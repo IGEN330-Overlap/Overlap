@@ -11,5 +11,6 @@ CLIENT_ID=
 CLIENT_SECRET=
 ```
 Contact repo owner for client_id and client_secret, or get your own using the spotify api dashboard.
+
 4. Run `npm start` in the frontend directory.
 5. Run `node app.js` in the backend directory.
