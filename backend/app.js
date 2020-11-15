@@ -44,13 +44,17 @@ app.use(express.static(__dirname + '/public'))
   .use(cors())
   .use(cookieParser());
 
+app.use(express.json);
+
 app.get('/login', function (req, res) {
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
+  console.log(redirect_uri);
+
   // your application requests authorization
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email user-top-read playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -108,13 +112,13 @@ app.get('/callback', function (req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
+        res.redirect(frontend_url + '/#' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           }));
       } else {
-        res.redirect('/#' +
+        res.redirect(frontend_url + '/#' +
           querystring.stringify({
             error: 'invalid_token'
           }));
@@ -146,6 +150,9 @@ app.get('/refresh_token', function (req, res) {
     }
   });
 });
+
+const router = require("./router.js");
+app.use("/", router);
 
 console.log('Listening on 8888');
 app.listen(8888);
