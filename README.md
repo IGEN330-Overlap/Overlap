@@ -2,7 +2,7 @@ spotify-api-with-react-test
 
 Setup:
 1. I recommend having two terminal instances open: one for the frontend directory and one for the backend directory.
-2. Run npm install for both directories.
+2. Run `npm install` for both directories.
 3. Create a `.env` file in the backend directory root folder and copy the following:
 ```
 BACKEND_URL=http://localhost:8888
