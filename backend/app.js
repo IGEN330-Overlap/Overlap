@@ -19,7 +19,7 @@ const cookieParser = require('cookie-parser');
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
-const redirect_uri = backend_url + 'callback'; // Your redirect uri
+const redirect_uri = backend_url + '/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -50,7 +50,7 @@ app.get('/login', function (req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-  var scope = 'user-read-private user-read-email';
+  var scope = 'user-read-private user-read-email user-top-read playlist-modify-public';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -108,13 +108,13 @@ app.get('/callback', function (req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
+        res.redirect(frontend_url + '/authorized' + '/#' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           }));
       } else {
-        res.redirect('/#' +
+        res.redirect(frontend_url + '/authorized' + '/#' +
           querystring.stringify({
             error: 'invalid_token'
           }));
@@ -146,6 +146,9 @@ app.get('/refresh_token', function (req, res) {
     }
   });
 });
+
+const router = require("./router.js");
+app.use("/", router);
 
 console.log('Listening on 8888');
 app.listen(8888);
