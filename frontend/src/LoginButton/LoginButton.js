@@ -1,12 +1,14 @@
 import './LoginButton.css';
 
-const LoginButton = () => {
+const LoginButton = (props) => {
     return (
-        <a href="http://localhost:8888/">
+        <>{props.active && <a href="http://localhost:8888/">
             <button className="button">
                 Login with Spotify
             </button>
-        </a>
+        </a>}
+
+        </>
     );
 }
 

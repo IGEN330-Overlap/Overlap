@@ -1,5 +1,7 @@
 .button {
-    margin: 64px;
+    margin: 32px;
     padding: 16px;
-    margin-left: 400px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import './App.css';
-import LoginButton from './LoginButton/LoginButton'
+import HomePage from './HomePage/HomePage';
+import AuthorizedPage from './AuthorizedPage/AuthorizedPage';
+import { Route, Switch } from 'react-router-dom';
 
 /**
  * Obtains parameters from the hash of the URL
@@ -18,14 +20,15 @@ function getHashParams() {
 
 function App() {
   const params = getHashParams();
-  console.log(params);
 
   const [loggedIn, setLoggedIn] = React.useState((params.access_token) ? true : false);
 
   return (
     <div className="App">
-      <LoginButton></LoginButton>
-      <h1>{params.access_token}</h1>
+      <Switch>
+        <Route path='/' render={() => <HomePage loggedIn={loggedIn} accessToken={params.access_token} />} exact={true} />
+        <Route path='/authorized' render={() => <AuthorizedPage loggedIn={loggedIn} accessToken={params.access_token} />} exact={true} />
+      </Switch>
     </div>
   );
 }

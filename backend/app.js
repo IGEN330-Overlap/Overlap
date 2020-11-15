@@ -19,7 +19,7 @@ const cookieParser = require('cookie-parser');
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
-const redirect_uri = backend_url + 'callback'; // Your redirect uri
+const redirect_uri = backend_url + '/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
@@ -44,14 +44,10 @@ app.use(express.static(__dirname + '/public'))
   .use(cors())
   .use(cookieParser());
 
-app.use(express.json);
-
 app.get('/login', function (req, res) {
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
-
-  console.log(redirect_uri);
 
   // your application requests authorization
   var scope = 'user-read-private user-read-email user-top-read playlist-modify-public';
@@ -112,13 +108,13 @@ app.get('/callback', function (req, res) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect(frontend_url + '/#' +
+        res.redirect(frontend_url + '/authorized' + '/#' +
           querystring.stringify({
             access_token: access_token,
             refresh_token: refresh_token
           }));
       } else {
-        res.redirect(frontend_url + '/#' +
+        res.redirect(frontend_url + '/authorized' + '/#' +
           querystring.stringify({
             error: 'invalid_token'
           }));
