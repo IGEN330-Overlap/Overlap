@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
+//Note that BrowerRouter wrapper is necessary to use react router components in App.js
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>

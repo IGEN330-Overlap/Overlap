@@ -8,12 +8,14 @@ const frontend_url = process.env.FRONTEND_URL;
 
 const redirect_uri = backend_url + 'callback'; // Your redirect uri
 
+// instantiate spotifyApi object
 var spotifyApi = new SpotifyWebApi({
     clientId: client_id,
     clientSecret: client_secret,
     redirectUri: redirect_uri,
 });
 
+//get current user middleware
 exports.getUser = async (req, res) => {
     spotifyApi.setAccessToken(req.params.token);
 

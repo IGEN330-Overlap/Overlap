@@ -18,6 +18,7 @@ function getHashParams() {
   return hashParams;
 }
 
+//App is the root of react router
 function App() {
   const params = getHashParams();
 
@@ -26,7 +27,9 @@ function App() {
   return (
     <div className="App">
       <Switch>
+        {/* Route for root */}
         <Route path='/' render={() => <HomePage loggedIn={loggedIn} accessToken={params.access_token} />} exact={true} />
+        {/* Router for authorized reroute from backend authorization */}
         <Route path='/authorized' render={() => <AuthorizedPage loggedIn={loggedIn} accessToken={params.access_token} />} exact={true} />
       </Switch>
     </div>

@@ -7,6 +7,7 @@
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
 
+//use .env file to retireve sensitive information
 require('dotenv').config();
 const backend_url = process.env.BACKEND_URL;
 const frontend_url = process.env.FRONTEND_URL;
@@ -147,6 +148,9 @@ app.get('/refresh_token', function (req, res) {
   });
 });
 
+/* END AUTHORIZATION BOILERPLATE CODE */
+
+//use express router to define api endpoints from router.js
 const router = require("./router.js");
 app.use("/", router);
 
