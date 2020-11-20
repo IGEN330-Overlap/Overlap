@@ -1,6 +1,6 @@
 Overlap main project repo
 
-# For contributors:
+### For contributors:
 Setup:
 1. I recommend having two terminal instances open: one for the frontend directory and one for the backend directory.
 2. Run `npm install` for both directories.
