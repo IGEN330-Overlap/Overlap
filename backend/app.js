@@ -150,16 +150,18 @@ app.get('/refresh_token', function (req, res) {
 
 /* END AUTHORIZATION BOILERPLATE CODE */
 
-// Tutorial Method
+// import required depedencies and variables
 const mongoose = require('mongoose');
 app.use(cors());
 app.use(express.json());
 const uri = process.env.ATLAS_URI;
+
+// Instantiate mongoose connection
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
+  console.log("MongoDB database connection established successfully"); // Verifies connection has been made
 }
 )
 

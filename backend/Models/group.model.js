@@ -12,18 +12,20 @@ const groupSchema = new Schema({
     groupName: {
         type: String
     },
+    groupLeader: {
+        type: String, 
+        required: true
+    },
     users: [
         {
             type: String,
         },
     ],
-    groupLeader: {
-        type: String, 
-        required: true
+}, 
+    {
+        timestamps: true,    
     }
-}, {
-    timestamps: true,    
-});
+);
 
 const group = mongoose.model('group', groupSchema);
 

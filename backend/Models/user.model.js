@@ -10,13 +10,25 @@ const userSchema = new Schema({
         required: true,
         trim: true
     },
-    refreshToken: {type: String},
-    name: {type: String},
-    profilePictureURL: {type: String},
-    groups: {type: Array}
-}, {
-    timestamps: true,    
-});
+    refreshToken: {
+        type: String
+    },
+    name: {
+        type: String
+    },
+    profilePictureURL: {
+        type: String
+    },
+    groups: [
+        {
+        type: String
+        },
+    ],
+}, 
+    {
+        timestamps: true,    
+    }
+);
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
