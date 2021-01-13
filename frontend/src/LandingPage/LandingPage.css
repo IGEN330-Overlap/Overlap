@@ -1,0 +1,18 @@
+/* CSS variables */
+@import url(../variables.css);
+
+.landing-root {
+    width: auto;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+}
+
+.landing-root .login-button {
+    background-color: var(--blue-color-main);
+    border-color: var(--blue-color-main);
+    color: white;
+}
+
+.white {
+    color: white;
+}
