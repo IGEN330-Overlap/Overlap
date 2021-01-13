@@ -1,13 +1,27 @@
-body {
+/* Google Open Sans font */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+body,
+html {
+  font-family: "Open Sans", sans-serif !important;
+  --font-family-sans-serif: "Open Sans", sans-serif !important;
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  width: 100%;
+  height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* preload class to ensure that animations and transitions do not play before page is loaded */
+/* preload class is removed from body after page is loaded */
+.preload *,
+.preload *:before,
+.preload *:after {
+  transition: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  animation-play-state: paused !important;
 }
