@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+// Building group schema and defining the fields
 const groupSchema = new Schema({
     groupCode: {
         type: String, 
