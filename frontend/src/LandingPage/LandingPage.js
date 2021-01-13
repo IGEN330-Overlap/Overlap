@@ -5,7 +5,7 @@ import './LandingPage.css';
 const LandingPage = (props) => {
     return (
         <div className="landing-root d-flex flex-column justify-content-center align-items-center">
-            <a href="http://localhost:8888/" className="btn btn-sm login-button">
+            <a href={process.env.REACT_APP_BACKEND_URL} className="btn btn-sm login-button">
                 Login with Spotify
             </a>
             <h1 className="white">
