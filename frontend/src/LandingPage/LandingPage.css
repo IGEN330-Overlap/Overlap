@@ -13,6 +13,37 @@
     color: white;
 }
 
+.landing-root .btn-sm {
+    padding: 0.40rem 0.95rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 1.05rem;
+}
+
+.landing-root .btn {
+    font-weight: 800;
+    font-size: 1rem;
+    transition: color 0.35s
+}
+
+/*adjust properties of the word 'overlap' */
+.purple {
+    color: var(--blue-color-main);
+    font-size: 2.85vw;
+    font-weight: 550;
+}
+
+/*adjust properties of the overall introduction text*/
 .white {
-    color: white;
+    color: var(--neutral-color-main);
+    font-size: 2.75vw;
+    font-weight: 450;
+    margin-bottom: 2rem;
+    text-align: center;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+}
+
+.large-logo {
+    margin-bottom: 0.5rem;
 }
