@@ -1,8 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+
+//***CSS
+//Bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+// Put any other imports below so that CSS from your
+// components takes precedence over default styles.
+import "./index.css";
 
 //Note that BrowerRouter wrapper is necessary to use react router components in App.js
 ReactDOM.render(
