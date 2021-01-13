@@ -155,22 +155,13 @@ const mongoose = require('mongoose');
 app.use(cors());
 app.use(express.json());
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
-})
-
-// Full driver code example
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = process.env.ATLAS_URI;
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
+}
+)
 
 //use express router to define api endpoints from router.js
 const router = require("./router.js");

@@ -9,9 +9,18 @@ const groupSchema = new Schema({
         unique: true,
         required: true,
     },
-    groupName: {type: String},
-    users: {type: Array},
-    groupLeader: {type: String, required: true}
+    groupName: {
+        type: String
+    },
+    users: [
+        {
+            type: String,
+        },
+    ],
+    groupLeader: {
+        type: String, 
+        required: true
+    }
 }, {
     timestamps: true,    
 });
