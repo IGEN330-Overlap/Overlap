@@ -1,0 +1,37 @@
+/* CSS variables */
+@import url(../../variables.css);
+
+.GroupsComponent{
+    color: white;
+}
+
+.item{
+   padding: 5px;
+}
+
+.search-bar{
+    display: inline;
+}
+
+.input-search{
+    background-color: transparent;
+    border-color: transparent;
+    background: url(../GroupsComponent/search-icon.svg) no-repeat scroll 7px 7px;
+}
+
+.glyphicon{
+    color: white;
+}
+
+input::placeholder{
+    color:white;
+}
+
+ul{
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li{
+    padding: 3px;
+}
