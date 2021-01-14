@@ -5,33 +5,26 @@
     color: white;
 }
 
-.item{
-   padding: 5px;
+.YourGroupsBox{
+    margin: 10px;
 }
 
-.search-bar{
-    display: inline;
+.JoinOrCreateBox{
+    margin: 10px;
 }
 
 .input-search{
     background-color: transparent;
     border-color: transparent;
-    background: url(../GroupsComponent/search-icon.svg) no-repeat scroll 7px 7px;
-}
-
-.glyphicon{
     color: white;
 }
 
 input::placeholder{
-    color:white;
+    color: var(--neutral-color-7);
+    background: 
+      linear-gradient(var(--neutral-color-7), var(--neutral-color-7)) center bottom 0/100% 1px no-repeat;
 }
 
-ul{
-    list-style-type: none;
-    padding-left: 0;
-}
-
-li{
-    padding: 3px;
+input:focus{
+    outline: none;
 }
