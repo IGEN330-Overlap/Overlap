@@ -1,10 +1,6 @@
 /* CSS variables */
 @import url(../../variables.css);
 
-.YourGroupsBox{
-    margin: 10px;
-}
-
 h1{
     color: white;
 }
@@ -13,8 +9,9 @@ h1{
     color: white;
 }
 
-.group-list{
-    color:white;
+.search-bar{
+    background: url(./search-icon.svg) left center no-repeat;
+    padding: 25px;
 }
 
 .input-search{
@@ -30,5 +27,12 @@ input::placeholder{
 }
 
 input:focus{
-    outline: none;
+    outline: var(--neutral-color-7);
+}
+.group-list{
+    color:white;
+}
+
+.group-item{
+    margin: 0.25rem;
 }

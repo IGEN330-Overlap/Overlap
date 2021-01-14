@@ -1,7 +1,12 @@
 /* CSS variables */
 @import url(../../variables.css);
 
-.CreateOrJoinBox{
-    margin: 10px;
+.CreateNewGroup{
+    margin: 0.25rem;
+    color: white;
+}
+
+.JoinGroup{
+    margin: 0.25rem;
     color: white;
 }

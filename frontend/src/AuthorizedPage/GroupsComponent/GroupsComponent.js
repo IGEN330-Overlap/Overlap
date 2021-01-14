@@ -12,8 +12,7 @@ const GroupsComponent = (props) => {
 
             { /*search bar */}
             <div className="search-bar">
-                <i class="glyphicon glyphicon-search"></i>
-                <input type="text" class="input-search" placeholder="search"/>
+                <input type="text" class="input-search" placeholder="search" size="15"/>
             </div>
 
             { /*list of groups */}
