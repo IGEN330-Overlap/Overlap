@@ -16,10 +16,6 @@ const LandingPage = (props) => {
             <a href={process.env.REACT_APP_BACKEND_URL} className="btn btn-sm login-button">
                 Log in with Spotify
             </a>
-            <div className="test">
-                <h2 className="test-font">HELLO</h2>
-            </div>
-           
         </div>
     );
 }
