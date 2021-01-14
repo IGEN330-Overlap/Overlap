@@ -1,0 +1,7 @@
+/* CSS variables */
+@import url(../../variables.css);
+
+.CreateOrJoinBox{
+    margin: 10px;
+    color: white;
+}

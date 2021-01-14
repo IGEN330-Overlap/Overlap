@@ -1,16 +1,20 @@
 /* CSS variables */
 @import url(../../variables.css);
 
-.GroupsComponent{
-    color: white;
-}
-
 .YourGroupsBox{
     margin: 10px;
 }
 
-.JoinOrCreateBox{
-    margin: 10px;
+h1{
+    color: white;
+}
+
+.search-bar{
+    color: white;
+}
+
+.group-list{
+    color:white;
 }
 
 .input-search{
