@@ -29,21 +29,48 @@
 /*adjust properties of the word 'overlap' */
 .purple {
     color: var(--blue-color-main);
-    font-size: 2.85vw;
+    font-size: min(2.65vw, 2.65rem);
     font-weight: 550;
 }
 
-/*adjust properties of the overall introduction text*/
+/*adjust properties of the overall introduction text */
 .white {
     color: var(--neutral-color-main);
-    font-size: 2.75vw;
+    font-size: min(2.55vw, 2.55rem);
     font-weight: 450;
-    margin-bottom: 2rem;
     text-align: center;
     margin-left: 3.5rem;
     margin-right: 3.5rem;
 }
 
-.large-logo {
-    margin-bottom: 0.5rem;
+.welcome-container {
+    width: 50rem;
+    height: auto;
+    margin-bottom: min(2.5vw, 2.25rem);
+}
+
+.logo-container {
+    width: 85vw;
+    max-width: 80rem;
+    height: auto;
+    margin-bottom: 0.25rem;
+}
+ 
+@media (max-width: 720px) {
+    .logo-container {
+        width: 612px;
+        height: auto;
+        margin-bottom: 0.25rem;
+    }
+    .welcome-container {
+        width: 28rem;
+        height: auto;
+        margin-bottom: 1.25rem;
+    }
+    .welcome-container .white {
+        font-size: 18.36px;
+    }
+    .welcome-container .purple {
+        font-size: 19.08px;
+    }
 }

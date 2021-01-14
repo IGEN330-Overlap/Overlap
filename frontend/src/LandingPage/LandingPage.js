@@ -7,12 +7,18 @@ import logo from './overlap large.svg';
 const LandingPage = (props) => {
     return (
         <div className="landing-root d-flex flex-column justify-content-center align-items-center">
-            <img src={logo} className="large-logo" alt="logo" />
-            <h2 className="white"> Welcome to <span className="purple">overlap</span>. <br></br>Make listening with friends easy.
-            </h2>
+            <div className="logo-container">
+                <img src={logo} alt="logo" />
+            </div>
+            <div className="welcome-container">
+                <h2 className="white"> Welcome to <span className="purple">overlap</span>. <br></br>Make listening with friends easy.</h2>
+            </div>
             <a href={process.env.REACT_APP_BACKEND_URL} className="btn btn-sm login-button">
                 Log in with Spotify
             </a>
+            <div className="test">
+                <h2 className="test-font">HELLO</h2>
+            </div>
            
         </div>
     );
