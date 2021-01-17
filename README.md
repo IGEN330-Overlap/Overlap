@@ -1,7 +1,7 @@
 # Overlap project repo
 
-## Contributors
-### Setup:
+# For Contributors
+## Setup:
 1. I recommend having two terminal instances open: one for the frontend directory and one for the backend directory.
 2. Run `npm install` for both directories.
 3. Create a `.env` file in the `backend` directory root folder and copy the following:
@@ -23,8 +23,8 @@ REACT_APP_FRONTEND_URL=http://localhost:3000
 6. Run `node app.js` in the backend directory.  
 <br/>
 
-### API Endpoint Documentation:
-#### POST: /users/login
+## API Endpoint Documentation:
+### POST: /users/login
 Use case:
 After successful authentication using our landing page, make request to backend to create user object in database. The API will check if the user already exists in the database, and only add a user object entry in the case where there is no user.
 
@@ -36,9 +36,14 @@ refreshToken: The SpotifyAPI refresh token of the user after user authentication
 Returns:
 ```
 spotifyID: Unique Spotify ID of the user, which will be used afterwards for most endpoint consumption for our API. (string)
-```
 
-#### POST: /groups/create
+-> Also returns display name, profile_pic url, etc. which will be useful for user display within groups, and also user profile display.
+```
+Expected response format:
+
+![User Login API response](public/user-login-api-response.png)
+
+### POST: /groups/create
 Use case:
 Consume endpoint for group creation, and use groupCode return to redirect to group page.
 
@@ -53,7 +58,7 @@ Returns:
 groupCode: Unique code for the group. (string)
 ```
 
-#### POST: /groups/join
+### POST: /groups/join
 Use case:
 Consume endpoint for group joining, and use groupCode return to redirect to group page. If group does not exist yet, API will respond with error.
 
