@@ -159,6 +159,7 @@ const uri = process.env.ATLAS_URI;
 // Instantiate mongoose connection
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 );
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully"); // Verifies connection has been made

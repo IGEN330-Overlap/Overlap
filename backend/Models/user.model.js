@@ -5,28 +5,32 @@ const Schema = mongoose.Schema;
 // Building user schema and defining the fields
 const userSchema = new Schema({
     userID: {
-        type: String, 
+        type: String,
         unique: true,
         required: true,
         trim: true
     },
     refreshToken: {
-        type: String
+        type: String,
+        required: true,
     },
     name: {
+        type: String,
+    },
+    imageURL: {
         type: String
     },
-    profilePictureURL: {
+    email: {
         type: String
     },
     groups: [
         {
-        type: String
+            type: String
         },
     ],
-}, 
+},
     {
-        timestamps: true,    
+        timestamps: true,
     }
 );
 
