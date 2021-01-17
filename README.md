@@ -24,7 +24,7 @@ REACT_APP_FRONTEND_URL=http://localhost:3000
 <br/>
 
 ### API Endpoint Documentation:
-#### POST: /user/login
+#### POST: /users/login
 Use case:
 After successful authentication using our landing page, make request to backend to create user object in database. The API will check if the user already exists in the database, and only add a user object entry in the case where there is no user.
 
@@ -38,7 +38,7 @@ Returns:
 spotifyID: Unique Spotify ID of the user, which will be used afterwards for most endpoint consumption for our API. (string)
 ```
 
-#### POST: /group/create
+#### POST: /groups/create
 Use case:
 Consume endpoint for group creation, and use groupCode return to redirect to group page.
 
@@ -53,7 +53,7 @@ Returns:
 groupCode: Unique code for the group. (string)
 ```
 
-#### POST: /group/join
+#### POST: /groups/join
 Use case:
 Consume endpoint for group joining, and use groupCode return to redirect to group page. If group does not exist yet, API will respond with error.
 
