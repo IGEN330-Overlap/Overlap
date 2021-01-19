@@ -1,7 +1,7 @@
 import CreateOrJoin from '../CreateOrJoin/CreateOrJoin';
 import './GroupsComponent.css';
 import dots from './three-dots.svg';
-
+import line from './Line.svg';
 
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
@@ -9,6 +9,7 @@ const GroupsComponent = (props) => {
         // Flexbox for existing groups
         <div className="YourGroupsBox d-flex flex-column align-left">
             <h1 className="title"><strong>Groups</strong></h1>
+            <div class="mr-auto"><img src={line} className="underline" alt="underline"/></div>
 
             { /*search bar */}
             <div className="search-bar">

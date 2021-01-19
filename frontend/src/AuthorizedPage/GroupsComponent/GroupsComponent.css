@@ -10,7 +10,7 @@ h1{
 }
 
 .search-bar{
-    background: url(./search-icon.svg) left center no-repeat;
+    background: url(./search.svg) left center no-repeat;
     padding: 25px;
 }
 
