@@ -29,14 +29,14 @@
 /*adjust properties of the word 'overlap' */
 .purple {
     color: var(--blue-color-main);
-    font-size: min(1.8vw, 2.65rem);
+    font-size: min(1.9vw, 2.05rem);
     font-weight: 550;
 }
 
 /*adjust properties of the overall introduction text */
 .white {
     color: var(--neutral-color-main);
-    font-size: min(1.7vw, 2.55rem);
+    font-size: min(1.8vw, 1.95rem);
     font-weight: 450;
     text-align: center;
     margin-left: 3.5rem;
@@ -56,7 +56,7 @@
     margin-bottom: 0.25rem;
 }
  
-@media (max-width: 720px) {
+@media (max-width: 1020px) {
     .logo-container {
         width: 612px;
         height: auto;
