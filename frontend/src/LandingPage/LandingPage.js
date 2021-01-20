@@ -1,4 +1,3 @@
-import Navbar from '../Navbar/Navbar';
 import './LandingPage.css';
 import logo from './overlap large.svg';
 
