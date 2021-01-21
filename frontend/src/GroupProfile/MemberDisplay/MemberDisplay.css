@@ -8,7 +8,7 @@
 /*full container for members */
 .member-container {
     width: 50vw;
-    margin-left: 8vw;
+    margin-left: 4vw;
     margin-right: auto;
     padding-right: 15px;
     padding-left: 15px;
@@ -29,11 +29,10 @@
     opacity: 0.7;
 }
 .text {
-    color: #fefffe;
+    color: var(--off-white-color);
     margin-top: 10px;
     margin-left: 9px;
-    font-size: 2.15rem;
-    font-weight: 500;
+    font-size: 1.85rem;
 }
 /*icons */
 .icon-container{
@@ -44,12 +43,12 @@
     text-align: center;
 }
 .user-icon {
-    height: min(10vw,175px);
+    height: min(9vw,150px);
     width: auto;
     border-radius: 50rem;
 }
 .user-name {
-    font-size: min(1.85vw,30px);
+    font-size: min(1.75vw,20px);
     color: transparent;
     position: absolute;
     top: 50%;
@@ -57,7 +56,7 @@
     transform: translate(-50%, -50%);
 }
 .icon-container:hover .user-icon {
-    opacity: 0.3;
+    opacity: 0.4;
     transition-duration: 0.45s;
 }
 
@@ -72,15 +71,15 @@
         margin-top: 3px
     }
     .text {
-        font-size: 1.75rem;
+        font-size: 1.65rem;
     }
     .member-container{
         width: 85vw;
     }
     .user-icon {
-        height: 80px;
+        height: 72px;
     }
     .user-name {
-        font-size: 14.8px;
+        font-size: 14px;
     }
 }
