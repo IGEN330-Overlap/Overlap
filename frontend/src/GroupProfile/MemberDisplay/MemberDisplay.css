@@ -5,45 +5,92 @@
     height: 100vh;
     background-color: var(--primary-color-main);
 }
+
 /*full container for members */
 .member-container {
-    width: 50vw;
+    width: 60vw;
     margin-left: 4vw;
     margin-right: auto;
     padding-right: 15px;
     padding-left: 15px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     background-color: transparent;
 }
+
 /*text container */
 .d-flex {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     align-items: center;
 }
 .add-member {
     margin-left: 20px;
-    margin-top: 4px;
+    margin-top: 32px;
 }
+
+/*add member button and popover */
 .add-member:hover {
     opacity: 0.7;
+    transition-duration: 0.4s;
 }
+.popover-display {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+/*copy group code element */
+.copy-code {
+    display: flex;
+    align-items: center;
+    border-style: solid;
+    border-color: var(--neutral-color-5);
+    border-width: 1.5px;
+    border-radius: 5rem;
+    height: 26.67px;
+}
+.copy-button {
+    height: 26.67px;
+    width: 50px;
+    color: var(--off-white-color);
+    background-color: var(--blue-color-main);
+    border-radius: 5rem;
+}
+input {
+    border-color: transparent;
+    background-color: transparent;
+    padding-left: 10px;
+}
+input:focus {
+    outline: none;
+}
+.copy-button h4 {
+    font-size: 0.95rem;
+    font-weight: 450;
+    padding-top: 2.75px;
+    padding-left: 7px;
+}
+.copy-button:hover {
+    color: var(--primary-color-main);
+    text-decoration: none;
+}
+
+/*members text */
 .text {
     color: var(--off-white-color);
-    margin-top: 10px;
+    margin-top: 40px;
     margin-left: 9px;
     font-size: 1.85rem;
 }
+
 /*icons */
 .icon-container{
-    margin-bottom: 20px;
-    margin-left: 9px;
-    margin-right: 9px;
+    margin-top: 15px;
+    margin-left: 6.5px;
+    margin-right: 6.5px;
     position: relative;
     text-align: center;
 }
 .user-icon {
-    height: min(9vw,150px);
+    height: min(9vw,110px);
     width: auto;
     border-radius: 50rem;
 }
@@ -66,18 +113,18 @@
 }
 
 /*adjust for different screen sizes */
-@media (max-width: 800px) {
+@media (max-width: 720px) {
     .add-member {
-        margin-top: 3px
+        margin-top: 32px
     }
     .text {
         font-size: 1.65rem;
     }
     .member-container{
-        width: 85vw;
+        width: 95vw;
     }
     .user-icon {
-        height: 72px;
+        height: 50px;
     }
     .user-name {
         font-size: 14px;
