@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 // Building group schema and defining the fields
 const groupSchema = new Schema({
     groupCode: {
-        type: String, 
+        type: String,
         unique: true,
         required: true,
     },
@@ -13,7 +13,7 @@ const groupSchema = new Schema({
         type: String
     },
     groupLeader: {
-        type: String, 
+        type: String,
         required: true
     },
     users: [
@@ -21,9 +21,9 @@ const groupSchema = new Schema({
             type: String,
         },
     ],
-}, 
+},
     {
-        timestamps: true,    
+        timestamps: true,
     }
 );
 
