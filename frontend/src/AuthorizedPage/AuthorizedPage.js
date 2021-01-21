@@ -1,3 +1,4 @@
+import MemberDisplay from '../GroupProfile/MemberDisplay/MemberDisplay';
 import './AuthorizedPage.css';
 
 //takes accessToken string and loggedIn boolean as props
@@ -8,6 +9,7 @@ const AuthorizedPage = (props) => {
             <>{props.loggedIn && <h1>Hey you logged in, good shit buddy!</h1>}</>
             <>{!props.loggedIn && <a href="http://localhost:3000/">Hey you're not logged in! Click here to log in</a>}</>
             <p>{props.accessToken}</p>
+            <MemberDisplay />
         </div>
     );
 }
