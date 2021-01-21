@@ -20,9 +20,6 @@ REACT_APP_BACKEND_URL=http://localhost:8888
 REACT_APP_FRONTEND_URL=http://localhost:3000
 ```
 5. Run `npm start` in the frontend directory.
-<<<<<<< HEAD
-6. Run `node app.js` in the backend directory.
-=======
 6. Run `node app.js` in the backend directory.  
 <br/>
 
@@ -75,4 +72,3 @@ Returns:
 ```
 status: 200 (Okay) or 404 (Not found) (status)
 ```
->>>>>>> master
