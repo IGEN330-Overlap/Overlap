@@ -55,20 +55,34 @@ exports.loginUser = async (req, res) => {
                     newUser.imageURL = data.body.images[0].url;
                     newUser.email = data.body.email;
 
-                    //create new User in MongoDB
-                    User.create(newUser).then(
-                        data => {
-                            res.json(data);
+                    //delete previous mongodb entry
+                    //define query to find user with ID that matches ID for current request
+                    User.findOneAndDelete({ "userID": data.body.id }, { "sort": { "userID": 1 } })
+                        .then(() => {
+                            console.log("ID of login attempt: " + data.body.id);
+
+                            //create new User in MongoDB
+                            User.create(newUser).then(
+                                data => {
+                                    res.json(data);
+                                },
+                                err => {
+                                    res.json(err);
+                                }
+                            );
                         },
-                        err => {
-                            res.json(err);
-                        }
-                    )
+                            //error in user delete
+                            err => {
+                                res.json(err);
+                            }
+                        );
                 },
+                //SpotifyAPI return error
                 (err) => {
                     res.status(400).json(err);
                 })
         },
+        //access token refresh error
         (err) => {
             res.json("Unable to refresh access token.");
             console.log(err);
