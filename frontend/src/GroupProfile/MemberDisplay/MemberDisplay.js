@@ -2,7 +2,7 @@ import React from 'react';
 import './MemberDisplay.css';
 import icon from './brendan-icon.jpg';
 import add_member from './add-member.svg';
-import { Button, Popover, OverlayTrigger } from 'react-bootstrap';
+import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 /*take input from backend to create array of users */
 const members = ['Brendan','Brendan'];
@@ -19,7 +19,7 @@ const MemberDisplay = (props) => {
                     <AddMember />
                 </div>
                 {/*user icon display */}
-                    <div className="d-flex justify-content-start flex-wrap">
+                    <div className="display-members">
                         <div className="icon-container">
                             <img className="user-icon" src={icon} alt="brendan"></img>
                             <div className="user-name">
