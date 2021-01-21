@@ -22,33 +22,39 @@ const MemberDisplay = (props) => {
                 <div className="d-flex justify-content-start flex-wrap">
                     <div className="icon-container">
                         <img className="user-icon" src={icon} alt="brendan"></img>
+                        <div className="user-name">
+                            <strong>Brendan</strong>
+                        </div>
                     </div>
                     <div className="icon-container">
                         <img className="user-icon" src={icon} alt="brendan"></img>
+                        <div className="user-name">
+                            <strong>Brendan</strong>
+                        </div>
                     </div>
                     <div className="icon-container">
                         <img className="user-icon" src={icon} alt="brendan"></img>
+                        <div className="user-name">
+                            <strong>Brendan</strong>
+                        </div>
                     </div>
                     <div className="icon-container">
                         <img className="user-icon" src={icon} alt="brendan"></img>
+                        <div className="user-name">
+                            <strong>Brendan</strong>
+                        </div>
                     </div>
                     <div className="icon-container">
                         <img className="user-icon" src={icon} alt="brendan"></img>
+                        <div className="user-name">
+                            <strong>Brendan</strong>
+                        </div>
                     </div>
                     <div className="icon-container">
                         <img className="user-icon" src={icon} alt="brendan"></img>
-                    </div>
-                    <div className="icon-container">
-                        <img className="user-icon" src={icon} alt="brendan"></img>
-                    </div>
-                    <div className="icon-container">
-                        <img className="user-icon" src={icon} alt="brendan"></img>
-                    </div>
-                    <div className="icon-container">
-                        <img className="user-icon" src={icon} alt="brendan"></img>
-                    </div>
-                    <div className="icon-container">
-                        <img className="user-icon" src={icon} alt="brendan"></img>
+                        <div className="user-name">
+                            <strong>Brendan</strong>
+                        </div>
                     </div>
                 </div>
             </div>

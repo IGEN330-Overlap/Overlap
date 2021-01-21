@@ -25,6 +25,9 @@
     margin-left: 20px;
     margin-top: 4px;
 }
+.add-member:hover {
+    opacity: 0.7;
+}
 .text {
     color: #fefffe;
     margin-top: 10px;
@@ -37,15 +40,30 @@
     margin-bottom: 20px;
     margin-left: 9px;
     margin-right: 9px;
+    position: relative;
+    text-align: center;
 }
 .user-icon {
     height: min(10vw,175px);
     width: auto;
     border-radius: 50rem;
 }
-.user-icon:hover {
-    opacity: 0.4;
-    transition-duration: 0.35s;
+.user-name {
+    font-size: min(1.85vw,30px);
+    color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.icon-container:hover .user-icon {
+    opacity: 0.3;
+    transition-duration: 0.45s;
+}
+
+.icon-container:hover .user-name {
+    color: var(--off-white-color);
+    transition-duration: 0.45s;
 }
 
 /*adjust for different screen sizes */
@@ -61,5 +79,8 @@
     }
     .user-icon {
         height: 80px;
+    }
+    .user-name {
+        font-size: 14.8px;
     }
 }
