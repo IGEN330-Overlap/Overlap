@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 
 // Building group schema and defining the fields
 const groupSchema = new Schema({
+    //_id: mongoose.Schema.Types.ObjectId
+
     groupCode: {
         type: String, 
         unique: true,
