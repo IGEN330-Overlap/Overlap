@@ -1,4 +1,4 @@
-const { Mongoose } = require('mongoose');
+// const { Mongoose } = require('mongoose');
 const SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
 
@@ -33,26 +33,28 @@ exports.getUser = async (req, res) => {
 
 
 exports.createGroup = async (req,res) => {
-    groupCode = groupCodeGenerator.generate 
-    const group = new Group({
+    
+    generatedGroupCode = groupCodeGenerator.generate 
+    
+    const newGroup = new Group({
 
-        groupCode: groupCode,
+        groupCode: generatedGroupCode,
         groupName: req.body.name,
         groupLeader: req.body.spotifyID,
         users: req.body.spotifyID
 
     });
-    product
-    .save()
-    .then(result => {
-        console.log(result);
-    })
+
+    newGroup
+        .save()
+        .then(result => {
+            console.log(result);
+        })
+        .catch(err => console.log(err));
     
     res.status(201).json({
         message: "Handling POST request to /groups",
-        createdGroup: group
+        createdGroup: newGroup
     });
-
-
-
+    
 };
