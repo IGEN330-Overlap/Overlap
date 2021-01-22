@@ -17,4 +17,4 @@ function generate(){
     return password
 }
 
-module.exports.generate = generate;
+module.exports.generate = generate();
