@@ -11,166 +11,132 @@ const icon_src = [];
 
 const MemberDisplay = (props) => {
     return(
-        <div className="landing-root">
-            <div className="member-container">
-                <div className="d-flex">
-                    <h1 className="text"><strong>Members</strong></h1>
-                    {/*link to add members*/}
-                    <AddMember />
-                </div>
-                {/*user icon display */}
-                    <div className="display-members">
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div> 
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div>
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div> 
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon} alt="brendan"></img>
-                            <div className="user-name">
-                                <strong>Brendan</strong>
-                            </div>
-                        </div> 
+        <div className="member-container">
+            <div className="d-flex">
+                <h1 className="text"><strong>Members</strong></h1>
+                {/*link to add members*/}
+                <AddMember />
+            </div>
+            {/*user icon display */}
+            <div className="display-members">
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
                     </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
+                <div className="icon-container">
+                    <img className="user-icon" src={icon} alt="brendan"></img>
+                    <div className="user-name">
+                            <strong>Brendan</strong>
+                    </div>
+                </div>
             </div>
         </div>
     )
 }
-
-export default MemberDisplay;
 
 /* popover content*/
 const popover = (
@@ -200,3 +166,4 @@ const popover = (
       document.execCommand("copy");
   }
   
+  export default MemberDisplay;

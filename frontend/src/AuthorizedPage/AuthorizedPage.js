@@ -11,7 +11,7 @@ const AuthorizedPage = (props) => {
             <>{!props.loggedIn && <a href="http://localhost:3000/">Hey you're not logged in! Click here to log in</a>}</>
             <p>{props.accessToken}</p>
              {/*link to group page*/}
-             <>{props.loggedIn && <Link to ="GroupProfile/MemberDisplay/MemberDisplay">Sample Group</Link>}</>
+             <>{props.loggedIn && <Link to ="GroupProfile/GroupProfile">Sample Group</Link>}</>
         </div>
     );
 }

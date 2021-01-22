@@ -3,7 +3,7 @@ import './App.css';
 import LandingPage from './LandingPage/LandingPage';
 import AuthorizedPage from './AuthorizedPage/AuthorizedPage';
 import { Route, Switch } from 'react-router-dom';
-import MemberDisplay from "./GroupProfile/MemberDisplay/MemberDisplay";
+import GroupProfile from './GroupProfile/GroupProfile';
 
 /**
  * Obtains parameters from the hash of the URL
@@ -32,7 +32,7 @@ function App() {
         <Route path='/' render={() => <LandingPage accessToken={params.access_token} />} exact={true} />
         {/* Router for authorized reroute from backend authorization */}
         <Route path='/authorized' render={() => <AuthorizedPage loggedIn={loggedIn} accessToken={params.access_token} />} exact={true} />
-        <Route path='/authorized' render={() => <MemberDisplay />} />
+        <Route path='/authorized' render={() => <GroupProfile />} />
       </Switch>
     </div>
   );
