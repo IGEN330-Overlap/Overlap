@@ -6,7 +6,8 @@ const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
 const frontend_url = process.env.FRONTEND_URL;
-const Group = require('../Models/group.model');
+const Group = require('./Models/group.model.js');
+const groupCodeGenerator = require('./scripts.js');
 
 const redirect_uri = backend_url + 'callback'; // Your redirect uri
 
@@ -32,13 +33,13 @@ exports.getUser = async (req, res) => {
 
 
 exports.createGroup = async (req,res) => {
+    groupCode = groupCodeGenerator.generate 
     const group = new Group({
-        _id: new Mongoose.Types.ObjectId(),
 
-        groupCode: req.body.scripts.generate, 
-        groupName: req.body.groupName,
-        groupLeader: req.body.groupLeader,
-        users: req.body.users
+        groupCode: groupCode,
+        groupName: req.body.name,
+        groupLeader: req.body.spotifyID,
+        users: req.body.spotifyID
 
     });
     product
