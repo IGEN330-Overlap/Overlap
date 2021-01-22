@@ -1,12 +1,21 @@
 /* CSS variables */
 @import url(../../variables.css);
 
-.CreateNewGroup{
-    margin: 0.25rem;
+.openCollapse{
     color: white;
 }
 
-.JoinGroup{
-    margin: 0.25rem;
+.input-code{
+    padding-left: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+    background-color: transparent;
+    border-color: transparent;
     color: white;
+}
+
+input::placeholder{
+    color: var(--neutral-color-5);
+    background: 
+      linear-gradient(var(--neutral-color-7), var(--neutral-color-7)) center bottom 0/100% 1px no-repeat;
 }

@@ -29,10 +29,51 @@ input::placeholder{
 input:focus{
     outline: var(--neutral-color-7);
 }
-.group-list{
-    color:white;
+
+.groupButton{
+    width: 10rem;
+    padding-left: 0px;
+    background-color: transparent;
+    color: white;
+    outline-color: transparent;
 }
 
-.group-item{
-    margin: 0.25rem;
+.groupToggle{
+    background-color:transparent;
+    color: white;
+    outline-color: transparent;
+    
+}
+
+.modal-body{
+    border-radius: 1.05rem;
+}
+
+.in-modal{
+    text-align: center;
+    background-color: var(--blue-color-1);
+}
+
+.btn-in-modal{
+    background-color: var(--blue-color-main);
+    color: white;
+    border-radius: 0.75rem;
+    border-color: transparent;
+
+}
+
+.btn-in-model .continue-button{
+    width: 6rem;
+}
+
+.btn-in-model .leave-buttons{
+    width: 10rem;
+}
+
+.modal-text{
+    padding: 0.75rem;
+}
+
+.modal-text .pad-below{
+    padding-bottom: 2rem;
 }
