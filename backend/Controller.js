@@ -88,7 +88,4 @@ exports.loginUser = async (req, res) => {
             console.log(err);
         }
     );
-
-
-
 }
