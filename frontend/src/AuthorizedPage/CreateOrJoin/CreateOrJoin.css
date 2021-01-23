@@ -5,6 +5,11 @@
     color: white;
 }
 
+.openCollapse:hover{
+    color: var(--neutral-color-5);
+    
+}
+
 .input-code{
     padding-left: 1rem;
     padding-top: 0.25rem;

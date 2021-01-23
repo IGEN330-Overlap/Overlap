@@ -38,6 +38,11 @@ input:focus{
     outline-color: transparent;
 }
 
+.groupButton:hover{
+    color: var(--neutral-color-7);
+    text-decoration: none;
+}
+
 .groupToggle{
     background-color:transparent;
     color: white;
@@ -76,4 +81,8 @@ input:focus{
 
 .modal-text .pad-below{
     padding-bottom: 2rem;
+}
+
+.modalcssv .modal-content{
+    border-radius: 5rem;
 }

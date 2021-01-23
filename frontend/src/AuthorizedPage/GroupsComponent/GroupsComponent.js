@@ -61,7 +61,7 @@ const GroupsComponent = (props) => {
                 {/* Group as a dropdown menu button */}
                 <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
-                        <Button variant="dark" className="groupButton" text-left>Group 1</Button>
+                        <a className="groupButton">Group 1</a>
                         <Dropdown.Toggle split variant="dark" className="groupToggle" id="dropdown-split-basic" />
                         <Dropdown.Menu>
                             <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
@@ -79,7 +79,7 @@ const GroupsComponent = (props) => {
     
             {/* "Show Group Code" Modal Content */}
             <>
-                <Modal show={CodeisOpen} onHide={hideCodeModal} centered>
+                <Modal className="modalcss" show={CodeisOpen} onHide={hideCodeModal} centered>
                     <Modal.Body className="in-modal modal-body">
                         <h5 className="modal-text"><strong>The Group Code for "Group Name" is</strong></h5>
                         <h4 className="modal-text pad-below"><strong>"Group Code"</strong></h4>
@@ -90,7 +90,7 @@ const GroupsComponent = (props) => {
 
             {/* "Leave Group" Modal Content */}
             <>
-                <Modal show={LeaveisOpen} onHide={hideLeaveModal} centered>
+                <Modal className="modalcss" show={LeaveisOpen} onHide={hideLeaveModal} centered>
                     <Modal.Body className="in-modal">
                         <h5 className="modal-text"><strong>Are you sure you want to leave?</strong></h5>
                         <h4 className="modal-text pad-below"><strong>"Group Name"</strong></h4>
