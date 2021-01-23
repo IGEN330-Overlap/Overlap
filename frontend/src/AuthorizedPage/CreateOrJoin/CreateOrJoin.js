@@ -22,7 +22,7 @@ const CreateOrJoin = (props) => {
             </a>
             <Collapse in={openCreate}>
                 <div id="example-collapse-text">
-                    <input type="text" class="input-code" placeholder="Enter Group Name" size="15"/>
+                    <input type="text" className="input" placeholder="Enter Group Name" size="15"/>
                     <a><img src={continueArrow}/></a>
                 </div>
             </Collapse>
@@ -36,7 +36,7 @@ const CreateOrJoin = (props) => {
             </a>
             <Collapse in={openJoin}>
                 <div id="example-collapse-text">
-                    <input type="text" class="input-code" placeholder="Enter Group Code" size="15"/>
+                    <input type="text" className="input" placeholder="Enter Group Code" size="15"/>
                     <a><img src={continueArrow}/></a>
                 </div>
             </Collapse>

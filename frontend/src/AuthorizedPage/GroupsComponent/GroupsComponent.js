@@ -31,7 +31,7 @@ const GroupsComponent = (props) => {
         setLeaveIsOpen(false);
     };
 
-    // //Display Dropdown Button
+    // //Display Dropdown Button Function
     // const groupDropdown = () => (
     //     <Dropdown as={ButtonGroup}>
     //         <Button variant="success">Group 1</Button>
@@ -63,7 +63,8 @@ const GroupsComponent = (props) => {
                     <Dropdown as={ButtonGroup}>
                         <a className="groupButton">Group 1</a>
                         <Dropdown.Toggle split variant="dark" className="groupToggle" id="dropdown-split-basic" />
-                        <Dropdown.Menu>
+                        {/* <a data-toggle="Dropdown" aria-haspopup="true" aria-expanded="false">push</a> */}
+                        <Dropdown.Menu className="menu">
                             <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
                             <Dropdown.Divider></Dropdown.Divider>
                             <Dropdown.Item href="#/action-2"><a onClick={showLeaveModal}>Leave Group</a></Dropdown.Item>
@@ -71,7 +72,7 @@ const GroupsComponent = (props) => {
                     </Dropdown>
                 </div>
 
-                {/* Group as a dropdown menu button
+                {/* Group as a dropdown menu button from function (function call)
                 <div className="group-item d-flex">
                     <groupDropdown/>
                 </div>  */}
@@ -81,8 +82,8 @@ const GroupsComponent = (props) => {
             <>
                 <Modal className="modalcss" show={CodeisOpen} onHide={hideCodeModal} centered>
                     <Modal.Body className="in-modal modal-body">
-                        <h5 className="modal-text"><strong>The Group Code for "Group Name" is</strong></h5>
-                        <h4 className="modal-text pad-below"><strong>"Group Code"</strong></h4>
+                        <h5 className="modal-text modal-head"><strong>The Group Code for "Group Name" is</strong></h5>
+                        <h4 className="modal-text"><strong>"Group Code"</strong></h4>
                         <button onClick={hideCodeModal} className="btn-in-modal continue-button" centered><strong>Continue</strong></button>
                     </Modal.Body>
                  </Modal>
@@ -92,8 +93,8 @@ const GroupsComponent = (props) => {
             <>
                 <Modal className="modalcss" show={LeaveisOpen} onHide={hideLeaveModal} centered>
                     <Modal.Body className="in-modal">
-                        <h5 className="modal-text"><strong>Are you sure you want to leave?</strong></h5>
-                        <h4 className="modal-text pad-below"><strong>"Group Name"</strong></h4>
+                        <h5 className="modal-text modal-head"><strong>Are you sure you want to leave?</strong></h5>
+                        <h4 className="modal-text"><strong>"Group Name"</strong></h4>
                         <p><button className="btn-in-modal leave-buttons">Yes, I'm sure</button></p>
                         <p><button onClick={hideLeaveModal} className="btn-in-modal leave-buttons">Nope, take me back</button></p>
                     </Modal.Body>
