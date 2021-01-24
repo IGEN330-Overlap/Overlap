@@ -23,11 +23,12 @@
 .add-member:hover {
     opacity: 0.7;
     transition-duration: 0.4s;
+    cursor: pointer;
 }
-.popover-display {
-    margin-bottom: 10px;
-    margin-left: 10px;
-}
+/*.custom-popover .popover-display {
+    margin-left:10px;
+    margin-top: 10px;
+}*/
 
 /*copy group code element */
 .copy-code {
@@ -63,6 +64,7 @@ input:focus {
 .copy-button:hover {
     color: var(--primary-color-main);
     text-decoration: none;
+    cursor: pointer;
 }
 
 /*members text */
