@@ -157,13 +157,12 @@ app.use(express.json());
 const uri = process.env.ATLAS_URI;
 
 // Instantiate mongoose connection
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
-);
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully"); // Verifies connection has been made
-}
-)
+});
 
 //use express router to define api endpoints from router.js
 const router = require("./router.js");

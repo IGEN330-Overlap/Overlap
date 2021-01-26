@@ -13,6 +13,64 @@
     color: white;
 }
 
+.landing-root .btn-sm {
+    padding: 0.40rem 0.95rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 1.05rem;
+}
+
+.landing-root .btn {
+    font-weight: 800;
+    font-size: 1rem;
+    transition: color 0.35s
+}
+
+/*adjust properties of the word 'overlap' */
+.purple {
+    color: var(--blue-color-main);
+    font-size: min(1.9vw, 2.05rem);
+    font-weight: 550;
+}
+
+/*adjust properties of the overall introduction text */
 .white {
-    color: white;
+    color: var(--neutral-color-main);
+    font-size: min(1.8vw, 1.95rem);
+    font-weight: 450;
+    text-align: center;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+}
+
+.welcome-container {
+    width: 50rem;
+    height: auto;
+    margin-bottom: min(2.5vw, 2.25rem);
+}
+
+.logo-container {
+    width: 60vw;
+    max-width: 70rem;
+    height: auto;
+    margin-bottom: 0.25rem;
+}
+ 
+@media (max-width: 1020px) {
+    .logo-container {
+        width: 612px;
+        height: auto;
+        margin-bottom: 0.25rem;
+    }
+    .welcome-container {
+        width: 28rem;
+        height: auto;
+        margin-bottom: 1.25rem;
+    }
+    .welcome-container .white {
+        font-size: 18.36px;
+    }
+    .welcome-container .purple {
+        font-size: 19.08px;
+    }
 }

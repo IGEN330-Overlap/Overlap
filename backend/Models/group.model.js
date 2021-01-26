@@ -7,7 +7,7 @@ const groupSchema = new Schema({
     //_id: mongoose.Schema.Types.ObjectId
 
     groupCode: {
-        type: String, 
+        type: String,
         unique: true,
         required: true,
     },
@@ -15,7 +15,7 @@ const groupSchema = new Schema({
         type: String
     },
     groupLeader: {
-        type: String, 
+        type: String,
         required: true
     },
     users: [
@@ -23,9 +23,9 @@ const groupSchema = new Schema({
             type: String,
         },
     ],
-}, 
+},
     {
-        timestamps: true,    
+        timestamps: true,
     }
 );
 
