@@ -109,7 +109,9 @@ input:focus {
 }
 .user-icon {
     height: min(9vw,110px);
-    width: auto;
+    width: min(9vw,110px);
+    object-fit: cover;
+    object-position: 50%;
     border-radius: 50rem;
 }
 .user-name {

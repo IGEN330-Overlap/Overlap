@@ -3,14 +3,14 @@ import './MemberDisplay.css';
 import brendan_icon from './brendan-icon.jpg';
 import kitten_icon from './kitten-icon.jpg';
 import puppy_icon from './puppy-icon.jpg';
-import icon from './brendan-icon.jpg';
+import kitten2 from './kitten2.jpg'
 import add_member from './add-member.svg';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 /*take input from backend to create array of users */
-const members = ['Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy'];
+const members = ['cat2','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy'];
 const num_members = members.length;
-const icon_src = [brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
+const icon_src = [kitten2, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
 
 const MemberDisplay = (props) => {
     return(
