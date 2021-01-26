@@ -1,0 +1,9 @@
+/* CSS variables */
+@import url(../variables.css);
+
+
+.landing-root {
+    width: auto;
+    height: 100vh;
+    background-color: var(--blue-color-1);
+}

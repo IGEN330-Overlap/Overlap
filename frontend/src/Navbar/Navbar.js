@@ -3,7 +3,7 @@ import logo from './overlap_image.jpg'
 
 const Navbar = (props) => {
     return (
-        <nav class="navbar navbar-expand-lg fixed-top">
+        <nav class="navbar navbar-text navbar-expand-lg fixed-top">
             <div class="container-fluid navbar-custom">
                  <img width="65" height="25" src= {logo} alt="logo"/>      
             <div class= "collapse navbar-collapse" id= "navbarNavAltMarkup">
@@ -18,7 +18,7 @@ const Navbar = (props) => {
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
+                        <a class="nav-link" href="./AboutUs">About Us</a>
                     </li>
                 </ul>
             </div>

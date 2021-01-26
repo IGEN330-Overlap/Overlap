@@ -3,7 +3,6 @@
 
 .navbar-text {
     background-color: var(--primary-color-main);
-    color: white;
 }
 
 .nav-item {
@@ -21,6 +20,7 @@
 
 .navbar {
     height: auto;
+    color: var(--primary-color-main);
 }
 
 .container-fluid {
