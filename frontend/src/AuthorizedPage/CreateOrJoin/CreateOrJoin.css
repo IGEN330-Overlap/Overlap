@@ -28,6 +28,17 @@ input::placeholder{
       linear-gradient(var(--neutral-color-7), var(--neutral-color-7)) center bottom 0/95% 1px no-repeat;
 }
 
+.arrow{
+    width: 1vw;
+    height: 1vw;
+    cursor: pointer;
+    margin-bottom: 0.5vw;
+}
+
+.continue-arrow:hover{
+    fill: var(--blue-color-3);
+}    
+
 @media (max-width: 720px){
     .openCollapse{
         font-size: 10px;

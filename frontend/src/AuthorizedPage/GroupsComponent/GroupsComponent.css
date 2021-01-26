@@ -31,7 +31,7 @@ input:focus{
 }
 
 .groupButton{
-    width: 10em;
+    width: 9em;
     font-size: 1.25vw;
     padding-left: 0px;
     background-color: transparent;
@@ -51,12 +51,21 @@ input:focus{
     outline-color: transparent;
 }
 
+.dots{
+    fill: white;
+    margin-top: 13px;
+}
+
+.dots:hover{
+    fill: var(--blue-color-3);
+}
+
 /* .menu{
     background-color: var(--blue-color-1);
 } */
 
-/* .modal-body{
-    border-radius: 1.05rem;
+/* .modal-dialogue .modal-content{
+    border-radius: 15px;
 } */
 
 .modal-head{
@@ -65,6 +74,7 @@ input:focus{
 
 .modal-text{
     padding-bottom: 15px;
+    font-size: 1.25vw;
 }
 
 .in-modal{
@@ -84,6 +94,10 @@ input:focus{
     outline: none;
 }
 
+.copy-button:hover{
+    color: white;
+}
+
 @media (max-width: 720px){
     .title{
         font-size: 18.36px;
@@ -92,6 +106,9 @@ input:focus{
         font-size: 10px;
     }
     .groupButton{
+        font-size: 10px;
+    }
+    .modal-text{
         font-size: 10px;
     }
 }

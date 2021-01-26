@@ -1,8 +1,8 @@
 import './CreateOrJoin.css';
 import React from "react";
-import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import continueArrow from './ContinueArrow.svg';
+import arrow from './right.svg';
+
 
 //Component to display Create a new group or Join a group component
 const CreateOrJoin = (props) => {
@@ -23,7 +23,7 @@ const CreateOrJoin = (props) => {
             <Collapse in={openCreate}>
                 <div id="example-collapse-text">
                     <input type="text" className="input" placeholder="Enter Group Name" size="15"/>
-                    <a><img src={continueArrow}/></a>
+                    <a className="continue-arrow"><img className="arrow" src={arrow}/></a>
                 </div>
             </Collapse>
 
@@ -37,7 +37,7 @@ const CreateOrJoin = (props) => {
             <Collapse in={openJoin}>
                 <div id="example-collapse-text">
                     <input type="text" className="input" placeholder="Enter Group Code" size="15"/>
-                    <a><img src={continueArrow}/></a>
+                    <a className="continue-arrow"><img className="arrow" src={arrow}/></a>
                 </div>
             </Collapse>
 

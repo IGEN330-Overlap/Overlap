@@ -1,12 +1,10 @@
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Button from 'react-bootstrap/Button';
 import './GroupsComponent.css';
-import dots from './three-dots.svg';
 import line from './Line.svg';
+import copy from './copy.svg';
 import React from "react";
 
 
@@ -31,18 +29,50 @@ const GroupsComponent = (props) => {
         setLeaveIsOpen(false);
     };
 
+    //custom toggle as three dots
+    const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
+        <a
+          href=""
+          ref={ref}
+          onClick={(e) => {
+            e.preventDefault();
+            onClick(e);
+          }}
+        >
+          <svg
+            width="16"
+            height="4"
+            viewBox="0 0 16 4"
+            xmlns="http://www.w3.org/2000/svg"
+            className="dots">
+            <ellipse cx="2.07407" cy="2" rx="2.07407" ry="2" />
+            <ellipse cx="8.0001" cy="2" rx="2.07407" ry="2" />  
+            <ellipse cx="13.9259" cy="2" rx="2.07407" ry="2" />     
+            </svg>
+        </a>
+    ));
+
+    // THIS DOES NOT WORK FOR SOME REASON
     // //Display Dropdown Button Function
     // const groupDropdown = () => (
     //     <Dropdown as={ButtonGroup}>
-    //         <Button variant="success">Group 1</Button>
-    //         <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-    //         <Dropdown.Menu>
-    //             <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
-    //             <Dropdown.Item href="#/action-2"><a onClick={showLeaveModal}>Leave Group</a></Dropdown.Item>
-    //         </Dropdown.Menu>
-    //     </Dropdown>
+        //     <a className="groupButton">Group 1</a>
+        //     <Dropdown.Toggle as={CustomToggle} />
+        //     <Dropdown.Menu className="menu">
+        //         <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
+        //         <Dropdown.Divider></Dropdown.Divider>
+        //         <Dropdown.Item href="#/action-2"><a onClick={showLeaveModal}>Leave Group</a></Dropdown.Item>
+        //     </Dropdown.Menu>
+        // </Dropdown>
     // );
 
+    //Copy code
+    function copyCode(){
+        var copyText = document.getElementById("myCode");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+    }
 
     return (
         // Flexbox for existing groups
@@ -62,8 +92,7 @@ const GroupsComponent = (props) => {
                 <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
                         <a className="groupButton">Group 1</a>
-                        <Dropdown.Toggle split variant="dark" className="groupToggle" id="dropdown-split-basic" />
-                        {/* <a data-toggle="Dropdown" aria-haspopup="true" aria-expanded="false">push</a> */}
+                        <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
                             <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
                             <Dropdown.Divider></Dropdown.Divider>
@@ -72,7 +101,7 @@ const GroupsComponent = (props) => {
                     </Dropdown>
                 </div>
 
-                {/* Group as a dropdown menu button from function (function call)
+                {/* Group as a dropdown menu button from function (function call) -- PART OF THE DOES NOT WORK
                 <div className="group-item d-flex">
                     <groupDropdown/>
                 </div>  */}
@@ -82,8 +111,12 @@ const GroupsComponent = (props) => {
             <>
                 <Modal className="modalcss" show={CodeisOpen} onHide={hideCodeModal} centered>
                     <Modal.Body className="in-modal modal-body">
-                        <h5 className="modal-text modal-head"><strong>The Group Code for "Group Name" is</strong></h5>
-                        <h4 className="modal-text"><strong>"Group Code"</strong></h4>
+                        <h5 className="modal-text modal-head"><strong>"Group Name" Code</strong></h5>
+                        <h4 className="modal-text" id="myCode" type="text"><strong>"EXAMPLE"</strong>
+                            <a onCLick={copyCode} className="copy-button">
+                                <img src={copy}/>
+                            </a>
+                        </h4>
                         <button onClick={hideCodeModal} className="btn-in-modal continue-button" centered><strong>Continue</strong></button>
                     </Modal.Body>
                  </Modal>
