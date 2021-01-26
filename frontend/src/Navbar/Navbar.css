@@ -2,15 +2,30 @@
 @import url(../variables.css);
 
 .navbar-text {
-    background-color: var(--blue-color-main);
-    border-color: var(--blue-color-main);
+    background-color: var(--primary-color-main);
     color: white;
 }
 
-.change-my-color {
-    fill:white;
-  }
-
-.navbar-custom {
-    height: 30px;
+.nav-item {
+    color:white;
 }
+
+.dropdown-toggle {
+    color: var(--blue-color-main); 
+    color: white;
+}
+
+.nav-link {
+    color: white;
+}
+
+.navbar {
+    height: auto;
+}
+
+.container-fluid {
+    height:fit-content;
+}
+
+
+  
