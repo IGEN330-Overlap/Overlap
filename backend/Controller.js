@@ -1,4 +1,4 @@
-const { Mongoose } = require('mongoose');
+//const { Mongoose } = require('mongoose');
 const SpotifyWebApi = require('spotify-web-api-node');
 require('dotenv').config();
 
@@ -31,28 +31,49 @@ exports.getUser = async (req, res) => {
         })
 }
 
-
+//create a new group middleware
+//parameters: (name, spotifyID) where name is the group name and spotifyID 
+//            is the spotifyID of the group leader
 exports.createGroup = async (req,res) => {
-    groupCode = groupCodeGenerator.generate 
-    const group = new Group({
+    generatedGroupCode = groupCodeGenerator.generate
+    
+    //create a new instance of the group model named newGroup
+    const newGroup = new Group({
 
-        groupCode: groupCode,
+        //format for storing data for the group model
+        groupCode: generatedGroupCode,
         groupName: req.body.name,
         groupLeader: req.body.spotifyID,
         users: req.body.spotifyID
 
     });
-    product
-    .save()
-    .then(result => {
-        console.log(result);
-    })
     
+    newGroup
+        .save()   //.save() is a mongoose method for storing newGroup in database  
+        .then(result => {
+            console.log(result);   //log to console the result of .save()
+    
+        })
+        //catching errors and log to console
+        .catch(err => console.log(err));
+
+    //response status to creating a new group
     res.status(201).json({
         message: "Handling POST request to /groups",
-        createdGroup: group
+        createdGroup: newGroup
     });
 
 
-
 };
+
+/* PostMan Testing instructions for createGroup:
+
+1. Make a new post request, 
+2. enter http://localhost:8888/group/create
+3. Body -> Raw
+3. {
+    "name": "Study Buddies 2"
+    "spotifyID": "    "6zzd11w6ibnra9mh12zuxcsp7"
+}
+
+*/
