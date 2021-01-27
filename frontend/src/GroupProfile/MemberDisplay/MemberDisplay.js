@@ -9,7 +9,6 @@ import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 /*take input from backend to create array of users */
 const members = ['cat2','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy','Brendan','cat','puppy'];
-const num_members = members.length;
 const icon_src = [kitten2, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
 
 const MemberDisplay = (props) => {
@@ -25,11 +24,11 @@ const MemberDisplay = (props) => {
 
             <div className="display-members">
 
-                {icon_src.map(icon => (
+                {members.map((member,i) => (
                     <div className="icon-container">
-                        <img className="user-icon" src={icon} alt={members}></img>
+                        <img className="user-icon" src={icon_src[i]} alt={member}></img>
                         <div className="user-name">
-                                <strong>{members[0]}</strong>
+                                <strong>{member}</strong>
                         </div>
                     </div>
                 ))
