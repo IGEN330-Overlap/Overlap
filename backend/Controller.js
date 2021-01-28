@@ -8,7 +8,6 @@ const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
 const frontend_url = process.env.FRONTEND_URL;
-const Group = require('./Models/group.model.js');
 const groupCodeGenerator = require('./scripts.js');
 
 const redirect_uri = backend_url + 'callback'; // Your redirect uri
