@@ -66,7 +66,7 @@ const GroupsComponent = (props) => {
         // </Dropdown>
     // );
 
-    //Copy code
+    //Copy code -- does not work rn
     function copyCode(){
         var copyText = document.getElementById("myCode");
         copyText.select();
@@ -80,17 +80,18 @@ const GroupsComponent = (props) => {
             <h1 className="title"><strong>Groups</strong></h1>
             <div class="mr-auto"><img src={line} className="underline" alt="underline"/></div>
 
-            { /*search bar */}
+            { /*search bar -- INPUT DOES NOT DO ANYTHING*/}
             <div className="search-bar">
                 <input type="text" class="input-search" placeholder="search" size="15"/>
             </div>
 
-            { /*list of groups */}
+            { /*list of groups -- NON ITERATIVE RN*/}
             <div className="group-list">
 
                 {/* Group as a dropdown menu button */}
                 <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
+                        {/* THIS LINK DOES NOT CONNECT TO ANYTHING */}
                         <a className="groupButton">Group 1</a>
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
@@ -101,7 +102,7 @@ const GroupsComponent = (props) => {
                     </Dropdown>
                 </div>
 
-                {/* Group as a dropdown menu button from function (function call) -- PART OF THE DOES NOT WORK
+                {/* Group as a dropdown menu button from function (function call) -- THIS IS PART OF THE STUFF THAT DOES NOT WORK BUT WANT TO FIX
                 <div className="group-item d-flex">
                     <groupDropdown/>
                 </div>  */}
@@ -113,6 +114,7 @@ const GroupsComponent = (props) => {
                     <Modal.Body className="in-modal modal-body">
                         <h5 className="modal-text modal-head"><strong>"Group Name" Code</strong></h5>
                         <h4 className="modal-text" id="myCode" type="text"><strong>"EXAMPLE"</strong>
+                            {/* COPY DOES NOT WORK and copy button does not change colour on hover - need fix*/}
                             <a onCLick={copyCode} className="copy-button">
                                 <img src={copy}/>
                             </a>
@@ -128,6 +130,7 @@ const GroupsComponent = (props) => {
                     <Modal.Body className="in-modal">
                         <h5 className="modal-text modal-head"><strong>Are you sure you want to leave?</strong></h5>
                         <h4 className="modal-text"><strong>"Group Name"</strong></h4>
+                        {/* BUTTON BELOW DOES NOT LINK TO ANYTHING */}
                         <p><button className="btn-in-modal leave-buttons">Yes, I'm sure</button></p>
                         <p><button onClick={hideLeaveModal} className="btn-in-modal leave-buttons">Nope, take me back</button></p>
                     </Modal.Body>
