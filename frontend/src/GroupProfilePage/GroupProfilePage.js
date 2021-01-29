@@ -1,9 +1,9 @@
 import React from 'react';
-import './GroupProfile.css';
+import './GroupProfilePage.css';
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
 
-const GroupProfile = (props) => {
+const GroupProfilePage = (props) => {
     return(
         <div className="landing-root">
             <div className="group-name">
@@ -16,4 +16,4 @@ const GroupProfile = (props) => {
     )
 }
 
-export default GroupProfile;
+export default GroupProfilePage;
