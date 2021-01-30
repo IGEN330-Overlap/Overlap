@@ -22,6 +22,8 @@ html {
     --neutral-color-5: #b9c0cb;
     --neutral-color-6: #a6aeba;
     --neutral-color-7: #99a1ac;
+
+    --off-white-color: #fefffe;
   
     --shadow-color: 0px 4px 8px 0px rgba(0, 0, 0, 0.15);
     --shadow-heavy: 1px 4px 15px 1px rgba(0, 0, 0, 0.35);
