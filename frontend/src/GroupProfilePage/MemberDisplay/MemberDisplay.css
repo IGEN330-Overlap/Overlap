@@ -1,0 +1,153 @@
+@import url(../../variables.css);
+
+/*full container for members */
+.member-container {
+    width: 60vw;
+    margin-right: auto;
+    padding-right: 15px;
+    margin-bottom: 10px;
+    background-color: transparent;
+}
+
+/*text container */
+.d-flex {
+    margin-bottom: 10px;
+    align-content: center;
+}
+.add-member {
+    margin-left: 15px;
+    margin-top: 7.25px;
+}
+
+/*add member button and popover */
+.add-member:hover {
+    opacity: 0.7;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+/*.custom-popover .popover-display {
+    margin-left:10px;
+    margin-top: 10px;
+}*/
+
+/*copy group code element */
+.copy-code {
+    display: flex;
+    align-items: center;
+    border-style: solid;
+    border-color: var(--neutral-color-5);
+    border-width: 1.5px;
+    border-radius: 5rem;
+    height: 26.67px;
+}
+.copy-button {
+    height: 26.67px;
+    width: 50px;
+    color: var(--off-white-color);
+    background-color: var(--blue-color-main);
+    border-radius: 5rem;
+}
+input {
+    border-color: transparent;
+    background-color: transparent;
+    padding-left: 10px;
+}
+input:focus {
+    outline: none;
+}
+.copy-button h4 {
+    font-size: 0.95rem;
+    font-weight: 450;
+    padding-top: 2.75px;
+    padding-left: 7px;
+}
+.copy-button:hover {
+    color: var(--primary-color-main);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*members text */
+.member-container .d-flex .text {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 1.85rem;
+}
+
+/*icons */
+.display-members {
+    display: flex;
+    width: 60vw;
+    flex-wrap: wrap;
+    max-height: 50vh;
+    justify-content: flex-start;
+    align-content: flex-start;
+    overflow-y: auto;
+}
+
+/*customize scroll bar */
+.display-members::-webkit-scrollbar{
+    width: 6px;
+    height: auto;
+}
+.display-members::-webkit-scrollbar-track {
+    background-color: black;
+    opacity: 0.6;
+    border-radius: 10px;
+}
+.display-members::-webkit-scrollbar-thumb {
+    background-color: var(--blue-color-3);
+    border-radius: 10px;
+}
+
+.icon-container {
+    margin-top: 15px;
+    margin-left: 6.5px;
+    margin-right: 6.5px;
+    position: relative;
+    text-align: center;
+}
+.user-icon {
+    height: min(9vw,110px);
+    width: min(9vw,110px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 50rem;
+}
+.user-name {
+    font-size: min(1.75vw,20px);
+    color: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.icon-container:hover .user-icon {
+    opacity: 0.4;
+    transition-duration: 0.45s;
+}
+
+.icon-container:hover .user-name {
+    color: var(--off-white-color);
+    transition-duration: 0.45s;
+}
+
+/*adjust for different screen sizes */
+@media (max-width: 720px) {
+    .display-members {
+        width: 90vw;
+        max-height: 60vh;
+    }
+    .add-member {
+        margin-top: 7.25px
+    }
+    .text {
+        font-size: 1.65rem;
+    }
+    .user-icon {
+        height: 64.8px;
+    }
+    .user-name {
+        font-size: 12.6px;
+    }
+}

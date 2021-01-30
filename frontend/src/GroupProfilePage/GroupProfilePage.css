@@ -1,0 +1,20 @@
+@import url(../variables.css);
+
+.landing-root {
+    width: auto;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.group-name {
+    margin-top: 50px;
+    margin-left: 4vw;
+}
+.member-display {
+    margin-top: 50px;
+    margin-left: 4vw;
+    padding-top: 15px;
+}
