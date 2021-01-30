@@ -1,0 +1,114 @@
+/* CSS variables */
+@import url(../../variables.css);
+
+.title{
+    color: white;
+    font-size: 2.55vw;
+}
+
+.search-bar{
+    color: white;
+    background: url(./search.svg) left center no-repeat;
+    padding: 25px;
+    width: auto;
+}
+
+.input-search{
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: 1.25vw;
+}
+
+input::placeholder{
+    color: var(--neutral-color-7);
+    background: 
+      linear-gradient(var(--neutral-color-7), var(--neutral-color-7)) center bottom 0/100% 1px no-repeat;
+}
+
+input:focus{
+    outline: none;
+}
+
+.groupButton{
+    width: 9em;
+    font-size: 1.25vw;
+    padding-left: 0px;
+    background-color: transparent;
+    color: white;
+    outline-color: transparent;
+}
+
+.groupButton:hover{
+    color: var(--blue-color-1);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.groupToggle{
+    background-color:transparent;
+    color: white;
+    outline-color: transparent;
+}
+
+.dots{
+    fill: white;
+    margin-top: 13px;
+}
+
+.dots:hover{
+    fill: var(--blue-color-3);
+}
+
+/* .menu{
+    background-color: var(--blue-color-1);
+} */
+
+/* .modal-dialogue .modal-content{
+    border-radius: 15px;
+} */
+
+.modal-head{
+    padding-top: 15px;
+}
+
+.modal-text{
+    padding-bottom: 15px;
+    font-size: 1.25vw;
+}
+
+.in-modal{
+    text-align: center;
+    background-color: var(--blue-color-1);
+}
+
+.btn-in-modal{
+    background-color: var(--blue-color-main);
+    color: white;
+    border-radius: 0.75rem;
+    border-color: transparent;
+    width: 15em;
+}
+
+.btn-in-modal:focus{
+    outline: none;
+}
+
+.copy-button:hover{
+    color: white;
+}
+
+@media (max-width: 720px){
+    .title{
+        font-size: 18.36px;
+    }
+    .input-search{
+        font-size: 10px;
+    }
+    .groupButton{
+        font-size: 10px;
+    }
+    .modal-text{
+        font-size: 10px;
+    }
+}

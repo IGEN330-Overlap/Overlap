@@ -1,17 +1,22 @@
 import MemberDisplay from '../GroupProfilePage/MemberDisplay/MemberDisplay';
 import './AuthorizedPage.css';
+import GroupsComponent from './GroupsComponent/GroupsComponent';
+import CreateOrJoin from './CreateOrJoin/CreateOrJoin';
 import { Link } from 'react-router-dom';
 
 //takes accessToken string and loggedIn boolean as props
 const AuthorizedPage = (props) => {
     return (
-        <div>
+        // STILL NEEDS TO BE FORMATTED
+        <div className="AuthorizedPage d-flex justify-content-center align-items-center">
             {/* && operator allows conditional rendering of the component */}
-            <>{props.loggedIn && <h1>Hey you logged in, good shit buddy!</h1>}</>
-            <>{!props.loggedIn && <a href="http://localhost:3000/">Hey you're not logged in! Click here to log in</a>}</>
-            <p>{props.accessToken}</p>
+
+            <>{props.loggedIn && <GroupsComponent/>}</>
+            <>{props.loggedIn && <CreateOrJoin/>}</>
+
              {/*link to group page*/}
              <>{props.loggedIn && <Link to ="GroupProfilePage/GroupProfilePage">Sample Group</Link>}</>
+
         </div>
     );
 }

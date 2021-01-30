@@ -1,0 +1,8 @@
+/* CSS variables */
+@import url(../variables.css);
+
+.AuthorizedPage {
+    width: auto;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+}

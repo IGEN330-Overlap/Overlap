@@ -1,0 +1,49 @@
+/* CSS variables */
+@import url(../../variables.css);
+
+.openCollapse{
+    color: white;
+    font-size: 1.25vw;
+}
+
+.openCollapse:hover{
+    color: var(--blue-color-1);
+    cursor:pointer;
+}
+
+.input{
+    font-size: 1vw;
+    width: 10em;
+    padding-left: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+}
+
+input::placeholder{
+    color: var(--neutral-color-5);
+    background: 
+      linear-gradient(var(--neutral-color-7), var(--neutral-color-7)) center bottom 0/95% 1px no-repeat;
+}
+
+.arrow{
+    width: 1vw;
+    height: 1vw;
+    cursor: pointer;
+    margin-bottom: 0.5vw;
+}
+
+.continue-arrow:hover{
+    fill: var(--blue-color-3);
+}    
+
+@media (max-width: 720px){
+    .openCollapse{
+        font-size: 10px;
+    }
+    .input{
+        font-size: 10px;
+    }
+}
