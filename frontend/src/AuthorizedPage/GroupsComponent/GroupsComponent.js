@@ -6,6 +6,7 @@ import './GroupsComponent.css';
 import line from './Line.svg';
 import copy from './copy.svg';
 import React from "react";
+import { Link } from 'react-router-dom';
 
 
 //Component to display groups on Groups page
@@ -92,7 +93,7 @@ const GroupsComponent = (props) => {
                 <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
                         {/* THIS LINK DOES NOT CONNECT TO ANYTHING */}
-                        <a className="groupButton">Group 1</a>
+                        <Link to ="GroupProfilePage/GroupProfilePage" className="groupButton">Group 1</Link>
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
                             <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
