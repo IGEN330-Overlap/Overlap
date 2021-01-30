@@ -64,22 +64,22 @@ input:focus{
     background-color: var(--blue-color-1);
 } */
 
-/* .modal-dialogue .modal-content{
+.modal-dialog .modal-content{
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-radius: 15px;
-} */
+    text-align: center;
+    background-color: var(--blue-color-1);
+    width: 400px;
+} 
 
-.modal-head{
+/* .modal-head{
     padding-top: 15px;
-}
+} */
 
 .modal-text{
     padding-bottom: 15px;
     font-size: 1.25vw;
-}
-
-.in-modal{
-    text-align: center;
-    background-color: var(--blue-color-1);
 }
 
 .btn-in-modal{
