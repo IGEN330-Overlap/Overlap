@@ -34,7 +34,7 @@ const CreateOrJoin = (props) => {
                 aria-expanded={openJoin}
             >
             <h5 className="openCollapse">+   Join a group</h5>
-            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING --  also continue button does not change colour on hover need to fix*/}
+            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING -- also continue button does not change colour on hover need to fix*/}
             </a>
             <Collapse in={openJoin}>
                 <div id="example-collapse-text">
