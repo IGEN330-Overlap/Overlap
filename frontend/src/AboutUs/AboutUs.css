@@ -2,9 +2,12 @@
 @import url(../variables.css);
 
 
-.text-color {
+.format {
     width: auto;
     height: 100vh;
-    color: white;
     background-color: var(--blue-color-1);
+}
+
+.text {
+    color: white;
 }

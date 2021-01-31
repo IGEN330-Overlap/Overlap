@@ -5,10 +5,6 @@
     background-color: var(--primary-color-main);
 }
 
-a:link {
-    color: white;
-  }
-
 .nav-item {
     color:white;
     margin-left: 40px;
