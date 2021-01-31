@@ -1,6 +1,10 @@
 /* CSS variables */
 @import url(../../variables.css);
 
+.CreateOrJoinBox{
+    padding-top: 25px;
+}
+
 .openCollapse{
     color: white;
     font-size: 1.25vw;
@@ -13,10 +17,10 @@
 
 .input{
     font-size: 1vw;
-    width: 10em;
-    padding-left: 1rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.5rem;
+    width: 11em;
+    padding-left: 1em;
+    padding-top: 0em;
+    padding-bottom: 0.5em;
     background-color: transparent;
     border-color: transparent;
     color: white;
@@ -45,10 +49,19 @@ input::placeholder{
 }    
 
 @media (max-width: 720px){
+    .CreateOrJoinBox{
+        width: 230px;
+    }
     .openCollapse{
-        font-size: 10px;
+        font-size: 20px;
     }
     .input{
-        font-size: 10px;
+        font-size: 20px;
+        width: 10em;
+    }
+    .arrow{
+        width: 20px;
+        height: 20px;
+        padding-left: 0px;
     }
 }
