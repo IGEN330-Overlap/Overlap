@@ -10,7 +10,7 @@
     align-content: flex-start;
 }
 .group-name {
-    margin-top: 60px;
+    margin-top: 50px;
     margin-left: 4vw;
 }
 .landing-root .d-flex {
@@ -25,6 +25,12 @@
 }
 .individual-comparisons {
     margin-top: 50px;
-    margin-left: 4vw;
+    margin-left: 2vw;
     padding-top: 15px;
+}
+
+@media (max-width: 720px) {
+    .individual-comparisons {
+        margin-left: 4vw;
+    }
 }

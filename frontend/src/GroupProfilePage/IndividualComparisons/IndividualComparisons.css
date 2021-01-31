@@ -29,25 +29,66 @@
     flex-wrap: wrap;
 }
 .artist-container {
-    text-align: center;
-    vertical-align: center;
     margin-left: 6px;
     margin-right: 6px;
     padding-right: 10px;
+    position: relative;
 }
 
 .artist-icon {
     margin-top: 3px;
-    height: min(9vw,110px);
-    width: min(9vw,110px);
+    height: min(12vw,120px);
+    width: min(12vw,120px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 10px;
 }
 .artist-name {
-    margin-top: 3px;
-    font-size: 12px;
+    align-content: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: min(8vw, 12px);
+    width: min(12vw,130px);
+}
+
+.artist-display strong {
     color: var(--off-white-color);
+}
+
+/* css for top tracks section */
+
+.track-container h3 {
+    width: 20px;
+    font-size: 40px;
+}
+.track-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding-right: 10px;
+    width: 30px;
+    position: relative;
+    color: var(--off-white-color);
+    font-size: 20px;
+}
+.track-icon {
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+.track-info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+.track-artist {
+    color: var(--blue-color-1);
+    font-size: 12px;
+    width: 500px;
 }
 
 @media (max-width: 720px) {
@@ -55,10 +96,11 @@
         width: 90vw;
     }
     .artist-icon {
-        height: 64.8px;
-        width: 64.8px;
+        height: 86.4px;
+        width: 86.4px;
     }
     .artist-name {
-        font-size: 10px;
+        width: 86.4px;
+        font-size: 9px;
     }
 }
