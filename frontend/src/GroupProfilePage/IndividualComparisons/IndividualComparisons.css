@@ -33,6 +33,7 @@
     vertical-align: center;
     margin-left: 6px;
     margin-right: 6px;
+    padding-right: 10px;
 }
 
 .artist-icon {
@@ -41,7 +42,7 @@
     width: min(9vw,110px);
     object-fit: cover;
     object-position: 50%;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 .artist-name {
     margin-top: 3px;
@@ -50,6 +51,9 @@
 }
 
 @media (max-width: 720px) {
+    .artist-display {
+        width: 90vw;
+    }
     .artist-icon {
         height: 64.8px;
         width: 64.8px;
