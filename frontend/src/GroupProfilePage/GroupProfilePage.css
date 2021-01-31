@@ -13,24 +13,30 @@
     margin-top: 50px;
     margin-left: 4vw;
 }
+/*
 .landing-root .d-flex {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
+*/
 .member-display {
     margin-top: 50px;
     margin-left: 4vw;
     padding-top: 15px;
 }
+/*
 .individual-comparisons {
     margin-top: 50px;
     margin-left: 2vw;
     padding-top: 15px;
 }
+*/
 
+/*
 @media (max-width: 720px) {
     .individual-comparisons {
         margin-left: 4vw;
     }
 }
+*/

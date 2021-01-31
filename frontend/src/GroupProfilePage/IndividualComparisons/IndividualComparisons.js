@@ -3,15 +3,14 @@ import icon1 from './conan.JPG'
 import icon2 from './valley.JPG';
 import icon3 from './daniel.JPG';
 import icon4 from './drivers.JPG';
+import icon5 from './3nights.JPG';
 
 const myTopArtists = ['conan gray','valley','daniel caesar']
 const myTopArtistsIcons = [icon1,icon2,icon3]
 
-const myTopTracks = ['Heather','drivers license']
-const myTopTracksArtist = ['Conan Gray','Olivia Rodrigo']
-const myTopTracksIcon = [icon1,icon4]
-
-const compare = ''
+const myTopTracks = ['Heather','drivers license','3 Nights']
+const myTopTracksArtist = ['Conan Gray','Olivia Rodrigo','Dominic Fike']
+const myTopTracksIcon = [icon1,icon4,icon5]
 
 export const MyInsights = (props) => {
     return(
@@ -51,6 +50,7 @@ export const MyInsights = (props) => {
                     }
                 </div>
             </div>
+            <h4><strong>Click on a friend to compare your stats!</strong></h4>
         </div>
     )
 }
@@ -58,7 +58,7 @@ export const MyInsights = (props) => {
 export const Comparisons = (props) => {
     return(
         <div className="comparisons">
-            <h1><strong>Comparing You and {compare}</strong></h1>
+            <h1><strong>Comparing You and {props.name}</strong></h1>
             <div className="under-bar"></div>
 
             <div className="top-artists">
@@ -93,6 +93,7 @@ export const Comparisons = (props) => {
                     }
                 </div>
             </div>
+            <h4><strong>Click here to return to your personal insights!</strong></h4>
         </div>
     )
 }

@@ -1,16 +1,23 @@
 @import url(../../variables.css);
 
-.my-insights h1{
+.my-insights h1 {
     color: var(--off-white-color);
     margin-left: 6px;
     font-size: 1.85rem;
 }
 
-.my-insights h2{
+.my-insights h2 {
     color: var(--off-white-color);
     margin-left: 6px;
     margin-top: 18px;
     font-size: 1.2rem;
+}
+
+.my-insights h4 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 50px;
+    font-size: 1.25rem;
 }
 
 .under-bar{
@@ -18,6 +25,26 @@
     width: 75px;
     height: 3px;
     background-color: var(--off-white-color);
+}
+
+.comparisons h1{
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 1.85rem;
+}
+
+.comparisons h2{
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 18px;
+    font-size: 1.2rem;
+}
+
+.comparisons h4 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 50px;
+    font-size: 1.25rem;
 }
 
 /* css for top artists section */

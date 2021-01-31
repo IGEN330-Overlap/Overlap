@@ -12,13 +12,8 @@ const GroupProfilePage = (props) => {
             <div className="group-name">
                 <GroupName />
             </div>
-            <div className="d-flex">
-                <div className="member-display">
-                    <MemberDisplay />
-                </div>
-                <div className="individual-comparisons">
-                    <MyInsights />
-                </div>
+            <div className="member-display">
+                <MemberDisplay />
             </div>
         </div>
     )
