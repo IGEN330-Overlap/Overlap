@@ -41,14 +41,14 @@ const GroupsComponent = (props) => {
           }}
         >
           <svg
-            width="16"
-            height="4"
+            width="1.25vw"
+            height="100%"
             viewBox="0 0 16 4"
             xmlns="http://www.w3.org/2000/svg"
             className="dots">
-            <ellipse cx="2.07407" cy="2" rx="2.07407" ry="2" />
-            <ellipse cx="8.0001" cy="2" rx="2.07407" ry="2" />  
-            <ellipse cx="13.9259" cy="2" rx="2.07407" ry="2" />     
+            <ellipse cx="2.07407" cy="50%" rx="2.07407" ry="2" />
+            <ellipse cx="8.0001" cy="50%" rx="2.07407" ry="2" />  
+            <ellipse cx="13.9259" cy="50%" rx="2.07407" ry="2" />     
             </svg>
         </a>
     ));
