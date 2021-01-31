@@ -35,6 +35,11 @@ input::placeholder{
     margin-bottom: 0.5vw;
 }
 
+.continue-arrow{
+    margin-left:10px;
+    fill: var(--off-white-color);
+}
+
 .continue-arrow:hover{
     fill: var(--blue-color-3);
 }    

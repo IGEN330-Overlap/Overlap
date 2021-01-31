@@ -1,4 +1,3 @@
-import MemberDisplay from '../GroupProfilePage/MemberDisplay/MemberDisplay';
 import './AuthorizedPage.css';
 <<<<<<< HEAD
 import Navbar from "../Navbar/Navbar";
@@ -27,7 +26,6 @@ const AuthorizedPage = (props) => {
              {/*link to group page*/}
              <>{props.loggedIn && <Link to ="GroupProfilePage/GroupProfilePage">Sample Group</Link>}</>
 
->>>>>>> master
         </div>
     );
 }
