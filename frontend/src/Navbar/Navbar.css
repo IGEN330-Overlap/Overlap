@@ -2,12 +2,21 @@
 @import url(../variables.css);
 
 .navbar-text {
-    background-color: var(--primary-color-main);
+    background-color: transparent;
 }
 
 .nav-item {
     color:white;
     margin-left: 40px;
+}
+
+.links{
+    color: white;
+}
+
+.links:hover{
+    text-decoration: none;
+    color: var(--blue-color-main);
 }
 
 .navbar {
