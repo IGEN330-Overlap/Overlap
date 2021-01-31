@@ -5,26 +5,23 @@
     background-color: var(--primary-color-main);
 }
 
+a:link {
+    color: white;
+  }
+
 .nav-item {
     color:white;
-}
-
-.dropdown-toggle {
-    color: var(--blue-color-main); 
-    color: white;
-}
-
-.nav-link {
-    color: white;
+    margin-left: 40px;
 }
 
 .navbar {
     height: auto;
-    color: var(--primary-color-main);
+    color: white;
 }
 
 .container-fluid {
     height:fit-content;
+    width: auto;
 }
 
 
