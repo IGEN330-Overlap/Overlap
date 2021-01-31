@@ -2,11 +2,13 @@ import React from 'react';
 import './GroupProfilePage.css';
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
+import Navbar from "../Navbar/Navbar";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons'
 
 const GroupProfilePage = (props) => {
-    return(
+    return(     
         <div className="landing-root">
+            <Navbar />
             <div className="group-name">
                 <GroupName />
             </div>
