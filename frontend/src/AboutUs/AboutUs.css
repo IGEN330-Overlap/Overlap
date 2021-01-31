@@ -2,8 +2,9 @@
 @import url(../variables.css);
 
 
-.landing-root {
+.text-color {
     width: auto;
     height: 100vh;
+    color: white;
     background-color: var(--blue-color-1);
 }
