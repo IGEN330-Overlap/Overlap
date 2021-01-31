@@ -134,6 +134,9 @@ input:focus {
 
 /*adjust for different screen sizes */
 @media (max-width: 720px) {
+    .member-container {
+        width: 90vw;
+    }
     .display-members {
         width: 90vw;
         max-height: 60vh;
@@ -146,6 +149,7 @@ input:focus {
     }
     .user-icon {
         height: 64.8px;
+        width: 64.8px;
     }
     .user-name {
         font-size: 12.6px;

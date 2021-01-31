@@ -1,0 +1,60 @@
+@import url(../../variables.css);
+
+.my-insights h1{
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 1.85rem;
+}
+
+.my-insights h2{
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 18px;
+    font-size: 1.2rem;
+}
+
+.under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    background-color: var(--off-white-color);
+}
+
+/* css for top artists section */
+
+.artist-display {
+    width: 30vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.artist-container {
+    text-align: center;
+    vertical-align: center;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.artist-icon {
+    margin-top: 3px;
+    height: min(9vw,110px);
+    width: min(9vw,110px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 5px;
+}
+.artist-name {
+    margin-top: 3px;
+    font-size: 12px;
+    color: var(--off-white-color);
+}
+
+@media (max-width: 720px) {
+    .artist-icon {
+        height: 64.8px;
+        width: 64.8px;
+    }
+    .artist-name {
+        font-size: 10px;
+    }
+}

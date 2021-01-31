@@ -2,6 +2,7 @@ import React from 'react';
 import './GroupProfilePage.css';
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
+import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons'
 
 const GroupProfilePage = (props) => {
     return(
@@ -9,8 +10,13 @@ const GroupProfilePage = (props) => {
             <div className="group-name">
                 <GroupName />
             </div>
-            <div className="member-display">
-                <MemberDisplay />
+            <div className="d-flex">
+                <div className="member-display">
+                    <MemberDisplay />
+                </div>
+                <div className="individual-comparisons">
+                    <MyInsights />
+                </div>
             </div>
         </div>
     )
