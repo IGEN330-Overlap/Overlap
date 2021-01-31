@@ -41,14 +41,14 @@ const GroupsComponent = (props) => {
           }}
         >
           <svg
-            width="16"
-            height="4"
+            width="1.25vw"
+            height="100%"
             viewBox="0 0 16 4"
             xmlns="http://www.w3.org/2000/svg"
             className="dots">
-            <ellipse cx="2.07407" cy="2" rx="2.07407" ry="2" />
-            <ellipse cx="8.0001" cy="2" rx="2.07407" ry="2" />  
-            <ellipse cx="13.9259" cy="2" rx="2.07407" ry="2" />     
+            <ellipse cx="2.07407" cy="50%" rx="2.07407" ry="2" />
+            <ellipse cx="8.0001" cy="50%" rx="2.07407" ry="2" />  
+            <ellipse cx="13.9259" cy="50%" rx="2.07407" ry="2" />     
             </svg>
         </a>
     ));
@@ -113,7 +113,9 @@ const GroupsComponent = (props) => {
             <>
                 <Modal className="modalcss" show={CodeisOpen} onHide={hideCodeModal} centered>
                     <Modal.Body className="in-modal modal-body">
+                        {/* "Group Name" should be real group name endpoint */}
                         <h5 className="modal-text modal-head"><strong>"Group Name" Code</strong></h5>
+                        {/* "EXAMPLE" to be replaced with a real code */}
                         <h4 className="modal-text" id="myCode" type="text"><strong>"EXAMPLE"</strong>
                             {/* COPY DOES NOT WORK and copy button does not change colour on hover - need fix*/}
                             <a onCLick={copyCode} className="copy-button">
@@ -130,6 +132,7 @@ const GroupsComponent = (props) => {
                 <Modal className="modalcss" show={LeaveisOpen} onHide={hideLeaveModal} centered>
                     <Modal.Body className="in-modal">
                         <h5 className="modal-text modal-head"><strong>Are you sure you want to leave?</strong></h5>
+                        {/* "Group Name" to be replaced with real group name endpoint */}
                         <h4 className="modal-text"><strong>"Group Name"</strong></h4>
                         {/* BUTTON BELOW DOES NOT LINK TO ANYTHING */}
                         <p><button className="btn-in-modal leave-buttons">Yes, I'm sure</button></p>

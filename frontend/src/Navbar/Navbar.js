@@ -1,20 +1,20 @@
 import './Navbar.css';
-import logo from './overlap_image.jpg';
+import logo from '../overlap-logo.svg';
 import { Link } from 'react-router-dom';
 
 
 const Navbar = (props) => {
     return (
-        <nav class="navbar navbar-text navbar-expand-lg fixed-top">
-            <div class="container-fluid">
+        <nav className="navbar navbar-text navbar-expand-lg">
+            <div className="container-fluid">
                  <img width="75" height="30" src= {logo} alt="logo"/>      
-            <div class= "collapse navbar-collapse" id= "navbarNavAltMarkup">
-                <ul class="navbar-nav">
-                    <li class="nav-item">  
-                        <Link to ="GroupProfilePage/GroupProfilePage">My Groups</Link>
+            <div className= "collapse navbar-collapse" id= "navbarNavAltMarkup">
+                <ul className="navbar-nav">
+                    <li className="nav-item">  
+                        <strong><Link to ="GroupProfilePage/GroupProfilePage" className="links">My Groups</Link></strong>
                     </li>
-                    <li class="nav-item">
-                        <Link to ="../AboutUs">About Us</Link> 
+                    <li className="nav-item">
+                        <strong><Link to ="../AboutUs" className="links">About Us</Link> </strong>
                     </li>
                 </ul>
             </div>
