@@ -45,12 +45,12 @@
     margin-left: 6px;
     margin-top: 50px;
     font-size: 1.25rem;
+    width: 30vw;
 }
 
 /* css for top artists section */
 
 .artist-display {
-    width: 30vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -59,7 +59,6 @@
     margin-left: 6px;
     margin-right: 6px;
     padding-right: 10px;
-    position: relative;
 }
 
 .artist-icon {
@@ -71,15 +70,25 @@
     border-radius: 10px;
 }
 .artist-name {
-    align-content: center;
+    display: flex;
+    flex-direction: row;
+    width: min(12vw,120px);
+}
+.artist-name h5 {
+    color: var(--blue-color-1);
+    justify-content: start;
     margin-top: 5px;
     margin-bottom: 10px;
-    font-size: min(8vw, 12px);
-    width: min(12vw,130px);
+    font-size: min(1.25vw, 12px);
+    width: 15px;
 }
-
-.artist-display strong {
+.artist-name .artist {
     color: var(--off-white-color);
+    font-size: min(1.25vw, 12px);
+    margin-top: 3.5px;
+    margin-bottom: 10px;
+    margin-left: 4px;
+    width: min(9vw,100px);
 }
 
 /* css for top tracks section */
@@ -96,7 +105,6 @@
     margin-right: 6px;
     padding-right: 10px;
     width: 30px;
-    position: relative;
     color: var(--off-white-color);
     font-size: 20px;
 }
@@ -104,6 +112,7 @@
     margin-left: 20px;
     width: 50px;
     height: 50px;
+    object-fit: cover;
     border-radius: 5px;
 }
 .track-info {
@@ -128,6 +137,13 @@
     }
     .artist-name {
         width: 86.4px;
+    }
+    .artist-name h5{
+        width: 11px;
+        font-size: 9px;
+    }
+    .artist-name .artist {
+        width: 70px;
         font-size: 9px;
     }
 }

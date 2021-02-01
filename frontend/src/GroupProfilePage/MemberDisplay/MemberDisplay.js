@@ -1,13 +1,14 @@
 import React from 'react';
 import './MemberDisplay.css';
 import { MyInsights, Comparisons } from '../IndividualComparisons/IndividualComparisons';
+import { Popover, OverlayTrigger } from 'react-bootstrap';
+import { useState } from 'react';
+
 import brendan_icon from './brendan-icon.jpg';
 import kitten_icon from './kitten-icon.jpg';
 import puppy_icon from './puppy-icon.jpg';
 import kitten2 from './kitten2.jpg'
 import add_member from './add-member.svg';
-import { Popover, OverlayTrigger } from 'react-bootstrap';
-import { useState } from 'react';
 
 /*take input from backend to create array of users */
 const members = ['Cat2','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
