@@ -37,8 +37,7 @@ exports.getUser = async (req, res) => {
 //parameters: (name, spotifyID) where name is the group name and spotifyID
 //            is the spotifyID of the group leader
 exports.createGroup = async (req, res) => {
-  generatedGroupCode = groupCodeGenerator.generate;
-
+  generatedGroupCode = groupCodeGenerator.generate();
   //create a new instance of the group model named newGroup
   const newGroup = new Group({
     //format for storing data for the group model
