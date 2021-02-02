@@ -59,7 +59,7 @@ exports.createGroup = async (req, res) => {
           //response status to creating a new group
           res.status(201).json({
             message: "Group created",
-            createdGroup: result,
+            return: result,
           });
         })
         //error when updating User object with new group code
@@ -108,7 +108,16 @@ exports.loginUser = async (req, res) => {
             { upsert: true } //create User if does not already exist
           )
             .then(() => {
-              res.json({ message: "User logged in successfully." });
+              res.json({
+                message: "User logged in successfully.",
+                return: {
+                  userID: data.body.id,
+                  refreshToken: req.body.refreshToken,
+                  name: data.body.display_name,
+                  imageURL: data.body.images[0].url,
+                  email: data.body.email,
+                },
+              });
             })
             .catch((err) => {
               res.json({ message: "Unable to login user.", error: err });
@@ -141,7 +150,10 @@ exports.joinGroup = async (req, res) => {
         { $addToSet: { groups: req.body.groupCode } }
       )
         .then(() => {
-          res.json({ message: "Successfully joined group" });
+          res.json({
+            message: "Successfully joined group",
+            groupCode: req.body.groupCode,
+          });
         })
         //error with adding group to user object
         .catch((err) => {
