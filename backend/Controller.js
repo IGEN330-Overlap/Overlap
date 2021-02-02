@@ -54,7 +54,7 @@ exports.createGroup = async (req, res) => {
       //Add group to user who created the group
       User.updateOne(
         { userID: req.body.spotifyID },
-        { $addToSet: { groups: [generatedGroupCode] } }
+        { $addToSet: { groups: generatedGroupCode } }
       )
         .then(() => {
           //response status to creating a new group
@@ -83,9 +83,6 @@ exports.createGroup = async (req, res) => {
 //middleware for user login
 //handles both new and returning user login
 exports.loginUser = async (req, res) => {
-  //new user object to be populated with spotify api response data
-  let newUser = {};
-
   //set refresh token
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
@@ -97,51 +94,69 @@ exports.loginUser = async (req, res) => {
       //get user object from SpotifyAPI
       spotifyApi.getMe().then(
         (data) => {
-          //populate newUser object
-          newUser.userID = data.body.id;
-          newUser.refreshToken = req.body.refreshToken;
-          newUser.name = data.body.display_name;
-          newUser.imageURL = data.body.images[0].url;
-          newUser.email = data.body.email;
-
-          //delete previous mongodb entry
-          //define query to find user with ID that matches ID for current request
-          User.findOneAndDelete(
-            { userID: data.body.id },
-            { sort: { userID: 1 } }
-          ).then(
-            () => {
-              console.log("ID of login attempt: " + data.body.id);
-
-              //create new User in MongoDB
-              User.create(newUser).then(
-                (data) => {
-                  res.json(data);
-                },
-                (err) => {
-                  res.json(err);
-                }
-              );
-            },
-            //error in user delete
-            (err) => {
-              res.json(err);
-            }
-          );
+          //update user object with new information, and create if not already existing
+          User.updateOne(
+            { userID: data.body.id }, //Filter
+            {
+              $set: {
+                userID: data.body.id,
+                refreshToken: req.body.refreshToken,
+                name: data.body.display_name,
+                imageURL: data.body.images[0].url,
+                email: data.body.email,
+              },
+            }, //Update
+            { upsert: true } //create User if does not already exist
+          )
+            .then(() => {
+              res.json({ message: "User logged in successfully." });
+            })
+            .catch((err) => {
+              res.json({ message: "Unable to login user.", error: err });
+            });
         },
         //SpotifyAPI return error
         (err) => {
-          res.status(400).json(err);
+          res.json({ message: "SpotifyAPI return error.", error: err });
         }
       );
     },
     //access token refresh error
     (err) => {
-      res.json("Unable to refresh access token.");
-      console.log(err);
+      res.json({ message: "Unable to refresh access token.", error: err });
     }
   );
 };
 
 //middleware for group joining endpoint
-exports.joinGroup = async (res, req) => {};
+exports.joinGroup = async (req, res) => {
+  //add userID to the group object
+  Group.updateOne(
+    { groupCode: req.body.groupCode }, //filter
+    { $addToSet: { users: req.body.spotifyID } }
+  )
+    .then(() => {
+      //add groupCode to user object
+      User.updateOne(
+        { userID: req.body.spotifyID }, //filter
+        { $addToSet: { groups: req.body.groupCode } }
+      )
+        .then(() => {
+          res.json({ message: "Successfully joined group" });
+        })
+        //error with adding group to user object
+        .catch((err) => {
+          res.json({
+            message: "Unable to add group to user object",
+            error: err,
+          });
+        });
+    })
+    //error with adding user to group object
+    .catch((err) => {
+      res.json({
+        message: "Unable to add user to group object",
+        error: err,
+      });
+    });
+};
