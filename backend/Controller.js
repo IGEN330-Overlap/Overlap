@@ -126,3 +126,21 @@ exports.loginUser = async (req, res) => {
         }
     );
 }
+
+
+//middleware for getting all userIDs of users in a group.
+exports.getGroupUsers = async (req,res) => {
+    const givenGroupCode = new Group({
+        groupCode: req.body.groupCode
+    })
+
+    Group.find({groupCode, users}).then(
+        function(groupCode, users){
+        res.send(groupCode, users);
+    })
+
+    .catch(() => {
+        console.log("Group not found!");
+    });
+
+}

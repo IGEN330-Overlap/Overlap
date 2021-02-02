@@ -72,3 +72,19 @@ Returns:
 ```
 status: 200 (Okay) or 404 (Not found) (status)
 ```
+
+### GET: /token/:token/getGroupUsers
+Use case:
+Consume a groupcode and return the spotifyIDs of all users in that given group. 
+
+Expected request body:
+
+```
+groupCode: Code of the group to extract user spotifyIDs (string)
+```
+
+Return:
+
+```
+UserIDs:  The unique ID which represents a user. Same as spotifyIDs. (string)
+```
