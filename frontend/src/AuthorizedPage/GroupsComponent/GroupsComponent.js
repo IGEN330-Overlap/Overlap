@@ -95,9 +95,9 @@ const GroupsComponent = (props) => {
                         <Link to ="GroupProfilePage/GroupProfilePage" className="groupButton">Group 1</Link>
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
-                            <Dropdown.Item href="#/action-1"><div onClick={showCodeModal}>Show Group Code</div></Dropdown.Item>
+                            <Dropdown.Item><div onClick={showCodeModal}>Show Group Code</div></Dropdown.Item>
                             <Dropdown.Divider></Dropdown.Divider>
-                            <Dropdown.Item href="#/action-2"><div onClick={showLeaveModal}>Leave Group</div></Dropdown.Item>
+                            <Dropdown.Item><div onClick={showLeaveModal}>Leave Group</div></Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
