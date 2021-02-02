@@ -19,4 +19,4 @@ function generate(){
 }
 
 //export generate() as a module for use in Controller.js
-module.exports.generate = generate();
+module.exports.generate = generate;

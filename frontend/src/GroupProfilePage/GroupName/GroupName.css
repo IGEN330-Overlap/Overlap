@@ -1,0 +1,19 @@
+@import url(../../variables.css);
+
+.group-name-container {
+    width: auto;
+    height: 30px;
+}
+
+.group-name-container .text {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 3rem;
+}
+
+.under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    background-color: var(--off-white-color);
+}
