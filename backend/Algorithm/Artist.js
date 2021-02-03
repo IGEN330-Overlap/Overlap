@@ -10,6 +10,7 @@ class Artist{
     type; // String
     images; // Array of image objects
 
+    // Constructor for Artist
     constructor(name, id, popularity, genres, type, images){
         this.name = name;
         this.#id =id;
