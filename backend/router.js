@@ -13,6 +13,8 @@ router.post("/group/create", Controller.createGroup);
 router.post("/users/login", Controller.loginUser);
 
 // TESTING ALGO
-router.get("/test/algo", algoTest.notFunTest);
+router.get("/test/getTopTracks", algoTest.getMyTopTracks);
+router.get("/test/trackFeature", algoTest.getTrackFeatures);
+router.get("/test/getTopArtists", algoTest.getMyTopArtists);
 
 module.exports = router;
