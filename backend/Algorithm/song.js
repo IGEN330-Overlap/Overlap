@@ -53,7 +53,7 @@ class Song {
                 this.time_signature = data.body['time_signature'];
                 },
             (err) => { done (err); }
-        );;
+        );
     }
 }
 
