@@ -174,17 +174,17 @@ exports.joinGroup = async (req, res) => {
 
 
 //middleware for getting all userIDs of users in a group.
+
+
 exports.getGroupUsers = async (req,res) => {
-    const givenGroupCode = new Group({
-        groupCode: req.body.groupCode
+
+
+    Group.find({groupCode: req.params.groupCode}).then(
+        function(data){
+        res.json(data.users);
     })
 
-    Group.find({groupCode, users}).then(
-        function(groupCode, users){
-        res.send(groupCode, users);
-    })
-
-    .catch(() => {
+    .catch((err) => {
         console.log("Group not found!");
     });
 
