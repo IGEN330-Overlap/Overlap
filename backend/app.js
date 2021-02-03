@@ -50,8 +50,13 @@ app.get('/login', function (req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
+  // provisionally required scopes below commented
+  /* 
+  user-top-read playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-follow-read user-library-read user-read-email user-read-private
+  */
+
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-top-read playlist-modify-public';
+  var scope = process.env.SCOPES
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
