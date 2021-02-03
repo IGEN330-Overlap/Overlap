@@ -1,9 +1,12 @@
-// Custom Song class
+/**
+ * Song class
+ * See the class for the fields and constructor
+ */
 class Song {
     // Fields
-    name; 
+    name; // String
     #id; // private field and cannot be modified
-    popularity;
+    popularity; 
     danceability;
     energy;
     key;
@@ -17,14 +20,18 @@ class Song {
     tempo;
     duration_ms;
     time_signature;
+    type; // String
 
     // Song constructor, Includes all the features of a song now
     // danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms, time_signature 
-    constructor(name, id, popularity, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms, time_signature){
+    constructor(name, id, popularity, type, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms, time_signature){
         this.name = name;
         this.id = id;
         this.popularity = popularity;
+        this.type = type
     };
+    
+    // -------- TESTER -------- //
     method; AddTrackFeatures(songID){
 
         spotifyApi.getAudioFeaturesForTrack(songID).then(
