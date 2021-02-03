@@ -15,4 +15,9 @@ router.post("/users/login", Controller.loginUser);
 //define post request for joining a group
 router.post("/groups/join", Controller.joinGroup);
 
+// TESTING ALGO
+router.get("/test/getTopTracks", algoTest.getMyTopTracks);
+router.get("/test/trackFeature", algoTest.getTrackFeatures);
+router.get("/test/getTopArtists", algoTest.getMyTopArtists);
+
 module.exports = router;
