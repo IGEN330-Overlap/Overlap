@@ -191,3 +191,20 @@ exports.getGroupUsers = async (req,res) => {
 
 }
 
+//middleware for getting all groupcodes for a single user
+exports.getUserGroups = async (req,res) => {
+
+    User.findOne({userID: req.params.userID}).then(
+        function(data){
+        res.json(data.groups);
+    })
+
+    .catch((err) => {
+        res.json({
+            message: "Unable to find user",
+            error:err,
+        })
+    });
+
+}
+
