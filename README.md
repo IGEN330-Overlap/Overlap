@@ -39,9 +39,6 @@ spotifyID: Unique Spotify ID of the user, which will be used afterwards for most
 
 -> Also returns display name, profile_pic url, etc. which will be useful for user display within groups, and also user profile display.
 ```
-Expected response format:
-
-![User Login API response](public/user-login-api-response.png)
 
 ### POST: /groups/create
 Use case:
