@@ -1,0 +1,26 @@
+@import url(../../variables.css);
+
+.about-name-container {
+    width: 450px;
+    height: 30px;
+}
+
+.about-name-container .text {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 3rem;
+}
+
+.about-name-container .sub-text {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 1.5rem;
+}
+
+.under-bar{
+    margin-left: 10px;
+    margin-bottom: 30px;
+    width: 75px;
+    height: 3px;
+    color: var(--primary-color-main);
+}
