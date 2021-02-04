@@ -171,3 +171,40 @@ exports.joinGroup = async (req, res) => {
       });
     });
 };
+
+
+//middleware for getting all userIDs of users in a group.
+exports.getGroupUsers = async (req,res) => {
+
+
+    Group.findOne({groupCode: req.params.groupCode}).then(
+        function(data){
+        res.json(data.users);
+    })
+
+    .catch((err) => {
+        res.json({
+            message: "Unable to find group",
+            error: err,
+        })
+    });
+
+}
+
+//middleware for getting all groupcodes for a single user
+exports.getUserGroups = async (req,res) => {
+
+    User.findOne({userID: req.params.userID}).then(
+        function(data){
+        res.json(data.groups);
+    })
+
+    .catch((err) => {
+        res.json({
+            message: "Unable to find user",
+            error:err,
+        })
+    });
+
+}
+
