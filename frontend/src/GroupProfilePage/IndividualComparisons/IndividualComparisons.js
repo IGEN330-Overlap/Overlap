@@ -64,15 +64,15 @@ export const MyInsights = (props) => {
                     }
                 </div>
             </div>
-            <h4><strong>Click on a friend to compare your stats!</strong></h4>
+            <h4><strong>Click on a friend to compare stats!</strong></h4>
         </div>
     )
 }
 
-export const Comparisons = (props) => {
+export const Comparisons = ({name, toCompare}) => {
     return(
         <div className="comparisons">
-            <h1><strong>You & {props.name}</strong></h1>
+            <h1><strong>You & {name}</strong></h1>
             <div className="under-bar"></div>
 
             <div className="top-artists">
@@ -91,7 +91,7 @@ export const Comparisons = (props) => {
                 </div>
             </div>
             <div className="top-tracks">
-                <h2><strong>Top Tracks</strong></h2>
+                <h2><strong>Top Tracks</strong></h2>                                                                      
                 <div className="track-display">
                     {compareTracks.map((track,i) => (
                         <div className="track-container">
@@ -108,7 +108,7 @@ export const Comparisons = (props) => {
                     }
                 </div>
             </div>
-            <h4><strong>Click here to return to your personal insights!</strong></h4>
+            <h4><strong onClick={() => toCompare()}>Click here to return to your personal insights!</strong></h4>
         </div>
     )
 }

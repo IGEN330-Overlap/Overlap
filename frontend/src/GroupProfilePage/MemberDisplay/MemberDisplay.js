@@ -1,8 +1,6 @@
 import React from 'react';
 import './MemberDisplay.css';
-import { MyInsights, Comparisons } from '../IndividualComparisons/IndividualComparisons';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
-import { useState } from 'react';
 
 import brendan_icon from './brendan-icon.jpg';
 import kitten_icon from './kitten-icon.jpg';
@@ -14,12 +12,9 @@ import add_member from './add-member.svg';
 const members = ['Cat2','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
 const icon_src = [kitten2, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
 
-const MemberDisplay = (props) => {
-
-    const [name, toCompare] = useState('');
+const MemberDisplay = ({name, toCompare}) => {
 
     return(
-        <div className="member-comparison-flex">
             <div className="member-container">
                 <div className="d-flex">
                     <h1 className="text"><strong>Members</strong></h1>
@@ -42,14 +37,6 @@ const MemberDisplay = (props) => {
 
                 </div>
             </div>
-            <div className="individual-comparisons">
-                {name 
-                    ? <Comparisons name={name} /> 
-                    : <MyInsights />}
-            </div>
-        </div>
-        
-      
     )
 }
 

@@ -27,13 +27,13 @@
     background-color: var(--off-white-color);
 }
 
-.comparisons h1{
+.comparisons h1 {
     color: var(--off-white-color);
     margin-left: 6px;
     font-size: 1.85rem;
 }
 
-.comparisons h2{
+.comparisons h2 {
     color: var(--off-white-color);
     margin-left: 6px;
     margin-top: 18px;
@@ -46,6 +46,11 @@
     margin-top: 50px;
     font-size: 1.25rem;
     width: 30vw;
+}
+.comparisons h4:hover {
+    cursor: pointer;
+    color: var(--blue-color-1);
+    transition-duration: 0.45s;
 }
 
 /* css for top artists section */
