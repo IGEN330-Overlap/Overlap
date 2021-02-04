@@ -16,12 +16,12 @@
 .add-member {
     margin-left: 15px;
     margin-top: 7.25px;
+    transition: opacity 0.45s;
 }
 
 /*add member button and popover */
 .add-member:hover {
     opacity: 0.7;
-    transition-duration: 0.4s;
     cursor: pointer;
 }
 /*.custom-popover .popover-display {
@@ -59,6 +59,7 @@ input:focus {
     font-weight: 450;
     padding-top: 2.75px;
     padding-left: 7px;
+    transition: color 0.45s;
 }
 .copy-button:hover {
     color: var(--primary-color-main);
@@ -112,6 +113,7 @@ input:focus {
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;
+    transition: opacity 0.45s;
 }
 .user-name {
     font-size: min(1.75vw,20px);
@@ -120,16 +122,17 @@ input:focus {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: color 0.45s;
 }
 .icon-container:hover .user-icon {
     opacity: 0.4;
-    transition-duration: 0.45s;
+    /* transition-duration: 0.45s; */
     cursor: pointer;
 }
 
 .icon-container:hover .user-name {
     color: var(--off-white-color);
-    transition-duration: 0.45s;
+    /* transition-duration: 0.45s; */
     cursor: pointer;
 }
 
