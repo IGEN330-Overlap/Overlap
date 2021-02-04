@@ -1,0 +1,100 @@
+@import url(../../variables.css);
+
+.playlist-container{
+    width: 60vw;
+    margin-right: auto;
+    padding-right: 15px;
+    background-color: transparent;
+}
+
+.text{
+    font-size: 1.85rem;
+}
+
+.addPlaylist-container{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    padding-right: 0.5vw;
+}
+
+.covers{
+    display: flex;
+    align-items: start;
+    padding-top: 0.5vw;
+}
+
+.plus-symbol{
+    height: 2vw;
+    width: 2vw;
+    color: white;
+    /* object-fit: cover;
+    object-position: 50%;
+    border-radius: 15%; */
+}
+
+.addButton{
+    display: flex;
+    height: min(12vw,120px);
+    width: min(12vw,120px);
+    justify-content: center;
+    align-items: center;
+    border-radius: 15%;
+    background-color: #494a4e;
+    cursor: pointer;
+}
+
+.display-playlists{
+    display: flex;
+    flex-direction: row;
+    width: 60vw;
+    overflow: auto;
+}
+
+.playlistcover-container{
+    padding-bottom: 0.5vw;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.playlistcover{
+    height: min(12vw,120px);
+    width: min(12vw,120px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 15%;
+    cursor: pointer;
+}
+
+.playlist-name{
+    color: white;
+    cursor: pointer;
+}
+
+/*customize scroll bar */
+.display-playlists::-webkit-scrollbar{
+    width: 6px;
+    height: 0.5vw;
+}
+.display-playlists::-webkit-scrollbar-track {
+    background-color: black;
+    opacity: 0.6;
+    border-radius: 10px;
+}
+.display-playlists::-webkit-scrollbar-thumb {
+    background-color: var(--blue-color-3);
+    border-radius: 10px;
+}
+
+@media (max-width: 720px) {
+    .playlist-name{
+        font-size: 12px;
+    }
+    .addPlaylist-container{
+        font-size: 12px;
+    }
+}
