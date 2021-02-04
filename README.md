@@ -70,14 +70,32 @@ Returns:
 status: 200 (Okay) or 404 (Not found) (status)
 ```
 
-### GET: /token/:token/getGroupUsers
+
+### GET: /groups/:groupCode/users
 Use case:
-Consume a groupcode and return the spotifyIDs of all users in that given group. 
+Consume a groupcode and return the spotifyIDs of all users in that given group. To use, replace ":groupCode" with the group code. Example: http://localhost:8888/groups/ATZGA5RL/users
 
 Expected request body:
 
 ```
 groupCode: Code of the group to extract user spotifyIDs (string)
+```
+
+Return:
+
+```
+UserIDs:  The unique ID which represents a user. Same as spotifyIDs. (string)
+```
+
+### GET: /users/:userID/groups
+Use case:
+Consume a userID and returns all the group codes of all the groups the user is in. To use, replace ":userID" with the user ID of the user you want to find groups from. 
+Example: http://localhost:8888/users/02v9lje265lzsjzqb68sx9zej/groups
+
+Expected request body:
+
+```
+userID: The unique userID for a user. Same as spotifyID (string)
 ```
 
 Return:
