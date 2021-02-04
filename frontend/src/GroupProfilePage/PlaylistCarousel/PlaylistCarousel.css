@@ -5,6 +5,7 @@
     margin-right: auto;
     padding-right: 15px;
     background-color: transparent;
+    height: 25vh;
 }
 
 .text{
@@ -91,10 +92,16 @@
 }
 
 @media (max-width: 720px) {
+    .playlist-container{
+        width: 90vw;
+    }
     .playlist-name{
         font-size: 12px;
     }
     .addPlaylist-container{
         font-size: 12px;
+    }
+    .display-playlists{
+        flex-wrap: wrap;
     }
 }
