@@ -101,6 +101,7 @@
 .track-container h3 {
     width: 20px;
     font-size: 40px;
+    transition: 0.3s;
 }
 .track-container {
     display: flex;
@@ -119,17 +120,38 @@
     height: 50px;
     object-fit: cover;
     border-radius: 5px;
+    transition: 0.3s;
 }
 .track-info {
     margin-left: 15px;
     display: flex;
     flex-direction: column;
     width: 500px;
+    transition: 0.3s;
 }
 .track-artist {
     color: var(--blue-color-1);
     font-size: 12px;
     width: 500px;
+    transition: 0.3s;
+}
+
+/* animations */
+
+.track-container:hover h3 {
+    font-size: 45px;
+    color: var(--neutral-color-main);
+}
+.track-container:hover .track-icon {
+    font-size: 45px;
+    width: 55px;
+    height: 55px;
+}
+.track-container:hover .track-info {
+    font-size: 23px;
+}
+.track-container:hover .track-artist {
+    font-size: 14px;
 }
 
 @media (max-width: 720px) {
