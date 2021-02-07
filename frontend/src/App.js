@@ -5,6 +5,7 @@ import AuthorizedPage from './AuthorizedPage/AuthorizedPage';
 import { Route, Switch } from 'react-router-dom';
 import AboutUs from './AboutUs/AboutUs';
 import GroupProfilePage from './GroupProfilePage/GroupProfilePage';
+import { PlaylistPage } from './PlaylistPage/PlaylistPage';
 
 /**
  * Obtains parameters from the hash of the URL
@@ -35,6 +36,7 @@ function App() {
         <Route path='/authorized' render={() => <AuthorizedPage loggedIn={loggedIn} accessToken={params.access_token} />} exact={true} />
         <Route path='/authorized/AboutUs' render={() => <AboutUs />}/>
         <Route path='/authorized/GroupProfilePage' render={() => <GroupProfilePage />} />
+        <Route path="/authorized/PlaylistPage" render={() => <PlaylistPage />} />
       </Switch>
     </div>
   );
