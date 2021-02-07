@@ -40,7 +40,7 @@
 .individual-comparisons {
     margin-left: 4vw;
     animation-name: insightanimation;
-    animation-duration: 1.5s;
+    animation-duration: 2.5s;
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
 
@@ -60,6 +60,10 @@
     from {
         opacity: 0;
         transform: translateX(500px);
+    }
+    75% {
+        opacity: 0;
+        transform: translateX(200px);
     }
     to {
         opacity: 1;
