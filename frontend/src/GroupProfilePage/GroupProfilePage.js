@@ -16,9 +16,13 @@ const GroupProfilePage = (props) => {
 
     return(     
         <div className="landing-root">
-            <Navbar />
-            <div className="group-name">
-                <GroupName />
+            <div className="navbar">
+                <Navbar />
+            </div>
+            <div className="box">
+                <div className="group-name">
+                    <GroupName />
+                </div>
             </div>
             <div className="d-flex">
                 <div className="member-display">
@@ -26,7 +30,7 @@ const GroupProfilePage = (props) => {
                 </div>
                 <div className="individual-comparisons">
                     {name 
-                        ? <Comparisons name={name} toCompare={toCompare}/> 
+                        ? <Comparisons name={name} toCompare={toCompare} /> 
                         : <MyInsights />}
                 </div>
             </div>

@@ -73,6 +73,7 @@
     object-fit: cover;
     object-position: 50%;
     border-radius: 10px;
+    transition: 0.3s;
 }
 .artist-name {
     display: flex;
@@ -137,10 +138,13 @@
 }
 
 /* animations */
-
+.artist-container:hover .artist-icon {
+    height: min(14vw,130px);
+    width: min(14vw,130px);
+}
 .track-container:hover h3 {
     font-size: 45px;
-    color: var(--neutral-color-main);
+    color: var(--blue-color-1);
 }
 .track-container:hover .track-icon {
     font-size: 45px;
