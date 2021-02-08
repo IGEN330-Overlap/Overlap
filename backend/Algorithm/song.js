@@ -5,8 +5,10 @@
 class Song {
     // Fields
     name; // String
-    #id; // String, private field and cannot be modified
+    songID; // String, private field and cannot be modified
     popularity; // Number
+    artist;
+    artistID;
     danceability; // Number
     energy; // Number
     key; // Number
@@ -21,14 +23,18 @@ class Song {
     duration_ms; // Number
     time_signature; // Numbers
     type; // String
+    imageURL;
 
     // Song constructor, Includes all the features of a song now 
     // TO IMPLEMENT: danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms, time_signature 
-    constructor(name, id, popularity, type, danceability, energy, key, loudness, mode, speechiness, acousticness, instrumentalness, liveness, valence, tempo, duration_ms, time_signature){
+    constructor(name, songID, popularity, type, artist, artistID, imageURL){
         this.name = name;
-        this.id = id;
+        this.songID = songID;
         this.popularity = popularity;
-        this.type = type
+        this.type = type;
+        this.artist = artist;
+        this.artistID = artistID;
+        this.imageURL = imageURL
     };
     
     // -------- TESTER -------- //
