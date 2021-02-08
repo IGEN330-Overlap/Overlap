@@ -7,7 +7,7 @@ const Navbar = (props) => {
     return (
         <nav className="navbar navbar-text navbar-expand-lg">
             <div className="container-fluid">
-                 <Link to = "/authorized/"><img width="75" height="30" src= {logo} alt="logo"/></Link>      
+                 <Link to ="/authorized/"><img width="75" height="30" src= {logo} alt="logo"/></Link>     
             <div className= "collapse navbar-collapse" id= "navbarNavAltMarkup">
                 <ul className="navbar-nav">
                     <li className="nav-item">  

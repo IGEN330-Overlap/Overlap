@@ -12,7 +12,7 @@ import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
  */
 function getHashParams() {
   var hashParams = {};
-  var e, 
+  var e,
     r = /([^&;=]+)=?([^&;]*)/g,
     q = window.location.hash.substring(1);
   while ((e = r.exec(q))) {
@@ -33,33 +33,33 @@ function App() {
     <div className="App">
       <Switch>
         {/* Route for root */}
-        <Route 
-         path="/" 
-         render={() => <LandingPage accessToken={params.access_token} />} 
-         exact={true} 
+        <Route
+          path="/"
+          render={() => <LandingPage accessToken={params.access_token} />}
+          exact={true}
         />
         {/* Router for authorized reroute from backend authorization */}
-        <Route 
-         path="/authorized" 
-         render={() => (
-          <AuthorizedPage 
-           loggedIn={loggedIn} 
-           accessToken={params.access_token} 
-           refreshToken={params.refresh_token}
-          />
-         )} 
-          exact={true} 
+        <Route
+          path="/authorized"
+          render={() => (
+            <AuthorizedPage
+              loggedIn={loggedIn}
+              accessToken={params.access_token}
+              refreshToken={params.refresh_token}
+            />
+          )}
+          exact={true}
         />
-        <Route path="/authorized/AboutUs" render={() => <AboutUs />}/>
-        <Route 
-         path="/authorized/GroupProfilePage" 
-         render={() => (
-          <GroupProfilePage 
-           loggedIn={loggedIn}
-           accessToken={params.access_token}
-           refreshToken={params.refresh_token}
-          />
-         )} 
+        <Route path="/authorized/AboutUs" render={() => <AboutUs />} />
+        <Route
+          path="/authorized/GroupProfilePage"
+          render={() => (
+            <GroupProfilePage
+              loggedIn={loggedIn}
+              accessToken={params.access_token}
+              refreshToken={params.refresh_token}
+            />
+          )}
         />
       </Switch>
     </div>
