@@ -12,6 +12,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
     
+    //use relative url for react router
     let { path, url } = useRouteMatch();
 
     //functions for opening and closing "Show Group Code" Modal
@@ -34,7 +35,7 @@ const GroupsComponent = (props) => {
 
     //custom toggle as three dots
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-        <a
+        <div
           href=""
           ref={ref}
           onClick={(e) => {
@@ -52,7 +53,7 @@ const GroupsComponent = (props) => {
             <ellipse cx="8.0001" cy="50%" rx="2.07407" ry="2" />  
             <ellipse cx="13.9259" cy="50%" rx="2.07407" ry="2" />     
             </svg>
-        </a>
+        </div>
     ));
 
     // THIS DOES NOT WORK FOR SOME REASON
@@ -94,13 +95,14 @@ const GroupsComponent = (props) => {
                 {/* Group as a dropdown menu button */}
                 <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
-                        {/* THIS LINK DOES NOT CONNECT TO ANYTHING */}
+
                         <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">Group 1</Link>
+
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
-                            <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
+                            <Dropdown.Item><div onClick={showCodeModal}>Show Group Code</div></Dropdown.Item>
                             <Dropdown.Divider></Dropdown.Divider>
-                            <Dropdown.Item href="#/action-2"><a onClick={showLeaveModal}>Leave Group</a></Dropdown.Item>
+                            <Dropdown.Item><div onClick={showLeaveModal}>Leave Group</div></Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>
@@ -119,10 +121,10 @@ const GroupsComponent = (props) => {
                         <h5 className="modal-text modal-head"><strong>"Group Name" Code</strong></h5>
                         {/* "EXAMPLE" to be replaced with a real code */}
                         <h4 className="modal-text" id="myCode" type="text"><strong>"EXAMPLE"</strong>
-                            {/* COPY DOES NOT WORK and copy button does not change colour on hover - need fix*/}
-                            <a onCLick={copyCode} className="copy-button">
-                                <img src={copy}/>
-                            </a>
+                            {/* COPY DOES NOT WORK and copy button does not change colour on hover - need fix
+                            <div className="copy-button">
+                                <img src={copy} onCLick={copyCode}/>
+                            </div> */}
                         </h4>
                         <button onClick={hideCodeModal} className="btn-in-modal continue-button" centered><strong>Continue</strong></button>
                     </Modal.Body>

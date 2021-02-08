@@ -13,9 +13,10 @@ import { PlaylistPage } from './PlaylistPage/PlaylistPage';
  */
 function getHashParams() {
   var hashParams = {};
-  var e, r = /([^&;=]+)=?([^&;]*)/g,
+  var e,
+    r = /([^&;=]+)=?([^&;]*)/g,
     q = window.location.hash.substring(1);
-  while (e = r.exec(q)) {
+  while ((e = r.exec(q))) {
     hashParams[e[1]] = decodeURIComponent(e[2]);
   }
   return hashParams;
@@ -25,13 +26,19 @@ function getHashParams() {
 function App() {
   const params = getHashParams();
 
-  const [loggedIn, setLoggedIn] = React.useState((params.access_token) ? true : false);
+  const [loggedIn, setLoggedIn] = React.useState(
+    params.access_token ? true : false
+  );
 
   return (
     <div className="App">
       <Switch>
         {/* Route for root */}
-        <Route path='/' render={() => <LandingPage accessToken={params.access_token} />} exact={true} />
+        <Route
+          path="/"
+          render={() => <LandingPage accessToken={params.access_token} />}
+          exact={true}
+        />
         {/* Router for authorized reroute from backend authorization */}
         <Route 
           path='/authorized' 
