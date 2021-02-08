@@ -5,10 +5,12 @@ import Navbar from "../Navbar/Navbar";
 
 export const PlaylistPage = (props) => {
     return(     
-        <div className="landing-root">
+        <div className="playlist-landing-root">
             <Navbar />
-            <div className="playlist-tracks-container">
-                <PlaylistTracks />
+            <div className="playlist-components">
+                <div className="playlist-tracks-container">
+                    <PlaylistTracks />
+                </div>
             </div>
         </div>
     )

@@ -33,10 +33,38 @@ function App() {
         {/* Route for root */}
         <Route path='/' render={() => <LandingPage accessToken={params.access_token} />} exact={true} />
         {/* Router for authorized reroute from backend authorization */}
-        <Route path='/authorized' render={() => <AuthorizedPage loggedIn={loggedIn} accessToken={params.access_token} />} exact={true} />
+        <Route 
+          path='/authorized' 
+          render={() => (
+            <AuthorizedPage 
+              loggedIn={loggedIn} 
+              accessToken={params.access_token}
+              refreshToken={params.refresh_token} 
+            />
+          )} 
+          exact={true} 
+        />
         <Route path='/authorized/AboutUs' render={() => <AboutUs />}/>
-        <Route path='/authorized/GroupProfilePage' render={() => <GroupProfilePage />} />
-        <Route path="/authorized/PlaylistPage" render={() => <PlaylistPage />} />
+        <Route 
+          path='/authorized/GroupProfilePage' 
+          render={() => (
+            <GroupProfilePage
+              loggedIn={loggedIn}
+              accessToken={params.access_token}
+              refreshToken={params.refresh_token}
+            />
+          )}
+        />
+        <Route 
+          path="/authorized/PlaylistPage" 
+          render={() => (
+            <PlaylistPage 
+              loggedIn={loggedIn}
+              accessToken={params.access_token}
+              refreshToken={params.refresh_token}
+            />
+          )}
+        />
       </Switch>
     </div>
   );

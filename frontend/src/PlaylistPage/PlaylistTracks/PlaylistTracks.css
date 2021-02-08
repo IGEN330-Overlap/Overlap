@@ -1,25 +1,35 @@
 @import url(../../variables.css);
 
-.track-container h3 {
-    width: 20px;
-    font-size: 40px;
-    transition: 0.3s;
+.playlist-container {
+    width: 420px;
+    height: 620px;
+    margin: 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
+
+.playlist-container .track-number h3 {
+    font-size: 15px;
+    color: var(--primary-color-6);
+    line-height: 45px;
+    height: 45px;
+    width: 32.5px;
+    margin: 0px;
+}
+
 .track-container {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
-    margin-left: 6px;
-    margin-right: 6px;
+    align-items: center;
+    margin: 8px;
     padding-right: 10px;
-    width: 30vw;
+    width: 400px;
     color: var(--off-white-color);
     font-size: 20px;
 }
 .track-icon {
-    margin-left: 20px;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     object-fit: cover;
     border-radius: 5px;
     transition: 0.3s;
@@ -28,33 +38,53 @@
     margin-left: 15px;
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 340px;
     transition: 0.3s;
+    align-items: center;
+    justify-content: start;
+}
+.track-info h3{
+    font-size: 17px;
+    margin-bottom: 0px;
+    width: 310px;
 }
 .track-artist {
-    color: var(--blue-color-1);
-    font-size: 12px;
-    width: 500px;
+    color: var(--neutral-color-3);
+    font-size: 11px;
+    width: 310px;
     transition: 0.3s;
 }
 
-/* animations */
-.artist-container:hover .artist-icon {
-    height: min(14vw,130px);
-    width: min(14vw,130px);
+/* customize scroll */
+.playlist-container::-webkit-scrollbar{
+    width: 9px;
+    height: auto;
 }
-.track-container:hover h3 {
-    font-size: 45px;
-    color: var(--blue-color-1);
+.playlist-container::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.25);
+    opacity: 0.6;
+    border-radius: 10px;
 }
-.track-container:hover .track-icon {
-    font-size: 45px;
-    width: 55px;
-    height: 55px;
+.playlist-container::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-color-3);
+    border-radius: 10px;
 }
-.track-container:hover .track-info {
-    font-size: 23px;
-}
-.track-container:hover .track-artist {
-    font-size: 14px;
+
+/* media sizing */
+@media (max-width: 720px) {
+    .playlist-container {
+        width: 380px;
+    }
+    .track-container {
+        width: 350px;
+    }
+    .track-info {
+        width: 310px;
+    }
+    .track-info h3 {
+        width: 290px;
+    }
+    .track-artist {
+        width: 290px;
+    }
 }
