@@ -2,8 +2,8 @@
 
 /*full container for members */
 .member-container {
-    width: 55vw;
-    margin-right: 60px;
+    width: 45vw;
+    margin-right: 5vw;
     margin-bottom: 10px;
     background-color: transparent;
 }
@@ -76,7 +76,7 @@ input:focus {
 /*icons */
 .display-members {
     display: flex;
-    width: 55vw;
+    width: 45vw;
     flex-wrap: wrap;
     max-height: 50vh;
     justify-content: flex-start;
@@ -96,7 +96,7 @@ input:focus {
 
 /*customize scroll bar */
 .display-members::-webkit-scrollbar{
-    width: 6px;
+    width: 7px;
     height: auto;
 }
 .display-members::-webkit-scrollbar-track {
@@ -154,7 +154,7 @@ input:focus {
 }
 
 /*adjust for different screen sizes */
-@media (max-width: 720px) {
+@media (max-width: 780px) {
     .member-container {
         width: 90vw;
     }

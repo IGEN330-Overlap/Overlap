@@ -17,7 +17,7 @@
     color: var(--off-white-color);
     margin-left: 6px;
     margin-top: 50px;
-    font-size: 1.25rem;
+    font-size: min(2.5vw,1.25rem);
 }
 
 .under-bar{
@@ -44,8 +44,8 @@
     color: var(--off-white-color);
     margin-left: 6px;
     margin-top: 50px;
-    font-size: 1.25rem;
-    width: 28vw;
+    font-size: min(2.5vw,1.25rem);
+    width: 29vw;
     transition: color 0.45s;
 }
 .comparisons h4:hover {
@@ -68,8 +68,8 @@
 
 .artist-icon {
     margin-top: 3px;
-    height: min(12vw,120px);
-    width: min(12vw,120px);
+    height: min(11vw,120px);
+    width: min(11vw,120px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 10px;
@@ -107,11 +107,12 @@
 .track-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
     margin-top: 20px;
     margin-left: 6px;
-    margin-right: 6px;
+    margin-right: 5px;
     padding-right: 10px;
-    width: 30vw;
+    width: 40vw;
     color: var(--off-white-color);
     font-size: 20px;
 }
@@ -127,20 +128,24 @@
     margin-left: 15px;
     display: flex;
     flex-direction: column;
-    width: 500px;
+    width: 29vw;
     transition: 0.3s;
 }
 .track-artist {
     color: var(--blue-color-1);
     font-size: 12px;
-    width: 500px;
+    width: 29vw;
     transition: 0.3s;
 }
 
 /* animations */
 .artist-container:hover .artist-icon {
-    height: min(14vw,130px);
-    width: min(14vw,130px);
+    height: min(13vw,130px);
+    width: min(13vw,130px);
+}
+.track-container:hover {
+    width: 31vw;
+    margin-right: 0px;
 }
 .track-container:hover h3 {
     font-size: 45px;
@@ -152,13 +157,15 @@
     height: 55px;
 }
 .track-container:hover .track-info {
-    font-size: 23px;
+    font-size: 21.5px;
+    width: 31vw;
 }
 .track-container:hover .track-artist {
-    font-size: 14px;
+    font-size: 13px;
+    width: 31vw;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 780px) {
     .artist-display {
         width: 90vw;
     }
@@ -176,5 +183,11 @@
     .artist-name .artist {
         width: 70px;
         font-size: 9px;
+    }
+    .track-info {
+        width: 80vw;
+    }
+    .track-artist {
+        width: 80vw;
     }
 }

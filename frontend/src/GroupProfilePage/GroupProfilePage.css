@@ -33,6 +33,7 @@
     z-index: 1;
 }
 .member-display {
+    width: 45vw;
     margin-left: 4vw;
     margin-bottom: 20px;
 }
@@ -40,7 +41,7 @@
 .individual-comparisons {
     margin-left: 4vw;
     animation-name: insightanimation;
-    animation-duration: 2.5s;
+    animation-duration: 2.25s;
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
 
@@ -68,6 +69,12 @@
     to {
         opacity: 1;
         transform: translateX(0px);
+    }
+}
+
+@media (min-width: 1250px) {
+    .individual-comparisons {
+        margin-left: 8vw;
     }
 }
 
