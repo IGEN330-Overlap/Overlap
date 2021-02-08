@@ -1,7 +1,7 @@
 const router = require("express").Router(); //require express router
 
 const Controller = require("./Controller.js");
-const algoTest = require("./Algorithm/algoTest.js");
+const SpotifyRequests = require("./Algorithm/SpotifyRequests.js");
 
 //define get request for retreiving user information
 router.get("/token/:token/user", Controller.getUser)
@@ -16,8 +16,8 @@ router.post("/users/login", Controller.loginUser);
 router.post("/groups/join", Controller.joinGroup);
 
 // TESTING ALGO
-router.get("/test/getTopTracks", algoTest.getMyTopTracks);
-router.get("/test/trackFeature", algoTest.getTrackFeatures);
-router.get("/test/getTopArtists", algoTest.getMyTopArtists);
+router.get("/test/getTopTracks", SpotifyRequests.getMyTopTracks);
+router.get("/test/trackFeature", SpotifyRequests.getTrackFeatures);
+router.get("/test/getTopArtists", SpotifyRequests.getMyTopArtists);
 
 module.exports = router;
