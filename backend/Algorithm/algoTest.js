@@ -55,25 +55,31 @@ exports.getMyTopTracks = async (req, res) => {
     (data) => {
       spotifyApi.setAccessToken(data.body.access_token); // Set Access token
 
-      // Get a user's top tracks
-      spotifyApi.getMyTopTracks().then(
-        (data) => {
-          // Iterate through every item from data body extracting useful types for a song
-          for (x of data.body.items) {
-            // Add to playlist array with each Song ADT
-            topTracks.push(
-              new Song(x["name"], x["id"], x["popularity"], x["type"])
-            );
+        spotifyApi.getMyTopTracks(limit=50).then(
+          (data) => {
+
+            // Iterate through every item from data body extracting useful types for a song
+            for (x of data.body.items) {
+              // Add to playlist array with each Song ADT
+              topTracks.push(new Song(
+                  x["name"],
+                  x["id"],
+                  x["popularity"],
+                  x["type"],
+                  x.artists[0].name,
+                  x.artists[0].id,
+                  x.album.images[0].url)
+              );
+            }
+            // respond with the array of song names
+            res.json(topTracks);
+            console.log("Got the top SOngs :)");
+          },
+          (err) => {
+            //SpotifyAPI return error
+            res.status(400).json({ message: "RUH ROH error", error: err });
           }
-          // respond with the array of song names
-          res.json(topTracks);
-          console.log("Got the top SOngs :)");
-        },
-        (err) => {
-          //SpotifyAPI return error
-          res.status(400).json({ message: "RUH ROH error", error: err });
-        }
-      );
+        );
     },
     (err) => {
       //access token refresh error
