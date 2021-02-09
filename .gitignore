@@ -8,6 +8,8 @@ node_modules
 # testing
 coverage
 
+backend/algorithm/data
+
 # production
 build
 .env
