@@ -73,7 +73,7 @@ status: 200 (Okay) or 404 (Not found) (status)
 
 ### GET: /groups/:groupCode/users
 Use case:
-Consume a groupcode and return the spotifyIDs of all users in that given group. To use, replace ":groupCode" with the group code. Example: http://localhost:8888/groups/ATZGA5RL/users
+Request with a groupcode parameter and return the spotifyIDs of all users in that given group. To use, replace ":groupCode" with the group code. Example: http://localhost:8888/groups/ATZGA5RL/users
 
 Expected request body:
 
