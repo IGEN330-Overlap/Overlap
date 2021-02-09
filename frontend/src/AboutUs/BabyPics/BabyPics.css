@@ -28,7 +28,8 @@
     width: 100px;
     margin-top: 15px;
     margin-left: 15px;
-    margin-right: 6.5px;
+    margin-right: 15px;
+    margin-bottom: 15px;
     position: relative;
     text-align: center;
 }
@@ -37,7 +38,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 40vw;
+    width: auto;
     max-height: 40vh;
     justify-content: flex-start;
     align-content: flex-start;

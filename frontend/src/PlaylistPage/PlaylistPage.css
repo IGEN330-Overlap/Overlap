@@ -1,0 +1,16 @@
+@import url(../variables.css);
+
+.playlist-root {
+    width: auto;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.playlist-name {
+    margin-top: 50px;
+    margin-left: 4vw;
+}
+

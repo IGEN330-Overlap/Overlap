@@ -2,7 +2,7 @@
 
 .about-root {
     width: auto;
-    height: 100vh;
+    height: auto;
     background-color: var(--blue-color-3);
 }
 .text-blurb {
@@ -14,7 +14,7 @@
 
 .display-babies {
     padding-top: 50px;
-    width: 40vw;
+    width: 100vw;
 }
 
 .about {
