@@ -55,18 +55,18 @@
 
 /* css for top artists section */
 
-.artist-display {
+.top-artists .artist-display {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
-.artist-container {
+.top-artists .artist-container {
     margin-left: 6px;
     margin-right: 6px;
     padding-right: 10px;
 }
 
-.artist-icon {
+.top-artists .artist-icon {
     margin-top: 3px;
     height: min(11vw,120px);
     width: min(11vw,120px);
@@ -75,12 +75,12 @@
     border-radius: 10px;
     transition: 0.3s;
 }
-.artist-name {
+.top-artists .artist-name {
     display: flex;
     flex-direction: row;
     width: min(12vw,120px);
 }
-.artist-name h5 {
+.top-artists .artist-name h5 {
     color: var(--blue-color-1);
     justify-content: start;
     margin-top: 5px;
@@ -88,7 +88,7 @@
     font-size: min(1.25vw, 12px);
     width: 15px;
 }
-.artist-name .artist {
+.top-artists .artist-name .artist {
     color: var(--off-white-color);
     font-size: min(1.25vw, 12px);
     margin-top: 3.5px;
@@ -99,12 +99,12 @@
 
 /* css for top tracks section */
 
-.track-container h3 {
+.top-tracks .track-container h3 {
     width: 20px;
     font-size: 40px;
     transition: 0.3s;
 }
-.track-container {
+.top-tracks .track-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -116,7 +116,7 @@
     color: var(--off-white-color);
     font-size: 20px;
 }
-.track-icon {
+.top-tracks .track-icon {
     margin-left: 20px;
     width: 50px;
     height: 50px;
@@ -124,14 +124,14 @@
     border-radius: 5px;
     transition: 0.3s;
 }
-.track-info {
+.top-tracks .track-info {
     margin-left: 15px;
     display: flex;
     flex-direction: column;
     width: 29vw;
     transition: 0.3s;
 }
-.track-artist {
+.top-tracks .track-artist {
     color: var(--blue-color-1);
     font-size: 12px;
     width: 29vw;
@@ -139,55 +139,55 @@
 }
 
 /* animations */
-.artist-container:hover .artist-icon {
+.top-artists .artist-container:hover .artist-icon {
     height: min(13vw,130px);
     width: min(13vw,130px);
 }
-.track-container:hover {
+.top-artists .track-container:hover {
     width: 31vw;
     margin-right: 0px;
 }
-.track-container:hover h3 {
+.top-artists .track-container:hover h3 {
     font-size: 45px;
     color: var(--blue-color-1);
 }
-.track-container:hover .track-icon {
+.top-tracks .track-container:hover .track-icon {
     font-size: 45px;
     width: 55px;
     height: 55px;
 }
-.track-container:hover .track-info {
+.top-tracks .track-container:hover .track-info {
     font-size: 21.5px;
     width: 31vw;
 }
-.track-container:hover .track-artist {
+.top-tracks .track-container:hover .track-artist {
     font-size: 13px;
     width: 31vw;
 }
 
 @media (max-width: 780px) {
-    .artist-display {
+    .top-artists .artist-display {
         width: 90vw;
     }
-    .artist-icon {
+    .top-artists .artist-icon {
         height: 86.4px;
         width: 86.4px;
     }
-    .artist-name {
+    .top-artists .artist-name {
         width: 86.4px;
     }
-    .artist-name h5{
+    .top-artists .artist-name h5{
         width: 11px;
         font-size: 9px;
     }
-    .artist-name .artist {
+    .top-artists .artist-name .artist {
         width: 70px;
         font-size: 9px;
     }
-    .track-info {
+    .top-tracks .track-info {
         width: 80vw;
     }
-    .track-artist {
+    .top-tracks .track-artist {
         width: 80vw;
     }
 }
