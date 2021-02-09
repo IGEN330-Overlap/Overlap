@@ -147,7 +147,7 @@
     width: 31vw;
     margin-right: 0px;
 }
-.top-artists .track-container:hover h3 {
+.top-tracks .track-container:hover h3 {
     font-size: 45px;
     color: var(--blue-color-1);
 }

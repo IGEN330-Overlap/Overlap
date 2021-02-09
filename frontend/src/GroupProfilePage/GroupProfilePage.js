@@ -12,7 +12,6 @@ const GroupProfilePage = (props) => {
 
     let { path, url } = useRouteMatch();
 
-
     const [name, selectMember] = useState('');
     function toCompare(value){
         selectMember(value);
