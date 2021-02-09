@@ -27,15 +27,15 @@ const userSchema = new Schema(
 
     topTracks: [
       {
-        songName: {
+        trackName: {
           type: String,
           required: true,
         },
-        songID: {
+        trackID: {
           type: String,
           required: true,
         },
-        songPopularity: {
+        trackPopularity: {
           type: Number,
           required: true,
         },

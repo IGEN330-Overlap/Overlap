@@ -98,9 +98,9 @@ exports.loginUser = async (req, res) => {
         .then((data) => {
           for (let i = 0; i < 3; i++) {
             let track = {};
-            track.songName = data.body.items[i].name;
-            track.songID = data.body.items[i].id;
-            track.songPopularity = data.body.items[i].popularity;
+            track.trackName = data.body.items[i].name;
+            track.trackID = data.body.items[i].id;
+            track.trackPopularity = data.body.items[i].popularity;
             track.linkURL = data.body.items[i].external_urls.spotify;
             track.imageURL = data.body.items[i].album.images[0].url;
             track.artistName = data.body.items[i].artists[0].name;
