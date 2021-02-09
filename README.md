@@ -89,7 +89,7 @@ UserIDs:  The unique ID which represents a user. Same as spotifyIDs. (string)
 
 ### GET: /users/:userID/groups
 Use case:
-Consume a userID and returns all the group codes of all the groups the user is in. To use, replace ":userID" with the user ID of the user you want to find groups from. 
+Request with userID parameter and returns all the group codes of all the groups the user is in. To use, replace ":userID" with the user ID of the user you want to find groups from. 
 Example: http://localhost:8888/users/02v9lje265lzsjzqb68sx9zej/groups
 
 Expected request body:
