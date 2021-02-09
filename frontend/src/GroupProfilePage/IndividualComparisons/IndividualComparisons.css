@@ -140,8 +140,8 @@
 
 /* animations */
 .top-artists .artist-container:hover .artist-icon {
-    height: min(13vw,130px);
-    width: min(13vw,130px);
+    height: min(12vw,130px);
+    width: min(12vw,130px);
 }
 .top-artists .track-container:hover {
     width: 31vw;

@@ -1,7 +1,7 @@
 @import url(../../variables.css);
 
 .playlist-container {
-    width: 420px;
+    width: 400px;
     height: 620px;
     margin: 15px;
     overflow-y: scroll;
@@ -10,7 +10,7 @@
 
 .playlist-container .track-number h3 {
     font-size: 15px;
-    color: var(--primary-color-6);
+    color: var(--off-white-color);
     line-height: 45px;
     height: 45px;
     width: 32.5px;
@@ -23,7 +23,7 @@
     align-items: center;
     margin: 8px;
     padding-right: 10px;
-    width: 400px;
+    width: 390px;
     color: var(--off-white-color);
     font-size: 20px;
 }
@@ -38,7 +38,7 @@
     margin-left: 15px;
     display: flex;
     flex-direction: column;
-    width: 340px;
+    width: 320px;
     transition: 0.3s;
     align-items: center;
     justify-content: start;
@@ -46,12 +46,12 @@
 .playlist-container .track-info h3{
     font-size: 17px;
     margin-bottom: 0px;
-    width: 310px;
+    width: 290px;
 }
 .playlist-container .track-artist {
     color: var(--neutral-color-3);
     font-size: 11px;
-    width: 310px;
+    width: 290px;
     transition: 0.3s;
 }
 
