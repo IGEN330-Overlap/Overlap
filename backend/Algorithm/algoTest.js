@@ -67,6 +67,7 @@ exports.getMyTopTracks = async (req, res) => {
           }
           // respond with the array of song names
           res.json(topTracks);
+          //res.json(data);
           console.log("Got the top SOngs :)");
         },
         (err) => {
@@ -113,7 +114,8 @@ exports.getMyTopArtists = async (req, res) => {
             );
           }
           console.log("Got the top Artists :)");
-          res.json(topArtists);
+          //res.json(topArtists);
+          res.json(data);
         },
         (err) => {
           res.json({ message: "RUH ROH error", error: err });

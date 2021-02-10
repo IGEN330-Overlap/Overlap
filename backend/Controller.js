@@ -87,8 +87,54 @@ exports.loginUser = async (req, res) => {
 
   //set new access token
   spotifyApi.refreshAccessToken().then(
-    (data) => {
+    async (data) => {
       spotifyApi.setAccessToken(data.body.access_token);
+
+      let topTracks = [];
+
+      //get user's top 3 tracks
+      await spotifyApi
+        .getMyTopTracks()
+        .then((data) => {
+          for (let i = 0; i < 3; i++) {
+            let track = {};
+            track.trackName = data.body.items[i].name;
+            track.trackID = data.body.items[i].id;
+            track.trackPopularity = data.body.items[i].popularity;
+            track.linkURL = data.body.items[i].external_urls.spotify;
+            track.imageURL = data.body.items[i].album.images[0].url;
+            track.artistName = data.body.items[i].artists[0].name;
+
+            topTracks.push(track);
+          }
+        })
+        .catch((err) => {
+          res.json({ message: "Unable to get user top tracks.", error: err });
+          return;
+        });
+      
+      let topArtists = [];
+
+      //get user's top three artists
+      await spotifyApi
+        .getMyTopArtists()
+        .then((data) => {
+          for (let i = 0; i < 3; i++) {
+            let artist = {};
+            artist.artistName = data.body.items[i].name;
+            artist.artistID = data.body.items[i].id;
+            artist.followerCount = data.body.items[i].followers.total;
+            artist.artistPopularity = data.body.items[i].popularity;
+            artist.imageURL = data.body.items[i].images[0].url;
+            artist.linkURL = data.body.items[i].external_urls.spotify;
+
+            topArtists.push(artist);
+          }
+        })
+        .catch((err) => {
+          res.json({ message: "Unable to get user top artists.", error: err });
+          return;
+        });
 
       //get user object from SpotifyAPI
       spotifyApi.getMe().then(
@@ -103,6 +149,8 @@ exports.loginUser = async (req, res) => {
                 name: data.body.display_name,
                 imageURL: data.body.images[0].url,
                 email: data.body.email,
+                topTracks: [topTracks[0], topTracks[1], topTracks[2]],
+                topArtists: topArtists,
               },
             }, //Update
             { upsert: true } //create User if does not already exist
@@ -116,6 +164,8 @@ exports.loginUser = async (req, res) => {
                   name: data.body.display_name,
                   imageURL: data.body.images[0].url,
                   email: data.body.email,
+                  topTracks: topTracks,
+                  topArtists: topArtists,
                 },
               });
             })
@@ -167,6 +217,36 @@ exports.joinGroup = async (req, res) => {
     .catch((err) => {
       res.json({
         message: "Unable to add user to group object",
+        error: err,
+      });
+    });
+};
+
+//middleware for getting all userIDs of users in a group.
+exports.getGroupUsers = async (req, res) => {
+  Group.findOne({ groupCode: req.params.groupCode })
+    .then(function (data) {
+      res.json(data.users);
+    })
+
+    .catch((err) => {
+      res.json({
+        message: "Unable to find group",
+        error: err,
+      });
+    });
+};
+
+//middleware for getting all groupcodes for a single user
+exports.getUserGroups = async (req, res) => {
+  User.findOne({ userID: req.params.userID })
+    .then(function (data) {
+      res.json(data.groups);
+    })
+
+    .catch((err) => {
+      res.json({
+        message: "Unable to find user",
         error: err,
       });
     });

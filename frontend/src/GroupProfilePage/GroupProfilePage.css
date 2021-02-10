@@ -9,16 +9,84 @@
     justify-content: flex-start;
     align-content: flex-start;
 }
+.landing-root .navbar {
+    position: relative;
+    z-index: 5;
+    animation-name: navbaropacity;
+    animation-duration: 3s;
+}
+.landing-root .box {
+    height: 150px;
+    background-color: var(--primary-color-main);
+    position: relative;
+    z-index: 5;
+}
 .group-name {
-    margin-top: 50px;
+    margin-top: 40px;
     margin-left: 4vw;
 }
+.landing-root .d-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
 .member-display {
-    margin-top: 50px;
+    width: 45vw;
     margin-left: 4vw;
-    padding-top: 15px;
+    margin-bottom: 20px;
 }
 .playlist-carousel{
     margin-top: 50px;
     margin-left: 4vw;
+}
+
+.individual-comparisons {
+    margin-left: 4vw;
+    animation-name: insightanimation;
+    animation-duration: 2.25s;
+    animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
+}
+
+@keyframes navbaropacity {
+    from {
+        background-color: var(--primary-color-main);
+    }
+    50% {
+        background-color: var(--primary-color-main);
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+@keyframes insightanimation {
+    from {
+        opacity: 0;
+        transform: translateX(500px);
+    }
+    75% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@media (min-width: 1250px) {
+    .individual-comparisons {
+        margin-left: 8vw;
+    }
+}
+
+@media (max-width: 720px) {
+    .group-name {
+        margin-top: 20px;
+    }
+    .individual-comparisons {
+        margin-left: 4vw;
+    }
 }

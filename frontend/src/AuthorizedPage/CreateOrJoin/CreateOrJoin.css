@@ -15,6 +15,12 @@
     cursor:pointer;
 }
 
+.collapseBody{
+    display: flex;
+    width: 20em;
+    align-items: center;
+}
+
 .input{
     font-size: 1vw;
     width: 11em;

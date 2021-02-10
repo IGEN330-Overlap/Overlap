@@ -90,6 +90,11 @@ input:focus{
     outline: none;
 }
 
+.copyButton{
+    display: flex;
+    justify-content: center;
+}
+
 .copy-button:hover{
     color: white;
 }

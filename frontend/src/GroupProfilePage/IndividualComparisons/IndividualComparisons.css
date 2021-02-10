@@ -1,0 +1,193 @@
+@import url(../../variables.css);
+
+.my-insights h1 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 1.85rem;
+}
+
+.my-insights h2 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 18px;
+    font-size: 1.2rem;
+}
+
+.my-insights h4 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 50px;
+    font-size: min(2.5vw,1.25rem);
+}
+
+.under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    background-color: var(--off-white-color);
+}
+
+.comparisons h1 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 1.85rem;
+}
+
+.comparisons h2 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 18px;
+    font-size: 1.2rem;
+}
+
+.comparisons h4 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 50px;
+    font-size: min(2.5vw,1.25rem);
+    width: 29vw;
+    transition: color 0.45s;
+}
+.comparisons h4:hover {
+    cursor: pointer;
+    color: var(--blue-color-1);
+}
+
+/* css for top artists section */
+
+.artist-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.artist-container {
+    margin-left: 6px;
+    margin-right: 6px;
+    padding-right: 10px;
+}
+
+.artist-icon {
+    margin-top: 3px;
+    height: min(11vw,120px);
+    width: min(11vw,120px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.artist-name {
+    display: flex;
+    flex-direction: row;
+    width: min(12vw,120px);
+}
+.artist-name h5 {
+    color: var(--blue-color-1);
+    justify-content: start;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: min(1.25vw, 12px);
+    width: 15px;
+}
+.artist-name .artist {
+    color: var(--off-white-color);
+    font-size: min(1.25vw, 12px);
+    margin-top: 3.5px;
+    margin-bottom: 10px;
+    margin-left: 4px;
+    width: min(10vw,100px);
+}
+
+/* css for top tracks section */
+
+.track-container h3 {
+    width: 20px;
+    font-size: 40px;
+    transition: 0.3s;
+}
+.track-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 6px;
+    margin-right: 5px;
+    padding-right: 10px;
+    width: 40vw;
+    color: var(--off-white-color);
+    font-size: 20px;
+}
+.track-icon {
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.track-info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 29vw;
+    transition: 0.3s;
+}
+.track-artist {
+    color: var(--blue-color-1);
+    font-size: 12px;
+    width: 29vw;
+    transition: 0.3s;
+}
+
+/* animations */
+.artist-container:hover .artist-icon {
+    height: min(13vw,130px);
+    width: min(13vw,130px);
+}
+.track-container:hover {
+    width: 31vw;
+    margin-right: 0px;
+}
+.track-container:hover h3 {
+    font-size: 45px;
+    color: var(--blue-color-1);
+}
+.track-container:hover .track-icon {
+    font-size: 45px;
+    width: 55px;
+    height: 55px;
+}
+.track-container:hover .track-info {
+    font-size: 21.5px;
+    width: 31vw;
+}
+.track-container:hover .track-artist {
+    font-size: 13px;
+    width: 31vw;
+}
+
+@media (max-width: 780px) {
+    .artist-display {
+        width: 90vw;
+    }
+    .artist-icon {
+        height: 86.4px;
+        width: 86.4px;
+    }
+    .artist-name {
+        width: 86.4px;
+    }
+    .artist-name h5{
+        width: 11px;
+        font-size: 9px;
+    }
+    .artist-name .artist {
+        width: 70px;
+        font-size: 9px;
+    }
+    .track-info {
+        width: 80vw;
+    }
+    .track-artist {
+        width: 80vw;
+    }
+}
