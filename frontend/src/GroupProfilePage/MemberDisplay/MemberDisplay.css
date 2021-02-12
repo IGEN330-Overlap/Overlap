@@ -32,37 +32,18 @@
 .copy-code {
     display: flex;
     align-items: center;
-    border-style: solid;
-    border-color: var(--neutral-color-5);
-    border-width: 1.5px;
-    border-radius: 5rem;
+    border-style: none;
     height: 26.67px;
 }
-.copy-button {
-    height: 26.67px;
-    width: 50px;
-    color: var(--off-white-color);
-    background-color: var(--blue-color-main);
-    border-radius: 5rem;
-}
-input {
-    border-color: transparent;
+.copy-button .clipboard {
     background-color: transparent;
-    padding-left: 10px;
+    fill: var(--primary-color-main);
+    height: 20px;
+    transition: fill 0.25s ease-in-out;
+    margin-left: 15px;
 }
-input:focus {
-    outline: none;
-}
-.copy-button h4 {
-    font-size: 0.95rem;
-    font-weight: 450;
-    padding-top: 2.75px;
-    padding-left: 7px;
-    transition: color 0.45s;
-}
-.copy-button:hover {
-    color: var(--primary-color-main);
-    text-decoration: none;
+.copy-button:hover .clipboard {
+    fill: var(--blue-color-main);
     cursor: pointer;
 }
 
@@ -141,16 +122,6 @@ input:focus {
 .icon-container:hover .user-name {
     color: var(--off-white-color);
     cursor: pointer;
-}
-
-/*individual comparisons - will probably have to move this later */
-.member-comparison-flex {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.member-comparison-flex .individual-comparisons {
-    margin-left: 1vw;
 }
 
 /*adjust for different screen sizes */

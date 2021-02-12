@@ -25,7 +25,7 @@ export const PlaylistTracks = (props) => {
                             </div>
                             <img className="track-icon" src={playlistTrackIcon[i]} alt={track}/>
                             <div className="track-info">    
-                                <h3><strong>{track.toUpperCase()}</strong></h3>
+                                <h3><strong>{track}</strong></h3>
                                 <div className="track-artist">
                                     <strong>{playlistArtist[i]}</strong>
                                 </div>

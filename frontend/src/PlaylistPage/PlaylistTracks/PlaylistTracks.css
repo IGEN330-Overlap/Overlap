@@ -45,13 +45,13 @@
 }
 .playlist-container .track-info h3{
     font-size: 17px;
-    margin-bottom: 0px;
-    width: 290px;
+    margin-bottom: 2px;
+    width: 280px;
 }
 .playlist-container .track-artist {
     color: var(--neutral-color-3);
     font-size: 11px;
-    width: 290px;
+    width: 280px;
     transition: 0.3s;
 }
 
@@ -73,18 +73,20 @@
 /* media sizing */
 @media (max-width: 720px) {
     .playlist-container {
-        width: 380px;
+        width: 350px;
+        margin-left: 0px;
     }
     .playlist-container .track-container {
-        width: 350px;
+        width: 330px;
+        margin-left: 0px;
     }
     .playlist-container .track-info {
-        width: 310px;
+        width: 300px;
     }
     .playlist-container .track-info h3 {
-        width: 290px;
+        width: 270px;
     }
     .playlist-container .track-artist {
-        width: 290px;
+        width: 270px;
     }
 }
