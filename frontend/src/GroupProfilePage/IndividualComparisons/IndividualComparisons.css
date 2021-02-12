@@ -14,10 +14,10 @@
 }
 
 .my-insights h4 {
-    color: var(--off-white-color);
+    color: var(--blue-color-1);
     margin-left: 6px;
-    margin-top: 50px;
-    font-size: min(2.5vw,1.25rem);
+    margin-top: 30px;
+    font-size: min(2vw,1.15rem);
 }
 
 .under-bar{
@@ -41,16 +41,16 @@
 }
 
 .comparisons h4 {
-    color: var(--off-white-color);
+    color: var(--blue-color-1);
     margin-left: 6px;
-    margin-top: 50px;
-    font-size: min(2.5vw,1.25rem);
-    width: 29vw;
-    transition: color 0.45s;
+    margin-top: 30px;
+    font-size: min(2vw,1.15rem);
+    width: 40vw;
+    transition: color 0.25s;
 }
 .comparisons h4:hover {
     cursor: pointer;
-    color: var(--blue-color-1);
+    color: var(--off-white-color);
 }
 
 /* css for top artists section */
@@ -166,12 +166,24 @@
 }
 
 @media (max-width: 780px) {
+    .my-insights h4 {
+        width: 55vw;
+        font-size: 14px;
+    }
+    .comparisons h4 {
+        width: 55vw;
+        font-size: 14px;
+    }
     .top-artists .artist-display {
         width: 90vw;
     }
     .top-artists .artist-icon {
         height: 86.4px;
         width: 86.4px;
+    }
+    .top-artists .artist-container:hover .artist-icon {
+        height: 92px;
+        width: 92px;
     }
     .top-artists .artist-name {
         width: 86.4px;
@@ -184,10 +196,17 @@
         width: 70px;
         font-size: 9px;
     }
-    .top-tracks .track-info {
+    .top-tracks .track-container {
         width: 80vw;
     }
+    .top-tracks .track-info {
+        width: 90vw;
+    }
+    .top-tracks .track-container:hover .track-info {
+        font-size: 21.5px;
+        width: 90vw;
+    }
     .top-tracks .track-artist {
-        width: 80vw;
+        width: 90vw;
     }
 }
