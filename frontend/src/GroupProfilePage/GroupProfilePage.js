@@ -6,6 +6,7 @@ import { Link, useRouteMatch } from 'react-router-dom';
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
 import Navbar from "../Navbar/Navbar";
+import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 
 const GroupProfilePage = (props) => {
@@ -26,6 +27,9 @@ const GroupProfilePage = (props) => {
                 <div className="group-name">
                     <GroupName />
                 </div>
+            </div>
+            <div className="playlist-carousel">
+                <PlaylistCarousel />
             </div>
             <div className="d-flex">
                 <div className="member-display">
