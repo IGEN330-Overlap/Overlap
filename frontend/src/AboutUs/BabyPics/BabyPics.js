@@ -4,7 +4,7 @@ import Kevin from './Kevin.jpg';
 import Beatrice from './Beatrice.jpg';
 import Josi from './Josi.jpg';
 import Danica from './Danica.jpg';
-import Remy from './Remy.jpg';
+import RealRemy from './RealRemy.jpg';
 
 const Babies = (props) => {
     return(
@@ -18,7 +18,7 @@ const Babies = (props) => {
                 <img className='icon' src={Kevin} alt= 'Kevin'></img></div>
 
             <div className= 'container-baby'>
-                <img className='icon' src={Remy} alt= 'Remy'></img></div>
+                <img className='icon' src={RealRemy} alt= 'RealRemy'></img></div>
             
             <div className= 'container-baby'>
                 <img className='icon' src={Josi} alt= 'Josi'></img></div>
