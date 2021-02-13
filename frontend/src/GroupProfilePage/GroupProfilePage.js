@@ -2,7 +2,6 @@ import React from 'react';
 import './GroupProfilePage.css';
 import { useState } from 'react';
 
-import { Link, useRouteMatch } from 'react-router-dom';
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
 import Navbar from "../Navbar/Navbar";
@@ -10,8 +9,6 @@ import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 
 const GroupProfilePage = (props) => {
-
-    let { path, url } = useRouteMatch();
 
     const [name, selectMember] = useState('');
     function toCompare(value){
@@ -43,8 +40,6 @@ const GroupProfilePage = (props) => {
                         : <MyInsights />}
                 </div>
             </div>
-            <br></br>
-            <Link to ="/authorized/PlaylistPage/PlaylistPage/" className="links">Sample Playlist</Link>
         </div>
     )
 }
