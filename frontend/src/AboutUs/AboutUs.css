@@ -1,13 +1,26 @@
-/* CSS variables */
 @import url(../variables.css);
 
-
-.format {
-    width: auto;
+.about-root {
+    position: relative;
+    z-index: 5;
+    background-color: var(--blue-color-3);
+}
+.text-blurb {
+    margin-top: 50px;
+    width: 50vw;
     height: 100vh;
-    background-color: var(--blue-color-1);
+    margin-left: 4vw;
 }
 
-.text {
-    color: white;
+.display-babies {
+    padding-top: 50px;
+    width: 100vw;
 }
+
+.about {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
