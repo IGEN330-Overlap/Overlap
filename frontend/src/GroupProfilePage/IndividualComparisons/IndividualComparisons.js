@@ -64,7 +64,9 @@ export const MyInsights = (props) => {
                     }
                 </div>
             </div>
+            
             <h4><strong>Click on a friend to compare stats!</strong></h4>
+
         </div>
     )
 }
@@ -74,7 +76,7 @@ export const Comparisons = ({name, toCompare}) => {
         <div className="comparisons">
             <h1><strong>You & {name}</strong></h1>
             <div className="under-bar"></div>
-
+            
             <div className="top-artists">
                 <h2><strong>Top Artists</strong></h2>
                 <div className="artist-display">
@@ -108,7 +110,9 @@ export const Comparisons = ({name, toCompare}) => {
                     }
                 </div>
             </div>
-            <h4><strong onClick={() => toCompare()}>Click here to return to your personal insights!</strong></h4>
+
+            <h4><strong onClick={() => toCompare()}>Click to return to personal insights!</strong></h4>
+        
         </div>
     )
 }

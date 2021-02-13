@@ -90,13 +90,16 @@ input:focus{
     outline: none;
 }
 
-.copyButton{
-    display: flex;
+.copy-groupCode {
     justify-content: center;
+    margin-bottom: 20px;
 }
-
-.copy-button:hover{
-    color: white;
+.copy-groupCode .copy-button .clipboard{
+    height: 22.5px;
+    margin-left: 0px;
+}
+.copy-groupCode .copy-button:hover .clipboard {
+    fill: white;
 }
 
 @media (max-width: 720px){

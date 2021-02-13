@@ -1,10 +1,11 @@
 import React from "react";
-import "./App.css";
-import LandingPage from "./LandingPage/LandingPage";
-import AuthorizedPage from "./AuthorizedPage/AuthorizedPage";
-import { Route, Switch } from "react-router-dom";
-import AboutUs from "./AboutUs/AboutUs";
-import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
+import './App.css';
+import LandingPage from './LandingPage/LandingPage';
+import AuthorizedPage from './AuthorizedPage/AuthorizedPage';
+import { Route, Switch } from 'react-router-dom';
+import AboutUs from './AboutUs/AboutUs';
+import GroupProfilePage from './GroupProfilePage/GroupProfilePage';
+import { PlaylistPage } from './PlaylistPage/PlaylistPage';
 
 /**
  * Obtains parameters from the hash of the URL
@@ -39,22 +40,32 @@ function App() {
           exact={true}
         />
         {/* Router for authorized reroute from backend authorization */}
-        <Route
-          path="/authorized"
+        <Route 
+          path='/authorized' 
           render={() => (
-            <AuthorizedPage
+            <AuthorizedPage 
+              loggedIn={loggedIn} 
+              accessToken={params.access_token}
+              refreshToken={params.refresh_token} 
+            />
+          )} 
+          exact={true} 
+        />
+        <Route path='/authorized/AboutUs' render={() => <AboutUs />}/>
+        <Route 
+          path='/authorized/GroupProfilePage' 
+          render={() => (
+            <GroupProfilePage
               loggedIn={loggedIn}
               accessToken={params.access_token}
               refreshToken={params.refresh_token}
             />
           )}
-          exact={true}
         />
-        <Route path="/authorized/AboutUs" render={() => <AboutUs />} />
-        <Route
-          path="/authorized/GroupProfilePage"
+        <Route 
+          path="/authorized/PlaylistPage" 
           render={() => (
-            <GroupProfilePage
+            <PlaylistPage 
               loggedIn={loggedIn}
               accessToken={params.access_token}
               refreshToken={params.refresh_token}
