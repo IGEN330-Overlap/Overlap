@@ -28,9 +28,6 @@ const GroupProfilePage = (props) => {
                     <GroupName />
                 </div>
             </div>
-            <div className="playlist-carousel">
-                <PlaylistCarousel />
-            </div>
             <div className="d-flex">
                 <div className="member-display">
                     <MemberDisplay toCompare={toCompare}/>
@@ -41,7 +38,9 @@ const GroupProfilePage = (props) => {
                         : <MyInsights />}
                 </div>
             </div>
-            
+            <div className="playlist-carousel">
+                <PlaylistCarousel />
+            </div>
             <br></br>
             <Link to ="/authorized/PlaylistPage/PlaylistPage/" className="links">Sample Playlist</Link>
         </div>
