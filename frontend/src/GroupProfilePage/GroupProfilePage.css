@@ -16,14 +16,15 @@
     animation-duration: 3s;
 }
 .landing-root .box {
-    height: 150px;
+    height: 12vh;
     background-color: var(--primary-color-main);
     position: relative;
     z-index: 5;
 }
 .group-name {
-    margin-top: 40px;
+    margin-top: 2vh;
     margin-left: 4vw;
+    margin-bottom: 3vw;
 }
 .landing-root .d-flex {
     display: flex;
@@ -35,10 +36,9 @@
 .member-display {
     width: 45vw;
     margin-left: 4vw;
-    margin-bottom: 20px;
 }
 .playlist-carousel{
-    margin-top: 50px;
+    margin-top: 0vw;
     margin-left: 4vw;
 }
 

@@ -2,13 +2,13 @@
 
 .group-name-container {
     width: auto;
-    height: 100px;
+    height: auto;
 }
 
 .group-name-container .text {
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: 3rem;
+    font-size: 3vw;
 }
 
 .under-bar{

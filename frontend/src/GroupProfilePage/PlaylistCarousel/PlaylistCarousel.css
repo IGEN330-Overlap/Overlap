@@ -8,7 +8,8 @@
     height: 25vh;
 }
 
-.text{
+.playlist-title-text{
+    color: white;
     font-size: 1.85rem;
 }
 
@@ -37,8 +38,8 @@
 
 .addButton{
     display: flex;
-    height: min(12vw,120px);
-    width: min(12vw,120px);
+    height: min(6vw,120px);
+    width: min(6vw,120px);
     justify-content: center;
     align-items: center;
     border-radius: 15%;
@@ -63,8 +64,8 @@
 }
 
 .playlistcover{
-    height: min(12vw,120px);
-    width: min(12vw,120px);
+    height: min(6vw,120px);
+    width: min(6vw,120px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 15%;
@@ -74,6 +75,7 @@
 .playlist-name{
     color: white;
     cursor: pointer;
+    font-size: min(1vw, 20px);
 }
 
 /*customize scroll bar */
