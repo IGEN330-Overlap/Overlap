@@ -11,7 +11,7 @@ const LandingPage = (props) => {
                 <img src={logo} alt="logo" />
             </div>
             <div className="welcome-container">
-                <h2 className="white"> Welcome to <span className="purple">overlap</span>. <br></br>Make listening with friends easy.</h2>
+                <h2 className="intro-message"> Welcome to <span className="purple">overlap</span>. <br></br>Make listening with friends easy.</h2>
             </div>
             <a href={process.env.REACT_APP_BACKEND_URL} className="btn btn-sm login-button">
                 Log in with Spotify

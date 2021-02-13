@@ -27,14 +27,14 @@
 }
 
 /*adjust properties of the word 'overlap' */
-.purple {
+.intro-message .purple {
     color: var(--blue-color-main);
     font-size: min(1.9vw, 2.05rem);
     font-weight: 550;
 }
 
 /*adjust properties of the overall introduction text */
-.white {
+.intro-message {
     color: var(--neutral-color-main);
     font-size: min(1.8vw, 1.95rem);
     font-weight: 450;
@@ -67,7 +67,7 @@
         height: auto;
         margin-bottom: 1.25rem;
     }
-    .welcome-container .white {
+    .welcome-container .intro-message {
         font-size: 18.36px;
     }
     .welcome-container .purple {
