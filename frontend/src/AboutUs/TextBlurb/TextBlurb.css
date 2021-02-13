@@ -5,7 +5,7 @@
     height: 30px;
 }
 
-.about-name-container .text {
+.about-name-container .big-text {
     color: var(--off-white-color);
     margin-left: 6px;
     font-size: 3rem;

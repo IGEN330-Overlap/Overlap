@@ -1,8 +1,8 @@
 @import url(../variables.css);
 
 .about-root {
-    width: auto;
-    height: auto;
+    position: relative;
+    z-index: 5;
     background-color: var(--blue-color-3);
 }
 .text-blurb {
