@@ -49,6 +49,11 @@
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
 
+.main-column{
+    display: flex;
+    flex-direction: column;
+}
+
 @keyframes navbaropacity {
     from {
         background-color: var(--primary-color-main);
