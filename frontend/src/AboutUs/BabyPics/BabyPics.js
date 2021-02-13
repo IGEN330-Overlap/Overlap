@@ -10,24 +10,22 @@ const Babies = (props) => {
     return(
         <div className= "baby-members">
             <div className= 'container-baby'>
-                <img className='icon' src={Danica} alt= 'Danica'></img></div>
-                    <div className="name">
-                                <strong>Danica</strong>
-                        </div>
-            <div className= 'container-baby'>
-                <img className='icon' src={Kevin} alt= 'Kevin'></img></div>
+                <img className='icon-baby' src={Danica} alt= 'Danica'></img></div>
 
             <div className= 'container-baby'>
-                <img className='icon' src={RealRemy} alt= 'RealRemy'></img></div>
+                <img className='icon-baby' src={Kevin} alt= 'Kevin'></img></div>
+
+            <div className= 'container-baby'>
+                <img className='icon-baby' src={RealRemy} alt= 'RealRemy'></img></div>
             
             <div className= 'container-baby'>
-                <img className='icon' src={Josi} alt= 'Josi'></img></div>
+                <img className='icon-baby' src={Josi} alt= 'Josi'></img></div>
             
             <div className= 'container-baby'>
-                <img className='icon' src={Brendan} alt= 'Brendan'></img></div>
+                <img className='icon-baby' src={Brendan} alt= 'Brendan'></img></div>
 
             <div className= 'container-baby'>    
-                <img className='icon' src={Beatrice} alt= 'Beatrice'></img></div>
+                <img className='icon-baby' src={Beatrice} alt= 'Beatrice'></img></div>
         </div>
     )
 }

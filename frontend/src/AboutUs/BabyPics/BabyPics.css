@@ -6,7 +6,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.icon:hover {
+.icon-baby:hover {
     opacity: 0.4;
     transition-duration: 0.45s;
 }
@@ -16,7 +16,7 @@
     transition-duration: 0.45s;
 }
 
-.icon {
+.icon-baby {
     height: min(12vw,200px);
     width: min(12vw,200px);
     object-fit: cover;
