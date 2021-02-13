@@ -15,8 +15,8 @@ const playlistTrackIcon = [icon1,icon2,icon3,icon4,icon5,icon6,icon1,icon2,icon3
 
 export const PlaylistTracks = (props) => {
     return(
-        <div className="playlist-container">
-            <div className="playlist-tracks">
+        <div className="playlist-page-container">
+            <div className="playlist-page-tracks">
                 <div className="track-display">
                     {playlistTrack.map((track,i) => (
                         <div className="track-container">
