@@ -1,11 +1,10 @@
 import './PlaylistTitle.css';
 import dog from './puppy-icon.jpg';
 
-
 const PlaylistTitle = (props) => {
     return (
         <div className="playlist-root d-flex flex-column justify-content-center align-items-center">
-            <div className="playlistcover-container">
+            <div className="playlist-page-cover-container">
                 <img src={dog} alt="dog" />
             </div>
             <div className="title-container">

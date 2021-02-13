@@ -1,9 +1,8 @@
-/* @import url(../variables.css); */
+@import url(../../variables.css);
 
 .playlist-root {
     width: auto;
-    height: 100vh;
-    background-color: rgb(165, 87, 87);
+    background-color: transparent;
 }
 
 .playlist-root .playlist-button {
@@ -25,7 +24,7 @@
     transition: color 0.35s
 }
 
-.playlistcover-container {
+.playlist-page-cover-container {
     width: auto;
     height: auto;
     margin-bottom: min(2.5vw, 2.25rem);

@@ -1,17 +1,22 @@
 import React from 'react';
 import './PlaylistPage.css';
+import { PlaylistTracks } from './PlaylistTracks/PlaylistTracks';
 import PlaylistTitle from './PlaylistTitle/PlaylistTitle';
 import Navbar from "../Navbar/Navbar";
 
-const PlaylistPage = (props) => {
+export const PlaylistPage = (props) => {
     return(     
-        <div className="playlist-root">
+        <div className="playlist-landing-root">
             <Navbar />
-            <div className="playlist-name">
-                <PlaylistTitle />
+            <div className="playlist-components">
+                <div className="playlist-page-name">
+                    <PlaylistTitle />
+                </div>
+                <div className="playlist-tracks-container">
+                    <PlaylistTracks />
+                </div>
             </div>
         </div>
     )
 }
 
-export default PlaylistPage;
