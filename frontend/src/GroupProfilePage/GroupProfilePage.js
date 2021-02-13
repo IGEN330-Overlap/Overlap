@@ -40,7 +40,6 @@ const GroupProfilePage = (props) => {
                         : <MyInsights />}
                 </div>
             </div>
-           
         </div>
     )
 }

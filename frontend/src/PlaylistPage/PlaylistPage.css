@@ -1,0 +1,38 @@
+@import url(../variables.css);
+
+.playlist-landing-root {
+    width: auto;
+    height: 100vh;
+    background-color: #9D5C63;
+}
+
+.playlist-page-name {
+    margin-top: 50px;
+    margin-left: 4vw;
+}
+
+.playlist-components {
+    margin-top: 50px;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.playlist-tracks-container {
+    margin-left: 4vw;
+    margin-top: 75px;
+    background: rgba(190, 154, 154, 0.25);
+    border-radius: 15px;
+    width: 425px;
+    height: 650px;
+}
+
+@media (max-width: 720px) {
+    .playlist-tracks-container {
+        background-color: transparent;
+        margin-left: 5vw;
+    }   
+}
