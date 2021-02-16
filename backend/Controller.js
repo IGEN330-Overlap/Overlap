@@ -112,7 +112,7 @@ exports.loginUser = async (req, res) => {
           res.json({ message: "Unable to get user top tracks.", error: err });
           return;
         });
-      
+
       let topArtists = [];
 
       //get user's top three artists
@@ -239,15 +239,27 @@ exports.getGroupUsers = async (req, res) => {
 
 //middleware for getting all groupcodes for a single user
 exports.getUserGroups = async (req, res) => {
-  User.findOne({ userID: req.params.userID })
-    .then(function (data) {
-      res.json(data.groups);
-    })
+  let groupIDs;
 
-    .catch((err) => {
-      res.json({
-        message: "Unable to find user",
-        error: err,
-      });
+  //get user's groups
+  try {
+    let data = await User.findOne({ userID: req.params.userID });
+    groupIDs = data.groups;
+  } catch (err) {
+    res.json({
+      message: "Unable to find user",
+      error: err,
     });
+  }
+
+  //query groups using the groupIDs
+  try {
+    let data = await Group.find({ groupCode: { $in: groupIDs } });
+    res.json(data);
+  } catch (err) {
+    res.json({
+      message: "Unable to find groups",
+      error: err,
+    });
+  }
 };
