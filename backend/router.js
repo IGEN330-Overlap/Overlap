@@ -6,10 +6,10 @@ const algoTest = require("./Algorithm/algoTest.js");
 //define get request for retreiving user information
 router.get("/token/:token/user", Controller.getUser)
 
-//define get request for retreiving UserIDs (spotifyIDs) of all users in a group
+//define get request for retreiving all users in a group
 router.get("/groups/:groupCode/users", Controller.getGroupUsers)
 
-//define get request for retreiving all group codes a single user is a member in
+//define get request for retreiving all groups a single user is in
 router.get("/users/:userID/groups", Controller.getUserGroups)
 
 //define post request for making a new group
