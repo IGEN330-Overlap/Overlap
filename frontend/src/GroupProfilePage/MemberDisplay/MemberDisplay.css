@@ -61,7 +61,7 @@
     display: flex;
     width: 45vw;
     flex-wrap: wrap;
-    max-height: 35vh;
+    max-height: 32.5vh;
     justify-content: flex-start;
     align-content: flex-start;
     overflow-y: auto;
@@ -133,7 +133,7 @@
     }
     .display-members {
         width: 90vw;
-        max-height: 45vh;
+        max-height: 42vh;
     }
     .add-member {
         margin-top: 5px;

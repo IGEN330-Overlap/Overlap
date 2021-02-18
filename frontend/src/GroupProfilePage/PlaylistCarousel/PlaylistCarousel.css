@@ -5,7 +5,7 @@
     margin-right: auto;
     padding-right: 15px;
     background-color: transparent;
-    height: 25vh;
+    max-height: 32vh;
 }
 
 .playlist-container .text{
@@ -51,6 +51,7 @@
     display: flex;
     flex-direction: row;
     width: 60vw;
+    max-height: 24vh;
     overflow: auto;
 }
 
@@ -103,6 +104,7 @@
         font-size: 12px;
     }
     .display-playlists{
+        width: 90vw;
         flex-wrap: wrap;
     }
 }

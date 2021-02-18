@@ -1,8 +1,8 @@
 @import url(../variables.css);
 
 .landing-root {
-    width: auto;
-    height: 10000px;
+    width: 100vw;
+    height: 100vh;
     background-color: var(--primary-color-main);
     display: flex;
     flex-direction: column;
@@ -35,8 +35,9 @@
 }
 .member-display {
     width: 45vw;
+    max-height: 48vh;
     margin-left: 4vw;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 .playlist-carousel{
     margin-left: 4vw;
@@ -90,5 +91,11 @@
 @media (max-width: 720px) {
     .individual-comparisons {
         margin-left: 4vw;
+    }
+    .member-display {
+        width: 90vw;
+    }
+    .playlist-carousel {
+        margin-bottom: 15px;
     }
 }
