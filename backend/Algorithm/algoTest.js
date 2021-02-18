@@ -56,7 +56,7 @@ exports.getMyTopTracks = async (req, res) => {
       spotifyApi.setAccessToken(data.body.access_token); // Set Access token
 
       // Get a user's top tracks
-      spotifyApi.getMyTopTracks().then(
+      spotifyApi.getMyTopTracks({limit: 30, time_range: "long_term"}).then(
         (data) => {
           // Iterate through every item from data body extracting useful types for a song
           for (x of data.body.items) {
@@ -83,6 +83,43 @@ exports.getMyTopTracks = async (req, res) => {
   );
 };
 
+
+
+
+exports.getTopTrackIds = async (req, res) => {
+  spotifyApi.setRefreshToken(req.body.refreshToken); // Set refresh token
+  var trackIDs = []; // Array for creating playlist of songs
+
+  spotifyApi.refreshAccessToken().then(
+    (data) => {
+      spotifyApi.setAccessToken(data.body.access_token); // Set Access token
+
+      // Get a user's top tracks
+      spotifyApi.getMyTopTracks({limit : 30, offset : 0}).then(
+        (data) => {
+          // Iterate through every item from data body extracting useful types for a song
+          for (x of data.body.items) {
+            // Add to playlist array with each Song ADT
+            trackIDs.push(x["id"])
+          }
+          // respond with the array of song names
+          res.json(trackIDs);
+          //res.json(data);
+          console.log("Got the top song ids :)");
+        },
+        (err) => {
+          //SpotifyAPI return error
+          res.status(400).json({ message: "RUH ROH error", error: err });
+        }
+      );
+    },
+    (err) => {
+      //access token refresh error
+      res.json({ message: "Unable to refresh access token", error: err });
+    }
+  );
+};
+
 /**
  * gets a users top tracks based on their unique refresh token and ??spotifyID??
  * @param {refreshToken} req
@@ -91,7 +128,6 @@ exports.getMyTopTracks = async (req, res) => {
 exports.getMyTopArtists = async (req, res) => {
   spotifyApi.setRefreshToken(req.body.refreshToken); // Set refresh token
   var topArtists = [];
-
   spotifyApi.refreshAccessToken().then(
     (data) => {
       spotifyApi.setAccessToken(data.body.access_token);
@@ -128,6 +164,7 @@ exports.getMyTopArtists = async (req, res) => {
     }
   );
 };
+
 
 /**
  * getting track features. Request body needs an array of songIDs and refresh token
