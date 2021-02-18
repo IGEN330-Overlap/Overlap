@@ -28,7 +28,7 @@ REACT_APP_FRONTEND_URL=http://localhost:3000
 Use case:
 After successful authentication using our landing page, make request to backend to create user object in database. The API will check if the user already exists in the database, and only add a user object entry in the case where there is no user.
 
-Expected request body:
+Expected request JSON:
 ```
 refreshToken: The SpotifyAPI refresh token of the user after user authentication. (string)
 ```
@@ -44,7 +44,7 @@ spotifyID: Unique Spotify ID of the user, which will be used afterwards for most
 Use case:
 Consume endpoint for group creation, and use groupCode return to redirect to group page.
 
-Expected request body:
+Expected request JSON:
 ```
 name: Name of the group to be created. (string)
 spotifyID: ID of the user creating the group who will be tagged as the group leader. (string)
@@ -59,7 +59,7 @@ groupCode: Unique code for the group. (string)
 Use case:
 Consume endpoint for group joining, and use groupCode return to redirect to group page. If group does not exist yet, API will respond with error.
 
-Expected request body:
+Expected request JSON:
 ```
 groupCode: Code of the group user is attempting to join. (string)
 spotifyID: ID of the user joining the group. (string)
@@ -73,33 +73,24 @@ status: 200 (Okay) or 404 (Not found) (status)
 
 ### GET: /groups/:groupCode/users
 Use case:
-Request with a groupcode parameter and return the spotifyIDs of all users in that given group. To use, replace ":groupCode" with the group code. Example: http://localhost:8888/groups/ATZGA5RL/users
+Make request with a groupCode, and the API will respond with an array of user objects which belong to the group. To use, replace ":groupCode" with the group code.
 
-Expected request body:
-
-```
-groupCode: Code of the group to extract user spotifyIDs (string)
-```
+Request JSON is not expected.
 
 Return:
 
 ```
-UserIDs:  The unique ID which represents a user. Same as spotifyIDs. (string)
+Array of user objects. ([array])
 ```
 
 ### GET: /users/:userID/groups
 Use case:
-Request with userID parameter and returns all the group codes of all the groups the user is in. To use, replace ":userID" with the user ID of the user you want to find groups from. 
-Example: http://localhost:8888/users/02v9lje265lzsjzqb68sx9zej/groups
+Request with userID parameter and API will return with an array of group objects which the user belong to. To use, replace ":userID" with the user ID of the user you want to find groups from. 
 
-Expected request body:
-
-```
-userID: The unique userID for a user. Same as spotifyID (string)
-```
+Request JSON is not expected.
 
 Return:
 
 ```
-UserIDs:  The unique ID which represents a user. Same as spotifyIDs. (string)
+Array of group objects. ([array])
 ```

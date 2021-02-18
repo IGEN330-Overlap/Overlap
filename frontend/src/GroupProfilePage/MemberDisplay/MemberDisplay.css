@@ -11,14 +11,15 @@
 /*text container */
 .member-container .d-flex {
     background-color: var(--primary-color-main);
-    margin-bottom: 2vw;
-    align-content: center;
+    margin-bottom: 5px;
+    align-items: center;
     position: relative;
     z-index: 10;
 }
 .add-member {
     margin-left: 15px;
-    margin-top: 7.25px;
+    margin-top: 5px;
+    height: 30px;
     transition: opacity 0.45s;
 }
 
@@ -51,7 +52,8 @@
 .member-container .d-flex .text {
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: 1.85rem;
+    margin-bottom: 0px;
+    font-size: clamp(20px, 3vw, 30px);
 }
 
 /*icons */
@@ -59,7 +61,7 @@
     display: flex;
     width: 45vw;
     flex-wrap: wrap;
-    max-height: 30vh;
+    max-height: 32.5vh;
     justify-content: flex-start;
     align-content: flex-start;
     overflow-y: auto;
@@ -98,15 +100,15 @@
     text-align: center;
 }
 .user-icon {
-    height: min(7vw,110px);
-    width: min(7vw,110px);
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;
     transition: opacity 0.45s;
 }
 .user-name {
-    font-size: min(1.75vw,20px);
+    font-size: clamp(12px, 1.75vw, 18px);
     color: transparent;
     position: absolute;
     top: 50%;
@@ -131,20 +133,10 @@
     }
     .display-members {
         width: 90vw;
-        max-height: 45vh;
+        max-height: 42vh;
     }
     .add-member {
-        margin-top: 7.25px
-    }
-    .text {
-        font-size: 1.65rem;
-    }
-    .user-icon {
-        height: 64.8px;
-        width: 64.8px;
-    }
-    .user-name {
-        font-size: 12.6px;
+        margin-top: 5px;
     }
     .member-comparison-flex .individual-comparisons {
         margin-top: 20px;

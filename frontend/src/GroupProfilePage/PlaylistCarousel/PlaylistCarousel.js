@@ -29,7 +29,7 @@ const PlaylistCarousel = (props) => {
 
     return(
         <div className="playlist-container">
-            <div><h1 className="playlist-title-text"><strong>Playlist</strong></h1></div>
+            <div><h1 className="text"><strong>Playlists</strong></h1></div>
             <div className="covers">
                 <div onClick={showAddPlaylistModal} className="addPlaylist-container"> 
                     {/*link to add playlist*/}

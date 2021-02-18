@@ -7,12 +7,11 @@
 }
 
 .playlist-page-name {
-    margin-top: 50px;
     margin-left: 4vw;
 }
 
 .playlist-components {
-    margin-top: 50px;
+    margin-top: 30px;
     width: 100vw;
     display: flex;
     flex-direction: row;
@@ -22,12 +21,11 @@
 }
 
 .playlist-tracks-container {
-    margin-left: 4vw;
-    margin-top: 75px;
+    margin-left: 2vw;
     background: rgba(190, 154, 154, 0.25);
     border-radius: 15px;
     width: 425px;
-    height: 650px;
+    height: 600px;
 }
 
 @media (max-width: 720px) {

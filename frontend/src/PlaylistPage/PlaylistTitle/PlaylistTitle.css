@@ -27,12 +27,12 @@
 .playlist-page-cover-container {
     width: auto;
     height: auto;
-    margin-bottom: min(2.5vw, 2.25rem);
+    margin-bottom: min(2.25vw, 2.25rem);
 }
 
 .title-container {
     font-size: 5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .white {

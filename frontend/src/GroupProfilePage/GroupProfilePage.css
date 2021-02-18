@@ -1,7 +1,7 @@
 @import url(../variables.css);
 
 .landing-root {
-    width: auto;
+    width: 100vw;
     height: 100vh;
     background-color: var(--primary-color-main);
     display: flex;
@@ -16,15 +16,15 @@
     animation-duration: 3s;
 }
 .landing-root .box {
-    height: 12vh;
+    height: clamp(55px, 9vw, 90px);
     background-color: var(--primary-color-main);
     position: relative;
     z-index: 5;
 }
 .group-name {
-    margin-top: 2vh;
+    margin-top: 10px;
     margin-left: 4vw;
-    margin-bottom: 3vw;
+    height: clamp(55px, 9vw, 90px);
 }
 .landing-root .d-flex {
     display: flex;
@@ -35,10 +35,11 @@
 }
 .member-display {
     width: 45vw;
+    max-height: 48vh;
     margin-left: 4vw;
+    margin-bottom: 10px;
 }
 .playlist-carousel{
-    margin-top: 0vw;
     margin-left: 4vw;
 }
 
@@ -88,10 +89,13 @@
 }
 
 @media (max-width: 720px) {
-    .group-name {
-        margin-top: 20px;
-    }
     .individual-comparisons {
         margin-left: 4vw;
+    }
+    .member-display {
+        width: 90vw;
+    }
+    .playlist-carousel {
+        margin-bottom: 15px;
     }
 }
