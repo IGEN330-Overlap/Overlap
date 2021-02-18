@@ -7,7 +7,6 @@ import kitten_icon from './kitten-icon.jpg';
 import puppy_icon from './puppy-icon.jpg';
 import kitten2 from './kitten2.jpg'
 import add_member from './add-member.svg';
-import copy_clipboard from '../../AuthorizedPage/GroupsComponent/copy.svg';
 
 /*take input from backend to create array of users */
 const members = ['Cat2','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
