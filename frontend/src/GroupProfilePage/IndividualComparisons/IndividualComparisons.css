@@ -3,14 +3,14 @@
 .my-insights h1 {
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: 1.85rem;
+    font-size: clamp(20px, 3vw, 30px);
 }
 
 .my-insights h2 {
     color: var(--off-white-color);
     margin-left: 6px;
-    margin-top: 18px;
-    font-size: 1.2rem;
+    margin-top: clamp(10px, 1.5vw, 17px);
+    font-size: clamp(17px, 2vw, 21px);
 }
 
 .my-insights h4 {
@@ -19,7 +19,9 @@
     margin-top: 30px;
     font-size: min(2vw,1.15rem);
 }
-
+.my-insights .d-flex {
+    margin-bottom: 5px;
+}
 .under-bar{
     margin-left: 10px;
     width: 75px;
@@ -30,27 +32,29 @@
 .comparisons h1 {
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: 1.85rem;
+    font-size: clamp(20px, 3vw, 30px);
 }
 
 .comparisons h2 {
     color: var(--off-white-color);
     margin-left: 6px;
-    margin-top: 18px;
-    font-size: 1.2rem;
+    margin-top: clamp(10px, 1.5vw, 17px);
+    font-size: clamp(17px, 2vw, 21px);
 }
 
 .comparisons h4 {
     color: var(--blue-color-1);
-    margin-left: 6px;
-    margin-top: 30px;
+    margin-left: 125px;
     font-size: min(2vw,1.15rem);
-    width: 40vw;
     transition: color 0.25s;
 }
 .comparisons h4:hover {
     cursor: pointer;
     color: var(--off-white-color);
+}
+.comparisons .d-flex {
+    margin-bottom: 5px;
+    align-items: center;
 }
 
 /* css for top artists section */
@@ -62,14 +66,13 @@
 }
 .top-artists .artist-container {
     margin-left: 6px;
-    margin-right: 6px;
-    padding-right: 10px;
+    padding-right: 5px;
 }
 
 .top-artists .artist-icon {
     margin-top: 3px;
-    height: min(11vw,120px);
-    width: min(11vw,120px);
+    height: clamp(86px,10vw,110px);
+    width: clamp(86px,10vw,110px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 10px;
@@ -78,7 +81,7 @@
 .top-artists .artist-name {
     display: flex;
     flex-direction: row;
-    width: min(12vw,120px);
+    width: min(11vw,120px);
 }
 .top-artists .artist-name h5 {
     color: var(--blue-color-1);
@@ -92,7 +95,7 @@
     color: var(--off-white-color);
     font-size: min(1.25vw, 12px);
     margin-top: 3.5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     margin-left: 4px;
     width: min(10vw,100px);
 }
@@ -108,7 +111,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 6px;
     margin-right: 5px;
     padding-right: 10px;
@@ -130,6 +133,9 @@
     flex-direction: column;
     width: 29vw;
     transition: 0.3s;
+}
+.top-tracks .track-info .track-title {
+    font-size: clamp(10px, 5vw, 20px);
 }
 .top-tracks .track-artist {
     color: var(--blue-color-1);
@@ -176,10 +182,6 @@
     }
     .top-artists .artist-display {
         width: 90vw;
-    }
-    .top-artists .artist-icon {
-        height: 86.4px;
-        width: 86.4px;
     }
     .top-artists .artist-container:hover .artist-icon {
         height: 92px;

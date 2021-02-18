@@ -31,7 +31,7 @@ const GroupProfilePage = (props) => {
                         <MemberDisplay toCompare={toCompare}/>
                     </div>
                     <div className="playlist-carousel">
-                    <PlaylistCarousel />
+                        <PlaylistCarousel />
                     </div>
                 </div> 
                 <div className="individual-comparisons">

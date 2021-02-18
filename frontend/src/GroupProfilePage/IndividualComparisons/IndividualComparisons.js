@@ -28,7 +28,9 @@ const compareTracksIcon = [icon6,icon7,icon8]
 export const MyInsights = (props) => {
     return(
         <div className="my-insights">
-            <h1><strong>My Insights</strong></h1>
+            <div className="d-flex">
+                <h1><strong>My Insights</strong></h1>
+            </div>
             <div className="under-bar"></div>
 
             <div className="top-artists">
@@ -74,8 +76,13 @@ export const MyInsights = (props) => {
 export const Comparisons = ({name, toCompare}) => {
     return(
         <div className="comparisons">
-            <h1><strong>You & {name}</strong></h1>
+            <div className="d-flex">
+                <h1><strong>You & {name}</strong></h1>
+                <h4><strong onClick={() => toCompare()}>Return to <br></br>Personal Insights</strong></h4>    
+            </div>
+            
             <div className="under-bar"></div>
+            
             
             <div className="top-artists">
                 <h2><strong>Top Artists</strong></h2>
@@ -99,8 +106,10 @@ export const Comparisons = ({name, toCompare}) => {
                         <div className="track-container">
                             <h3><strong>{[i+1]}</strong></h3>
                             <img className="track-icon" src={compareTracksIcon[i]} alt={track}/>
-                            <div className="track-info">    
-                                <strong>{track.toUpperCase()}</strong>
+                            <div className="track-info">
+                                <div className="track-title">    
+                                    <strong>{track.toUpperCase()}</strong>
+                                </div>
                                 <div className="track-artist">
                                     <strong>{compareTracksArtist[i]}</strong>
                                 </div>
@@ -111,7 +120,7 @@ export const Comparisons = ({name, toCompare}) => {
                 </div>
             </div>
 
-            <h4><strong onClick={() => toCompare()}>Click to return to personal insights!</strong></h4>
+            
         
         </div>
     )
