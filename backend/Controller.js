@@ -94,16 +94,16 @@ exports.loginUser = async (req, res) => {
 
       //get user's top 3 tracks
       await spotifyApi
-        .getMyTopTracks()
+        .getMyTopTracks({limit:3})
         .then((data) => {
-          for (let i = 0; i < 3; i++) {
+          for (x of data.body.items) {
             let track = {};
-            track.trackName = data.body.items[i].name;
-            track.trackID = data.body.items[i].id;
-            track.trackPopularity = data.body.items[i].popularity;
-            track.linkURL = data.body.items[i].external_urls.spotify;
-            track.imageURL = data.body.items[i].album.images[0].url;
-            track.artistName = data.body.items[i].artists[0].name;
+            track.trackName = x.name;
+            track.trackID = x.id;
+            track.trackPopularity = x.popularity;
+            track.linkURL = x.external_urls.spotify;
+            track.imageURL = x.album.images[0].url;
+            track.artistName = x.artists[0].name;
 
             topTracks.push(track);
           }
@@ -117,16 +117,16 @@ exports.loginUser = async (req, res) => {
 
       //get user's top three artists
       await spotifyApi
-        .getMyTopArtists()
+        .getMyTopArtists({limit: 3})
         .then((data) => {
-          for (let i = 0; i < 3; i++) {
+          for (x of data.body.items) {
             let artist = {};
-            artist.artistName = data.body.items[i].name;
-            artist.artistID = data.body.items[i].id;
-            artist.followerCount = data.body.items[i].followers.total;
-            artist.artistPopularity = data.body.items[i].popularity;
-            artist.imageURL = data.body.items[i].images[0].url;
-            artist.linkURL = data.body.items[i].external_urls.spotify;
+            artist.artistName = x.name;
+            artist.artistID = x.id;
+            artist.followerCount = x.followers.total;
+            artist.artistPopularity = x.popularity;
+            artist.imageURL = x.images[0].url;
+            artist.linkURL = x.external_urls.spotify;
 
             topArtists.push(artist);
           }
