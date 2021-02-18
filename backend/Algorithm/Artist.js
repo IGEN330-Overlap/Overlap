@@ -1,5 +1,7 @@
 /**
  * Artist ADT used to hold artists
+ * 
+ * PURELY DOCUMNETATION NOT REALLY NEEDED. CAN USE AS AN INTERFACE
  */
 class Artist{
     // Fields
