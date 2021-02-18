@@ -60,10 +60,14 @@ exports.getMyTopTracks = async (req, res) => {
         (data) => {
           // Iterate through every item from data body extracting useful types for a song
           for (x of data.body.items) {
-            // Add to playlist array with each Song ADT
-            topTracks.push(
-              new Song(x["name"], x["id"], x["popularity"], x["type"])
-            );
+            let track = {};
+            track.trackName = data.body.items[i].name;
+            track.trackID = data.body.items[i].id;
+            track.trackPopularity = data.body.items[i].popularity;
+            track.linkURL = data.body.items[i].external_urls.spotify;
+            track.imageURL = data.body.items[i].album.images[0].url;
+            track.artistName = data.body.items[i].artists[0].name;
+            topTracks.push(track)
           }
           // respond with the array of song names
           res.json(topTracks);
@@ -176,6 +180,7 @@ exports.getTrackFeatures = async (req, res) => {
  
   let songIDs = req.body.songIDs; //array holding song ids that we want features of
 
+
   if (songIDs > 100) {
     songIDs.splice(100); // spotifyAPI call limits to 100 so only take first 100
   }
@@ -188,7 +193,7 @@ exports.getTrackFeatures = async (req, res) => {
       /* Get Audio Features for several tracks */
       spotifyApi.getAudioFeaturesForTracks(songIDs).then(
         (data) => {
-          res.json(data.body);
+          res.json(data.body.audio_features);
           console.log("Got the audio features :)");
         },
         (err) => {
