@@ -5,11 +5,12 @@
     margin-right: auto;
     padding-right: 15px;
     background-color: transparent;
-    height: 25vh;
+    max-height: 32vh;
 }
 
-.text{
-    font-size: 1.85rem;
+.playlist-container .text{
+    font-size: clamp(20px, 3vw, 30px);
+    color: var(--off-white-color);
 }
 
 .addPlaylist-container{
@@ -37,8 +38,8 @@
 
 .addButton{
     display: flex;
-    height: min(12vw,120px);
-    width: min(12vw,120px);
+    height: min(11vw,110px);
+    width: min(11vw,110px);
     justify-content: center;
     align-items: center;
     border-radius: 15%;
@@ -50,6 +51,7 @@
     display: flex;
     flex-direction: row;
     width: 60vw;
+    max-height: 24vh;
     overflow: auto;
 }
 
@@ -63,8 +65,8 @@
 }
 
 .playlistcover{
-    height: min(12vw,120px);
-    width: min(12vw,120px);
+    height: min(11vw,110px);
+    width: min(11vw,110px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 15%;
@@ -102,6 +104,7 @@
         font-size: 12px;
     }
     .display-playlists{
+        width: 90vw;
         flex-wrap: wrap;
     }
 }
