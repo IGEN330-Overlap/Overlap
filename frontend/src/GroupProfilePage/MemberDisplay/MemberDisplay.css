@@ -11,7 +11,7 @@
 /*text container */
 .member-container .d-flex {
     background-color: var(--primary-color-main);
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     align-items: center;
     position: relative;
     z-index: 10;
@@ -54,6 +54,20 @@
     margin-left: 6px;
     margin-bottom: 0px;
     font-size: clamp(20px, 3vw, 30px);
+}
+.member-container .compare-message {
+    color: var(--blue-color-1);
+    margin-left: 6px;
+    margin-bottom: 0px;
+    font-size: clamp(13px, 1.25vw, 18px);
+    animation-name: comparemessage;
+    animation-duration: 2.5s;
+}
+
+@keyframes comparemessage {
+    from {opacity: 0}
+    75% {opacity: 0}
+    to {opacity: 1}
 }
 
 /*icons */

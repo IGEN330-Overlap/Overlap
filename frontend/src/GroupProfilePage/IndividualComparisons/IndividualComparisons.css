@@ -3,23 +3,24 @@
 .my-insights h1 {
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: clamp(20px, 3vw, 30px);
+    font-size: clamp(20px, 3vw, 28px);
 }
 
 .my-insights h2 {
     color: var(--off-white-color);
     margin-left: 6px;
     margin-top: clamp(10px, 1vw, 17px);
-    font-size: clamp(17px, 2vw, 21px);
+    font-size: clamp(17px, 2vw, 20px);
 }
 
-.my-insights h4 {
+/* .my-insights h4 {
     color: var(--blue-color-1);
     margin-left: 6px;
     margin-top: 15px;
     margin-bottom: 0px;
     font-size: min(2vw,1.15rem);
-}
+} */
+
 .my-insights .d-flex {
     margin-bottom: 5px;
 }
@@ -40,12 +41,12 @@
     color: var(--off-white-color);
     margin-left: 6px;
     margin-top: clamp(10px, 1vw, 17px);
-    font-size: clamp(17px, 2vw, 21px);
+    font-size: clamp(13px, 1.25vw, 18px);
 }
 
 .comparisons h4 {
     color: var(--blue-color-1);
-    margin-left: 125px;
+    margin-left: 80px;
     font-size: min(2vw,1.15rem);
     transition: color 0.25s;
 }
@@ -57,7 +58,10 @@
     margin-bottom: 5px;
     align-items: center;
 }
-
+/* .comparisons .arrow-icon {
+    height: 10px;
+    width: 10px;
+} */
 /* css for top artists section */
 
 .top-artists .artist-display {
@@ -82,23 +86,23 @@
 .top-artists .artist-name {
     display: flex;
     flex-direction: row;
-    width: min(11vw,120px);
+    width: min(11.5vw,125px);
 }
 .top-artists .artist-name h5 {
     color: var(--blue-color-1);
     justify-content: start;
     margin-top: 5px;
-    margin-bottom: 10px;
-    font-size: min(1.25vw, 12px);
-    width: 15px;
+    margin-bottom: 5px;
+    font-size: min(1.15vw, 12px);
+    max-width: 15px;
 }
 .top-artists .artist-name .artist {
     color: var(--off-white-color);
-    font-size: min(1.25vw, 12px);
+    font-size: min(1.15vw, 12px);
     margin-top: 3.5px;
     margin-bottom: 5px;
     margin-left: 4px;
-    width: min(10vw,100px);
+    width: min(9.5vw,100px);
 }
 
 /* css for top tracks section */
@@ -116,7 +120,7 @@
     margin-left: 6px;
     margin-right: 5px;
     padding-right: 10px;
-    width: 40vw;
+    max-width: 40vw;
     color: var(--off-white-color);
     font-size: 20px;
 }
@@ -147,8 +151,8 @@
 
 /* animations */
 .top-artists .artist-container:hover .artist-icon {
-    height: min(12vw,130px);
-    width: min(12vw,130px);
+    height: min(11vw,120px);
+    width: min(11vw,120px);
 }
 .top-artists .track-container:hover {
     width: 31vw;

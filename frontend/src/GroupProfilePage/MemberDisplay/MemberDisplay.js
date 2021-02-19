@@ -8,9 +8,13 @@ import puppy_icon from './puppy-icon.jpg';
 import kitten2 from './kitten2.jpg'
 import add_member from './add-member.svg';
 
-/*take input from backend to create array of users */
-const members = ['Cat2','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
-const icon_src = [kitten2, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
+/* primary user */
+const primary_user = ['me']
+const primary_icon = [kitten2]
+
+/* take input from backend to create array of users */
+const members = ['Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
+const icon_src = [brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
 
 const MemberDisplay = ({name, toCompare}) => {
 
@@ -20,11 +24,21 @@ const MemberDisplay = ({name, toCompare}) => {
                     <h1 className="text"><strong>Members</strong></h1>
                     {/*link to add members*/}
                     <AddMember />
+                    <br></br>            
+                    
                 </div>
-        
+
+                <h1 className="compare-message"><strong>Click on a friend to compare stats!</strong></h1>
+
                 {/*user icon display */}
 
                 <div className="display-members">
+                    <div className="icon-container">
+                        <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
+                        <div className="user-name" onClick={() => toCompare()}>
+                          <strong>{primary_user}</strong>
+                        </div>
+                    </div>
                     {members.map((member,i) => (
                         <div className="icon-container">
                             <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member)}></img>
