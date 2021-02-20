@@ -1,12 +1,13 @@
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import './GroupsComponent.css';
 import line from './Line.svg';
-import copy from './copy.svg';
 import React from "react";
 import { Link, useRouteMatch } from 'react-router-dom';
+
+/*take input from backend to create array of formed groups */
+const groups = ['group1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa','group2','group3', 'group1','group2','group3', 'group1','group2','group3', 'group1','group2','group3'];
 
 
 //Component to display groups on Groups page
@@ -56,21 +57,6 @@ const GroupsComponent = (props) => {
         </div>
     ));
 
-    // THIS DOES NOT WORK FOR SOME REASON
-    // //Display Dropdown Button Function
-    // const groupDropdown = () => (
-    //     <Dropdown as={ButtonGroup}>
-        //     <a className="groupButton">Group 1</a>
-        //     <Dropdown.Toggle as={CustomToggle} />
-        //     <Dropdown.Menu className="menu">
-        //         <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
-        //         <Dropdown.Divider></Dropdown.Divider>
-        //         <Dropdown.Item href="#/action-2"><a onClick={showLeaveModal}>Leave Group</a></Dropdown.Item>
-        //     </Dropdown.Menu>
-        // </Dropdown>
-    // );
-
-    //Copy code -- does not work rn
     function copyCode(){
         var copyText = document.getElementById("myCode");
         var currentRange;
@@ -103,14 +89,13 @@ const GroupsComponent = (props) => {
                 <input type="text" class="input-search" placeholder="search" size="15"/>
             </div>
 
-            { /*list of groups -- NON ITERATIVE RN*/}
             <div className="group-list">
-
-                {/* Group as a dropdown menu button */}
-                <div className="group-item d-flex">
+                {groups.map((group,i) => (
+                    /* Group as a dropdown menu button */
+                    <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
 
-                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">Group 1</Link>
+                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">{group}</Link>
 
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
@@ -119,12 +104,9 @@ const GroupsComponent = (props) => {
                             <Dropdown.Item><div onClick={showLeaveModal}>Leave Group</div></Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                </div>
-
-                {/* Group as a dropdown menu button from function (function call) -- THIS IS PART OF THE STUFF THAT DOES NOT WORK BUT WANT TO FIX
-                <div className="group-item d-flex">
-                    <groupDropdown/>
-                </div>  */}
+                    </div>
+                ))
+                }
             </div>
     
             {/* "Show Group Code" Modal Content */}

@@ -76,6 +76,7 @@
 .playlist-name{
     color: white;
     cursor: pointer;
+    font-size: min(1vw, 20px);
 }
 
 /*customize scroll bar */
