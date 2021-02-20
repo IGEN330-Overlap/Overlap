@@ -34,7 +34,7 @@ input:focus{
 .group-list{
     display: flex;
     flex-direction: column;
-    height: 20vh;
+    height: 25vh;
     overflow-y: scroll;
     direction: rtl;
 }
@@ -58,19 +58,20 @@ input:focus{
 .group-item{
     direction: ltr;
     justify-content: space-between;
-    padding: 5px;
+    padding: 10px;
     padding-left: 1vw;
 }
 
 .groupButton{
     display: flex;
-    width: 9em;
+    width: 8.5em;
     font-size: 1.5vw;
-    padding-left: 0px;
+    margin-right: 0.5em;
     background-color: transparent;
     color: white;
     outline-color: transparent;
     align-self: center;
+    overflow: hidden;
 }
 
 .groupButton:hover{

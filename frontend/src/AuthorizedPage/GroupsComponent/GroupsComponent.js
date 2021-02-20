@@ -7,7 +7,7 @@ import React from "react";
 import { Link, useRouteMatch } from 'react-router-dom';
 
 /*take input from backend to create array of formed groups */
-const groups = ['group1','group2','group3', 'group1','group2','group3', 'group1','group2','group3', 'group1','group2','group3'];
+const groups = ['group1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa','group2','group3', 'group1','group2','group3', 'group1','group2','group3', 'group1','group2','group3'];
 
 
 //Component to display groups on Groups page
