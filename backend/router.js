@@ -21,6 +21,9 @@ router.post("/users/login", Controller.loginUser);
 //define post request for joining a group
 router.post("/groups/join", Controller.joinGroup);
 
+//define post request for leaving a group
+router.post("/groups/leave", Controller.leaveGroup);
+
 // TESTING ALGO
 router.get("/test/getTopTracks", algoTest.getMyTopTracks);
 router.get("/test/trackFeature", algoTest.getTrackFeatures);

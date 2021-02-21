@@ -70,6 +70,21 @@ Returns:
 status: 200 (Okay) or 404 (Not found) (status)
 ```
 
+### POST: /groups/leave
+Use case:
+Consume endpoint for group leaving, and use groupCode return to redirect to group page. If group does not exist yet, API will respond with error.
+
+Expected request body:
+```
+groupCode: Code of the group user is attempting to leave. (string)
+spotifyID: ID of the user leaving the group. (string)
+```
+
+Returns:
+```
+status: 200 (Okay) or 404 (Not found) (status)
+```
+
 
 ### GET: /groups/:groupCode/users
 Use case:
