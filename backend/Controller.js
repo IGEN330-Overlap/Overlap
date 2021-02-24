@@ -222,6 +222,43 @@ exports.joinGroup = async (req, res) => {
     });
 };
 
+//middleware for group leaving endpoint
+exports.leaveGroup = async (req, res) => {
+  //remove userID from group object
+  Group.updateOne(
+    { groupCode: req.body.groupCode }, //filters for the specified group 
+    { $pull: { users: req.body.spotifyID } }  //remove userID from users field
+  )
+    .then(() => {
+      //remove groupCode from user object
+      User.updateOne(
+        { userID: req.body.spotifyID  }, //filters for specified user
+        { $pull: { groups: req.body.groupCode } } //remove groupCode from groups field
+      )
+        .then(() => {
+          res.json({
+            message: "Successfully left group",
+            groupCode: req.body.groupCode,
+          });
+        })
+        //error with removing groupCode from user object
+        .catch((err) => {
+          res.json({
+            message: "Unable to remove group from user object",
+            error: err,
+          });
+        });
+    })
+    //error removing userID from group object
+    .catch((err) => {
+      res.json({
+        message: "Unable to remove user from group object",
+        error: err,
+      });
+    });
+};
+
+
 //middleware for getting all userIDs of users in a group.
 exports.getGroupUsers = async (req, res) => {
   Group.findOne({ groupCode: req.params.groupCode })
