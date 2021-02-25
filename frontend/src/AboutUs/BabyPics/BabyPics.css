@@ -11,25 +11,20 @@
     transition-duration: 0.45s;
 }
 
-.icon-container:hover .name {
-    color: var(--off-white-color);
-    transition-duration: 0.45s;
-}
-
 .icon-baby {
-    height: min(12vw,200px);
-    width: min(12vw,200px);
+    height: clamp(100px, 25vw, 175px);
+    width: clamp(100px, 25vw, 175px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;
 }
 
 .container-baby {
-    width: 100px;
-    margin-top: 15px;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    width: auto;
+    margin-top: 2vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-bottom: 2vh; 
     position: relative;
     text-align: center;
 }

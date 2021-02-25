@@ -1,26 +1,19 @@
 @import url(../../variables.css);
 
 .about-name-container {
-    width: 450px;
-    height: 30px;
+    height: clamp(25px, 4vw, 40px)
 }
 
 .about-name-container .big-text {
     color: var(--off-white-color);
-    margin-left: 6px;
-    font-size: 3rem;
+    font-size: clamp(25px, 4vw, 40px);
 }
 
 .about-name-container .sub-text {
     color: var(--off-white-color);
-    margin-left: 6px;
-    font-size: 1.5rem;
+    font-size: clamp(5px, 4vw, 20px);
 }
 
-.under-bar{
-    margin-left: 10px;
-    margin-bottom: 30px;
-    width: 75px;
-    height: 3px;
-    color: var(--primary-color-main);
+.sub-text{
+    margin-top: 30px;
 }

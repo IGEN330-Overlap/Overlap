@@ -6,21 +6,21 @@
     background-color: var(--blue-color-3);
 }
 .text-blurb {
-    margin-top: 50px;
-    width: 50vw;
-    height: 100vh;
-    margin-left: 4vw;
+    height: 25vh;
 }
 
 .display-babies {
-    padding-top: 50px;
-    width: 100vw;
+    margin-right: 2vw;
+    padding-top: 10vh;
 }
 
 .about {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
+    height: 100vh;
+    margin-left: 4vw;
+    margin-top: 4vw;
 }
 
