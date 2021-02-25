@@ -1,3 +1,4 @@
+
 @import url(../../variables.css);
 
 .playlist-container{
@@ -50,7 +51,7 @@
 .display-playlists{
     display: flex;
     flex-direction: row;
-    width: 60vw;
+    width: 120px;
     max-height: 24vh;
     overflow: auto;
 }
@@ -62,6 +63,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    width: 110px;
 }
 
 .playlistcover{
@@ -109,3 +112,56 @@
         flex-wrap: wrap;
     }
 }
+
+/* .multi-carousel {
+    position: relative;
+    width: 50vw;
+    height: 25vh;
+}
+.multi-carousel .multi-carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0;
+}
+.multi-carousel .multi-carousel-item {
+    width: 110px;
+    display: inline-block;
+} */
+
+.playlist-container .carousel {
+    position: relative;
+    width: 500px
+}
+.playlist-container .carousel-inner {
+    position: relative;
+    overflow: hidden;
+    width: 400px;
+    margin-left: 50px;
+    display: inline-block;
+}
+.playlist-container .carousel-item {
+    width: 120px;
+}
+.carousel-item {
+    position: relative;
+    display: none;
+    float: left;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+
