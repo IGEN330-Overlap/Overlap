@@ -25,7 +25,7 @@ exports.getMyTopTracks = async (req, res) => {
       let topTrackIDs = [];
       //get user's top 3 tracks
       await spotifyApi
-        .getMyTopTracks({limit: 50, time_range: req.time_range})
+        .getMyTopTracks({limit: 50, time_range: "medium_term"})
         .then((data) => {
           for (x of data.body.items) {
             let track = {}; // track data needed for song
