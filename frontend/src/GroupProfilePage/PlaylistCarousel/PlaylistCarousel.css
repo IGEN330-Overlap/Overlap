@@ -19,7 +19,7 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
-    padding-right: 0.5vw;
+    margin: 0.5vw;
 }
 
 .covers{
@@ -32,9 +32,6 @@
     height: 2vw;
     width: 2vw;
     color: white;
-    /* object-fit: cover;
-    object-position: 50%;
-    border-radius: 15%; */
 }
 
 .addButton{
@@ -52,18 +49,15 @@
     display: flex;
     flex-direction: row;
     max-height: 24vh;
-    overflow: auto;
+    width: 100%;
 }
 
 .playlistcover-container{
-    padding-bottom: 0.5vw;
-    padding-left: 0.5vw;
-    padding-right: 0.5vw;
+    margin: 0.5vw;
     justify-content: center;
     align-items: center;
     text-align: center;
-
-    width: 110px;
+    width: min(11vw,110px);
 }
 
 .playlistcover{
@@ -96,6 +90,29 @@
     border-radius: 10px;
 }
 
+.carousel .carousel-inner{
+    width: 40vw;
+}
+
+.carousel .carousel-control-prev{
+    position: absolute;
+    display: inline;
+    top: -29%;
+    width: auto;
+    height: 2rem;
+    left: 2%;
+}
+
+.carousel .carousel-control-next{
+    position: absolute;
+    display: inline;
+    top: -29%;
+    width: auto;
+    height: 2rem;
+    right: 88%;
+}
+
+
 @media (max-width: 720px) {
     .playlist-container{
         width: 90vw;
@@ -107,58 +124,20 @@
         font-size: 12px;
     }
     .display-playlists{
-        width: 90vw;
-        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    .carousel .carousel-inner{
+        width: 75vw;
+    }
+    .carousel .carousel-control-prev{
+        top: -50%;
+        left: 70%;
+    }
+    .carousel .carousel-control-next{
+        top: -50%;
+        right: 10%;
     }
 }
 
-/* .multi-carousel {
-    position: relative;
-    width: 50vw;
-    height: 25vh;
-}
-.multi-carousel .multi-carousel-inner {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 0;
-}
-.multi-carousel .multi-carousel-item {
-    width: 110px;
-    display: inline-block;
-} */
-
-.playlist-container .carousel {
-    position: relative;
-    width: 500px
-}
-.playlist-container .carousel-inner {
-    position: relative;
-    overflow: hidden;
-    width: 400px;
-    margin-left: 50px;
-    display: inline-block;
-}
-
-.carousel-item {
-    position: relative;
-    display: none;
-    float: left;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    transition: transform 0.6s ease-in-out;
-}
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
 
 
