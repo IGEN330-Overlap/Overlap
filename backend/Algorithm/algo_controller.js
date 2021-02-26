@@ -67,7 +67,6 @@ exports.getMyTopTracks = async (req, res) => {
               topTracks[i]['tempo'] = x.tempo;
               topTracks[i]['duration_ms'] = x.duration_ms;
             }
-
             i++; // iterate for the next item
           }
         })
@@ -76,7 +75,7 @@ exports.getMyTopTracks = async (req, res) => {
           return;
         });
 
-        res.json(topTracks); // Respond with the top track features and the songs
+      res.json(topTracks); // Respond with the top track features and the songs
     },
     //access token refresh error
     (err) => {
