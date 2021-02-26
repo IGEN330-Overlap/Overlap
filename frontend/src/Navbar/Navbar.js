@@ -5,13 +5,14 @@ import React from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 
-const groupnames = ['Group 1', 'Boop', 'Group 2', 'Group 3', 'Group 4'];
+const groupnames = ['Group 1', 'Group 2', 'Group 3', 'Group 4'];
 
 const Navbar1 = (props) => {
 
     // let { path, url } = useRouteMatch();
 
     return (
+        <div className='navbar-stuff'>
         <Navbar bg="transparent" variant="dark" expand="sm">
             <Navbar.Brand href="/authorized/"><img width="75" height="30" src= {logo} alt="logo"/></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -32,6 +33,7 @@ const Navbar1 = (props) => {
                     </Nav>
             </Navbar.Collapse>
         </Navbar>
+        </div>
     );  
 }
 
