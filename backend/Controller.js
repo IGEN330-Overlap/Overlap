@@ -36,10 +36,9 @@ exports.getUser = async (req, res) => {
 /**
  * middle ware for creating a group
  * POST method to create a new group
- * @param {name} req group name
- * @param {spotifyID} req spotifyID of group creator 
- * ^^ REQUEST BODY
- * Expected return is "Group created"
+ *
+ * @param {} req {groupName: String, spotifyID: String}
+ * @param {} res
  */
 exports.createGroup = async (req, res) => {
   generatedGroupCode = groupCodeGenerator.generate();
@@ -88,8 +87,9 @@ exports.createGroup = async (req, res) => {
  * middleware for a user login
  * POST: Creates / updates a users schema in DB upon login
  * Overwrites previous user if they already have logged in otherwise create new
- * @param {refreshToken} req refresh token of the user logging in
- * ^^ REQUEST BODY
+ *
+ * @param {} req {refreshToken: String}
+ * @param {} res
  */
 exports.loginUser = async (req, res) => {
   //set refresh token
@@ -264,9 +264,9 @@ exports.loginUser = async (req, res) => {
 /**
  * Middleware for group joining end point
  * POST method that lets a user join a desired group
- * @param {groupCode} req group code of the group user wants to join
- * @param {spotifyID} req spotifyID of the user joining
- * ^^ REQUEST BODY
+ 
+ * @param {} req {groupCode: String, spotifyID: String}
+ * @param {} res
  */
 exports.joinGroup = async (req, res) => {
   //add userID to the group object
@@ -307,9 +307,9 @@ exports.joinGroup = async (req, res) => {
 /** 
  * Middleware for group leaving endpoint
  * POST method that lets users leave a group
- * @param {groupCode} req group code of the group user wants to join
- * @param {spotifyID} req spotifyID of the user joining
- * ^^ REQUEST BODY
+ *
+ * @param {} req {groupCode: String, spotifyID: String}
+ * @param {} res
  */
 exports.leaveGroup = async (req, res) => {
   //remove userID from group object
@@ -349,8 +349,9 @@ exports.leaveGroup = async (req, res) => {
 //middleware for getting all userIDs of users in a group.
 /**
  * GET method for all the users in a group
- * @param {groupCode} req 
- * @param {data.users} res 
+ *
+ * @param {groupCode: String} req
+ * @param {} res
  */
 exports.getGroupUsers = async (req, res) => {
   Group.findOne({ groupCode: req.params.groupCode })
@@ -368,8 +369,8 @@ exports.getGroupUsers = async (req, res) => {
 
 /**
  * GET method for getting all the groups a user is in
- * @param {userID} req 
- * @param {*} res 
+ * @param {userID: String} req 
+ * @param {} res 
  */
 exports.getUserGroups = async (req, res) => {
   let groupIDs;
