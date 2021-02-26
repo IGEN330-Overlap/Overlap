@@ -3,7 +3,7 @@
 .about-root {
     position: relative;
     z-index: 5;
-    background-color: var(--blue-color-3);
+    background-color: var(--primary-color-main);
 }
 .text-blurb {
     height: 25vh;
@@ -11,7 +11,7 @@
 
 .display-babies {
     margin-right: 2vw;
-    padding-top: 10vh;
+    padding-top: 5vh;
 }
 
 .about {
