@@ -19,7 +19,7 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: redirect_uri,
 });
 
-//get current user middleware
+// Initial Tester
 exports.getUser = async (req, res) => {
   spotifyApi.setAccessToken(req.params.token);
 
@@ -33,9 +33,13 @@ exports.getUser = async (req, res) => {
   );
 };
 
-//create a new group middleware
-//parameters: (name, spotifyID) where name is the group name and spotifyID
-//            is the spotifyID of the group leader
+/**
+ * middle ware for creating a group
+ * POST method to create a new group
+ *
+ * @param {} req {groupName: String, spotifyID: String}
+ * @param {} res
+ */
 exports.createGroup = async (req, res) => {
   generatedGroupCode = groupCodeGenerator.generate();
   //create a new instance of the group model named newGroup
@@ -79,8 +83,14 @@ exports.createGroup = async (req, res) => {
     );
 };
 
-//middleware for user login
-//handles both new and returning user login
+/**
+ * middleware for a user login
+ * POST: Creates / updates a users schema in DB upon login
+ * Overwrites previous user if they already have logged in otherwise create new
+ *
+ * @param {} req {refreshToken: String}
+ * @param {} res
+ */
 exports.loginUser = async (req, res) => {
   //set refresh token
   spotifyApi.setRefreshToken(req.body.refreshToken);
@@ -91,10 +101,11 @@ exports.loginUser = async (req, res) => {
       spotifyApi.setAccessToken(data.body.access_token);
 
       let topTracks = [];
+      let topTrackIDs = [];
 
-      //get user's top 3 tracks
+      //get user's top 50 tracks
       await spotifyApi
-        .getMyTopTracks({limit:3})
+        .getMyTopTracks({ limit: 50 })
         .then((data) => {
           for (x of data.body.items) {
             let track = {};
@@ -105,6 +116,7 @@ exports.loginUser = async (req, res) => {
             track.imageURL = x.album.images[0].url;
             track.artistName = x.artists[0].name;
 
+            topTrackIDs.push(x.id);
             topTracks.push(track);
           }
         })
@@ -112,13 +124,45 @@ exports.loginUser = async (req, res) => {
           res.json({ message: "Unable to get user top tracks.", error: err });
           return;
         });
-      
-      let topArtists = [];
 
-      //get user's top three artists
+      //get the corresponding top track features to those 50 songs
       await spotifyApi
-        .getMyTopArtists({limit: 3})
+        .getAudioFeaturesForTracks(topTrackIDs)
         .then((data) => {
+          var i = 0;
+          // iterate over return data to extract the corresponding individual track features
+          for (x of data.body.audio_features) {
+            // Verify that we are adding to the corresponding song and if successful add attributes
+            if (topTracks[i]["trackID"] == x.id) {
+              topTracks[i]["danceability"] = x.danceability;
+              topTracks[i]["energy"] = x.energy;
+              topTracks[i]["key"] = x.key;
+              topTracks[i]["loudness"] = x.loudness;
+              topTracks[i]["mode"] = x.mode;
+              topTracks[i]["speechiness"] = x.speechiness;
+              topTracks[i]["acousticness"] = x.acousticness;
+              topTracks[i]["instrumentalness"] = x.instrumentalness;
+              // topTracks[i]['liveness'] = x.liveness; Ignore for now
+              // note liveness if added needs to be in the model as well (type: Number)
+              topTracks[i]["valence"] = x.valence;
+              topTracks[i]["duration_ms"] = x.duration_ms;
+            } else {
+              break; // theoretically should probably throw an error but break for now for simplicity
+            }
+            i++; // iterate for the next item to add in our topTracks array
+          }
+        })
+        .catch((err) => {
+          res.json({ message: "Unable to get user top artists.", error: err });
+          return;
+        });
+
+      let topArtists = [];
+      //get user's top 30 artists
+      await spotifyApi
+        .getMyTopArtists({ limit: 25 })
+        .then((data) => {
+          // iterate over data and add relevant artist attributes
           for (x of data.body.items) {
             let artist = {};
             artist.artistName = x.name;
@@ -136,12 +180,41 @@ exports.loginUser = async (req, res) => {
           return;
         });
 
+      // initiate vars for the musical profile
+      var pop = ( dnce = nrgy = spch = acst = inst = vale = 0);
+      // Calculate their musical profile (use averages for now) (calc sums and div n)
+      for (x of topTracks) {
+        pop += x.popularity;
+        dnce += x.danceability;
+        nrgy += x.energy;
+        spch += x.speechiness;
+        acst += x.acousticness;
+        inst += x.instrumentalness;
+        vale += x.valence;
+      }
+      pop /= 0.5;
+      dnce /= 0.5;
+      nrgy /= 0.5;
+      spch /= 0.5;
+      acst /= 0.5;
+      inst /= 0.5;
+      vale /= 0.5;
+
+      musicalProfile = {
+        danceability: dnce,
+        energy: nrgy,
+        speechiness: spch,
+        acousticness: acst,
+        instrumentalness: inst,
+        valence: vale,
+      };
+
       //get user object from SpotifyAPI
       spotifyApi.getMe().then(
         (data) => {
           //update user object with new information, and create if not already existing
           User.updateOne(
-            { userID: data.body.id }, //Filter
+            { userID: data.body.id }, // Filter
             {
               $set: {
                 userID: data.body.id,
@@ -149,8 +222,9 @@ exports.loginUser = async (req, res) => {
                 name: data.body.display_name,
                 imageURL: data.body.images[0].url,
                 email: data.body.email,
-                topTracks: [topTracks[0], topTracks[1], topTracks[2]],
-                topArtists: topArtists,
+                musicalProfile: musicalProfile,
+                topTracks: topTracks, // Add top 50 tracks with their attributes
+                topArtists: topArtists, // Add top 30 artists with their attributes
               },
             }, //Update
             { upsert: true } //create User if does not already exist
@@ -164,6 +238,7 @@ exports.loginUser = async (req, res) => {
                   name: data.body.display_name,
                   imageURL: data.body.images[0].url,
                   email: data.body.email,
+                  musicalProfile: musicalProfile,
                   topTracks: topTracks,
                   topArtists: topArtists,
                 },
@@ -186,7 +261,13 @@ exports.loginUser = async (req, res) => {
   );
 };
 
-//middleware for group joining endpoint
+/**
+ * Middleware for group joining end point
+ * POST method that lets a user join a desired group
+ 
+ * @param {} req {groupCode: String, spotifyID: String}
+ * @param {} res
+ */
 exports.joinGroup = async (req, res) => {
   //add userID to the group object
   Group.updateOne(
@@ -222,17 +303,24 @@ exports.joinGroup = async (req, res) => {
     });
 };
 
-//middleware for group leaving endpoint
+
+/** 
+ * Middleware for group leaving endpoint
+ * POST method that lets users leave a group
+ *
+ * @param {} req {groupCode: String, spotifyID: String}
+ * @param {} res
+ */
 exports.leaveGroup = async (req, res) => {
   //remove userID from group object
   Group.updateOne(
-    { groupCode: req.body.groupCode }, //filters for the specified group 
-    { $pull: { users: req.body.spotifyID } }  //remove userID from users field
+    { groupCode: req.body.groupCode }, //filters for the specified group
+    { $pull: { users: req.body.spotifyID } } //remove userID from users field
   )
     .then(() => {
       //remove groupCode from user object
       User.updateOne(
-        { userID: req.body.spotifyID  }, //filters for specified user
+        { userID: req.body.spotifyID }, //filters for specified user
         { $pull: { groups: req.body.groupCode } } //remove groupCode from groups field
       )
         .then(() => {
@@ -258,8 +346,13 @@ exports.leaveGroup = async (req, res) => {
     });
 };
 
-
 //middleware for getting all userIDs of users in a group.
+/**
+ * GET method for all the users in a group
+ *
+ * @param {groupCode: String} req
+ * @param {} res
+ */
 exports.getGroupUsers = async (req, res) => {
   Group.findOne({ groupCode: req.params.groupCode })
     .then(function (data) {
@@ -274,7 +367,11 @@ exports.getGroupUsers = async (req, res) => {
     });
 };
 
-//middleware for getting all groupcodes for a single user
+/**
+ * GET method for getting all the groups a user is in
+ * @param {userID: String} req 
+ * @param {} res 
+ */
 exports.getUserGroups = async (req, res) => {
   let groupIDs;
 
