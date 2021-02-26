@@ -113,7 +113,7 @@
 }
 
 
-@media (max-width: 720px) {
+@media (max-width: 780px) {
     .playlist-container{
         width: 90vw;
     }
