@@ -1,24 +1,30 @@
 @import url(../../variables.css);
 
-.playlist-root {
+.playlist-info-root {
     width: auto;
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.playlist-root .playlist-button {
+.playlist-info-root .playlist-button {
     background-color:  rgb(126, 42, 42);
     border-color: rgb(131, 46, 46); 
     color: white;
+    height: 35px;
+    align-items: center;
 }
 
-.playlist-root .btn-sm {
-    padding: 0.40rem 0.95rem;
+.playlist-info-root .btn-sm {
+    padding: 0.30rem 0.95rem;
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
 }
 
-.playlist-root .btn {
+.playlist-info-root .btn {
     font-weight: 800;
     font-size: 1rem;
     transition: color 0.35s
@@ -30,17 +36,45 @@
     margin-bottom: min(2.25vw, 2.25rem);
 }
 
-.title-container {
-    font-size: 5rem;
-    margin-bottom: 1rem;
+.playlist-info-save {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.white {
+.title-container {
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+}
+
+.playlist-info-root .white {
     color: white;
     font-size: 3rem;
-    font-weight: 450;
-    text-align: center;
-    margin-left: 3.5rem;
-    margin-right: 3.5rem;
     font-weight: 550;
+}
+
+@media (max-width: 820px) {
+    .playlist-info-root {
+        flex-direction: row;
+        margin-bottom: 20px;
+        justify-content: start;
+        margin-left: 15px;
+    }
+    .playlist-page-cover-container{
+        margin-bottom: 0px;
+    }
+    .playlist-page-cover {
+        width: 125px;
+        height: 125px;
+    }
+    .playlist-info-save {
+        justify-content: start;
+        align-items: flex-start;
+        margin-left: 3vw;
+    }
+    .playlist-info-root .white {
+        font-size: 2.5rem;
+    }
+  
 }
