@@ -4,7 +4,7 @@
 .member-container {
     width: 45vw;
     margin-right: 5vw;
-    margin-bottom: 5vw;
+    margin-bottom: 3vh;
     background-color: transparent;
 }
 
@@ -61,7 +61,8 @@
     margin-bottom: 0px;
     font-size: clamp(13px, 1.25vw, 18px);
     animation-name: comparemessage;
-    animation-duration: 2.5s;
+    animation-duration: 3s;
+    z-index: 5;
 }
 
 @keyframes comparemessage {
@@ -82,12 +83,12 @@
     position: relative;
     z-index: 1;
     animation-name: displaymember;
-    animation-duration: 1.5s;
+    animation-duration: 2s;
     animation-timing-function: cubic-bezier(0, 0.45, 0.88, 1.09);
 }
 
 @keyframes displaymember {
-    from {transform: translateY(-30em)}
+    from {transform: translateY(-50em)}
     to {transform: translateY(0em);}
 }
 

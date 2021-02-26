@@ -73,9 +73,11 @@ export const MyInsights = (props) => {
 export const Comparisons = ({name, toCompare}) => {
     return(
         <div className="comparisons">
+            <div className="return-to-insights">
+                <h4><strong onClick={() => toCompare()}> Return to Personal Insights</strong></h4>
+            </div>
             <div className="d-flex">
                 <h1><strong>You & {name}</strong></h1>
-                <h4><strong onClick={() => toCompare()}>Personal Insights</strong></h4>
                 {/* <img className="arrow-icon">
                     
                 </img>    */}

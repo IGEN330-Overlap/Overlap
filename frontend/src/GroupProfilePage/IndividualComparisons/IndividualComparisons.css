@@ -3,6 +3,7 @@
 .my-insights h1 {
     color: var(--off-white-color);
     margin-left: 6px;
+    margin-top: 30px;
     font-size: clamp(20px, 3vw, 28px);
 }
 
@@ -11,18 +12,12 @@
     margin-left: 6px;
     margin-top: clamp(10px, 1vw, 17px);
     font-size: clamp(17px, 2vw, 20px);
+    width: fit-content;
 }
-
-/* .my-insights h4 {
-    color: var(--blue-color-1);
-    margin-left: 6px;
-    margin-top: 15px;
-    margin-bottom: 0px;
-    font-size: min(2vw,1.15rem);
-} */
 
 .my-insights .d-flex {
     margin-bottom: 5px;
+    width: fit-content;
 }
 .under-bar{
     margin-left: 10px;
@@ -42,13 +37,18 @@
     margin-left: 6px;
     margin-top: clamp(10px, 1vw, 17px);
     font-size: clamp(13px, 1.25vw, 18px);
+    width: fit-content;
 }
-
+.comparisons .return-to-insights {
+    width: min(40vw, 475px);
+    display: flex;
+    justify-content: flex-end;
+}
 .comparisons h4 {
     color: var(--blue-color-1);
-    margin-left: 80px;
     font-size: min(2vw,1.15rem);
     transition: color 0.25s;
+    width: 250px;
 }
 .comparisons h4:hover {
     cursor: pointer;
@@ -57,13 +57,18 @@
 .comparisons .d-flex {
     margin-bottom: 5px;
     align-items: center;
+    width: fit-content;
 }
+
 /* .comparisons .arrow-icon {
     height: 10px;
     width: 10px;
 } */
 /* css for top artists section */
 
+.top-artists {
+    width: fit-content;
+}
 .top-artists .artist-display {
     display: flex;
     flex-direction: row;
@@ -107,6 +112,12 @@
 
 /* css for top tracks section */
 
+.top-tracks {
+    width: fit-content;
+}
+.top-tracks .track-display {
+    width: fit-content;
+}
 .top-tracks .track-container h3 {
     width: 20px;
     font-size: 40px;
@@ -120,7 +131,7 @@
     margin-left: 6px;
     margin-right: 5px;
     padding-right: 10px;
-    max-width: 40vw;
+    width: min(40vw, 800px);
     color: var(--off-white-color);
     font-size: 20px;
 }
@@ -177,12 +188,15 @@
 }
 
 @media (max-width: 780px) {
+    .my-insights h1 {
+        margin-top: 24.67px;
+    }
     .my-insights h4 {
         width: 80vw;
         font-size: 14px;
     }
     .comparisons h4 {
-        width: 55vw;
+        width: 200px;
         font-size: 14px;
     }
     .top-artists .artist-display {
@@ -215,5 +229,8 @@
     }
     .top-tracks .track-artist {
         width: 90vw;
+    }
+    .comparisons .return-to-insights {
+        width: 80vw
     }
 }
