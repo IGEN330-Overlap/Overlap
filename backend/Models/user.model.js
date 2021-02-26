@@ -35,7 +35,7 @@ const userSchema = new Schema(
           type: String,
           required: true,
         },
-        trackPopularity: {
+        popularity: {
           type: Number,
           required: true,
         },
@@ -51,9 +51,45 @@ const userSchema = new Schema(
           type: String,
           required: true,
         },
+        // Relevant Audio Features
+        danceability: {
+          type: Number,
+          required: true
+        },
+        energy: {
+          type: Number,
+          required: true
+        },
+        speechiness: {
+          type: Number,
+          required: true
+        },
+        acoustiness: {
+          type: Number,
+          required: true
+        },
+        instrumentalness: {
+          type: Number,
+          required: true
+        },
+        liveness: {
+          type: Number,
+          required: true
+        },
+        valence: {
+          type: Number,
+          required: true
+        },
+        duration_ms: {
+          type: Number,
+          required: true
+        },
+        type: {
+          type: String,
+          required: true
+        },
       },
     ],
-
     topArtists: [
       {
         artistName: {
