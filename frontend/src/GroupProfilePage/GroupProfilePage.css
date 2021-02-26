@@ -11,7 +11,7 @@
 }
 .landing-root .navbar {
     position: relative;
-    z-index: 5;
+    z-index: 6;
     animation-name: navbaropacity;
     animation-duration: 3s;
 }

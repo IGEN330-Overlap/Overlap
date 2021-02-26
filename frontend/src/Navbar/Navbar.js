@@ -1,29 +1,28 @@
 import './Navbar.css';
 import logo from '../overlap-logo.svg';
-import { Link } from 'react-router-dom';
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import React from 'react';
 
-
-const Navbar = (props) => {
+const Navbar1 = (props) => {
     return (
-        <nav className="navbar navbar-text navbar-expand">
-            <div className="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                 <Link to ="/authorized/"><img width="75" height="30" src= {logo} alt="logo"/></Link>     
-            <div className= "navbar-collapse" id="navbarToggle">
-                <ul className="navbar-nav">
-                    <li className="nav-item">  
-                        <strong><Link to ="/authorized/GroupProfilePage/GroupProfilePage/" className="links">My Groups</Link></strong>
-                    </li>
-                    <li className="nav-item">
-                        <strong><Link to ="/authorized/AboutUs/" className="links">About Us</Link> </strong>
-                    </li>
-                </ul>
-            </div>
-            </div>                       
-        </nav>
+        <Navbar bg="transparent" variant="dark" expand="sm">
+            <Navbar.Brand href="/authorized/"><img width="75" height="30" src= {logo} alt="logo"/></Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    <NavDropdown title="My Groups" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/authorized/GroupProfilePage/">Group 1</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Group 2</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Group 3</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="/authorized/">New Group</NavDropdown.Item>
+                    </NavDropdown>
+                    <Nav.Link bg="white" href="/authorized/AboutUs/">About Us</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     );  
 }
 
-export default Navbar;
+
+export default Navbar1;

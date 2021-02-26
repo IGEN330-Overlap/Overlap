@@ -1,3 +1,4 @@
+
 @import url(../../variables.css);
 
 .playlist-container{
@@ -18,7 +19,7 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
-    padding-right: 0.5vw;
+    margin: 0.5vw;
 }
 
 .covers{
@@ -31,9 +32,6 @@
     height: 2vw;
     width: 2vw;
     color: white;
-    /* object-fit: cover;
-    object-position: 50%;
-    border-radius: 15%; */
 }
 
 .addButton{
@@ -50,18 +48,16 @@
 .display-playlists{
     display: flex;
     flex-direction: row;
-    width: 60vw;
     max-height: 24vh;
-    overflow: auto;
+    width: 100%;
 }
 
 .playlistcover-container{
-    padding-bottom: 0.5vw;
-    padding-left: 0.5vw;
-    padding-right: 0.5vw;
+    margin: 0.5vw;
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: min(11vw,110px);
 }
 
 .playlistcover{
@@ -94,6 +90,29 @@
     border-radius: 10px;
 }
 
+.carousel .carousel-inner{
+    width: 40vw;
+}
+
+.carousel .carousel-control-prev{
+    position: absolute;
+    display: inline;
+    top: -29%;
+    width: auto;
+    height: 2rem;
+    left: 2%;
+}
+
+.carousel .carousel-control-next{
+    position: absolute;
+    display: inline;
+    top: -29%;
+    width: auto;
+    height: 2rem;
+    right: 88%;
+}
+
+
 @media (max-width: 780px) {
     .playlist-container{
         width: 90vw;
@@ -105,7 +124,20 @@
         font-size: 12px;
     }
     .display-playlists{
-        width: 90vw;
-        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    .carousel .carousel-inner{
+        width: 75vw;
+    }
+    .carousel .carousel-control-prev{
+        top: -50%;
+        left: 70%;
+    }
+    .carousel .carousel-control-next{
+        top: -50%;
+        right: 10%;
     }
 }
+
+
+

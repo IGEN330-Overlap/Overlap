@@ -1,3 +1,11 @@
+/**
+ * NOTE: This file is purely for test purposes
+ * Documentation is not kept thoroughly for this file and is likely hard to comrehend
+ * Refer to the algo_controller file for the useful endpoints
+ * If not there, then the relevent spotifyAPI has already been implemeneted in the corresponding spots
+ * Ask Brendan if you need anything from the SpotifyAPI
+ */
+
 const SpotifyWebApi = require("spotify-web-api-node");
 require("dotenv").config();
 
@@ -56,19 +64,58 @@ exports.getMyTopTracks = async (req, res) => {
       spotifyApi.setAccessToken(data.body.access_token); // Set Access token
 
       // Get a user's top tracks
-      spotifyApi.getMyTopTracks().then(
+      spotifyApi.getMyTopTracks({limit: 30}).then(
         (data) => {
           // Iterate through every item from data body extracting useful types for a song
           for (x of data.body.items) {
-            // Add to playlist array with each Song ADT
-            topTracks.push(
-              new Song(x["name"], x["id"], x["popularity"], x["type"])
-            );
+            let track = {};
+            track.trackName = data.body.items[i].name;
+            track.trackID = data.body.items[i].id;
+            track.trackPopularity = data.body.items[i].popularity;
+            track.linkURL = data.body.items[i].external_urls.spotify;
+            track.imageURL = data.body.items[i].album.images[0].url;
+            track.artistName = data.body.items[i].artists[0].name;
+            topTracks.push(track)
           }
           // respond with the array of song names
           res.json(topTracks);
           //res.json(data);
           console.log("Got the top SOngs :)");
+        },
+        (err) => {
+          //SpotifyAPI return error
+          res.status(400).json({ message: "RUH ROH error", error: err });
+        }
+      );
+    },
+    (err) => {
+      //access token refresh error
+      res.json({ message: "Unable to refresh access token", error: err });
+    }
+  );
+};
+
+// get the top track IDS
+exports.getTopTrackIds = async (req, res) => {
+  spotifyApi.setRefreshToken(req.body.refreshToken); // Set refresh token
+  var trackIDs = []; // Array for creating playlist of songs
+
+  spotifyApi.refreshAccessToken().then(
+    (data) => {
+      spotifyApi.setAccessToken(data.body.access_token); // Set Access token
+
+      // Get a user's top tracks
+      spotifyApi.getMyTopTracks({limit : 30, offset : 0}).then(
+        (data) => {
+          // Iterate through every item from data body extracting useful types for a song
+          for (x of data.body.items) {
+            // Add to playlist array with each Song ADT
+            trackIDs.push(x["id"])
+          }
+          // respond with the array of song names
+          res.json(trackIDs);
+          //res.json(data);
+          console.log("Got the top song ids :)");
         },
         (err) => {
           //SpotifyAPI return error
@@ -91,7 +138,6 @@ exports.getMyTopTracks = async (req, res) => {
 exports.getMyTopArtists = async (req, res) => {
   spotifyApi.setRefreshToken(req.body.refreshToken); // Set refresh token
   var topArtists = [];
-
   spotifyApi.refreshAccessToken().then(
     (data) => {
       spotifyApi.setAccessToken(data.body.access_token);
@@ -129,6 +175,7 @@ exports.getMyTopArtists = async (req, res) => {
   );
 };
 
+
 /**
  * getting track features. Request body needs an array of songIDs and refresh token
  * @param {[array of "songIDs"], refresh token} req
@@ -138,6 +185,7 @@ exports.getTrackFeatures = async (req, res) => {
   spotifyApi.setRefreshToken(req.body.refreshToken);
  
   let songIDs = req.body.songIDs; //array holding song ids that we want features of
+
 
   if (songIDs > 100) {
     songIDs.splice(100); // spotifyAPI call limits to 100 so only take first 100
@@ -151,7 +199,7 @@ exports.getTrackFeatures = async (req, res) => {
       /* Get Audio Features for several tracks */
       spotifyApi.getAudioFeaturesForTracks(songIDs).then(
         (data) => {
-          res.json(data.body);
+          res.json(data.body.audio_features);
           console.log("Got the audio features :)");
         },
         (err) => {
