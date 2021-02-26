@@ -1,3 +1,11 @@
+/**
+ * NOTE: This file is purely for test purposes
+ * Documentation is not kept thoroughly for this file and is likely hard to comrehend
+ * Refer to the algo_controller file for the useful endpoints
+ * If not there, then the relevent spotifyAPI has already been implemeneted in the corresponding spots
+ * Ask Brendan if you need anything from the SpotifyAPI
+ */
+
 const SpotifyWebApi = require("spotify-web-api-node");
 require("dotenv").config();
 
@@ -56,7 +64,7 @@ exports.getMyTopTracks = async (req, res) => {
       spotifyApi.setAccessToken(data.body.access_token); // Set Access token
 
       // Get a user's top tracks
-      spotifyApi.getMyTopTracks({limit: 30, time_range: "long_term"}).then(
+      spotifyApi.getMyTopTracks({limit: 30}).then(
         (data) => {
           // Iterate through every item from data body extracting useful types for a song
           for (x of data.body.items) {
@@ -87,9 +95,7 @@ exports.getMyTopTracks = async (req, res) => {
   );
 };
 
-
-
-
+// get the top track IDS
 exports.getTopTrackIds = async (req, res) => {
   spotifyApi.setRefreshToken(req.body.refreshToken); // Set refresh token
   var trackIDs = []; // Array for creating playlist of songs
