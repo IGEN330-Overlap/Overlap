@@ -2,12 +2,16 @@
 
 .landing-root {
     width: 100vw;
-    height: 100vh;
+    height: auto;
     background-color: var(--primary-color-main);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
+}
+.group-info-root {
+    height: 100vh;
+    background-color: var(--primary-color-main);
 }
 .landing-root .navbar {
     position: relative;

@@ -1,0 +1,32 @@
+@import url(../../variables.css);
+
+.top-genres-root {
+    height: 100vh;
+    width: auto;
+    background-color: var(--blue-color-1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-genres-heading {
+    margin-left: 4vw;
+    padding-top: 2vh;
+    width: auto;
+    height: 80px;
+}
+
+.top-genres-heading .text {
+    color: var(--primary-color-main);
+    margin-left: 6px;
+    font-size: 4vw;
+    font-size: clamp(25px, 4vw, 40px);
+}
+
+.top-genres-heading .under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+    background-color: var(--primary-color-main);
+}

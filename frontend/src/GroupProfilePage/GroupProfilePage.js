@@ -7,6 +7,7 @@ import GroupName from './GroupName/GroupName';
 import Navbar from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
+import { TopGenres } from './TopGenres/TopGenres';
 
 const GroupProfilePage = (props) => {
 
@@ -17,28 +18,33 @@ const GroupProfilePage = (props) => {
 
     return(     
         <div className="landing-root">
-            <div className="navbar">
-                <Navbar />
-            </div>
-            <div className="box">
-                <div className="group-name">
-                    <GroupName />
+            <div className="group-info-root">
+                <div className="navbar">
+                    <Navbar />
+                </div>
+                <div className="box">
+                    <div className="group-name">
+                        <GroupName />
+                    </div>
+                </div>
+                <div className="d-flex">
+                    <div className="main-column">
+                        <div className="member-display">
+                            <MemberDisplay toCompare={toCompare}/>
+                        </div>
+                        <div className="playlist-carousel">
+                            <PlaylistCarousel />
+                        </div>
+                    </div> 
+                    <div className="individual-comparisons">
+                        {name 
+                            ? <Comparisons name={name} toCompare={toCompare} /> 
+                            : <MyInsights />}
+                    </div>
                 </div>
             </div>
-            <div className="d-flex">
-                <div className="main-column">
-                    <div className="member-display">
-                        <MemberDisplay toCompare={toCompare}/>
-                    </div>
-                    <div className="playlist-carousel">
-                        <PlaylistCarousel />
-                    </div>
-                </div> 
-                <div className="individual-comparisons">
-                    {name 
-                        ? <Comparisons name={name} toCompare={toCompare} /> 
-                        : <MyInsights />}
-                </div>
+            <div className="top-genres-display">
+                <TopGenres />
             </div>
         </div>
     )
