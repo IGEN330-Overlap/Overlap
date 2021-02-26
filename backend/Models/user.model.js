@@ -24,7 +24,36 @@ const userSchema = new Schema(
     email: {
       type: String,
     },
-
+    musicalProfile:{
+      popularity:{
+        type: Number,
+        required: true
+      },
+      danceability: {
+        type: Number,
+        required: true
+      },
+      energy: {
+        type: Number,
+        required: true
+      },
+      speechiness: {
+        type: Number,
+        required: true
+      },
+      acoustiness: {
+        type: Number,
+        required: true
+      },
+      instrumentalness: {
+        type: Number,
+        required: true
+      },
+      valence: {
+        type: Number,
+        required: true
+      },
+    },
     topTracks: [
       {
         trackName: {
@@ -72,20 +101,12 @@ const userSchema = new Schema(
           type: Number,
           required: true
         },
-        liveness: {
-          type: Number,
-          required: true
-        },
         valence: {
           type: Number,
           required: true
         },
         duration_ms: {
           type: Number,
-          required: true
-        },
-        type: {
-          type: String,
           required: true
         },
       },
