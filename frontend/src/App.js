@@ -1,11 +1,16 @@
-import React from "react";
-import './App.css';
-import LandingPage from './LandingPage/LandingPage';
-import AuthorizedPage from './AuthorizedPage/AuthorizedPage';
-import { Route, Switch } from 'react-router-dom';
-import AboutUs from './AboutUs/AboutUs';
-import GroupProfilePage from './GroupProfilePage/GroupProfilePage';
-import { PlaylistPage } from './PlaylistPage/PlaylistPage';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateRefreshToken, updateUser } from "./Redux/Actions.js";
+import { Route, Switch, Redirect } from "react-router-dom";
+
+import LandingPage from "./LandingPage/LandingPage";
+import AuthorizedPage from "./AuthorizedPage/AuthorizedPage";
+import AboutUs from "./AboutUs/AboutUs";
+import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
+import { PlaylistPage } from "./PlaylistPage/PlaylistPage";
+import "./App.css";
+
+const axios = require("axios");
 
 /**
  * Obtains parameters from the hash of the URL
@@ -22,55 +27,54 @@ function getHashParams() {
   return hashParams;
 }
 
-//App is the root of react router
 function App() {
+  //Get url hash parameters
   const params = getHashParams();
 
-  const [loggedIn, setLoggedIn] = React.useState(
-    params.access_token ? true : false
-  );
+  //use dispatch function from redux react
+  const dispatch = useDispatch();
 
+  //select refresh token state from redux store
+  const refreshToken = useSelector((state) => state.refreshToken);
+
+  //Update refresh token on App render
+  dispatch(updateRefreshToken(params.refresh_token));
+
+  //User Effect hook for logging in the user with API upon refreshToken update
+  useEffect(() => {
+    axios
+      .post(process.env.REACT_APP_BACKEND_URL + "/users/login", {
+        refreshToken: refreshToken,
+      })
+      .then((data) => {
+        console.log(data.data.return);
+        dispatch(updateUser(data.data.return));
+      })
+      .catch((err) => console.log(err));
+  }, [refreshToken]);
+
+  //Start return statement
   return (
     <div className="App">
+      {/* Redirect if not logged in with spotify */}
+      {refreshToken.length === 0 && <Redirect to="/" />}
       <Switch>
         {/* Route for root */}
+        <Route path="/" render={() => <LandingPage />} exact={true} />
+        {/* Router for authorized reroute from backend authorization */}
         <Route
-          path="/"
-          render={() => <LandingPage accessToken={params.access_token} />}
+          path="/authorized"
+          render={() => <AuthorizedPage />}
           exact={true}
         />
-        {/* Router for authorized reroute from backend authorization */}
-        <Route 
-          path='/authorized' 
-          render={() => (
-            <AuthorizedPage 
-              loggedIn={loggedIn} 
-              accessToken={params.access_token}
-              refreshToken={params.refresh_token} 
-            />
-          )} 
-          exact={true} 
+        <Route path="/authorized/AboutUs" render={() => <AboutUs />} />
+        <Route
+          path="/authorized/GroupProfilePage"
+          render={() => <GroupProfilePage />}
         />
-        <Route path='/authorized/AboutUs' render={() => <AboutUs />}/>
-        <Route 
-          path='/authorized/GroupProfilePage' 
-          render={() => (
-            <GroupProfilePage
-              loggedIn={loggedIn}
-              accessToken={params.access_token}
-              refreshToken={params.refresh_token}
-            />
-          )}
-        />
-        <Route 
-          path="/authorized/PlaylistPage" 
-          render={() => (
-            <PlaylistPage 
-              loggedIn={loggedIn}
-              accessToken={params.access_token}
-              refreshToken={params.refresh_token}
-            />
-          )}
+        <Route
+          path="/authorized/PlaylistPage"
+          render={() => <PlaylistPage />}
         />
       </Switch>
     </div>

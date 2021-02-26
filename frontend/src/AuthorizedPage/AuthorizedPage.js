@@ -1,19 +1,21 @@
-import './AuthorizedPage.css';
-import GroupsComponent from './GroupsComponent/GroupsComponent';
-import CreateOrJoin from './CreateOrJoin/CreateOrJoin';
+import "./AuthorizedPage.css";
+import GroupsComponent from "./GroupsComponent/GroupsComponent";
+import CreateOrJoin from "./CreateOrJoin/CreateOrJoin";
+import { useSelector } from "react-redux";
 
 //takes accessToken string and loggedIn boolean as props
 const AuthorizedPage = (props) => {
-    return (
+  //Select refreshToken state from Redux store
+  const refreshToken = useSelector((state) => state.refreshToken);
 
-        <div className="AuthorizedPage">
-            {/* && operator allows conditional rendering of the component */}
+  return (
+    <div className="AuthorizedPage">
+      {/* && operator allows conditional rendering of the component */}
 
-            <>{props.loggedIn && <GroupsComponent/>}</>
-            <>{props.loggedIn && <CreateOrJoin/>}</>
-
-        </div>
-    );
-}
+      <>{refreshToken.length !== 0 && <GroupsComponent />}</>
+      <>{refreshToken.length !== 0 && <CreateOrJoin />}</>
+    </div>
+  );
+};
 
 export default AuthorizedPage;
