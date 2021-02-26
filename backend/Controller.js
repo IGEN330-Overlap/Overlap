@@ -19,7 +19,7 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: redirect_uri,
 });
 
-//get current user middleware
+// Initial Tester
 exports.getUser = async (req, res) => {
   spotifyApi.setAccessToken(req.params.token);
 
@@ -33,9 +33,14 @@ exports.getUser = async (req, res) => {
   );
 };
 
-//create a new group middleware
-//parameters: (name, spotifyID) where name is the group name and spotifyID
-//            is the spotifyID of the group leader
+/**
+ * middle ware for creating a group
+ * POST method to create a new group
+ * @param {name} req group name
+ * @param {spotifyID} req spotifyID of group creator 
+ * ^^ REQUEST BODY
+ * Expected return is "Group created"
+ */
 exports.createGroup = async (req, res) => {
   generatedGroupCode = groupCodeGenerator.generate();
   //create a new instance of the group model named newGroup
@@ -79,8 +84,13 @@ exports.createGroup = async (req, res) => {
     );
 };
 
-//middleware for user login
-//handles both new and returning user login
+/**
+ * middleware for a user login
+ * POST: Creates / updates a users schema in DB upon login
+ * Overwrites previous user if they already have logged in otherwise create new
+ * @param {refreshToken} req refresh token of the user logging in
+ * ^^ REQUEST BODY
+ */
 exports.loginUser = async (req, res) => {
   //set refresh token
   spotifyApi.setRefreshToken(req.body.refreshToken);
@@ -251,7 +261,13 @@ exports.loginUser = async (req, res) => {
   );
 };
 
-//middleware for group joining endpoint
+/**
+ * Middleware for group joining end point
+ * POST method that lets a user join a desired group
+ * @param {groupCode} req group code of the group user wants to join
+ * @param {spotifyID} req spotifyID of the user joining
+ * ^^ REQUEST BODY
+ */
 exports.joinGroup = async (req, res) => {
   //add userID to the group object
   Group.updateOne(
@@ -287,7 +303,14 @@ exports.joinGroup = async (req, res) => {
     });
 };
 
-//middleware for group leaving endpoint
+
+/** 
+ * Middleware for group leaving endpoint
+ * POST method that lets users leave a group
+ * @param {groupCode} req group code of the group user wants to join
+ * @param {spotifyID} req spotifyID of the user joining
+ * ^^ REQUEST BODY
+ */
 exports.leaveGroup = async (req, res) => {
   //remove userID from group object
   Group.updateOne(
@@ -324,6 +347,11 @@ exports.leaveGroup = async (req, res) => {
 };
 
 //middleware for getting all userIDs of users in a group.
+/**
+ * GET method for all the users in a group
+ * @param {groupCode} req 
+ * @param {data.users} res 
+ */
 exports.getGroupUsers = async (req, res) => {
   Group.findOne({ groupCode: req.params.groupCode })
     .then(function (data) {
@@ -338,7 +366,11 @@ exports.getGroupUsers = async (req, res) => {
     });
 };
 
-//middleware for getting all groupcodes for a single user
+/**
+ * GET method for getting all the groups a user is in
+ * @param {userID} req 
+ * @param {*} res 
+ */
 exports.getUserGroups = async (req, res) => {
   let groupIDs;
 
