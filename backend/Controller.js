@@ -192,13 +192,13 @@ exports.loginUser = async (req, res) => {
         inst += x.instrumentalness;
         vale += x.valence;
       }
-      pop /= 50;
-      dnce /= 50;
-      nrgy /= 50;
-      spch /= 50;
-      acst /= 50;
-      inst /= 50;
-      vale /= 50;
+      pop /= 0.5;
+      dnce /= 0.5;
+      nrgy /= 0.5;
+      spch /= 0.5;
+      acst /= 0.5;
+      inst /= 0.5;
+      vale /= 0.5;
 
       musicalProfile = {
         danceability: dnce,
