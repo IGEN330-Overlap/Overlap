@@ -1,6 +1,7 @@
 /**
  * Song class
- * See the class for the fields and constructor
+ * PURELY DOCUMENTATION NOTE REALLY NEEDED
+ * CAN USE AS AN INTERFACE
  */
 class Song {
     // Fields

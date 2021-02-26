@@ -2,6 +2,7 @@ const router = require("express").Router(); //require express router
 
 const Controller = require("./Controller.js");
 const algoTest = require("./Algorithm/algoTest.js");
+const algoController = require("./Algorithm/algo_controller.js")
 
 //define get request for retreiving user information
 router.get("/token/:token/user", Controller.getUser)
@@ -25,8 +26,9 @@ router.post("/groups/join", Controller.joinGroup);
 router.post("/groups/leave", Controller.leaveGroup);
 
 // TESTING ALGO
-router.get("/test/getTopTracks", algoTest.getMyTopTracks);
+router.get("/test/getTopTracksNoAttributes", algoTest.getMyTopTracks);
 router.get("/test/trackFeature", algoTest.getTrackFeatures);
 router.get("/test/getTopArtists", algoTest.getMyTopArtists);
-
+router.get("/test/getTopTrackIDs", algoTest.getTopTrackIds);
+router.get("/test/getTopTracks", algoController.getMyTopTracks);
 module.exports = router;
