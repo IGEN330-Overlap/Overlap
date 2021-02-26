@@ -20,10 +20,8 @@ const GroupProfilePage = (props) => {
             <div className="navbar">
                 <Navbar />
             </div>
-            <div className="box">
-                <div className="group-name">
-                    <GroupName />
-                </div>
+            <div className="group-name">
+                <GroupName />
             </div>
             <div className="d-flex">
                 <div className="main-column">

@@ -15,12 +15,12 @@
     animation-name: navbaropacity;
     animation-duration: 3s;
 }
-.landing-root .box {
+/* .landing-root .box {
     height: clamp(55px, 9vw, 90px);
     background-color: var(--primary-color-main);
     position: relative;
     z-index: 5;
-}
+} */
 .group-name {
     margin-top: 10px;
     margin-left: 4vw;
