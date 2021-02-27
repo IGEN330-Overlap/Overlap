@@ -6,7 +6,6 @@
     background-color: var(--blue-color-1);
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .top-genres-heading {

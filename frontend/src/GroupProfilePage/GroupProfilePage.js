@@ -17,38 +17,38 @@ const GroupProfilePage = (props) => {
     }
 
     return(     
-        <div className="landing-root">
+        <div className="group-landing-root">
             <div className="group-info-root">
-            <div className="navbar">
-                <Navbar />
-            </div>
-            <div className="group-profile-page-components">
-                <div className="component-box"></div>
-                <div className="d-flex">
-                    <div className="main-column">
-                        <div className="main-column-box"></div>
-                        <div className="group-name">
-                            <GroupName />
+                <div className="navbar">
+                    <Navbar />
+                </div>
+                <div className="group-profile-page-components">
+                    <div className="component-box"></div>
+                    <div className="d-flex">
+                        <div className="main-column">
+                            <div className="main-column-box"></div>
+                            <div className="group-name">
+                                <GroupName />
+                            </div>
+                            <div className="member-display">
+                                <MemberDisplay toCompare={toCompare}/>
+                            </div>
+                            <div className="playlist-carousel">
+                                <PlaylistCarousel />
+                            </div>
+                        </div> 
+                        <div className="individual-comparisons">
+                            {name 
+                                ? <Comparisons name={name} toCompare={toCompare} /> 
+                                : <MyInsights />}
                         </div>
-                        <div className="member-display">
-                            <MemberDisplay toCompare={toCompare}/>
-                        </div>
-                        <div className="playlist-carousel">
-                            <PlaylistCarousel />
-                        </div>
-                    </div> 
-                    <div className="individual-comparisons">
-                        {name 
-                            ? <Comparisons name={name} toCompare={toCompare} /> 
-                            : <MyInsights />}
-                    </div>
                     </div>
                 </div>
-            </div>
-            <div className="top-genres-display">
-                <TopGenres />
-            </div>
         </div>
+        <div className="top-genres-display">
+            <TopGenres />
+        </div>
+    </div>
     )
 }
 

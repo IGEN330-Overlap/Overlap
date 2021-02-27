@@ -1,6 +1,6 @@
 @import url(../variables.css);
 
-.landing-root {
+.group-landing-root {
     width: 100vw;
     height: auto;
     background-color: var(--primary-color-main);
@@ -10,17 +10,17 @@
     align-content: flex-start;
 }
 .group-info-root {
-    height: 100vh;
+    height: fit-content;
     background-color: var(--primary-color-main);
 }
-.landing-root .navbar {
+.group-landing-root .navbar {
     position: relative;
     z-index: 6;
     animation-name: navbaropacity;
     animation-duration: 3s;
 }
-.landing-root .main-column-box {
-    height: clamp(100px, 9vh, 150px);
+.group-landing-root .main-column-box {
+    height: clamp(110px, 9vh, 150px);
     width: 50vw;
     background-color: var(--primary-color-main);
     position: absolute;
@@ -49,7 +49,7 @@
     height: clamp(55px, 9vw, 90px);
     z-index: 3;
 }
-.landing-root .d-flex {
+.group-landing-root .d-flex {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -124,7 +124,7 @@
         align-items: start;
         justify-content: start;
     }
-    .landing-root .main-column-box {
+    .group-landing-root .main-column-box {
         height: 100px;
         width: 90vw;
         z-index: 2;
