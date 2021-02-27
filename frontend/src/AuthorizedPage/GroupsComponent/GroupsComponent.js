@@ -19,6 +19,8 @@ const GroupsComponent = (props) => {
     //use relative url for react router
     let { path, url } = useRouteMatch();
     const groupList = useSelector(state => state.groupList);
+    const userID = useSelector(state => state.userObject.userID);
+    //const groupCode = useSelector(state => state.groupCode);
 
     //functions for opening and closing "Show Group Code" Modal
     const [CodeisOpen, setCodeIsOpen] = React.useState(false);
@@ -85,14 +87,14 @@ const GroupsComponent = (props) => {
       //User Effect hook for displaying groups upon group list update
         useEffect(() => {
             axios
-            .get(process.env.REACT_APP_BACKEND_URL + "/users/:userID/groups", {
+            .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userID + "/groups", {
                 groupList: groupList,
             })
             .then((data) => {
                 console.log(groupList);
             })
             .catch((err) => console.log(err));
-        }, [groupList]);
+        }, [groupList, userID]);
 
     return (
         // Flexbox for existing groups
