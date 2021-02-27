@@ -1,7 +1,7 @@
 import React from "react";
 import "./PlaylistCarousel.css";
 
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 import playlistcover1 from "./playlist-cover1.jpg";
 import playlistcover2 from "./playlist-cover2.jpg";
@@ -43,8 +43,6 @@ const cover_src = [
 ];
 
 const PlaylistCarousel = (props) => {
-  // linking
-  let { path, url } = useRouteMatch();
 
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
@@ -90,7 +88,7 @@ const PlaylistCarousel = (props) => {
         <div onClick={showAddPlaylistModal} className="addPlaylist-container">
           {/*link to add playlist*/}
           <div className="addButton">
-            <img src={addButton} className="plus-symbol" />
+            <img src={addButton} className="plus-symbol" alt="Add Playlist Button"/>
           </div>
           <div className="playlist-name">
             <strong>Add Playlist</strong>

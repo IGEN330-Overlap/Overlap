@@ -11,9 +11,9 @@ const PlaylistTitle = (props) => {
                 <div className="title-container">
                     <h2 className="white"> Playlist Title </h2>
                 </div>
-                <a className="btn btn-sm playlist-button">
+                <div className="btn btn-sm playlist-button">
                     Save Playlist
-                </a>
+                </div>
             </div>
         </div>
     );
