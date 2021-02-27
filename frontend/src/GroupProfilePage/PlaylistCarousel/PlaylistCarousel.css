@@ -24,7 +24,7 @@
 
 .covers{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     padding-top: 0.5vw;
 }
 

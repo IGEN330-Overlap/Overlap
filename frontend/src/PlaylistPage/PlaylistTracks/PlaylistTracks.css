@@ -41,7 +41,7 @@
     width: 320px;
     transition: 0.3s;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
 }
 .playlist-tracks-container .track-info h3{
     font-size: 17px;
