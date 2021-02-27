@@ -1,7 +1,6 @@
 import './CreateOrJoin.css';
 import React from "react";
 import Collapse from 'react-bootstrap/Collapse';
-import arrow from './right.svg';
 
 
 //Component to display Create a new group or Join a group component
