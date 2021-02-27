@@ -7,7 +7,7 @@ import Navbar1 from "../Navbar/Navbar";
 export const PlaylistPage = (props) => {
     return(     
         <div className="playlist-landing-root">
-            <Navbar />
+            <Navbar1 />
             <div className="playlist-page-content">
                 <div className="playlist-components">
                     <div className="playlist-page-name">
