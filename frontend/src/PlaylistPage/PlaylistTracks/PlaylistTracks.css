@@ -1,14 +1,14 @@
 @import url(../../variables.css);
 
-.playlist-page-container {
+.playlist-tracks-container {
     width: 400px;
-    height: 570px;
+    height: max(52.5vh, 445px);
     margin: 15px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
 
-.playlist-page-container .track-number h3 {
+.playlist-tracks-container .track-number h3 {
     font-size: 15px;
     color: var(--off-white-color);
     line-height: 45px;
@@ -17,7 +17,7 @@
     margin: 0px;
 }
 
-.playlist-page-container .track-container {
+.playlist-tracks-container .track-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -27,28 +27,28 @@
     color: var(--off-white-color);
     font-size: 20px;
 }
-.playlist-page-container .track-icon {
+.playlist-tracks-container .track-icon {
     width: 45px;
     height: 45px;
     object-fit: cover;
     border-radius: 5px;
     transition: 0.3s;
 }
-.playlist-page-container .track-info {
+.playlist-tracks-container .track-info {
     margin-left: 15px;
     display: flex;
     flex-direction: column;
     width: 320px;
     transition: 0.3s;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
 }
-.playlist-page-container .track-info h3{
+.playlist-tracks-container .track-info h3{
     font-size: 17px;
     margin-bottom: 2px;
     width: 280px;
 }
-.playlist-page-container .track-artist {
+.playlist-tracks-container .track-artist {
     color: var(--neutral-color-3);
     font-size: 11px;
     width: 280px;
@@ -56,37 +56,37 @@
 }
 
 /* customize scroll */
-.playlist-page-container::-webkit-scrollbar{
+.playlist-tracks-container::-webkit-scrollbar{
     width: 9px;
     height: auto;
 }
-.playlist-page-container::-webkit-scrollbar-track {
+.playlist-tracks-container::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.25);
     opacity: 0.6;
     border-radius: 10px;
 }
-.playlist-page-container::-webkit-scrollbar-thumb {
+.playlist-tracks-container::-webkit-scrollbar-thumb {
     background-color: var(--neutral-color-3);
     border-radius: 10px;
 }
 
 /* media sizing */
 @media (max-width: 720px) {
-    .playlist-page-container {
-        width: 350px;
-        margin-left: 0px;
+    .playlist-tracks-container {
+        justify-content: center;
+        align-items: center;
     }
-    .playlist-page-container .track-container {
+    .playlist-tracks-container .track-container {
         width: 330px;
         margin-left: 0px;
     }
-    .playlist-page-container .track-info {
+    .playlist-tracks-container .track-info {
         width: 300px;
     }
-    .playlist-page-container .track-info h3 {
+    .playlist-tracks-container .track-info h3 {
         width: 270px;
     }
-    .playlist-page-container .track-artist {
+    .playlist-tracks-container .track-artist {
         width: 270px;
     }
 }

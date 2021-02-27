@@ -24,7 +24,7 @@
 
 .covers{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     padding-top: 0.5vw;
 }
 
@@ -36,8 +36,8 @@
 
 .addButton{
     display: flex;
-    height: min(11vw,110px);
-    width: min(11vw,110px);
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
     justify-content: center;
     align-items: center;
     border-radius: 15%;
@@ -57,12 +57,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: min(11vw,110px);
+    width: clamp(65px, 7.5vw, 100px);
 }
 
 .playlistcover{
-    height: min(11vw,110px);
-    width: min(11vw,110px);
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 15%;
@@ -91,29 +91,29 @@
 }
 
 .carousel .carousel-inner{
-    width: 40vw;
+    width: 35vw;
 }
 
 .carousel .carousel-control-prev{
     position: absolute;
     display: inline;
-    top: -29%;
+    top: -32%;
     width: auto;
     height: 2rem;
-    left: 2%;
+    left: 4%;
 }
 
 .carousel .carousel-control-next{
     position: absolute;
     display: inline;
-    top: -29%;
+    top: -32%;
     width: auto;
     height: 2rem;
-    right: 88%;
+    right: 86%;
 }
 
 
-@media (max-width: 720px) {
+@media (max-width: 780px) {
     .playlist-container{
         width: 90vw;
     }
@@ -130,11 +130,11 @@
         width: 75vw;
     }
     .carousel .carousel-control-prev{
-        top: -50%;
+        top: -35%;
         left: 70%;
     }
     .carousel .carousel-control-next{
-        top: -50%;
+        top: -35%;
         right: 10%;
     }
 }

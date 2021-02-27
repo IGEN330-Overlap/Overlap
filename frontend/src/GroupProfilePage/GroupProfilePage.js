@@ -20,24 +20,26 @@ const GroupProfilePage = (props) => {
             <div className="navbar">
                 <Navbar1 />
             </div>
-            <div className="box">
-                <div className="group-name">
-                    <GroupName />
-                </div>
-            </div>
-            <div className="d-flex">
-                <div className="main-column">
-                    <div className="member-display">
-                        <MemberDisplay toCompare={toCompare}/>
+            <div className="group-profile-page-components">
+                <div className="component-box"></div>
+                <div className="d-flex">
+                    <div className="main-column">
+                        <div className="main-column-box"></div>
+                        <div className="group-name">
+                            <GroupName />
+                        </div>
+                        <div className="member-display">
+                            <MemberDisplay toCompare={toCompare}/>
+                        </div>
+                        <div className="playlist-carousel">
+                            <PlaylistCarousel />
+                        </div>
+                    </div> 
+                    <div className="individual-comparisons">
+                        {name 
+                            ? <Comparisons name={name} toCompare={toCompare} /> 
+                            : <MyInsights />}
                     </div>
-                    <div className="playlist-carousel">
-                        <PlaylistCarousel />
-                    </div>
-                </div> 
-                <div className="individual-comparisons">
-                    {name 
-                        ? <Comparisons name={name} toCompare={toCompare} /> 
-                        : <MyInsights />}
                 </div>
             </div>
         </div>

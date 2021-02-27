@@ -7,15 +7,15 @@ import Navbar1 from "../Navbar/Navbar";
 export const PlaylistPage = (props) => {
     return(     
         <div className="playlist-landing-root">
-            <div className = 'navbar'>
-                <Navbar1 />
-            </div>
-            <div className="playlist-components">
-                <div className="playlist-page-name">
-                    <PlaylistTitle />
-                </div>
-                <div className="playlist-tracks-container">
-                    <PlaylistTracks />
+            <Navbar />
+            <div className="playlist-page-content">
+                <div className="playlist-components">
+                    <div className="playlist-page-name">
+                        <PlaylistTitle />
+                    </div>
+                    <div className="playlist-page-tracks-container">
+                        <PlaylistTracks />
+                    </div>
                 </div>
             </div>
         </div>
