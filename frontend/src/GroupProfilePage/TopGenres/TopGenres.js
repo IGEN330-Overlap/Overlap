@@ -1,7 +1,7 @@
 import React from 'react';
 import './TopGenres.css';
 
-const top_genres = ['pop','indie pop','electropop','country pop','yay pop']
+const top_genres = ['pop','indie pop','electropop','more pop','poptropica']
 
 export const TopGenres = (props) => {
     return (
