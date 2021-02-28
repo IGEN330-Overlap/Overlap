@@ -6,6 +6,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import './GroupsComponent.css';
 import line from './Line.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
+import { updateGroupList } from "../../Redux/Actions";
 
 const axios = require("axios");
 
@@ -18,6 +19,7 @@ const GroupsComponent = (props) => {
     
     //use relative url for react router
     let { url } = useRouteMatch();
+    const dispatch = useDispatch();
     const groupList = useSelector(state => state.groupList);
     const userObject = useSelector(state => state.userObject);
     //const groupCode = useSelector(state => state.groupCode);
@@ -90,11 +92,12 @@ const GroupsComponent = (props) => {
             .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups", {
             })
             .then((data) => {
+                dispatch(updateGroupList(data.data));
                 console.log(data.data);
-                
+                console.log(groupList);
             })
             .catch((err) => console.log(err));
-        }, [userObject.userID, groupList]);
+        }, [userObject.userID]);
 
     return (
         // Flexbox for existing groups
