@@ -40,7 +40,8 @@ Finally there is our playlist page which displays a top playlist for the group a
 
 # Documentation: MOVED TO THE [WIKI](https://github.com/IGEN330-Overlap/Overlap/wiki)
 If you want to help contribute or read into our documentation you can look at your repository wiki which has the relevant and important information to our application.
-The wiki contains relevant API references and information on our database. A sample of what our documentation looks like is below for hte users login endpoint.
+The wiki contains relevant API references and information on our database. 
+A sample of what our documentation looks like is below for hthte users login endpoint.
 ### POST: /users/login
 Use case:
 After successful authentication using our landing page, make request to backend to create user object in database. The API will check if the user already exists in the database, and only add a user object entry in the case where there is no user.
