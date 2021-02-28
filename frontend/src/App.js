@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateRefreshToken, updateUser } from "./Redux/Actions.js";
+import { updateRefreshToken, updateUser, updateGroupList } from "./Redux/Actions.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import LandingPage from "./LandingPage/LandingPage";
@@ -37,6 +37,9 @@ function App() {
   //select refresh token state from redux store
   const refreshToken = useSelector((state) => state.refreshToken);
 
+  //Get group list from a user upon login
+  const spotifyID = useSelector(state => state.userObject);
+
   //Update refresh token on App render
   dispatch(updateRefreshToken(params.refresh_token));
 
@@ -50,8 +53,20 @@ function App() {
         console.log(data.data.return);
         dispatch(updateUser(data.data.return));
       })
+      .then(getGroupList())
       .catch((err) => console.log(err));
   }, [refreshToken]);
+
+  function getGroupList(){
+    axios
+      //need to wait a second before userID loads
+      .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+      .then((data) => {
+          dispatch(updateGroupList(data.data))
+          console.log(data.data);
+      })
+      .catch((err) => console.log(err));
+  }
 
   //Start return statement
   return (

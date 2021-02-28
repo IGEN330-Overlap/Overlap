@@ -46,7 +46,6 @@ const CreateOrJoin = (props) => {
             })
             .catch((err) => console.log(err));
         }
-
     }
 
     //Join a group on arrow click

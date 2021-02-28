@@ -18,6 +18,7 @@ export const updateUser = (newUser = null) => {
   };
 };
 
+//Update group list action
 export const updateGroupList = (groupList) => {
   return {
     type: "groupList/update",
