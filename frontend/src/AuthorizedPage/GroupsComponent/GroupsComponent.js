@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -17,9 +17,9 @@ const axios = require("axios");
 const GroupsComponent = (props) => {
     
     //use relative url for react router
-    let { path, url } = useRouteMatch();
+    let { url } = useRouteMatch();
     const groupList = useSelector(state => state.groupList);
-    const userID = useSelector(state => state.userObject.userID);
+    const userObject = useSelector(state => state.userObject);
     //const groupCode = useSelector(state => state.groupCode);
 
     //functions for opening and closing "Show Group Code" Modal
@@ -87,14 +87,14 @@ const GroupsComponent = (props) => {
       //User Effect hook for displaying groups upon group list update
         useEffect(() => {
             axios
-            .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userID + "/groups", {
-                groupList: groupList,
+            .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups", {
             })
             .then((data) => {
-                console.log(groupList);
+                console.log(data.data);
+                
             })
             .catch((err) => console.log(err));
-        }, [groupList, userID]);
+        }, [userObject.userID, groupList]);
 
     return (
         // Flexbox for existing groups
