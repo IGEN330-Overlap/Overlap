@@ -27,3 +27,12 @@ export const updateGroupUsers = (groupUsers) => {
     },
   };
 };
+
+export const updateGroupList = (groupList) => {
+  return {
+    type: "groupList/update",
+    payload: {
+      groupList: groupList,
+    },
+  };
+};
