@@ -1,22 +1,54 @@
-import React from 'react';
+import React,  { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import './MemberDisplay.css';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
+import { updateGroupUsers } from '../../Redux/Actions.js';
 
-import brendan_icon from './brendan-icon.jpg';
-import kitten_icon from './kitten-icon.jpg';
-import puppy_icon from './puppy-icon.jpg';
-import kitten2 from './kitten2.jpg'
+
+// import brendan_icon from './brendan-icon.jpg';
+// import kitten_icon from './kitten-icon.jpg';
+// import puppy_icon from './puppy-icon.jpg';
+// import kitten2 from './kitten2.jpg'
 import add_member from './add-member.svg';
 
-/* primary user */
-const primary_user = ['me']
-const primary_icon = [kitten2]
+// /* primary user */
+// const primary_user = ['me']
+// const primary_icon = [kitten2]
 
-/* take input from backend to create array of users */
-const members = ['Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
-const icon_src = [brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
+// /* take input from backend to create array of users */
+// const members = ['Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
+// const icon_src = [brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
+
+const axios = require("axios");
 
 const MemberDisplay = ({name, toCompare}) => {
+
+    const dispatch = useDispatch();
+
+    const groupCode = useSelector((state)=> state.groupList.groupCode);
+
+    const getGroupUsers = useSelector((state) => state.groupUsers);
+    const myUsername = []
+    const myUserIcon = []
+    getGroupUsers.map((member,i) => {
+      myUsername[i] = member.Name
+      myUserIcon[i] = member.imageURL
+    })
+
+    const primary_user = useSelector((state) => state.userObject.name);
+    const primary_icon = useSelector((state) => state.userObject.imageURL);
+
+    useEffect(() => {
+      axios
+      .get(process.env.REACT_APP_BACKEND_URL + "/groups/" + "4GPMB43W" + "/Users", {
+      })
+      .then((data) => {
+        dispatch(updateGroupUsers(data.data))
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
+  },);
+
 
     return(
             <div className="member-container">
@@ -39,9 +71,9 @@ const MemberDisplay = ({name, toCompare}) => {
                           <strong>{primary_user}</strong>
                         </div>
                     </div>
-                    {members.map((member,i) => (
+                    {myUsername.map((member,i) => (
                         <div className="icon-container">
-                            <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member)}></img>
+                            <img className="user-icon" src={ myUserIcon[i]} alt={member} onClick={() => toCompare(member)}></img>
                             <div className="user-name" onClick={() => toCompare(member)}>
                                     <strong>{member}</strong>
                             </div>

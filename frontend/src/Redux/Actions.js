@@ -17,3 +17,13 @@ export const updateUser = (newUser = null) => {
     },
   };
 };
+
+//Members of group display
+export const updateGroupUsers = (groupUsers) => {
+  return {
+    type: "groupUsers/update",
+    payload: {
+      groupUsers: groupUsers,
+    },
+  };
+};
