@@ -26,3 +26,16 @@ const reducer = (state = initialState, action) => {
 };
 
 export default reducer;
+
+//New group name
+export const groupNameReducer = (state='', action) => {
+  switch (action.type) {
+    case 'groupName': {
+      let newState = state;
+      newState.groupName = action.payload.groupName;
+      return newState;
+    }
+    default:
+      return state;
+  }
+};

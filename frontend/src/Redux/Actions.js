@@ -17,3 +17,13 @@ export const updateUser = (newUser = null) => {
     },
   };
 };
+
+//Set group name
+export const updateGroupName = (newGroupName = "") => {
+  return {
+    type: "groupName",
+    payload: {
+      groupName: newGroupName,
+    },
+  };
+};
