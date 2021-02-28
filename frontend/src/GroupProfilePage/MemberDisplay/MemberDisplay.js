@@ -45,9 +45,15 @@ const MemberDisplay = ({name, toCompare}) => {
       .then((data) => {
         dispatch(updateGroupUsers(data.data))
         console.log(data);
-      })
+        data.map((userObject) => {
+          axios
+          .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject + "/user")
+          .then((data) => { console.log(data.data.return)})
+          .catch((err) => console.log(err));
+        }
+      )})
       .catch((err) => console.log(err));
-  },);
+  });
 
 
     return(
@@ -73,7 +79,7 @@ const MemberDisplay = ({name, toCompare}) => {
                     </div>
                     {myUsername.map((member,i) => (
                         <div className="icon-container">
-                            <img className="user-icon" src={ myUserIcon[i]} alt={member} onClick={() => toCompare(member)}></img>
+                            <img className="user-icon" src={myUserIcon[i]} alt={member} onClick={() => toCompare(member)}></img>
                             <div className="user-name" onClick={() => toCompare(member)}>
                                     <strong>{member}</strong>
                             </div>
