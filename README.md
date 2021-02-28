@@ -1,9 +1,16 @@
-# Overlap project repo
+# Overlap Project 
+<img src="public\images\overlap-logo.png" width="30%">
 
 # About the project
-Overlap is a web application designed and created by six Integrated Eningeering Students at UBC. One thing the COVID pandemic has showed us is the lack of socialibilty in music. Where you could previously go to parties or concerts and discover new music, the pandemic has limited the opportunities to expand your own horizons. Seeing this gap we decided to build an application that helps you connect with your friends to help build stronger relationships and keep connections that can fade in the online environment. The application integrates spotify to collect a user's listening habits and lets you compare amongst your friends. Our other key feature is our playlist generation which builds a group's "favourite" playlists so you can ensure that everyone in your online parties will enjoy the music. 
+Overlap is a web application designed and created by six Integrated Engineering Students at UBC. One thing the COVID pandemic has showed us is the lack of socialibilty in music. Where you could previously go to parties or concerts and discover new music, the pandemic has limited the opportunities to expand your own horizons. Seeing this gap we decided to build an application that helps you connect with your friends to help build stronger relationships and keep connections that can fade in the online environment. 
+
+The application integrates Spotify to collect a user's listening habits and lets you:
+ - Create and join music sharing groups with friends.
+ - Compare music stats and insights with a group.
+ - Generate playlists using the group's music taste and overlap.
+
 ## Tech / Framework used
-Currently the application is still in the build process as we continue to link the frontend and backend, develop our playlist algorithms, and continuously quash bugs. Further our web app is built using the MERN ([MongoDB](https://www.mongodb.com), [ExpressJS](https://expressjs.com), [ReactJS](https://reactjs.org), [NodeJS](https://nodejs.org/en/)) stack and follows standard processes. We integrated our RESTful API to store the client users and groups information too. (If anyone on frontend has anything to add about the frontend technologies used can add here)
+The application is built using the MERN stack. Our frontend is built with [ReactJS](https://reactjs.org) and [Bootstrap](https://react-bootstrap.github.io/) in addition to [Redux](https://redux.js.org/) for global state management. Our backend is a RESTful API built with [ExpressJS](https://expressjs.com), [NodeJS](https://nodejs.org/en/), and [MongoDB](https://www.mongodb.com), and integrates the [Spotify API](https://developer.spotify.com/documentation/web-api/).
 
 # For Contributors
 ## Setup:
@@ -42,17 +49,3 @@ Finally there is our playlist page which displays a top playlist for the group a
 If you want to help contribute or read into our documentation you can look at your repository wiki which has the relevant and important information to our application.
 The wiki contains relevant API references and information on our database. 
 A sample of what our documentation looks like is below for hthte users login endpoint.
-### POST: /users/login
-Use case:
-After successful authentication using our landing page, make request to backend to create user object in database. The API will check if the user already exists in the database, and only add a user object entry in the case where there is no user.
-
-Expected request JSON:
-```
-refreshToken: The SpotifyAPI refresh token of the user after user authentication. (string)
-```
-Returns:
-```
-spotifyID: Unique Spotify ID of the user, which will be used afterwards for most endpoint consumption for our API. (string)
-
--> Also returns display name, profile_pic url, etc. which will be useful for user display within groups, and also user profile display.
-```
