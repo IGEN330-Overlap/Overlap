@@ -215,12 +215,13 @@ exports.loginUser = async (req, res) => {
       vale /= 0.5;
 
       musicalProfile = {
+        poopularity: pop,
         danceability: dnce,
         energy: nrgy,
         speechiness: spch,
         acousticness: acst,
         instrumentalness: inst,
-        valence: vale,
+        valence: vale
       };
 
       //get user object from SpotifyAPI
