@@ -1,35 +1,48 @@
 import './CreateOrJoin.css';
 import React from "react";
-import {useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateGroupList } from '../../Redux/Actions.js';
 
 import Collapse from 'react-bootstrap/Collapse';
 
 const axios = require("axios");
+
 var input_name = '';
 var input_code = '';
 
 //Component to display Create a new group or Join a group component
 const CreateOrJoin = (props) => {
 
+    const dispatch = useDispatch();
+
     const [openCreate, setCreateOpen] = React.useState(false);
     const [openJoin, setJoinOpen] = React.useState(false);
+
+    const spotifyID = useSelector(state => state.userObject);
     
     //Create new group on arrow click
 
-    function setGroupName(){
+    function createNewGroup(){
         input_name = document.getElementById("newGroupName").value
-        if (input_name == "") {
+        if (input_name === "") {
             console.log('No group name entered!')
         }
         else {
-            console.log(input_name)
+            console.log(input_name);
             axios
             .post(process.env.REACT_APP_BACKEND_URL + "/groups/create", {
                 name: input_name,
                 spotifyID: spotifyID.userID,
             })
             .then((data) => {
-                console.log(data.data.return);
+                console.log(data.data.return)
+                axios
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+                .then((data) => {
+                    dispatch(updateGroupList(data.data))
+                    console.log(data.data);
+                })
+                .catch((err) => console.log(err))
             })
             .catch((err) => console.log(err));
         }
@@ -40,7 +53,7 @@ const CreateOrJoin = (props) => {
 
     function joinGroup(){
         input_code = document.getElementById("joinGroupCode").value
-        if (input_code == "") {
+        if (input_code === "") {
             console.log('No group code entered!')
         }
         else {
@@ -51,13 +64,18 @@ const CreateOrJoin = (props) => {
                 spotifyID: spotifyID.userID,
             })
             .then((data) => {
-                console.log(data.data.return);
+                console.log(data.data);
+                axios
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+                .then((data) => {
+                    dispatch(updateGroupList(data.data))
+                    console.log(data.data);
+                })
+                .catch((err) => console.log(err));
             })
             .catch((err) => console.log(err));
         }
     }
-
-    const spotifyID = useSelector(state => state.userObject);
 
     return (
         //Flexbox for creating or joining new group
@@ -73,7 +91,7 @@ const CreateOrJoin = (props) => {
             <Collapse in={openCreate}>
                 <div id="example-collapse-text" className="collapseBody">
                     <input type="text" className="input" placeholder="Enter Group Name" size="15" id="newGroupName"/>
-                    <div className="continue-arrow" onClick={setGroupName}>
+                    <div className="continue-arrow" onClick={createNewGroup}>
                         <svg 
                             height="429.92093pt" 
                             viewBox="0 0 429.92093 429.92093" 
