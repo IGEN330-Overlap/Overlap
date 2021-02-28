@@ -19,18 +19,32 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: redirect_uri,
 });
 
-// Initial Tester
+/**
+ * GET method to collect a users information
+ *
+ * Responds with the user data and req.param needs the spotifyID "userID"
+ *
+ * @param {userID: String} req userID param required
+ * @param {} res All the user data
+ */
 exports.getUser = async (req, res) => {
-  spotifyApi.setAccessToken(req.params.token);
-
-  spotifyApi.getMe().then(
-    (data) => {
-      res.json(data);
-    },
-    (err) => {
-      res.status(400).json(err);
-    }
-  );
+  User.findOne({ userID: req.params.id }) // Find the user in collection based on id
+    .then((data) => {
+      // If user exists respond with data else respond with inability to find
+      if (data) {
+        res.json(data);
+      } else {
+        res.json({
+          message: "Unable to find user",
+        });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        message: "Unable to find user",
+        error: err,
+      });
+    });
 };
 
 /**
@@ -181,7 +195,7 @@ exports.loginUser = async (req, res) => {
         });
 
       // initiate vars for the musical profile
-      var pop = ( dnce = nrgy = spch = acst = inst = vale = 0);
+      var pop = (dnce = nrgy = spch = acst = inst = vale = 0);
       // Calculate their musical profile (use averages for now) (calc sums and div n)
       for (x of topTracks) {
         pop += x.popularity;
@@ -303,8 +317,7 @@ exports.joinGroup = async (req, res) => {
     });
 };
 
-
-/** 
+/**
  * Middleware for group leaving endpoint
  * POST method that lets users leave a group
  *
@@ -369,8 +382,8 @@ exports.getGroupUsers = async (req, res) => {
 
 /**
  * GET method for getting all the groups a user is in
- * @param {userID: String} req 
- * @param {} res 
+ * @param {userID: String} req
+ * @param {} res
  */
 exports.getUserGroups = async (req, res) => {
   let groupIDs;
