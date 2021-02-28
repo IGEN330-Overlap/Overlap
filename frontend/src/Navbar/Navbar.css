@@ -19,6 +19,28 @@
     height: auto;
     color: white;
     display: flex;
+} 
+
+.navbar-stuff {
     width: 100vw;
+} 
+
+.navbar-stuff .btn-sm {
+    padding: 0.40rem 0.95rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 1.05rem;
+}
+
+.navbar-stuff .btn {
+    font-weight: 800;
+    font-size: 1rem;
+    transition: color 0.35s;
+    background: var(--blue-color-main);
+    border-color: var(--blue-color-main);
+}
+
+.navbar-stuff .btn:hover {
+    background: var(--blue-color-5);
 }
 
