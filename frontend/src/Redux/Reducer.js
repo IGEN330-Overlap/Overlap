@@ -20,6 +20,12 @@ const reducer = (state = initialState, action) => {
       let newState = {...state, userObject: action.payload.newUser}
       return newState;
     }
+    //for updating user group list
+    case "groupList/update": {
+      let newState = state;
+      newState.groupList = action.payload.groupList;
+      return newState;
+    }
     default:
       return state;
   }
