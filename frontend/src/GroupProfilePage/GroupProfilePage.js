@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
-import Navbar from "../Navbar/Navbar";
+import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 import { TopGenres } from './TopGenres/TopGenres';

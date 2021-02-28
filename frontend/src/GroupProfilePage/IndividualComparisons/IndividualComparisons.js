@@ -17,13 +17,14 @@ const compareTracksArtist = ['David Bowie','Youngblood Hawke','Cage The Elephant
 const compareTracksIcon = [icon6,icon7,icon8]
 
 export const MyInsights = (props) => {
-    
+       
     const getTopArtists = useSelector((state) => state.userObject.topArtists).slice(0,3);
     const myTopArtists = []
     const myTopArtistsIcons = []
     getTopArtists.map((artist,i) => {
         myTopArtists[i]=artist.artistName
         myTopArtistsIcons[i]=artist.imageURL
+        return myTopArtists
     })
 
     const getTopTracks = useSelector((state) => state.userObject.topTracks).slice(0,3);
@@ -34,9 +35,9 @@ export const MyInsights = (props) => {
         myTopTracks[i]=track.trackName
         myTopTracksArtist[i]=track.artistName
         myTopTracksIcon[i]=track.imageURL
+        return myTopTracks
     })
     
-
     return(
         <div className="my-insights">
             <div className="d-flex">
