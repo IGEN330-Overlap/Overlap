@@ -1,22 +1,13 @@
+import React from 'react'
+import { useSelector } from 'react-redux'
 import './IndividualComparisons.css';
 
 import icon1 from './conan.JPG'
-import icon2 from './valley.JPG';
-import icon3 from './daniel.JPG';
-import icon4 from './drivers.JPG';
-import icon5 from './3nights.JPG';
 import icon6 from './heroe.JPG';
 import icon7 from './running.JPG';
 import icon8 from './elephant.JPG';
 import icon10 from './joji.JPG';
 import icon11 from './ts.JPG';
-
-const myTopArtists = ['conan gray','valley','daniel caesar']
-const myTopArtistsIcons = [icon1,icon2,icon3]
-
-const myTopTracks = ['Heather','drivers license','3 Nights']
-const myTopTracksArtist = ['Conan Gray','Olivia Rodrigo','Dominic Fike']
-const myTopTracksIcon = [icon1,icon4,icon5]
 
 const compareArtists = ['Joji','conan gray','taylor swift']
 const compareArtistsIcons = [icon10,icon1,icon11]
@@ -26,6 +17,27 @@ const compareTracksArtist = ['David Bowie','Youngblood Hawke','Cage The Elephant
 const compareTracksIcon = [icon6,icon7,icon8]
 
 export const MyInsights = (props) => {
+       
+    const getTopArtists = useSelector((state) => state.userObject.topArtists).slice(0,3);
+    const myTopArtists = []
+    const myTopArtistsIcons = []
+    getTopArtists.map((artist,i) => {
+        myTopArtists[i]=artist.artistName
+        myTopArtistsIcons[i]=artist.imageURL
+        return myTopArtists
+    })
+
+    const getTopTracks = useSelector((state) => state.userObject.topTracks).slice(0,3);
+    const myTopTracks = []
+    const myTopTracksArtist = []
+    const myTopTracksIcon = []
+    getTopTracks.map((track,i) => {
+        myTopTracks[i]=track.trackName
+        myTopTracksArtist[i]=track.artistName
+        myTopTracksIcon[i]=track.imageURL
+        return myTopTracks
+    })
+    
     return(
         <div className="my-insights">
             <div className="d-flex">

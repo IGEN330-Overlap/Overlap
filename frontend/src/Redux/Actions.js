@@ -17,3 +17,12 @@ export const updateUser = (newUser = null) => {
     },
   };
 };
+
+export const updateGroupList = (groupList) => {
+  return {
+    type: "groupList/update",
+    payload: {
+      groupList: groupList,
+    },
+  };
+};
