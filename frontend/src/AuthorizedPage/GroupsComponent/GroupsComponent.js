@@ -19,9 +19,9 @@ const GroupsComponent = (props) => {
     
     //use relative url for react router
     let { url } = useRouteMatch();
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const groupList = useSelector(state => state.groupList);
-    const userObject = useSelector(state => state.userObject);
+    //const userObject = useSelector(state => state.userObject);
     //const groupCode = useSelector(state => state.groupCode);
 
     //functions for opening and closing "Show Group Code" Modal
@@ -86,19 +86,7 @@ const GroupsComponent = (props) => {
         }
       }
 
-      //User Effect hook for displaying groups upon group list update
-        useEffect(() => {
-            axios
-            .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups", {
-            })
-            .then((data) => {
-                dispatch(updateGroupList(data.data));
-                console.log(data.data);
-                console.log(groupList);
-            })
-            .catch((err) => console.log(err));
-        }, [userObject.userID]);
-
+      
     return (
         // Flexbox for existing groups
         <div className="YourGroupsBox d-flex flex-column align-left">
@@ -116,7 +104,7 @@ const GroupsComponent = (props) => {
                     <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
 
-                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">{group}</Link>
+                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">{group.groupName}</Link>
 
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
