@@ -38,7 +38,7 @@ function App() {
   const refreshToken = useSelector((state) => state.refreshToken);
 
   //Get group list from a user upon login
-  const spotifyID = useSelector(state => state.userObject);
+  const userObject = useSelector(state => state.userObject);
 
   //Update refresh token on App render
   dispatch(updateRefreshToken(params.refresh_token));
@@ -53,20 +53,21 @@ function App() {
         console.log(data.data.return);
         dispatch(updateUser(data.data.return));
       })
-      .then(getGroupList())
       .catch((err) => console.log(err));
   }, [refreshToken]);
 
-  function getGroupList(){
-    axios
-      //need to wait a second before userID loads
-      .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
-      .then((data) => {
-          dispatch(updateGroupList(data.data))
-          console.log(data.data);
-      })
-      .catch((err) => console.log(err));
-  }
+  //User Effect to get user group list when userObject is updated
+  useEffect(() => {
+    if (userObject != null) {
+      axios
+        .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+        .then((data) => {
+            dispatch(updateGroupList(data.data))
+            console.log(data.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [userObject])
 
   //Start return statement
   return (
