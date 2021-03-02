@@ -170,4 +170,5 @@ Algorithm Development
 Integrating a base64 for the playlist Logo
 TODO build playlist model
 outline integrating the playlist model and the necessary endpoints as well as adding it into this one
+add the ugc-image-upload to the scopes for now and will need to redo getting the access-token
 */
