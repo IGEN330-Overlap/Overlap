@@ -5,7 +5,7 @@ const algoTest = require("./Algorithm/algoTest.js");
 const algoController = require("./Algorithm/algo_controller.js")
 
 //define get request for retreiving user information
-router.get("/token/:token/user", Controller.getUser)
+router.get("/users/:id/user", Controller.getUser)
 
 //define get request for retreiving all users in a group
 router.get("/groups/:groupCode/users", Controller.getGroupUsers)
