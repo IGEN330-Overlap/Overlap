@@ -9,6 +9,7 @@ const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
 const frontend_url = process.env.FRONTEND_URL;
 const groupCodeGenerator = require("./scripts.js");
+const group = require("./Models/group.model");
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
@@ -354,18 +355,29 @@ exports.leaveGroup = async (req, res) => {
  * @param {} res
  */
 exports.getGroupUsers = async (req, res) => {
-  Group.findOne({ groupCode: req.params.groupCode })
-    .then(function (data) {
-      res.json(data.users);
-    })
-
-    .catch((err) => {
-      res.json({
-        message: "Unable to find group",
-        error: err,
-      });
+  let userIDs;
+  
+  try {
+    let data = await group.findOne({ groupCode: req.params.groupCode });
+    userIDs = data.users;
+  } catch(err){
+    res.json({
+      message: "Unable to find group",
+      error: err,
     });
-};
+  }
+
+  //returning/querying the user documents associated with each userID
+  try{
+    let data = await User.find({ userID: { $in: userIDs } });
+    res.json(data);
+  } catch (err) {
+    res.json({
+      message: "Unable to find groups",
+      error: err,
+    });
+  }
+}; 
 
 /**
  * GET method for getting all the groups a user is in
