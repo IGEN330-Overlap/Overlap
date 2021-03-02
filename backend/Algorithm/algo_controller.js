@@ -143,14 +143,14 @@ exports.buildSpotifyPlaylist = async (req, res) => {
         .catch((err) => {
           console.log('Something went wrong!', err);
         });
-      await spotifyApi
-        .uploadCustomPlaylistCoverImage(playlistID, overlapLogo)
-        .then((data) => {
-          console.log("uploaded playlist image", data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      // await spotifyApi
+      //   .uploadCustomPlaylistCoverImage(playlistID, overlapLogo)
+      //   .then((data) => {
+      //     console.log("uploaded playlist image", data)
+      //   })
+      //   .catch((err) => {
+      //     console.log(err)
+      //   })
     
     res.json({
       message: "Successfully created playlist",
