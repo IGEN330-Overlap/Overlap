@@ -1,20 +1,16 @@
 /* CSS variables */
 @import url(../variables.css);
 
-.navbar-text {
-    background-color: transparent;
-}
-
 .nav-item {
     color:white;
-    margin-left: 40px;
+    margin-right: 20px;
 }
 
-.links{
+.nav-link{
     color: white;
 }
 
-.links:hover{
+.nav-link:hover{
     text-decoration: none;
     color: var(--blue-color-main);
 }
@@ -22,10 +18,29 @@
 .navbar {
     height: auto;
     color: white;
+    display: flex;
+} 
+
+.navbar-stuff {
+    width: 100vw;
+} 
+
+.navbar-stuff .btn-sm {
+    padding: 0.40rem 0.95rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 1.05rem;
 }
 
-.container-fluid {
-    height:fit-content;
-    width: auto;
+.navbar-stuff .btn {
+    font-weight: 800;
+    font-size: 1rem;
+    transition: color 0.35s;
+    background: var(--blue-color-main);
+    border-color: var(--blue-color-main);
+}
+
+.navbar-stuff .btn:hover {
+    background: var(--blue-color-5);
 }
 

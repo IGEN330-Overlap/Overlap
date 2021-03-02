@@ -1,38 +1,4 @@
-.name {
-    font-size: min(1.75vw,20px);
-    color: transparent;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-.icon-baby:hover {
-    opacity: 0.4;
-    transition-duration: 0.45s;
-}
-
-.icon-container:hover .name {
-    color: var(--off-white-color);
-    transition-duration: 0.45s;
-}
-
-.icon-baby {
-    height: min(12vw,200px);
-    width: min(12vw,200px);
-    object-fit: cover;
-    object-position: 50%;
-    border-radius: 50rem;
-}
-
-.container-baby {
-    width: 100px;
-    margin-top: 15px;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-    position: relative;
-    text-align: center;
-}
+@import url(../../variables.css);
 
 .baby-members {
     display: flex;
@@ -42,4 +8,41 @@
     max-height: 40vh;
     justify-content: flex-start;
     align-content: flex-start;
+}
+
+.container-baby {
+    width: auto;
+    margin-top: 2vh;
+    margin-right: 4vw;
+    margin-bottom: 2vh; 
+    position: relative;
+    text-align: center;
+}
+
+.icon-baby {
+    height: clamp(100px, 25vw, 175px);
+    width: clamp(100px, 25vw, 175px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 50rem;
+}
+
+.baby-name {
+    font-size: clamp(12px, 1.75vw, 18px);
+    color:transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.45s;
+}
+
+.container-baby:hover .icon-baby {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.container-baby:hover .baby-name {
+    color: var(--off-white-color);
+    cursor: pointer;
 }

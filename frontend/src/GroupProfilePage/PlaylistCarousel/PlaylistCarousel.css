@@ -1,3 +1,4 @@
+
 @import url(../../variables.css);
 
 .playlist-container{
@@ -5,11 +6,12 @@
     margin-right: auto;
     padding-right: 15px;
     background-color: transparent;
-    height: 25vh;
+    max-height: 32vh;
 }
 
-.text{
-    font-size: 1.85rem;
+.playlist-container .text{
+    font-size: clamp(20px, 3vw, 30px);
+    color: var(--off-white-color);
 }
 
 .addPlaylist-container{
@@ -17,12 +19,12 @@
     align-items: center;
     text-align: center;
     cursor: pointer;
-    padding-right: 0.5vw;
+    margin: 0.5vw;
 }
 
 .covers{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     padding-top: 0.5vw;
 }
 
@@ -30,15 +32,12 @@
     height: 2vw;
     width: 2vw;
     color: white;
-    /* object-fit: cover;
-    object-position: 50%;
-    border-radius: 15%; */
 }
 
 .addButton{
     display: flex;
-    height: min(12vw,120px);
-    width: min(12vw,120px);
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
     justify-content: center;
     align-items: center;
     border-radius: 15%;
@@ -49,22 +48,21 @@
 .display-playlists{
     display: flex;
     flex-direction: row;
-    width: 60vw;
-    overflow: auto;
+    max-height: 24vh;
+    width: 100%;
 }
 
 .playlistcover-container{
-    padding-bottom: 0.5vw;
-    padding-left: 0.5vw;
-    padding-right: 0.5vw;
+    margin: 0.5vw;
     justify-content: center;
     align-items: center;
     text-align: center;
+    width: clamp(65px, 7.5vw, 100px);
 }
 
 .playlistcover{
-    height: min(12vw,120px);
-    width: min(12vw,120px);
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 15%;
@@ -74,6 +72,7 @@
 .playlist-name{
     color: white;
     cursor: pointer;
+    font-size: min(1vw, 20px);
 }
 
 /*customize scroll bar */
@@ -91,7 +90,30 @@
     border-radius: 10px;
 }
 
-@media (max-width: 720px) {
+.carousel .carousel-inner{
+    width: 35vw;
+}
+
+.carousel .carousel-control-prev{
+    position: absolute;
+    display: inline;
+    top: -32%;
+    width: auto;
+    height: 2rem;
+    left: 4%;
+}
+
+.carousel .carousel-control-next{
+    position: absolute;
+    display: inline;
+    top: -32%;
+    width: auto;
+    height: 2rem;
+    right: 86%;
+}
+
+
+@media (max-width: 780px) {
     .playlist-container{
         width: 90vw;
     }
@@ -102,6 +124,20 @@
         font-size: 12px;
     }
     .display-playlists{
-        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+    .carousel .carousel-inner{
+        width: 75vw;
+    }
+    .carousel .carousel-control-prev{
+        top: -35%;
+        left: 70%;
+    }
+    .carousel .carousel-control-next{
+        top: -35%;
+        right: 10%;
     }
 }
+
+
+

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
-import Navbar from "../Navbar/Navbar";
+import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 
@@ -18,26 +18,28 @@ const GroupProfilePage = (props) => {
     return(     
         <div className="landing-root">
             <div className="navbar">
-                <Navbar />
+                <Navbar1 />
             </div>
-            <div className="box">
-                <div className="group-name">
-                    <GroupName />
-                </div>
-            </div>
-            <div className="d-flex">
-                <div className="main-column">
-                    <div className="member-display">
-                        <MemberDisplay toCompare={toCompare}/>
+            <div className="group-profile-page-components">
+                <div className="component-box"></div>
+                <div className="d-flex">
+                    <div className="main-column">
+                        <div className="main-column-box"></div>
+                        <div className="group-name">
+                            <GroupName />
+                        </div>
+                        <div className="member-display">
+                            <MemberDisplay toCompare={toCompare}/>
+                        </div>
+                        <div className="playlist-carousel">
+                            <PlaylistCarousel />
+                        </div>
+                    </div> 
+                    <div className="individual-comparisons">
+                        {name 
+                            ? <Comparisons name={name} toCompare={toCompare} /> 
+                            : <MyInsights />}
                     </div>
-                    <div className="playlist-carousel">
-                    <PlaylistCarousel />
-                    </div>
-                </div> 
-                <div className="individual-comparisons">
-                    {name 
-                        ? <Comparisons name={name} toCompare={toCompare} /> 
-                        : <MyInsights />}
                 </div>
             </div>
         </div>

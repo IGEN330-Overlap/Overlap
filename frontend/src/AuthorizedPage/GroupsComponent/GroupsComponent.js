@@ -1,12 +1,13 @@
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import './GroupsComponent.css';
 import line from './Line.svg';
-import copy from './copy.svg';
 import React from "react";
 import { Link, useRouteMatch } from 'react-router-dom';
+
+/*take input from backend to create array of formed groups */
+const groups = ['group1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa','group2','group3', 'group1','group2','group3', 'group1','group2','group3', 'group1','group2','group3'];
 
 
 //Component to display groups on Groups page
@@ -56,21 +57,6 @@ const GroupsComponent = (props) => {
         </div>
     ));
 
-    // THIS DOES NOT WORK FOR SOME REASON
-    // //Display Dropdown Button Function
-    // const groupDropdown = () => (
-    //     <Dropdown as={ButtonGroup}>
-        //     <a className="groupButton">Group 1</a>
-        //     <Dropdown.Toggle as={CustomToggle} />
-        //     <Dropdown.Menu className="menu">
-        //         <Dropdown.Item href="#/action-1"><a onClick={showCodeModal}>Show Group Code</a></Dropdown.Item>
-        //         <Dropdown.Divider></Dropdown.Divider>
-        //         <Dropdown.Item href="#/action-2"><a onClick={showLeaveModal}>Leave Group</a></Dropdown.Item>
-        //     </Dropdown.Menu>
-        // </Dropdown>
-    // );
-
-    //Copy code -- does not work rn
     function copyCode(){
         var copyText = document.getElementById("myCode");
         var currentRange;
@@ -103,14 +89,13 @@ const GroupsComponent = (props) => {
                 <input type="text" class="input-search" placeholder="search" size="15"/>
             </div>
 
-            { /*list of groups -- NON ITERATIVE RN*/}
             <div className="group-list">
-
-                {/* Group as a dropdown menu button */}
-                <div className="group-item d-flex">
+                {groups.map((group,i) => (
+                    /* Group as a dropdown menu button */
+                    <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
 
-                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">Group 1</Link>
+                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">{group}</Link>
 
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">
@@ -119,12 +104,9 @@ const GroupsComponent = (props) => {
                             <Dropdown.Item><div onClick={showLeaveModal}>Leave Group</div></Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
-                </div>
-
-                {/* Group as a dropdown menu button from function (function call) -- THIS IS PART OF THE STUFF THAT DOES NOT WORK BUT WANT TO FIX
-                <div className="group-item d-flex">
-                    <groupDropdown/>
-                </div>  */}
+                    </div>
+                ))
+                }
             </div>
     
             {/* "Show Group Code" Modal Content */}
@@ -136,13 +118,13 @@ const GroupsComponent = (props) => {
                         {/* "EXAMPLE" to be replaced with a real code */}
                         <div id="myCode"><h4 className="modal-text" type="text"><strong>EXAMPLE</strong></h4></div>
                         <div className = "copy-groupCode">
-                            <a onClick={copyCode} className="copy-button">
+                            <div onClick={copyCode} className="copy-button">
                                 <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
                                     <path 
                                     d="M25.3333 2.83333H19.76C19.2 1.19 17.7333 0 16 0C14.2667 0 12.8 1.19 12.24 2.83333H6.66667C5.2 2.83333 4 4.10833 4 5.66667V28.3333C4 29.8917 5.2 31.1667 6.66667 31.1667H25.3333C26.8 31.1667 28 29.8917 28 28.3333V5.66667C28 4.10833 26.8 2.83333 25.3333 2.83333ZM16 2.83333C16.7333 2.83333 17.3333 3.47083 17.3333 4.25C17.3333 5.02917 16.7333 5.66667 16 5.66667C15.2667 5.66667 14.6667 5.02917 14.6667 4.25C14.6667 3.47083 15.2667 2.83333 16 2.83333ZM25.3333 28.3333H6.66667V5.66667H9.33333V9.91667H22.6667V5.66667H25.3333V28.3333Z" 
                                     />
                                 </svg>
-                            </a>
+                            </div>
                         </div>
                         <button onClick={hideCodeModal} className="btn-in-modal continue-button" centered><strong>Continue</strong></button>
                     </Modal.Body>

@@ -1,4 +1,16 @@
-# Overlap project repo
+# Overlap Project 
+<img src="public\images\overlap-logo.png" width="30%">
+
+# About the project
+Overlap is a web application designed and created by six Integrated Engineering Students at UBC. One thing the COVID pandemic has showed us is the lack of socialibilty in music. Where you could previously go to parties or concerts and discover new music, the pandemic has limited the opportunities to expand your own horizons. Seeing this gap we decided to build an application that helps you connect with your friends to help build stronger relationships and keep connections that can fade in the online environment. 
+
+The application integrates Spotify to collect a user's listening habits and lets you:
+ - Create and join music sharing groups with friends.
+ - Compare music stats and insights with a group.
+ - Generate playlists using the group's music taste and overlap.
+
+## Tech / Framework used
+The application is built using the MERN stack. Our frontend is built with [ReactJS](https://reactjs.org) and [Bootstrap](https://react-bootstrap.github.io/) in addition to [Redux](https://redux.js.org/) for global state management. Our backend is a RESTful API built with [ExpressJS](https://expressjs.com), [NodeJS](https://nodejs.org/en/), and [MongoDB](https://www.mongodb.com), and integrates the [Spotify API](https://developer.spotify.com/documentation/web-api/).
 
 # For Contributors
 ## Setup:
@@ -12,7 +24,7 @@ CLIENT_ID=
 CLIENT_SECRET=
 ATLAS_URI=
 ```
-Contact repo owner for client_id, client_secret, and atlas_uri.
+Contact repo owner for client_id, client_secret, and atlas_uri. Alternatively, you could also build your own Spotify Application and run the repository as well with your own client. [Here](https://developer.spotify.com/dashboard/applications) you can create your own client with Spotify.
 
 4. Create a `.env` file in the `frontend` directory root folder and copy the following:
 ```
@@ -23,74 +35,17 @@ REACT_APP_FRONTEND_URL=http://localhost:3000
 6. Run `node app.js` in the backend directory.  
 <br/>
 
-## API Endpoint Documentation:
-### POST: /users/login
-Use case:
-After successful authentication using our landing page, make request to backend to create user object in database. The API will check if the user already exists in the database, and only add a user object entry in the case where there is no user.
+# Using the Application
+To use the application you need to complete the steps above. Once you have completed steps 5 and 6 open your browser and open http://localhost:3000 which should lead you to the login page. After clicking login you are redirected to the spotify login and authorization process looking like this:
+![image](https://user-images.githubusercontent.com/51245035/109400671-f796dc80-7917-11eb-9f46-1189a9baf4ea.png)
+This then brings you to our Overlap Home page. Here you can navigate between groups, create groups, or join groups with codes given to you by your friends. When creating a group it requires you to set a name. Once the group is created you can distribute the group code to your friends so that they are able to join. While unfinished this is currently what the page looks like.
+![image](https://user-images.githubusercontent.com/51245035/109400726-417fc280-7918-11eb-8dd2-f30f3f4f4382.png)
+Entering a group page you are greeted with the members of the group, our rapid comparison tool, and a log of the playlists that have been previously created.
+![image](https://user-images.githubusercontent.com/51245035/109400777-a0ddd280-7918-11eb-90e4-d43afe4a03ce.png)
+Finally there is our playlist page which displays a top playlist for the group at a certain point in time.
+![image](https://user-images.githubusercontent.com/51245035/109400793-b94ded00-7918-11eb-9e19-56790b6617d2.png)
 
-Expected request JSON:
-```
-refreshToken: The SpotifyAPI refresh token of the user after user authentication. (string)
-```
-
-Returns:
-```
-spotifyID: Unique Spotify ID of the user, which will be used afterwards for most endpoint consumption for our API. (string)
-
--> Also returns display name, profile_pic url, etc. which will be useful for user display within groups, and also user profile display.
-```
-
-### POST: /groups/create
-Use case:
-Consume endpoint for group creation, and use groupCode return to redirect to group page.
-
-Expected request JSON:
-```
-name: Name of the group to be created. (string)
-spotifyID: ID of the user creating the group who will be tagged as the group leader. (string)
-```
-
-Returns:
-```
-groupCode: Unique code for the group. (string)
-```
-
-### POST: /groups/join
-Use case:
-Consume endpoint for group joining, and use groupCode return to redirect to group page. If group does not exist yet, API will respond with error.
-
-Expected request JSON:
-```
-groupCode: Code of the group user is attempting to join. (string)
-spotifyID: ID of the user joining the group. (string)
-```
-
-Returns:
-```
-status: 200 (Okay) or 404 (Not found) (status)
-```
-
-
-### GET: /groups/:groupCode/users
-Use case:
-Make request with a groupCode, and the API will respond with an array of user objects which belong to the group. To use, replace ":groupCode" with the group code.
-
-Request JSON is not expected.
-
-Return:
-
-```
-Array of user objects. ([array])
-```
-
-### GET: /users/:userID/groups
-Use case:
-Request with userID parameter and API will return with an array of group objects which the user belong to. To use, replace ":userID" with the user ID of the user you want to find groups from. 
-
-Request JSON is not expected.
-
-Return:
-
-```
-Array of group objects. ([array])
-```
+# Documentation: MOVED TO THE [WIKI](https://github.com/IGEN330-Overlap/Overlap/wiki)
+If you want to help contribute or read into our documentation you can look at your repository wiki which has the relevant and important information to our application.
+The wiki contains relevant API references and information on our database. 
+A sample of what our documentation looks like is below for hthte users login endpoint.

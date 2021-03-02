@@ -1,25 +1,25 @@
 @import url(../variables.css);
 
-.about-root {
-    position: relative;
-    z-index: 5;
-    background-color: var(--blue-color-3);
-}
 .text-blurb {
-    margin-top: 50px;
-    width: 50vw;
-    height: 100vh;
-    margin-left: 4vw;
+    height: 25vh;
 }
 
 .display-babies {
-    padding-top: 50px;
-    width: 100vw;
+    margin-right: 2vw;
+    padding-top: 20px;
 }
 
 .about {
+    margin-left: 4vw;
+    margin-top: 2vw;
+}
+
+.about-root {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color-main);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
 }
