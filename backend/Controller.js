@@ -198,7 +198,7 @@ exports.loginUser = async (req, res) => {
       var pop = (dnce = nrgy = spch = acst = inst = vale = 0);
       // Calculate their musical profile (use averages for now) (calc sums and div n)
       for (x of topTracks) {
-        pop += x.popularity;
+        pop += x.trackPopularity;
         dnce += x.danceability;
         nrgy += x.energy;
         spch += x.speechiness;
@@ -206,7 +206,7 @@ exports.loginUser = async (req, res) => {
         inst += x.instrumentalness;
         vale += x.valence;
       }
-      pop /= 0.5;
+      pop /= 50;
       dnce /= 0.5;
       nrgy /= 0.5;
       spch /= 0.5;
@@ -215,7 +215,7 @@ exports.loginUser = async (req, res) => {
       vale /= 0.5;
 
       musicalProfile = {
-        poopularity: pop,
+        popularity: pop,
         danceability: dnce,
         energy: nrgy,
         speechiness: spch,
