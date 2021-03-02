@@ -1,20 +1,18 @@
+import React from "react";
+import { useSelector } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import './GroupsComponent.css';
 import line from './Line.svg';
-import React from "react";
 import { Link, useRouteMatch } from 'react-router-dom';
-
-/*take input from backend to create array of formed groups */
-const groups = ['group1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa','group2','group3', 'group1','group2','group3', 'group1','group2','group3', 'group1','group2','group3'];
-
 
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
     
     //use relative url for react router
     let { path, url } = useRouteMatch();
+    const groupList = useSelector(state => state.groupList);
 
     //functions for opening and closing "Show Group Code" Modal
     const [CodeisOpen, setCodeIsOpen] = React.useState(false);
@@ -90,12 +88,12 @@ const GroupsComponent = (props) => {
             </div>
 
             <div className="group-list">
-                {groups.map((group,i) => (
+                {groupList.map((group,i) => (
                     /* Group as a dropdown menu button */
                     <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
 
-                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">{group}</Link>
+                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">{group.groupName}</Link>
 
                         <Dropdown.Toggle as={CustomToggle} />
                         <Dropdown.Menu className="menu">

@@ -18,11 +18,22 @@ export const updateUser = (newUser = null) => {
   };
 };
 
+//Update group list action
 export const updateGroupList = (groupList) => {
   return {
     type: "groupList/update",
     payload: {
       groupList: groupList,
+    },
+  };
+};
+
+//Update group users action
+export const updateGroupUsers = (groupUsers) => {
+  return {
+    type: "groupUsers/update",
+    payload: {
+      groupUsers: groupUsers,
     },
   };
 };
