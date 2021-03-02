@@ -19,19 +19,28 @@ var spotifyApi = new SpotifyWebApi({
   redirectUri: redirect_uri,
 });
 
-// Initial Tester
+/**
+ * GET method to collect a users information
+ * 
+ * Responds with the user data and req.param needs the spotifyID "userID"
+ * 
+ * @param {userID: String} req userID param required
+ * @param {} res All the user data 
+ */
 exports.getUser = async (req, res) => {
-  spotifyApi.setAccessToken(req.params.token);
-
-  spotifyApi.getMe().then(
-    (data) => {
+  User.findOne({userID: req.params.id })
+    .then((data) => {
       res.json(data);
-    },
-    (err) => {
-      res.status(400).json(err);
-    }
-  );
+    })
+
+    .catch((err) => {
+      res.json({
+        message: "Unable to find user",
+        error: err,
+      });
+    });
 };
+
 
 /**
  * middle ware for creating a group

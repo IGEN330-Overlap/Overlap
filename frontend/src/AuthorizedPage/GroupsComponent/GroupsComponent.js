@@ -10,19 +10,12 @@ import { updateGroupList } from "../../Redux/Actions";
 
 const axios = require("axios");
 
-/*take input from backend to create array of formed groups */
-//const groups = ['group1aaaaaaaaaaaaaaaaaaaaaaaaaaaaa','group2','group3', 'group1','group2','group3', 'group1','group2','group3', 'group1','group2','group3'];
-
-
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
     
     //use relative url for react router
     let { url } = useRouteMatch();
-    //const dispatch = useDispatch();
     const groupList = useSelector(state => state.groupList);
-    //const userObject = useSelector(state => state.userObject);
-    //const groupCode = useSelector(state => state.groupCode);
 
     //functions for opening and closing "Show Group Code" Modal
     const [CodeisOpen, setCodeIsOpen] = React.useState(false);
@@ -85,8 +78,7 @@ const GroupsComponent = (props) => {
           window.getSelection().addRange(currentRange);
         }
       }
-
-      
+ 
     return (
         // Flexbox for existing groups
         <div className="YourGroupsBox d-flex flex-column align-left">
@@ -125,7 +117,7 @@ const GroupsComponent = (props) => {
                         {/* "Group Name" should be real group name endpoint */}
                         <h5 className="modal-text modal-head"><strong>"Group Name" Code</strong></h5>
                         {/* "EXAMPLE" to be replaced with a real code */}
-                        <div id="myCode"><h4 className="modal-text" type="text"><strong>EXAMPLE</strong></h4></div>
+                        <div id="myCode"><h4 className="modal-text" type="text"><strong>Example</strong></h4></div>
                         <div className = "copy-groupCode">
                             <div onClick={copyCode} className="copy-button">
                                 <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
