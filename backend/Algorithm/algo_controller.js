@@ -1,5 +1,6 @@
 // Don't bother using the song and artist class
 const SpotifyWebApi = require("spotify-web-api-node");
+const Group = require("../Models/group.model");
 // const { db } = require("../Models/user.model");
 require("dotenv").config();
 
@@ -89,12 +90,20 @@ exports.getMyTopTracks = async (req, res) => {
   );
 };
 
+/**
+ * POST Method, All in one endpoint that gets users and generates the spotify playlist
+ * 
+ * NOTE the algorithm is incomplete (not done at all)
+ * @param { userIDs: [String], refreshToken: String, groupeCdoe: String} req.body
+ * @param { message: String, return: {json} } res 
+ */
 exports.buildSpotifyPlaylist = async (req, res) => {
   
   topTracks = []; // Array to store the total data from mongoDB
-
+  spotifyApi.setRefreshToken(req.body.refreshToken);
   // Map the user ids sent to get the mongoDB user information
   var user_ids = req.body.userIDs.map((id) => {return id});
+
   await User.find({userID: {$in: user_ids}})
     .then((data) => {
       // topTracks = data.topTracks.map((trackList) => {return trackList})
@@ -108,16 +117,25 @@ exports.buildSpotifyPlaylist = async (req, res) => {
       res.json(err)
     })
   
-    playlist = [];
+    playlistTracksIDs = [];
+    dbTrackList = []
 
     // DO THE ALGORITHM, TO IMPLEMENT
     for(var i = 0; i < topTracks.length; i++){
       for(var j = 0; j < 5; j++){
-        playlist.push("spotify:track:" + topTracks[i][j].trackID);
+        playlistTracksIDs.push("spotify:track:" + topTracks[i][j].trackID)
+        
+        let track = {
+          trackName : topTracks[i][j].trackName,
+          trackID:   topTracks[i][j].trackID,
+          linkURL: topTracks[i][j].linkURL,
+          imageURL: topTracks[i][j].imageURL,
+          artistName: topTracks[i][j].aristName,
+        };
+        dbTrackList.push(track)
       }
     }
 
-    spotifyApi.setRefreshToken(req.body.refreshToken);
   // Connect to spotify API using the owners refresh access token
   await spotifyApi.refreshAccessToken()
     .then( async (data) => {
@@ -125,18 +143,17 @@ exports.buildSpotifyPlaylist = async (req, res) => {
       
       var playlistID; // playlistID to be used in adding to the playlist
       await spotifyApi
-        .createPlaylist("Overlap YOLO", {'description': "Gang", 'public': true})
+        .createPlaylist("Overlap yolo", {'description': "Gang", 'public': true})
         .then((data) => {
-          console.log("Playlist Created") 
+          console.log("Playlist Created", data.body.statusCode) 
           playlistID = data.body.id;
-
         })
         .catch((err) => {
           console.log(err)
         })
       
       await spotifyApi
-        .addTracksToPlaylist(playlistID, playlist)
+        .addTracksToPlaylist(playlistID, playlistTracksIDs)
         .then((data) =>{
           console.log('Added tracks to playlist!', data.statusCode);
         })
@@ -151,15 +168,25 @@ exports.buildSpotifyPlaylist = async (req, res) => {
       //   .catch((err) => {
       //     console.log(err)
       //   })
+    var playlist = {
+      playlistID: playlistID,
+      tracks: dbTrackList
+    }
     
-    res.json({
-      message: "Successfully created playlist",
-      return: {
-        playlistID: playlistID,
-        // playlistOwner: req.body.userID,
-        playlistTracks: playlist,
-      }
-    });
+  await Group.updateOne(
+      { groupCode: req.body.groupCode },
+      { $addToSet: {playlist: playlist} }
+    ).then(() => {
+      res.json({
+        message: "Successfully created playlist",
+        return: {
+          playlistID: playlistID,
+          // playlistOwner: req.body.userID,
+          playlistTracks: playlist,
+        }
+      });
+  
+    })
 
   })
 }
