@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from 'react-redux';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -8,13 +8,11 @@ import line from './Line.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { updateGroupList } from "../../Redux/Actions";
 
-const axios = require("axios");
-
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
     
     //use relative url for react router
-    let { url } = useRouteMatch();
+    let { path, url } = useRouteMatch();
     const groupList = useSelector(state => state.groupList);
 
     //functions for opening and closing "Show Group Code" Modal
