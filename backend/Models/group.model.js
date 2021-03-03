@@ -1,34 +1,67 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
 // Building group schema and defining the fields
-const groupSchema = new Schema({
+const groupSchema = new Schema(
+  {
     //_id: mongoose.Schema.Types.ObjectId
 
     groupCode: {
-        type: String,
-        unique: true,
-        required: true,
+      type: String,
+      unique: true,
+      required: true,
     },
     groupName: {
-        type: String
+      type: String,
     },
     groupLeader: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     users: [
-        {
-            type: String,
-        },
+      {
+        type: String,
+      },
     ],
-},
-    {
-        timestamps: true,
-    }
+    playlist: [
+      {
+        playlistID: {
+          type: String,
+          required: true,
+        },
+        tracks: [
+          {
+            trackName: {
+              type: String,
+              required: true,
+            },
+            trackID: {
+              type: String,
+              required: true,
+            },
+            imageURL: {
+              type: String,
+              required: true,
+            },
+            linkURL: {
+              type: String,
+              required: true,
+            },
+            artistName: {
+              type: String,
+              required: true,
+            },
+          }
+        ],
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
 );
 
-const group = mongoose.model('group', groupSchema);
+const group = mongoose.model("group", groupSchema);
 
 module.exports = group;
