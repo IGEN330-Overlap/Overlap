@@ -100,12 +100,10 @@ exports.loginUser = async (req, res) => {
             topTracks[i]["speechiness"] = x.speechiness;
             topTracks[i]["acousticness"] = x.acousticness;
             topTracks[i]["instrumentalness"] = x.instrumentalness;
-            // topTracks[i]['liveness'] = x.liveness; Ignore for now
-            // note liveness if added needs to be in the model as well (type: Number)
             topTracks[i]["valence"] = x.valence;
             topTracks[i]["duration_ms"] = x.duration_ms;
           } else {
-            break; // theoretically should probably throw an error but break for now for simplicity
+            continue; // skip to next, ids were not the same
           }
           i++; // iterate for the next item to add in our topTracks array
         }
