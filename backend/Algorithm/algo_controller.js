@@ -98,9 +98,6 @@ exports.buildSpotifyPlaylist = async (req, res) => {
   topTracks = []; // Array to store the total data from mongoDB
   spotifyApi.setRefreshToken(req.body.refreshToken);
   // Map the user ids sent to get the mongoDB user information
-  // var user_ids = req.body.userIDs.map((id) => {
-  //   return id;
-  // });
   var user_ids;
   await Group.findOne({ groupCode: req.body.groupCode }).then((data) => {
     user_ids = data.users;
