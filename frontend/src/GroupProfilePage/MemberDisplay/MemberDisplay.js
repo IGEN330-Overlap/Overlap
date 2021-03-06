@@ -1,57 +1,95 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateGroupUsers } from '../../Redux/Actions.js';
+
 import './MemberDisplay.css';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 
-import brendan_icon from './brendan-icon.jpg';
-import kitten_icon from './kitten-icon.jpg';
-import puppy_icon from './puppy-icon.jpg';
-import kitten2 from './kitten2.jpg'
 import add_member from './add-member.svg';
 
-/* primary user */
-const primary_user = ['me']
-const primary_icon = [kitten2]
-
-/* take input from backend to create array of users */
-const members = ['Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
-const icon_src = [brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
+const axios = require("axios");
 
 const MemberDisplay = ({name, toCompare}) => {
 
-    return(
-            <div className="member-container">
-                <div className="d-flex">
-                    <h1 className="text"><strong>Members</strong></h1>
-                    {/*link to add members*/}
-                    <AddMember />
-                    <br></br>            
-                    
-                </div>
+  const dispatch = useDispatch();
 
-                <h1 className="compare-message"><strong>Click on a friend to compare stats!</strong></h1>
+  const userObject = useSelector(state => state.userObject)
 
-                {/*user icon display */}
+  // use effect to get user info for each user in the group
+  useEffect(() => {
+    axios
+    // using an existing group for now, need to replace with group code later
+    .get(process.env.REACT_APP_BACKEND_URL + "/groups/4GPMB43W/users")
+    .then((data) => {
+      console.log(data.data)
+      var users = data.data
+      let group_user = []
+      // store user information in the state
+      users.map((user) => {
+        axios
+        .get(process.env.REACT_APP_BACKEND_URL + "/users/" + user + "/user")
+        .then((data) => {
+          let user_info = data.data
+          group_user.push(user_info)
+          dispatch(updateGroupUsers(group_user))
+        })
+        .catch((err) => console.log(err))
+        return user
+      })
+    })
+    .catch((err) => console.log(err))
+  }, [userObject])
 
-                <div className="display-members">
-                    <div className="icon-container">
-                        <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
-                        <div className="user-name" onClick={() => toCompare()}>
-                          <strong>{primary_user}</strong>
-                        </div>
-                    </div>
-                    {members.map((member,i) => (
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member)}></img>
-                            <div className="user-name" onClick={() => toCompare(member)}>
-                                    <strong>{member}</strong>
-                            </div>
-                        </div>
-                    ))
-                    }
+  // primary user
+  const primary_user = useSelector(state => state.userObject.name)
+  const primary_icon = useSelector(state => state.userObject.imageURL)
 
+  // group members
+  const groupUsers = useSelector(state => state.groupUsers)
+  const members = []
+  const icon_src = []
+  groupUsers.map((member,i) => {
+    if (member.name !== primary_user) {
+      members[i] = member.name
+      icon_src[i] = member.imageURL
+    }
+    return members
+  })
+
+  return(
+    <div className="member-container">
+        <div className="d-flex">
+            <h1 className="text"><strong>Members</strong></h1>
+            {/*link to add members*/}
+            <AddMember />
+            <br></br>            
+            
+        </div>
+
+        <h1 className="compare-message"><strong>Click on a friend to compare stats!</strong></h1>
+
+        {/*user icon display */}
+
+        <div className="display-members">
+            <div className="icon-container">
+                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
+                <div className="user-name" onClick={() => toCompare()}>
+                  <strong>{primary_user}</strong>
                 </div>
             </div>
-    )
+            {members.map((member,i) => (
+                <div className="icon-container">
+                    <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member)}></img>
+                    <div className="user-name" onClick={() => toCompare(member)}>
+                            <strong>{member}</strong>
+                    </div>
+                </div>
+            ))
+            }
+
+        </div>
+    </div>
+  )
 }
 
 /* popover content*/

@@ -1,5 +1,5 @@
 //function to generate random group code for /group/create post request
-function generate(){
+function generateGroupCode(){
 
     //set password length/complexity
     let complexity = 7//document.getElementById("slider").value;
@@ -19,4 +19,4 @@ function generate(){
 }
 
 //export generate() as a module for use in Controller.js
-module.exports.generate = generate;
+module.exports.generateGroupCode = generateGroupCode;

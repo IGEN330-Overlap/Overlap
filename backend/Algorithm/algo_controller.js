@@ -95,12 +95,11 @@ exports.getMyTopTracks = async (req, res) => {
  * @param { message: String, return: {json} } res
  */
 exports.buildSpotifyPlaylist = async (req, res) => {
+  
   topTracks = []; // Array to store the total data from mongoDB
   spotifyApi.setRefreshToken(req.body.refreshToken);
   // Map the user ids sent to get the mongoDB user information
-  // var user_ids = req.body.userIDs.map((id) => {
-  //   return id;
-  // });
+
   var user_ids;
   await Group.findOne({ groupCode: req.body.groupCode }).then((data) => {
     user_ids = data.users;
@@ -144,7 +143,7 @@ exports.buildSpotifyPlaylist = async (req, res) => {
 
     var playlistID; // playlistID to be used in adding to the playlist
     await spotifyApi
-      .createPlaylist("Overlap yolo", { description: "Gang", public: true })
+      .createPlaylist("{req.body.playlistName}", { description: "Gang", public: true })
       .then((data) => {
         console.log("Playlist Created", data.statusCode);
         playlistID = data.body.id;
@@ -170,13 +169,13 @@ exports.buildSpotifyPlaylist = async (req, res) => {
     //     console.log(err)
     //   })
     var playlist = {
-      playlistID: playlistID,
+      playlistName: req.body.playlistName,
       tracks: dbTrackList,
     };
 
     await Group.updateOne(
       { groupCode: req.body.groupCode },
-      { $addToSet: { playlist: playlist } }
+      { $addToSet: { playlists: playlist } }
     ).then(() => {
       res.json({
         message: "Successfully created playlist",
