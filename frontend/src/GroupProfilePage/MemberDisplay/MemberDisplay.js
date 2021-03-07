@@ -84,7 +84,7 @@ const MemberDisplay = ({name, toCompare}) => {
             
         </div>
 
-        <h1 className="compare-message"><strong>Click on a friend to see the overlap between your listening!</strong></h1>
+        <h1 className="compare-message"><strong>Click on a friend to see the overlap in your listening habits!</strong></h1>
 
         {/*user icon display */}
 
