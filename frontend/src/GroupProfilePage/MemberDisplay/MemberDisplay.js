@@ -22,20 +22,8 @@ const MemberDisplay = ({name, toCompare}) => {
     .get(process.env.REACT_APP_BACKEND_URL + "/groups/4GPMB43W/users")
     .then((data) => {
       console.log(data.data)
-      var users = data.data
-      let group_user = []
-      // store user information in the state
-      users.map((user) => {
-        axios
-        .get(process.env.REACT_APP_BACKEND_URL + "/users/" + user + "/user")
-        .then((data) => {
-          let user_info = data.data
-          group_user.push(user_info)
-          dispatch(updateGroupUsers(group_user))
-        })
-        .catch((err) => console.log(err))
-        return user
-      })
+      var group_users = data.data
+      dispatch(updateGroupUsers(group_users))
     })
     .catch((err) => console.log(err))
   }, [userObject])
