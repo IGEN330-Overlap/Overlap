@@ -102,9 +102,9 @@ const GroupsComponent = (props) => {
                     <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
 
-                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton" onClick={ () => setCurrentGroup(group)}>{group.groupName}</Link>
+                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton" onClick={() => setCurrentGroup(group)}>{group.groupName}</Link>
 
-                        <Dropdown.Toggle as={CustomToggle} />
+                        <Dropdown.Toggle as={CustomToggle} onClick={() => setCurrentGroup(group)}/>
                         <Dropdown.Menu className="menu">
                             <Dropdown.Item><div onClick={showCodeModal}>Show Group Code</div></Dropdown.Item>
                             <Dropdown.Divider></Dropdown.Divider>
