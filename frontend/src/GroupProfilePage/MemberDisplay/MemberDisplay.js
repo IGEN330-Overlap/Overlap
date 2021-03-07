@@ -36,10 +36,12 @@ const MemberDisplay = ({name, toCompare}) => {
   const groupUsers = useSelector(state => state.groupUsers)
   const members = []
   const icon_src = []
+  const member_id = []
   groupUsers.map((member,i) => {
     if (member.name !== primary_user) {
       members[i] = member.name
       icon_src[i] = member.imageURL
+      member_id[i] = member.userID
     }
     return members
   })
@@ -54,7 +56,7 @@ const MemberDisplay = ({name, toCompare}) => {
             
         </div>
 
-        <h1 className="compare-message"><strong>Click on a friend to compare stats!</strong></h1>
+        <h1 className="compare-message"><strong>Click on a friend to see the overlap between your listening habits!</strong></h1>
 
         {/*user icon display */}
 
@@ -67,8 +69,8 @@ const MemberDisplay = ({name, toCompare}) => {
             </div>
             {members.map((member,i) => (
                 <div className="icon-container">
-                    <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member)}></img>
-                    <div className="user-name" onClick={() => toCompare(member)}>
+                    <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member_id[i])}></img>
+                    <div className="user-name" onClick={() => toCompare(member_id[i])}>
                             <strong>{member}</strong>
                     </div>
                 </div>

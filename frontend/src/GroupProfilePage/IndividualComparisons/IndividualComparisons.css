@@ -151,7 +151,7 @@
     transition: 0.3s;
 }
 .top-tracks .track-info .track-title {
-    font-size: clamp(10px, 5vw, 20px);
+    font-size: clamp(10px, 4vw, 18px);
 }
 .top-tracks .track-artist {
     color: var(--blue-color-1);

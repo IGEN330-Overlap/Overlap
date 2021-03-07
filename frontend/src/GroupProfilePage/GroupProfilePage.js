@@ -10,7 +10,7 @@ import { MyInsights, Comparisons } from './IndividualComparisons/IndividualCompa
 
 const GroupProfilePage = (props) => {
 
-    const [name, selectMember] = useState('');
+    const [member_id, selectMember] = useState('');
     function toCompare(value){
         selectMember(value);
     }
@@ -36,8 +36,8 @@ const GroupProfilePage = (props) => {
                         </div>
                     </div> 
                     <div className="individual-comparisons">
-                        {name 
-                            ? <Comparisons name={name} toCompare={toCompare} /> 
+                        {member_id 
+                            ? <Comparisons member_id={member_id} toCompare={toCompare} /> 
                             : <MyInsights />}
                     </div>
                 </div>
