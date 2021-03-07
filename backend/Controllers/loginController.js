@@ -107,8 +107,8 @@ exports.loginUser = async (req, res) => {
           }
           i++; // iterate for the next item to add in our topTracks array
         }
-      } catch {
-        res.json({ message: "Unable to get user top artists.", error: err });
+      } catch (err) {
+        res.json({ message: "Unable to get audio features", error: err });
         return;
       }
 
@@ -136,7 +136,7 @@ exports.loginUser = async (req, res) => {
 
           topArtists.push(artist);
         }
-      } catch {
+      } catch (err) {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
