@@ -123,6 +123,7 @@ export const Comparisons = ({member_id, toCompare}) => {
     compareArtists.sort(function(a,b){
         return a.rank - b.rank
     })
+    console.log(compareArtists)
 
     myTopTracks.map((myTrack, i) => {
         userCompareTracks.map((compTrack, j) => {
@@ -149,9 +150,11 @@ export const Comparisons = ({member_id, toCompare}) => {
             
             <div className="under-bar"></div>
             
-            
             <div className="top-artists">
                 <h2><strong>Top Artists</strong></h2>
+                
+                {compareArtists.length > 0 
+                ?
                 <div className="artist-display">
                     {compareArtists.slice(0,3).map((artist,i) => (
                         <div className="artist-container">
@@ -164,9 +167,18 @@ export const Comparisons = ({member_id, toCompare}) => {
                     ))
                     }
                 </div>
+                :
+                <div className = "no-common-message">
+                    <h3><strong>Seems like you don't have any top artists in common :(</strong></h3>
+                </div>
+                }
+
             </div>
             <div className="top-tracks">
-                <h2><strong>Top Tracks</strong></h2>                                                                      
+                <h2><strong>Top Tracks</strong></h2>
+
+                {compareTracks.length > 0
+                ?                                                                      
                 <div className="track-display">
                     {compareTracks.slice(0,3).map((track,i) => (
                         <div className="track-container">
@@ -184,9 +196,13 @@ export const Comparisons = ({member_id, toCompare}) => {
                     ))
                     }
                 </div>
-            </div>
+                :
+                <div className="no-common-message">
+                    <h3><strong>Seems like you don't have any top tracks in common :(</strong></h3>
+                </div>
+                }
 
-            
+            </div>
         
         </div>
     )
