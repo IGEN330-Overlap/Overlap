@@ -84,7 +84,7 @@ export const Comparisons = ({member_id, toCompare}) => {
     // compare top artists and tracks
     var compare_name = ''
     var compare_info = ''
-    const getGroupUsers = useSelector((state) => state.groupUsers)
+    const getGroupUsers = useSelector((state) => state.currentGroup.groupUsers)
     getGroupUsers.map((user) => {
         if (user.userID === member_id){
             compare_name = user.name
