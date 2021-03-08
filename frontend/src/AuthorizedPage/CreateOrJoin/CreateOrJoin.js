@@ -46,6 +46,7 @@ const CreateOrJoin = (props) => {
             })
             .catch((err) => console.log(err));
         }
+        document.getElementById("newGroupName").value = ''
     }
 
     //Join a group on arrow click
@@ -74,6 +75,7 @@ const CreateOrJoin = (props) => {
             })
             .catch((err) => console.log(err));
         }
+        document.getElementById("joinGroupCode").value = ''
     }
 
     return (
