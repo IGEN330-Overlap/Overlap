@@ -20,7 +20,7 @@ export const MyInsights = (props) => {
     
     return(
         <div className="my-insights">
-            <div className="d-flex">
+            <div className="heading">
                 <h1><strong>My Insights</strong></h1>
             </div>
             <div className="under-bar"></div>
@@ -144,7 +144,7 @@ export const Comparisons = ({member_id, toCompare}) => {
             <div className="return-to-insights">
                 <h4><strong onClick={() => toCompare()}> Return to Personal Insights</strong></h4>
             </div>
-            <div className="d-flex">
+            <div className="heading">
                 <h1><strong>You & {compare_name}</strong></h1>
             </div>
             
