@@ -21,12 +21,12 @@ var spotifyApi = new SpotifyWebApi({
 
 /**
  * POST generate group top playlists
- * @param {*} req 
+ * 
+ * @param {userIDs: [Strings], groupCode: String} req 
  * @param {*} res 
  */
-exports.generateGroupsTopPlaylist = async (req, res) => {
+ exports.generateGroupsTopPlaylist = async (req, res) => {
 
-    spotifyApi.setRefreshToken(req.body.refreshToken); // RefreshToken for spotify access
     topTracks = []; // Array to store the total data from mongoDB
 
     let userIDs = req.body.userIDs.map((id) => {return id});
@@ -40,13 +40,13 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     } catch (err) {
         res.json({message: "error on finding users", error: err});
     }
-    
+
     let playlistTracks = [];
 
     /* Let's algorithm */
     let masterSet = [];
     let masterIDs = []
-    
+
     // put all the songs into one array, the master set
     for (x of topTracks){
         for (data of x){
@@ -107,7 +107,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     }
 }
 
+
 /**
+ * POST Create the spotify playlist
  * 
  * @param {*} req 
  * @param {*} res 
@@ -128,4 +130,14 @@ exports.createSpotifyPlaylist = async (req, res) => {
     } catch (err) {
         res.json(err)
     }
+}
+
+/**
+ * GET Method for retriveing a past playlist
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.getGroupPlaylist = async (req, res) =>{
+    console.log("EMPTY");
 }

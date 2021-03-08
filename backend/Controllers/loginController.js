@@ -44,7 +44,7 @@ exports.loginUser = async (req, res) => {
       //get user's top 50 tracks
       try {
         //spotify api call
-        let data = await spotifyApi.getMyTopTracks({ limit: 50 });
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range:"med_term" });
 
         for (x of data.body.items) {
           let track = {};
@@ -107,8 +107,8 @@ exports.loginUser = async (req, res) => {
           }
           i++; // iterate for the next item to add in our topTracks array
         }
-      } catch {
-        res.json({ message: "Unable to get user top artists.", error: err });
+      } catch (err) {
+        res.json({ message: "Unable to get track audio featurs.", error: err });
         return;
       }
 
@@ -136,13 +136,14 @@ exports.loginUser = async (req, res) => {
 
           topArtists.push(artist);
         }
-      } catch {
+      } catch (err) {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
 
       // initiate vars for the musical profile
       let pop = (dnce = nrgy = spch = acst = inst = vale = 0);
+
       // Calculate their musical profile (use averages for now) (calc sums and div n)
       for (x of topTracks) {
         pop += x.trackPopularity;

@@ -16,6 +16,19 @@ var spotifyApi = new SpotifyWebApi({
 let User = require("../Models/user.model");
 let Group = require("../Models/group.model");
 
+// exports.manuallyAddUser = async (req, res) => {
+//   User.updateOne(
+//       {userID: req.body.id }, // Filter
+//       {
+//           $set: {
+//           musicalProfile: req.musicalProfile,
+//           topTracks: req.topTracks, // Add top 50 tracks with their attributes
+//           topArtists: req.topArtists, // Add top 30 artists with their attributes
+//           },
+//       },
+//   )
+// }
+
 exports.getMyTopTracks = async (req, res) => {
   //set refresh token
   spotifyApi.setRefreshToken(req.body.refreshToken);
@@ -29,7 +42,7 @@ exports.getMyTopTracks = async (req, res) => {
       let topTrackIDs = [];
       //get user's top 3 tracks
       await spotifyApi
-        .getMyTopTracks({ limit: 50, time_range: "medium_term" })
+        .getMyTopTracks({ limit: 50})
         .then((data) => {
           for (x of data.body.items) {
             let track = {}; // track data needed for song
