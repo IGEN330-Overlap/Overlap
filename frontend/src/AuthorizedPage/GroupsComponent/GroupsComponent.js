@@ -100,12 +100,12 @@ const GroupsComponent = (props) => {
             <div className="group-list">
                 {groupList.map((group,i) => (
                     /* Group as a dropdown menu button */
-                    <div className="group-item d-flex">
+                    <div className="group-item d-flex" onClick={() => setCurrentGroup(group)}>
                     <Dropdown as={ButtonGroup}>
 
                         <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton" onClick={() => setCurrentGroup(group)}>{group.groupName}</Link>
 
-                        <Dropdown.Toggle as={CustomToggle} onClick={() => setCurrentGroup(group)}/>
+                        <Dropdown.Toggle as={CustomToggle}/>
                         <Dropdown.Menu className="menu">
                             <Dropdown.Item><div onClick={showCodeModal}>Show Group Code</div></Dropdown.Item>
                             <Dropdown.Divider></Dropdown.Divider>

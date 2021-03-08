@@ -127,7 +127,7 @@ export const Comparisons = ({member_id, toCompare}) => {
 
     myTopTracks.map((myTrack, i) => {
         userCompareTracks.map((compTrack, j) => {
-            if(myTrack.track === compTrack.track){
+            if((myTrack.track === compTrack.track) && (myTrack.artist === compTrack.artist)){
                 compareTracks.push({rank: i+j, track: myTrack.track, artist: myTrack.artist, icon: myTrack.icon})
             }
             return null
