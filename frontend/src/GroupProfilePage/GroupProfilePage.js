@@ -20,7 +20,7 @@ const GroupProfilePage = (props) => {
         <div className="group-landing-root">
             <div className="group-info-root">
                 <div className="navbar">
-                    <Navbar />
+                    <Navbar1 />
                 </div>
                 <div className="group-profile-page-components">
                     <div className="component-box"></div>
@@ -38,22 +38,12 @@ const GroupProfilePage = (props) => {
                             </div>
                         </div> 
                         <div className="individual-comparisons">
-                            {name 
-                                ? <Comparisons name={name} toCompare={toCompare} /> 
-                                : <MyInsights />}
-                        </div>
-                        <div className="member-display">
-                            <MemberDisplay toCompare={toCompare}/>
-                        </div>
-                        <div className="playlist-carousel">
-                            <PlaylistCarousel />
-                        </div>
-                    </div> 
-                    <div className="individual-comparisons">
                         {member_id 
                             ? <Comparisons member_id={member_id} toCompare={toCompare} /> 
                             : <MyInsights />}
-                    </div>
+                        </div>
+                    </div> 
+                    
                 </div>
         </div>
         <div className="top-genres-display">
