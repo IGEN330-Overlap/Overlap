@@ -190,18 +190,29 @@ exports.leaveGroup = async (req, res) => {
  * @param {} res
  */
 exports.getGroupUsers = async (req, res) => {
-  Group.findOne({ groupCode: req.params.groupCode })
-    .then(function (data) {
-      res.json(data.users);
-    })
-
-    .catch((err) => {
-      res.json({
-        message: "Unable to find group",
-        error: err,
-      });
+  let userIDs;
+  
+  try {
+    let data = await Group.findOne({ groupCode: req.params.groupCode });
+    userIDs = data.users;
+  } catch(err){
+    res.json({
+      message: "Unable to find group",
+      error: err,
     });
-};
+  }
+
+  //returning/querying the user documents associated with each userID
+  try{
+    let data = await User.find({ userID: { $in: userIDs } });
+    res.json(data);
+  } catch (err) {
+    res.json({
+      message: "Unable to find users",
+      error: err,
+    });
+  }
+}; 
 
 /**
  * GET method for getting all the groups a user is in

@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateGroupCode, updateGroupName, updateGroupPlaylists } from '../../Redux/Actions.js';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -11,6 +12,8 @@ import { updateGroupList } from "../../Redux/Actions";
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
     
+    const dispatch = useDispatch();
+
     //use relative url for react router
     let { path, url } = useRouteMatch();
     const groupList = useSelector(state => state.groupList);
@@ -76,7 +79,13 @@ const GroupsComponent = (props) => {
           window.getSelection().addRange(currentRange);
         }
       }
- 
+
+    const setCurrentGroup = (group) => {
+        dispatch(updateGroupName(group.groupName))
+        dispatch(updateGroupCode(group.groupCode))
+        dispatch(updateGroupPlaylists(group.playlists))
+    }
+
     return (
         // Flexbox for existing groups
         <div className="YourGroupsBox d-flex flex-column align-left">
@@ -94,9 +103,9 @@ const GroupsComponent = (props) => {
                     <div className="group-item d-flex">
                     <Dropdown as={ButtonGroup}>
 
-                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton">{group.groupName}</Link>
+                        <Link to ={`${url}GroupProfilePage/GroupProfilePage`} className="groupButton" onClick={() => setCurrentGroup(group)}>{group.groupName}</Link>
 
-                        <Dropdown.Toggle as={CustomToggle} />
+                        <Dropdown.Toggle as={CustomToggle} onClick={() => setCurrentGroup(group)}/>
                         <Dropdown.Menu className="menu">
                             <Dropdown.Item><div onClick={showCodeModal}>Show Group Code</div></Dropdown.Item>
                             <Dropdown.Divider></Dropdown.Divider>
