@@ -15,7 +15,7 @@
     width: fit-content;
 }
 
-.my-insights .d-flex {
+.my-insights .heading {
     margin-bottom: 5px;
     width: fit-content;
 }
@@ -54,16 +54,20 @@
     cursor: pointer;
     color: var(--off-white-color);
 }
-.comparisons .d-flex {
+.comparisons .heading {
     margin-bottom: 5px;
     align-items: center;
-    width: fit-content;
+    width: 400px;
+}
+.no-common-message h3{
+    font-size: clamp(11px, 2vw, 13px);
+    color: var(--blue-color-1);
+    width: min(40vw, 800px);
+    margin-right: 5px;
+    padding-right: 10px;
+    margin-left: 6px;
 }
 
-/* .comparisons .arrow-icon {
-    height: 10px;
-    width: 10px;
-} */
 /* css for top artists section */
 
 .top-artists {
@@ -151,7 +155,7 @@
     transition: 0.3s;
 }
 .top-tracks .track-info .track-title {
-    font-size: clamp(10px, 5vw, 20px);
+    font-size: clamp(10px, 4vw, 18px);
 }
 .top-tracks .track-artist {
     color: var(--blue-color-1);

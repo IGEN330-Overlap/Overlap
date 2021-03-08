@@ -1,66 +1,60 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateGroupUsers } from '../../Redux/Actions.js';
+
 import './MemberDisplay.css';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 
-import brendan_icon from './brendan-icon.jpg';
-import kitten_icon from './kitten-icon.jpg';
-import puppy_icon from './puppy-icon.jpg';
-import kitten2 from './kitten2.jpg'
 import add_member from './add-member.svg';
 
-/* primary user */
-const primary_user = ['me']
-const primary_icon = [kitten2]
-
-/* take input from backend to create array of users */
-const members = ['Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy','Brendan','Cat','Puppy'];
-const icon_src = [brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon, brendan_icon, kitten_icon, puppy_icon];
+const axios = require("axios");
 
 const MemberDisplay = ({name, toCompare}) => {
 
-    return(
-            <div className="member-container">
-                <div className="d-flex">
-                    <h1 className="text"><strong>Members</strong></h1>
-                    {/*link to add members*/}
-                    <AddMember />
-                    <br></br>            
-                    
-                </div>
+  const dispatch = useDispatch();
 
-                <h1 className="compare-message"><strong>Click on a friend to compare stats!</strong></h1>
+  const userObject = useSelector(state => state.userObject)
 
-                {/*user icon display */}
+  const groupCode = useSelector(state => state.currentGroup.groupCode)
 
-                <div className="display-members">
-                    <div className="icon-container">
-                        <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
-                        <div className="user-name" onClick={() => toCompare()}>
-                          <strong>{primary_user}</strong>
-                        </div>
-                    </div>
-                    {members.map((member,i) => (
-                        <div className="icon-container">
-                            <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member)}></img>
-                            <div className="user-name" onClick={() => toCompare(member)}>
-                                    <strong>{member}</strong>
-                            </div>
-                        </div>
-                    ))
-                    }
+  // use effect to get user info for each user in the group
+  useEffect(() => {
+    axios
+    // using an existing group for now, need to replace with group code later
+    .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
+    .then((data) => {
+      console.log(data.data)
+      var group_users = data.data
+      dispatch(updateGroupUsers(group_users))
+    })
+    .catch((err) => console.log(err))
+  }, [userObject])
 
-                </div>
-            </div>
-    )
-}
+  // primary user
+  const primary_user = useSelector(state => state.userObject.name)
+  const primary_icon = useSelector(state => state.userObject.imageURL)
 
-/* popover content*/
-const popover = (
+  // group members
+  const groupUsers = useSelector(state => state.currentGroup.groupUsers)
+  const members = []
+  const icon_src = []
+  const member_id = []
+  groupUsers.map((member,i) => {
+    if (member.name !== primary_user) {
+      members[i] = member.name
+      icon_src[i] = member.imageURL
+      member_id[i] = member.userID
+    }
+    return members
+  })
+
+  /* popover content*/
+  const popover = (
     <Popover id="popover-basic" className="popover-display">
       <Popover.Title as="h3">Your Group Code</Popover.Title>
       <Popover.Content>
           <div className="copy-code">
-            <div id = "myCode">Group Code</div>
+            <div id = "myCode">{groupCode}</div>
             <div onClick={copyCode} className="copy-button">
               <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
                 <path 
@@ -72,7 +66,7 @@ const popover = (
       </Popover.Content>
     </Popover>
   );
-  
+
   /*popover display*/
   const AddMember = () => (
     <OverlayTrigger trigger="click" rootClose placement="right" overlay={popover}>
@@ -80,25 +74,61 @@ const popover = (
     </OverlayTrigger>
   );
 
-  function copyCode(){
-    var copyText = document.getElementById("myCode");
-    var currentRange;
-    if(document.getSelection().rangeCount > 0) {
-      currentRange = document.getSelection().getRangeAt(0);
-      window.getSelection().removeRange(currentRange);
-    }
-    else {
-      currentRange = false;
-    }
-    var CopyRange = document.createRange();
-    CopyRange.selectNode(copyText);
-    window.getSelection().addRange(CopyRange);
-    document.execCommand("copy");
+  return(
+    <div className="member-container">
+        <div className="d-flex">
+            <h1 className="text"><strong>Members</strong></h1>
+            {/*link to add members*/}
+            <AddMember />
+            <br></br>            
+            
+        </div>
 
-    window.getSelection().removeRange(CopyRange);
-    if(currentRange) {
-      window.getSelection().addRange(currentRange);
-    }
+        <h1 className="compare-message"><strong>Click on a friend to see the overlap in your listening habits!</strong></h1>
+
+        {/*user icon display */}
+
+        <div className="display-members">
+            <div className="icon-container">
+                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
+                <div className="user-name" onClick={() => toCompare()}>
+                  <strong>{primary_user}</strong>
+                </div>
+            </div>
+            {members.map((member,i) => (
+                <div className="icon-container">
+                    <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member_id[i])}></img>
+                    <div className="user-name" onClick={() => toCompare(member_id[i])}>
+                            <strong>{member}</strong>
+                    </div>
+                </div>
+            ))
+            }
+
+        </div>
+    </div>
+  )
+}
+
+function copyCode(){
+  var copyText = document.getElementById("myCode");
+  var currentRange;
+  if(document.getSelection().rangeCount > 0) {
+    currentRange = document.getSelection().getRangeAt(0);
+    window.getSelection().removeRange(currentRange);
   }
-  
-  export default MemberDisplay;
+  else {
+    currentRange = false;
+  }
+  var CopyRange = document.createRange();
+  CopyRange.selectNode(copyText);
+  window.getSelection().addRange(CopyRange);
+  document.execCommand("copy");
+
+  window.getSelection().removeRange(CopyRange);
+  if(currentRange) {
+    window.getSelection().addRange(currentRange);
+  }
+}
+
+export default MemberDisplay;

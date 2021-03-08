@@ -3,8 +3,12 @@ const initialState = {
   refreshToken: "",
   userObject: null,
   groupList: [],
-  groupUsers: [],
-  playlists: [],
+  currentGroup: {
+    groupCode:'',
+    groupName:'',
+    groupUsers:[],
+    groupPlaylists:[],
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,6 +28,29 @@ const reducer = (state = initialState, action) => {
     case "groupList/update": {
       let newState = state;
       newState.groupList = action.payload.groupList;
+      return newState;
+    }
+    //for updating group name
+    case "groupName/update": {
+      let newState = state;
+      newState.currentGroup.groupName = action.payload.groupName;
+      return newState;
+    }
+    //for updating group code
+    case "groupCode/update": {
+      let newState = state;
+      newState.currentGroup.groupCode = action.payload.groupCode;
+      return newState;
+    }
+    //for updating group user list
+    case "groupUsers/update": {
+      let newState = state;
+      newState.currentGroup.groupUsers = action.payload.groupUsers;
+      return newState;
+    }
+    case "groupPlaylists/update": {
+      let newState = state;
+      newState.currentGroup.groupPlaylists = action.payload.groupPlaylists;
       return newState;
     }
     default:

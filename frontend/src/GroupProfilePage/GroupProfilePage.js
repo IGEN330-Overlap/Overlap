@@ -11,7 +11,7 @@ import { TopGenres } from './TopGenres/TopGenres';
 
 const GroupProfilePage = (props) => {
 
-    const [name, selectMember] = useState('');
+    const [member_id, selectMember] = useState('');
     function toCompare(value){
         selectMember(value);
     }
@@ -42,6 +42,17 @@ const GroupProfilePage = (props) => {
                                 ? <Comparisons name={name} toCompare={toCompare} /> 
                                 : <MyInsights />}
                         </div>
+                        <div className="member-display">
+                            <MemberDisplay toCompare={toCompare}/>
+                        </div>
+                        <div className="playlist-carousel">
+                            <PlaylistCarousel />
+                        </div>
+                    </div> 
+                    <div className="individual-comparisons">
+                        {member_id 
+                            ? <Comparisons member_id={member_id} toCompare={toCompare} /> 
+                            : <MyInsights />}
                     </div>
                 </div>
         </div>
