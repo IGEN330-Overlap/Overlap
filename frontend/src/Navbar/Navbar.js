@@ -2,7 +2,7 @@ import './Navbar.css';
 import logo from '../overlap-logo.svg';
 import {Navbar, Nav, NavDropdown, Button} from 'react-bootstrap';
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 const groupnames = ['Group 1', 'Group 2', 'Group 3', 'Group 4'];
