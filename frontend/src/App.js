@@ -70,17 +70,19 @@ function App() {
   //User Effect to get user group list when userObject is updated
   useEffect(() => {
     if (userObject != null) {
-      axios
-        .get(
-          process.env.REACT_APP_BACKEND_URL +
-            "/users/" +
-            userObject.userID +
-            "/groups"
-        )
-        .then((data) => {
-          dispatch(updateGroupList(data.data));
-        })
-        .catch((err) => console.log(err));
+      if (userObject.userID !== "") {
+        axios
+          .get(
+            process.env.REACT_APP_BACKEND_URL +
+              "/users/" +
+              userObject.userID +
+              "/groups"
+          )
+          .then((data) => {
+            dispatch(updateGroupList(data.data));
+          })
+          .catch((err) => console.log(err));
+      }
     }
   }, [userObject]);
 
@@ -99,14 +101,8 @@ function App() {
           exact={true}
         />
         <Route path="/authorized/about" render={() => <AboutUs />} />
-        <Route
-          path="/authorized/group"
-          render={() => <GroupProfilePage />}
-        />
-        <Route
-          path="/authorized/playlist"
-          render={() => <PlaylistPage />}
-        />
+        <Route path="/authorized/group" render={() => <GroupProfilePage />} />
+        <Route path="/authorized/playlist" render={() => <PlaylistPage />} />
       </Switch>
     </div>
   );

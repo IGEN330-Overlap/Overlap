@@ -20,7 +20,7 @@ const Navbar1 = (props) => {
                 <Nav className="mr-auto">
                     <NavDropdown title="My Groups" id="basic-nav-dropdown">
                         {groupnames.map((group,i) => (
-                            <div>
+                            <div key={i}>
                                 <NavDropdown.Item as={Link} to = "/authorized/group/groupcode">{group}</NavDropdown.Item>
                             </div>
                             ))
