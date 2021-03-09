@@ -98,13 +98,13 @@ function App() {
           render={() => <AuthorizedPage />}
           exact={true}
         />
-        <Route path="/authorized/AboutUs" render={() => <AboutUs />} />
+        <Route path="/authorized/about" render={() => <AboutUs />} />
         <Route
-          path="/authorized/GroupProfilePage"
+          path="/authorized/group"
           render={() => <GroupProfilePage />}
         />
         <Route
-          path="/authorized/PlaylistPage"
+          path="/authorized/playlist"
           render={() => <PlaylistPage />}
         />
       </Switch>

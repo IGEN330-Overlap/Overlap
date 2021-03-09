@@ -10,7 +10,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import "./GroupsComponent.css";
 import line from "./Line.svg";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
@@ -92,7 +92,7 @@ const GroupsComponent = (props) => {
       <h1 className="title">
         <strong>Groups</strong>
       </h1>
-      <div class="mr-auto">
+      <div className="mr-auto">
         <img src={line} className="underline" alt="underline" />
       </div>
 
@@ -100,7 +100,7 @@ const GroupsComponent = (props) => {
       <div className="search-bar">
         <input
           type="text"
-          class="input-search"
+          className="input-search"
           placeholder="search"
           size="15"
         />
@@ -112,10 +112,11 @@ const GroupsComponent = (props) => {
           <div
             className="group-item d-flex"
             onClick={() => setCurrentGroup(group)}
+            key={i}
           >
             <Dropdown as={ButtonGroup}>
               <Link
-                to="/authorized/GroupProfilePage/GroupProfilePage"
+                to="/authorized/group/groupcode"
                 className="groupButton"
                 onClick={() => setCurrentGroup(group)}
               >

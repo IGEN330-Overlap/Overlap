@@ -61,7 +61,7 @@ const PlaylistCarousel = (props) => {
     let carouselElement = fourPlaylists.map((playlist, i) => {
       return (
         <div className="playlistcover-container">
-          <Link to="/authorized/PlaylistPage/PlaylistPage/" className="links">
+          <Link to="/authorized/playlist/playlistcode" className="links">
             <img
               className="playlistcover"
               src={cover_src[i]}

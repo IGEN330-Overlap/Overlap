@@ -21,14 +21,14 @@ const Navbar1 = (props) => {
                     <NavDropdown title="My Groups" id="basic-nav-dropdown">
                         {groupnames.map((group,i) => (
                             <div>
-                                <NavDropdown.Item as={Link} to = "/authorized/GroupProfilePage">{group}</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to = "/authorized/group/groupcode">{group}</NavDropdown.Item>
                             </div>
                             ))
                         }
                         <NavDropdown.Divider />
                         <NavDropdown.Item as={Link} to = "/authorized/">New Group</NavDropdown.Item>
                     </NavDropdown> 
-                    <Nav.Link as={Link} to = "/authorized/AboutUs" bg="white">About Us</Nav.Link>
+                    <Nav.Link as={Link} to = "/authorized/about" bg="white">About Us</Nav.Link>
                 </Nav>
                 <Nav className="justify-content-end">
                     <Button as={Link} to ="/" variant='secondary' size='sm'>Logout</Button>
