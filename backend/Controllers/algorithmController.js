@@ -34,6 +34,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     });
     let numUsers = userIDs.length;
 
+    console.log("Users", userIDs) //debugging
+
     // Collect user top track data into top tracks array
     try {
         let data = await User.find({ userID: { $in: userIDs } });
@@ -47,6 +49,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         res.json({ message: "error on finding users", error: err });
     }
 
+    console.log("top track profiles collected:", usersTopTracks.length) //debugging
+
     let duplicateBasedSongs = []; // array to store the tracks of our playlist
 
     let masterSet = []; //stores all top tracks as an item
@@ -59,6 +63,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             masterIDs.push(data.trackID);
         }
     }
+
+    console.log("masterset length", masterSet.length); //debugging
 
     /* Let's algorithm: This is making a 30 song playlist */
 
@@ -79,6 +85,10 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       NOTE: what happens if one person is in the group and tries to make a playlist?????
       algo off the top of my head would no likey, needs small adjustment at top of this block of ifs 
       */
+
+    console.log("max count is: ", maxCount);
+    let dummy = Object.keys(counts).filter((k) => counts[k] === maxCount);
+    console.log("num of max count: ", dummy.length);
 
     // If there are at least 2 users and max count occurs in at least half the users
     if (numUsers <= 2 && maxCount == 2) {
@@ -101,7 +111,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     } else if (numUsers <= 7 && maxCount >= numUsers - Math.floor(numUsers / 2)) {
         let numOccurencesOfSongsToAdd = numUsers - Math.floor(numUsers / 2);
         let mostFrequentTracks = Object.keys(counts).filter(
-            (k) => counts[k] <= numOccurencesOfSongsToAdd
+            (k) => counts[k] >= numOccurencesOfSongsToAdd
         );
 
         if (mostFrequentTracks.length > 20) {
@@ -115,7 +125,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     } else if (numUsers > 7 && maxCount >= numUsers - Math.ceil(numUsers / 2)) {
         let numOccurencesOfSongsToAdd = numUsers - Math.ceil(numUsers / 2);
         let mostFrequentTracks = Object.keys(counts).filter(
-            (k) => counts[k] <= numOccurencesOfSongsToAdd
+            (k) => counts[k] >= numOccurencesOfSongsToAdd
         );
 
         if (mostFrequentTracks.length > 20) {
@@ -125,11 +135,14 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             playlistTracks = mostFrequentTracks;
             numSongs = mostFrequentTracks.length;
         }
+    } else {
+        console.log("no frequent tracks added :(");
     }
 
     // Using track sounds to add the rest of the songs
     // To implement (BETTER WAYS possibly)
     let groupsMusicalProfile = Scripts.calculateMusicalProfile(usersMusicalProfile);
+    console.log("groups musical profile", groupsMusicalProfile);
 
     // Remove all duplicates and add to the new array groupUniqueSet
     let groupUniqueSet = masterSet.filter(
@@ -149,6 +162,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             Math.abs(x.valence - groupsMusicalProfile.valence) * attributeAdjust[3]
             //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
         );
+        // console.log(i)
     }
 
     // Sort the unique set by the deltaFromGroup to (lowest to highest)
@@ -156,11 +170,14 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     let sortedTrackSet = groupUniqueSet.sort((a, b) => {
         return parseFloat(a.deltaFromGroup) - parseFloat(b.deltaFromGroup);
     });
+    // console.log(sortedTrackSet[40]);
+
 
     // array to fill the remaining needed songs
     let attributeBasedSongs = [];
 
     // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
+    // To implement verify that we're adding a song that is not already in the playlist
     for (var i = 0; attributeBasedSongs.length + numSongs < 30; i++) {
         attributeBasedSongs.push({
             trackName: sortedTrackSet[i].trackName,
@@ -193,6 +210,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         }
     }
 
+    //debugging
+    console.log("duplicate based songs added: ", duplicateBasedSongs.length);
+    console.log("attribute baesd songs: ", attributeBasedSongs.length)
     /* End of algorithm */
 
     // Create playlist object which will be uploaded to the group
@@ -208,10 +228,15 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             { groupCode: req.body.groupCode },
             { $addToSet: { playlists: playlist } }
         );
+        // for (x of playlist.tracks){
+        //     console.log(x.trackName);
+        // }
+        
         res.json({
             message: "added playlist to the group",
             playlist: playlist,
         });
+        
     } catch (err) {
         res.json({
             message: "Unable to add playlist to the group",
