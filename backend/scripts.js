@@ -1,5 +1,5 @@
 //function to generate random group code for /group/create post request
-function generate(){
+function generateGroupCode(){
 
     //set password length/complexity
     let complexity = 7//document.getElementById("slider").value;
@@ -18,5 +18,42 @@ function generate(){
     return password
 }
 
-//export generate() as a module for use in Controller.js
-module.exports.generate = generate;
+/**
+ * Method used to calculate the averages of people's top artists
+ * @param {[track objects]} data, pass array of track objects to calcualte the averages 
+ * @returns 
+ */
+function calculateMusicalProfile (data) {
+    let pop = (dnce = nrgy = spch = acst = inst = vale = 0);
+
+    for (x of data){
+        pop += x.trackPopularity;
+        dnce += x.danceability;
+        nrgy += x.energy;
+        spch += x.speechiness;
+        acst += x.acousticness;
+        inst += x.instrumentalness;
+        vale += x.valence;
+    }
+
+    dataLen = data.length;
+
+    musicalProfile = {
+        trackPopularity: pop / dataLen,
+        danceability: (dnce / dataLen),
+        energy: (nrgy / dataLen),
+        speechiness: (spch / dataLen),
+        acousticness: (acst / dataLen),
+        instrumentalness: (inst / dataLen),
+        valence: (vale / dataLen),
+      };
+
+    return musicalProfile;
+}
+
+
+//export music profile calculation method
+module.exports.calculateMusicalProfile = calculateMusicalProfile;
+
+//export generateGroupCode() as a module for use in Controller.js
+module.exports.generateGroupCode = generateGroupCode;

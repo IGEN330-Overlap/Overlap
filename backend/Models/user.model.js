@@ -25,7 +25,7 @@ const userSchema = new Schema(
       type: String,
     },
     musicalProfile:{
-      popularity:{
+      trackPopularity:{
         type: Number,
         required: true
       },
@@ -64,7 +64,7 @@ const userSchema = new Schema(
           type: String,
           required: true,
         },
-        popularity: {
+        trackPopularity: {
           type: Number,
           required: true,
         },
