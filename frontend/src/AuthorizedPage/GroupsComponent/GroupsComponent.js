@@ -1,12 +1,17 @@
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupCode, updateGroupName, updateGroupPlaylists, updateGroupList } from '../../Redux/Actions.js';
-import Modal from 'react-bootstrap/Modal';
-import Dropdown from 'react-bootstrap/Dropdown';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import './GroupsComponent.css';
-import line from './Line.svg';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  updateGroupCode,
+  updateGroupName,
+  updateGroupPlaylists,
+  updateGroupList,
+} from "../../Redux/Actions.js";
+import Modal from "react-bootstrap/Modal";
+import Dropdown from "react-bootstrap/Dropdown";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import "./GroupsComponent.css";
+import line from "./Line.svg";
+import { Link } from "react-router-dom";
 
 const axios = require("axios");
 
@@ -14,13 +19,10 @@ const axios = require("axios");
 const GroupsComponent = (props) => {
   const dispatch = useDispatch();
 
-    //use relative url for react router
-    let { url } = useRouteMatch();
-
-    //variables for using states
-    const groupList = useSelector(state => state.groupList);
-    const selectedGroup = useSelector(state => state.currentGroup);
-    const spotifyID = useSelector(state => state.userObject);
+  //variables for using states
+  const groupList = useSelector((state) => state.groupList);
+  const selectedGroup = useSelector((state) => state.currentGroup);
+  const spotifyID = useSelector((state) => state.userObject);
 
   //functions for opening and closing "Show Group Code" Modal
   const [CodeisOpen, setCodeIsOpen] = React.useState(false);
@@ -84,30 +86,35 @@ const GroupsComponent = (props) => {
     }
   }
 
-    function leaveGroup(){
-        axios
-        .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
-            groupCode: selectedGroup.groupCode,
-            spotifyID: spotifyID.userID,
-        })
-        .then((data) => {
-            console.log(data.data.return)
-            axios
-            .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
-            .then((data) => {
-                dispatch(updateGroupList(data.data))
-                console.log(data.data);
-            })
-            .catch((err) => console.log(err))
-        })
-        .catch((err) => console.log(err));
-    }
+  const setCurrentGroup = (group) => {
+    dispatch(updateGroupName(group.groupName));
+    dispatch(updateGroupCode(group.groupCode));
+    dispatch(updateGroupPlaylists(group.playlists));
+  };
 
-    return (
-        // Flexbox for existing groups
-        <div className="YourGroupsBox d-flex flex-column align-left">
-            <h1 className="title"><strong>Groups</strong></h1>
-            <div class="mr-auto"><img src={line} className="underline" alt="underline"/></div>
+  function leaveGroup() {
+    axios
+      .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
+        groupCode: selectedGroup.groupCode,
+        spotifyID: spotifyID.userID,
+      })
+      .then((data) => {
+        console.log(data.data.return);
+        axios
+          .get(
+            process.env.REACT_APP_BACKEND_URL +
+              "/users/" +
+              spotifyID.userID +
+              "/groups"
+          )
+          .then((data) => {
+            dispatch(updateGroupList(data.data));
+            console.log(data.data);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     // Flexbox for existing groups
@@ -115,7 +122,7 @@ const GroupsComponent = (props) => {
       <h1 className="title">
         <strong>Groups</strong>
       </h1>
-      <div className="mr-auto">
+      <div class="mr-auto">
         <img src={line} className="underline" alt="underline" />
       </div>
 
@@ -123,7 +130,7 @@ const GroupsComponent = (props) => {
       <div className="search-bar">
         <input
           type="text"
-          className="input-search"
+          class="input-search"
           placeholder="search"
           size="15"
         />
@@ -135,11 +142,10 @@ const GroupsComponent = (props) => {
           <div
             className="group-item d-flex"
             onClick={() => setCurrentGroup(group)}
-            key={i}
           >
             <Dropdown as={ButtonGroup}>
               <Link
-                to="/authorized/group/groupcode"
+                to="/authorized/group/groupid"
                 className="groupButton"
                 onClick={() => setCurrentGroup(group)}
               >
@@ -170,47 +176,77 @@ const GroupsComponent = (props) => {
           centered
         >
           <Modal.Body className="in-modal modal-body">
-            {/* "Group Name" should be real group name endpoint */}
             <h5 className="modal-text modal-head">
-              <strong>"Group Name" Code</strong>
+              <strong>{selectedGroup.groupName} Code</strong>
             </h5>
-            {/* "EXAMPLE" to be replaced with a real code */}
             <div id="myCode">
               <h4 className="modal-text" type="text">
-                <strong>EXAMPLE</strong>
+                <strong>{selectedGroup.groupCode}</strong>
               </h4>
             </div>
-    
-            {/* "Show Group Code" Modal Content */}
-            <>
-                <Modal className="modalcss" show={CodeisOpen} onHide={hideCodeModal} centered>
-                    <Modal.Body className="in-modal modal-body">
-                        <h5 className="modal-text modal-head"><strong>{selectedGroup.groupName} Code</strong></h5>
-                        <div id="myCode"><h4 className="modal-text" type="text"><strong>{selectedGroup.groupCode}</strong></h4></div>
-                        <div className = "copy-groupCode">
-                            <div onClick={copyCode} className="copy-button">
-                                <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
-                                    <path 
-                                    d="M25.3333 2.83333H19.76C19.2 1.19 17.7333 0 16 0C14.2667 0 12.8 1.19 12.24 2.83333H6.66667C5.2 2.83333 4 4.10833 4 5.66667V28.3333C4 29.8917 5.2 31.1667 6.66667 31.1667H25.3333C26.8 31.1667 28 29.8917 28 28.3333V5.66667C28 4.10833 26.8 2.83333 25.3333 2.83333ZM16 2.83333C16.7333 2.83333 17.3333 3.47083 17.3333 4.25C17.3333 5.02917 16.7333 5.66667 16 5.66667C15.2667 5.66667 14.6667 5.02917 14.6667 4.25C14.6667 3.47083 15.2667 2.83333 16 2.83333ZM25.3333 28.3333H6.66667V5.66667H9.33333V9.91667H22.6667V5.66667H25.3333V28.3333Z" 
-                                    />
-                                </svg>
-                            </div>
-                        </div>
-                        <button onClick={hideCodeModal} className="btn-in-modal continue-button" centered><strong>Continue</strong></button>
-                    </Modal.Body>
-                 </Modal>
-            </>
+            <div className="copy-groupCode">
+              <div onClick={copyCode} className="copy-button">
+                <svg
+                  width="32"
+                  height="34"
+                  viewBox="0 0 32 34"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="clipboard"
+                >
+                  <path d="M25.3333 2.83333H19.76C19.2 1.19 17.7333 0 16 0C14.2667 0 12.8 1.19 12.24 2.83333H6.66667C5.2 2.83333 4 4.10833 4 5.66667V28.3333C4 29.8917 5.2 31.1667 6.66667 31.1667H25.3333C26.8 31.1667 28 29.8917 28 28.3333V5.66667C28 4.10833 26.8 2.83333 25.3333 2.83333ZM16 2.83333C16.7333 2.83333 17.3333 3.47083 17.3333 4.25C17.3333 5.02917 16.7333 5.66667 16 5.66667C15.2667 5.66667 14.6667 5.02917 14.6667 4.25C14.6667 3.47083 15.2667 2.83333 16 2.83333ZM25.3333 28.3333H6.66667V5.66667H9.33333V9.91667H22.6667V5.66667H25.3333V28.3333Z" />
+                </svg>
+              </div>
+            </div>
+            <button
+              onClick={hideCodeModal}
+              className="btn-in-modal continue-button"
+              centered
+            >
+              <strong>Continue</strong>
+            </button>
+          </Modal.Body>
+        </Modal>
+      </>
 
-            {/* "Leave Group" Modal Content */}
-            <>
-                <Modal className="modalcss" show={LeaveisOpen} onHide={hideLeaveModal} centered>
-                    <Modal.Body className="in-modal">
-                        <h5 className="modal-text modal-head"><strong>Are you sure you want to leave?</strong></h5>
-                        <h4 className="modal-text"><strong>{selectedGroup.groupName}</strong></h4>
-                        <p><button className="btn-in-modal leave-buttons" onClick={() => {hideLeaveModal(); leaveGroup()}}>Yes, I'm sure</button></p>
-                        <p><button onClick={hideLeaveModal} className="btn-in-modal leave-buttons">Nope, take me back</button></p>
-                    </Modal.Body>
-                </Modal>
-            </>
+      {/* "Leave Group" Modal Content */}
+      <>
+        <Modal
+          className="modalcss"
+          show={LeaveisOpen}
+          onHide={hideLeaveModal}
+          centered
+        >
+          <Modal.Body className="in-modal">
+            <h5 className="modal-text modal-head">
+              <strong>Are you sure you want to leave?</strong>
+            </h5>
+            <h4 className="modal-text">
+              <strong>{selectedGroup.groupName}</strong>
+            </h4>
+            <p>
+              <button
+                className="btn-in-modal leave-buttons"
+                onClick={() => {
+                  hideLeaveModal();
+                  leaveGroup();
+                }}
+              >
+                Yes, I'm sure
+              </button>
+            </p>
+            <p>
+              <button
+                onClick={hideLeaveModal}
+                className="btn-in-modal leave-buttons"
+              >
+                Nope, take me back
+              </button>
+            </p>
+          </Modal.Body>
+        </Modal>
+      </>
+    </div>
+  );
+};
 
 export default GroupsComponent;
