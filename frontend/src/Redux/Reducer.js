@@ -1,13 +1,30 @@
 //Define initial state
 const initialState = {
   refreshToken: "",
-  userObject: null,
+  userObject: {
+    email: "",
+    imageURL: "",
+    musicalProfile: {
+      acousticness: 0,
+      danceability: 0,
+      energy: 0,
+      instrumentalness: 0,
+      speechiness: 0,
+      trackPopularity: 0,
+      valence: 0,
+    },
+    name: "",
+    refreshToken: "",
+    topArtists: [],
+    topTracks: [],
+    userID: "",
+  },
   groupList: [],
   currentGroup: {
-    groupCode:'',
-    groupName:'',
-    groupUsers:[],
-    groupPlaylists:[],
+    groupCode: "",
+    groupName: "",
+    groupUsers: [],
+    groupPlaylists: [],
   },
 };
 
@@ -21,7 +38,7 @@ const reducer = (state = initialState, action) => {
     }
     //for updating user self object
     case "userObject/update": {
-      let newState = {...state, userObject: action.payload.newUser}
+      let newState = { ...state, userObject: action.payload.newUser };
       return newState;
     }
     //for updating user group list
