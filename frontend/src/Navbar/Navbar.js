@@ -1,15 +1,22 @@
 import './Navbar.css';
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import logo from '../overlap-logo.svg';
 import {Navbar, Nav, NavDropdown, Button} from 'react-bootstrap';
-import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import {updateGroupName} from '../Redux/Actions.js';
 
 const groupnames = ['Group 1', 'Group 2', 'Group 3', 'Group 4'];
 
 const Navbar1 = (props) => {
 
-    // let { path, url } = useRouteMatch();
+    const dispatch = useDispatch();
+    const groupList = useSelector(state => state.groupList);
+
+    const setCurrentGroup = (group) => {
+        dispatch(updateGroupName(group.groupName))
+    }
+
 
     return (
         <div className='navbar-stuff'>
@@ -19,9 +26,9 @@ const Navbar1 = (props) => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <NavDropdown title="My Groups" id="basic-nav-dropdown">
-                        {groupnames.map((group,i) => (
+                        {groupList.map((group,i) => (
                             <div>
-                                <NavDropdown.Item as={Link} to = "/authorized/GroupProfilePage">{group}</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} to="GroupProfilePage/GroupProfilePage" onClick={() => setCurrentGroup(group)} >{group.groupName}</NavDropdown.Item>
                             </div>
                             ))
                         }
