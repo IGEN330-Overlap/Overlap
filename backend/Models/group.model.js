@@ -26,6 +26,10 @@ const groupSchema = new Schema(
     ],
     playlists: [
       {
+        playlistName: {
+          type: String,
+          required: true,
+        },
         tracks: [
           {
             trackName: {
