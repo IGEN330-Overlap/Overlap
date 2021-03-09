@@ -118,7 +118,7 @@ exports.loginUser = async (req, res) => {
 
       //get user's top 30 artists
       try {
-        let data = await spotifyApi.getMyTopArtists({ limit: 25 });
+        let data = await spotifyApi.getMyTopArtists({ limit: 50 });
 
         // iterate over data and add relevant artist attributes
         for (x of data.body.items) {
