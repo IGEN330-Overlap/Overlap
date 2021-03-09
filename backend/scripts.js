@@ -39,13 +39,13 @@ function calculateMusicalProfile (data) {
     dataLen = data.length;
 
     musicalProfile = {
-        popularity: pop / dataLen,
-        danceability: (dnce / dataLen) * 100,
-        energy: (nrgy / dataLen) * 100,
-        speechiness: (spch / dataLen) * 100,
-        acousticness: (acst / dataLen) * 100,
-        instrumentalness: (inst / dataLen) * 100,
-        valence: (vale / dataLen) * 100,
+        trackPopularity: pop / dataLen,
+        danceability: (dnce / dataLen),
+        energy: (nrgy / dataLen),
+        speechiness: (spch / dataLen),
+        acousticness: (acst / dataLen),
+        instrumentalness: (inst / dataLen),
+        valence: (vale / dataLen),
       };
 
     return musicalProfile;

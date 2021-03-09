@@ -143,8 +143,15 @@ exports.loginUser = async (req, res) => {
       }
 
       // use scripted method for calculating musical profile and store in musicalProfile
-      
-      // musicalProfile = calculateMusicalProfile(topTracks);
+      musicalProfile = calculateMusicalProfile(topTracks);
+      // multiply so all attributes are on the 0-100 scale
+
+      musicalProfile.danceability *= 100; 
+      musicalProfile.energy *= 100;
+      musicalProfile.speechiness *= 100;
+      musicalProfile.acousticness *= 100;
+      musicalProfile.instrumentalness *= 100;
+      musicalProfile.valence *= 100;
 
       //get user object from SpotifyAPI
       spotifyApi.getMe().then(
@@ -159,7 +166,7 @@ exports.loginUser = async (req, res) => {
                 name: data.body.display_name,
                 imageURL: data.body.images[0].url,
                 email: data.body.email,
-                musicalProfile: calculateMusicalProfile(topTracks),
+                musicalProfile: musicalProfile,
                 topTracks: topTracks, // Add top 50 tracks with their attributes
                 topArtists: topArtists, // Add top 30 artists with their attributes
               },
