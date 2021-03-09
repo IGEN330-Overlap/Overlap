@@ -125,7 +125,7 @@ exports.loginUser = async (req, res) => {
           let artist = {};
 
           //if artist name is empty, continue
-          if (x.name.length === 0) {
+          if (x.name.length === 0 || x.name.length == null || x.images.length == 0) {
             continue;
           }
           artist.artistName = x.name;
@@ -164,7 +164,7 @@ exports.loginUser = async (req, res) => {
                 userID: data.body.id,
                 refreshToken: req.body.refreshToken,
                 name: data.body.display_name,
-                imageURL: data.body.images[0].url,
+                imageURL: data.body.images.length != 0 ? data.body.images[0].url : "",
                 email: data.body.email,
                 musicalProfile: musicalProfile,
                 topTracks: topTracks, // Add top 50 tracks with their attributes
@@ -180,7 +180,7 @@ exports.loginUser = async (req, res) => {
                   userID: data.body.id,
                   refreshToken: req.body.refreshToken,
                   name: data.body.display_name,
-                  imageURL: data.body.images[0].url,
+                  imageURL: data.body.images.length != 0 ? data.body.images[0].url : "",
                   email: data.body.email,
                   musicalProfile: musicalProfile,
                   topTracks: topTracks,
