@@ -1,0 +1,141 @@
+@import url(../variables.css);
+
+.landing-root {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+.landing-root .navbar {
+    position: relative;
+    z-index: 6;
+    animation-name: navbaropacity;
+    animation-duration: 3s;
+}
+.landing-root .main-column-box {
+    height: clamp(100px, 9vh, 150px);
+    width: 50vw;
+    background-color: var(--primary-color-main);
+    position: absolute;
+    z-index: 2;
+}
+
+.group-profile-page-components {
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.component-box {
+    height: 8vh;
+    width: 90vw;
+    z-index: 3;
+    background-color: var(--primary-color-main);
+}
+
+.group-name {
+    margin-top: 10px;
+    margin-left: 4vw;
+    height: clamp(55px, 9vw, 90px);
+    z-index: 3;
+}
+.landing-root .d-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.member-display {
+    width: 45vw;
+    max-height: 48vh;
+    margin-left: 4vw;
+    margin-bottom: 10px;
+}
+.playlist-carousel{
+    margin-left: 4vw;
+}
+
+.individual-comparisons {
+    margin-top: 70px;
+    margin-left: 8vw;
+    animation-name: insightanimation;
+    animation-duration: 2.75s;
+    animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
+}
+
+.main-column{
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes navbaropacity {
+    from {
+        background-color: var(--primary-color-main);
+    }
+    50% {
+        background-color: var(--primary-color-main);
+    }
+    to {
+        background-color: transparent;
+    }
+}
+
+@keyframes insightanimation {
+    from {
+        opacity: 0;
+        transform: translateX(500px);
+    }
+    75% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+@media (max-width: 780px) {
+    .individual-comparisons {
+        margin-left: 4vw;
+        margin-top: 10px;
+    }
+    .member-display {
+        width: 90vw;
+    }
+    .playlist-carousel {
+        margin-bottom: 15px;
+    }
+    .group-name {
+        width: 100vw;
+    }
+    .group-profile-page-components {
+        align-items: start;
+        justify-content: start;
+    }
+    .landing-root .main-column-box {
+        height: 100px;
+        width: 90vw;
+        z-index: 2;
+    }
+    .component-box {
+        height: 0px;
+    }
+}
+@media (max-height: 1200px) {
+    .component-box {
+        height: 2.5vh;
+    }
+}
+@media (max-height: 720px) {
+    .component-box {
+        height: 0px;
+    }
+}

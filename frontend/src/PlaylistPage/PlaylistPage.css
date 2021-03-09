@@ -1,0 +1,51 @@
+@import url(../variables.css);
+
+.playlist-landing-root {
+    width: auto;
+    height: 100vh;
+    background-color: #9D5C63;
+}
+
+.playlist-page-content {
+    display: flex;
+    height: 90vh;
+    width: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.playlist-page-name {
+    margin-left: 4vw;
+}
+
+.playlist-components {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.playlist-page-tracks-container {
+    margin-left: 2vw;
+    background: rgba(190, 154, 154, 0.25);
+    border-radius: 15px;
+    width: 425px;
+    height: max(55vh, 475px);
+}
+
+@media (max-width: 820px) {
+    .playlist-components {
+        align-items: flex-start;
+    }
+    .playlist-page-tracks-container {
+        background-color: transparent;
+        justify-content: center;
+        margin-left: 0px;
+    }   
+    .playlist-page-name {
+        width: 425px;
+        margin-left: 0px;
+    }
+}

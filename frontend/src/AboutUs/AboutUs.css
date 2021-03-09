@@ -1,0 +1,26 @@
+@import url(../variables.css);
+
+.text-blurb {
+    height: 25vh;
+}
+
+.display-babies {
+    margin-right: 2vw;
+    padding-top: 20px;
+}
+
+.about {
+    margin-left: 4vw;
+    margin-top: 2vw;
+}
+
+.about-root {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+

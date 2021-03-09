@@ -50,8 +50,13 @@ app.get('/login', function (req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
+  // provisionally required scopes below commented
+  /* 
+  user-top-read playlist-modify-public playlist-modify-private playlist-read-private playlist-read-collaborative user-follow-read user-library-read user-read-email user-read-private
+  */
+
   // your application requests authorization
-  var scope = 'user-read-private user-read-email user-top-read playlist-modify-public';
+  var scope = process.env.SCOPES
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -157,13 +162,12 @@ app.use(express.json());
 const uri = process.env.ATLAS_URI;
 
 // Instantiate mongoose connection
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
-);
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully"); // Verifies connection has been made
-}
-)
+});
 
 //use express router to define api endpoints from router.js
 const router = require("./router.js");

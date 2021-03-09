@@ -1,30 +1,43 @@
 import './Navbar.css';
-import logo from './overlap_image.jpg'
+import logo from '../overlap-logo.svg';
+import {Navbar, Nav, NavDropdown, Button} from 'react-bootstrap';
+import React from 'react';
+import { Link, useRouteMatch } from 'react-router-dom';
 
-const Navbar = (props) => {
+
+const groupnames = ['Group 1', 'Group 2', 'Group 3', 'Group 4'];
+
+const Navbar1 = (props) => {
+
+    // let { path, url } = useRouteMatch();
+
     return (
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container-fluid navbar-custom">
-                 <img width="65" height="25" src= {logo} alt="logo"/>      
-            <div class= "collapse navbar-collapse" id= "navbarNavAltMarkup">
-                <ul class="navbar-nav me-auto mb-lg-0">
-                    <li class="nav-item dropdown">  
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown">
-                            My Groups
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About Us</a>
-                    </li>
-                </ul>
-            </div>
-            </div>                       
-        </nav>
+        <div className='navbar-stuff'>
+        <Navbar bg="transparent" variant="dark" expand="sm">
+            <Navbar.Brand as={Link} to = "/authorized/"><img width="75" height="30" src= {logo} alt="logo"/></Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    <NavDropdown title="My Groups" id="basic-nav-dropdown">
+                        {groupnames.map((group,i) => (
+                            <div>
+                                <NavDropdown.Item as={Link} to = "/authorized/GroupProfilePage">{group}</NavDropdown.Item>
+                            </div>
+                            ))
+                        }
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item as={Link} to = "/authorized/">New Group</NavDropdown.Item>
+                    </NavDropdown> 
+                    <Nav.Link as={Link} to = "/authorized/AboutUs" bg="white">About Us</Nav.Link>
+                </Nav>
+                <Nav className="justify-content-end">
+                    <Button as={Link} to ="/" variant='secondary' size='sm'>Logout</Button>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+        </div>
     );  
 }
 
-export default Navbar;
+
+export default Navbar1;

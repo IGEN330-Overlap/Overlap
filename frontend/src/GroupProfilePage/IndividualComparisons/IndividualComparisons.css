@@ -1,0 +1,240 @@
+@import url(../../variables.css);
+
+.my-insights h1 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: 30px;
+    font-size: clamp(20px, 3vw, 28px);
+}
+
+.my-insights h2 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: clamp(10px, 1vw, 17px);
+    font-size: clamp(17px, 2vw, 20px);
+    width: fit-content;
+}
+
+.my-insights .heading {
+    margin-bottom: 5px;
+    width: fit-content;
+}
+.under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    background-color: var(--off-white-color);
+}
+
+.comparisons h1 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: clamp(20px, 3vw, 30px);
+}
+
+.comparisons h2 {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    margin-top: clamp(10px, 1vw, 17px);
+    font-size: clamp(13px, 1.25vw, 18px);
+    width: fit-content;
+}
+.comparisons .return-to-insights {
+    width: min(40vw, 475px);
+    display: flex;
+    justify-content: flex-end;
+}
+.comparisons h4 {
+    color: var(--blue-color-1);
+    font-size: min(2vw,1.15rem);
+    transition: color 0.25s;
+    width: 250px;
+}
+.comparisons h4:hover {
+    cursor: pointer;
+    color: var(--off-white-color);
+}
+.comparisons .heading {
+    margin-bottom: 5px;
+    align-items: center;
+    width: 400px;
+}
+.no-common-message h3{
+    font-size: clamp(11px, 2vw, 13px);
+    color: var(--blue-color-1);
+    width: min(40vw, 800px);
+    margin-right: 5px;
+    padding-right: 10px;
+    margin-left: 6px;
+}
+
+/* css for top artists section */
+
+.top-artists {
+    width: fit-content;
+}
+.top-artists .artist-display {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.top-artists .artist-container {
+    margin-left: 6px;
+    padding-right: 5px;
+}
+
+.top-artists .artist-icon {
+    margin-top: 3px;
+    height: clamp(86px,10vw,110px);
+    width: clamp(86px,10vw,110px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+.top-artists .artist-name {
+    display: flex;
+    flex-direction: row;
+    width: min(11.5vw,125px);
+}
+.top-artists .artist-name h5 {
+    color: var(--blue-color-1);
+    justify-content: start;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: min(1.15vw, 12px);
+    max-width: 15px;
+}
+.top-artists .artist-name .artist {
+    color: var(--off-white-color);
+    font-size: min(1.15vw, 12px);
+    margin-top: 3.5px;
+    margin-bottom: 5px;
+    margin-left: 4px;
+    width: min(9.5vw,100px);
+}
+
+/* css for top tracks section */
+
+.top-tracks {
+    width: fit-content;
+}
+.top-tracks .track-display {
+    width: fit-content;
+}
+.top-tracks .track-container h3 {
+    width: 20px;
+    font-size: 40px;
+    transition: 0.3s;
+}
+.top-tracks .track-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 8px;
+    margin-left: 6px;
+    margin-right: 5px;
+    padding-right: 10px;
+    width: min(40vw, 800px);
+    color: var(--off-white-color);
+    font-size: 20px;
+}
+.top-tracks .track-icon {
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.top-tracks .track-info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 29vw;
+    transition: 0.3s;
+}
+.top-tracks .track-info .track-title {
+    font-size: clamp(10px, 4vw, 18px);
+}
+.top-tracks .track-artist {
+    color: var(--blue-color-1);
+    font-size: 12px;
+    width: 29vw;
+    transition: 0.3s;
+}
+
+/* animations */
+.top-artists .artist-container:hover .artist-icon {
+    height: min(11vw,120px);
+    width: min(11vw,120px);
+}
+.top-artists .track-container:hover {
+    width: 31vw;
+    margin-right: 0px;
+}
+.top-tracks .track-container:hover h3 {
+    font-size: 45px;
+    color: var(--blue-color-1);
+}
+.top-tracks .track-container:hover .track-icon {
+    font-size: 45px;
+    width: 55px;
+    height: 55px;
+}
+.top-tracks .track-container:hover .track-info {
+    font-size: 21.5px;
+    width: 31vw;
+}
+.top-tracks .track-container:hover .track-artist {
+    font-size: 13px;
+    width: 31vw;
+}
+
+@media (max-width: 780px) {
+    .my-insights h1 {
+        margin-top: 24.67px;
+    }
+    .my-insights h4 {
+        width: 80vw;
+        font-size: 14px;
+    }
+    .comparisons h4 {
+        width: 200px;
+        font-size: 14px;
+    }
+    .top-artists .artist-display {
+        width: 90vw;
+    }
+    .top-artists .artist-container:hover .artist-icon {
+        height: 92px;
+        width: 92px;
+    }
+    .top-artists .artist-name {
+        width: 86.4px;
+    }
+    .top-artists .artist-name h5{
+        width: 11px;
+        font-size: 9px;
+    }
+    .top-artists .artist-name .artist {
+        width: 70px;
+        font-size: 9px;
+    }
+    .top-tracks .track-container {
+        width: 80vw;
+    }
+    .top-tracks .track-info {
+        width: 90vw;
+    }
+    .top-tracks .track-container:hover .track-info {
+        font-size: 21.5px;
+        width: 90vw;
+    }
+    .top-tracks .track-artist {
+        width: 90vw;
+    }
+    .comparisons .return-to-insights {
+        width: 80vw
+    }
+}

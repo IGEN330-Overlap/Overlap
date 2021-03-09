@@ -1,0 +1,163 @@
+/* CSS variables */
+@import url(../../variables.css);
+
+.title{
+    color: white;
+    font-size: 2.55vw;
+}
+
+.search-bar{
+    color: white;
+    background: url(./search.svg) left center no-repeat;
+    background-size: 8%;
+    padding: 1.5vw;
+    width: auto;
+}
+
+.input-search{
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: 1.5vw;
+}
+
+input::placeholder{
+    color: var(--neutral-color-7);
+    background: 
+      linear-gradient(var(--neutral-color-7), var(--neutral-color-7)) center bottom 0/100% 1px no-repeat;
+}
+
+input:focus{
+    outline: none;
+}
+
+.group-list{
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+    overflow-y: scroll;
+    direction: rtl;
+}
+
+/*customize scroll bar */
+.group-list::-webkit-scrollbar{
+    width: 4px;
+    height: 0.5vw;
+}
+.group-list::-webkit-scrollbar-track {
+    background-color: var(--primary-color-6);
+    opacity: 0.6;
+    border-radius: 10px;
+    margin-top: 1vw;
+}
+.group-list::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color-2);
+    border-radius: 10px;
+}
+
+.group-item{
+    direction: ltr;
+    justify-content: space-between;
+    padding: 10px;
+    padding-left: 1vw;
+}
+
+.groupButton{
+    display: flex;
+    width: 8.5em;
+    font-size: 1.5vw;
+    margin-right: 0.5em;
+    background-color: transparent;
+    color: white;
+    outline-color: transparent;
+    align-self: center;
+    overflow: hidden;
+}
+
+.groupButton:hover{
+    color: var(--blue-color-1);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.groupToggle{
+    background-color:transparent;
+    color: white;
+    outline-color: transparent;
+}
+
+.dots{
+    width: 1.5vw;
+    height: 100%;
+    fill: white;
+}
+
+.dots:hover{
+    fill: var(--blue-color-3);
+}
+
+.modal-dialog .modal-content{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: var(--blue-color-1);
+    width: 400px;
+} 
+
+.modal-text{
+    padding-bottom: 15px;
+    font-size: 1.5vw;
+}
+
+.btn-in-modal{
+    background-color: var(--blue-color-main);
+    color: white;
+    border-radius: 0.75rem;
+    border-color: transparent;
+    width: 15em;
+}
+
+.btn-in-modal:focus{
+    outline: none;
+}
+
+.copy-groupCode {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.copy-groupCode .copy-button .clipboard{
+    height: 22.5px;
+    margin-left: 0px;
+}
+.copy-groupCode .copy-button:hover .clipboard {
+    fill: white;
+}
+
+@media (max-width: 720px){
+    .title{
+        font-size: 30px;
+    }
+    .search-bar{
+        background-size: 20px;
+        padding-left: 20px;
+    }
+    .input-search{
+        font-size: 20px;
+    }
+    .group-list{
+        padding: 10px;
+    }
+    .group-list::-webkit-scrollbar-track {
+        margin-top: 5vw;
+    }
+    .groupButton{
+        font-size: 20px;
+    }
+    .modal-text{
+        font-size: 20px;
+    }
+    .dots{
+        width: 20px;
+    }
+}
