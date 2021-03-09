@@ -47,7 +47,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         res.json({ message: "error on finding users", error: err });
     }
 
-    let playlistTracksAndInfo = []; // array to store the tracks of our playlist
+    let duplicateBasedSongs = []; // array to store the tracks of our playlist
 
     let masterSet = []; //stores all top tracks as an item
     let masterIDs = []; //stores all track IDs as an item
@@ -158,7 +158,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     });
 
     // array to fill the remaining needed songs
-    let attributeBasedSongs = []; 
+    let attributeBasedSongs = [];
 
     // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
     for (var i = 0; attributeBasedSongs.length + numSongs < 30; i++) {
@@ -178,7 +178,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     for (i = 0; j < playlistTracks.length; i++) {
         // trackIDs match then add the corresponding data
         if (playlistTracks[j] == groupUniqueSet[i].trackID) {
-            playlistTracksAndInfo.push({
+            duplicateBasedSongs.push({
                 trackName: masterSet[i].trackName,
                 trackID: masterSet[i].trackID,
                 imageUrl: masterSet[i].imageURL,
@@ -199,12 +199,12 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     // Concatenate the duplicates and attribute based songs into one playlist
     playlist = {
         playlistName: req.body.playlistName,
-        tracks: playlistTracksAndInfo.concat(attributeBasedSongs),
+        tracks: duplicateBasedSongs.concat(attributeBasedSongs),
     };
 
     // Update playlist to the group
     try {
-        let data = await Group.updateOne(
+        await Group.updateOne(
             { groupCode: req.body.groupCode },
             { $addToSet: { playlists: playlist } }
         );
