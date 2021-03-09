@@ -156,13 +156,17 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
     for (var i = 0; i < groupUniqueSet.length; i++) {
         groupUniqueSet[i]["deltaFromGroup"] = (
-            Math.abs(x.trackPopularity - groupsMusicalProfile.trackPopularity) * attributeAdjust[0] +
-            Math.abs(x.danceability - groupsMusicalProfile.danceability) * attributeAdjust[1] +
-            Math.abs(x.energy - groupsMusicalProfile.energy) * attributeAdjust[2] +
-            Math.abs(x.valence - groupsMusicalProfile.valence) * attributeAdjust[3]
+            Math.abs(groupUniqueSet[i].trackPopularity - groupsMusicalProfile.trackPopularity) * attributeAdjust[0] +
+            Math.abs(groupUniqueSet[i].danceability - groupsMusicalProfile.danceability) * attributeAdjust[1] +
+            Math.abs(groupUniqueSet[i].energy - groupsMusicalProfile.energy) * attributeAdjust[2] +
+            Math.abs(groupUniqueSet[i].valence - groupsMusicalProfile.valence) * attributeAdjust[3]
             //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
         );
         // console.log(i)
+        if (i < 5){
+            console.log(groupUniqueSet[i].deltaFromGroup);
+            
+        }
     }
 
     // Sort the unique set by the deltaFromGroup to (lowest to highest)
@@ -171,6 +175,10 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         return parseFloat(a.deltaFromGroup) - parseFloat(b.deltaFromGroup);
     });
     // console.log(sortedTrackSet[40]);
+
+    // for (x of sortedTrackSet){
+    //     console.log(x.deltaFromGroup);
+    // }
 
 
     // array to fill the remaining needed songs
