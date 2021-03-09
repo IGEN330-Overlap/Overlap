@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupCode, updateGroupName, updateGroupPlaylists } from '../../Redux/Actions.js';
+import { updateGroupCode, updateGroupName, updateGroupPlaylists, updateGroupList } from '../../Redux/Actions.js';
 import Modal from 'react-bootstrap/Modal';
 import Dropdown from 'react-bootstrap/Dropdown';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -8,14 +8,20 @@ import './GroupsComponent.css';
 import line from './Line.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
 
+const axios = require("axios");
+
 //Component to display groups on Groups page
 const GroupsComponent = (props) => {
     
     const dispatch = useDispatch();
 
     //use relative url for react router
-    let { path, url } = useRouteMatch();
+    let { url } = useRouteMatch();
+
+    //variables for using states
     const groupList = useSelector(state => state.groupList);
+    const selectedGroup = useSelector(state => state.currentGroup);
+    const spotifyID = useSelector(state => state.userObject);
 
     //functions for opening and closing "Show Group Code" Modal
     const [CodeisOpen, setCodeIsOpen] = React.useState(false);
@@ -85,6 +91,25 @@ const GroupsComponent = (props) => {
         dispatch(updateGroupPlaylists(group.playlists))
     }
 
+    function leaveGroup(){
+        axios
+        .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
+            groupCode: selectedGroup.groupCode,
+            spotifyID: spotifyID.userID,
+        })
+        .then((data) => {
+            console.log(data.data.return)
+            axios
+            .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+            .then((data) => {
+                dispatch(updateGroupList(data.data))
+                console.log(data.data);
+            })
+            .catch((err) => console.log(err))
+        })
+        .catch((err) => console.log(err));
+    }
+
     return (
         // Flexbox for existing groups
         <div className="YourGroupsBox d-flex flex-column align-left">
@@ -120,10 +145,8 @@ const GroupsComponent = (props) => {
             <>
                 <Modal className="modalcss" show={CodeisOpen} onHide={hideCodeModal} centered>
                     <Modal.Body className="in-modal modal-body">
-                        {/* "Group Name" should be real group name endpoint */}
-                        <h5 className="modal-text modal-head"><strong>"Group Name" Code</strong></h5>
-                        {/* "EXAMPLE" to be replaced with a real code */}
-                        <div id="myCode"><h4 className="modal-text" type="text"><strong>EXAMPLE</strong></h4></div>
+                        <h5 className="modal-text modal-head"><strong>{selectedGroup.groupName} Code</strong></h5>
+                        <div id="myCode"><h4 className="modal-text" type="text"><strong>{selectedGroup.groupCode}</strong></h4></div>
                         <div className = "copy-groupCode">
                             <div onClick={copyCode} className="copy-button">
                                 <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
@@ -143,10 +166,8 @@ const GroupsComponent = (props) => {
                 <Modal className="modalcss" show={LeaveisOpen} onHide={hideLeaveModal} centered>
                     <Modal.Body className="in-modal">
                         <h5 className="modal-text modal-head"><strong>Are you sure you want to leave?</strong></h5>
-                        {/* "Group Name" to be replaced with real group name endpoint */}
-                        <h4 className="modal-text"><strong>"Group Name"</strong></h4>
-                        {/* BUTTON BELOW DOES NOT LINK TO ANYTHING */}
-                        <p><button className="btn-in-modal leave-buttons">Yes, I'm sure</button></p>
+                        <h4 className="modal-text"><strong>{selectedGroup.groupName}</strong></h4>
+                        <p><button className="btn-in-modal leave-buttons" onClick={() => {hideLeaveModal(); leaveGroup()}}>Yes, I'm sure</button></p>
                         <p><button onClick={hideLeaveModal} className="btn-in-modal leave-buttons">Nope, take me back</button></p>
                     </Modal.Body>
                 </Modal>

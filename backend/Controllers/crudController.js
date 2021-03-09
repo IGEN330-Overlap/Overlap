@@ -47,6 +47,7 @@ exports.getUser = async (req, res) => {
     });
 };
 
+
 /**
  * middle ware for creating a group
  * POST method to create a new group
