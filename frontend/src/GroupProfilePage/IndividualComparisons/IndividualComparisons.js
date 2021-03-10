@@ -29,7 +29,7 @@ export const MyInsights = (props) => {
                 <h2><strong>Top Artists</strong></h2>
                 <div className="artist-display">
                     {myTopArtists.map((artist,i) => (
-                        <div className="artist-container">
+                        <div className="artist-container" key={i}>
                             <img className="artist-icon" src={artist.icon} alt={artist.artist}></img>
                             <div className="artist-name">
                                 <h5><strong>{[i+1]} / </strong></h5>
@@ -44,7 +44,7 @@ export const MyInsights = (props) => {
                 <h2><strong>Top Tracks</strong></h2>
                 <div className="track-display">
                     {myTopTracks.map((track,i) => (
-                        <div className="track-container">
+                        <div className="track-container" key={i}>
                             <h3><strong>{[i+1]}</strong></h3>
                             <img className="track-icon" src={track.icon} alt={track.track}/>
                             <div className="track-info">    
@@ -157,7 +157,7 @@ export const Comparisons = ({member_id, toCompare}) => {
                 ?
                 <div className="artist-display">
                     {compareArtists.slice(0,3).map((artist,i) => (
-                        <div className="artist-container">
+                        <div className="artist-container" key={i}>
                             <img className="artist-icon" src={artist.icon} alt={artist.artist}></img>
                             <div className="artist-name">
                                 <h5><strong>{[i+1]} / </strong></h5>
@@ -181,7 +181,7 @@ export const Comparisons = ({member_id, toCompare}) => {
                 ?                                                                      
                 <div className="track-display">
                     {compareTracks.slice(0,3).map((track,i) => (
-                        <div className="track-container">
+                        <div className="track-container" key={i}>
                             <h3><strong>{[i+1]}</strong></h3>
                             <img className="track-icon" src={track.icon} alt={track.track}/>
                             <div className="track-info">
