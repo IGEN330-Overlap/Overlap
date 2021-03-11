@@ -271,19 +271,21 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   // Update playlist to the group
   try {
-    await Group.updateOne(
+    Group.updateOne(
       { groupCode: req.body.groupCode },
       { $addToSet: { playlists: playlist } }
-    );
-
-    // for (x of playlist.tracks){
-    //     console.log(x.trackName);
-    // }
-
-    res.json({
-      message: "added playlist to the group",
-      playlist: playlist,
-    });
+    ).then(() => {
+      // for (x of playlist.tracks){
+      //     console.log(x.trackName);
+      // }
+      res.json({
+        message: "added playlist to the group",
+        playlist: playlist,
+      });
+    })
+    .catch((err) => {
+      res.json({ message: "Unable to add playlist to group", error: err});
+    })
   } catch (err) {
     res.json({
       message: "Unable to add playlist to the group",
@@ -304,9 +306,8 @@ exports.createSpotifyPlaylist = async (req, res) => {
 
   // find the group and the corresponding playlistID (playlist object ID)
   try {
-    let data = await Group.findOne(
-      { groupCode: req.body.groupCode },
-      { playlist: { $elemMatch: { _id: req.body.playlistID } } }
+    let data = await Group.find(
+      { "_id": req.body.playlistID},
     );
     res.json(data); // SHIT DOESN'T WORK
   } catch (err) {
