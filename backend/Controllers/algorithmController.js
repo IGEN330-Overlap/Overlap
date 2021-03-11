@@ -270,6 +270,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   };
 
   // Update playlist to the group
+  // Note: no error is thrown when the groupCode is incorrect / dne
   try {
     Group.updateOne(
       { groupCode: req.body.groupCode },
@@ -304,14 +305,58 @@ exports.createSpotifyPlaylist = async (req, res) => {
   // Connect to spotify API using the owners refresh access token
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
+  let formattedTrackIds = [];
+  let playlistName;
+
   // find the group and the corresponding playlistID (playlist object ID)
   try {
     let data = await Group.find(
-      { "_id": req.body.playlistID},
+      { groupCode: req.body.groupCode },
+      { playlists: {$elemMatch: {_id: req.body.playlistID}} }
     );
-    res.json(data); // SHIT DOESN'T WORK
+
+    playlistName = data[0].playlists[0].playlistName; // Set playlist Name
+
+    // Add the spotify track ids in the necessary format for adding to playlist
+    for (x of data[0].playlists[0].tracks){
+      formattedTrackIds.push("spotify:track:" + x.trackID);
+    }
+
   } catch (err) {
     res.json(err);
+  }
+
+  let playlistID; // variable to store playlist ID (spotify based)
+  try {
+      let data = await spotifyApi.refreshAccessToken();
+      spotifyApi.setAccessToken(data.body.access_token)
+
+      try {
+          // create spotify plyalist using the given playlist name
+          // TODO adding descriptions???????
+          let data = await spotifyApi.createPlaylist(playlistName, {description: "jams", public: true})
+          playlistID = data.body.id // collect playlist id so we can add to it later
+          console.log("playlist creation status code: ", data.statusCode);
+      } catch(err) {
+          res.json(err)
+      }
+
+      try{
+          // Add the tracks to the spotify playlist
+          let data = await spotifyApi.addTracksToPlaylist(playlistID, formattedTrackIds)
+          console.log("playlist song addition status code: ", data.statusCode);
+          
+          res.json({
+            message: "Successfully added playlist and the tracks to spotify",
+            playlistID: playlistID,
+            playlist: formattedTrackIds
+          })
+      } catch (err) {
+          res.json(err)
+      }
+  } catch (err) {
+      // console.log(err)
+      res.json(err)
   }
 };
 
