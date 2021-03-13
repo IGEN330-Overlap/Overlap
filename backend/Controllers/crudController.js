@@ -111,8 +111,10 @@ exports.joinGroup = async (req, res) => {
     { groupCode: req.body.groupCode }, //filter
     { $addToSet: { users: req.body.spotifyID } }
   )
-    .then(() => {
-      //add groupCode to user object
+    .then((data) => {
+      //if updateOne modified
+      if (data.n != 0 ) {
+        //add groupCode to user object
       User.updateOne(
         { userID: req.body.spotifyID }, //filter
         { $addToSet: { groups: req.body.groupCode } }
@@ -125,16 +127,20 @@ exports.joinGroup = async (req, res) => {
         })
         //error with adding group to user object
         .catch((err) => {
-          res.json({
+          res.status(400).json({
             message: "Unable to add group to user object",
             error: err,
           });
         });
+      }
+      else {
+        throw new Error("Group does not exist.")
+      }
     })
     //error with adding user to group object
     .catch((err) => {
-      res.json({
-        message: "Unable to add user to group object",
+      res.status(400).json({
+        message: "Group does not exist.",
         error: err,
       });
     });
