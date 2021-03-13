@@ -16,6 +16,29 @@ var spotifyApi = new SpotifyWebApi({
 let User = require("../Models/user.model");
 let Group = require("../Models/group.model");
 
+
+exports.getRecommendations = async(req, res) => {
+
+  spotifyApi.setRefreshToken(req.body.refreshToken);
+
+  try {
+    spotifyApi.setAccessToken(data.body.access_token)
+
+    let data = await spotifyApi.getRecommendations({
+      target_danceability: 57.4,
+      target_energy: 76.62,
+      target_valence: 43.38,
+      seed_artists: ['6048099f7ec4121f20f32d01', '6048099f7ec4121f20f32d02'],
+      min_popularity: 50
+    })
+    let recommendations = data.body;
+    res.json(recommendations);
+
+  } catch (err) {
+    res.json(err)
+  }
+}
+
 // exports.manuallyAddUser = async (req, res) => {
 //   User.updateOne(
 //       {userID: req.body.id }, // Filter

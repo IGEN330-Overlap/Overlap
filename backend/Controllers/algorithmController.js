@@ -354,6 +354,7 @@ exports.createSpotifyPlaylist = async (req, res) => {
       } catch (err) {
           res.json(err)
       }
+      //TO IMPLEMENT adding an image cover to the playlist????
   } catch (err) {
       // console.log(err)
       res.json(err)
