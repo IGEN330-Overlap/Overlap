@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateRefreshToken, updateUser, updateGroupList } from "./Redux/Actions.js";
+import {
+  updateRefreshToken,
+  updateUser,
+  updateGroupList,
+} from "./Redux/Actions.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import LandingPage from "./LandingPage/LandingPage";
@@ -38,10 +42,18 @@ function App() {
   const refreshToken = useSelector((state) => state.refreshToken);
 
   //Get group list from a user upon login
-  const userObject = useSelector(state => state.userObject);
+  const userObject = useSelector((state) => state.userObject);
 
   //Update refresh token on App render
-  dispatch(updateRefreshToken(params.refresh_token));
+  //if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
+  if (params.refresh_token !== "" && params.refresh_token !== undefined) {
+    localStorage.setItem("refreshToken", params.refresh_token);
+    dispatch(updateRefreshToken(params.refresh_token));
+  }
+  //else if localStorage contains refresh token, dispatch update for redux store
+  else if (localStorage.getItem("refreshToken") !== undefined) {
+    dispatch(updateRefreshToken(localStorage.getItem("refreshToken")));
+  }
 
   //User Effect hook for logging in the user with API upon refreshToken update
   useEffect(() => {
@@ -50,7 +62,6 @@ function App() {
         refreshToken: refreshToken,
       })
       .then((data) => {
-        console.log(data.data.return);
         dispatch(updateUser(data.data.return));
       })
       .catch((err) => console.log(err));
@@ -59,15 +70,21 @@ function App() {
   //User Effect to get user group list when userObject is updated
   useEffect(() => {
     if (userObject != null) {
-      axios
-        .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
-        .then((data) => {
-            dispatch(updateGroupList(data.data))
-            console.log(data.data);
-        })
-        .catch((err) => console.log(err));
+      if (userObject.userID !== "") {
+        axios
+          .get(
+            process.env.REACT_APP_BACKEND_URL +
+              "/users/" +
+              userObject.userID +
+              "/groups"
+          )
+          .then((data) => {
+            dispatch(updateGroupList(data.data));
+          })
+          .catch((err) => console.log(err));
+      }
     }
-  }, [userObject])
+  }, [userObject]);
 
   //Start return statement
   return (
@@ -83,15 +100,9 @@ function App() {
           render={() => <AuthorizedPage />}
           exact={true}
         />
-        <Route path="/authorized/AboutUs" render={() => <AboutUs />} />
-        <Route
-          path="/authorized/GroupProfilePage"
-          render={() => <GroupProfilePage />}
-        />
-        <Route
-          path="/authorized/PlaylistPage"
-          render={() => <PlaylistPage />}
-        />
+        <Route path="/authorized/about" render={() => <AboutUs />} />
+        <Route path="/authorized/group" render={() => <GroupProfilePage />} />
+        <Route path="/authorized/playlist" render={() => <PlaylistPage />} />
       </Switch>
     </div>
   );

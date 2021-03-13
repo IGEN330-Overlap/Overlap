@@ -60,8 +60,8 @@ const PlaylistCarousel = (props) => {
 
     let carouselElement = fourPlaylists.map((playlist, i) => {
       return (
-        <div className="playlistcover-container">
-          <Link to="/authorized/PlaylistPage/PlaylistPage/" className="links">
+        <div className="playlistcover-container" key={i}>
+          <Link to="/authorized/playlist/playlistcode" className="links">
             <img
               className="playlistcover"
               src={cover_src[i]}
@@ -95,8 +95,8 @@ const PlaylistCarousel = (props) => {
           </div>
         </div>
         <Carousel interval={null} indicators={false} defaultActiveIndex={0}>
-          {carouselArray.map((element) => (
-            <Carousel.Item>
+          {carouselArray.map((element, i) => (
+            <Carousel.Item key={i}>
               <div className="display-playlists">{element}</div>
             </Carousel.Item>
           ))}
