@@ -42,8 +42,6 @@ const GroupsComponent = (props) => {
     setLeaveIsOpen(false);
   };
 
-  var url = ''
-
   //custom toggle as three dots
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <div
@@ -144,10 +142,9 @@ const GroupsComponent = (props) => {
             onClick={() => setCurrentGroup(group)}
           >
             <Dropdown as={ButtonGroup}>
-                {url = "/authorized/group/"+ group.groupCode}
               <Link
                 // change this later
-                to={url}
+                to={"/authorized/group/"+group.groupCode}
                 className="groupButton"
                 onClick={() => setCurrentGroup(group)}
               >

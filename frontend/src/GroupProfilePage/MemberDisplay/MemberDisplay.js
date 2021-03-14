@@ -1,41 +1,23 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupUsers } from '../../Redux/Actions.js';
+import React from 'react';
+import { useSelector } from 'react-redux';
+// import { updateGroupUsers } from '../../Redux/Actions.js';
 
 import './MemberDisplay.css';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 import add_member from './add-member.svg';
 
-const axios = require("axios");
+// const axios = require("axios");
 
-const MemberDisplay = ({name, toCompare}) => {
-
-  const dispatch = useDispatch();
+const MemberDisplay = ({groupUsers, toCompare}) => {
 
   const userObject = useSelector(state => state.userObject)
 
-  const groupCode = useSelector(state => state.currentGroup.groupCode)
-
-  // use effect to get user info for each user in the group
-  useEffect(() => {
-    axios
-    // using an existing group for now, need to replace with group code later
-    .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
-    .then((data) => {
-      console.log(data.data)
-      var group_users = data.data
-      dispatch(updateGroupUsers(group_users))
-    })
-    .catch((err) => console.log(err))
-  }, [userObject])
-
   // primary user
-  const primary_user = useSelector(state => state.userObject.name)
-  const primary_icon = useSelector(state => state.userObject.imageURL)
+  const primary_user = userObject ? userObject.name : ''
+  const primary_icon = userObject ? userObject.imageURL : ''
 
   // group members
-  const groupUsers = useSelector(state => state.currentGroup.groupUsers)
   const members = []
   const icon_src = []
   const member_id = []
@@ -54,7 +36,8 @@ const MemberDisplay = ({name, toCompare}) => {
       <Popover.Title as="h3">Your Group Code</Popover.Title>
       <Popover.Content>
           <div className="copy-code">
-            <div id = "myCode">{groupCode}</div>
+            {/* fix */}
+            <div id = "myCode">code</div>
             <div onClick={copyCode} className="copy-button">
               <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
                 <path 

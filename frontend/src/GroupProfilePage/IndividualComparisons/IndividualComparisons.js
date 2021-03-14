@@ -66,7 +66,7 @@ export const MyInsights = (props) => {
     )
 }
 
-export const Comparisons = ({member_id, toCompare}) => {
+export const Comparisons = ({groupUsers, member_id, toCompare}) => {
     
     const userObject = useSelector(state => state.userObject)
 
@@ -89,8 +89,7 @@ export const Comparisons = ({member_id, toCompare}) => {
     // compare top artists and tracks
     var compare_name = ''
     var compare_info = ''
-    const getGroupUsers = useSelector((state) => state.currentGroup.groupUsers)
-    getGroupUsers.map((user) => {
+    groupUsers.map((user) => {
         if (user.userID === member_id){
             compare_name = user.name
             compare_info = user
@@ -128,7 +127,6 @@ export const Comparisons = ({member_id, toCompare}) => {
     compareArtists.sort(function(a,b){
         return a.rank - b.rank
     })
-    console.log(compareArtists)
 
     myTopTracks.map((myTrack, i) => {
         userCompareTracks.map((compTrack, j) => {
