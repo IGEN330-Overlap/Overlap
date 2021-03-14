@@ -22,18 +22,50 @@ exports.getRecommendations = async(req, res) => {
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
   try {
+    let data = await spotifyApi.refreshAccessToken();
     spotifyApi.setAccessToken(data.body.access_token)
+    let info = [];
 
-    let data = await spotifyApi.getRecommendations({
-      target_danceability: 57.4,
-      target_energy: 76.62,
-      target_valence: 43.38,
-      seed_artists: ['6048099f7ec4121f20f32d01', '6048099f7ec4121f20f32d02'],
-      min_popularity: 50
-    })
-    let recommendations = data.body;
-    res.json(recommendations);
+    try {
+      // Get recommendations for the group
+      let data = await spotifyApi.getRecommendations({
+        target_danceability: 0.574,
+        target_energy: 0.7662,
+        target_valence: 0.4338,
+        min_popularity: 50,
+        // seed_artists: [
+        //   "2xaAOVImG2O6lURwqperlD",
+        //   "4sTQVOfp9vEMCemLw50sbu",
+        //   "3TVXtAsR1Inumwj472S9r4",
+        // ],
+        seed_tracks: [
+          "2CgOd0Lj5MuvOqzqdaAXtS",
+          "4Sfa7hdVkqlM8UW5LsSY3F",
+          "7gMlhlV1AllhpBM8ssg7z6"
+        ]
+      })
+      
+      // add the songs ensuring that their type is correct and that there is populated data
+      for (x of data.body.tracks){
+        if (x.type == "track" && x.album.images.length != 0){          
+          info.push({
+            trackName: x.name,
+            trackID: x.id,
+            imageURL: x.album.images[0].url,
+            linkURL: x.external_urls.spotify,
+            artistName: x.artists[0].name,
+            identifier: x.name + " " + x.artists[0].name
+          })
+        }
+      }
 
+      res.json(info)
+      // console.log(recommendations.tracks.length)
+
+      // res.json(info);
+    } catch (err) {
+      res.json(err)
+    }
   } catch (err) {
     res.json(err)
   }
