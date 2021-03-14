@@ -23,6 +23,21 @@
     z-index: 2;
 }
 
+.loading-message{
+    font-size: 2vw;
+    color: var(--off-white-color);
+    opacity: 0;
+    animation-name: loading-message;
+    animation-duration: 3s;
+}
+.wrong-group{
+    font-size: 2vw;
+    color: var(--off-white-color);
+    position: absolute;
+    animation-name: wrong-group;
+    animation-duration: 4s;
+}
+
 .group-profile-page-components {
     width: 100vw;
     height: 90vh;
@@ -99,6 +114,30 @@
     to {
         opacity: 1;
         transform: translateX(0px);
+    }
+}
+
+@keyframes loading-message {
+    from {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes wrong-group {
+    from {
+        opacity: 0;
+    }
+    75% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 

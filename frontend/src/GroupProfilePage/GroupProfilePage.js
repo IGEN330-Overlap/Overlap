@@ -19,11 +19,11 @@ const GroupProfilePage = (props) => {
     // get group name
     const groupList = useSelector((state) => state.groupList)
     var groupName
-    var checkMember = 'false'
-    groupList.map((group) => {
+    var checkMember = ''
+    groupList.map((group,i) => {
         if (group.groupCode === groupCode){
             // add function to check if user is member of group
-            checkMember = ''
+            checkMember = 'true'
             groupName = group.groupName
         }
         return groupName;
@@ -49,10 +49,8 @@ const GroupProfilePage = (props) => {
         selectMember(value);
     }
 
-    return checkMember 
+    return (checkMember === 'true') 
     ? 
-    <div>Sorry, it looks like you're not part of this group!</div>
-    :
     (     
         <div className="landing-root">
             <div className="navbar">
@@ -82,6 +80,11 @@ const GroupProfilePage = (props) => {
             </div>
         </div>
     )
+    :
+    <div className = "landing-root">
+        <div className = "loading-message">Loading...</div>
+        <div className = "wrong-group">Sorry, it looks like you're not part of this group!</div>
+    </div>
 }
 
 export default GroupProfilePage;
