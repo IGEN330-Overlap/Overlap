@@ -46,7 +46,7 @@ function App() {
 
   //Update refresh token on App render
   //if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
-  if (params.refresh_token !== "" && params.refresh_token !== undefined) {
+  if (params.refresh_token !== "" && params.refresh_token != undefined) {
     localStorage.setItem("refreshToken", params.refresh_token);
     dispatch(updateRefreshToken(params.refresh_token));
   }
@@ -90,7 +90,7 @@ function App() {
   return (
     <div className="App">
       {/* Redirect if not logged in with spotify */}
-      {refreshToken.length === 0 && <Redirect to="/" />}
+      {(refreshToken == null || refreshToken.length === 0) && <Redirect to="/" />}
       <Switch>
         {/* Route for root */}
         <Route path="/" render={() => <LandingPage />} exact={true} />
