@@ -3,15 +3,17 @@ import { useSelector } from 'react-redux'
 import './IndividualComparisons.css';
 
 export const MyInsights = (props) => {
-       
-    const getTopArtists = useSelector((state) => state.userObject.topArtists).slice(0,3);
+    
+    const userObject = useSelector(state => state.userObject)
+
+    const getTopArtists = userObject ? userObject.topArtists.slice(0,3) : []
     const myTopArtists = []
     getTopArtists.map((artist,i) => {
         myTopArtists[i]=({artist: artist.artistName, icon: artist.imageURL})
         return myTopArtists
     })
 
-    const getTopTracks = useSelector((state) => state.userObject.topTracks).slice(0,3);
+    const getTopTracks = userObject ? userObject.topTracks.slice(0,3) : []
     const myTopTracks = []
     getTopTracks.map((track,i) => {
         myTopTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
@@ -66,20 +68,23 @@ export const MyInsights = (props) => {
 
 export const Comparisons = ({member_id, toCompare}) => {
     
+    const userObject = useSelector(state => state.userObject)
+
     // user top artists and tracks
-    const getTopArtists = useSelector((state) => state.userObject.topArtists)
+    const getTopArtists = userObject ? userObject.topArtists : []
     const myTopArtists = []
     getTopArtists.map((artist,i) => {
         myTopArtists[i]=({artist: artist.artistName, icon: artist.imageURL})
         return myTopArtists
     })
 
-    const getTopTracks = useSelector((state) => state.userObject.topTracks)
+    const getTopTracks = userObject ? userObject.topTracks : []
     const myTopTracks = []
     getTopTracks.map((track,i) => {
-        myTopTracks[i]=({track:track.trackName, artist: track.artistName, icon: track.imageURL})
+        myTopTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
         return myTopTracks
     })
+
 
     // compare top artists and tracks
     var compare_name = ''

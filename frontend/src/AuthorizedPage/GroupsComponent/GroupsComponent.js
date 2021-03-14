@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  updateGroupCode,
-  updateGroupName,
-  updateGroupPlaylists,
+//   updateGroupCode,
+//   updateGroupName,
+//   updateGroupPlaylists,
   updateGroupList,
 } from "../../Redux/Actions.js";
 import Modal from "react-bootstrap/Modal";
@@ -41,6 +41,8 @@ const GroupsComponent = (props) => {
   const hideLeaveModal = () => {
     setLeaveIsOpen(false);
   };
+
+  var url = ''
 
   //custom toggle as three dots
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -87,9 +89,7 @@ const GroupsComponent = (props) => {
   }
 
   const setCurrentGroup = (group) => {
-    dispatch(updateGroupName(group.groupName));
-    dispatch(updateGroupCode(group.groupCode));
-    dispatch(updateGroupPlaylists(group.playlists));
+    
   };
 
   function leaveGroup() {
@@ -144,8 +144,10 @@ const GroupsComponent = (props) => {
             onClick={() => setCurrentGroup(group)}
           >
             <Dropdown as={ButtonGroup}>
+                {url = "/authorized/group/"+ group.groupCode}
               <Link
-                to="/authorized/group/groupid"
+                // change this later
+                to={url}
                 className="groupButton"
                 onClick={() => setCurrentGroup(group)}
               >
@@ -177,11 +179,11 @@ const GroupsComponent = (props) => {
         >
           <Modal.Body className="in-modal modal-body">
             <h5 className="modal-text modal-head">
-              <strong>{selectedGroup.groupName} Code</strong>
+              {/* <strong>{selectedGroup.groupName} Code</strong> */}
             </h5>
             <div id="myCode">
               <h4 className="modal-text" type="text">
-                <strong>{selectedGroup.groupCode}</strong>
+                {/* <strong>{selectedGroup.groupCode}</strong> */}
               </h4>
             </div>
             <div className="copy-groupCode">
@@ -221,7 +223,7 @@ const GroupsComponent = (props) => {
               <strong>Are you sure you want to leave?</strong>
             </h5>
             <h4 className="modal-text">
-              <strong>{selectedGroup.groupName}</strong>
+              {/* <strong>{selectedGroup.groupName}</strong> */}
             </h4>
             <p>
               <button
