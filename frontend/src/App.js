@@ -46,7 +46,7 @@ function App() {
 
   //Update refresh token on App render
   //if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
-  if (params.refresh_token !== "" && params.refresh_token != undefined) {
+  if (params.refresh_token !== "" && params.refresh_token !== undefined && params.refresh_token !== null) {
     localStorage.setItem("refreshToken", params.refresh_token);
     dispatch(updateRefreshToken(params.refresh_token));
   }
