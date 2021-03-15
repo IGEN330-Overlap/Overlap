@@ -1,13 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-// import { updateGroupUsers } from '../../Redux/Actions.js';
 
 import './MemberDisplay.css';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 import add_member from './add-member.svg';
-
-// const axios = require("axios");
 
 const MemberDisplay = ({groupUsers, toCompare}) => {
 
@@ -40,7 +37,6 @@ const MemberDisplay = ({groupUsers, toCompare}) => {
       <Popover.Title as="h3">Your Group Code</Popover.Title>
       <Popover.Content>
           <div className="copy-code">
-            {/* fix */}
             <div id = "myCode">{groupCode}</div>
             <div onClick={copyCode} className="copy-button">
               <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
