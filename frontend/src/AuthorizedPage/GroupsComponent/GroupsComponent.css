@@ -35,7 +35,7 @@ input:focus{
     display: flex;
     flex-direction: column;
     height: 25vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     direction: rtl;
 }
 
