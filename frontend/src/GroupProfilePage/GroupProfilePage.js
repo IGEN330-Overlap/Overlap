@@ -28,7 +28,7 @@ const GroupProfilePage = (props) => {
         return groupName;
     })
 
-    // get group users
+    // get group users and assign to groupUsers variable
     const [groupUsers, setUsers] = useState('')
 
     useEffect (() => {
@@ -64,6 +64,7 @@ const GroupProfilePage = (props) => {
                             <GroupName groupName = {groupName} />
                         </div>
                         <div className="member-display">
+                            {/* render members display when group users variable is populated */}
                             {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare}/>}
                         </div>
                         <div className="playlist-carousel">
@@ -71,6 +72,8 @@ const GroupProfilePage = (props) => {
                         </div>
                     </div> 
                     <div className="individual-comparisons">
+                        {/* if user has clicked on a member to compare, will render comparisons component
+                            otherwise, render insights component */}
                         {member_id 
                             ? <Comparisons groupUsers={groupUsers} member_id={member_id} toCompare={toCompare} /> 
                             : <MyInsights />}
@@ -80,8 +83,10 @@ const GroupProfilePage = (props) => {
         </div>
     )
     :
+    // loading screen while checking if user is member of group
     <div className = "landing-root-error">
         <div className = "loading-message">Collecting your group's information...</div>
+        {/* wrong group error if user is trying to access group they're not part of */}
         <div className = "wrong-group">
             Oops! It looks like you're not part of this group :(
             <div>

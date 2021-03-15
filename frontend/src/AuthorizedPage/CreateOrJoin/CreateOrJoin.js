@@ -23,7 +23,6 @@ const CreateOrJoin = (props) => {
     const spotifyID = useSelector(state => state.userObject);
     
     //Create new group on arrow click
-
     function createNewGroup(){
         input_name = document.getElementById("newGroupName").value
         if (input_name === "") {
@@ -82,7 +81,7 @@ const CreateOrJoin = (props) => {
         document.getElementById("joinGroupCode").value = ''
     }
 
-    //redirect to new group page
+    //Redirect to new group page when group_code changes
     useEffect(() => {
         if(group_code !== '') {
             console.log(group_code)

@@ -139,7 +139,6 @@ const GroupsComponent = (props) => {
           >
             <Dropdown as={ButtonGroup}>
               <Link
-                // change this later
                 to={"/authorized/group/"+group.groupCode}
                 className="groupButton"
               >
@@ -223,7 +222,7 @@ const GroupsComponent = (props) => {
               <strong>Are you sure you want to leave?</strong>
             </h5>
             <h4 className="modal-text">
-              {/* <strong>{selectedGroup.groupName}</strong> */}
+              <strong>{groupName}</strong>
             </h4>
             <p>
               <button

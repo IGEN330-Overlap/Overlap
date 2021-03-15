@@ -1,6 +1,8 @@
 import React from 'react';
 import './GroupName.css';
 
+// display group name on group profile page
+
 const GroupName = ({groupName}) => {
 
     return(
