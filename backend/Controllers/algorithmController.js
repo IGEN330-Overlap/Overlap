@@ -36,7 +36,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   });
 
   let numUsers = userIDs.length; // keep track of number of users
-
   console.log("Users", userIDs); //debugging
 
   // Collect user top track data into top tracks array
@@ -71,6 +70,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     }
   }
 
+  // Put all the artists into one array (master set)
   for (x of usersTopArtists) {
     for (data of x) {
       masterSetArtists.push(data.artistID);
@@ -79,8 +79,15 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   console.log("masterset length", masterSetTracks.length); //debugging
 
-  /* Let's algorithm: This is making a 30 song playlist */
+  /* Let's algorithm: This is making a 30 song playlist 
+    NOTE: what happens if one person is in the group and tries to make a playlist?????
+    algo off the top of my head would no likey, needs small adjustment at top of this block of ifs 
+  */
 
+  let playlistTracks = []; // Array to store songs to be added to playlist
+  let duplicateBasedSongs = []; // array to store the tracks of our playlist
+  let recommendations = []; // Array to store the recommendations
+  
   // Count occurences of songs in master set
   let counts = findDuplicatesArr.reduce((a, c) => {
     a[c] = (a[c] || 0) + 1;
@@ -89,20 +96,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   // find max count of common occurences in the masterID set
   let maxCountTracks = Math.max(...Object.values(counts));
-  // uncover most commonly occuring ids and store to most Frequent tracks
-
-  let playlistTracks = []; // Array to store songs to be added to playlist
-  let attributeBasedSongs = []; // array to fill the remaining needed songs
-  let duplicateBasedSongs = []; // array to store the tracks of our playlist
-  let recommendations = []; // Array to store the recommendations
-
-  /*
-      NOTE: what happens if one person is in the group and tries to make a playlist?????
-      algo off the top of my head would no likey, needs small adjustment at top of this block of ifs 
-  */
-
-  // debugging stuff
-  let dummy = Object.keys(counts).filter((k) => counts[k] === maxCountTracks);
 
   // If there are at least 2 users and max count occurs in at least half the users
   if (numUsers <= 2 && maxCountTracks == 2) {
@@ -166,13 +159,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     console.log("no frequent tracks added :(");
   }
 
-  // console.log("Duplicate based songs", playlistTracks); //debugging
-
   // Using track sounds to add the rest of the songs
   // To implement (BETTER WAYS possibly)
-  let groupsMusicalProfile = Scripts.calculateMusicalProfile(
-    usersMusicalProfile
-  );
+  let groupsMusicalProfile = Scripts.calculateMusicalProfile(usersMusicalProfile);
   // console.log("groups musical profile", groupsMusicalProfile);
 
   // Remove all duplicates and add to the new array groupUniqueSet
@@ -187,36 +176,26 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
   for (var i = 0; i < groupUniqueSet.length; i++) {
     groupUniqueSet[i]["deltaFromGroup"] =
-      attributeAdjust[0] *
-        Math.abs(
-          groupUniqueSet[i].data.trackPopularity -
-            groupsMusicalProfile.trackPopularity
-        ) +
-      attributeAdjust[1] *
-        Math.abs(
-          groupUniqueSet[i].data.danceability -
-            groupsMusicalProfile.danceability
-        ) +
-      attributeAdjust[2] *
-        Math.abs(groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
+      attributeAdjust[0] * Math.abs( 
+        groupUniqueSet[i].data.trackPopularity - groupsMusicalProfile.trackPopularity) +
+      attributeAdjust[1] * Math.abs(
+        groupUniqueSet[i].data.danceability - groupsMusicalProfile.danceability) +
+      attributeAdjust[2] * Math.abs(
+        groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
       attributeAdjust[3] *
         Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
     //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
-    // if (i < 5) {
-    //     console.log(groupUniqueSet[i].deltaFromGroup);
-    // }
   }
 
   // Sort the unique set by the deltaFromGroup to (lowest to highest)
-  // Lowest is the bset
+  // Lowest is the best
   let sortedTrackSet = groupUniqueSet.sort((a, b) => {
     return parseFloat(a.deltaFromGroup) - parseFloat(b.deltaFromGroup);
   });
 
   // Parses master set and adds the generate playlist tracks and the necessary info too
   // add the commonly occuring songs and the relevant props, can definitely be optimized
-  var i,
-    j = 0;
+  var i, j = 0;
   for (i = 0; j < duplicateBasedSongs.length; i++) {
     // trackIDs match then add the corresponding data
 
@@ -256,9 +235,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let mostFrequentArtists = Object.keys(counts).filter(
     (k) => counts[k] == maxCountArtists
   );
-
+  
+  // debugging
   console.log("max count tracks is: ", maxCountTracks);
-  console.log("num tracks that max count: ", dummy.length);
 
   // console.log("frequent artists", mostFrequentArtists);
   // console.log("frequent tracks", mostFrequentTracks);
@@ -394,10 +373,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   //debugging
   console.log("duplicate based songs added: ", duplicateBasedSongs.length);
-  console.log("attribute baesd songs: ", attributeBasedSongs.length);
+
   /* End of algorithm */
 
-  // Create playlist object which will be uploaded to the group
   // Concatenate the duplicates and attribute based songs into one playlist
   // Remove identifier property
   playlistTracks.map((item) => {
@@ -405,7 +383,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     return item;
   });
 
-  // playlist data to be passed to mongoDB
+  // Create playlist object which will be uploaded to the group, passed to MongoDB
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
