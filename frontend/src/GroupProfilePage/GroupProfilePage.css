@@ -22,20 +22,39 @@
     position: absolute;
     z-index: 2;
 }
-
-.loading-message{
+.landing-root-error {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading-message {
     font-size: 2vw;
     color: var(--off-white-color);
     opacity: 0;
     animation-name: loading-message;
     animation-duration: 3s;
 }
-.wrong-group{
+.wrong-group {
     font-size: 2vw;
     color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
     animation-name: wrong-group;
     animation-duration: 4s;
+}
+.return-button {
+    font-size: 1.5vw;
+    color: var(--blue-color-1);
+}
+.return-button:hover {
+    text-decoration: none;
+    color: var(--blue-color-main);
+    cursor: pointer;
 }
 
 .group-profile-page-components {

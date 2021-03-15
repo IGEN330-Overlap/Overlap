@@ -20,9 +20,8 @@ const GroupProfilePage = (props) => {
     const groupList = useSelector((state) => state.groupList)
     var groupName
     var checkMember = ''
-    groupList.map((group,i) => {
+    groupList.map((group) => {
         if (group.groupCode === groupCode){
-            // add function to check if user is member of group
             checkMember = 'true'
             groupName = group.groupName
         }
@@ -81,9 +80,14 @@ const GroupProfilePage = (props) => {
         </div>
     )
     :
-    <div className = "landing-root">
-        <div className = "loading-message">Loading...</div>
-        <div className = "wrong-group">Sorry, it looks like you're not part of this group!</div>
+    <div className = "landing-root-error">
+        <div className = "loading-message">Collecting your group's information...</div>
+        <div className = "wrong-group">
+            Oops! It looks like you're not part of this group :(
+            <div>
+                <a href="/authorized" className = "return-button">Take me back to my groups!</a>
+            </div>
+        </div>
     </div>
 }
 
