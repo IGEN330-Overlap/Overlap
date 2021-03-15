@@ -7,7 +7,6 @@ let Group = require("../Models/group.model");
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
-const frontend_url = process.env.FRONTEND_URL;
 const scripts = require("../scripts.js");
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
@@ -46,7 +45,6 @@ exports.getUser = async (req, res) => {
       });
     });
 };
-
 
 /**
  * middle ware for creating a group
@@ -113,28 +111,27 @@ exports.joinGroup = async (req, res) => {
   )
     .then((data) => {
       //if updateOne modified
-      if (data.n != 0 ) {
+      if (data.n != 0) {
         //add groupCode to user object
-      User.updateOne(
-        { userID: req.body.spotifyID }, //filter
-        { $addToSet: { groups: req.body.groupCode } }
-      )
-        .then(() => {
-          res.json({
-            message: "Successfully joined group",
-            groupCode: req.body.groupCode,
+        User.updateOne(
+          { userID: req.body.spotifyID }, //filter
+          { $addToSet: { groups: req.body.groupCode } }
+        )
+          .then(() => {
+            res.json({
+              message: "Successfully joined group",
+              groupCode: req.body.groupCode,
+            });
+          })
+          //error with adding group to user object
+          .catch((err) => {
+            res.status(400).json({
+              message: "Unable to add group to user object",
+              error: err,
+            });
           });
-        })
-        //error with adding group to user object
-        .catch((err) => {
-          res.status(400).json({
-            message: "Unable to add group to user object",
-            error: err,
-          });
-        });
-      }
-      else {
-        throw new Error("Group does not exist.")
+      } else {
+        throw new Error();
       }
     })
     //error with adding user to group object
@@ -197,28 +194,40 @@ exports.leaveGroup = async (req, res) => {
  */
 exports.getGroupUsers = async (req, res) => {
   let userIDs;
-  
+
   try {
-    let data = await Group.findOne({ groupCode: req.params.groupCode });
+    let data = await Group.findOne({
+      groupCode: req.params.groupCode.toUpperCase(),
+    });
+
+    if (data == null) {
+      throw new Error();
+    }
     userIDs = data.users;
-  } catch(err){
+  } catch (err) {
     res.json({
       message: "Unable to find group",
       error: err,
     });
+    return;
   }
 
   //returning/querying the user documents associated with each userID
-  try{
+  try {
     let data = await User.find({ userID: { $in: userIDs } });
+
+    if (data == null) {
+      throw new Error();
+    }
     res.json(data);
   } catch (err) {
     res.json({
       message: "Unable to find users",
       error: err,
     });
+    return;
   }
-}; 
+};
 
 /**
  * GET method for getting all the groups a user is in
@@ -231,22 +240,32 @@ exports.getUserGroups = async (req, res) => {
   //get user's groups
   try {
     let data = await User.findOne({ userID: req.params.userID });
+
+    if (data == null) {
+      throw new Error();
+    }
     groupIDs = data.groups;
   } catch (err) {
     res.json({
       message: "Unable to find user",
       error: err,
     });
+    return;
   }
 
   //query groups using the groupIDs
   try {
     let data = await Group.find({ groupCode: { $in: groupIDs } });
+
+    if (data == null) {
+      throw new Error();
+    }
     res.json(data);
   } catch (err) {
     res.json({
       message: "Unable to find groups",
       error: err,
     });
+    return;
   }
 };
