@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateRefreshToken,
@@ -38,21 +38,26 @@ function App() {
   //use dispatch function from redux react
   const dispatch = useDispatch();
 
-  //select refresh token state from redux store
+  //select state from redux store
   const refreshToken = useSelector((state) => state.refreshToken);
-
-  //Get group list from a user upon login
   const userObject = useSelector((state) => state.userObject);
 
+  //useState hook for faulty login attempts
+  const [faultyLogin, setFaultyLogin] = useState(false);
+
   //Update refresh token on App render
-  //if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
-  if (params.refresh_token !== "" && params.refresh_token !== undefined && params.refresh_token !== null) {
+  //if refresh token exists in localstorage, dispatch update
+  //else if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
+  if (localStorage.getItem("refreshToken") !== undefined && localStorage.getItem("refreshToken") !== null) {
+    dispatch(updateRefreshToken(localStorage.getItem("refreshToken")));
+  }
+  else if (
+    params.refresh_token !== "" &&
+    params.refresh_token !== undefined &&
+    params.refresh_token !== null
+  ) {
     localStorage.setItem("refreshToken", params.refresh_token);
     dispatch(updateRefreshToken(params.refresh_token));
-  }
-  //else if localStorage contains refresh token, dispatch update for redux store
-  else if (localStorage.getItem("refreshToken") !== undefined) {
-    dispatch(updateRefreshToken(localStorage.getItem("refreshToken")));
   }
 
   //User Effect hook for logging in the user with API upon refreshToken update
@@ -62,9 +67,21 @@ function App() {
         refreshToken: refreshToken,
       })
       .then((data) => {
-        dispatch(updateUser(data.data.return));
+        //if login is unsuccessful, reset refresh token
+        if (data.data.error) {
+          dispatch(updateRefreshToken(""));
+          localStorage.clear();
+          setFaultyLogin(true);
+        }
+        //if login is sucessful, update user object
+        else {
+          dispatch(updateUser(data.data.return));
+          setFaultyLogin(false);
+        }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      });
   }, [refreshToken]);
 
   //User Effect to get user group list when userObject is updated
@@ -90,10 +107,12 @@ function App() {
   return (
     <div className="App">
       {/* Redirect if not logged in with spotify */}
-      {(refreshToken == null || refreshToken.length === 0) && <Redirect to="/" />}
+      {(refreshToken == null || refreshToken.length === 0 || refreshToken === "" || faultyLogin) && (
+        <Redirect to="/" />
+      )}
       <Switch>
         {/* Route for root */}
-        <Route path="/" render={() => <LandingPage />} exact={true} />
+        <Route path="/" render={() => <LandingPage faultyLogin={faultyLogin}/>} exact={true} />
         {/* Router for authorized reroute from backend authorization */}
         <Route
           path="/authorized"
