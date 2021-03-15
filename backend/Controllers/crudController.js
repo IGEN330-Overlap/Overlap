@@ -199,13 +199,17 @@ exports.getGroupUsers = async (req, res) => {
   let userIDs;
   
   try {
-    let data = await Group.findOne({ groupCode: req.params.groupCode });
+    let data = await Group.findOne({ groupCode: req.params.groupCode.toUpperCase() });
+    if(data == null) {
+      throw new Error("Unable to find group");
+    }
     userIDs = data.users;
   } catch(err){
     res.json({
       message: "Unable to find group",
       error: err,
     });
+    return;
   }
 
   //returning/querying the user documents associated with each userID
@@ -217,6 +221,7 @@ exports.getGroupUsers = async (req, res) => {
       message: "Unable to find users",
       error: err,
     });
+    return;
   }
 }; 
 
