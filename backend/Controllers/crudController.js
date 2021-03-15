@@ -240,22 +240,32 @@ exports.getUserGroups = async (req, res) => {
   //get user's groups
   try {
     let data = await User.findOne({ userID: req.params.userID });
+
+    if (data == null) {
+      throw new Error();
+    }
     groupIDs = data.groups;
   } catch (err) {
     res.json({
       message: "Unable to find user",
       error: err,
     });
+    return;
   }
 
   //query groups using the groupIDs
   try {
     let data = await Group.find({ groupCode: { $in: groupIDs } });
+
+    if (data == null) {
+      throw new Error();
+    }
     res.json(data);
   } catch (err) {
     res.json({
       message: "Unable to find groups",
       error: err,
     });
+    return;
   }
 };
