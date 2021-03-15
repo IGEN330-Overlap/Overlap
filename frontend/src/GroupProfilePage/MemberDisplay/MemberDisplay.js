@@ -30,6 +30,10 @@ const MemberDisplay = ({groupUsers, toCompare}) => {
     return members
   })
 
+  // get group code
+  const url = window.location.href
+  const groupCode = url.replace("http://localhost:3000/authorized/group/","")
+
   /* popover content*/
   const popover = (
     <Popover id="popover-basic" className="popover-display">
@@ -37,7 +41,7 @@ const MemberDisplay = ({groupUsers, toCompare}) => {
       <Popover.Content>
           <div className="copy-code">
             {/* fix */}
-            <div id = "myCode">code</div>
+            <div id = "myCode">{groupCode}</div>
             <div onClick={copyCode} className="copy-button">
               <svg width="32" height="34" viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg" className = "clipboard">
                 <path 

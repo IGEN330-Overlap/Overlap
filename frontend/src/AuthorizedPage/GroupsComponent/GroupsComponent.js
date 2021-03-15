@@ -1,9 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-//   updateGroupCode,
-//   updateGroupName,
-//   updateGroupPlaylists,
   updateGroupList,
 } from "../../Redux/Actions.js";
 import Modal from "react-bootstrap/Modal";
@@ -21,7 +18,6 @@ const GroupsComponent = (props) => {
 
   //variables for using states
   const groupList = useSelector((state) => state.groupList);
-  const selectedGroup = useSelector((state) => state.currentGroup);
   const spotifyID = useSelector((state) => state.userObject);
 
   //functions for opening and closing "Show Group Code" Modal
@@ -41,6 +37,11 @@ const GroupsComponent = (props) => {
   const hideLeaveModal = () => {
     setLeaveIsOpen(false);
   };
+
+  //set group code state
+  const [groupCode, setCode] = useState('')
+  //set group name state
+  const [groupName, setName] = useState('')
 
   //custom toggle as three dots
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -86,14 +87,10 @@ const GroupsComponent = (props) => {
     }
   }
 
-  const setCurrentGroup = (group) => {
-    
-  };
-
   function leaveGroup() {
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
-        groupCode: selectedGroup.groupCode,
+        groupCode: groupCode,
         spotifyID: spotifyID.userID,
       })
       .then((data) => {
@@ -139,14 +136,12 @@ const GroupsComponent = (props) => {
           /* Group as a dropdown menu button */
           <div
             className="group-item d-flex"
-            onClick={() => setCurrentGroup(group)}
           >
             <Dropdown as={ButtonGroup}>
               <Link
                 // change this later
                 to={"/authorized/group/"+group.groupCode}
                 className="groupButton"
-                onClick={() => setCurrentGroup(group)}
               >
                 {group.groupName}
               </Link>
@@ -154,11 +149,19 @@ const GroupsComponent = (props) => {
               <Dropdown.Toggle as={CustomToggle} />
               <Dropdown.Menu className="menu">
                 <Dropdown.Item>
-                  <div onClick={showCodeModal}>Show Group Code</div>
+                  <div onClick={() => {
+                      showCodeModal();
+                      setCode(group.groupCode);
+                      setName(group.groupName);
+                    }}>Show Group Code</div>
                 </Dropdown.Item>
                 <Dropdown.Divider></Dropdown.Divider>
                 <Dropdown.Item>
-                  <div onClick={showLeaveModal}>Leave Group</div>
+                  <div onClick={() => {
+                      showLeaveModal();
+                      setCode(group.groupCode);
+                      setName(group.groupName);
+                    }}>Leave Group</div>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -176,11 +179,11 @@ const GroupsComponent = (props) => {
         >
           <Modal.Body className="in-modal modal-body">
             <h5 className="modal-text modal-head">
-              {/* <strong>{selectedGroup.groupName} Code</strong> */}
+              <strong>{groupName} Code</strong>
             </h5>
             <div id="myCode">
               <h4 className="modal-text" type="text">
-                {/* <strong>{selectedGroup.groupCode}</strong> */}
+                <strong>{groupCode}</strong>
               </h4>
             </div>
             <div className="copy-groupCode">
