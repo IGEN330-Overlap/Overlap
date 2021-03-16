@@ -20,7 +20,7 @@ const LandingPage = (props) => {
                 Log in with Spotify
             </a>
             {/* Redirect if already authenticated */}
-            {refreshToken !== null && <Redirect to="/authorized" />}
+            {(refreshToken != null && refreshToken !== "" && props.faultyLogin === false) && <Redirect to="/authorized" />}
         </div>
     );
 }
