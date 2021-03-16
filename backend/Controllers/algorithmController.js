@@ -203,7 +203,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       playlistTracks.push({
         trackName: groupUniqueSet[i].data.trackName,
         trackID: groupUniqueSet[i].data.trackID,
-        imageUrl: groupUniqueSet[i].data.imageURL,
+        imageURL: groupUniqueSet[i].data.imageURL,
         linkURL: groupUniqueSet[i].data.linkURL,
         artistName: groupUniqueSet[i].data.artistName,
         identifier: groupUniqueSet[i].data.trackName + " " + groupUniqueSet[i].data.artistName,
@@ -342,7 +342,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       playlistTracks.push({
         trackName: recommendations[i].trackName,
         trackID: recommendations[i].trackID,
-        imageUrl: recommendations[i].imageURL,
+        imageURL: recommendations[i].imageURL,
         linkURL: recommendations[i].linkURL,
         artistName: recommendations[i].artistName,
         identifier: recommendations[i].trackName + " " + recommendations[i].artistName,
@@ -361,7 +361,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       playlistTracks.push({
         trackName: sortedTrackSet[i].data.trackName,
         trackID: sortedTrackSet[i].data.trackID,
-        imageUrl: sortedTrackSet[i].data.imageURL,
+        imageURL: sortedTrackSet[i].data.imageURL,
         linkURL: sortedTrackSet[i].data.linkURL,
         artistName: sortedTrackSet[i].data.artistName,
         identifier: sortedTrackSet[i].data.trackName + " " + sortedTrackSet[i].data.artistName,
