@@ -19,11 +19,13 @@ const GroupProfilePage = (props) => {
     // get group name
     const groupList = useSelector((state) => state.groupList)
     var groupName
+    var playlists
     var checkMember = ''
     groupList.map((group) => {
         if (group.groupCode === groupCode){
             checkMember = 'true'
             groupName = group.groupName
+            playlists = group.playlists
         }
         return groupName;
     })
@@ -68,7 +70,7 @@ const GroupProfilePage = (props) => {
                             {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare}/>}
                         </div>
                         <div className="playlist-carousel">
-                            <PlaylistCarousel />
+                            <PlaylistCarousel playlists={playlists} />
                         </div>
                     </div> 
                     <div className="individual-comparisons">

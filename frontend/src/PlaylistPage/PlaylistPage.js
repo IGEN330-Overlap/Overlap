@@ -1,24 +1,62 @@
 import React from 'react';
 import './PlaylistPage.css';
+import { useSelector } from 'react-redux';
+
 import { PlaylistTracks } from './PlaylistTracks/PlaylistTracks';
 import PlaylistTitle from './PlaylistTitle/PlaylistTitle';
 import Navbar1 from "../Navbar/Navbar";
 
 export const PlaylistPage = (props) => {
-    return(     
+
+    // get playlist code from url
+    const url = window.location.href
+    const playlistID = url.replace("http://localhost:3000/authorized/playlist/","")
+
+    // get information from playlist ID
+    const groupList = useSelector((state) => state.groupList)
+    var playlistName
+    var playlistTracks
+    var check_member = ''
+    groupList.map((group) => {
+        group.playlists.map((playlist, i) => {
+            if (playlist._id === playlistID) {
+                check_member = 'true'
+                playlistName = playlist.playlistName
+                playlistTracks = playlist.tracks
+            }
+            return playlistTracks
+        })
+        return groupList;
+    })
+
+    return (check_member === 'true')
+    ?
+    (     
         <div className="playlist-landing-root">
             <Navbar1 />
             <div className="playlist-page-content">
                 <div className="playlist-components">
                     <div className="playlist-page-name">
-                        <PlaylistTitle />
+                        <PlaylistTitle playlistName={playlistName} />
                     </div>
                     <div className="playlist-page-tracks-container">
-                        <PlaylistTracks />
+                        <PlaylistTracks playlistTracks={playlistTracks} />
                     </div>
                 </div>
             </div>
         </div>
     )
+    :
+    // loading screen while checking if user can access this playlist
+    <div className = "landing-root-error">
+        <div className = "loading-message">Collecting your playlist tracks...</div>
+        {/* wrong group error if user is trying to access playlist they're not part of */}
+        <div className = "wrong-group">
+            Oops! It looks like this playlist does not exist :(
+            <div>
+                <a href="/authorized/" className = "return-button">Take me back to my groups!</a>
+            </div>
+        </div>
+    </div>
 }
 

@@ -22,6 +22,7 @@
     position: absolute;
     z-index: 2;
 }
+
 .landing-root-error {
     width: 100vw;
     height: 100vh;
@@ -185,6 +186,15 @@
     }
     .component-box {
         height: 0px;
+    }
+    .loading-message {
+        font-size: 3.5vw;
+    }
+    .wrong-group {
+        font-size: 3.5vw;
+    }
+    .return-button {
+        font-size: 3vw;
     }
 }
 @media (max-height: 1200px) {
