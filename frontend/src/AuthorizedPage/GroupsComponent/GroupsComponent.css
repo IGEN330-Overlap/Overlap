@@ -10,7 +10,7 @@
     color: white;
     background: url(./search.svg) left center no-repeat;
     background-size: 8%;
-    padding: 1vw;
+    padding: 1.5vw;
     width: auto;
 }
 
@@ -18,7 +18,7 @@
     background-color: transparent;
     border-color: transparent;
     color: white;
-    font-size: 1.25vw;
+    font-size: 1.5vw;
 }
 
 input::placeholder{
@@ -31,15 +31,47 @@ input:focus{
     outline: none;
 }
 
+.group-list{
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+    overflow-y: auto;
+    direction: rtl;
+}
+
+/*customize scroll bar */
+.group-list::-webkit-scrollbar{
+    width: 4px;
+    height: 0.5vw;
+}
+.group-list::-webkit-scrollbar-track {
+    background-color: var(--primary-color-6);
+    opacity: 0.6;
+    border-radius: 10px;
+    margin-top: 1vw;
+}
+.group-list::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color-2);
+    border-radius: 10px;
+}
+
+.group-item{
+    direction: ltr;
+    justify-content: space-between;
+    padding: 10px;
+    padding-left: 1vw;
+}
+
 .groupButton{
     display: flex;
-    width: 9em;
-    font-size: 1.25vw;
-    padding-left: 0px;
+    width: 8.5em;
+    font-size: 1.5vw;
+    margin-right: 0.5em;
     background-color: transparent;
     color: white;
     outline-color: transparent;
     align-self: center;
+    overflow: hidden;
 }
 
 .groupButton:hover{
@@ -55,7 +87,7 @@ input:focus{
 }
 
 .dots{
-    width: 1.25vw;
+    width: 1.5vw;
     height: 100%;
     fill: white;
 }
@@ -75,7 +107,7 @@ input:focus{
 
 .modal-text{
     padding-bottom: 15px;
-    font-size: 1.25vw;
+    font-size: 1.5vw;
 }
 
 .btn-in-modal{
@@ -90,8 +122,16 @@ input:focus{
     outline: none;
 }
 
-.copy-button:hover{
-    color: white;
+.copy-groupCode {
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.copy-groupCode .copy-button .clipboard{
+    height: 22.5px;
+    margin-left: 0px;
+}
+.copy-groupCode .copy-button:hover .clipboard {
+    fill: white;
 }
 
 @media (max-width: 720px){
@@ -104,6 +144,12 @@ input:focus{
     }
     .input-search{
         font-size: 20px;
+    }
+    .group-list{
+        padding: 10px;
+    }
+    .group-list::-webkit-scrollbar-track {
+        margin-top: 5vw;
     }
     .groupButton{
         font-size: 20px;

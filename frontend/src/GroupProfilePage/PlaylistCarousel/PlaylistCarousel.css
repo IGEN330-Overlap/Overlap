@@ -1,0 +1,143 @@
+
+@import url(../../variables.css);
+
+.playlist-container{
+    width: 45vw;
+    margin-right: auto;
+    padding-right: 15px;
+    background-color: transparent;
+    max-height: 32vh;
+}
+
+.playlist-container .text{
+    font-size: clamp(20px, 3vw, 30px);
+    color: var(--off-white-color);
+}
+
+.addPlaylist-container{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    margin: 0.5vw;
+}
+
+.covers{
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0.5vw;
+}
+
+.plus-symbol{
+    height: 2vw;
+    width: 2vw;
+    color: white;
+}
+
+.addButton{
+    display: flex;
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
+    justify-content: center;
+    align-items: center;
+    border-radius: 15%;
+    background-color: #494a4e;
+    cursor: pointer;
+}
+
+.display-playlists{
+    display: flex;
+    flex-direction: row;
+    max-height: 24vh;
+    width: 100%;
+}
+
+.playlistcover-container{
+    margin: 0.5vw;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: clamp(65px, 7.5vw, 100px);
+}
+
+.playlistcover{
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 15%;
+    cursor: pointer;
+}
+
+.playlist-name{
+    color: white;
+    cursor: pointer;
+    font-size: min(1vw, 20px);
+}
+
+/*customize scroll bar */
+.display-playlists::-webkit-scrollbar{
+    width: 6px;
+    height: 0.5vw;
+}
+.display-playlists::-webkit-scrollbar-track {
+    background-color: black;
+    opacity: 0.6;
+    border-radius: 10px;
+}
+.display-playlists::-webkit-scrollbar-thumb {
+    background-color: var(--blue-color-3);
+    border-radius: 10px;
+}
+
+.carousel .carousel-inner{
+    width: 35vw;
+}
+
+.carousel .carousel-control-prev{
+    position: absolute;
+    display: inline;
+    top: -32%;
+    width: auto;
+    height: 2rem;
+    left: 4%;
+}
+
+.carousel .carousel-control-next{
+    position: absolute;
+    display: inline;
+    top: -32%;
+    width: auto;
+    height: 2rem;
+    right: 86%;
+}
+
+
+@media (max-width: 780px) {
+    .playlist-container{
+        width: 90vw;
+    }
+    .playlist-name{
+        font-size: 12px;
+    }
+    .addPlaylist-container{
+        font-size: 12px;
+    }
+    .display-playlists{
+        justify-content: space-evenly;
+    }
+    .carousel .carousel-inner{
+        width: 75vw;
+    }
+    .carousel .carousel-control-prev{
+        top: -35%;
+        left: 70%;
+    }
+    .carousel .carousel-control-next{
+        top: -35%;
+        right: 10%;
+    }
+}
+
+
+

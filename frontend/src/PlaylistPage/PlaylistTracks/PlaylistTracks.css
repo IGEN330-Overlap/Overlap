@@ -1,0 +1,92 @@
+@import url(../../variables.css);
+
+.playlist-tracks-container {
+    width: 400px;
+    height: max(52.5vh, 445px);
+    margin: 15px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.playlist-tracks-container .track-number h3 {
+    font-size: 15px;
+    color: var(--off-white-color);
+    line-height: 45px;
+    height: 45px;
+    width: 32.5px;
+    margin: 0px;
+}
+
+.playlist-tracks-container .track-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 8px;
+    padding-right: 10px;
+    width: 390px;
+    color: var(--off-white-color);
+    font-size: 20px;
+}
+.playlist-tracks-container .track-icon {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.playlist-tracks-container .track-info {
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    transition: 0.3s;
+    align-items: center;
+    justify-content: flex-start;
+}
+.playlist-tracks-container .track-info h3{
+    font-size: 17px;
+    margin-bottom: 2px;
+    width: 280px;
+}
+.playlist-tracks-container .track-artist {
+    color: var(--neutral-color-3);
+    font-size: 11px;
+    width: 280px;
+    transition: 0.3s;
+}
+
+/* customize scroll */
+.playlist-tracks-container::-webkit-scrollbar{
+    width: 9px;
+    height: auto;
+}
+.playlist-tracks-container::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.25);
+    opacity: 0.6;
+    border-radius: 10px;
+}
+.playlist-tracks-container::-webkit-scrollbar-thumb {
+    background-color: var(--neutral-color-3);
+    border-radius: 10px;
+}
+
+/* media sizing */
+@media (max-width: 720px) {
+    .playlist-tracks-container {
+        justify-content: center;
+        align-items: center;
+    }
+    .playlist-tracks-container .track-container {
+        width: 330px;
+        margin-left: 0px;
+    }
+    .playlist-tracks-container .track-info {
+        width: 300px;
+    }
+    .playlist-tracks-container .track-info h3 {
+        width: 270px;
+    }
+    .playlist-tracks-container .track-artist {
+        width: 270px;
+    }
+}

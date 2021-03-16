@@ -1,10 +1,13 @@
 import React from 'react';
 import './GroupName.css';
 
-const GroupName = (props) => {
+// display group name on group profile page
+
+const GroupName = ({groupName}) => {
+
     return(
     <div className="group-name-container">
-        <h1 className="text"><strong>Group Name</strong></h1>
+        <h1 className="text"><strong>{groupName}</strong></h1>
         <div className="under-bar"></div>
     </div>
     )

@@ -2,68 +2,49 @@
 
 /*full container for members */
 .member-container {
-    width: 60vw;
-    margin-right: auto;
-    padding-right: 15px;
-    margin-bottom: 10px;
+    width: 45vw;
+    margin-right: 5vw;
+    margin-bottom: 3vh;
     background-color: transparent;
 }
 
 /*text container */
-.d-flex {
-    margin-bottom: 10px;
-    align-content: center;
+.member-container .d-flex {
+    background-color: var(--primary-color-main);
+    margin-bottom: 3px;
+    align-items: center;
+    position: relative;
+    z-index: 10;
 }
 .add-member {
     margin-left: 15px;
-    margin-top: 7.25px;
+    margin-top: 5px;
+    height: 30px;
+    transition: opacity 0.45s;
 }
 
 /*add member button and popover */
 .add-member:hover {
     opacity: 0.7;
-    transition-duration: 0.4s;
     cursor: pointer;
 }
-/*.custom-popover .popover-display {
-    margin-left:10px;
-    margin-top: 10px;
-}*/
 
 /*copy group code element */
 .copy-code {
     display: flex;
     align-items: center;
-    border-style: solid;
-    border-color: var(--neutral-color-5);
-    border-width: 1.5px;
-    border-radius: 5rem;
+    border-style: none;
     height: 26.67px;
 }
-.copy-button {
-    height: 26.67px;
-    width: 50px;
-    color: var(--off-white-color);
-    background-color: var(--blue-color-main);
-    border-radius: 5rem;
-}
-input {
-    border-color: transparent;
+.copy-button .clipboard {
     background-color: transparent;
-    padding-left: 10px;
+    fill: var(--primary-color-main);
+    height: 20px;
+    transition: fill 0.25s ease-in-out;
+    margin-left: 15px;
 }
-input:focus {
-    outline: none;
-}
-.copy-button h4 {
-    font-size: 0.95rem;
-    font-weight: 450;
-    padding-top: 2.75px;
-    padding-left: 7px;
-}
-.copy-button:hover {
-    color: var(--primary-color-main);
-    text-decoration: none;
+.copy-button:hover .clipboard {
+    fill: var(--blue-color-main);
     cursor: pointer;
 }
 
@@ -71,23 +52,49 @@ input:focus {
 .member-container .d-flex .text {
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: 1.85rem;
+    margin-bottom: 0px;
+    font-size: clamp(20px, 3vw, 30px);
+}
+.member-container .compare-message {
+    color: var(--blue-color-1);
+    margin-left: 6px;
+    margin-bottom: 0px;
+    font-size: clamp(13px, 1.25vw, 18px);
+    animation-name: comparemessage;
+    animation-duration: 3s;
+    z-index: 5;
+}
+
+@keyframes comparemessage {
+    from {opacity: 0}
+    75% {opacity: 0}
+    to {opacity: 1}
 }
 
 /*icons */
 .display-members {
     display: flex;
-    width: 60vw;
+    width: 45vw;
     flex-wrap: wrap;
-    max-height: 50vh;
+    max-height: 32.5vh;
     justify-content: flex-start;
     align-content: flex-start;
     overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    animation-name: displaymember;
+    animation-duration: 2s;
+    animation-timing-function: cubic-bezier(0, 0.45, 0.88, 1.09);
+}
+
+@keyframes displaymember {
+    from {transform: translateY(-50em)}
+    to {transform: translateY(0em);}
 }
 
 /*customize scroll bar */
 .display-members::-webkit-scrollbar{
-    width: 6px;
+    width: 7px;
     height: auto;
 }
 .display-members::-webkit-scrollbar-track {
@@ -108,46 +115,45 @@ input:focus {
     text-align: center;
 }
 .user-icon {
-    height: min(9vw,110px);
-    width: min(9vw,110px);
+    height: clamp(65px, 7.5vw, 100px);
+    width: clamp(65px, 7.5vw, 100px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;
+    transition: opacity 0.45s;
 }
 .user-name {
-    font-size: min(1.75vw,20px);
+    font-size: clamp(12px, 1.75vw, 17px);
     color: transparent;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: color 0.45s;
 }
 .icon-container:hover .user-icon {
     opacity: 0.4;
-    transition-duration: 0.45s;
+    cursor: pointer;
 }
 
 .icon-container:hover .user-name {
     color: var(--off-white-color);
-    transition-duration: 0.45s;
+    cursor: pointer;
 }
 
 /*adjust for different screen sizes */
-@media (max-width: 720px) {
+@media (max-width: 780px) {
+    .member-container {
+        width: 90vw;
+    }
     .display-members {
         width: 90vw;
-        max-height: 60vh;
+        max-height: 42vh;
     }
     .add-member {
-        margin-top: 7.25px
+        margin-top: 5px;
     }
-    .text {
-        font-size: 1.65rem;
-    }
-    .user-icon {
-        height: 64.8px;
-    }
-    .user-name {
-        font-size: 12.6px;
+    .member-comparison-flex .individual-comparisons {
+        margin-top: 20px;
     }
 }
