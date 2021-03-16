@@ -8,6 +8,7 @@ import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 import { TopGenres } from './TopGenres/TopGenres';
+import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 
 const axios = require("axios");
 
@@ -56,40 +57,42 @@ const GroupProfilePage = (props) => {
     (     
         <div className="group-landing-root">
             <div className="group-info-root">
-            <div className="navbar">
-                <Navbar1 />
-            </div>
-            <div className="group-profile-page-components">
-                <div className="component-box"></div>
-                <div className="d-flex">
-                    <div className="main-column">
-                        <div className="main-column-box"></div>
-                        <div className="group-name">
-                            <GroupName groupName = {groupName} />
-                        </div>
-                        <div className="member-display">
-                            {/* render members display when group users variable is populated */}
-                            {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare}/>}
-                        </div>
-                        <div className="playlist-carousel">
-                            <PlaylistCarousel playlists={playlists} />
-                        </div>
-                    </div> 
-                    <div className="individual-comparisons">
-                        {/* if user has clicked on a member to compare, will render comparisons component
-                            otherwise, render insights component */}
-                        {member_id 
-                            ? <Comparisons groupUsers={groupUsers} member_id={member_id} toCompare={toCompare} /> 
-                            : <MyInsights />}
-                        </div>
-                    </div> 
-                    
+                <div className="navbar">
+                    <Navbar1 />
                 </div>
+                <div className="group-profile-page-components">
+                    <div className="component-box"></div>
+                    <div className="d-flex">
+                        <div className="main-column">
+                            <div className="main-column-box"></div>
+                            <div className="group-name">
+                                <GroupName groupName = {groupName} />
+                            </div>
+                            <div className="member-display">
+                                {/* render members display when group users variable is populated */}
+                                {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare}/>}
+                            </div>
+                            <div className="playlist-carousel">
+                                <PlaylistCarousel playlists={playlists} />
+                            </div>
+                        </div> 
+                        <div className="individual-comparisons">
+                            {/* if user has clicked on a member to compare, will render comparisons component
+                                otherwise, render insights component */}
+                            {member_id 
+                                ? <Comparisons groupUsers={groupUsers} member_id={member_id} toCompare={toCompare} /> 
+                                : <MyInsights />}
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div className="top-genres-display">
+                <TopGenres groupUsers={groupUsers} />
+            </div>
+            <div className="musical-profile-display">
+                <MusicalProfile groupUsers={groupUsers} />
+            </div>
         </div>
-        <div className="top-genres-display">
-            <TopGenres />
-        </div>
-    </div>
     )
     :
     // loading screen while checking if user is member of group

@@ -29,3 +29,100 @@
     margin-bottom: 0px;
     background-color: var(--primary-color-main);
 }
+
+.genre-bubbles {
+    height: 70vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.genre-bubbles strong {
+    position: absolute;
+    width: 20vw;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    color: var(--off-white-color);
+    z-index: 5;
+}
+
+.top-genre-1 {
+    position: absolute;
+}
+.top-genre-1 .bubble {
+    height: min(40vw, 50vh);
+    width: min(40vw, 50vh);
+    border-radius: 50rem;
+    background-color: var(--blue-color-main);
+    opacity: 0.5;
+}
+.top-genre-1 strong {
+    font-size: 5vw;
+}
+
+.top-genre-2 {
+    position: absolute;
+    margin-top: min(5vw, 100px);
+    margin-left: min(57.5vw, 650px);
+}
+.top-genre-2 .bubble {
+    height: min(30vw, 40vh);
+    width: min(30vw, 40vh);
+    border-radius: 50rem;
+    background-color: #FFB347;
+    opacity: 0.5;
+}
+.top-genre-2 strong {
+    font-size: clamp(10px, 4vw, 50px);
+}
+
+.top-genre-3 {
+    position: absolute;
+    margin-top: min(40vw, 500px);
+    margin-left: min(30vw, 325px);
+}
+.top-genre-3 .bubble {
+    height: min(20vw, 30vh);
+    width: min(20vw, 30vh);
+    border-radius: 50rem;
+    background-color: #9D5C63;
+    opacity: 0.5;
+}
+.top-genre-3 strong {
+    font-size: clamp(10px, 3.75vw, 40px);
+}
+
+.top-genre-4 {
+    position: absolute;
+    margin-top: min(30vw, 300px);
+    margin-left: max(-35vw, -500px);
+}
+.top-genre-4 .bubble {
+    height: min(12.5vw, 22.5vh);
+    width: min(12.5vw, 22.5vh);
+    border-radius: 50rem;
+    background-color: #77DD77;
+    opacity: 0.5;
+}
+.top-genre-4 strong {
+    font-size: clamp(10px, 3vw, 30px);
+}
+
+.top-genre-5 {
+    position: absolute;
+    margin-top: max(-25vw, -350px);
+    margin-left: max(-35vw, -400px);
+}
+.top-genre-5 .bubble {
+    height: min(10vw, 20vh);
+    width: min(10vw, 20vh);
+    border-radius: 50rem;
+    background-color: #F4C20C;
+    opacity: 0.38;
+}
+.top-genre-5 strong {
+    font-size: clamp(10px, 2.5vw, 20px);
+}

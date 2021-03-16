@@ -2,7 +2,7 @@
 
 .group-landing-root {
     width: 100vw;
-    height: auto;
+    height: min(100vh, auto);
     background-color: var(--primary-color-main);
     display: flex;
     flex-direction: column;
