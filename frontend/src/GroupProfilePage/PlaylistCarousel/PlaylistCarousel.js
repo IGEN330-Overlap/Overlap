@@ -10,22 +10,6 @@ import addButton from "./add.svg";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 
-/*take input from backend to create array of formed playlists */
-// const playlists = [
-//   "playlist1",
-//   "playlist2",
-//   "playlist3",
-//   "playlist4",
-//   "playlist5",
-//   "playlist6",
-//   "playlist1",
-//   "playlist2",
-//   "playlist3",
-//   "playlist1",
-//   "playlist2",
-//   "playlist3",
-//   "playlist16",
-// ];
 const cover_src = [
   playlistcover1,
   playlistcover2,

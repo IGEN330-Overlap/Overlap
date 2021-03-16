@@ -32,7 +32,7 @@
 
 .genre-bubbles {
     height: 70vh;
-    width: auto;
+    width: min(85vw, 2500px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,5 +124,5 @@
     opacity: 0.38;
 }
 .top-genre-5 strong {
-    font-size: clamp(10px, 2.5vw, 20px);
+    font-size: clamp(10px, 2.5vw, 25px);
 }

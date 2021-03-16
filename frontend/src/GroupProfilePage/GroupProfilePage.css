@@ -2,7 +2,7 @@
 
 .group-landing-root {
     width: 100vw;
-    height: min(100vh, auto);
+    height: 100vh;
     background-color: var(--primary-color-main);
     display: flex;
     flex-direction: column;
@@ -10,7 +10,6 @@
     align-content: flex-start;
 }
 .group-info-root {
-    height: fit-content;
     background-color: var(--primary-color-main);
 }
 .group-landing-root .navbar {
@@ -64,7 +63,8 @@
 
 .group-profile-page-components {
     width: 100vw;
-    height: 90vh;
+    min-height: 90vh;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
