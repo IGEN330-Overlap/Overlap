@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {updateGroupList} from "../../Redux/Actions.js";
+import {
+  updateGroupList,
+} from "../../Redux/Actions.js";
 import Modal from "react-bootstrap/Modal";
 import Dropdown from "react-bootstrap/Dropdown";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -16,7 +18,6 @@ const GroupsComponent = (props) => {
 
   //variables for using states
   const groupList = useSelector((state) => state.groupList);
-  //const selectedGroup = useSelector((state) => state.currentGroup);
   const spotifyID = useSelector((state) => state.userObject);
 
   //functions for opening and closing "Show Group Code" Modal
@@ -131,14 +132,14 @@ const GroupsComponent = (props) => {
       </div>
 
       <div className="group-list">
-        {groupList.map((group, i) => (
+        {groupList.map((group) => (
           /* Group as a dropdown menu button */
           <div
             className="group-item d-flex"
           >
             <Dropdown as={ButtonGroup}>
               <Link
-                to="/authorized/group/groupid"
+                to={"/authorized/group/"+group.groupCode}
                 className="groupButton"
               >
                 {group.groupName}
@@ -148,14 +149,18 @@ const GroupsComponent = (props) => {
               <Dropdown.Menu className="menu">
                 <Dropdown.Item>
                   <div onClick={() => {
-                    showCodeModal();
-                    setCode(group.groupCode);
-                    setName(group.groupName);
-                  }}>Group Code</div>
+                      showCodeModal();
+                      setCode(group.groupCode);
+                      setName(group.groupName);
+                    }}>Show Group Code</div>
                 </Dropdown.Item>
                 <Dropdown.Divider></Dropdown.Divider>
                 <Dropdown.Item>
-                  <div onClick={showLeaveModal}>Leave Group</div>
+                  <div onClick={() => {
+                      showLeaveModal();
+                      setCode(group.groupCode);
+                      setName(group.groupName);
+                    }}>Leave Group</div>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

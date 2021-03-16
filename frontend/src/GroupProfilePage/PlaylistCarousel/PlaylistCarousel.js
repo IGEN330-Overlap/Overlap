@@ -11,21 +11,21 @@ import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 
 /*take input from backend to create array of formed playlists */
-const playlists = [
-  "playlist1",
-  "playlist2",
-  "playlist3",
-  "playlist4",
-  "playlist5",
-  "playlist6",
-  "playlist1",
-  "playlist2",
-  "playlist3",
-  "playlist1",
-  "playlist2",
-  "playlist3",
-  "playlist16",
-];
+// const playlists = [
+//   "playlist1",
+//   "playlist2",
+//   "playlist3",
+//   "playlist4",
+//   "playlist5",
+//   "playlist6",
+//   "playlist1",
+//   "playlist2",
+//   "playlist3",
+//   "playlist1",
+//   "playlist2",
+//   "playlist3",
+//   "playlist16",
+// ];
 const cover_src = [
   playlistcover1,
   playlistcover2,
@@ -42,7 +42,7 @@ const cover_src = [
   playlistcover1,
 ];
 
-const PlaylistCarousel = (props) => {
+const PlaylistCarousel = ({playlists}) => {
 
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
@@ -53,22 +53,29 @@ const PlaylistCarousel = (props) => {
     setAddPlaylistIsOpen(false);
   };
 
+  // get playlist info
+  var playlistInfo = []
+  playlists.map((playlist,i) => {
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id})
+    return playlistInfo
+  })
+
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
-  for (let i = 0; i < playlists.length; i += 4) {
-    let fourPlaylists = playlists.slice(i, i + 4);
+  for (let i = 0; i < playlistInfo.length; i += 4) {
+    let fourPlaylists = playlistInfo.slice(i, i + 4);
 
     let carouselElement = fourPlaylists.map((playlist, i) => {
       return (
         <div className="playlistcover-container" key={i}>
-          <Link to="/authorized/playlist/playlistcode" className="links">
+          <Link to={"/authorized/playlist/" + playlist.id} className="links">
             <img
               className="playlistcover"
               src={cover_src[i]}
-              alt={playlist}
+              alt={playlist.name}
             ></img>
             <div className="playlist-name">
-              <strong>{playlist}</strong>
+              <strong>{playlist.name}</strong>
             </div>
           </Link>
         </div>
