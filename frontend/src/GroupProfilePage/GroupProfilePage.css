@@ -27,6 +27,41 @@
     z-index: 2;
 }
 
+.landing-root-error {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading-message {
+    font-size: 2vw;
+    color: var(--off-white-color);
+    opacity: 0;
+    animation-name: loading-message;
+    animation-duration: 3s;
+}
+.wrong-group {
+    font-size: 2vw;
+    color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    animation-name: wrong-group;
+    animation-duration: 4s;
+}
+.return-button {
+    font-size: 1.5vw;
+    color: var(--blue-color-1);
+}
+.return-button:hover {
+    text-decoration: none;
+    color: var(--blue-color-main);
+    cursor: pointer;
+}
+
 .group-profile-page-components {
     width: 100vw;
     height: 90vh;
@@ -106,6 +141,30 @@
     }
 }
 
+@keyframes loading-message {
+    from {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes wrong-group {
+    from {
+        opacity: 0;
+    }
+    75% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 780px) {
     .individual-comparisons {
         margin-left: 4vw;
@@ -131,6 +190,15 @@
     }
     .component-box {
         height: 0px;
+    }
+    .loading-message {
+        font-size: 3.5vw;
+    }
+    .wrong-group {
+        font-size: 3.5vw;
+    }
+    .return-button {
+        font-size: 3vw;
     }
 }
 @media (max-height: 1200px) {

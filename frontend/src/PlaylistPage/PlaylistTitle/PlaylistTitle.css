@@ -13,12 +13,12 @@
     background-color:  rgb(126, 42, 42);
     border-color: rgb(131, 46, 46); 
     color: white;
-    height: 35px;
+    height: 33px;
     align-items: center;
 }
 
 .playlist-info-root .btn-sm {
-    padding: 0.30rem 0.95rem;
+    padding: 0.175rem 0.95rem;
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
@@ -26,7 +26,7 @@
 
 .playlist-info-root .btn {
     font-weight: 800;
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 2vw, 1rem);
     transition: color 0.35s
 }
 
@@ -50,7 +50,7 @@
 
 .playlist-info-root .white {
     color: white;
-    font-size: 3rem;
+    font-size: clamp(25px, 4.25vw, 50px);
     font-weight: 550;
 }
 
@@ -60,6 +60,9 @@
         margin-bottom: 20px;
         justify-content: start;
         margin-left: 15px;
+    }
+    .playlist-info-root .playlist-button {
+        height: 30px;
     }
     .playlist-page-cover-container{
         margin-bottom: 0px;
@@ -73,8 +76,4 @@
         align-items: flex-start;
         margin-left: 3vw;
     }
-    .playlist-info-root .white {
-        font-size: 2.5rem;
-    }
-  
 }
