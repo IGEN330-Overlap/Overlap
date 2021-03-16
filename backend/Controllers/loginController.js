@@ -3,6 +3,7 @@ require("dotenv").config();
 
 let User = require("../Models/user.model");
 let Group = require("../Models/group.model");
+const { calculateMusicalProfile } = require("../scripts");
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -108,7 +109,7 @@ exports.loginUser = async (req, res) => {
           i++; // iterate for the next item to add in our topTracks array
         }
       } catch (err) {
-        res.json({ message: "Unable to get audio features", error: err });
+        res.json({ message: "Unable to get track audio features.", error: err });
         return;
       }
 
@@ -117,14 +118,14 @@ exports.loginUser = async (req, res) => {
 
       //get user's top 30 artists
       try {
-        let data = await spotifyApi.getMyTopArtists({ limit: 25 });
+        let data = await spotifyApi.getMyTopArtists({ limit: 50 });
 
         // iterate over data and add relevant artist attributes
         for (x of data.body.items) {
           let artist = {};
 
           //if artist name is empty, continue
-          if (x.name.length === 0) {
+          if (x.name.length === 0 || x.name.length == null || x.images.length == 0) {
             continue;
           }
           artist.artistName = x.name;
@@ -141,30 +142,16 @@ exports.loginUser = async (req, res) => {
         return;
       }
 
-      // initiate vars for the musical profile
-      let pop = (dnce = nrgy = spch = acst = inst = vale = 0);
-      // Calculate their musical profile (use averages for now) (calc sums and div n)
-      for (x of topTracks) {
-        pop += x.trackPopularity;
-        dnce += x.danceability;
-        nrgy += x.energy;
-        spch += x.speechiness;
-        acst += x.acousticness;
-        inst += x.instrumentalness;
-        vale += x.valence;
-      }
+      // use scripted method for calculating musical profile and store in musicalProfile
+      musicalProfile = calculateMusicalProfile(topTracks);
+      // multiply so all attributes are on the 0-100 scale
 
-      topTracksLength = topTracks.length;
-
-      musicalProfile = {
-        popularity: pop / topTracksLength,
-        danceability: (dnce / topTracksLength) * 100,
-        energy: (nrgy / topTracksLength) * 100,
-        speechiness: (spch / topTracksLength) * 100,
-        acousticness: (acst / topTracksLength) * 100,
-        instrumentalness: (inst / topTracksLength) * 100,
-        valence: (vale / topTracksLength) * 100,
-      };
+      musicalProfile.danceability *= 100; 
+      musicalProfile.energy *= 100;
+      musicalProfile.speechiness *= 100;
+      musicalProfile.acousticness *= 100;
+      musicalProfile.instrumentalness *= 100;
+      musicalProfile.valence *= 100;
 
       //get user object from SpotifyAPI
       spotifyApi.getMe().then(
@@ -177,7 +164,7 @@ exports.loginUser = async (req, res) => {
                 userID: data.body.id,
                 refreshToken: req.body.refreshToken,
                 name: data.body.display_name,
-                imageURL: data.body.images[0].url,
+                imageURL: data.body.images.length != 0 ? data.body.images[0].url : "",
                 email: data.body.email,
                 musicalProfile: musicalProfile,
                 topTracks: topTracks, // Add top 50 tracks with their attributes
@@ -193,7 +180,7 @@ exports.loginUser = async (req, res) => {
                   userID: data.body.id,
                   refreshToken: req.body.refreshToken,
                   name: data.body.display_name,
-                  imageURL: data.body.images[0].url,
+                  imageURL: data.body.images.length != 0 ? data.body.images[0].url : "",
                   email: data.body.email,
                   musicalProfile: musicalProfile,
                   topTracks: topTracks,

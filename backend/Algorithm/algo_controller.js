@@ -16,6 +16,74 @@ var spotifyApi = new SpotifyWebApi({
 let User = require("../Models/user.model");
 let Group = require("../Models/group.model");
 
+
+exports.getRecommendations = async(req, res) => {
+
+  spotifyApi.setRefreshToken(req.body.refreshToken);
+
+  try {
+    let data = await spotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(data.body.access_token)
+    let info = [];
+
+    try {
+      // Get recommendations for the group
+      let data = await spotifyApi.getRecommendations({
+        target_danceability: 0.574,
+        target_energy: 0.7662,
+        target_valence: 0.4338,
+        min_popularity: 50,
+        // seed_artists: [
+        //   "2xaAOVImG2O6lURwqperlD",
+        //   "4sTQVOfp9vEMCemLw50sbu",
+        //   "3TVXtAsR1Inumwj472S9r4",
+        // ],
+        seed_tracks: [
+          "2CgOd0Lj5MuvOqzqdaAXtS",
+          "4Sfa7hdVkqlM8UW5LsSY3F",
+          "7gMlhlV1AllhpBM8ssg7z6"
+        ]
+      })
+      
+      // add the songs ensuring that their type is correct and that there is populated data
+      for (x of data.body.tracks){
+        if (x.type == "track" && x.album.images.length != 0){          
+          info.push({
+            trackName: x.name,
+            trackID: x.id,
+            imageURL: x.album.images[0].url,
+            linkURL: x.external_urls.spotify,
+            artistName: x.artists[0].name,
+            identifier: x.name + " " + x.artists[0].name
+          })
+        }
+      }
+
+      res.json(info)
+      // console.log(recommendations.tracks.length)
+
+      // res.json(info);
+    } catch (err) {
+      res.json(err)
+    }
+  } catch (err) {
+    res.json(err)
+  }
+}
+
+// exports.manuallyAddUser = async (req, res) => {
+//   User.updateOne(
+//       {userID: req.body.id }, // Filter
+//       {
+//           $set: {
+//           musicalProfile: req.musicalProfile,
+//           topTracks: req.topTracks, // Add top 50 tracks with their attributes
+//           topArtists: req.topArtists, // Add top 30 artists with their attributes
+//           },
+//       },
+//   )
+// }
+
 exports.getMyTopTracks = async (req, res) => {
   //set refresh token
   spotifyApi.setRefreshToken(req.body.refreshToken);
@@ -29,7 +97,7 @@ exports.getMyTopTracks = async (req, res) => {
       let topTrackIDs = [];
       //get user's top 3 tracks
       await spotifyApi
-        .getMyTopTracks({ limit: 50, time_range: "medium_term" })
+        .getMyTopTracks({ limit: 50})
         .then((data) => {
           for (x of data.body.items) {
             let track = {}; // track data needed for song
@@ -95,9 +163,11 @@ exports.getMyTopTracks = async (req, res) => {
  * @param { message: String, return: {json} } res
  */
 exports.buildSpotifyPlaylist = async (req, res) => {
+  
   topTracks = []; // Array to store the total data from mongoDB
   spotifyApi.setRefreshToken(req.body.refreshToken);
   // Map the user ids sent to get the mongoDB user information
+
   var user_ids;
   await Group.findOne({ groupCode: req.body.groupCode }).then((data) => {
     user_ids = data.users;
@@ -141,7 +211,7 @@ exports.buildSpotifyPlaylist = async (req, res) => {
 
     var playlistID; // playlistID to be used in adding to the playlist
     await spotifyApi
-      .createPlaylist("Overlap yolo", { description: "Gang", public: true })
+      .createPlaylist("{req.body.playlistName}", { description: "Gang", public: true })
       .then((data) => {
         console.log("Playlist Created", data.statusCode);
         playlistID = data.body.id;
@@ -167,13 +237,13 @@ exports.buildSpotifyPlaylist = async (req, res) => {
     //     console.log(err)
     //   })
     var playlist = {
-      playlistID: playlistID,
+      playlistName: req.body.playlistName,
       tracks: dbTrackList,
     };
 
     await Group.updateOne(
       { groupCode: req.body.groupCode },
-      { $addToSet: { playlist: playlist } }
+      { $addToSet: { playlists: playlist } }
     ).then(() => {
       res.json({
         message: "Successfully created playlist",
