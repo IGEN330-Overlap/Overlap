@@ -104,6 +104,9 @@
     margin-left: 4vw;
     margin-bottom: 16vh;
     width: 45vw;
+    animation-name: playlistanimation;
+    animation-duration: 3.5s;
+    animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
 
 .individual-comparisons {
@@ -126,6 +129,21 @@
     }
     to {
         background-color: transparent;
+    }
+}
+
+@keyframes playlistanimation {
+    from {
+        opacity: 0;
+        transform: translateY(500px);
+    }
+    75% {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
     }
 }
 
