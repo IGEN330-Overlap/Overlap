@@ -63,55 +63,58 @@
 
 .group-profile-page-components {
     width: 100vw;
-    min-height: 90vh;
+    min-height: 91vh;
     height: fit-content;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
 }
 
 .component-box {
-    height: 8vh;
-    width: 90vw;
-    z-index: 3;
+    position: relative;
+    height: min(8vh, 50px);
+    width: 95vw;
+    z-index: 5;
     background-color: var(--primary-color-main);
 }
 
 .group-name {
-    margin-top: 10px;
+    position: absolute;
     margin-left: 4vw;
     height: clamp(55px, 9vw, 90px);
     z-index: 3;
 }
-.group-landing-root .d-flex {
+.group-landing-root .info-flex {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    height: fit-content;
+    width: 100vw;
     position: relative;
     z-index: 1;
 }
 .member-display {
+    position: relative;
     width: 45vw;
     max-height: 48vh;
     margin-left: 4vw;
-    margin-bottom: 10px;
+    margin-bottom: 2vh;
+    margin-top: clamp(80px, 10vh, 100px);
 }
 .playlist-carousel{
+    position: relative;
+    margin-top: clamp(40px, 4vh, 50px);
     margin-left: 4vw;
+    margin-bottom: 16vh;
+    width: 45vw;
 }
 
 .individual-comparisons {
-    margin-top: 70px;
-    margin-left: 8vw;
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 55vw;
+    margin-bottom: 2vh;
+    z-index: 8;
     animation-name: insightanimation;
     animation-duration: 2.75s;
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
-}
-
-.main-column{
-    display: flex;
-    flex-direction: column;
 }
 
 @keyframes navbaropacity {
@@ -167,16 +170,23 @@
 
 @media (max-width: 780px) {
     .individual-comparisons {
+        position: relative;
         margin-left: 4vw;
         margin-top: 10px;
     }
     .member-display {
+        position: relative;
+        margin-top: 0px;
+        margin-bottom: 0px;
         width: 90vw;
     }
     .playlist-carousel {
-        margin-bottom: 15px;
+        position: relative;
+        margin-top: 2vh;
+        margin-bottom: 3vh;
     }
     .group-name {
+        position: relative;
         width: 100vw;
     }
     .group-profile-page-components {
@@ -184,11 +194,11 @@
         justify-content: start;
     }
     .group-landing-root .main-column-box {
-        height: 100px;
-        width: 90vw;
+        height: 85px;
+        width: 95vw;
         z-index: 2;
     }
-    .component-box {
+    .group-profile-page-components .component-box {
         height: 0px;
     }
     .loading-message {

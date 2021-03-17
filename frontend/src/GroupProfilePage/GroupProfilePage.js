@@ -62,26 +62,24 @@ const GroupProfilePage = (props) => {
                 </div>
                 <div className="group-profile-page-components">
                     <div className="component-box"></div>
-                    <div className="d-flex">
-                        <div className="main-column">
-                            <div className="main-column-box"></div>
-                            <div className="group-name">
-                                <GroupName groupName = {groupName} />
-                            </div>
-                            <div className="member-display">
-                                {/* render members display when group users variable is populated */}
-                                {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare}/>}
-                            </div>
-                            <div className="playlist-carousel">
-                                <PlaylistCarousel playlists={playlists} />
-                            </div>
-                        </div> 
+                    <div className="info-flex">
+                        <div className="main-column-box"></div>
+                        <div className="group-name">
+                            <GroupName groupName = {groupName} />
+                        </div>
+                        <div className="member-display">
+                            {/* render members display when group users variable is populated */}
+                            {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare}/>}
+                        </div>
                         <div className="individual-comparisons">
-                            {/* if user has clicked on a member to compare, will render comparisons component
-                                otherwise, render insights component */}
+                        {/* if user has clicked on a member to compare, will render comparisons component
+                            otherwise, render insights component */}
                             {member_id 
-                                ? <Comparisons groupUsers={groupUsers} member_id={member_id} toCompare={toCompare} /> 
-                                : <MyInsights />}
+                            ? <Comparisons groupUsers={groupUsers} member_id={member_id} toCompare={toCompare} /> 
+                            : <MyInsights />}
+                        </div>
+                        <div className="playlist-carousel">
+                            <PlaylistCarousel playlists={playlists} />
                         </div>
                     </div> 
                 </div>
