@@ -45,14 +45,36 @@ exports.loginUser = async (req, res) => {
       //instantiate corresponding IDs for getting audio features
       let topTrackIDs = [];
 
-      //get user's top 100 tracks
+      //get user's top 50 medium term tracks
       try {
         //spotify api call
-        let data = await spotifyApi.getMyTopTracks({ limit: 50 });
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "medium_term" });
 
-        let info = extractUsersTopTracks(data.body.items);
-        topTracks = info[0];
-        topTrackIDs = info[1];
+        // store data extractions in tmp
+        let tmp = extractUsersTopTracks(data.body.items);
+        topTracks = tmp[0];
+        topTrackIDs = tmp[1];
+
+      } catch (err) {
+        res.json({ message: "Unable to get user top tracks.", error: err });
+        return;
+      }
+      //get user's top 50 short term tracks
+      try {
+        //spotify api call
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "short_term" });
+
+        let tmp = extractUsersTopTracks(data.body.items);
+
+        // iterate over top short term tracks completely 
+        // recall tmp[0] is arr of topTracs & data, tmp[1] is arr of topTrackIDs
+        for (var i = 0; i < tmp[0].length; i++){
+          // if the trackID doesn't exist from top medium term then add
+          if (!topTrackIDs.some(x => x === tmp[1][i])){
+            topTracks.push(tmp[0][i]);
+            topTrackIDs.push(tmp[1][i]);
+          }
+        }
 
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
@@ -92,29 +114,46 @@ exports.loginUser = async (req, res) => {
       //instantiate top artists array
       let topArtists = [];
 
-      //get user's top 30 artists
+      //get user's top 50 artists medium term
       try {
-        let data = await spotifyApi.getMyTopArtists({ limit: 50 });
+        let data = await spotifyApi.getMyTopArtists({ limit: 50, time_range: "medium_term" });
 
         topArtists = extractUsersTopArtists(data.body.items);
 
-        // // iterate over data and add relevant artist attributes
-        // for (x of data.body.items) {
-        //   let artist = {};
+      } catch (err) {
+        res.json({ message: "Unable to get user top artists.", error: err });
+        return;
+      }
+      //get user's top 50 artists short term
+      try {
+        let data = await spotifyApi.getMyTopArtists({ limit: 50, time_range: "short_term" });
 
-        //   //if artist name is empty, continue
-        //   if (x.name.length === 0 || x.name.length == null || x.images.length == 0) {
-        //     continue;
-        //   }
-        //   artist.artistName = x.name;
-        //   artist.artistID = x.id;
-        //   artist.followerCount = x.followers.total;
-        //   artist.artistPopularity = x.popularity;
-        //   artist.imageURL = x.images[0].url;
-        //   artist.linkURL = x.external_urls.spotify;
+        tmp = extractUsersTopArtists(data.body.items);
 
-        //   topArtists.push(artist);
-        // }
+        // iterate over top short term tracks completely 
+        for (var i = 0; i < tmp.length; i++){
+          // if the artistID doesn't exist from top medium term then add
+          if (!topArtists.some(x => x.artistID === tmp[i].artistID)) {
+            topArtists.push(tmp[i]);
+          }
+        }
+      } catch (err) {
+        res.json({ message: "Unable to get user top artists.", error: err });
+        return;
+      }
+      //get user's top 50 artists short term
+      try {
+        let data = await spotifyApi.getMyTopArtists({ limit: 50, time_range: "long_term" });
+
+        tmp = extractUsersTopArtists(data.body.items);
+
+        // iterate over top short term tracks completely 
+        for (var i = 0; i < tmp.length; i++){
+          // if the artistID doesn't exist from top medium term then add
+          if (!topArtists.some(x => x.artistID === tmp[i].artistID)) {
+            topArtists.push(tmp[i]);
+          }
+        }
       } catch (err) {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;

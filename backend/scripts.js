@@ -100,6 +100,12 @@ function extractUsersTopTracks (data) {
     return [topTracks, topTrackIDs];
 }
 
+/**
+ * Used to extract data for our use. used in conjuction with GET getMyTopArtists
+ * Should pass data.body.items from the above SpotifyAPI request
+ * @param {array} data 
+ * @returns 
+ */
 function extractUsersTopArtists (data) {
     
     if (typeof(data) === "undefined") {
