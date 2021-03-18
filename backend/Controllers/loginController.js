@@ -4,6 +4,9 @@ require("dotenv").config();
 let User = require("../Models/user.model");
 let Group = require("../Models/group.model");
 const { calculateMusicalProfile } = require("../scripts");
+const { extractUsersTopTracks } = require("../scripts.js");
+const { extractUsersTopArtists } = require("../scripts.js");
+
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -46,78 +49,10 @@ exports.loginUser = async (req, res) => {
       try {
         //spotify api call
         let data = await spotifyApi.getMyTopTracks({ limit: 50 });
-        let data2 = await spotifyApi.getMyTopTracks({limit: 30, offset: 50});
 
-        for (x of data.body.items) {
-          let track = {};
-
-          // if name is empty it usually means that the track has been removed from spotify (ex. Kpop songs on 2021-03-01)
-          if (x.name.length === 0) {
-            continue;
-          }
-          track.trackName = x.name;
-          track.trackID = x.id;
-          track.trackPopularity = x.popularity;
-          track.linkURL = x.external_urls.spotify;
-
-          //If album images array isn't empty, set the imageURL to the first element
-          //Else set to empty string
-          if (x.album.images.length != 0) {
-            track.imageURL = x.album.images[0].url;
-          } else {
-            track.imageURL = "";
-          }
-
-          //If artists array isn't empty, set the artistName to the first element
-          //Else set to empty string
-          if (x.artists.length != 0) {
-            track.artistName = x.artists[0].name;
-          } else {
-            track.artistName = "";
-          }
-
-          topTrackIDs.push(x.id);
-          topTracks.push(track);
-        }
-
-        for(x2 of data2.body.items){
-          let track = {};
-          var duplicateFlag = false;
-
-          for (x0 of data.body.items){
-            if(x2.id == x0.id){
-              duplicateFlag = true;
-            }
-          }
-
-          // if name is empty it usually means that the track has been removed from spotify (ex. Kpop songs on 2021-03-01)
-          if (x2.name.length === 0 && duplicateFlag == false) {
-            continue;
-          }
-          track.trackName = x2.name;
-          track.trackID = x2.id;
-          track.trackPopularity = x2.popularity;
-          track.linkURL = x2.external_urls.spotify;
-
-          //If album images array isn't empty, set the imageURL to the first element
-          //Else set to empty string
-          if (x2.album.images.length != 0) {
-            track.imageURL = x2.album.images[0].url;
-          } else {
-            track.imageURL = "";
-          }
-
-          //If artists array isn't empty, set the artistName to the first element
-          //Else set to empty string
-          if (x2.artists.length != 0) {
-            track.artistName = x2.artists[0].name;
-          } else {
-            track.artistName = "";
-          }
-
-          topTrackIDs.push(x2.id);
-          topTracks.push(track);
-        }
+        let info = extractUsersTopTracks(data.body.items);
+        topTracks = info[0];
+        topTrackIDs = info[1];
 
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
@@ -161,23 +96,25 @@ exports.loginUser = async (req, res) => {
       try {
         let data = await spotifyApi.getMyTopArtists({ limit: 50 });
 
-        // iterate over data and add relevant artist attributes
-        for (x of data.body.items) {
-          let artist = {};
+        topArtists = extractUsersTopArtists(data.body.items);
 
-          //if artist name is empty, continue
-          if (x.name.length === 0 || x.name.length == null || x.images.length == 0) {
-            continue;
-          }
-          artist.artistName = x.name;
-          artist.artistID = x.id;
-          artist.followerCount = x.followers.total;
-          artist.artistPopularity = x.popularity;
-          artist.imageURL = x.images[0].url;
-          artist.linkURL = x.external_urls.spotify;
+        // // iterate over data and add relevant artist attributes
+        // for (x of data.body.items) {
+        //   let artist = {};
 
-          topArtists.push(artist);
-        }
+        //   //if artist name is empty, continue
+        //   if (x.name.length === 0 || x.name.length == null || x.images.length == 0) {
+        //     continue;
+        //   }
+        //   artist.artistName = x.name;
+        //   artist.artistID = x.id;
+        //   artist.followerCount = x.followers.total;
+        //   artist.artistPopularity = x.popularity;
+        //   artist.imageURL = x.images[0].url;
+        //   artist.linkURL = x.external_urls.spotify;
+
+        //   topArtists.push(artist);
+        // }
       } catch (err) {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
