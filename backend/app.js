@@ -41,10 +41,6 @@ var stateKey = 'spotify_auth_state';
 
 var app = express();
 
-app.use(express.static(__dirname + '/public'))
-  .use(cors())
-  .use(cookieParser());
-
 app.get('/login', function (req, res) {
 
   var state = generateRandomString(16);
@@ -159,6 +155,11 @@ app.get('/refresh_token', function (req, res) {
 const mongoose = require('mongoose');
 app.use(cors());
 app.use(express.json());
+
+
+app.use(express.static("../frontend/build"))
+  .use(cookieParser());
+
 const uri = process.env.ATLAS_URI;
 
 // Instantiate mongoose connection
