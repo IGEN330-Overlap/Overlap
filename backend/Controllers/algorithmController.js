@@ -35,6 +35,19 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     return id;
   });
 
+  // minor error handling THIS SHOULD BE PREVENTED ON THE FRONT END THOUGH
+  try {
+    if (userIDs.length == 0) {
+      throw new Error();
+    }
+  } catch (e) {
+    console.log("Attempted to pass no user ids to create a playlist");
+    res.json({
+      message: "Cannot create a group with zero other users",
+      error: e
+    })
+  }
+
   let numUsers = userIDs.length; // keep track of number of users
   console.log("Users", userIDs); //debugging
 
@@ -42,13 +55,11 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   try {
     let data = await User.find({ userID: { $in: userIDs } });
 
-    // Add each persons dataset to our master array
-    for (x of data) {
-      usersTopTracks.push(x.topTracks);
-      usersMusicalProfile.push(x.musicalProfile);
-      usersTopArtists.push(x.topArtists);
-      // console.log(usersTopArtists.length)
-    }
+    // Add each persons dataset to our master array for the corresponding thing
+    usersTopTracks = data.map(x => x.topTracks);
+    usersMusicalProfile = data.map(x => x.musicalProfile);
+    usersTopArtists = data.map(x => x.topArtists);
+
   } catch (err) {
     res.json({ message: "error on finding users", error: err });
   }
@@ -70,6 +81,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     }
   }
 
+  // switch to Arr.flat() since its cleaner code if we get the chance
   // Put all the artists into one array (master set)
   for (x of usersTopArtists) {
     for (data of x) {
@@ -104,17 +116,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       (k) => counts[k] === maxCountTracks
     );
     // Each nested if block in this set of if/elif statements does the same thing
-    // add first 20 tracks if there are that many
-    // else add however many songs there are that occur maxCount times
+    // add up to first 10 tracks if there are that many
+    duplicateBasedSongs = mostFrequentTracks.slice(0, 10);
 
-    if (mostFrequentTracks.length > 20) {
-      duplicateBasedSongs = mostFrequentTracks.slice(0, 20);
-      numSongs = 20;
-    } else {
-      duplicateBasedSongs = mostFrequentTracks;
-      numSongs = mostFrequent;
-      Tracks.length;
-    }
     // If there are less than 7 users add if maxCount > (half the users rounded up)
   } else if (
     numUsers <= 7 &&
@@ -128,13 +132,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       (k) => counts[k] >= numOccurencesOfSongsToAdd
     );
 
-    if (mostFrequentTracks.length > 20) {
-      duplicateBasedSongs = mostFrequentTracks.slice(0, 20);
-      numSongs = 20;
-    } else {
-      duplicateBasedSongs = mostFrequentTracks;
-      numSongs = mostFrequentTracks.length;
-    }
+    duplicateBasedSongs = mostFrequentTracks.slice(0, 10);
+
     // If there are more than 7 users add if maxCount > (half the users rounded down)
   } else if (
     numUsers > 7 &&
@@ -148,17 +147,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       (k) => counts[k] >= numOccurencesOfSongsToAdd
     );
 
-    if (mostFrequentTracks.length > 20) {
-      duplicateBasedSongs = mostFrequentTracks.slice(0, 20);
-      numSongs = 20;
-    } else {
-      duplicateBasedSongs = mostFrequentTracks;
-      numSongs = mostFrequentTracks.length;
-    }
-  } else {
-    console.log("no frequent tracks added :(");
+    duplicateBasedSongs = mostFrequentTracks.slice(0, 10);
   }
-
   // Using track sounds to add the rest of the songs
   // To implement (BETTER WAYS possibly)
   let groupsMusicalProfile = Scripts.calculateMusicalProfile(usersMusicalProfile);
@@ -217,10 +207,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   // purely trackIDs of duplicate songs for the recommendation seed
-  let mostFrequentTracks = [];
-  for (x of playlistTracks) {
-    mostFrequentTracks.push(x.trackID);
-  }
+  let mostFrequentTracks = playlistTracks.map(x => x.trackID);
 
   // Count occurences of songs in master set of artists
   counts = masterSetArtists.reduce((a, c) => {
@@ -335,7 +322,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   // Add all the recommendation songs from spotify until the playlist has 20 songs
   // To implement verify that we're adding a song that is not already in the playlist
-  for (var i = 0; playlistTracks.length < 20; i++) {
+  for (var i = 0; playlistTracks.length < 25; i++) {
     // console.log(i)
     // Add an attribute songs so long as they don't already exist in duplicates
     if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
@@ -348,7 +335,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         identifier: recommendations[i].trackName + " " + recommendations[i].artistName,
       });
     } else if (i == recommendations.length) {
-      break;
+      break; // We have added all the reccomendations so break from loop
     }
   }
 
