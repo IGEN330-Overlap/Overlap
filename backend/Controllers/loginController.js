@@ -42,10 +42,11 @@ exports.loginUser = async (req, res) => {
       //instantiate corresponding IDs for getting audio features
       let topTrackIDs = [];
 
-      //get user's top 50 tracks
+      //get user's top 100 tracks
       try {
         //spotify api call
         let data = await spotifyApi.getMyTopTracks({ limit: 50 });
+        let data2 = await spotifyApi.getMyTopTracks({limit: 30, offset: 50});
 
         for (x of data.body.items) {
           let track = {};
@@ -78,6 +79,46 @@ exports.loginUser = async (req, res) => {
           topTrackIDs.push(x.id);
           topTracks.push(track);
         }
+
+        for(x2 of data2.body.items){
+          let track = {};
+          var duplicateFlag = false;
+
+          for (x0 of data.body.items){
+            if(x2.id == x0.id){
+              duplicateFlag = true;
+            }
+          }
+
+          // if name is empty it usually means that the track has been removed from spotify (ex. Kpop songs on 2021-03-01)
+          if (x2.name.length === 0 && duplicateFlag == false) {
+            continue;
+          }
+          track.trackName = x2.name;
+          track.trackID = x2.id;
+          track.trackPopularity = x2.popularity;
+          track.linkURL = x2.external_urls.spotify;
+
+          //If album images array isn't empty, set the imageURL to the first element
+          //Else set to empty string
+          if (x2.album.images.length != 0) {
+            track.imageURL = x2.album.images[0].url;
+          } else {
+            track.imageURL = "";
+          }
+
+          //If artists array isn't empty, set the artistName to the first element
+          //Else set to empty string
+          if (x2.artists.length != 0) {
+            track.artistName = x2.artists[0].name;
+          } else {
+            track.artistName = "";
+          }
+
+          topTrackIDs.push(x2.id);
+          topTracks.push(track);
+        }
+
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
