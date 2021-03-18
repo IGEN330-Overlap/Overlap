@@ -40,7 +40,7 @@ const Navbar1 = (props) => {
                 New Group
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={Link} to="/authorized/about" bg="white">
+            <Nav.Link as={Link} to="/about" bg="white">
               About Us
             </Nav.Link>
           </Nav>
