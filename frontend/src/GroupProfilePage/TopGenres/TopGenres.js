@@ -4,6 +4,7 @@ import './TopGenres.css';
 const top_genres = ['genre1','genre2','genre3','genre4','genre5']
 
 export const TopGenres = (props) => {
+
     return (
         <div className="top-genres-root">
             <div className="top-genres-heading">

@@ -32,7 +32,7 @@
 
 .genre-bubbles {
     height: 70vh;
-    width: min(85vw, 2500px);
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,9 +64,9 @@
 }
 
 .top-genre-2 {
-    position: absolute;
-    margin-top: min(5vw, 100px);
-    margin-left: min(57.5vw, 650px);
+    position: relative;
+    top: clamp(5px, 2vw, 100px);
+    left: clamp(380px, 50vw, 650px);
 }
 .top-genre-2 .bubble {
     height: min(30vw, 40vh);
@@ -80,9 +80,9 @@
 }
 
 .top-genre-3 {
-    position: absolute;
-    margin-top: min(40vw, 500px);
-    margin-left: min(30vw, 325px);
+    position: relative;
+    top: clamp(160px, 17.5vw, 230px);
+    left: clamp(80px, 12vw, 200px);
 }
 .top-genre-3 .bubble {
     height: min(20vw, 30vh);
@@ -96,9 +96,9 @@
 }
 
 .top-genre-4 {
-    position: absolute;
-    margin-top: min(30vw, 300px);
-    margin-left: max(-35vw, -500px);
+    position: relative;
+    top: clamp(125px, 10vw, 300px);
+    right: clamp(290px, 39vw, 450px);
 }
 .top-genre-4 .bubble {
     height: min(12.5vw, 22.5vh);
@@ -112,9 +112,9 @@
 }
 
 .top-genre-5 {
-    position: absolute;
-    margin-top: max(-25vw, -350px);
-    margin-left: max(-35vw, -400px);
+    position: relative;
+    bottom: clamp(140px, 19vw, 200px);
+    right: clamp(350px, 43vw, 600px);
 }
 .top-genre-5 .bubble {
     height: min(10vw, 20vh);
@@ -126,3 +126,22 @@
 .top-genre-5 strong {
     font-size: clamp(10px, 2.5vw, 25px);
 }
+
+/* @media (max-width:780px) {
+    .top-genre-2 {
+        top: clamp(80px, 50vw, 200px);
+        left: clamp(120px, 50vw, 300px);
+    }
+    .top-genre-3 {
+        top: clamp(15px, 50vw, 40px);
+        left: clamp(70px, 50vw, 155px);
+    }
+    .top-genre-4 {
+        top: clamp(-80px, -60vw, -70px);
+        right: clamp(30px, 50vw, 50px);
+    }
+    .top-genre-5 {
+        bottom: clamp(40px, 50vw, 80px);
+        right: clamp(170px, 50vw, 400px);
+    }
+} */
