@@ -102,6 +102,12 @@ const PlaylistCarousel = ({playlists}) => {
       >
         <button onClick={hideAddPlaylistModal} centered>
           <strong>Continue</strong>
+          {/* add code to generate playlist
+            post request to /groups/build/playlist
+            require: groupCode, userID (array IDs of people part of the playlist), playlistName
+            automatic inputs: groupCode
+            user inputs: select people for userID, enter playlist name 
+          */}
         </button>
       </Modal>
     </div>
