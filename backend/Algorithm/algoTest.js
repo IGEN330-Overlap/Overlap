@@ -14,7 +14,7 @@ const client_secret = process.env.CLIENT_SECRET; // Your secret
 const redirect_uri = process.env.BACKEND_URL + "callback"; // Your redirect uri
 
 // Import Song and Artist class
-let Song = require("./Song.js");
+let Song = require("./song.js");
 let Artist = require("./Artist.js");
 
 // instantiate spotifyApi object
