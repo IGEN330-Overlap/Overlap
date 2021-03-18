@@ -173,5 +173,7 @@ connection.once('open', () => {
 const router = require("./router.js");
 app.use("/", router);
 
+const port = process.env.PORT || 8888
+
 console.log('Listening on 8888');
-app.listen(8888);
+app.listen(port);
