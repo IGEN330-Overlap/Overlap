@@ -14,6 +14,9 @@ const axios = require("axios");
 
 const GroupProfilePage = (props) => {
 
+    // get refresh token
+    const refreshToken = useSelector((state) => state.refreshToken)
+
     // get group code from url
     const url = window.location.href
     const groupCode = url.replace("http://localhost:3000/authorized/group/","")
@@ -65,7 +68,7 @@ const GroupProfilePage = (props) => {
                     <div className="info-flex">
                         <div className="main-column-box"></div>
                         <div className="group-name">
-                            <GroupName groupName = {groupName} />
+                            <GroupName groupName={groupName} />
                         </div>
                         <div className="member-display">
                             {/* render members display when group users variable is populated */}
@@ -79,7 +82,7 @@ const GroupProfilePage = (props) => {
                             : <MyInsights />}
                         </div>
                         <div className="playlist-carousel">
-                            <PlaylistCarousel playlists={playlists} />
+                            <PlaylistCarousel playlists={playlists} groupCode={groupCode} groupUsers={groupUsers} refreshToken={refreshToken}/>
                         </div>
                     </div> 
                 </div>

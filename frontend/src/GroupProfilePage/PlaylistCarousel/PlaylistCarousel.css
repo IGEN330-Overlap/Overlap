@@ -125,6 +125,57 @@
     height: 1.5rem;
 }
 
+/* modal css */
+
+.playlistModal h4 {
+    font-size: 18px;
+}
+.modal-content .playlistModal{
+    height: fit-content;
+}
+.select-playlist-users {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center
+}
+.select-a-user {
+    background-color: var(--off-white-color);
+    width: fit-content;
+    color: var(--primary-color-main);
+    margin: 4px;
+    border-radius: 20px;
+}
+.select-a-user:hover {
+    cursor: pointer;
+}
+.select-a-user:active {
+    background-color: var(--primary-color-1);
+}
+.select-a-user strong {
+    margin: 10px;
+}
+.name-the-playlist {
+    margin-top: 20px;
+}
+.name-input {
+    width: 275px;
+    height: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
+    font-size: 20px;
+    font-weight: 550;
+    text-align: center;
+}
+.name-input::placeholder{
+    color: var(--off-white-color);
+    font-weight: 400;
+    text-align: center;
+}
+.generate-button {
+    margin-top: 30px;
+}
 
 @media (max-width: 780px) {
     .playlist-container{
@@ -137,7 +188,7 @@
         font-size: 12px;
     }
     .display-playlists{
-        justify-content: space-evenly;
+        justify-content: flex-start;
     }
     .carousel .carousel-inner{
         width: 75vw;
