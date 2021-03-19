@@ -39,60 +39,125 @@ exports.loginUser = async (req, res) => {
     async (data) => {
       spotifyApi.setAccessToken(data.body.access_token);
 
-      //insantiate topTracks array to add to user object
       let topTracks = [];
 
       //instantiate corresponding IDs for getting audio features
       let topTrackIDs = [];
-
-      //get user's top 50 medium term tracks
-      try {
-        //spotify api call
-        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "short_term" });
-
-        // store data extractions in tmp
-        let tmp = extractUsersTopTracks(data.body.items);
-        topTracks = tmp[0];
-        topTrackIDs = tmp[1];
-
-      } catch (err) {
-        res.json({ message: "Unable to get user top tracks.", error: err });
-        return;
-      }
+      let short_term = [];
+      let med_term = [];
+      let long_term = [];
       //get user's top 50 short term tracks
       try {
         //spotify api call
-        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "medium_term" });
-
-        let tmp = extractUsersTopTracks(data.body.items);
-
-        // iterate over top short term tracks completely 
-        // recall tmp[0] is arr of topTracks & data, tmp[1] is arr of topTrackIDs
-        for (var i = 0; i < tmp[0].length; i++){
-          // if the trackID doesn't exist from top medium term then add
-          if (!topTrackIDs.some(x => x === tmp[1][i])){
-            topTracks.push(tmp[0][i]);
-            topTrackIDs.push(tmp[1][i]);
-          } else {
-
-            topTracks = topTracks.filter(x => x.trackID != tmp[1][i]);
-            topTrackIDs = topTrackIDs.filter(x => x != tmp[1][i]);
-
-            topTracks.unshift(tmp[0][i]);
-            topTrackIDs.unshift(tmp[1][i]);
-          }
-        }        
-
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "short_term" });
+        short_term = extractUsersTopTracks(data.body.items);
+  
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
       }
+      //get user's top 50 medium term tracks
+      try {
+        //spotify api call
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "medium_term" });
+        med_term = extractUsersTopTracks(data.body.items); 
+  
+      } catch (err) {
+        res.json({ message: "Unable to get user top tracks.", error: err });
+        return;
+      }
+  
+      //get user's top 50 long term tracks
+      try {
+        //spotify api call
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "long_term" });
+        long_term = extractUsersTopTracks(data.body.items); 
+  
+      } catch (err) {
+        res.json({ message: "Unable to get user top tracks.", error: err });
+        return;
+      }
+      // intiialize the top 3 forcefully 
+  
+      var x = 2; // previuosly already added the first 2 from short-term
+      var y = 1; // previously already added first song from med term
+      var dupCount = 0;
+      var isShortTerm = true;
+  
+      for (var i = 0; i < short_term[0].length + med_term[0].length - 3; i++) {
+  
+        if (isShortTerm){
+          if (x == short_term[0].length){
+            continue;
+          }
+          if (!topTrackIDs.some(x => x === short_term[1][x])){
+            topTracks.push(short_term[0][x]);
+            topTrackIDs.push(short_term[1][x]);
+          } else {
+
+            topTracks.unshift(short_term[0][x]);
+            topTrackIDs.unshift(short_term[1][x]);
+            dupCount++;
+          }
+          x++;
+          
+          if (i % 5 == 0){
+            isShortTerm = false;
+          }
+  
+        } else {
+          if (y == med_term[0].length){
+            continue;
+          }
+          if (!topTrackIDs.some(x => x === med_term[1][y])){
+            topTracks.push(med_term[0][y]);
+            topTrackIDs.push(med_term[1][y]);
+          } else {         
+            if(med_term[0][y].trackName == "Dancin - Krono Remix") {
+              console.log(med_term[0][y]);
+            }  
+            topTracks.unshift(med_term[0][y]);
+            topTrackIDs.unshift(med_term[1][y]);
+            dupCount++;
+          }
+          y++
+  
+          if (i % 5 == 0){
+            isShortTerm = true;
+          }
+        }
+      }
+      console.log("duplicate count", dupCount)
+  
+      let tmp = topTracks.splice(0, dupCount);
+      tmp = tmp.reverse();
+      topTracks = topTracks.splice(dupCount);
+      topTracks = tmp.concat(topTracks);
+  
+      tmp = topTrackIDs.splice(0, dupCount);
+      tmp = tmp.reverse();
+      topTrackIDs = topTrackIDs.splice(dupCount);
+      topTrackIDs = tmp.concat(topTrackIDs);
       
+      topTracks.unshift(short_term[0][1]);
+      topTracks.unshift(med_term[0][0]);
+      topTracks.unshift(short_term[0][0]);
+      topTrackIDs.unshift(short_term[1][1]);
+      topTrackIDs.unshift(med_term[1][0]);
+      topTrackIDs.unshift(short_term[1][0]);
+    
+      for (var i = 0; i < long_term[0].length; i++){
+        if (!topTrackIDs.some(x => x === long_term[1][i])){
+          topTracks.push(long_term[0][i]);
+          topTrackIDs.push(long_term[1][i])
+        }
+      }
+  
       //get the corresponding top track features to those 50 songs
       try {
         //Spotify api call
-        let data = await spotifyApi.getAudioFeaturesForTracks(topTrackIDs);
-
+        let data = await spotifyApi.getAudioFeaturesForTracks(topTrackIDs.splice(0,100));
+  
         let i = 0;
         // iterate over return data to extract the corresponding individual track features
         for (x of data.body.audio_features) {
@@ -117,16 +182,48 @@ exports.loginUser = async (req, res) => {
         res.json({ message: "Unable to get track audio features.", error: err });
         return;
       }
-
+  
+      if (topTrackIDs.length != 0) {
+          //get the corresponding top track features to those 50 songs
+        try {
+          //Spotify api call
+          let data = await spotifyApi.getAudioFeaturesForTracks(topTrackIDs.splice(0, 100));
+  
+          let i = 100;
+          // iterate over return data to extract the corresponding individual track features
+          for (x of data.body.audio_features) {
+            // Verify that we are adding to the corresponding song and if successful add attributes
+            if (topTracks[i]["trackID"] == x.id) {
+              topTracks[i]["danceability"] = x.danceability;
+              topTracks[i]["energy"] = x.energy;
+              topTracks[i]["key"] = x.key;
+              topTracks[i]["loudness"] = x.loudness;
+              topTracks[i]["mode"] = x.mode;
+              topTracks[i]["speechiness"] = x.speechiness;
+              topTracks[i]["acousticness"] = x.acousticness;
+              topTracks[i]["instrumentalness"] = x.instrumentalness;
+              topTracks[i]["valence"] = x.valence;
+              topTracks[i]["duration_ms"] = x.duration_ms;
+            } else {
+              continue; // skip to next, ids were not the same
+            }
+            i++; // iterate for the next item to add in our topTracks array
+          }
+        } catch (err) {
+          res.json({ message: "Unable to get track audio features.", error: err });
+          return;
+        }
+      }
+  
       //instantiate top artists array
       let topArtists = [];
-
+  
       //get user's top 50 artists medium term
       try {
         let data = await spotifyApi.getMyTopArtists({ limit: 50, time_range: "medium_term" });
-
+  
         topArtists = extractUsersTopArtists(data.body.items);
-
+  
       } catch (err) {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
@@ -134,9 +231,9 @@ exports.loginUser = async (req, res) => {
       //get user's top 50 artists short term
       try {
         let data = await spotifyApi.getMyTopArtists({ limit: 50, time_range: "short_term" });
-
+  
         tmp = extractUsersTopArtists(data.body.items);
-
+  
         // iterate over top short term tracks completely 
         for (var i = 0; i < tmp.length; i++){
           // if the artistID doesn't exist from top medium term then add
@@ -151,9 +248,9 @@ exports.loginUser = async (req, res) => {
       //get user's top 50 artists short term
       try {
         let data = await spotifyApi.getMyTopArtists({ limit: 50, time_range: "long_term" });
-
+  
         tmp = extractUsersTopArtists(data.body.items);
-
+  
         // iterate over top short term tracks completely 
         for (var i = 0; i < tmp.length; i++){
           // if the artistID doesn't exist from top medium term then add
@@ -165,11 +262,17 @@ exports.loginUser = async (req, res) => {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
-
+  
+      // Remove all duplicates and add to the new array groupUniqueSet
+      topTracks = topTracks.filter(
+        (v, i, a) => a.findIndex((t) => t.trackID === v.trackID) === i
+      );
+  
+  
       // use scripted method for calculating musical profile and store in musicalProfile
       musicalProfile = calculateMusicalProfile(topTracks);
       // multiply so all attributes are on the 0-100 scale
-
+  
       musicalProfile.danceability *= 100; 
       musicalProfile.energy *= 100;
       musicalProfile.speechiness *= 100;
