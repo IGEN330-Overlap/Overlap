@@ -48,7 +48,7 @@ exports.loginUser = async (req, res) => {
       //get user's top 50 medium term tracks
       try {
         //spotify api call
-        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "medium_term" });
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "short_term" });
 
         // store data extractions in tmp
         let tmp = extractUsersTopTracks(data.body.items);
@@ -62,25 +62,32 @@ exports.loginUser = async (req, res) => {
       //get user's top 50 short term tracks
       try {
         //spotify api call
-        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "short_term" });
+        let data = await spotifyApi.getMyTopTracks({ limit: 50, time_range: "medium_term" });
 
         let tmp = extractUsersTopTracks(data.body.items);
 
         // iterate over top short term tracks completely 
-        // recall tmp[0] is arr of topTracs & data, tmp[1] is arr of topTrackIDs
+        // recall tmp[0] is arr of topTracks & data, tmp[1] is arr of topTrackIDs
         for (var i = 0; i < tmp[0].length; i++){
           // if the trackID doesn't exist from top medium term then add
           if (!topTrackIDs.some(x => x === tmp[1][i])){
             topTracks.push(tmp[0][i]);
             topTrackIDs.push(tmp[1][i]);
+          } else {
+
+            topTracks = topTracks.filter(x => x.trackID != tmp[1][i]);
+            topTrackIDs = topTrackIDs.filter(x => x != tmp[1][i]);
+
+            topTracks.unshift(tmp[0][i]);
+            topTrackIDs.unshift(tmp[1][i]);
           }
-        }
+        }        
 
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
       }
-
+      
       //get the corresponding top track features to those 50 songs
       try {
         //Spotify api call
