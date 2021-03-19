@@ -126,18 +126,31 @@
 }
 
 /* modal css */
-
+.playlistModal h2 {
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
 .playlistModal h4 {
+    margin-top: 12px;
     font-size: 18px;
+    color: var(--primary-color-main);
+    font-weight: 520;
 }
 .modal-content .playlistModal{
     height: fit-content;
 }
 .select-playlist-users {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+.select-playlist-users-container {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center
+    justify-content: center;
+    width: 400px;
 }
 .select-a-user {
     background-color: var(--off-white-color);
@@ -149,11 +162,25 @@
 .select-a-user:hover {
     cursor: pointer;
 }
-.select-a-user:active {
-    background-color: var(--primary-color-1);
-}
 .select-a-user strong {
     margin: 10px;
+}
+.select-all-users {
+    background-color: var(--off-white-color);
+    width: fit-content;
+    color: var(--primary-color-main);
+    margin: 4px;
+    margin-top: 10px;
+    margin-bottom: 17px;
+    border-radius: 20px;
+}
+.select-all-users:hover {
+    cursor: pointer;
+}
+.select-all-users strong {
+    margin: 12px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .name-the-playlist {
     margin-top: 20px;
@@ -174,7 +201,14 @@
     text-align: center;
 }
 .generate-button {
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.playlistModal button {
+    border-color: transparent;
+    width: 200px;
+    height: 35px;
+    font-size: 20px;
 }
 
 @media (max-width: 780px) {

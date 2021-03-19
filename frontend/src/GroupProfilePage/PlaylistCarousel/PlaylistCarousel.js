@@ -42,10 +42,12 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   var playlistUsers = []
   var checkDuplicate = false
   var index
+
+  // select users and check if user is already selected
   const selectUser = (userID, position) => {
     if (playlistUsers.length === 0) {
       playlistUsers.push(userID)
-      document.getElementById("select-bubble").style.backgroundColor = "lightblue"
+      document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--neutral-color-main)"
     }  
     else if (playlistUsers.length !== 0) {
       playlistUsers.map((user, i) => {
@@ -57,11 +59,17 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       })
       if(checkDuplicate === true){
         playlistUsers.splice(index, 1)
-        document.getElementById("select-bubble").style.backgroundColor = "white"
+        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--off-white-color)"
+        if(playlistUsers.length !== groupUsers.length) {
+          document.getElementById("select-bubble").style.backgroundColor = "var(--off-white-color)"
+        }
       }
       else if(checkDuplicate === false){
         playlistUsers.push(userID)
-        document.getElementById("select-bubble").style.backgroundColor = "lightblue"
+        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--neutral-color-main)"
+        if(playlistUsers.length === groupUsers.length) {
+          document.getElementById("select-bubble").style.backgroundColor = "var(--neutral-color-main)"
+        }
       }
     }
     checkDuplicate = false
@@ -69,19 +77,32 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     console.log(playlistUsers)
   }
   
+  // select all users or remove all users if everyone is already selected
   const selectAll = () => {
-    playlistUsers = []
-    groupUsers.map((user) => {
-      playlistUsers.push(user.userID)
-      return playlistUsers
-    })
+    if(playlistUsers.length === groupUsers.length){
+      playlistUsers=[]
+      groupUsers.map((user, i) => {
+        document.getElementById("select-bubble").style.backgroundColor = "var(--off-white-color)"
+        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--off-white-color)"
+        return playlistUsers
+      })
+    }
+    else {
+      playlistUsers = []
+      groupUsers.map((user, i) => {
+        playlistUsers.push(user.userID)
+        document.getElementById("select-bubble").style.backgroundColor = "var(--neutral-color-main)"
+        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--neutral-color-main)"
+        return playlistUsers
+      })
+    }
     console.log(playlistUsers)
   }
 
   // generate playlist
   // need to add alerts to tell users if no one is selected or if there is no playlist title
   const generatePlaylist = () => {
-    if (playlistUsers.length !== 0) {
+    if (playlistUsers.length > 1) {
       var input_playlistName = document.getElementById("newPlaylistName").value
         if (input_playlistName === "") {
           console.log('No playlist name entered!')
@@ -101,6 +122,9 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               console.log(err);
           });
         }
+    }
+    else {
+      console.log("Please select at least one more person!")
     }
   }
 
@@ -166,27 +190,23 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         onHide={hideAddPlaylistModal}
         centered
       >
-          {/* add code to generate playlist
-            post request to /groups/build/playlist
-            require: groupCode, userID (array IDs of people part of the playlist), playlistName
-            automatic inputs: groupCode
-            user inputs: select people for userID, enter playlist name 
-          */}
           <div className="playlistModal">
             <h2><strong>Generate a Playlist!</strong></h2>
-            <h4>Select whose songs you want in this playlist:</h4>
+            <h4>Who do you want to contribute to this playlist?</h4>
             <div className="select-playlist-users">
-                <div className="select-a-user" id="select-bubble" onClick={() => selectAll()}>
+                <div className="select-all-users" id="select-bubble" onClick={() => selectAll()}>
                   <strong>Select All</strong>
                 </div>
-                {groupUsers.map((user, i) => (
-                  <div
-                    className="select-a-user"
-                    id="select-bubble"
-                    onClick={() => selectUser(user.userID, i)}>
-                    <strong>{user.name}</strong>
-                  </div>
-                ))}
+                <div className="select-playlist-users-container">
+                  {groupUsers.map((user, i) => (
+                    <div
+                      className="select-a-user"
+                      id={"select-bubble-"+i}
+                      onClick={() => selectUser(user.userID, i)}>
+                      <strong>{user.name}</strong>
+                    </div>
+                  ))}
+                </div>
             </div>
             <div className="playlist-moods">
               section for moods/top tracks toggle

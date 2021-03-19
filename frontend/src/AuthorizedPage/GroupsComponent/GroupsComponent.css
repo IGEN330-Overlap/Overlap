@@ -102,7 +102,7 @@ input:focus{
     border-radius: 15px;
     text-align: center;
     background-color: var(--blue-color-1);
-    width: 400px;
+    width: 450px;
 } 
 
 .modal-text{
