@@ -319,13 +319,19 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       res.json(err);
     }
   }
+  for (x of playlistTracks){
+    console.log(x.identifier)
+  }
+  console.log(recommendations)
 
   // Add all the recommendation songs from spotify until the playlist has 20 songs
   // To implement verify that we're adding a song that is not already in the playlist
-  for (var i = 0; playlistTracks.length < 25; i++) {
-    // console.log(i)
+  for (var i = 0; playlistTracks.length < 23; i++) {
+    // We have added all the reccomendations so break from loop
+    if (i == recommendations.length) {
+      break; 
     // Add an attribute songs so long as they don't already exist in duplicates
-    if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
+    } else if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
       playlistTracks.push({
         trackName: recommendations[i].trackName,
         trackID: recommendations[i].trackID,
@@ -334,17 +340,18 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         artistName: recommendations[i].artistName,
         identifier: recommendations[i].trackName + " " + recommendations[i].artistName,
       });
-    } else if (i == recommendations.length) {
-      break; // We have added all the reccomendations so break from loop
     }
   }
 
   // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
   // To implement verify that we're adding a song that is not already in the playlist
   for (var i = 0; playlistTracks.length < 30; i++) {
-    // console.log(i)
+
+    if (i == sortedTrackSet.length) {
+      break; // if we have already added all the sorted tracks then break 
+    }
     // Add an attribute songs so long as they don't already exist in duplicates
-    if (!playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)) {
+    else if (!playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)) {
       playlistTracks.push({
         trackName: sortedTrackSet[i].data.trackName,
         trackID: sortedTrackSet[i].data.trackID,
@@ -353,8 +360,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         artistName: sortedTrackSet[i].data.artistName,
         identifier: sortedTrackSet[i].data.trackName + " " + sortedTrackSet[i].data.artistName,
       });
-    } else if (i == sortedTrackSet.length) {
-      break;
     }
   }
 

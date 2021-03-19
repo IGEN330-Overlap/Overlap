@@ -1,5 +1,8 @@
 import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import "./PlaylistCarousel.css";
+
+import { updateGroupList } from "../../Redux/Actions.js";
 
 import { Link} from "react-router-dom";
 
@@ -29,6 +32,10 @@ const cover_src = [
 ];
 
 const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
+
+  const userObject = useSelector((state) => state.userObject)
+  
+  const dispatch = useDispatch();
 
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
@@ -116,7 +123,15 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               playlistName: input_playlistName,
           })
           .then((data) => {
-              console.log(data)
+              console.log(data);
+              axios
+              .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+              .then((data) => {
+                dispatch(updateGroupList(data.data));
+              })
+              .catch((err) => {
+                console.log(err);
+              })
           })
           .catch((err) => {
               console.log(err);
