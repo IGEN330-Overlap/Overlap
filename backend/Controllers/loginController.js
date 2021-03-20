@@ -53,6 +53,11 @@ exports.loginUser = async (req, res) => {
           time_range: "short_term",
         });
         short_term = extractUsersTopTracks(data.body.items);
+
+        if (short_term == "undefined"){
+          throw new Error();
+        }
+
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
@@ -65,6 +70,9 @@ exports.loginUser = async (req, res) => {
           time_range: "medium_term",
         });
         med_term = extractUsersTopTracks(data.body.items);
+        if (med_term == "undefined"){
+          throw new Error()
+        }
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
@@ -78,6 +86,9 @@ exports.loginUser = async (req, res) => {
           time_range: "long_term",
         });
         long_term = extractUsersTopTracks(data.body.items);
+        if (long_term == "undefined"){
+          throw new Error()
+        }
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
