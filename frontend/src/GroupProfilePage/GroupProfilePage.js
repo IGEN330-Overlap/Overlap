@@ -13,8 +13,8 @@ const axios = require("axios");
 const GroupProfilePage = (props) => {
 
     // get group code from url
-    const url = window.location.href
-    const groupCode = url.replace("http://localhost:3000/authorized/group/","")
+    const url = new URL(window.location.href);
+    const groupCode = url.pathname.replace("/authorized/group/", "");
 
     // get group name
     const groupList = useSelector((state) => state.groupList)
@@ -67,7 +67,7 @@ const GroupProfilePage = (props) => {
                         </div>
                         <div className="member-display">
                             {/* render members display when group users variable is populated */}
-                            {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare}/>}
+                            {groupUsers && <MemberDisplay groupUsers={groupUsers} toCompare={toCompare} groupCode={groupCode}/>}
                         </div>
                         <div className="playlist-carousel">
                             <PlaylistCarousel playlists={playlists} />
