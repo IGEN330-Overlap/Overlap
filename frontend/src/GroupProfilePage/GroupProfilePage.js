@@ -55,7 +55,7 @@ const GroupProfilePage = (props) => {
         selectMember(value);
     }
 
-    return (checkMember === 'true') 
+    return ((checkMember === 'true') &&  groupUsers) 
     ? 
     (     
         <div className="group-landing-root">
@@ -71,13 +71,11 @@ const GroupProfilePage = (props) => {
                             <GroupName groupName={groupName} />
                         </div>
                         <div className="member-display">
-                            {/* render members display when group users variable is populated */}
-                            {groupUsers && 
-                                <MemberDisplay 
-                                    groupUsers={groupUsers} 
-                                    toCompare={toCompare}
-                                />
-                            }
+                            {/* render members display when group users variable is populated */} 
+                            <MemberDisplay 
+                                groupUsers={groupUsers} 
+                                toCompare={toCompare}
+                            />
                         </div>
                         <div className="individual-comparisons">
                         {/* if user has clicked on a member to compare, will render comparisons component
@@ -91,14 +89,12 @@ const GroupProfilePage = (props) => {
                             }
                         </div>
                         <div className="playlist-carousel">
-                            {(playlists.length > -1) && 
-                                <PlaylistCarousel 
-                                    playlists={playlists} 
-                                    groupCode={groupCode} 
-                                    groupUsers={groupUsers} 
-                                    refreshToken={refreshToken}
-                                />
-                            }
+                            <PlaylistCarousel 
+                                playlists={playlists} 
+                                groupCode={groupCode} 
+                                groupUsers={groupUsers} 
+                                refreshToken={refreshToken}
+                            />
                         </div>
                     </div> 
                 </div>
