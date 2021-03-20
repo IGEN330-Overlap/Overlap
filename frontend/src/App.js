@@ -48,10 +48,12 @@ function App() {
   //Update refresh token on App render
   //if refresh token exists in localstorage, dispatch update
   //else if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
-  if (localStorage.getItem("refreshToken") !== undefined && localStorage.getItem("refreshToken") !== null) {
+  if (
+    localStorage.getItem("refreshToken") !== undefined &&
+    localStorage.getItem("refreshToken") !== null
+  ) {
     dispatch(updateRefreshToken(localStorage.getItem("refreshToken")));
-  }
-  else if (
+  } else if (
     params.refresh_token !== "" &&
     params.refresh_token !== undefined &&
     params.refresh_token !== null
@@ -63,7 +65,7 @@ function App() {
   //User Effect hook for logging in the user with API upon refreshToken update
   useEffect(() => {
     axios
-      .post(process.env.REACT_APP_BACKEND_URL + "/users/login", {
+      .post("/users/login", {
         refreshToken: refreshToken,
       })
       .then((data) => {
@@ -89,12 +91,7 @@ function App() {
     if (userObject != null) {
       if (userObject.userID !== "") {
         axios
-          .get(
-            process.env.REACT_APP_BACKEND_URL +
-              "/users/" +
-              userObject.userID +
-              "/groups"
-          )
+          .get("/users/" + userObject.userID + "/groups")
           .then((data) => {
             dispatch(updateGroupList(data.data));
           })
@@ -107,12 +104,17 @@ function App() {
   return (
     <div className="App">
       {/* Redirect if not logged in with spotify */}
-      {(refreshToken == null || refreshToken.length === 0 || refreshToken === "" || faultyLogin) && (
-        <Redirect to="/" />
-      )}
+      {(refreshToken == null ||
+        refreshToken.length === 0 ||
+        refreshToken === "" ||
+        faultyLogin) && <Redirect to="/" />}
       <Switch>
         {/* Route for root */}
-        <Route path="/" render={() => <LandingPage faultyLogin={faultyLogin}/>} exact={true} />
+        <Route
+          path="/"
+          render={() => <LandingPage faultyLogin={faultyLogin} />}
+          exact={true}
+        />
         {/* Router for authorized reroute from backend authorization */}
         <Route
           path="/authorized"

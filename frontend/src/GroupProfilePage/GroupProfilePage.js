@@ -36,7 +36,7 @@ const GroupProfilePage = (props) => {
     useEffect (() => {
         if(groupCode !== null) {
             axios
-            .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
+            .get("/groups/"+ groupCode + "/users")
             .then((data) => {
                 setUsers(data.data)
             })
