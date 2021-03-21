@@ -117,7 +117,7 @@ const GroupsComponent = (props) => {
       <h1 className="title">
         <strong>Groups</strong>
       </h1>
-      <div class="mr-auto">
+      <div className="mr-auto">
         <img src={line} className="underline" alt="underline" />
       </div>
 
@@ -125,7 +125,7 @@ const GroupsComponent = (props) => {
       <div className="search-bar">
         <input
           type="text"
-          class="input-search"
+          className="input-search"
           placeholder="search"
           size="15"
         />

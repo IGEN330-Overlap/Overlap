@@ -75,7 +75,7 @@ const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
                 </div>
             </div>
             {members.map((member,i) => (
-                <div className="icon-container">
+                <div className="icon-container" key={i}>
                     <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member_id[i])}></img>
                     <div className="user-name" onClick={() => toCompare(member_id[i])}>
                             <strong>{member}</strong>
