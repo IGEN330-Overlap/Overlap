@@ -132,9 +132,10 @@ const GroupsComponent = (props) => {
       </div>
 
       <div className="group-list">
-        {groupList.map((group) => (
+        {groupList.map((group,i) => (
           /* Group as a dropdown menu button */
-          <div
+          <div 
+            key={i}
             className="group-item d-flex"
           >
             <Dropdown as={ButtonGroup}>

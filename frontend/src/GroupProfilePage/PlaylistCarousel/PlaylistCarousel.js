@@ -215,7 +215,8 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                 </div>
                 <div className="select-playlist-users-container">
                   {groupUsers.map((user, i) => (
-                    <div
+                    <div 
+                      key={i}
                       className="select-a-user"
                       id={"select-bubble-"+i}
                       onClick={() => selectUser(user.userID, i)}>
