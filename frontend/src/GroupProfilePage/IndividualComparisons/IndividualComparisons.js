@@ -99,16 +99,18 @@ export const Comparisons = ({groupUsers, member_id, toCompare}) => {
 
     var userCompareArtists = []
     var userCompareTracks = []
-
-    compare_info.topArtists.map((artist,i) => {
-        userCompareArtists[i] = ({artist: artist.artistName, icon: artist.imageURL})
-        return userCompareArtists
-    })
     
-    compare_info.topTracks.map((track,i) => {
-        userCompareTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
-        return userCompareTracks
-    })
+    if(compare_info.length !== 0){
+        compare_info.topArtists.map((artist,i) => {
+            userCompareArtists[i] = ({artist: artist.artistName, icon: artist.imageURL})
+            return userCompareArtists
+        })
+        
+        compare_info.topTracks.map((track,i) => {
+            userCompareTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
+            return userCompareTracks
+        })
+    }
 
     // find up to three common artists
     const compareArtists = []

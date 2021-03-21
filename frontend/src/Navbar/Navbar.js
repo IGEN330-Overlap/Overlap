@@ -18,6 +18,15 @@ const Navbar1 = (props) => {
   //get group list from redux states
   const groupList = useSelector((state) => state.groupList)
 
+  //order groupList from most recent to oldest
+  function sortGroupList (a,b) {
+    if (b.createdAt > a.createdAt) return 1;
+    if (a.createdAt > b.createdAt) return -1;
+
+    return 0
+  }
+  groupList.sort(sortGroupList)
+
   return (
     <div className="navbar-stuff">
       <Navbar bg="transparent" variant="dark" expand="sm">
