@@ -15,7 +15,7 @@ export const PlaylistTracks = ({playlistTracks}) => {
             <div className="playlist-page-tracks">
                 <div className="track-display">
                     {trackInfo.map((track,i) => (
-                        <div className="track-container">
+                        <div key={i} className="track-container">
                             <div className="track-number">
                                 <h3><strong>{[i+1]}</strong></h3>
                             </div>

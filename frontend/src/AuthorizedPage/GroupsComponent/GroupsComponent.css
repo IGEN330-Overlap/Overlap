@@ -96,7 +96,7 @@ input:focus{
     fill: var(--blue-color-3);
 }
 
-.modal-dialog .modal-content{
+.modalcss .modal-dialog .modal-content{
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 15px;

@@ -10,6 +10,9 @@ const LandingPage = (props) => {
 
     return (
         <div className="landing-root d-flex flex-column justify-content-center align-items-center">
+            <div className="landing-about">
+                <a className="about-us-access" href="/about"><strong>About Us</strong></a>
+            </div>
             <div className="logo-container">
                 <img src={logo} alt="logo" />
             </div>
