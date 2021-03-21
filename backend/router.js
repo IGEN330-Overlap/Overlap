@@ -39,7 +39,6 @@ router.post("/groups/generatePlaylist", algorithmController.generateGroupsTopPla
 // TESTING ALGO
 router.get("/test/getTopTracksNoAttributes", algoTest.getMyTopTracks);
 router.get("/test/trackFeature", algoTest.getTrackFeatures);
-router.get("/test/getTopArtists", algoTest.getMyTopArtists);
 router.get("/test/getTopTrackIDs", algoTest.getTopTrackIds);
 router.get("/test/getTopTracks", algoController.getMyTopTracks);
 router.post("/test/buildSpotifyPlaylist", algoController.buildSpotifyPlaylist);
