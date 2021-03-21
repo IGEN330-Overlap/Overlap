@@ -147,6 +147,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   var playlistInfo = []
   playlists.map((playlist,i) => {
     playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id})
+    playlistInfo.reverse()
     return playlistInfo
   })
 
