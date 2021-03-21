@@ -171,6 +171,7 @@
     cursor: pointer;
 }
 .select-a-user strong {
+    vertical-align: middle;
     margin: 15px;
 }
 .select-all-users {
@@ -187,6 +188,7 @@
     cursor: pointer;
 }
 .select-all-users strong {
+    vertical-align: middle;
     margin: 15px;
 }
 .name-the-playlist {
