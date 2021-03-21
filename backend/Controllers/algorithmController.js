@@ -110,7 +110,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let maxCountTracks = Math.max(...Object.values(counts));
 
   // If there are at least 2 users and max count occurs in at least half the users
-  if (numUsers <= 2 && maxCountTracks == 2) {
+  if (numUsers == 2 && maxCountTracks == 2) {
     // filters for songs that appear the same amount of times as maxCount
     let mostFrequentTracks = Object.keys(counts).filter(
       (k) => counts[k] === maxCountTracks
@@ -121,7 +121,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
     // If there are less than 7 users add if maxCount > (half the users rounded up)
   } else if (
-    numUsers <= 7 &&
+    numUsers <= 7 && numUsers > 2 &&
     maxCountTracks >= numUsers - Math.floor(numUsers / 2)
   ) {
     // A song must appear a minimum in 1/2 the users (half+1) if the num users in group is odd
@@ -318,9 +318,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     } catch (err) {
       res.json(err);
     }
-  }
-  for (x of playlistTracks){
-    console.log(x.identifier)
   }
 
   // Add all the recommendation songs from spotify until the playlist has 20 songs
