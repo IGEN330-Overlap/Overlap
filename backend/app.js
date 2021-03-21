@@ -44,11 +44,11 @@ var stateKey = "spotify_auth_state";
 var app = express();
 
 app
-  .use(express.static(path.join(__dirname, "/../frontend/build")))
+  .use(express.static(path.join(__dirname, "/public")))
   .use(cors())
   .use(cookieParser());
 
-console.log(path.join(__dirname, "/../frontend/build"));
+console.log(path.join(__dirname, "/public"));
 
 app.get("/login", function (req, res) {
   var state = generateRandomString(16);
