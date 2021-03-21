@@ -1,6 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import './IndividualComparisons.css';
+import { useSelector } from "react-redux";
 
 export const MyInsights = (props) => {
     

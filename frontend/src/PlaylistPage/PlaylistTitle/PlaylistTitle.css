@@ -18,7 +18,7 @@
 }
 
 .playlist-info-root .btn-sm {
-    padding: 0.175rem 0.95rem;
+    padding: 0.2rem 0.95rem;
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
@@ -26,8 +26,11 @@
 
 .playlist-info-root .btn {
     font-weight: 800;
-    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-size: clamp(0.85rem, 1.75vw, 1rem);
     transition: color 0.35s
+}
+.playlist-info-root .btn:hover {
+    color: var(--blue-color-2);
 }
 
 .playlist-page-cover-container {
