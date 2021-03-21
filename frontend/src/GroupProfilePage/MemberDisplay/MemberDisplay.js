@@ -6,7 +6,7 @@ import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 import add_member from './add-member.svg';
 
-const MemberDisplay = ({groupUsers, toCompare}) => {
+const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
 
   const userObject = useSelector(state => state.userObject)
 
@@ -26,10 +26,6 @@ const MemberDisplay = ({groupUsers, toCompare}) => {
     }
     return members
   })
-
-  // get group code
-  const url = window.location.href
-  const groupCode = url.replace("http://localhost:3000/authorized/group/","")
 
   /* popover content*/
   const popover = (

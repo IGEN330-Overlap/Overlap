@@ -129,6 +129,7 @@
 .playlistModal h2 {
     margin-top: 5px;
     margin-bottom: 3px;
+    color: var(--blue-color-main);
 }
 .playlistModal h4 {
     margin-top: 12px;
@@ -136,8 +137,13 @@
     color: var(--primary-color-main);
     font-weight: 520;
 }
-.modal-content .playlistModal{
+.playlist-add-modal .modal-dialog .modal-content{
     height: fit-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    background-color: var(--off-white-color);
+    width: 500px;
 }
 .select-playlist-users {
     display: flex;
@@ -153,9 +159,9 @@
     width: 400px;
 }
 .select-a-user {
-    background-color: var(--off-white-color);
+    background-color: var(--neutral-color-3);
     width: fit-content;
-    color: var(--primary-color-main);
+    color: var(--primary-color-6);
     margin: 4px;
     border-radius: 20px;
 }
@@ -166,9 +172,9 @@
     margin: 10px;
 }
 .select-all-users {
-    background-color: var(--off-white-color);
+    background-color: var(--neutral-color-3);
     width: fit-content;
-    color: var(--primary-color-main);
+    color: var(--primary-color-6);
     margin: 4px;
     margin-top: 10px;
     margin-bottom: 17px;
@@ -186,23 +192,24 @@
     margin-top: 20px;
 }
 .name-input {
-    width: 275px;
+    width: 300px;
     height: 30px;
     background-color: transparent;
     border-color: transparent;
-    color: white;
+    color: var(--blue-color-main);
     font-size: 20px;
     font-weight: 550;
     text-align: center;
 }
 .name-input::placeholder{
-    color: var(--off-white-color);
-    font-weight: 400;
+    color: var(--neutral-color-7);
+    font-weight: 450;
     text-align: center;
 }
 .generate-button {
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: var(--blue-color-1);
 }
 .playlistModal button {
     border-color: transparent;

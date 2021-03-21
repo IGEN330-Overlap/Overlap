@@ -54,7 +54,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   const selectUser = (userID, position) => {
     if (playlistUsers.length === 0) {
       playlistUsers.push(userID)
-      document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--neutral-color-main)"
+      document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--blue-color-1)"
     }  
     else if (playlistUsers.length !== 0) {
       playlistUsers.map((user, i) => {
@@ -66,16 +66,16 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       })
       if(checkDuplicate === true){
         playlistUsers.splice(index, 1)
-        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--off-white-color)"
+        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--neutral-color-5)"
         if(playlistUsers.length !== groupUsers.length) {
-          document.getElementById("select-bubble").style.backgroundColor = "var(--off-white-color)"
+          document.getElementById("select-bubble").style.backgroundColor = "var(--neutral-color-5)"
         }
       }
       else if(checkDuplicate === false){
         playlistUsers.push(userID)
-        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--neutral-color-main)"
+        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--blue-color-1)"
         if(playlistUsers.length === groupUsers.length) {
-          document.getElementById("select-bubble").style.backgroundColor = "var(--neutral-color-main)"
+          document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-1)"
         }
       }
     }
@@ -89,8 +89,8 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     if(playlistUsers.length === groupUsers.length){
       playlistUsers=[]
       groupUsers.map((user, i) => {
-        document.getElementById("select-bubble").style.backgroundColor = "var(--off-white-color)"
-        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--off-white-color)"
+        document.getElementById("select-bubble").style.backgroundColor = "var(--neutral-color-5)"
+        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--neutral-color-5)"
         return playlistUsers
       })
     }
@@ -98,8 +98,8 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       playlistUsers = []
       groupUsers.map((user, i) => {
         playlistUsers.push(user.userID)
-        document.getElementById("select-bubble").style.backgroundColor = "var(--neutral-color-main)"
-        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--neutral-color-main)"
+        document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-1)"
+        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--blue-color-1)"
         return playlistUsers
       })
     }
@@ -204,6 +204,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         show={AddPlaylistisOpen}
         onHide={hideAddPlaylistModal}
         centered
+        className="playlist-add-modal"
       >
           <div className="playlistModal">
             <h2><strong>Generate a Playlist!</strong></h2>

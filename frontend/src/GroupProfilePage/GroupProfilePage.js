@@ -73,7 +73,8 @@ const GroupProfilePage = (props) => {
                         <div className="member-display">
                             {/* render members display when group users variable is populated */} 
                             <MemberDisplay 
-                                groupUsers={groupUsers} 
+                                groupUsers={groupUsers}
+                                groupCode={groupCode} 
                                 toCompare={toCompare}
                             />
                         </div>
