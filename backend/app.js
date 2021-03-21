@@ -17,6 +17,7 @@ const request = require("request"); // "Request" library
 const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
+const path = require('path');
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -43,9 +44,11 @@ var stateKey = "spotify_auth_state";
 var app = express();
 
 app
-  .use(express.static(__dirname + "/public"))
+  .use(express.static(path.join(__dirname, "/public")))
   .use(cors())
   .use(cookieParser());
+
+console.log(path.join(__dirname, "/public"));
 
 app.get("/login", function (req, res) {
   var state = generateRandomString(16);
