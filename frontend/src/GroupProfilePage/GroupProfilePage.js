@@ -7,8 +7,8 @@ import GroupName from './GroupName/GroupName';
 import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
-import { TopGenres } from './TopGenres/TopGenres';
-import { MusicalProfile } from './MusicalProfile/MusicalProfile';
+//import { TopGenres } from './TopGenres/TopGenres';
+//import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 
 const axios = require("axios");
 
@@ -55,7 +55,7 @@ const GroupProfilePage = (props) => {
         selectMember(value);
     }
 
-    return ((checkMember === 'true') &&  groupUsers) 
+    return ((checkMember === 'true') && groupUsers) 
     ? 
     (     
         <div className="group-landing-root">
