@@ -322,7 +322,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   for (x of playlistTracks){
     console.log(x.identifier)
   }
-  console.log(recommendations)
 
   // Add all the recommendation songs from spotify until the playlist has 20 songs
   // To implement verify that we're adding a song that is not already in the playlist
@@ -360,7 +359,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         artistName: sortedTrackSet[i].data.artistName,
         identifier: sortedTrackSet[i].data.trackName + " " + sortedTrackSet[i].data.artistName,
       });
-    }
+    } 
   }
 
   //debugging
@@ -469,15 +468,4 @@ exports.createSpotifyPlaylist = async (req, res) => {
     // console.log(err)
     res.json(err);
   }
-};
-
-/**
- * GET Method for retriveing a past playlist
- *
- * @param {*} req
- * @param {*} res
- */
-exports.getGroupPlaylist = async (req, res) => {
-  console.log("EMPTY");
-  res.json({ m: "lmao" });
 };
