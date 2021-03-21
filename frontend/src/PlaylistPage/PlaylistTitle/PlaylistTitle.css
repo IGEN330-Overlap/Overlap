@@ -10,8 +10,7 @@
 }
 
 .playlist-info-root .playlist-button {
-    background-color:  rgb(126, 42, 42);
-    border-color: rgb(131, 46, 46); 
+    background: var(--blue-color-main); 
     color: white;
     height: 33px;
     align-items: center;
@@ -30,7 +29,8 @@
     transition: color 0.35s
 }
 .playlist-info-root .btn:hover {
-    color: var(--blue-color-2);
+    background: var(--blue-color-5);
+    color: white;
 }
 
 .playlist-page-cover-container {
