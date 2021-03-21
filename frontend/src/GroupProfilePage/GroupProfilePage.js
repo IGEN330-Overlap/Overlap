@@ -100,12 +100,14 @@ const GroupProfilePage = (props) => {
                     </div> 
                 </div>
             </div>
+            {/*
             <div className="top-genres-display">
                 <TopGenres groupUsers={groupUsers} />
             </div>
             <div className="musical-profile-display">
                 <MusicalProfile groupUsers={groupUsers} />
             </div>
+            */}
         </div>
     )
     :
