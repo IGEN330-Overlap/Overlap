@@ -127,9 +127,9 @@
 
 /* modal css */
 .playlistModal h2 {
-    margin-top: 5px;
-    margin-bottom: 3px;
-    color: var(--blue-color-main);
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: var(--primary-color-main);
 }
 .playlistModal h4 {
     margin-top: 12px;
@@ -142,7 +142,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
-    background-color: var(--off-white-color);
+    background-color: var(--blue-color-1);
     width: 500px;
 }
 .select-playlist-users {
@@ -156,12 +156,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    width: 400px;
+    width: 440px;
 }
 .select-a-user {
-    background-color: var(--neutral-color-3);
+    background-color: var(--primary-color-1);
     width: fit-content;
-    color: var(--primary-color-6);
+    height: 30px;
+    text-align: center;
+    color: var(--off-white-color);
     margin: 4px;
     border-radius: 20px;
 }
@@ -169,12 +171,13 @@
     cursor: pointer;
 }
 .select-a-user strong {
-    margin: 10px;
+    margin: 15px;
 }
 .select-all-users {
-    background-color: var(--neutral-color-3);
+    background-color: var(--primary-color-1);
     width: fit-content;
-    color: var(--primary-color-6);
+    height: 30px;
+    color: var(--off-white-color);
     margin: 4px;
     margin-top: 10px;
     margin-bottom: 17px;
@@ -184,9 +187,7 @@
     cursor: pointer;
 }
 .select-all-users strong {
-    margin: 12px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: 15px;
 }
 .name-the-playlist {
     margin-top: 20px;
@@ -202,14 +203,18 @@
     text-align: center;
 }
 .name-input::placeholder{
-    color: var(--neutral-color-7);
+    color: var(--primary-color-main);
     font-weight: 450;
     text-align: center;
 }
 .generate-button {
     margin-top: 20px;
     margin-bottom: 20px;
-    background-color: var(--blue-color-1);
+    border-radius: 20px;
+    background-color: var(--blue-color-main);
+}
+.generate-button strong {
+    color: var(--off-white-color);
 }
 .playlistModal button {
     border-color: transparent;
