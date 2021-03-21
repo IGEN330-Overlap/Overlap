@@ -48,8 +48,6 @@ app
   .use(cors())
   .use(cookieParser());
 
-console.log(path.join(__dirname, "/public"));
-
 app.get("/login", function (req, res) {
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
