@@ -119,7 +119,7 @@ function App() {
           render={() => <AuthorizedPage />}
           exact={true}
         />
-        <Route path="/authorized/about" render={() => <AboutUs />} />
+        <Route path="/about" render={() => <AboutUs />} />
         <Route path="/authorized/group" render={() => <GroupProfilePage />} />
         <Route path="/authorized/playlist" render={() => <PlaylistPage />} />
       </Switch>

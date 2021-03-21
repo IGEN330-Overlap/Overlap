@@ -218,6 +218,85 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             error: err,
         });
     }
+  }
+  for (x of playlistTracks){
+    console.log(x.identifier)
+  }
+
+  // Add all the recommendation songs from spotify until the playlist has 20 songs
+  // To implement verify that we're adding a song that is not already in the playlist
+  for (var i = 0; playlistTracks.length < 23; i++) {
+    // We have added all the reccomendations so break from loop
+    if (i == recommendations.length) {
+      break; 
+    // Add an attribute songs so long as they don't already exist in duplicates
+    } else if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
+      playlistTracks.push({
+        trackName: recommendations[i].trackName,
+        trackID: recommendations[i].trackID,
+        imageURL: recommendations[i].imageURL,
+        linkURL: recommendations[i].linkURL,
+        artistName: recommendations[i].artistName,
+        identifier: recommendations[i].trackName + " " + recommendations[i].artistName,
+      });
+    }
+  }
+
+  // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
+  // To implement verify that we're adding a song that is not already in the playlist
+  for (var i = 0; playlistTracks.length < 30; i++) {
+
+    if (i == sortedTrackSet.length) {
+      break; // if we have already added all the sorted tracks then break 
+    }
+    // Add an attribute songs so long as they don't already exist in duplicates
+    else if (!playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)) {
+      playlistTracks.push({
+        trackName: sortedTrackSet[i].data.trackName,
+        trackID: sortedTrackSet[i].data.trackID,
+        imageURL: sortedTrackSet[i].data.imageURL,
+        linkURL: sortedTrackSet[i].data.linkURL,
+        artistName: sortedTrackSet[i].data.artistName,
+        identifier: sortedTrackSet[i].data.trackName + " " + sortedTrackSet[i].data.artistName,
+      });
+    } 
+  }
+
+  //debugging
+  console.log("duplicate based songs added: ", duplicateBasedSongs.length);
+
+  /* End of algorithm */
+
+  // Concatenate the duplicates and attribute based songs into one playlist
+  // Remove identifier property
+  playlistTracks.map((item) => {
+    delete item.identifier;
+    return item;
+  });
+
+  // Create playlist object which will be uploaded to the group, passed to MongoDB
+  playlist = {
+    playlistName: req.body.playlistName,
+    tracks: playlistTracks,
+  };
+
+  // Update playlist to the group
+  // Note: no error is thrown when the groupCode is incorrect / dne
+  try {
+    await Group.updateOne(
+      { groupCode: req.body.groupCode },
+      { $addToSet: { playlists: playlist } }
+    );
+    res.json({
+      message: "added playlist to the group",
+      playlist: playlist,
+    });
+  } catch (err) {
+    res.json({
+      message: "Unable to add playlist to the group",
+      error: err,
+    });
+  }
 };
 
 /**
@@ -240,14 +319,4 @@ exports.createSpotifyPlaylist = async (req, res) => {
     } catch (err) {
         res.json(err);
     }
-};
-
-/**
- * GET Method for retriveing a past playlist
- *
- * @param {*} req
- * @param {*} res
- */
-exports.getGroupPlaylist = async (req, res) => {
-    console.log("EMPTY");
 };

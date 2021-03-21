@@ -9,20 +9,22 @@ import Navbar1 from "../Navbar/Navbar";
 export const PlaylistPage = (props) => {
 
     // get playlist code from url
-    const url = window.location.href
-    const playlistID = url.replace("http://localhost:3000/authorized/playlist/","")
+    const url = new URL(window.location.href);
+    const playlistID = url.pathname.replace("/authorized/playlist/","")
 
     // get information from playlist ID
     const groupList = useSelector((state) => state.groupList)
     var playlistName
     var playlistTracks
     var check_member = ''
+    var groupCode
     groupList.map((group) => {
         group.playlists.map((playlist, i) => {
             if (playlist._id === playlistID) {
                 check_member = 'true'
                 playlistName = playlist.playlistName
                 playlistTracks = playlist.tracks
+                groupCode = group.groupCode
             }
             return playlistTracks
         })
@@ -37,7 +39,7 @@ export const PlaylistPage = (props) => {
             <div className="playlist-page-content">
                 <div className="playlist-components">
                     <div className="playlist-page-name">
-                        <PlaylistTitle playlistName={playlistName} />
+                        <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode}/>
                     </div>
                     <div className="playlist-page-tracks-container">
                         <PlaylistTracks playlistTracks={playlistTracks} />

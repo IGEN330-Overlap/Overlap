@@ -55,6 +55,20 @@
     height: auto;
     margin-bottom: 0.25rem;
 }
+
+.landing-about {
+    position: absolute;
+    top: 5vh;
+    right: 8vw;
+}
+.about-us-access {
+    color: var(--off-white-color);
+    font-size: 20px;
+}
+.about-us-access:hover {
+    text-decoration: none;
+    color: var(--blue-color-1);
+}
  
 @media (max-width: 1020px) {
     .logo-container {
