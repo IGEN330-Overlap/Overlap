@@ -9,8 +9,8 @@ import Navbar1 from "../Navbar/Navbar";
 export const PlaylistPage = (props) => {
 
     // get playlist code from url
-    const url = window.location.href
-    const playlistID = url.replace("http://localhost:3000/authorized/playlist/","")
+    const url = new URL(window.location.href);
+    const playlistID = url.pathname.replace("/authorized/playlist/","")
 
     // get information from playlist ID
     const groupList = useSelector((state) => state.groupList)

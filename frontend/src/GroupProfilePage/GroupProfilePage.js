@@ -18,8 +18,8 @@ const GroupProfilePage = (props) => {
     const refreshToken = useSelector((state) => state.refreshToken)
 
     // get group code from url
-    const url = window.location.href
-    const groupCode = url.replace("http://localhost:3000/authorized/group/","")
+    const url = new URL(window.location.href);
+    const groupCode = url.pathname.replace("/authorized/group/", "");
 
     // get group name
     const groupList = useSelector((state) => state.groupList)
