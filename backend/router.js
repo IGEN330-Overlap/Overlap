@@ -36,13 +36,9 @@ router.post("/groups/addToSpotify", algorithmController.createSpotifyPlaylist);
 //define post request for generating playlist
 router.post("/groups/generatePlaylist", algorithmController.generateGroupsTopPlaylist);
 
-//define get request for a previously generated playlist
-router.get("/groups/:playlistID/playlist", algorithmController.getGroupPlaylist);
-
 // TESTING ALGO
 router.get("/test/getTopTracksNoAttributes", algoTest.getMyTopTracks);
 router.get("/test/trackFeature", algoTest.getTrackFeatures);
-router.get("/test/getTopArtists", algoTest.getMyTopArtists);
 router.get("/test/getTopTrackIDs", algoTest.getTopTrackIds);
 router.get("/test/getTopTracks", algoController.getMyTopTracks);
 router.post("/test/buildSpotifyPlaylist", algoController.buildSpotifyPlaylist);

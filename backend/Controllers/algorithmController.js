@@ -110,7 +110,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let maxCountTracks = Math.max(...Object.values(counts));
 
   // If there are at least 2 users and max count occurs in at least half the users
-  if (numUsers <= 2 && maxCountTracks == 2) {
+  if (numUsers == 2 && maxCountTracks == 2) {
     // filters for songs that appear the same amount of times as maxCount
     let mostFrequentTracks = Object.keys(counts).filter(
       (k) => counts[k] === maxCountTracks
@@ -121,7 +121,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
     // If there are less than 7 users add if maxCount > (half the users rounded up)
   } else if (
-    numUsers <= 7 &&
+    numUsers <= 7 && numUsers > 2 &&
     maxCountTracks >= numUsers - Math.floor(numUsers / 2)
   ) {
     // A song must appear a minimum in 1/2 the users (half+1) if the num users in group is odd
@@ -322,10 +322,12 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   // Add all the recommendation songs from spotify until the playlist has 20 songs
   // To implement verify that we're adding a song that is not already in the playlist
-  for (var i = 0; playlistTracks.length < 25; i++) {
-    // console.log(i)
+  for (var i = 0; playlistTracks.length < 23; i++) {
+    // We have added all the reccomendations so break from loop
+    if (i == recommendations.length) {
+      break; 
     // Add an attribute songs so long as they don't already exist in duplicates
-    if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
+    } else if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
       playlistTracks.push({
         trackName: recommendations[i].trackName,
         trackID: recommendations[i].trackID,
@@ -334,17 +336,18 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         artistName: recommendations[i].artistName,
         identifier: recommendations[i].trackName + " " + recommendations[i].artistName,
       });
-    } else if (i == recommendations.length) {
-      break; // We have added all the reccomendations so break from loop
     }
   }
 
   // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
   // To implement verify that we're adding a song that is not already in the playlist
   for (var i = 0; playlistTracks.length < 30; i++) {
-    // console.log(i)
+
+    if (i == sortedTrackSet.length) {
+      break; // if we have already added all the sorted tracks then break 
+    }
     // Add an attribute songs so long as they don't already exist in duplicates
-    if (!playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)) {
+    else if (!playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)) {
       playlistTracks.push({
         trackName: sortedTrackSet[i].data.trackName,
         trackID: sortedTrackSet[i].data.trackID,
@@ -353,9 +356,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         artistName: sortedTrackSet[i].data.artistName,
         identifier: sortedTrackSet[i].data.trackName + " " + sortedTrackSet[i].data.artistName,
       });
-    } else if (i == sortedTrackSet.length) {
-      break;
-    }
+    } 
   }
 
   //debugging
@@ -464,15 +465,4 @@ exports.createSpotifyPlaylist = async (req, res) => {
     // console.log(err)
     res.json(err);
   }
-};
-
-/**
- * GET Method for retriveing a past playlist
- *
- * @param {*} req
- * @param {*} res
- */
-exports.getGroupPlaylist = async (req, res) => {
-  console.log("EMPTY");
-  res.json({ m: "lmao" });
 };

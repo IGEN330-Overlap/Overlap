@@ -2,6 +2,8 @@
 const SpotifyWebApi = require("spotify-web-api-node");
 require("dotenv").config();
 
+const {extractUsersTopTracks} = require("../scripts.js");
+
 // const overlapLogo = process.env.OVERLAP_LOGO;
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -71,20 +73,7 @@ exports.getRecommendations = async(req, res) => {
   }
 }
 
-// exports.manuallyAddUser = async (req, res) => {
-//   User.updateOne(
-//       {userID: req.body.id }, // Filter
-//       {
-//           $set: {
-//           musicalProfile: req.musicalProfile,
-//           topTracks: req.topTracks, // Add top 50 tracks with their attributes
-//           topArtists: req.topArtists, // Add top 30 artists with their attributes
-//           },
-//       },
-//   )
-// }
-
-exports.getMyTopTracks = async (req, res) => {
+exports.getMyTopArtists = async(req, res) => {
   //set refresh token
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
@@ -95,58 +84,96 @@ exports.getMyTopTracks = async (req, res) => {
 
       let topTracks = [];
       let topTrackIDs = [];
-      //get user's top 3 tracks
-      await spotifyApi
-        .getMyTopTracks({ limit: 50})
-        .then((data) => {
-          for (x of data.body.items) {
-            let track = {}; // track data needed for song
-            track.trackName = x.name;
-            track.trackID = x.id;
-            track.popularity = x.popularity;
-            track.artistName = x.artists[0].name;
 
-            topTrackIDs.push(x.id);
-            topTracks.push(track);
-          }
-        })
-        .catch((err) => {
-          res.json({ message: "Unable to get user top tracks.", error: err });
-          return;
+      //get user's top 50 short term tracks
+      try {
+        //spotify api call
+        let data = await spotifyApi.getMyTopTracks({
+          limit: 50,
+          time_range: "short_term",
         });
 
-      //get the corresponding top track features
-      await spotifyApi
-        .getAudioFeaturesForTracks(topTrackIDs)
-        .then((data) => {
-          var i = 0;
-          // iterate over return data to extract the corresponding individual track features
-          for (x of data.body.audio_features) {
-            // Verify that we are adding to the corresponding song
-            // Add the song attributes as well
-            if (topTracks[i]["trackID"] == x.id) {
-              topTracks[i]["danceability"] = x.danceability;
-              topTracks[i]["energy"] = x.energy;
-              topTracks[i]["key"] = x.key;
-              topTracks[i]["loudness"] = x.loudness;
-              topTracks[i]["mode"] = x.mode;
-              topTracks[i]["speechiness"] = x.speechiness;
-              topTracks[i]["acousticness"] = x.acousticness;
-              topTracks[i]["instrumentalness"] = x.instrumentalness;
-              topTracks[i]["liveness"] = x.liveness;
-              topTracks[i]["valence"] = x.valence;
-              topTracks[i]["tempo"] = x.tempo;
-              topTracks[i]["duration_ms"] = x.duration_ms;
-            }
-            i++; // iterate for the next item
+        let tmp = extractUsersTopTracks(data.body.items);
+        topTracks = tmp[0];
+        topTrackIDs = tmp[1];
+
+      } catch (err) {
+        res.json({ message: "Unable to get user top tracks.", error: err });
+        return;
+      }
+
+      //get the corresponding top track features to up to 100 songs
+      try {
+        //Spotify api call
+        let data = await spotifyApi.getAudioFeaturesForTracks(
+          topTrackIDs.splice(0, 100)
+        );
+
+        let i = 0;
+        // iterate over return data to extract the corresponding individual track features
+        for (x of data.body.audio_features) {
+          // Verify that we are adding to the corresponding song and if successful add attributes
+          if (topTracks[i]["trackID"] == x.id) {
+            topTracks[i]["danceability"] = x.danceability;
+            topTracks[i]["energy"] = x.energy;
+            topTracks[i]["key"] = x.key;
+            topTracks[i]["loudness"] = x.loudness;
+            topTracks[i]["mode"] = x.mode;
+            topTracks[i]["speechiness"] = x.speechiness;
+            topTracks[i]["acousticness"] = x.acousticness;
+            topTracks[i]["instrumentalness"] = x.instrumentalness;
+            topTracks[i]["valence"] = x.valence;
+            topTracks[i]["duration_ms"] = x.duration_ms;
+          } else {
+            delete topTracks[i];
+            continue; // skip to next, ids were not the same
           }
-        })
-        .catch((err) => {
-          res.json({ message: "Unable to get user top artists.", error: err });
-          return;
+          i++; // iterate for the next item to add in our topTracks array
+        }
+
+        console.log("Got top tracks :)")
+        res.json(topTracks); // Respond with the top track features and the songs
+
+      } catch (err) {
+        res.json({
+          message: "Unable to get track audio features.",
+          error: err,
+        });
+        return;
+      }
+
+    },
+    //access token refresh error
+    (err) => {
+      res.json({ message: "Unable to refresh access token.", error: err });
+    }
+  );
+}
+
+
+
+exports.getMyTopTracks = async (req, res) => {
+  //set refresh token
+  spotifyApi.setRefreshToken(req.body.refreshToken);
+
+  //set new access token
+  spotifyApi.refreshAccessToken().then(
+    async (data) => {
+      spotifyApi.setAccessToken(data.body.access_token);
+
+      try {
+        let data = await spotifyApi.getMyTopArtists({
+          limit: 50,
+          time_range: "medium_term",
         });
 
-      res.json(topTracks); // Respond with the top track features and the songs
+        let topArtists = extractUsersTopArtists(data.body.items);
+        res.json(topArtists)
+      } catch (err) {
+        res.json({ message: "Unable to get user top artists.", error: err });
+        return;
+      }
+
     },
     //access token refresh error
     (err) => {
