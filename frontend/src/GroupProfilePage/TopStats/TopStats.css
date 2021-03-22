@@ -57,6 +57,9 @@
     background-color: #5858C5;
     border-radius: 35px;
 }
+.top-tracks-root .track-container:hover {
+    cursor: pointer;
+}
 .top-tracks-root .track-icon {
     margin-left: 15px;
     width: 50px;
@@ -112,8 +115,11 @@
     height: 200px;
     margin-left: 4vw;
     align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
-.top-artists-root .top-artists-container {
+.top-artists-root .top-artist-container {
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -122,15 +128,64 @@
     padding: 5px;
     padding-top: 25px;
 }
-.top-artists-container strong {
+.top-artists-root .top-artist-container:hover {
+    cursor: pointer;
+}
+.top-artist-container strong {
     font-size: 25px;
 }
-.top-artists-container .artist-index {
+.top-artist-container .artist-index {
     padding-right: 10px;
     color: var(--neutral-color-2);
 }
-.top-artists-container .artist-name {
+.top-artist-container .artist-name {
     color: var(--off-white-color);
+}
+.top-artist-podiums {
+    width: 275px;
+    margin-right: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.top-artist-podiums .artist-icon{
+    height: 80px;
+    width: 80px;
+    border-radius: 10px;
+}
+.top-artist-podiums .artist-icon:hover {
+    cursor: pointer;
+}
+.artist-podium {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.artist-podium .podium-3 {
+    margin-top: 15px;
+    height: 70px;
+    width: 80px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+}
+.artist-podium .podium-1 {
+    margin-top: 15px;
+    height: 150px;
+    width: 80px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+}
+.artist-podium .podium-2 {
+    margin-top: 15px;
+    height: 110px;
+    width: 80px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+}
+.artist-podium strong {
+    font-size: 40px;
+    color: var(--primary-color-main)
 }
 
 /* for bigger screen sizes */

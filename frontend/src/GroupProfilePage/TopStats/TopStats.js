@@ -10,6 +10,11 @@ export const GroupTopStats = ({groupUsers}) => {
         window.open(song_url)
     }
 
+    //open artist with spotify
+    const openArtist = (artist_url) => {
+        window.open(artist_url)
+    }
+
     //combine all top tracks into one array
     var allTopSongs = []
     var allTrackIDs = []
@@ -173,12 +178,40 @@ export const GroupTopStats = ({groupUsers}) => {
                 <div className="under-bar"></div>
             </div>
             <div className="top-artists-root">
-                {groupUniqueArtists.slice(0,3).map((artist, i) => (
-                    <div className="top-artists-container" key={i}>
-                        <div className="artist-index"><strong>#{[i+1]}</strong></div>
-                        <div className="artist-name"><strong>{artist.artistName}</strong></div>
+                <div className="top-artist-list">
+                    {groupUniqueArtists.slice(0,3).map((artist, i) => (
+                        <div className="top-artist-container" onClick={()=>openArtist(artist.linkURL)} key={i}>
+                            <div className="artist-index"><strong>#{[i+1]}</strong></div>
+                            <div className="artist-name"><strong>{artist.artistName}</strong></div>
+                        </div>
+                    ))}
+                </div>
+                <div className="top-artist-podiums">
+                    <div className="artist-podium">
+                        <img className="artist-icon" 
+                            src={groupUniqueArtists[2].imageURL} 
+                            alt={groupUniqueArtists[2].artistName}
+                            onClick={openArtist(groupUniqueArtists[2].linkURL)}
+                        />
+                        <div className="podium-3"><strong>#3</strong></div>
                     </div>
-                ))}
+                    <div className="artist-podium">
+                        <img className="artist-icon" 
+                            src={groupUniqueArtists[0].imageURL} 
+                            alt={groupUniqueArtists[0].artistName}
+                            onClick={openArtist(groupUniqueArtists[0].linkURL)}
+                        />
+                        <div className="podium-1"><strong>#1</strong></div>
+                    </div>
+                    <div className="artist-podium">
+                        <img className="artist-icon" 
+                            src={groupUniqueArtists[1].imageURL} 
+                            alt={groupUniqueArtists[1].artistName}
+                            onClick={openArtist(groupUniqueArtists[1].linkURL)}
+                        />
+                        <div className="podium-2"><strong>#2</strong></div>
+                    </div>
+                </div>
             </div>
         </div>
     )
