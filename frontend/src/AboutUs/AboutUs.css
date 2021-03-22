@@ -1,12 +1,15 @@
 @import url(../variables.css);
 
 .text-blurb {
-    height: 25vh;
+    margin-right: 4vw;
+    height: 350px;
 }
 
 .display-babies {
     margin-right: 2vw;
     padding-top: 20px;
+    min-height: 100vh;
+    height: fit-content;
 }
 
 .about {
@@ -16,7 +19,8 @@
 
 .about-root {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     background-color: var(--primary-color-main);
     display: flex;
     flex-direction: column;
