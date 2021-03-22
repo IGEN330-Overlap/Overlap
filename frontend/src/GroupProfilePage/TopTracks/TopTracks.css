@@ -1,0 +1,31 @@
+@import url(../../variables.css);
+
+.top-tracks-root {
+    height: 100vh;
+    width: auto;
+    background-color: var(--blue-color-main);
+    display: flex;
+    flex-direction: column;
+}
+
+.top-tracks-heading {
+    margin-left: 4vw;
+    padding-top: 2vh;
+    width: auto;
+    height: 80px;
+}
+
+.top-tracks-heading .text {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 4vw;
+    font-size: clamp(25px, 4vw, 40px);
+}
+
+.top-tracks-heading .under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+    background-color: var(--off-white-color);
+}

@@ -130,6 +130,7 @@ export const Comparisons = ({groupUsers, member_id, toCompare}) => {
         return a.rank - b.rank
     })
 
+    // find up to three common tracks
     myTopTracks.map((myTrack, i) => {
         userCompareTracks.map((compTrack, j) => {
             if((myTrack.track === compTrack.track) && (myTrack.artist === compTrack.artist)){

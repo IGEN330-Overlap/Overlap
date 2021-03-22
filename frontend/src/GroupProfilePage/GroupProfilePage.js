@@ -8,6 +8,7 @@ import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 //import { TopGenres } from './TopGenres/TopGenres';
+import { GroupTopTracks } from './TopTracks/TopTracks';
 //import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 
 const axios = require("axios");
@@ -104,6 +105,11 @@ const GroupProfilePage = (props) => {
             <div className="top-genres-display">
                 <TopGenres groupUsers={groupUsers} />
             </div>
+            */}
+            <div className="group-top-tracks-display">
+                <GroupTopTracks groupUsers={groupUsers} />
+            </div>
+            {/*
             <div className="musical-profile-display">
                 <MusicalProfile groupUsers={groupUsers} />
             </div>

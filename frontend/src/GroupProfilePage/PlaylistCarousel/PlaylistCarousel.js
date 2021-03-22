@@ -113,6 +113,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       var input_playlistName = document.getElementById("newPlaylistName").value
         if (input_playlistName === "") {
           console.log('No playlist name entered!')
+          document.getElementById("generate-playlist-button").style.cursor = "not-allowed" 
         }
         else if (input_playlistName !== "") {
           axios
@@ -136,6 +137,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
           .catch((err) => {
               console.log(err);
           });
+          hideAddPlaylistModal()
         }
     }
     else {
@@ -208,7 +210,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         className="playlist-add-modal"
       >
           <div className="playlistModal">
-            <h2><strong>Generate a Playlist!</strong></h2>
+            <h2 id="generate-playlist-button"><strong>Generate a Playlist!</strong></h2>
             <h4>Who do you want to contribute to this playlist?</h4>
             <div className="select-playlist-users">
                 <div className="select-all-users" id="select-bubble" onClick={() => selectAll()}>
@@ -234,7 +236,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               {/*create alert to tell user playlist title is too long */}
               <input type="text" className="name-input" placeholder="Enter Playlist Name" maxlength="25" id="newPlaylistName"/>
             </div>
-            <button onClick={() => {hideAddPlaylistModal(); generatePlaylist()}} centered className="generate-button">
+            <button onClick={() => {generatePlaylist()}} centered className="generate-button">
               <strong>Generate Playlist</strong>
             </button>
           </div>
