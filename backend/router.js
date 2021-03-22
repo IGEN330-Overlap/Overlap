@@ -33,8 +33,11 @@ router.post("/groups/leave", crudController.leaveGroup);
 //define post request for creating spotify playlist
 router.post("/groups/addToSpotify", algorithmController.createSpotifyPlaylist);
 
-//define post request for generating playlist
+//define post request for generating top playlist
 router.post("/groups/generatePlaylist", algorithmController.generateGroupsTopPlaylist);
+
+//define post request for generating mood playlist
+router.post("/groups/generateMoodsPlaylist", algorithmController.generateGroupsMoodsPlaylist);
 
 // TESTING ALGO
 router.get("/test/getTopTracksNoAttributes", algoTest.getMyTopTracks);

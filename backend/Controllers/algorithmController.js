@@ -8,9 +8,13 @@ let Scripts = require("../scripts.js");
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
-const frontend_url = process.env.FRONTEND_URL;
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
+
+const happy = require("../Moods/happy.json");
+const chill = require("../Moods/chill.json");
+const party = require("../Moods/party.json");
+const sad = require("../Moods/sad.json")
 
 // instantiate spotifyApi object
 var spotifyApi = new SpotifyWebApi({
@@ -22,8 +26,8 @@ var spotifyApi = new SpotifyWebApi({
 /**
  * POST generate group top playlists
  *
- * @param {userIDs: [Strings], groupCode: String} req
- * @param {*} res
+ * @param {*} req { refreshToken: String, userIDs: [Strings], groupCode: String}
+ * @param {*} res 
  */
 exports.generateGroupsTopPlaylist = async (req, res) => {
   let usersTopTracks = []; // stores each users top tracks as a single item
@@ -99,7 +103,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let playlistTracks = []; // Array to store songs to be added to playlist
   let duplicateBasedSongs = []; // array to store the tracks of our playlist
   let recommendations = []; // Array to store the recommendations
-  
+
   // Count occurences of songs in master set
   let counts = findDuplicatesArr.reduce((a, c) => {
     a[c] = (a[c] || 0) + 1;
@@ -166,14 +170,14 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
   for (var i = 0; i < groupUniqueSet.length; i++) {
     groupUniqueSet[i]["deltaFromGroup"] =
-      attributeAdjust[0] * Math.abs( 
+      attributeAdjust[0] * Math.abs(
         groupUniqueSet[i].data.trackPopularity - groupsMusicalProfile.trackPopularity) +
       attributeAdjust[1] * Math.abs(
         groupUniqueSet[i].data.danceability - groupsMusicalProfile.danceability) +
       attributeAdjust[2] * Math.abs(
         groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
       attributeAdjust[3] *
-        Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
+      Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
     //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
   }
 
@@ -222,7 +226,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let mostFrequentArtists = Object.keys(counts).filter(
     (k) => counts[k] == maxCountArtists
   );
-  
+
   // debugging
   console.log("max count tracks is: ", maxCountTracks);
 
@@ -325,8 +329,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   for (var i = 0; playlistTracks.length < 23; i++) {
     // We have added all the reccomendations so break from loop
     if (i == recommendations.length) {
-      break; 
-    // Add an attribute songs so long as they don't already exist in duplicates
+      break;
+      // Add an attribute songs so long as they don't already exist in duplicates
     } else if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
       playlistTracks.push({
         trackName: recommendations[i].trackName,
@@ -356,7 +360,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         artistName: sortedTrackSet[i].data.artistName,
         identifier: sortedTrackSet[i].data.trackName + " " + sortedTrackSet[i].data.artistName,
       });
-    } 
+    }
   }
 
   //debugging
@@ -397,9 +401,162 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 };
 
 /**
+ * 
+ * @param {*} req { refreshToken: String, userIDs: [String], selectedMood: String}
+ * @param {*} res 
+ */
+exports.generateGroupsMoodsPlaylist = async (req, res) => {
+
+  // Set moods based on the request
+  let moodParams;
+
+  try {
+    if (req.body.selectedMood === "party") {
+      moodParams = party;
+    } else if (req.body.selectedMood === "happy") {
+      moodParams = happy;
+    } else if (req.body.selectedMood === "chill") {
+      moodParams = chill;
+    } else if(req.body.selectedMood === "sad") {
+      moodParams = sad;
+    } else {
+      throw new Error();
+    }
+  } catch (e) {
+    console.log("tried to generate mood playlist without selected mood");
+    res.json({
+      message: "no selected mood",
+      error: e,
+    });
+  }
+
+  // get the userIDs 
+  let userIDs;
+  // set users so long as there is at least 1 user sent
+  try {
+    // add users from request body
+    userIDs = req.body.userIDs.map((id) => {
+      return id;
+    });
+
+    if (userIDs.length == 0) {
+      throw new Error();
+    }
+
+  } catch (e) {
+    console.log("Attempted to pass no user ids to create a playlist");
+    res.json({
+      message: "Cannot create a group with zero other users",
+      error: e
+    })
+  }
+
+  console.log("Users", userIDs); //debugging
+
+  let usersTopTracks = []; // arrays for storing user track information
+  let usersTopArtists = []; // arrays for storing user artist information
+
+  // Collect user top "x" data from mongoDB
+  try {
+    let data = await User.find({ userID: { $in: userIDs } });
+
+    // Add each persons dataset to our master array for the corresponding thing
+    usersTopTracks = data.map(x => x.topTracks);
+    usersTopArtists = data.map(x => x.topArtists);
+
+  } catch (err) {
+    res.json({ message: "error on finding users", error: err });
+  }
+  // set tracks into one array
+  let masterTopTracks = usersTopTracks.flat();
+  
+  // calculate differences between each attribute and a song
+  // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
+  for (var i = 0; i < masterTopTracks.length; i++) {
+    masterTopTracks[i]["delta"] =
+      Math.abs(masterTopTracks[i].danceability - moodParams.target_danceability) +
+      Math.abs(masterTopTracks[i].energy - moodParams.target_energy) +
+      Math.abs(masterTopTracks[i].valence - moodParams.target_valence);
+    // console.log(masterTopTracks[i])
+  }
+
+    // Sort the unique set by the deltaFromGroup to (lowest to highest)
+  // Lowest is the best
+  let sortedTrackSet = masterTopTracks.sort((a, b) => {
+    return parseFloat(a.delta) - parseFloat(b.delta);
+  });
+
+  let seedTracks = sortedTrackSet.map(x => x.trackID).slice(0,5)
+  console.log(sortedTrackSet.map(x => x.delta).slice(0,5))
+
+  // set artists into one array
+  let masterTopArtists = usersTopArtists.flat();
+  masterTopArtists = masterTopArtists.map(x => x.artistID);
+
+  // Count occurences of songs in master set
+  let counts = masterTopArtists.reduce((a, c) => {
+    a[c] = (a[c] || 0) + 1;
+    return a;
+  }, {});
+
+  // get max count of artists
+  let maxCountArtists = Math.max(...Object.values(counts));
+
+  // filters for songs that appear the same amount of times as (numusers/2 +1) or more
+  let mostFrequentArtists = Object.keys(counts).filter(
+    (k) => counts[k] == maxCountArtists
+  );
+
+  let recommendations = [];
+
+  spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
+  try {
+    let data = await spotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(data.body.access_token);
+
+    try {
+      // Get recommendations for the group
+      let data;
+
+      let recommendationsBody = moodParams;
+      // recommendationsBody["seed_artists"] = mostFrequentArtists.slice(0,5);
+      recommendationsBody["seed_tracks"] = seedTracks.slice(0,5);
+      console.log(recommendationsBody);
+
+      // select seed based on whichever provides more information
+      // prioritize tracks seed as shown by the non inclusive conditional
+      data = await spotifyApi.getRecommendations(recommendationsBody);
+      // console.log(data.body.tracks)
+      // console.log(data.body)
+
+      // add the songs ensuring that their type is correct and that there is populated data
+      for (x of data.body.tracks) {
+        if (x.type == "track" && x.album.images.length != 0) {
+          recommendations.push({
+            trackName: x.name,
+            trackID: x.id,
+            // imageURL: x.album.images[0].url,
+            // linkURL: x.external_urls.spotify,
+            artistName: x.artists[0].name,
+            // identifier: x.name + " " + x.artists[0].name,
+          });
+        }
+      }
+    } catch (err) {
+      res.json(err);
+    }
+  } catch (err) {
+    res.json(err);
+  }
+
+  res.json({recommendations});
+
+};
+
+/**
  * POST Create the spotify playlist
  *
- * @param {*} req
+ * @param {*} req { refreshToken: String, groupCode: String, playlistID: String }
  * @param {*} res
  */
 exports.createSpotifyPlaylist = async (req, res) => {
