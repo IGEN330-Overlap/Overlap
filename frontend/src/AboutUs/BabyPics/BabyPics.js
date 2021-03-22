@@ -9,14 +9,15 @@ import RealRemy from './RealRemy.jpg';
 const Babies = (props) => {
     return(
         <div className= "baby-members">
-            <div className= 'container-baby'>
-                <img className='icon-baby' src={Danica} alt= 'Danica'></img>
-                <p className="baby-name">
-                                    <b>Danica</b></p></div>
+            
             <div className= 'container-baby'>
                 <img className='icon-baby' src={Kevin} alt= 'Kevin'></img>
                 <p className="baby-name">
                                     <b>Kevin</b></p></div>
+            <div className= 'container-baby'>
+                <img className='icon-baby' src={Danica} alt= 'Danica'></img>
+                <p className="baby-name">
+                                    <b>Danica</b></p></div>
             <div className= 'container-baby'>
                 <img className='icon-baby' src={RealRemy} alt= 'RealRemy'></img>
                 <div className="baby-name">

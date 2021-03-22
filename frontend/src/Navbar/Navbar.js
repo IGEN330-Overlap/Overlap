@@ -35,10 +35,6 @@ const Navbar1 = (props) => {
                   </NavDropdown.Item>
                 </div>
               ))}
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/authorized/">
-                New Group
-              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/about" bg="white">
               About Us

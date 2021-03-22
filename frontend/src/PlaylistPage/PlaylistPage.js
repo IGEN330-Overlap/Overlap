@@ -35,6 +35,7 @@ export const PlaylistPage = (props) => {
     ?
     (     
         <div className="playlist-landing-root">
+            <div className="navbar">
             <Navbar1 />
             <a href={"/authorized/group/"+groupCode} className="pp_backArrow">
                 <svg
