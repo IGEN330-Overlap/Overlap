@@ -24,14 +24,16 @@ export const GroupTopTracks = ({groupUsers}) => {
 
     //order songs in terms of occurrences
     let maxTrackOccurrences = Math.max(...Object.values(counts))
+    let trackOccurences = maxTrackOccurrences
 
     var groupFrequentTracks = []
-    while (maxTrackOccurrences > 0) {
+    while (trackOccurences > 0) {
         groupFrequentTracks.push(Object.keys(counts).filter(
-            (k) => counts[k] === maxTrackOccurrences
+            (k) => counts[k] === trackOccurences
         ))
-        maxTrackOccurrences = maxTrackOccurrences - 1;
+        trackOccurences -= 1;
     }
+    console.log(groupFrequentTracks)
 
     var groupTopSongs = []
     groupFrequentTracks.map((tracks) => {

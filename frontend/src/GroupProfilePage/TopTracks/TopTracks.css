@@ -65,6 +65,8 @@
 }
 .top-tracks-root .track-info .track-title {
     font-size: 15px;
+    max-height: 68px;
+    overflow-y: auto;
 }
 .top-tracks-root .track-artist {
     color: var(--blue-color-1);
@@ -98,7 +100,7 @@
 /* for bigger screen sizes */
 @media (min-width: 1450px) {
     .top-tracks-root .track-container {
-        width: 21vw;
+        width: 22vw;
         height: clamp(100px, 5vw, 120px);
     }
     .top-tracks-carousel .carousel-inner {
@@ -111,10 +113,10 @@
         width: 72vw;
     }
     .top-tracks-root .track-info {
-        width: 12.75vw;
+        width: 14vw;
     }
     .top-tracks-root .track-artist {
-        width: 12.75vw;
+        width: 14vw;
         font-size: clamp(12px, 0.6vw, 16px)
     }
     .top-tracks-root .track-info .track-title {
