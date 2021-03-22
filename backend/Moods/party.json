@@ -1,0 +1,8 @@
+{
+    "target_energy": 85,
+    "target_danceability": 85,
+    "target_valence": 85,
+    "target_popularity": 75,
+    "min_popularity": 50,
+    "limit": 30
+}

@@ -1,0 +1,13 @@
+{
+    "target_energy": 40,
+    "target_danceability": 25,
+    "target_valence": 75,
+    "min_popularity": 50,
+    "Seed_genres": [
+        "happy",
+        "pop",
+        "summer",
+        "road-trip",
+        "chill"
+    ]
+}

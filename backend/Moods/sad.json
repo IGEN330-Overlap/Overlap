@@ -1,0 +1,13 @@
+{
+    "target_energy": 10,
+    "target_danceability": 10,
+    "target_valence": 10,
+    "target_acousticness": 70,
+    "min_popularity": 25,
+    "Seed_genres": [
+        "sad",
+        "rainy-day",
+        "sleep", 
+        "r-n-b"
+    ]
+}

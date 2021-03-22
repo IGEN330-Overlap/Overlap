@@ -1,0 +1,14 @@
+{
+    "target_energy": 10,
+    "target_danceability": 25,
+    "target_valence": 25,
+    "min_popularity": 50,
+    "Seed_genres": [
+        "chill",
+        "ambient",
+        "indie", 
+        "jazz",
+        "summer"
+    ]
+}
+
