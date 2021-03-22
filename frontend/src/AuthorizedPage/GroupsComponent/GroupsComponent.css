@@ -4,7 +4,7 @@
 .title{
     color: white;
     font-size: 3vw;
-    padding-top: 20vh;
+    padding-top: 15vh;
 }
 
 .search-bar{
@@ -139,7 +139,7 @@ input:focus{
 @media (max-width: 720px){
     .title{
         font-size: 30px;
-        padding-top: 0;
+        padding-top: 12vh;
     }
     .search-bar{
         background-size: 20px;

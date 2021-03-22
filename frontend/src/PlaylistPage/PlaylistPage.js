@@ -36,24 +36,25 @@ export const PlaylistPage = (props) => {
     (     
         <div className="playlist-landing-root">
             <div className="navbar">
-            <Navbar1 />
-            <a href={"/authorized/group/"+groupCode} className="pp_backArrow">
-                <svg
-                    className="pp_backArrow_svg"
-                    xmlns="http://www.w3.org/2000/svg"  
-                    viewBox="0 0 24 24" >
-                    <path d="M0 0h24v24H0z" 
-                    fill="none"/>
-                    <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
-                </svg>
-            </a>
-            <div className="playlist-page-content">
-                <div className="playlist-components">
-                    <div className="playlist-page-name">
-                        <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode}/>
-                    </div>
-                    <div className="playlist-page-tracks-container">
-                        <PlaylistTracks playlistTracks={playlistTracks} />
+                <Navbar1 />
+                <a href={"/authorized/group/"+groupCode} className="pp_backArrow">
+                    <svg
+                        className="pp_backArrow_svg"
+                        xmlns="http://www.w3.org/2000/svg"  
+                        viewBox="0 0 24 24" >
+                        <path d="M0 0h24v24H0z" 
+                        fill="none"/>
+                        <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
+                    </svg>
+                </a>
+                <div className="playlist-page-content">
+                    <div className="playlist-components">
+                        <div className="playlist-page-name">
+                            <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode}/>
+                        </div>
+                        <div className="playlist-page-tracks-container">
+                            <PlaylistTracks playlistTracks={playlistTracks} />
+                        </div>
                     </div>
                 </div>
             </div>
