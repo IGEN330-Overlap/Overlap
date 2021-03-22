@@ -30,13 +30,6 @@
     background-color: var(--off-white-color);
 }
 
-/* .top-tracks-root .all-group-tracks {
-    width: 92vw;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-} */
 .top-tracks-root .track-container h3 {
     width: 20px;
     font-size: 23px;
@@ -50,14 +43,13 @@
     margin-top: 15px;
     padding: 10px;
     height: 100px;
-    width: 370px;
+    width: 320px;
     color: var(--off-white-color);
     background-color: #5858C5;
     border-radius: 35px;
-    font-size: 18px;
 }
 .top-tracks-root .track-icon {
-    margin-left: 20px;
+    margin-left: 15px;
     width: 50px;
     height: 50px;
     object-fit: cover;
@@ -65,30 +57,35 @@
     transition: 0.3s;
 }
 .top-tracks-root .track-info {
-    margin-left: 15px;
+    margin-left: 12px;
     display: flex;
     flex-direction: column;
-    width: 240px;
+    width: 200px;
     transition: 0.3s;
 }
-.top-track-root .track-info .track-title {
-    font-size: clamp(10px, 3vw, 15px);
+.top-tracks-root .track-info .track-title {
+    font-size: 15px;
 }
 .top-tracks-root .track-artist {
     color: var(--blue-color-1);
-    font-size: 14px;
-    width: 17vw;
+    font-size: 12px;
+    width: 200px;
     transition: 0.3s;
 }
 .top-tracks-carousel {
+    margin-top: clamp(15px, 2.5vh, 40px);
     width: 100vw;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .top-tracks-carousel .carousel-inner{
-    width: 90vw;
+    width: 80vw;
     display: flex;
 }
 .top-tracks-carousel .carousel-item {
-    width: 90vw;
+    width: 100vw;
 }
 .top-tracks-carousel .group-tracks {
     width: 80vw;
@@ -96,4 +93,31 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+/* for bigger screen sizes */
+@media (min-width: 1450px) {
+    .top-tracks-root .track-container {
+        width: 21vw;
+        height: clamp(100px, 5vw, 120px);
+    }
+    .top-tracks-carousel .carousel-inner {
+        width: 72vw;
+    }
+    .top-tracks-carousel .carousel-item {
+        width: 90vw;
+    }
+    .top-tracks-carousel .group-tracks {
+        width: 72vw;
+    }
+    .top-tracks-root .track-info {
+        width: 12.75vw;
+    }
+    .top-tracks-root .track-artist {
+        width: 12.75vw;
+        font-size: clamp(12px, 0.6vw, 16px)
+    }
+    .top-tracks-root .track-info .track-title {
+        font-size: clamp(15px, 0.9vw, 20px);
+    }
 }
