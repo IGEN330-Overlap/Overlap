@@ -102,15 +102,15 @@
     border-radius: 10px;
 }
 
-.carousel {
+.playlist-carousel-carousel {
     width: 110px;
 }
 
-.carousel .carousel-inner{
+.playlist-carousel-carousel .carousel-inner{
     width: 35vw;
 }
 
-.carousel .carousel-control-prev{
+.playlist-carousel-carousel .carousel-control-prev{
     position: absolute;
     top: -42px;
     width: auto;
@@ -118,7 +118,7 @@
     margin-left: max(5%, 45px);
 }
 
-.carousel .carousel-control-next{
+.playlist-carousel-carousel .carousel-control-next{
     position: absolute;
     top: -42px;
     width: auto;

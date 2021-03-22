@@ -194,7 +194,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
             <strong>Add Playlist</strong>
           </div>
         </div>
-        <Carousel interval={null} indicators={false} defaultActiveIndex={0}>
+        <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="playlist-carousel-carousel">
           {carouselArray.map((element, i) => (
             <Carousel.Item key={i}>
               <div className="display-playlists">{element}</div>
