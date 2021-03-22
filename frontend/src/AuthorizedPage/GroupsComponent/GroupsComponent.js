@@ -39,9 +39,18 @@ const GroupsComponent = (props) => {
   };
 
   //set group code state
-  const [groupCode, setCode] = useState('')
+  const [groupCodeState, setCode] = useState('');
   //set group name state
-  const [groupName, setName] = useState('')
+  const [groupNameState, setName] = useState('');
+  
+  //search bar state
+  const [searchText, setSearch] = useState('');
+  const editSearch = (e) => {
+    setSearch(e.target.value)
+  }
+  const dynamicSearch = () => {
+    return groupList.filter(x => x.groupName.includes(searchText));
+  }  
 
   //custom toggle as three dots
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -90,7 +99,7 @@ const GroupsComponent = (props) => {
   function leaveGroup() {
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
-        groupCode: groupCode,
+        groupCode: groupCodeState,
         spotifyID: spotifyID.userID,
       })
       .then((data) => {
@@ -121,18 +130,21 @@ const GroupsComponent = (props) => {
         <img src={line} className="underline" alt="underline" />
       </div>
 
-      {/*search bar -- INPUT DOES NOT DO ANYTHING*/}
+      {/* search bar */}
       <div className="search-bar">
         <input
           type="text"
-          className="input-search"
+          name="search-bar"
+          value={searchText.value}
+          onChange={editSearch}
+          class="input-search"
           placeholder="search"
           size="15"
         />
       </div>
-
+      
       <div className="group-list">
-        {groupList.map((group,i) => (
+        {dynamicSearch().map((group,i) => (
           /* Group as a dropdown menu button */
           <div 
             key={i}
@@ -179,11 +191,11 @@ const GroupsComponent = (props) => {
         >
           <Modal.Body className="in-modal modal-body">
             <h5 className="modal-text modal-head">
-              <strong>{groupName} Code</strong>
+              <strong>{groupNameState} Code</strong>
             </h5>
             <div id="myCode">
               <h4 className="modal-text" type="text">
-                <strong>{groupCode}</strong>
+                <strong>{groupCodeState}</strong>
               </h4>
             </div>
             <div className="copy-groupCode">
@@ -223,7 +235,7 @@ const GroupsComponent = (props) => {
               <strong>Are you sure you want to leave?</strong>
             </h5>
             <h4 className="modal-text">
-              <strong>{groupName}</strong>
+              <strong>{groupNameState}</strong>
             </h4>
             <p>
               <button
