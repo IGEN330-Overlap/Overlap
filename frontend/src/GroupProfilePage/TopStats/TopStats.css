@@ -1,6 +1,6 @@
 @import url(../../variables.css);
 
-.top-tracks-root {
+.top-stats-root {
     height: 100vh;
     width: auto;
     background-color: var(--blue-color-main);
@@ -8,14 +8,20 @@
     flex-direction: column;
 }
 
-.top-tracks-heading {
+.top-stats-heading {
     margin-left: 4vw;
     padding-top: 2vh;
     width: auto;
     height: 80px;
 }
 
-.top-tracks-heading .text {
+.top-stats-heading .text {
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 4vw;
+    font-size: clamp(25px, 4vw, 40px);
+}
+.top-stats-heading .text {
     color: var(--off-white-color);
     margin-left: 6px;
     font-size: 4vw;
@@ -40,9 +46,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    margin-top: 15px;
-    padding: 10px;
-    height: 100px;
+    margin-top: 12px;
+    padding-right: 8px;
+    padding-top: 7px;
+    padding-left: 10px;
+    padding-bottom: 7px;
+    height: 95px;
     width: 320px;
     color: var(--off-white-color);
     background-color: #5858C5;
@@ -75,9 +84,10 @@
     transition: 0.3s;
 }
 .top-tracks-carousel {
-    margin-top: clamp(15px, 2.5vh, 40px);
+    margin-top: clamp(10px, 2vh, 40px);
+    margin-bottom: clamp(10px, 2vh, 40px);
     width: 100vw;
-    height: 350px;
+    height: 310px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -95,6 +105,32 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+
+/* top artists */
+.top-artists-root {
+    height: 200px;
+    margin-left: 4vw;
+    align-items: center;
+}
+.top-artists-root .top-artists-container {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+    padding: 5px;
+    padding-top: 25px;
+}
+.top-artists-container strong {
+    font-size: 25px;
+}
+.top-artists-container .artist-index {
+    padding-right: 10px;
+    color: var(--neutral-color-2);
+}
+.top-artists-container .artist-name {
+    color: var(--off-white-color);
 }
 
 /* for bigger screen sizes */

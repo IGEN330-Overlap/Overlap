@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import './TopTracks.css';
+import './TopStats.css';
 
 import Carousel from "react-bootstrap/Carousel";
 
-export const GroupTopTracks = ({groupUsers}) => {
+export const GroupTopStats = ({groupUsers}) => {
+
+    //open song with spotify
+    const openSong = (song_url) => {
+        window.open(song_url)
+    }
 
     //combine all top tracks into one array
     var allTopSongs = []
@@ -17,23 +22,22 @@ export const GroupTopTracks = ({groupUsers}) => {
         return allTrackIDs
     })
 
-    let counts = allTrackIDs.reduce((a,c) => {
+    let track_counts = allTrackIDs.reduce((a,c) => {
         a[c] = (a[c] || 0) + 1;
         return a
     },{})
 
     //order songs in terms of occurrences
-    let maxTrackOccurrences = Math.max(...Object.values(counts))
+    let maxTrackOccurrences = Math.max(...Object.values(track_counts))
     let trackOccurences = maxTrackOccurrences
 
     var groupFrequentTracks = []
     while (trackOccurences > 0) {
-        groupFrequentTracks.push(Object.keys(counts).filter(
-            (k) => counts[k] === trackOccurences
+        groupFrequentTracks.push(Object.keys(track_counts).filter(
+            (k) => track_counts[k] === trackOccurences
         ))
         trackOccurences -= 1;
     }
-    console.log(groupFrequentTracks)
 
     var groupTopSongs = []
     groupFrequentTracks.map((tracks) => {
@@ -83,7 +87,7 @@ export const GroupTopTracks = ({groupUsers}) => {
 
         let carouselElement = threeTracks.map((track, j) => {
         return (
-            <div className="track-container" key={j}>
+            <div className="track-container" key={j} onClick={()=>openSong(track.linkURL)}>
                 <h3><strong>{[i+j+1]}</strong></h3>
                 <img className="track-icon" src={track.imageURL} alt={track.trackName}/>
                 <div className="track-info">
@@ -100,19 +104,82 @@ export const GroupTopTracks = ({groupUsers}) => {
         carouselTracks.push(carouselElement);
     }
 
+    // top artist sort
+    var allTopArtists = []
+    var allArtistIDs = []
+    groupUsers.map((user) => {
+        user.topArtists.map((artist) => {
+            allTopArtists.push(artist)
+            allArtistIDs.push(artist.artistID)
+            return allTopArtists
+        })
+        return allArtistIDs
+    })
+
+    let artist_counts = allArtistIDs.reduce((a,c) => {
+        a[c] = (a[c] || 0) + 1;
+        return a
+    },{})
+
+    //order artists in terms of occurrences
+    let maxArtistOccurrences = Math.max(...Object.values(artist_counts))
+    let artistOccurences = maxArtistOccurrences
+
+    var groupFrequentArtists = []
+    while (artistOccurences > 0) {
+        groupFrequentArtists.push(Object.keys(artist_counts).filter(
+            (k) => artist_counts[k] === artistOccurences
+        ))
+        artistOccurences -= 1;
+    }
+
+    var groupTopArtists = []
+    groupFrequentArtists.map((artists) => {
+        artists.map(artistID => {
+            allTopArtists.map((artist) => {
+                if (artistID === artist.artistID){
+                    groupTopArtists.push(artist)
+                }
+                return groupTopArtists
+            })
+            return groupTopArtists
+        })
+        return groupTopArtists
+    })
+
+    //remove duplicates
+    let groupUniqueArtists = groupTopArtists.filter(
+        (v, i, a) => a.findIndex((t) => t.artistID === v.artistID) === i
+    );
+    console.log(groupUniqueArtists)
+
     return(
-        <div className="top-tracks-root">
-            <div className="top-tracks-heading">
+        <div className="top-stats-root">
+            <div className="top-stats-heading">
                 <h1 className="text"><strong>Top Tracks</strong></h1>
                 <div className="under-bar"></div>
             </div>
-            <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="top-tracks-carousel">
+            <div className="top-tracks-root">
+                <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="top-tracks-carousel">
                     {carouselTracks.map((element, i) => (
                         <Carousel.Item key={i}>
                         <div className="group-tracks">{element}</div>
                         </Carousel.Item>
                     ))}
                 </Carousel>
+            </div>
+            <div className="top-stats-heading">
+                <h1 className="text"><strong>Top Artists</strong></h1>
+                <div className="under-bar"></div>
+            </div>
+            <div className="top-artists-root">
+                {groupUniqueArtists.slice(0,3).map((artist, i) => (
+                    <div className="top-artists-container" key={i}>
+                        <div className="artist-index"><strong>#{[i+1]}</strong></div>
+                        <div className="artist-name"><strong>{artist.artistName}</strong></div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
