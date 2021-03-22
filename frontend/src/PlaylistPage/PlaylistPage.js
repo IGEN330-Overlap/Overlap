@@ -35,7 +35,9 @@ export const PlaylistPage = (props) => {
     ?
     (     
         <div className="playlist-landing-root">
+            <div className="navbar">
             <Navbar1 />
+            </div>
             <div className="playlist-page-content">
                 <div className="playlist-components">
                     <div className="playlist-page-name">
