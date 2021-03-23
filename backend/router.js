@@ -33,6 +33,9 @@ router.post("/groups/leave", crudController.leaveGroup);
 //define post request for creating spotify playlist
 router.post("/groups/addToSpotify", algorithmController.createSpotifyPlaylist);
 
+//define post request for deleting playlistCode from group object
+router.post("/groups/deletePlaylist", crudController.deletePlaylist);
+
 //define post request for generating playlist
 router.post("/groups/generatePlaylist", algorithmController.generateGroupsTopPlaylist);
 

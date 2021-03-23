@@ -12,6 +12,7 @@ import AuthorizedPage from "./AuthorizedPage/AuthorizedPage";
 import AboutUs from "./AboutUs/AboutUs";
 import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
 import { PlaylistPage } from "./PlaylistPage/PlaylistPage";
+import ScreenOverlay from "./ScreenOverlay/ScreenOverlay";
 import "./App.css";
 
 const axios = require("axios");
@@ -45,13 +46,18 @@ function App() {
   //useState hook for faulty login attempts
   const [faultyLogin, setFaultyLogin] = useState(false);
 
+  //useState hook for page loading
+  const [isLoading, setIsLoading] = useState(false);
+
   //Update refresh token on App render
   //if refresh token exists in localstorage, dispatch update
   //else if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
-  if (localStorage.getItem("refreshToken") !== undefined && localStorage.getItem("refreshToken") !== null) {
+  if (
+    localStorage.getItem("refreshToken") !== undefined &&
+    localStorage.getItem("refreshToken") !== null
+  ) {
     dispatch(updateRefreshToken(localStorage.getItem("refreshToken")));
-  }
-  else if (
+  } else if (
     params.refresh_token !== "" &&
     params.refresh_token !== undefined &&
     params.refresh_token !== null
@@ -62,6 +68,9 @@ function App() {
 
   //User Effect hook for logging in the user with API upon refreshToken update
   useEffect(() => {
+    //Start loading
+    setIsLoading(true);
+
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/users/login", {
         refreshToken: refreshToken,
@@ -78,8 +87,14 @@ function App() {
           dispatch(updateUser(data.data.return));
           setFaultyLogin(false);
         }
+
+        //Stop loading
+        setIsLoading(false);
       })
       .catch((err) => {
+        //Stop loading
+        setIsLoading(false);
+
         console.log(err);
       });
   }, [refreshToken]);
@@ -106,13 +121,21 @@ function App() {
   //Start return statement
   return (
     <div className="App">
+      {/* If page loading, render loading overlay */}
+      {isLoading && <ScreenOverlay text="Retreiving Data" />}
+
       {/* Redirect if not logged in with spotify */}
-      {(refreshToken == null || refreshToken.length === 0 || refreshToken === "" || faultyLogin) && (
-        <Redirect to="/" />
-      )}
+      {(refreshToken == null ||
+        refreshToken.length === 0 ||
+        refreshToken === "" ||
+        faultyLogin) && <Redirect to="/" />}
       <Switch>
         {/* Route for root */}
-        <Route path="/" render={() => <LandingPage faultyLogin={faultyLogin}/>} exact={true} />
+        <Route
+          path="/"
+          render={() => <LandingPage faultyLogin={faultyLogin} />}
+          exact={true}
+        />
         {/* Router for authorized reroute from backend authorization */}
         <Route
           path="/authorized"
