@@ -269,3 +269,32 @@ exports.getUserGroups = async (req, res) => {
     return;
   }
 };
+
+/**
+ * Middleware for deleting embedded playlist object from group object
+ * POST method that groups use to delete playlists
+ *
+ * @param {} req {groupCode: String, playlistID: String}
+ * @param {} res
+ */
+exports.deletePlaylist = async (req, res) => {
+  Group.updateOne(
+    //Filter the group
+    {groupCode: req.body.groupCode}, 
+    // remove embedded playlist object from the playlist ARRAY
+    {$pull: {playlists: {_id: {$eq: req.body.playlistID} } } }
+  ) 
+  .then(() => {
+    res.json({
+      message: "Successfully deleted playlist:",
+      groupCode: req.body.groupCode,
+    });
+  })
+  //error with the removal of playlist object from group object
+  .catch((err) => {
+    res.json({
+      message: "Unable to delete playlist from group",
+      error: err,
+    });
+  });
+};
