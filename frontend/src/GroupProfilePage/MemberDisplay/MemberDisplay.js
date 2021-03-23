@@ -5,6 +5,7 @@ import './MemberDisplay.css';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 import add_member from './add-member.svg';
+import logo_small from './logo small.svg';
 
 const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
 
@@ -12,16 +13,18 @@ const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
 
   // primary user
   const primary_user = userObject ? userObject.name : ''
-  const primary_icon = userObject ? userObject.imageURL : ''
+  let primary_icon = userObject ? userObject.imageURL : ''
+
+  primary_icon = primary_icon ? primary_icon : logo_small;
 
   // group members
   const members = []
-  const icon_src = []
+  let icon_src = []
   const member_id = []
   groupUsers.map((member,i) => {
     if (member.name !== primary_user) {
       members[i] = member.name
-      icon_src[i] = member.imageURL
+      icon_src[i] = member.imageURL ? member.imageURL : logo_small;
       member_id[i] = member.userID
     }
     return members

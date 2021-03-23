@@ -102,7 +102,7 @@ const CreateOrJoin = (props) => {
             </div>
             <Collapse in={openCreate}>
                 <div id="example-collapse-text" className="collapseBody">
-                    <input type="text" className="input" placeholder="Enter Group Name" size="15" id="newGroupName"/>
+                    <input type="text" className="input" placeholder="Enter Group Name" size="15" id="newGroupName" maxLength="25"/>
                     <div className="continue-arrow" onClick={createNewGroup}>
                         <svg 
                             height="429.92093pt" 

@@ -8,7 +8,7 @@
 
 .playlist-page-content {
     display: flex;
-    height: 90vh;
+    /* height: 90vh; */
     width: auto;
     align-items: center;
     justify-content: center;
@@ -20,6 +20,7 @@
 }
 
 .playlist-components {
+    padding-top: 5vh;
     width: 100vw;
     display: flex;
     flex-direction: row;
@@ -71,6 +72,20 @@
     cursor: pointer;
 }
 
+.pp_backArrow{
+    fill: white;
+    margin-left: 2vw;
+}
+
+.pp_backArrow:hover{
+    cursor: pointer;
+}
+
+.pp_backArrow_svg{
+    height:3vw;
+    width:3vw;
+}
+
 @keyframes loading-message {
     from {
         opacity: 1;
@@ -117,5 +132,9 @@
     }
     .return-button {
         font-size: 3vw;
+    }
+    .pp_backArrow_svg{
+        height:35px;
+        width:35px;
     }
 }
