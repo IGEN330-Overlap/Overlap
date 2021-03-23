@@ -145,6 +145,16 @@
     background-color: var(--blue-color-1);
     width: 500px;
 }
+.playlist-add-modal .cancel-generate {
+    position: absolute;
+    right: 5%;
+    margin-top: 10px;
+    height: 15px;
+    width: 15px;
+}
+.playlist-add-modal .cancel-generate:hover{
+    cursor: pointer;
+}
 .select-playlist-users {
     display: flex;
     flex-direction: column;

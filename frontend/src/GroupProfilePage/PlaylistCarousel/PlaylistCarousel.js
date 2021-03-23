@@ -10,6 +10,7 @@ import playlistcover1 from "./playlist-cover1.jpg";
 import playlistcover2 from "./playlist-cover2.jpg";
 import playlistcover3 from "./playlist-cover3.jpeg";
 import addButton from "./add.svg";
+import closeButton from "./close-x.svg";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 
@@ -210,6 +211,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         className="playlist-add-modal"
       >
           <div className="playlistModal">
+            <img src={closeButton} alt="close" className="cancel-generate" onClick={hideAddPlaylistModal}/>
             <h2 id="generate-playlist-button"><strong>Generate a Playlist!</strong></h2>
             <h4>Who do you want to contribute to this playlist?</h4>
             <div className="select-playlist-users">
