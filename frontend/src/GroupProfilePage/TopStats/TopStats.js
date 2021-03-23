@@ -191,7 +191,6 @@ export const GroupTopStats = ({groupUsers}) => {
                         <img className="artist-icon" 
                             src={groupUniqueArtists[2].imageURL} 
                             alt={groupUniqueArtists[2].artistName}
-                            onClick={openArtist(groupUniqueArtists[2].linkURL)}
                         />
                         <div className="podium-3"><strong>#3</strong></div>
                     </div>
@@ -199,7 +198,6 @@ export const GroupTopStats = ({groupUsers}) => {
                         <img className="artist-icon" 
                             src={groupUniqueArtists[0].imageURL} 
                             alt={groupUniqueArtists[0].artistName}
-                            onClick={openArtist(groupUniqueArtists[0].linkURL)}
                         />
                         <div className="podium-1"><strong>#1</strong></div>
                     </div>
@@ -207,7 +205,6 @@ export const GroupTopStats = ({groupUsers}) => {
                         <img className="artist-icon" 
                             src={groupUniqueArtists[1].imageURL} 
                             alt={groupUniqueArtists[1].artistName}
-                            onClick={openArtist(groupUniqueArtists[1].linkURL)}
                         />
                         <div className="podium-2"><strong>#2</strong></div>
                     </div>

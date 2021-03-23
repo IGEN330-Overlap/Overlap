@@ -51,10 +51,7 @@ const GroupProfilePage = (props) => {
     }, [groupCode])
     
     // select member to compare
-    const [member_id, selectMember] = useState('');
-    function toCompare(value){
-        selectMember(value);
-    }
+    const [member_id, toCompare] = useState('');
 
     return ((checkMember === 'true') && groupUsers) 
     ? 
@@ -62,7 +59,9 @@ const GroupProfilePage = (props) => {
         <div className="group-landing-root">
             <div className="group-info-root">
                 <div className="navbar">
-                    <Navbar1 />
+                    <Navbar1 
+                        toCompare={toCompare}
+                    />
                 </div>
                 <div className="group-profile-page-components">
                     <div className="component-box"></div>

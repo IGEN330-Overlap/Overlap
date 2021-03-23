@@ -153,9 +153,6 @@
     width: 80px;
     border-radius: 10px;
 }
-.top-artist-podiums .artist-icon:hover {
-    cursor: pointer;
-}
 .artist-podium {
     display: flex;
     flex-direction: column;
