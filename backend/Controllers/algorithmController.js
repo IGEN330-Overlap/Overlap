@@ -12,10 +12,7 @@ const backend_url = process.env.BACKEND_URL;
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
 // Moods profiles tuned to suit the corresponding vibes
-const happy = require("../Moods/happy.json");
-const chill = require("../Moods/chill.json");
-const party = require("../Moods/party.json");
-const sad = require("../Moods/sad.json");
+const { buildPlaylistMoodProfile } = require("../scripts.js")
 
 // instantiate spotifyApi object
 var spotifyApi = new SpotifyWebApi({
@@ -427,16 +424,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   
   // Error handling, request must be a valid mood
   try {
-    if (req.body.selectedMood === "party") {
-      moodParams = party;
-    } else if (req.body.selectedMood === "happy") {
-      moodParams = happy;
-    } else if (req.body.selectedMood === "chill") {
-      moodParams = chill;
-    } else if (req.body.selectedMood === "sad") {
-      moodParams = sad;
-    } else {
-      throw new Error(); // frontened should handle this
+    moodParams = buildPlaylistMoodProfile(req.body.selectedMood);
+    
+    if (moodParams == "type error" || moodParams == "undefined") {
+      throw new Error;
     }
   } catch (e) {
     console.log("tried to generate mood playlist without selected mood");

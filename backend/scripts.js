@@ -134,6 +134,76 @@ function extractUsersTopArtists (data) {
     return topArtists;
 }
 
+function buildPlaylistMoodProfile (selection) {
+    if (selection === "happy") {
+        return {
+            "target_energy": 0.7,
+            "target_danceability": 0.40,
+            "target_valence": 0.85,
+            "min_energy": 0.50,
+            "min_danceability": 0.20,
+            "min_valence": 0.60,
+            "min_popularity": 50,
+            "limit": 30,
+            "Seed_genres": [
+                "happy",
+                "pop",
+                "summer"
+            ]
+        };
+    } else if (selection === "chill") {
+        return {
+            "target_energy": 0.5,
+            "target_danceability": 0.35,
+            "target_valence": 0.5,
+            "min_popularity": 50,
+            "limit": 30,
+            "Seed_genres": [
+                "chill",
+                "ambient",
+                "indie", 
+                "summer"
+            ]
+        }        
+
+    } else if (selection === "sad") {
+        return {
+            "target_energy": 0.10,
+            "target_danceability": 0.10,
+            "target_valence": 0.10,
+            "target_acousticness": 0.70,
+            "min_popularity": 25,
+            "limit": 30,
+            "Seed_genres": [
+                "sad",
+                "rainy-day",
+                "sleep", 
+                "r-n-b"
+            ]
+        }
+    } else if (selection === "party") {
+        return {
+            "target_energy": 0.80,
+            "target_danceability": 0.85,
+            "target_valence": 0.75,
+            "target_popularity": 75,
+            "min_energy": 0.65,
+            "min_danceability": 0.70,
+            "min_valence": 0.60,
+            "min_popularity": 50,
+            "limit": 30,
+            "Seed_genres": [
+                "party",
+                "pop",
+                "edm",        
+                "dance"
+            ]
+        } 
+    } else {
+        return "undefined"
+    }
+}
+
 //export generateGroupCode() as a module for use in Controller.js
 module.exports.generateGroupCode = generateGroupCode;
 
@@ -145,3 +215,6 @@ module.exports.extractUsersTopTracks = extractUsersTopTracks;
 
 // export getTopTracks data extraction method
 module.exports.extractUsersTopArtists = extractUsersTopArtists;
+
+// export mood profile
+module.exports.buildPlaylistMoodProfile = buildPlaylistMoodProfile;
