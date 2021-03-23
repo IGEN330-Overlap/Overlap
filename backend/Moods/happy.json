@@ -1,7 +1,10 @@
 {
-    "target_energy": 0.65,
+    "target_energy": 0.7,
     "target_danceability": 0.40,
     "target_valence": 0.85,
+    "min_energy": 0.50,
+    "min_danceability": 0.20,
+    "min_valence": 0.60,
     "min_popularity": 50,
     "limit": 30,
     "Seed_genres": [
