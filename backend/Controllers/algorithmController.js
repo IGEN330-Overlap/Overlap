@@ -198,8 +198,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   // Parses master set and adds the generate playlist tracks and the necessary info too
   // add the commonly occuring songs and the relevant props, can definitely be optimized
-  var i,
-    j = 0;
+  var i, j = 0;
   for (i = 0; j < duplicateBasedSongs.length; i++) {
     // trackIDs match then add the corresponding data
 
@@ -240,11 +239,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     (k) => counts[k] == maxCountArtists
   );
 
-  // debugging
-  console.log("max count tracks is: ", maxCountTracks);
+  console.log("max count tracks is: ", maxCountTracks); // debugging
 
-  // console.log("frequent artists", mostFrequentArtists);
-  // console.log("frequent tracks", mostFrequentTracks);
 
   // must have at least a single commonality to generate a viable seed based on the duplicates
   // otherwise use the best 3 matching songs to the group profile
@@ -264,7 +260,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           target_danceability: musicalProfile.danceability / 100,
           target_energy: musicalProfile.energy / 100,
           target_valence: musicalProfile.valence / 100,
-          min_popularity: 50,
+          min_popularity: 35,
           seed_tracks: sortedTrackSeed.slice(0, 5),
         });
 
@@ -409,7 +405,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       { $addToSet: { playlists: playlist } }
     );
     res.json({
-      message: "added playlist to the group",
+      message: "added groups top playlist to the group",
       playlist: playlist,
     });
   } catch (err) {
@@ -578,7 +574,30 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     });
   }
 
-  res.json({ playlistTracks });
+  // Comment out this below part for parameter improvement to not go overkill on our groups
+  // Create playlist object which will be uploaded to the group, passed to MongoDB
+  playlist = {
+    playlistName: req.body.playlistName,
+    tracks: playlistTracks,
+  };
+
+  // Update playlist to the group
+  // Note: no error is thrown when the groupCode is incorrect / dne
+  try {
+    await Group.updateOne(
+      { groupCode: req.body.groupCode },
+      { $addToSet: { playlists: playlist } }
+    );
+    res.json({
+      message: "added " + req.body.selectedMood + " playlist to the group",
+      playlist: playlist,
+    });
+  } catch (err) {
+    res.json({
+      message: "Unable to add mood playlist to the group",
+      error: err,
+    });
+  }
 };
 
 /**
