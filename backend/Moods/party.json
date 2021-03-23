@@ -7,7 +7,7 @@
     "min_danceability": 0.70,
     "min_valence": 0.40,
     "min_popularity": 50,
-    "limit": 25,
+    "limit": 30,
     "Seed_genres": [
         "party",
         "pop",

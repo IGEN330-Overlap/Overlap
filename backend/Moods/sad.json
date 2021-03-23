@@ -1,9 +1,10 @@
 {
-    "target_energy": 10,
-    "target_danceability": 10,
-    "target_valence": 10,
-    "target_acousticness": 70,
+    "target_energy": 0.10,
+    "target_danceability": 0.10,
+    "target_valence": 0.10,
+    "target_acousticness": 0.70,
     "min_popularity": 25,
+    "limit": 30,
     "Seed_genres": [
         "sad",
         "rainy-day",
