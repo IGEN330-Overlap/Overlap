@@ -462,7 +462,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
 
     // Add each persons dataset to our master array for the corresponding thing
     usersTopTracks = data.map(x => x.topTracks);
-    usersTopArtists = data.map(x => x.topArtists);
+    usersTopArtists = data.map(x => x.topArtists); 
 
   } catch (err) {
     res.json({ message: "error on finding users", error: err });
@@ -477,37 +477,32 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       Math.abs(masterTopTracks[i].danceability - moodParams.target_danceability) +
       Math.abs(masterTopTracks[i].energy - moodParams.target_energy) +
       Math.abs(masterTopTracks[i].valence - moodParams.target_valence);
-    // console.log(masterTopTracks[i])
   }
 
-    // Sort the unique set by the deltaFromGroup to (lowest to highest)
+  // Sort the unique set by the deltaFromGroup to (lowest to highest)
   // Lowest is the best
   let sortedTrackSet = masterTopTracks.sort((a, b) => {
     return parseFloat(a.delta) - parseFloat(b.delta);
   });
 
   let seedTracks = sortedTrackSet.map(x => x.trackID).slice(0,5)
-  console.log(sortedTrackSet.map(x => x.delta).slice(0,5))
 
-  // set artists into one array
-  let masterTopArtists = usersTopArtists.flat();
-  masterTopArtists = masterTopArtists.map(x => x.artistID);
+  console.log(sortedTrackSet.map(x => x.delta).slice(0,5)) //debugging
 
-  // Count occurences of songs in master set
-  let counts = masterTopArtists.reduce((a, c) => {
-    a[c] = (a[c] || 0) + 1;
-    return a;
-  }, {});
+  let playlistTracks = [];
 
-  // get max count of artists
-  let maxCountArtists = Math.max(...Object.values(counts));
-
-  // filters for songs that appear the same amount of times as (numusers/2 +1) or more
-  let mostFrequentArtists = Object.keys(counts).filter(
-    (k) => counts[k] == maxCountArtists
-  );
-
-  let recommendations = [];
+  // Add seed tracks to the playlist so long as they meet the required delta
+  for (x of sortedTrackSet){
+    if (x.delta <= 0.15){
+      playlistTracks.push({
+        trackName: x.trackName,
+        trackID: x.id,
+        imageURL: x.imageURL,
+        linkURL: x.linkURL,
+        artistName: x.artistName,
+      })
+    }
+  }
 
   spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
   try {
@@ -516,40 +511,49 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
 
     try {
       // Get recommendations for the group
-      let data;
-
       let recommendationsBody = moodParams;
-      // recommendationsBody["seed_artists"] = mostFrequentArtists.slice(0,5);
-      recommendationsBody["seed_tracks"] = seedTracks.slice(0,5);
-      console.log(recommendationsBody);
 
-      // select seed based on whichever provides more information
-      // prioritize tracks seed as shown by the non inclusive conditional
-      data = await spotifyApi.getRecommendations(recommendationsBody);
-      // console.log(data.body.tracks)
-      // console.log(data.body)
+      recommendationsBody["seed_tracks"] = seedTracks.slice(0,5);
+      console.log(recommendationsBody); // debugging
+
+      let data = await spotifyApi.getRecommendations(recommendationsBody);
 
       // add the songs ensuring that their type is correct and that there is populated data
       for (x of data.body.tracks) {
-        if (x.type == "track" && x.album.images.length != 0) {
-          recommendations.push({
+        // continuosly add songs until we've hit our playlist length (30 songs)
+        if (playlistTracks.length == 30){
+          break;
+        // skip past if the song has already been added to the playlist to avoid duplicates
+        } else if (playlistTracks.some(x => x.trackID == x.id)) {
+          continue;
+        } else if (x.type == "track" && x.album.images.length != 0 && artistName.length != 0) {
+          playlistTracks.push({
             trackName: x.name,
             trackID: x.id,
-            // imageURL: x.album.images[0].url,
-            // linkURL: x.external_urls.spotify,
+            imageURL: x.album.images[0].url,
+            linkURL: x.external_urls.spotify,
             artistName: x.artists[0].name,
-            // identifier: x.name + " " + x.artists[0].name,
           });
         }
       }
     } catch (err) {
-      res.json(err);
+      console.log("error in get recommendations mood playlist")
+      res.json({
+        message:"error in get recommendations mood playlist",
+        error: err
+      });
     }
   } catch (err) {
-    res.json(err);
+    console.log("error with spotify access token")
+    res.json({
+      message: "error with spotify access token",
+      error: err
+    });
   }
 
-  res.json({recommendations});
+
+
+  res.json({playlistTracks});
 
 };
 

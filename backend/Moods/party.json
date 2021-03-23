@@ -1,8 +1,18 @@
 {
-    "target_energy": 85,
-    "target_danceability": 85,
-    "target_valence": 85,
+    "target_energy": 0.85,
+    "target_danceability": 0.85,
+    "target_valence": 0.75,
     "target_popularity": 75,
+    "min_energy": 0.65,
+    "min_danceability": 0.70,
+    "min_valence": 0.40,
     "min_popularity": 50,
-    "limit": 30
+    "limit": 25,
+    "Seed_genres": [
+        "party",
+        "pop",
+        "edm",        
+        "dance",
+        "work-out"  
+    ]
 }
