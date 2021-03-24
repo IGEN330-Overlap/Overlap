@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateRefreshToken } from "../Redux/Actions";
 
-const Navbar1 = ({toCompare}) => {
+const Navbar1 = (props) => {
   //useDispatch hook for redux
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ const Navbar1 = ({toCompare}) => {
             <NavDropdown title="My Groups" id="basic-nav-dropdown">
               {groupList.map((group, i) => (
                 <div key={i}>
-                  <NavDropdown.Item as={Link} to={"/authorized/group/"+group.groupCode} onClick={() => toCompare()}>
+                  <NavDropdown.Item as={Link} to={"/authorized/group/"+group.groupCode}>
                     {group.groupName}
                   </NavDropdown.Item>
                 </div>

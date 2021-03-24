@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './GroupProfilePage.css';
 
@@ -16,6 +16,8 @@ import { GroupTopStats } from './TopStats/TopStats';
 const axios = require("axios");
 
 const GroupProfilePage = (props) => {
+
+    const history = useHistory()
 
     // get refresh token
     const refreshToken = useSelector((state) => state.refreshToken)
@@ -54,9 +56,15 @@ const GroupProfilePage = (props) => {
     
     // select member to compare
     const [member_id, setMemberID] = useState('');
-    const toCompare = (value) => {
+    const selectMember = (value) => {
         setMemberID(value);
     }
+
+    useEffect (() => {
+        return history.listen((location) => {
+            selectMember("");
+        })
+    }, [history])
 
     return ((checkMember === 'true') && groupUsers) 
     ? 
@@ -64,9 +72,7 @@ const GroupProfilePage = (props) => {
         <div className="group-landing-root">
             <div className="group-info-root">
                 <div className="navbar">
-                    <Navbar1 
-                        toCompare={toCompare}
-                    />
+                    <Navbar1 />
                 </div>
                 <div className="group-profile-page-components">
                     <div className="component-box"></div>
@@ -80,7 +86,7 @@ const GroupProfilePage = (props) => {
                             <MemberDisplay 
                                 groupUsers={groupUsers}
                                 groupCode={groupCode} 
-                                toCompare={toCompare}
+                                selectMember={selectMember}
                             />
                         </div>
                         <div className="individual-comparisons">
@@ -90,7 +96,7 @@ const GroupProfilePage = (props) => {
                             ? <Comparisons 
                                 groupUsers={groupUsers} 
                                 member_id={member_id} 
-                                toCompare={toCompare} /> 
+                                selectMember={selectMember} /> 
                             : <MyInsights />
                             }
                         </div>

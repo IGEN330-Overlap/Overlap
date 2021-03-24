@@ -7,7 +7,7 @@ import { Popover, OverlayTrigger } from 'react-bootstrap';
 import add_member from './add-member.svg';
 import logo_small from './logo small.svg';
 
-const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
+const MemberDisplay = ({groupUsers, groupCode, selectMember}) => {
 
   const userObject = useSelector(state => state.userObject)
 
@@ -72,15 +72,15 @@ const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
 
         <div className="display-members">
             <div className="icon-container">
-                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
-                <div className="user-name" onClick={() => toCompare()}>
+                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => selectMember('')}></img>
+                <div className="user-name" onClick={() => selectMember('')}>
                   <strong>{primary_user}</strong>
                 </div>
             </div>
             {members.map((member,i) => (
                 <div className="icon-container" key={i}>
-                    <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member_id[i])}></img>
-                    <div className="user-name" onClick={() => toCompare(member_id[i])}>
+                    <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => selectMember(member_id[i])}></img>
+                    <div className="user-name" onClick={() => selectMember(member_id[i])}>
                             <strong>{member}</strong>
                     </div>
                 </div>

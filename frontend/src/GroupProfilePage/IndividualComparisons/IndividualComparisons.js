@@ -66,7 +66,7 @@ export const MyInsights = (props) => {
     )
 }
 
-export const Comparisons = ({groupUsers, member_id, toCompare}) => {
+export const Comparisons = ({groupUsers, member_id, selectMember}) => {
     
     const userObject = useSelector(state => state.userObject)
 
@@ -148,7 +148,7 @@ export const Comparisons = ({groupUsers, member_id, toCompare}) => {
     return(
         <div className="comparisons">
             <div className="return-to-insights">
-                <h4><strong onClick={() => toCompare()}> Return to Personal Insights</strong></h4>
+                <h4><strong onClick={() => selectMember('')}> Return to Personal Insights</strong></h4>
             </div>
             <div className="heading">
                 <h1><strong>You & {compare_name}</strong></h1>
