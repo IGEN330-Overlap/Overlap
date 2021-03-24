@@ -496,13 +496,13 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     return parseFloat(a.delta) - parseFloat(b.delta);
   });
 
-  // For the seed use the 5 best matching songs from the group to the mood profile
-  let seedTracks = sortedTrackSet.map((x) => x.trackID).slice(0, 5);
+  let seedTracks = [];
   let playlistTracks = [];
 
   // Add seed tracks to the playlist so long as they meet the required delta
   for (x of sortedTrackSet) {
-    if (x.delta <= 0.21) {
+    // add to playlist if the song is precisely enough matching the target profile
+    if (x.delta <= 0.15) {
       playlistTracks.push({
         trackName: x.trackName,
         trackID: x.id,
@@ -510,7 +510,16 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
         linkURL: x.linkURL,
         artistName: x.artistName,
       });
+      // add to seed tracks so long as we don't already have 5
+      if (seedTracks.length < 5){
+        seedTracks.push(x.trackID);
+      }
     }
+  }
+
+  // if no song currently made it use the closest 3 as seed tracks in case
+  if (seedTracks.length == 0){
+    seedTracks = sortedTrackSet.map((x) => x.trackID).slice(0,3)
   }
 
   spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
@@ -523,7 +532,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       let recommendationsBody = moodParams;
 
       recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5);
-      console.log(recommendationsBody); // debugging
+      // console.log(recommendationsBody); // debugging
 
       let data = await spotifyApi.getRecommendations(recommendationsBody);
 

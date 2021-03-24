@@ -134,15 +134,22 @@ function extractUsersTopArtists (data) {
     return topArtists;
 }
 
+/**
+ * Returns the corresponding mood profile, 
+ * Expected parameters passed are, "happy", "sad", "chill", "party"
+ * @param {String} selection, mood selection
+ * @returns 
+ */
 function buildPlaylistMoodProfile (selection) {
     if (selection === "happy") {
         return {
-            "target_energy": 0.7,
-            "target_danceability": 0.40,
-            "target_valence": 0.85,
             "min_energy": 0.50,
+            "target_energy": 0.7,
             "min_danceability": 0.20,
+            "target_danceability": 0.40,
+            "max_danceability": 0.70,
             "min_valence": 0.60,
+            "target_valence": 0.85,
             "min_popularity": 50,
             "limit": 30,
             "Seed_genres": [
@@ -154,48 +161,52 @@ function buildPlaylistMoodProfile (selection) {
     } else if (selection === "chill") {
         return {
             "target_energy": 0.5,
-            "target_danceability": 0.35,
+            "max_energy": 0.75,
             "target_valence": 0.5,
+            "target_danceability": 0.35,
+            "max_danceability": 0.70, 
             "min_popularity": 50,
             "limit": 30,
             "Seed_genres": [
                 "chill",
                 "ambient",
-                "indie", 
                 "summer"
             ]
         }        
 
     } else if (selection === "sad") {
         return {
-            "target_energy": 0.10,
-            "target_danceability": 0.10,
+            "target_energy": 0.20,
+            "max_energy": 0.50,
+            "target_danceability": 0.20,
+            "max_danceability": 0.5,
             "target_valence": 0.10,
+            "max_valence": 0.7,
             "target_acousticness": 0.70,
             "min_popularity": 25,
+            "max_tempo": 140,
             "limit": 30,
             "Seed_genres": [
                 "sad",
                 "rainy-day",
-                "sleep", 
-                "r-n-b"
+                "sleep"
             ]
         }
     } else if (selection === "party") {
         return {
-            "target_energy": 0.80,
-            "target_danceability": 0.85,
-            "target_valence": 0.75,
-            "target_popularity": 75,
             "min_energy": 0.65,
+            "target_energy": 0.80,
             "min_danceability": 0.70,
+            "target_danceability": 0.85,
             "min_valence": 0.60,
+            "target_valence": 0.75,
             "min_popularity": 50,
+            "target_popularity": 75,
+            "min_tempo": 120,
             "limit": 30,
             "Seed_genres": [
                 "party",
                 "pop",
-                "edm",        
                 "dance"
             ]
         } 
