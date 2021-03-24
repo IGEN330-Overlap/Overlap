@@ -151,6 +151,8 @@
 .top-artist-podiums .artist-icon{
     height: 80px;
     width: 80px;
+    object-fit: cover;
+    object-position: 50%;
     border-radius: 10px;
 }
 .artist-podium {

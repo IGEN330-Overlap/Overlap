@@ -15,15 +15,23 @@ export const GroupTopStats = ({groupUsers}) => {
         window.open(artist_url)
     }
 
+    //braiding arrays function
+    const braidArrays = (target_array, ...arrays) => {
+        for (let i=0; i < Math.max(...arrays.map(a => a.length)); i++) {
+            arrays.forEach((array) => {
+                if (array[i] !== undefined) target_array.push(array[i]);
+            })
+        }
+        return target_array;
+    }
+
     //combine all top tracks into one array
     var allTopSongs = []
     var allTrackIDs = []
-    groupUsers.map((user) => {
-        user.topTracks.map((track) => {
-            allTopSongs.push(track)
-            allTrackIDs.push(track.trackID)
-            return allTopSongs
-        })
+ 
+    braidArrays(allTopSongs, ...groupUsers.map(user => user.topTracks))
+    allTopSongs.map((track) => {
+        allTrackIDs.push(track.trackID)
         return allTrackIDs
     })
 
@@ -109,17 +117,15 @@ export const GroupTopStats = ({groupUsers}) => {
         carouselTracks.push(carouselElement);
     }
 
-    // top artist sort
-    var allTopArtists = []
-    var allArtistIDs = []
-    groupUsers.map((user) => {
-        user.topArtists.map((artist) => {
-            allTopArtists.push(artist)
-            allArtistIDs.push(artist.artistID)
-            return allTopArtists
-        })
-        return allArtistIDs
-    })
+     //combine all top artists into one array
+     var allTopArtists = []
+     var allArtistIDs = []
+  
+     braidArrays(allTopArtists, ...groupUsers.map(user => user.topArtists))
+     allTopArtists.map((artist) => {
+         allArtistIDs.push(artist.artistID)
+         return allArtistIDs
+     })
 
     let artist_counts = allArtistIDs.reduce((a,c) => {
         a[c] = (a[c] || 0) + 1;
@@ -138,6 +144,8 @@ export const GroupTopStats = ({groupUsers}) => {
         artistOccurences -= 1;
     }
 
+    console.log(groupFrequentArtists)
+    
     var groupTopArtists = []
     groupFrequentArtists.map((artists) => {
         artists.map(artistID => {
@@ -156,7 +164,6 @@ export const GroupTopStats = ({groupUsers}) => {
     let groupUniqueArtists = groupTopArtists.filter(
         (v, i, a) => a.findIndex((t) => t.artistID === v.artistID) === i
     );
-    console.log(groupUniqueArtists)
 
     return(
         <div className="top-stats-root">
