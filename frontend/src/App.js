@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+//React, redux, and react-router imports
+import React, { useEffect, useState, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateRefreshToken,
@@ -7,6 +8,7 @@ import {
 } from "./Redux/Actions.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 
+//Component Imports
 import LandingPage from "./LandingPage/LandingPage";
 import AuthorizedPage from "./AuthorizedPage/AuthorizedPage";
 import AboutUs from "./AboutUs/AboutUs";
@@ -121,14 +123,12 @@ function App() {
   //Start return statement
   return (
     <div className="App">
-      {/* If page loading, render loading overlay */}
-      {isLoading && <ScreenOverlay text="Retreiving Data" />}
-
       {/* Redirect if not logged in with spotify */}
-      {((refreshToken == null ||
+      {(refreshToken == null ||
         refreshToken.length === 0 ||
         refreshToken === "" ||
-        faultyLogin) && isLoading === false) && <Redirect to="/" />}
+        faultyLogin) &&
+        isLoading === false && <Redirect to="/" />}
       <Switch>
         {/* Route for root */}
         <Route
@@ -139,7 +139,13 @@ function App() {
         {/* Router for authorized reroute from backend authorization */}
         <Route
           path="/authorized"
-          render={() => <AuthorizedPage />}
+          render={() => (
+            <Fragment>
+              <AuthorizedPage />
+              {/* If page loading, render loading overlay */}
+              {isLoading && <ScreenOverlay text="Retreiving Data" />}
+            </Fragment>
+          )}
           exact={true}
         />
         <Route path="/about" render={() => <AboutUs />} />
