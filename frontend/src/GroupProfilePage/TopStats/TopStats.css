@@ -5,7 +5,7 @@
     width: auto;
     background-color: var(--blue-color-main);
     display: flex;
-    flex-direction: column;
+    align-items: center;
 }
 
 .top-stats-heading {
@@ -87,8 +87,8 @@
     transition: 0.3s;
 }
 .top-tracks-carousel {
-    margin-top: clamp(10px, 2vh, 40px);
-    margin-bottom: clamp(10px, 2vh, 40px);
+    margin-top: clamp(10px, 3vh, 60px);
+    margin-bottom: clamp(10px, 3vh, 60px);
     width: 100vw;
     height: 310px;
     display: flex;
@@ -112,9 +112,8 @@
 
 /* top artists */
 .top-artists-root {
-    height: 200px;
+    height: 300px;
     margin-left: 4vw;
-    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

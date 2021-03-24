@@ -126,9 +126,11 @@
 }
 
 /* modal css */
+.generate-playlist-title {
+    display: flex;
+    flex-direction: row;
+}
 .playlistModal h2 {
-    margin-top: 10px;
-    margin-bottom: 5px;
     color: var(--primary-color-main);
 }
 .playlistModal h4 {
@@ -141,14 +143,13 @@
     height: fit-content;
     padding-top: 10px;
     padding-bottom: 10px;
-    text-align: center;
-    background-color: var(--blue-color-1);
+    /* text-align: center; */
+    background-color: var(--off-white-color);
     width: 500px;
 }
 .playlist-add-modal .cancel-generate {
     position: absolute;
     right: 5%;
-    margin-top: 10px;
     height: 15px;
     width: 15px;
 }
@@ -158,21 +159,20 @@
 .select-playlist-users {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 10px;
+    /* align-items: center; */
+    /* margin: 10px; */
 }
 .select-playlist-users-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 440px;
+    /* justify-content: center; */
 }
 .select-a-user {
     background-color: var(--primary-color-1);
     width: fit-content;
     height: 30px;
-    text-align: center;
+    /* text-align: center; */
     color: var(--off-white-color);
     margin: 4px;
     border-radius: 20px;
@@ -212,16 +212,20 @@
     color: var(--blue-color-main);
     font-size: 20px;
     font-weight: 550;
-    text-align: center;
+    /* text-align: center; */
 }
 .name-input::placeholder{
     color: var(--primary-color-main);
     font-weight: 450;
-    text-align: center;
+    /* text-align: center; */
+}
+.generate-playlist {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 .generate-button {
     margin-top: 20px;
-    margin-bottom: 20px;
     border-radius: 20px;
     background-color: var(--blue-color-main);
 }
@@ -231,8 +235,9 @@
 .playlistModal button {
     border-color: transparent;
     width: 200px;
-    height: 35px;
+    height: 42px;
     font-size: 20px;
+    filter: drop-shadow(0 2mm 2mm var(--primary-color-main));
 }
 
 @media (max-width: 780px) {

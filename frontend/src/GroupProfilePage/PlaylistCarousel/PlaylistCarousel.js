@@ -210,9 +210,16 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         centered
         className="playlist-add-modal"
       >
+        <Modal.Header>
+          <Modal.Title>
+            <div className="generate-playlist-title">
+              <h2 id="generate-playlist-button"><strong>Generate a Playlist!</strong></h2>
+              <img src={closeButton} alt="close" className="cancel-generate" onClick={hideAddPlaylistModal}/>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <div className="playlistModal">
-            <img src={closeButton} alt="close" className="cancel-generate" onClick={hideAddPlaylistModal}/>
-            <h2 id="generate-playlist-button"><strong>Generate a Playlist!</strong></h2>
             <h4>Who do you want to contribute to this playlist?</h4>
             <div className="select-playlist-users">
                 <div className="select-all-users" id="select-bubble" onClick={() => selectAll()}>
@@ -238,10 +245,13 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               {/*create alert to tell user playlist title is too long */}
               <input type="text" className="name-input" placeholder="Enter Playlist Name" maxlength="25" id="newPlaylistName"/>
             </div>
-            <button onClick={() => {generatePlaylist()}} centered className="generate-button">
-              <strong>Generate Playlist</strong>
-            </button>
+            <div className="generate-playlist">
+              <button onClick={() => generatePlaylist()} centered className="generate-button">
+                <strong>Generate Playlist</strong>
+              </button>
+            </div>
           </div>
+        </Modal.Body>
       </Modal>
     </div>
   );
