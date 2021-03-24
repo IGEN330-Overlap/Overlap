@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './GroupProfilePage.css';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import './GroupProfilePage.css';
 
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
@@ -10,6 +11,7 @@ import { MyInsights, Comparisons } from './IndividualComparisons/IndividualCompa
 //import { TopGenres } from './TopGenres/TopGenres';
 import { GroupTopStats } from './TopStats/TopStats';
 //import { MusicalProfile } from './MusicalProfile/MusicalProfile';
+//import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
 
 const axios = require("axios");
 
@@ -33,7 +35,7 @@ const GroupProfilePage = (props) => {
             groupName = group.groupName
             playlists = group.playlists
         }
-        return groupName;
+        return groupName;          
     })
 
     // get group users and assign to groupUsers variable
@@ -118,13 +120,22 @@ const GroupProfilePage = (props) => {
     :
     // loading screen while checking if user is member of group
     <div className = "landing-root-error">
-        <div className = "loading-message">Collecting your group's information...</div>
+        {/* <ScreenOverlay text="Loading" /> */}
         {/* wrong group error if user is trying to access group they're not part of */}
         <div className = "wrong-group">
             Oops! It looks like you're not part of this group :(
-            <div>
-                <a href="/authorized" className = "return-button">Take me back to my groups!</a>
-            </div>
+            <Link to={"/authorized"} className="return-button">
+                <svg
+                    className="pp_backArrow_svg"
+                    xmlns="http://www.w3.org/2000/svg"  
+                    viewBox="0 0 24 24" >
+                    <path d="M0 0h24v24H0z" 
+                    fill="none"/>
+                    <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+                    fill="var(--off-white-color)"/>
+                </svg>
+                <strong>My Groups</strong>
+            </Link>
         </div>
     </div>
 }

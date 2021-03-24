@@ -1,6 +1,7 @@
 import React from 'react';
-import './PlaylistPage.css';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import './PlaylistPage.css';
 
 import { PlaylistTracks } from './PlaylistTracks/PlaylistTracks';
 import PlaylistTitle from './PlaylistTitle/PlaylistTitle';
@@ -38,7 +39,7 @@ export const PlaylistPage = (props) => {
             <div className="navbar">
                 <Navbar1 />
             </div>
-            <a href={"/authorized/group/"+groupCode} className="pp_backArrow">
+            <Link to={"/authorized/group/"+groupCode} className="pp_backArrow">
                 <svg
                     className="pp_backArrow_svg"
                     xmlns="http://www.w3.org/2000/svg"  
@@ -47,7 +48,7 @@ export const PlaylistPage = (props) => {
                     fill="none"/>
                     <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
                 </svg>
-            </a>
+            </Link>
             <div className="playlist-page-content">
                 <div className="playlist-components">
                     <div className="playlist-page-name">
@@ -63,13 +64,21 @@ export const PlaylistPage = (props) => {
     :
     // loading screen while checking if user can access this playlist
     <div className = "landing-root-error">
-        <div className = "loading-message">Collecting your playlist tracks...</div>
         {/* wrong group error if user is trying to access playlist they're not part of */}
-        <div className = "wrong-group">
+        <div className = "wrong-playlist">
             Oops! It looks like this playlist does not exist :(
-            <div>
-                <a href="/authorized/" className = "return-button">Take me back to my groups!</a>
-            </div>
+            <Link to={"/authorized"} className="return-button">
+                <svg
+                    className="pp_backArrow_svg"
+                    xmlns="http://www.w3.org/2000/svg"  
+                    viewBox="0 0 24 24" >
+                    <path d="M0 0h24v24H0z" 
+                    fill="none"/>
+                    <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+                    fill="var(--off-white-color)"/>
+                </svg>
+                <strong>My Groups</strong>
+            </Link>
         </div>
     </div>
 }

@@ -37,13 +37,6 @@
     justify-content: center;
     align-items: center;
 }
-.loading-message {
-    font-size: 2vw;
-    color: var(--off-white-color);
-    opacity: 0;
-    animation-name: loading-message;
-    animation-duration: 3s;
-}
 .wrong-group {
     font-size: 2vw;
     color: var(--off-white-color);
@@ -54,9 +47,15 @@
     animation-name: wrong-group;
     animation-duration: 4s;
 }
-.return-button {
-    font-size: 1.5vw;
-    color: var(--blue-color-1);
+.wrong-group .return-button {
+    margin-top: 20px;
+    display: flex;
+    padding-right: 15px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: var(--blue-color-main);
+    font-size: 1.75vw;
+    color: var(--off-white-color);
 }
 .return-button:hover {
     text-decoration: none;
@@ -162,18 +161,6 @@
     to {
         opacity: 1;
         transform: translateX(0px);
-    }
-}
-
-@keyframes loading-message {
-    from {
-        opacity: 1;
-    }
-    75% {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
     }
 }
 
