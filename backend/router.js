@@ -5,10 +5,6 @@ const crudController = require("./Controllers/crudController.js");
 const loginController = require("./Controllers/loginController.js");
 const algorithmController = require("./Controllers/algorithmController.js");
 
-//Algorithm test imports
-const algoTest = require("./Algorithm/algoTest.js");
-const algoController = require("./Algorithm/algo_controller.js");
-
 //define get request for retreiving user information
 router.get("/users/:id/user", crudController.getUser);
 
@@ -38,13 +34,5 @@ router.post("/groups/deletePlaylist", crudController.deletePlaylist);
 
 //define post request for generating playlist
 router.post("/groups/generatePlaylist", algorithmController.generateGroupsTopPlaylist);
-
-// TESTING ALGO
-router.get("/test/getTopTracksNoAttributes", algoTest.getMyTopTracks);
-router.get("/test/trackFeature", algoTest.getTrackFeatures);
-router.get("/test/getTopTrackIDs", algoTest.getTopTrackIds);
-router.get("/test/getTopTracks", algoController.getMyTopTracks);
-router.post("/test/buildSpotifyPlaylist", algoController.buildSpotifyPlaylist);
-router.get("/test/getRecommendations", algoController.getRecommendations);
 
 module.exports = router;
