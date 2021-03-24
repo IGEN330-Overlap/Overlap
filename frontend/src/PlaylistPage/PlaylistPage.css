@@ -3,12 +3,12 @@
 .playlist-landing-root {
     width: auto;
     height: 100vh;
-    background-color: #9D5C63;
+    background-color: var(--primary-color-main);
 }
 
 .playlist-page-content {
     display: flex;
-    height: 90vh;
+    /* height: 90vh; */
     width: auto;
     align-items: center;
     justify-content: center;
@@ -20,6 +20,7 @@
 }
 
 .playlist-components {
+    padding-top: 5vh;
     width: 100vw;
     display: flex;
     flex-direction: row;
@@ -30,7 +31,7 @@
 
 .playlist-page-tracks-container {
     margin-left: 2vw;
-    background: rgba(190, 154, 154, 0.25);
+    background: rgba(155, 154, 190, 0.301);
     border-radius: 15px;
     width: 425px;
     height: max(55vh, 475px);
@@ -69,6 +70,20 @@
     text-decoration: none;
     color: var(--blue-color-main);
     cursor: pointer;
+}
+
+.pp_backArrow{
+    fill: white;
+    margin-left: 2vw;
+}
+
+.pp_backArrow:hover{
+    cursor: pointer;
+}
+
+.pp_backArrow_svg{
+    height:3vw;
+    width:3vw;
 }
 
 @keyframes loading-message {
@@ -117,5 +132,9 @@
     }
     .return-button {
         font-size: 3vw;
+    }
+    .pp_backArrow_svg{
+        height:35px;
+        width:35px;
     }
 }

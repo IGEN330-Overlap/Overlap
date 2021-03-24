@@ -2,7 +2,7 @@ import "./Navbar.css";
 import logo from "../overlap-logo.svg";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateRefreshToken } from "../Redux/Actions";
 
@@ -10,13 +10,17 @@ const Navbar1 = (props) => {
   //useDispatch hook for redux
   const dispatch = useDispatch();
 
+  //useHistory for redirect
+  const history = useHistory();
+
   const handleLogout = () => {
-      dispatch(updateRefreshToken(""));
-      localStorage.clear();
+    dispatch(updateRefreshToken(""));
+    localStorage.clear();
+    history.push("/");
   };
 
   //get group list from redux states
-  const groupList = useSelector((state) => state.groupList)
+  const groupList = useSelector((state) => state.groupList);
 
   return (
     <div className="navbar-stuff">
@@ -30,15 +34,14 @@ const Navbar1 = (props) => {
             <NavDropdown title="My Groups" id="basic-nav-dropdown">
               {groupList.map((group, i) => (
                 <div key={i}>
-                  <NavDropdown.Item as={Link} to={"/authorized/group/"+group.groupCode}>
+                  <NavDropdown.Item
+                    as={Link}
+                    to={"/authorized/group/" + group.groupCode}
+                  >
                     {group.groupName}
                   </NavDropdown.Item>
                 </div>
               ))}
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/authorized/">
-                New Group
-              </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/about" bg="white">
               About Us
