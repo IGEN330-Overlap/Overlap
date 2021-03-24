@@ -20,7 +20,7 @@ const LandingPage = (props) => {
                 <h2 className="intro-message"> Welcome to <span className="purple">overlap</span>. <br></br>Make listening with friends easy.</h2>
             </div>
             <a href={process.env.REACT_APP_BACKEND_URL + "/login"} className="btn btn-sm login-button">
-                Log in with Spotify
+                Continue
             </a>
             {/* Redirect if already authenticated */}
             {(refreshToken != null && refreshToken !== "" && props.faultyLogin === false) && <Redirect to="/authorized" />}
