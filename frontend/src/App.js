@@ -125,10 +125,10 @@ function App() {
       {isLoading && <ScreenOverlay text="Retreiving Data" />}
 
       {/* Redirect if not logged in with spotify */}
-      {(refreshToken == null ||
+      {((refreshToken == null ||
         refreshToken.length === 0 ||
         refreshToken === "" ||
-        faultyLogin) && <Redirect to="/" />}
+        faultyLogin) && isLoading === false) && <Redirect to="/" />}
       <Switch>
         {/* Route for root */}
         <Route
