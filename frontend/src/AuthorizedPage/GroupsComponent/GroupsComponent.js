@@ -138,7 +138,7 @@ const GroupsComponent = (props) => {
           value={searchText.value}
           onChange={editSearch}
           class="input-search"
-          placeholder="search"
+          placeholder="Search"
           size="15"
         />
       </div>
@@ -150,7 +150,7 @@ const GroupsComponent = (props) => {
             key={i}
             className="group-item d-flex"
           >
-            <Dropdown as={ButtonGroup}>
+            <Dropdown as={ButtonGroup} drop="right">
               <Link
                 to={"/authorized/group/"+group.groupCode}
                 className="groupButton"

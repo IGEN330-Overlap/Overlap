@@ -123,6 +123,13 @@
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
 
+.profile_iceberg{
+    position: absolute;
+    bottom: 2vh;
+    right: 1vh;
+    opacity: 25%;
+}
+
 @keyframes navbaropacity {
     from {
         background-color: var(--primary-color-main);

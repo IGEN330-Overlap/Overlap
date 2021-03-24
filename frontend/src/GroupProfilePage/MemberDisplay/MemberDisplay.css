@@ -121,6 +121,7 @@
     object-position: 50%;
     border-radius: 50rem;
     transition: opacity 0.45s;
+    background-color: var(--primary-color-6);
 }
 .user-name {
     font-size: clamp(12px, 1.75vw, 17px);

@@ -7,8 +7,9 @@ import GroupName from './GroupName/GroupName';
 import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
-//import { TopGenres } from './TopGenres/TopGenres';
-//import { MusicalProfile } from './MusicalProfile/MusicalProfile';
+// import { TopGenres } from './TopGenres/TopGenres';
+// import { MusicalProfile } from './MusicalProfile/MusicalProfile';
+import iceberg from '../AuthorizedPage/iceberg.svg';
 
 const axios = require("axios");
 
@@ -100,14 +101,18 @@ const GroupProfilePage = (props) => {
                     </div> 
                 </div>
             </div>
-            {/*
-            <div className="top-genres-display">
+
+            <div className="profile_iceberg">
+                <img src={iceberg} alt="decorative iceberg"/>
+            </div>
+                
+            {/* <div className="top-genres-display">
                 <TopGenres groupUsers={groupUsers} />
             </div>
             <div className="musical-profile-display">
                 <MusicalProfile groupUsers={groupUsers} />
-            </div>
-            */}
+            </div> */}
+           
         </div>
     )
     :

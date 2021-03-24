@@ -5,6 +5,9 @@ import { updateGroupList } from '../../Redux/Actions.js';
 
 import Collapse from 'react-bootstrap/Collapse';
 
+import add_member from '../../GroupProfilePage/MemberDisplay/add-member.svg';
+import plus_sign from '../../GroupProfilePage/PlaylistCarousel/add.svg';
+
 const axios = require("axios");
 
 var input_name = '';
@@ -97,8 +100,7 @@ const CreateOrJoin = (props) => {
                 aria-controls="example-collapse-text"
                 aria-expanded={openCreate}
             >
-            <h5 className="openCollapse">+   Create a new group</h5>
-            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING */}
+            <h5 className="openCollapse"><img className="create_icon" src={plus_sign} alt="plus sign"/>Create a new group</h5>
             </div>
             <Collapse in={openCreate}>
                 <div id="example-collapse-text" className="collapseBody">
@@ -123,8 +125,7 @@ const CreateOrJoin = (props) => {
                 aria-controls="example-collapse-text"
                 aria-expanded={openJoin}
             >
-            <h5 className="openCollapse">+   Join a group</h5>
-            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING */}
+            <h5 className="openCollapse"><img className="join_icon"src={add_member} alt="join group icon"/>Join a group</h5>
             </div>
             <Collapse in={openJoin}>
                 <div id="example-collapse-text" className="collapseBody">
