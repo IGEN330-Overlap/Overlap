@@ -53,7 +53,10 @@ const GroupProfilePage = (props) => {
     }, [groupCode])
     
     // select member to compare
-    const [member_id, toCompare] = useState('');
+    const [member_id, setMemberID] = useState('');
+    const toCompare = (value) => {
+        setMemberID(value);
+    }
 
     return ((checkMember === 'true') && groupUsers) 
     ? 
