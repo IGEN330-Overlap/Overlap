@@ -8,9 +8,11 @@ let Scripts = require("../scripts.js");
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
-const frontend_url = process.env.FRONTEND_URL;
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
+
+// Moods profiles tuned to suit the corresponding vibes
+const { buildPlaylistMoodProfile } = require("../scripts.js")
 
 // instantiate spotifyApi object
 var spotifyApi = new SpotifyWebApi({
@@ -22,7 +24,7 @@ var spotifyApi = new SpotifyWebApi({
 /**
  * POST generate group top playlists
  *
- * @param {userIDs: [Strings], groupCode: String} req
+ * @param {*} req { refreshToken: String, userIDs: [Strings], groupCode: String}
  * @param {*} res
  */
 exports.generateGroupsTopPlaylist = async (req, res) => {
@@ -44,8 +46,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     console.log("Attempted to pass no user ids to create a playlist");
     res.json({
       message: "Cannot create a group with zero other users",
-      error: e
-    })
+      error: e,
+    });
   }
 
   let numUsers = userIDs.length; // keep track of number of users
@@ -56,10 +58,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     let data = await User.find({ userID: { $in: userIDs } });
 
     // Add each persons dataset to our master array for the corresponding thing
-    usersTopTracks = data.map(x => x.topTracks);
-    usersMusicalProfile = data.map(x => x.musicalProfile);
-    usersTopArtists = data.map(x => x.topArtists);
-
+    usersTopTracks = data.map((x) => x.topTracks);
+    usersMusicalProfile = data.map((x) => x.musicalProfile);
+    usersTopArtists = data.map((x) => x.topArtists);
   } catch (err) {
     res.json({ message: "error on finding users", error: err });
   }
@@ -99,7 +100,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let playlistTracks = []; // Array to store songs to be added to playlist
   let duplicateBasedSongs = []; // array to store the tracks of our playlist
   let recommendations = []; // Array to store the recommendations
-  
+
   // Count occurences of songs in master set
   let counts = findDuplicatesArr.reduce((a, c) => {
     a[c] = (a[c] || 0) + 1;
@@ -121,7 +122,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
     // If there are less than 7 users add if maxCount > (half the users rounded up)
   } else if (
-    numUsers <= 7 && numUsers > 2 &&
+    numUsers <= 7 &&
+    numUsers > 2 &&
     maxCountTracks >= numUsers - Math.floor(numUsers / 2)
   ) {
     // A song must appear a minimum in 1/2 the users (half+1) if the num users in group is odd
@@ -151,7 +153,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
   // Using track sounds to add the rest of the songs
   // To implement (BETTER WAYS possibly)
-  let groupsMusicalProfile = Scripts.calculateMusicalProfile(usersMusicalProfile);
+  let groupsMusicalProfile = Scripts.calculateMusicalProfile(
+    usersMusicalProfile
+  );
   // console.log("groups musical profile", groupsMusicalProfile);
 
   // Remove all duplicates and add to the new array groupUniqueSet
@@ -166,12 +170,18 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
   for (var i = 0; i < groupUniqueSet.length; i++) {
     groupUniqueSet[i]["deltaFromGroup"] =
-      attributeAdjust[0] * Math.abs( 
-        groupUniqueSet[i].data.trackPopularity - groupsMusicalProfile.trackPopularity) +
-      attributeAdjust[1] * Math.abs(
-        groupUniqueSet[i].data.danceability - groupsMusicalProfile.danceability) +
-      attributeAdjust[2] * Math.abs(
-        groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
+      attributeAdjust[0] *
+        Math.abs(
+          groupUniqueSet[i].data.trackPopularity -
+            groupsMusicalProfile.trackPopularity
+        ) +
+      attributeAdjust[1] *
+        Math.abs(
+          groupUniqueSet[i].data.danceability -
+            groupsMusicalProfile.danceability
+        ) +
+      attributeAdjust[2] *
+        Math.abs(groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
       attributeAdjust[3] *
         Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
     //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
@@ -196,7 +206,10 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         imageURL: groupUniqueSet[i].data.imageURL,
         linkURL: groupUniqueSet[i].data.linkURL,
         artistName: groupUniqueSet[i].data.artistName,
-        identifier: groupUniqueSet[i].data.trackName + " " + groupUniqueSet[i].data.artistName,
+        identifier:
+          groupUniqueSet[i].data.trackName +
+          " " +
+          groupUniqueSet[i].data.artistName,
       });
       // iterate to next track and reset the master to retraverse from left
       j++;
@@ -207,7 +220,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   // purely trackIDs of duplicate songs for the recommendation seed
-  let mostFrequentTracks = playlistTracks.map(x => x.trackID);
+  let mostFrequentTracks = playlistTracks.map((x) => x.trackID);
 
   // Count occurences of songs in master set of artists
   counts = masterSetArtists.reduce((a, c) => {
@@ -222,12 +235,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let mostFrequentArtists = Object.keys(counts).filter(
     (k) => counts[k] == maxCountArtists
   );
-  
-  // debugging
-  console.log("max count tracks is: ", maxCountTracks);
 
-  // console.log("frequent artists", mostFrequentArtists);
-  // console.log("frequent tracks", mostFrequentTracks);
+  console.log("max count tracks is: ", maxCountTracks); // debugging
+
 
   // must have at least a single commonality to generate a viable seed based on the duplicates
   // otherwise use the best 3 matching songs to the group profile
@@ -247,7 +257,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           target_danceability: musicalProfile.danceability / 100,
           target_energy: musicalProfile.energy / 100,
           target_valence: musicalProfile.valence / 100,
-          min_popularity: 50,
+          min_popularity: 35,
           seed_tracks: sortedTrackSeed.slice(0, 5),
         });
 
@@ -325,16 +335,19 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   for (var i = 0; playlistTracks.length < 23; i++) {
     // We have added all the reccomendations so break from loop
     if (i == recommendations.length) {
-      break; 
-    // Add an attribute songs so long as they don't already exist in duplicates
-    } else if (!playlistTracks.some((e) => e.identifier == recommendations[i].identifier)) {
+      break;
+      // Add an attribute songs so long as they don't already exist in duplicates
+    } else if (
+      !playlistTracks.some((e) => e.identifier == recommendations[i].identifier)
+    ) {
       playlistTracks.push({
         trackName: recommendations[i].trackName,
         trackID: recommendations[i].trackID,
         imageURL: recommendations[i].imageURL,
         linkURL: recommendations[i].linkURL,
         artistName: recommendations[i].artistName,
-        identifier: recommendations[i].trackName + " " + recommendations[i].artistName,
+        identifier:
+          recommendations[i].trackName + " " + recommendations[i].artistName,
       });
     }
   }
@@ -342,21 +355,25 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
   // To implement verify that we're adding a song that is not already in the playlist
   for (var i = 0; playlistTracks.length < 30; i++) {
-
     if (i == sortedTrackSet.length) {
-      break; // if we have already added all the sorted tracks then break 
+      break; // if we have already added all the sorted tracks then break
     }
     // Add an attribute songs so long as they don't already exist in duplicates
-    else if (!playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)) {
+    else if (
+      !playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)
+    ) {
       playlistTracks.push({
         trackName: sortedTrackSet[i].data.trackName,
         trackID: sortedTrackSet[i].data.trackID,
         imageURL: sortedTrackSet[i].data.imageURL,
         linkURL: sortedTrackSet[i].data.linkURL,
         artistName: sortedTrackSet[i].data.artistName,
-        identifier: sortedTrackSet[i].data.trackName + " " + sortedTrackSet[i].data.artistName,
+        identifier:
+          sortedTrackSet[i].data.trackName +
+          " " +
+          sortedTrackSet[i].data.artistName,
       });
-    } 
+    }
   }
 
   //debugging
@@ -385,7 +402,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       { $addToSet: { playlists: playlist } }
     );
     res.json({
-      message: "added playlist to the group",
+      message: "added groups top playlist to the group",
       playlist: playlist,
     });
   } catch (err) {
@@ -397,9 +414,202 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 };
 
 /**
+ * POST generate mood based group playlist SEE WIKI for more docs
+ * @param {*} req { refreshToken: String, userIDs: [String], selectedMood: String}
+ * @param {*} res
+ */
+exports.generateGroupsMoodsPlaylist = async (req, res) => {
+  // Set moods based on the request
+  let moodParams;
+  
+  // Error handling, request must be a valid mood
+  try {
+    moodParams = buildPlaylistMoodProfile(req.body.selectedMood);
+    
+    if (moodParams == "type error" || moodParams == "undefined") {
+      throw new Error;
+    }
+  } catch (e) {
+    console.log("tried to generate mood playlist without selected mood");
+    res.json({
+      message: "no selected mood",
+      error: e,
+    });
+  }
+
+  // get the userIDs
+  let userIDs;
+  // set users so long as there is at least 1 user sent
+  try {
+    // add users from request body
+    userIDs = req.body.userIDs.map((id) => {
+      return id;
+    });
+
+    if (userIDs.length == 0) {
+      throw new Error();
+    }
+  } catch (e) {
+    console.log("Attempted to pass no user ids to create a playlist");
+    res.json({
+      message: "Cannot create a group with zero other users",
+      error: e,
+    });
+  }
+
+  // console.log("Users", userIDs); //debugging
+
+  let usersTopTracks = []; // arrays for storing user track information
+  let usersTopArtists = []; // arrays for storing user artist information
+
+  // Collect user top "x" data from mongoDB
+  try {
+    let data = await User.find({ userID: { $in: userIDs } });
+
+    // Add each persons dataset to our master array for the corresponding thing
+    usersTopTracks = data.map((x) => x.topTracks);
+    usersTopArtists = data.map((x) => x.topArtists);
+  } catch (err) {
+    res.json({ 
+      message: "error on finding users", 
+      error: err 
+    });
+  }
+  // set tracks into one array and removes duplicates
+  let masterTopTracks = usersTopTracks.flat();
+  masterTopTracks = masterTopTracks.filter(
+    (v, i, a) => a.findIndex((t) => t.trackID === v.trackID) === i
+  );
+
+  // calculate differences between each attribute and a song
+  // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
+  for (var i = 0; i < masterTopTracks.length; i++) {
+    masterTopTracks[i]["delta"] =
+      Math.abs(masterTopTracks[i].danceability - moodParams.target_danceability) +
+      Math.abs(masterTopTracks[i].energy - moodParams.target_energy) +
+      Math.abs(masterTopTracks[i].valence - moodParams.target_valence);
+  }
+
+  // Sort the unique set by the deltaFromGroup to (lowest to highest)
+  // Lowest is the best
+  let sortedTrackSet = masterTopTracks.sort((a, b) => {
+    return parseFloat(a.delta) - parseFloat(b.delta);
+  });
+
+  let seedTracks = [];
+  let playlistTracks = [];
+
+  // Add seed tracks to the playlist so long as they meet the required delta
+  for (x of sortedTrackSet) {
+    // add to playlist if the song is precisely enough matching the target profile
+    if (x.delta <= 0.15) {
+      playlistTracks.push({
+        trackName: x.trackName,
+        trackID: x.id,
+        imageURL: x.imageURL,
+        linkURL: x.linkURL,
+        artistName: x.artistName,
+      });
+      // add to seed tracks so long as we don't already have 5
+      if (seedTracks.length < 5){
+        seedTracks.push(x.trackID);
+      }
+    } else {
+      break; // break from loop if the delta doesn't meet requirements
+    }
+  }
+
+  // if no song currently made it use the closest 3 as seed tracks in case
+  if (seedTracks.length == 0){
+    seedTracks = sortedTrackSet.map((x) => x.trackID).slice(0, 5)
+  } else if (seedTracks.length  <= 2) {
+    // concatenate more songs if seedtracks are 2 or less
+    seedTracks = seedTracks.concat(sortedTrackSet.map((x) => x.trackID).slice(0, 3));
+  }
+  console.log("seed tracks used for moods: ", seedTracks.length);
+
+  spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
+  try {
+    let data = await spotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(data.body.access_token);
+
+    try {
+      // Get recommendations for the group
+      let recommendationsBody = moodParams;
+
+      recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5); // force to 5 to prevent any possible error
+      // console.log(recommendationsBody); // debugging
+
+      let data = await spotifyApi.getRecommendations(recommendationsBody);
+
+      // add the songs ensuring that their type is correct and that there is populated data
+      for (x of data.body.tracks) {
+        // continuosly add songs until we've hit our playlist length (30 songs)
+        if (playlistTracks.length == 30) {
+          break;
+          // skip past if the song has already been added to the playlist to avoid duplicates
+        } else if (playlistTracks.some((x) => x.trackID == x.id)) {
+          continue;
+        } else if (
+          x.type == "track" &&
+          x.album.images.length != 0 &&
+          x.artists.length != 0 &&
+          x.external_urls.spotify != null
+        ) {
+          playlistTracks.push({
+            trackName: x.name,
+            trackID: x.id,
+            imageURL: x.album.images[0].url,
+            linkURL: x.external_urls.spotify,
+            artistName: x.artists[0].name,
+          });
+        }
+      }
+    } catch (err) {
+      console.log("error in get recommendations mood playlist");
+      res.json({
+        message: "error in get recommendations mood playlist",
+        error: err,
+      });
+    }
+  } catch (err) {
+    console.log("error with spotify access token");
+    res.json({
+      message: "error with spotify access token",
+      error: err
+    });
+  }
+
+  // Comment out this below part for parameter improvement to not go overkill on our groups
+  // Create playlist object which will be uploaded to the group, passed to MongoDB
+  playlist = {
+    playlistName: req.body.playlistName,
+    tracks: playlistTracks,
+  };
+
+  // Update playlist to the group
+  // Note: no error is thrown when the groupCode is incorrect / dne
+  try {
+    await Group.updateOne(
+      { groupCode: req.body.groupCode },
+      { $addToSet: { playlists: playlist } }
+    );
+    res.json({
+      message: "added " + req.body.selectedMood + " playlist to the group",
+      playlist: playlist,
+    });
+  } catch (err) {
+    res.json({
+      message: "Unable to add mood playlist to the group",
+      error: err,
+    });
+  }
+};
+
+/**
  * POST Create the spotify playlist
  *
- * @param {*} req
+ * @param {*} req { refreshToken: String, groupCode: String, playlistID: String }
  * @param {*} res
  */
 exports.createSpotifyPlaylist = async (req, res) => {
