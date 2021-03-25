@@ -457,7 +457,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     });
   }
 
-  console.log("Users", userIDs); //debugging
+  // console.log("Users", userIDs); //debugging
 
   let usersTopTracks = []; // arrays for storing user track information
   let usersTopArtists = []; // arrays for storing user artist information
@@ -514,13 +514,19 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       if (seedTracks.length < 5){
         seedTracks.push(x.trackID);
       }
+    } else {
+      break; // break from loop if the delta doesn't meet requirements
     }
   }
 
   // if no song currently made it use the closest 3 as seed tracks in case
   if (seedTracks.length == 0){
-    seedTracks = sortedTrackSet.map((x) => x.trackID).slice(0,3)
+    seedTracks = sortedTrackSet.map((x) => x.trackID).slice(0, 5)
+  } else if (seedTracks.length  <= 2) {
+    // concatenate more songs if seedtracks are 2 or less
+    seedTracks = seedTracks.concat(sortedTrackSet.map((x) => x.trackID).slice(0, 3));
   }
+  console.log("seed tracks used for moods: ", seedTracks.length);
 
   spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
   try {
@@ -531,7 +537,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       // Get recommendations for the group
       let recommendationsBody = moodParams;
 
-      recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5);
+      recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5); // force to 5 to prevent any possible error
       // console.log(recommendationsBody); // debugging
 
       let data = await spotifyApi.getRecommendations(recommendationsBody);
