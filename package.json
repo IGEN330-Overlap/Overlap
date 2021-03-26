@@ -2,7 +2,6 @@
   "name": "overlap",
   "version": "1.0.0",
   "description": "",
-  "proxy": "http://localhost:8888",
   "scripts": {
     "start": "cd backend && npm install && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
