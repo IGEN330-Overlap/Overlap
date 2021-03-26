@@ -66,7 +66,7 @@ input:focus{
 
 .groupButton{
     display: flex;
-    width: 8em;
+    width: 9em;
     font-size: 2vw;
     margin-right: 0.5em;
     background-color: transparent;
@@ -96,6 +96,7 @@ input:focus{
 
 .dots:hover{
     fill: var(--blue-color-3);
+    cursor: pointer;
 }
 
 .modalcss .modal-dialog .modal-content{

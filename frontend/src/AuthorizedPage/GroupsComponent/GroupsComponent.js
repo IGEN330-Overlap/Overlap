@@ -131,7 +131,7 @@ const GroupsComponent = (props) => {
           value={searchText.value}
           onChange={editSearch}
           class="input-search"
-          placeholder="search"
+          placeholder="Search"
           size="15"
         />
       </div>
