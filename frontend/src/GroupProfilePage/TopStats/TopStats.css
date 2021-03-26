@@ -1,7 +1,8 @@
 @import url(../../variables.css);
 
 .top-stats-root {
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     width: auto;
     background-color: var(--blue-color-main);
     display: flex;
@@ -15,12 +16,6 @@
     height: 80px;
 }
 
-.top-stats-heading .text {
-    color: var(--off-white-color);
-    margin-left: 6px;
-    font-size: 4vw;
-    font-size: clamp(25px, 4vw, 40px);
-}
 .top-stats-heading .text {
     color: var(--off-white-color);
     margin-left: 6px;
@@ -87,8 +82,8 @@
     transition: 0.3s;
 }
 .top-tracks-carousel {
-    margin-top: clamp(10px, 3vh, 60px);
-    margin-bottom: clamp(10px, 3vh, 60px);
+    margin-top: clamp(10px, 2vh, 40px);
+    margin-bottom: clamp(10px, 2vh, 40px);
     width: 100vw;
     height: 310px;
     display: flex;
@@ -112,11 +107,18 @@
 
 /* top artists */
 .top-artists-root {
-    height: 300px;
+    height: clamp(240px, 2vh, 300px);
+    width: 90vw;
     margin-left: 4vw;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.top-artists-root .top-artist-heading .text{
+    color: var(--off-white-color);
+    margin-left: 6px;
+    font-size: 4vw;
+    font-size: clamp(25px, 4vw, 40px);
 }
 .top-artists-root .top-artist-container {
     height: 40px;
@@ -130,6 +132,9 @@
 .top-artists-root .top-artist-container:hover {
     cursor: pointer;
 }
+.top-artists-root .top-artist-list {
+    width: 250px;
+}
 .top-artist-container strong {
     font-size: 25px;
 }
@@ -141,8 +146,8 @@
     color: var(--off-white-color);
 }
 .top-artist-podiums {
+    right: 2%;
     width: 275px;
-    margin-right: 250px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -210,5 +215,17 @@
     }
     .top-tracks-root .track-info .track-title {
         font-size: clamp(15px, 0.9vw, 20px);
+    }
+}
+
+/* for smaller screen sizes */
+@media(max-width: 780px) {
+    .top-artists-root {
+        height: fit-content;
+        width: 90vw;
+        margin-left: 4vw;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: none;
     }
 }

@@ -181,11 +181,11 @@ export const GroupTopStats = ({groupUsers}) => {
                         ))}
                     </Carousel>
                 </div>
-                <div className="top-stats-heading">
-                    <h1 className="text"><strong>Top Artists</strong></h1>
-                    <div className="under-bar"></div>
-                </div>
                 <div className="top-artists-root">
+                    <div className="top-artist-heading">
+                        <h1 className="text"><strong>Top Artists</strong></h1>
+                        <div className="under-bar"></div>
+                    </div>
                     <div className="top-artist-list">
                         {groupUniqueArtists.slice(0,3).map((artist, i) => (
                             <div className="top-artist-container" onClick={()=>openArtist(artist.linkURL)} key={i}>
