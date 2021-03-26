@@ -116,7 +116,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         }
         else if (input_playlistName !== "") {
           axios
-          .post(process.env.REACT_APP_BACKEND_URL+"/groups/generatePlaylist", {
+          .post("/groups/generatePlaylist", {
               groupCode: groupCode,
               userIDs: playlistUsers,
               refreshToken: refreshToken,
@@ -125,7 +125,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
           .then((data) => {
               console.log(data);
               axios
-              .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+              .get("/users/" + userObject.userID + "/groups")
               .then((data) => {
                 dispatch(updateGroupList(data.data));
               })

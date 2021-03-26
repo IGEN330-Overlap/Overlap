@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  updateGroupList,
-} from "../../Redux/Actions.js";
+import { updateGroupList } from "../../Redux/Actions.js";
 import Modal from "react-bootstrap/Modal";
 import Dropdown from "react-bootstrap/Dropdown";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -39,18 +37,18 @@ const GroupsComponent = (props) => {
   };
 
   //set group code state
-  const [groupCodeState, setCode] = useState('');
+  const [groupCodeState, setCode] = useState("");
   //set group name state
-  const [groupNameState, setName] = useState('');
-  
+  const [groupNameState, setName] = useState("");
+
   //search bar state
-  const [searchText, setSearch] = useState('');
+  const [searchText, setSearch] = useState("");
   const editSearch = (e) => {
-    setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
   const dynamicSearch = () => {
-    return groupList.filter(x => x.groupName.includes(searchText));
-  }  
+    return groupList.filter((x) => x.groupName.includes(searchText));
+  };
 
   //custom toggle as three dots
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -98,19 +96,14 @@ const GroupsComponent = (props) => {
 
   function leaveGroup() {
     axios
-      .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
+      .post("/groups/leave", {
         groupCode: groupCodeState,
         spotifyID: spotifyID.userID,
       })
       .then((data) => {
         console.log(data.data.return);
         axios
-          .get(
-            process.env.REACT_APP_BACKEND_URL +
-              "/users/" +
-              spotifyID.userID +
-              "/groups"
-          )
+          .get("/users/" + spotifyID.userID + "/groups")
           .then((data) => {
             dispatch(updateGroupList(data.data));
             console.log(data.data);
@@ -142,17 +135,14 @@ const GroupsComponent = (props) => {
           size="15"
         />
       </div>
-      
+
       <div className="group-list">
-        {dynamicSearch().map((group,i) => (
+        {dynamicSearch().map((group, i) => (
           /* Group as a dropdown menu button */
-          <div 
-            key={i}
-            className="group-item d-flex"
-          >
+          <div key={i} className="group-item d-flex">
             <Dropdown as={ButtonGroup}>
               <Link
-                to={"/authorized/group/"+group.groupCode}
+                to={"/authorized/group/" + group.groupCode}
                 className="groupButton"
               >
                 {group.groupName}
@@ -161,19 +151,27 @@ const GroupsComponent = (props) => {
               <Dropdown.Toggle as={CustomToggle} />
               <Dropdown.Menu className="menu">
                 <Dropdown.Item>
-                  <div onClick={() => {
+                  <div
+                    onClick={() => {
                       showCodeModal();
                       setCode(group.groupCode);
                       setName(group.groupName);
-                    }}>Show Group Code</div>
+                    }}
+                  >
+                    Show Group Code
+                  </div>
                 </Dropdown.Item>
                 <Dropdown.Divider></Dropdown.Divider>
                 <Dropdown.Item>
-                  <div onClick={() => {
+                  <div
+                    onClick={() => {
                       showLeaveModal();
                       setCode(group.groupCode);
                       setName(group.groupName);
-                    }}>Leave Group</div>
+                    }}
+                  >
+                    Leave Group
+                  </div>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

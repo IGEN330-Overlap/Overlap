@@ -31,7 +31,7 @@ const CreateOrJoin = (props) => {
         else {
             console.log(input_name);
             axios
-            .post(process.env.REACT_APP_BACKEND_URL + "/groups/create", {
+            .post("/groups/create", {
                 name: input_name,
                 spotifyID: spotifyID.userID,
             })
@@ -39,7 +39,7 @@ const CreateOrJoin = (props) => {
                 console.log(data.data.return)
                 setGroupCode(data.data.return.groupCode);
                 axios
-                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+                .get("/users/" + spotifyID.userID + "/groups")
                 .then((data) => {
                     dispatch(updateGroupList(data.data))
                     console.log(data.data);
@@ -61,7 +61,7 @@ const CreateOrJoin = (props) => {
         else {
             console.log(input_code)
             axios
-            .post(process.env.REACT_APP_BACKEND_URL + "/groups/join", {
+            .post("/groups/join", {
                 groupCode: input_code,
                 spotifyID: spotifyID.userID,
             })
@@ -69,7 +69,7 @@ const CreateOrJoin = (props) => {
                 console.log(data.data);
                 setGroupCode(data.data.groupCode);
                 axios
-                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+                .get("/users/" + spotifyID.userID + "/groups")
                 .then((data) => {
                     dispatch(updateGroupList(data.data));
                     console.log(data.data);
@@ -84,7 +84,7 @@ const CreateOrJoin = (props) => {
     //Redirect to new group page when group_code changes
     useEffect(() => {
         if(group_code !== '') {
-            console.log(group_code)
+            //console.log(group_code)
             window.location.href = "/authorized/group/" + group_code
         }
     }, [group_code])
