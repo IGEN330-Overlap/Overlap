@@ -12,6 +12,7 @@ import { MyInsights, Comparisons } from './IndividualComparisons/IndividualCompa
 import { GroupTopStats } from './TopStats/TopStats';
 //import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 //import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
+import iceberg from '../AuthorizedPage/iceberg.svg';
 
 const axios = require("axios");
 
@@ -46,7 +47,7 @@ const GroupProfilePage = (props) => {
     useEffect (() => {
         if(groupCode !== null) {
             axios
-            .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
+            .get("/groups/"+ groupCode + "/users")
             .then((data) => {
                 setUsers(data.data)
             })
@@ -111,8 +112,12 @@ const GroupProfilePage = (props) => {
                     </div> 
                 </div>
             </div>
-            {/*
-            <div className="top-genres-display">
+
+            <div className="profile_iceberg">
+                <img src={iceberg} alt="decorative iceberg"/>
+            </div>
+                
+            {/* <div className="top-genres-display">
                 <TopGenres groupUsers={groupUsers} />
             </div>
             */}
@@ -122,8 +127,8 @@ const GroupProfilePage = (props) => {
             {/*
             <div className="musical-profile-display">
                 <MusicalProfile groupUsers={groupUsers} />
-            </div>
-            */}
+            </div> */}
+           
         </div>
     )
     :

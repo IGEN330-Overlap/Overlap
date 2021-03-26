@@ -5,6 +5,9 @@ import { updateGroupList } from '../../Redux/Actions.js';
 
 import Collapse from 'react-bootstrap/Collapse';
 
+import add_member from '../../GroupProfilePage/MemberDisplay/add-member.svg';
+import plus_sign from '../../GroupProfilePage/PlaylistCarousel/add.svg';
+
 const axios = require("axios");
 
 var input_name = '';
@@ -31,7 +34,7 @@ const CreateOrJoin = (props) => {
         else {
             console.log(input_name);
             axios
-            .post(process.env.REACT_APP_BACKEND_URL + "/groups/create", {
+            .post("/groups/create", {
                 name: input_name,
                 spotifyID: spotifyID.userID,
             })
@@ -39,7 +42,7 @@ const CreateOrJoin = (props) => {
                 console.log(data.data.return)
                 setGroupCode(data.data.return.groupCode);
                 axios
-                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+                .get("/users/" + spotifyID.userID + "/groups")
                 .then((data) => {
                     dispatch(updateGroupList(data.data))
                     console.log(data.data);
@@ -61,7 +64,7 @@ const CreateOrJoin = (props) => {
         else {
             console.log(input_code)
             axios
-            .post(process.env.REACT_APP_BACKEND_URL + "/groups/join", {
+            .post("/groups/join", {
                 groupCode: input_code,
                 spotifyID: spotifyID.userID,
             })
@@ -69,7 +72,7 @@ const CreateOrJoin = (props) => {
                 console.log(data.data);
                 setGroupCode(data.data.groupCode);
                 axios
-                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+                .get("/users/" + spotifyID.userID + "/groups")
                 .then((data) => {
                     dispatch(updateGroupList(data.data));
                     console.log(data.data);
@@ -84,7 +87,7 @@ const CreateOrJoin = (props) => {
     //Redirect to new group page when group_code changes
     useEffect(() => {
         if(group_code !== '') {
-            console.log(group_code)
+            //console.log(group_code)
             window.location.href = "/authorized/group/" + group_code
         }
     }, [group_code])
@@ -97,8 +100,7 @@ const CreateOrJoin = (props) => {
                 aria-controls="example-collapse-text"
                 aria-expanded={openCreate}
             >
-            <h5 className="openCollapse">+   Create a new group</h5>
-            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING */}
+            <h5 className="openCollapse"><img className="create_icon" src={plus_sign} alt="plus sign"/>Create a new group</h5>
             </div>
             <Collapse in={openCreate}>
                 <div id="example-collapse-text" className="collapseBody">
@@ -123,8 +125,7 @@ const CreateOrJoin = (props) => {
                 aria-controls="example-collapse-text"
                 aria-expanded={openJoin}
             >
-            <h5 className="openCollapse">+   Join a group</h5>
-            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING */}
+            <h5 className="openCollapse"><img className="join_icon"src={add_member} alt="join group icon"/>Join a group</h5>
             </div>
             <Collapse in={openJoin}>
                 <div id="example-collapse-text" className="collapseBody">

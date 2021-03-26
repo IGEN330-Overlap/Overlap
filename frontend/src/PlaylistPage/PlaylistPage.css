@@ -71,16 +71,21 @@
 
 .pp_backArrow{
     fill: white;
-    margin-left: 2vw;
+    margin-left:2vw;
+    color: white;
+    text-align: center;
 }
 
 .pp_backArrow:hover{
     cursor: pointer;
+    color: var(--blue-color-1);
+    text-decoration: none;
 }
 
 .pp_backArrow_svg{
-    height:3vw;
-    width:3vw;
+    height:2vw;
+    width:2vw;
+    padding-right: 2px;
 }
 
 @media (max-width: 820px) {
