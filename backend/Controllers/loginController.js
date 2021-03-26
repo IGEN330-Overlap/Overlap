@@ -145,7 +145,7 @@ exports.loginUser = async (req, res) => {
 
         }
       }
-      console.log("duplicate count", dupCount);
+      // console.log("duplicate count", dupCount);
 
       // splice and flip the duplicates added because they were added in reverse order
       let tmp = topTracks.splice(0, dupCount);
