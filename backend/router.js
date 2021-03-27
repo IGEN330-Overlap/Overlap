@@ -36,6 +36,9 @@ router.post("/groups/deletePlaylist", crudController.deletePlaylist);
 router.post("/groups/generatePlaylist", algorithmController.generateGroupsTopPlaylist);
 
 //define post request for generating moods playlist
-router.post("/groups/generateMoodsPlaylist", algorithmController.generateGroupsMoodsPlaylist)
+router.post("/groups/generateMoodsPlaylist", algorithmController.generateGroupsMoodsPlaylist);
+
+//define post request for generating user seed selected playlist
+router.post("/groups/generateUserSeedSelectedPlaylist", algorithmController.generateUserSeedSelectedPlaylist);
 
 module.exports = router;

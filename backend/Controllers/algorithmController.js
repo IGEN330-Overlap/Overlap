@@ -482,8 +482,6 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     });
   }
 
-  // console.log("Users", userIDs); //debugging
-
   let usersTopTracks = []; // arrays for storing user track information
   let usersTopArtists = []; // arrays for storing user artist information
 
@@ -555,8 +553,8 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
 
   spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
   try {
-    let data = await spotifyApi.refreshAccessToken();
-    spotifyApi.setAccessToken(data.body.access_token);
+    let tokenData = await spotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(tokenData.body.access_token);
 
     try {
       // Get recommendations for the group
@@ -630,6 +628,96 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     });
   }
 };
+
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.generateUserSeedSelectedPlaylist = async (req, res) => {
+
+  // validate seed artists have been passed and slice first 5
+  let seedArtists = req.body.seedArtists.length != 0 ? req.body.seedArtists.slice(0, 5) : false;
+  if (!seedArtists) {
+    console.log("no seed artists passed");
+    res.json({
+      message: "no seed artists passed"
+    })
+  }
+
+  // Set moods based on the request
+  let moodParams;
+  // Error handling, request must be a valid mood
+  try {
+    moodParams = buildPlaylistMoodProfile(req.body.selectedMood);
+    
+    if (moodParams == "type error" || moodParams == "undefined") {
+      throw new Error;
+    }
+  } catch (e) {
+    console.log("tried to generate mood playlist without selected mood");
+    res.json({
+      message: "no valid selected mood",
+      error: e,
+    });
+  }
+
+  spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
+  try {
+    let tokenData = await spotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(tokenData.body.access_token);
+
+    try {
+      // Get recommendations for the group
+      let recommendationsBody = moodParams;
+
+      recommendationsBody["seed_artists"] = seedArtists.slice(0, 5); // force to 5 to prevent any possible error
+      // console.log(recommendationsBody); // debugging
+
+      let data = await spotifyApi.getRecommendations(recommendationsBody);
+
+      // add the songs ensuring that their type is correct and that there is populated data
+      for (x of data.body.tracks) {
+        // continuosly add songs until we've hit our playlist length (30 songs)
+        if (playlistTracks.length == 30) {
+          break;
+          // skip past if the song has already been added to the playlist to avoid duplicates
+        } else if (playlistTracks.some((x) => x.trackID == x.id)) {
+          continue;
+        } else if (
+          x.type == "track" &&
+          x.album.images.length != 0 &&
+          x.artists.length != 0 &&
+          x.external_urls.spotify != null
+        ) {
+          playlistTracks.push({
+            trackName: x.name,
+            trackID: x.id,
+            imageURL: x.album.images[0].url,
+            linkURL: x.external_urls.spotify,
+            artistName: x.artists[0].name,
+          });
+        }
+      }
+    } catch (err) {
+      console.log("error in get recommendations mood playlist");
+      res.json({
+        message: "error in get recommendations mood playlist",
+        error: err,
+      });
+    }
+  } catch (err) {
+    console.log("error with spotify access token");
+    res.json({
+      message: "error with spotify access token",
+      error: err
+    });
+  }
+
+
+
+
+}
 
 /**
  * POST Create the spotify playlist
