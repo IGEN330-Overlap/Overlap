@@ -45,6 +45,14 @@
     justify-content: center;
     align-items: center;
 }
+.landing-root-base {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .wrong-playlist {
     font-size: 2vw;
     color: var(--off-white-color);
@@ -60,13 +68,20 @@
     padding-left: 10px;
     border-radius: 20px;
     background-color: var(--blue-color-main);
-    font-size: 1.75vw;
+    font-size: clamp(12px, 1.75vw, 25px);
     color: var(--off-white-color);
+    align-items: center;
 }
 .return-button:hover {
     text-decoration: none;
-    color: var(--blue-color-main);
+    background-color: var(--blue-color-5);
     cursor: pointer;
+}
+
+.error-return-arrow {
+    width: 28px;
+    height: 28px;
+    margin-right: 3px;
 }
 
 .pp_backArrow{

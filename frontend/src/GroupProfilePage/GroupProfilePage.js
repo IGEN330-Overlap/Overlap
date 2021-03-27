@@ -11,7 +11,7 @@ import { MyInsights, Comparisons } from './IndividualComparisons/IndividualCompa
 //import { TopGenres } from './TopGenres/TopGenres';
 import { GroupTopStats } from './TopStats/TopStats';
 //import { MusicalProfile } from './MusicalProfile/MusicalProfile';
-//import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
+import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
 import iceberg from '../AuthorizedPage/iceberg.svg';
 
 const axios = require("axios");
@@ -20,46 +20,51 @@ const GroupProfilePage = (props) => {
   // get refresh token
   const refreshToken = useSelector((state) => state.refreshToken);
 
-    const history = useHistory()
+  // get group code from url
+  const url = new URL(window.location.href);
+  const groupCode = url.pathname.replace("/authorized/group/", "");
+
+  const history = useHistory();
 
   // get group name
   const groupList = useSelector((state) => state.groupList);
 
+  const [groupUsers, setUsers] = useState("");
   const [groupName, setGroupName] = useState("");
   const [playlists, setPlaylists] = useState([]);
+  const [createdDate, setCreatedDate] = useState("");
 
   const [checkMember, setCheckMember] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
-
-  const [groupUsers, setUsers] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (groupCode !== null) {
       //start loading
-      setIsloading(true);
+      setIsLoading(true);
 
       axios
-            .get("/groups/"+ groupCode + "/users")
-            .then((data) => {
-                setUsers(data.data)
+        .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
+        .then((data) => {
+            setUsers(data.data)
 
-          //check if user belongs to group
-          groupList.map((group) => {
-            if (group.groupCode === groupCode) {
-              setCheckMember(true);
-              setGroupName(group.groupName);
-              setPlaylists(group.playlists);
-            }
-            return groupName;
-          });
+        //check if user belongs to group
+        groupList.map((group) => {
+        if (group.groupCode === groupCode) {
+            setCheckMember(true);
+            setGroupName(group.groupName);
+            setPlaylists(group.playlists);
+            setCreatedDate(group.createdAt);
+        }
+        return groupName;
+        });
 
-          //end loading
-          setIsloading(false);
+        //end loading
+        setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
-          //end loading
-          setIsloading(false);
+            console.log(err);
+            //end loading
+            setIsLoading(false);
         });
     }
   }, [groupCode, groupList, groupName]);
@@ -90,7 +95,7 @@ const GroupProfilePage = (props) => {
             <div className="info-flex">
               <div className="main-column-box"></div>
               <div className="group-name">
-                <GroupName groupName={groupName} />
+                <GroupName groupName={groupName} createdDate={createdDate} />
               </div>
               <div className="member-display">
                 {/* render members display when group users variable is populated */}
@@ -136,10 +141,13 @@ const GroupProfilePage = (props) => {
           <img src={iceberg} alt="decorative iceberg" />
         </div>
 
-        {/* <div className="top-genres-display">
+          {/* <div className="top-genres-display">
               <TopGenres groupUsers={groupUsers} />
+          </div> */}
+          <div className="top-stats-display">
+              <GroupTopStats groupUsers={groupUsers}/>
           </div>
-          <div className="musical-profile-display">
+          {/* <div className="musical-profile-display">
               <MusicalProfile groupUsers={groupUsers} />
           </div> */}
       </div>
@@ -151,8 +159,17 @@ const GroupProfilePage = (props) => {
         <div className="wrong-group">
           Oops! It looks like you're not part of this group!
           <div>
-            <Link to="/authorized" className="return-button">
-              Take me back to my groups!
+            <Link to={"/authorized"} className="return-button">
+                <svg
+                    className="error-return-arrow"
+                    xmlns="http://www.w3.org/2000/svg"  
+                    viewBox="0 0 24 24" >
+                    <path d="M0 0h24v24H0z" 
+                    fill="none"/>
+                    <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+                    fill="var(--off-white-color)"/>
+                </svg>
+                <strong>My Groups</strong>
             </Link>
           </div>
         </div>

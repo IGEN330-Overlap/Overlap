@@ -46,14 +46,6 @@
     justify-content: center;
     align-items: center;
 }
-
-.loading-message {
-    font-size: 2vw;
-    color: var(--off-white-color);
-    opacity: 0;
-    /*animation-name: loading-message;
-    animation-duration: 3s; */
-}
 .wrong-group {
     font-size: 2vw;
     color: var(--off-white-color);
@@ -71,18 +63,25 @@
     padding-left: 10px;
     border-radius: 20px;
     background-color: var(--blue-color-main);
-    font-size: 1.75vw;
+    font-size: clamp(12px, 1.75vw, 25px);
     color: var(--off-white-color);
+    align-items: center;
 }
 .return-button:hover {
     text-decoration: none;
-    color: var(--blue-color-main);
+    background-color: var(--blue-color-5);
     cursor: pointer;
+}
+
+.error-return-arrow {
+    width: 28px;
+    height: 28px;
+    margin-right: 3px;
 }
 
 .group-profile-page-components {
     width: 100vw;
-    min-height: 90vh;
+    min-height: 92vh;
     height: fit-content;
 }
 
@@ -232,9 +231,6 @@
     }
     .group-profile-page-components .component-box {
         height: 0px;
-    }
-    .loading-message {
-        font-size: 3.5vw;
     }
     .wrong-group {
         font-size: 3.5vw;
