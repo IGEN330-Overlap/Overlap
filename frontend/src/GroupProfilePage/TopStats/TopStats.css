@@ -16,6 +16,13 @@
     height: 80px;
 }
 
+.top-stats-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 92vh;
+}
+
 .top-stats-heading .text {
     color: var(--off-white-color);
     margin-left: 6px;
@@ -82,8 +89,6 @@
     transition: 0.3s;
 }
 .top-tracks-carousel {
-    margin-top: clamp(10px, 2vh, 40px);
-    margin-bottom: clamp(10px, 2vh, 40px);
     width: 100vw;
     height: 310px;
     display: flex;
@@ -107,18 +112,29 @@
 
 /* top artists */
 .top-artists-root {
-    height: clamp(240px, 2vh, 300px);
+    height: 375px;
     width: 90vw;
     margin-left: 4vw;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
 }
+.top-artists-root .top-artist-heading {
+    width: 250px;
+    padding-top: 2vh;
+}
 .top-artists-root .top-artist-heading .text{
     color: var(--off-white-color);
     margin-left: 6px;
     font-size: 4vw;
     font-size: clamp(25px, 4vw, 40px);
+}
+.top-artists-root .top-artist-display {
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .top-artists-root .top-artist-container {
     height: 40px;
@@ -146,8 +162,8 @@
     color: var(--off-white-color);
 }
 .top-artist-podiums {
-    right: 2%;
     width: 275px;
+    margin-right: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

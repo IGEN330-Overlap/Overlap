@@ -8,10 +8,15 @@
 .group-name-container .text {
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: 4vw;
     font-size: clamp(25px, 4vw, 40px);
+    margin-bottom: 2px;
 }
-
+.group-name-container .created-date {
+    margin-left: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--neutral-color-3);
+}
 .under-bar{
     margin-left: 10px;
     width: 75px;
