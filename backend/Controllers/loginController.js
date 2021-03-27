@@ -14,13 +14,6 @@ const frontend_url = process.env.FRONTEND_URL;
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
-// instantiate spotifyApi object
-var spotifyApi = new SpotifyWebApi({
-  clientId: client_id,
-  clientSecret: client_secret,
-  redirectUri: redirect_uri,
-});
-
 /**
  * middleware for a user login
  * POST: Creates / updates a users schema in DB upon login
@@ -30,6 +23,13 @@ var spotifyApi = new SpotifyWebApi({
  * @param {} res
  */
 exports.loginUser = async (req, res) => {
+  // instantiate spotifyApi object
+  let spotifyApi = new SpotifyWebApi({
+    clientId: client_id,
+    clientSecret: client_secret,
+    redirectUri: redirect_uri,
+  });
+
   //set refresh token
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
@@ -54,10 +54,9 @@ exports.loginUser = async (req, res) => {
         });
         short_term = extractUsersTopTracks(data.body.items);
 
-        if (short_term == "undefined"){
+        if (short_term == "undefined") {
           throw new Error();
         }
-
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
@@ -70,8 +69,8 @@ exports.loginUser = async (req, res) => {
           time_range: "medium_term",
         });
         med_term = extractUsersTopTracks(data.body.items);
-        if (med_term == "undefined"){
-          throw new Error()
+        if (med_term == "undefined") {
+          throw new Error();
         }
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
@@ -86,8 +85,8 @@ exports.loginUser = async (req, res) => {
           time_range: "long_term",
         });
         long_term = extractUsersTopTracks(data.body.items);
-        if (long_term == "undefined"){
-          throw new Error()
+        if (long_term == "undefined") {
+          throw new Error();
         }
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
@@ -106,7 +105,7 @@ exports.loginUser = async (req, res) => {
       for (var i = 0; i < short_term[0].length + med_term[0].length - 3; i++) {
         // isShortTerm -> true means add short term
         if (isShortTerm) {
-          // verify iterator x is within bounds 
+          // verify iterator x is within bounds
           if (x == short_term[0].length) {
             continue;
           }
@@ -124,7 +123,6 @@ exports.loginUser = async (req, res) => {
           if (i % 5 == 0) {
             isShortTerm = false;
           }
-
         } else {
           // Do  same thing as  short term except with the medium term list and its iterator y
           if (y == med_term[0].length) {
@@ -142,7 +140,6 @@ exports.loginUser = async (req, res) => {
           if (i % 5 == 0) {
             isShortTerm = true;
           }
-
         }
       }
       // console.log("duplicate count", dupCount);

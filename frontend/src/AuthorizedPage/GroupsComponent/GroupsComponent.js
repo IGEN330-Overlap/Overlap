@@ -105,14 +105,14 @@ const GroupsComponent = (props) => {
 
   function leaveGroup() {
     axios
-      .post("/groups/leave", {
+      .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
         groupCode: groupCodeState,
         spotifyID: spotifyID.userID,
       })
       .then((data) => {
         console.log(data.data.return);
         axios
-          .get("/users/" + spotifyID.userID + "/groups")
+          .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
           .then((data) => {
             dispatch(updateGroupList(data.data));
             console.log(data.data);

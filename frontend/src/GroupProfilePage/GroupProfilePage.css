@@ -37,6 +37,23 @@
     justify-content: center;
     align-items: center;
 }
+
+.landing-root-base {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-message {
+    font-size: 2vw;
+    color: var(--off-white-color);
+    opacity: 0;
+    /*animation-name: loading-message;
+    animation-duration: 3s; */
+}
 .wrong-group {
     font-size: 2vw;
     color: var(--off-white-color);
@@ -45,7 +62,7 @@
     align-items: center;
     position: absolute;
     animation-name: wrong-group;
-    animation-duration: 4s;
+    animation-duration: 0.1s;
 }
 .wrong-group .return-button {
     margin-top: 20px;
