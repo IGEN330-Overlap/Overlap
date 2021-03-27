@@ -12,14 +12,7 @@ const backend_url = process.env.BACKEND_URL;
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
 // Moods profiles tuned to suit the corresponding vibes
-const { buildPlaylistMoodProfile } = require("../scripts.js")
-
-// instantiate spotifyApi object
-var spotifyApi = new SpotifyWebApi({
-  clientId: client_id,
-  clientSecret: client_secret,
-  redirectUri: redirect_uri,
-});
+const { buildPlaylistMoodProfile } = require("../scripts.js");
 
 /**
  * POST generate group top playlists
@@ -28,6 +21,13 @@ var spotifyApi = new SpotifyWebApi({
  * @param {*} res
  */
 exports.generateGroupsTopPlaylist = async (req, res) => {
+  // instantiate spotifyApi object
+  let spotifyApi = new SpotifyWebApi({
+    clientId: client_id,
+    clientSecret: client_secret,
+    redirectUri: redirect_uri,
+  });
+
   let usersTopTracks = []; // stores each users top tracks as a single item
   let usersTopArtists = []; // stores each users top artists as an item in the array
   let usersMusicalProfile = []; // stores each users musical proifles as single item
@@ -193,7 +193,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   // Parses master set and adds the generate playlist tracks and the necessary info too
   // add the commonly occuring songs and the relevant props, can definitely be optimized
   try {
-    var i, j = 0;
+    var i,
+      j = 0;
     for (i = 0; j < duplicateBasedSongs.length; i++) {
       // trackIDs match then add the corresponding data
 
@@ -220,7 +221,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     console.log("Duplicates error");
     res.json({
       message: "duplicates adding error",
-      error: e
+      error: e,
     });
   }
 
@@ -242,7 +243,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   );
 
   console.log("max count tracks is: ", maxCountTracks); // debugging
-
 
   // must have at least a single commonality to generate a viable seed based on the duplicates
   // otherwise use the best 3 matching songs to the group profile
@@ -316,7 +316,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             target_energy: musicalProfile.energy / 100,
             target_valence: musicalProfile.valence / 100,
             min_popularity: 50,
-            seed_tracks: mostFrequentTracks.slice(0, 5)
+            seed_tracks: mostFrequentTracks.slice(0, 5),
           });
         }
 
@@ -334,11 +334,11 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error occured on 337")
+        console.log("error occured on 337");
         res.json(err);
       }
     } catch (err) {
-      console.log("error on 343")
+      console.log("error on 343");
       res.json(err);
     }
   }
@@ -352,7 +352,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         break;
         // Add an attribute songs so long as they don't already exist in duplicates
       } else if (
-        !playlistTracks.some((e) => e.identifier == recommendations[i].identifier)
+        !playlistTracks.some(
+          (e) => e.identifier == recommendations[i].identifier
+        )
       ) {
         playlistTracks.push({
           trackName: recommendations[i].trackName,
@@ -374,7 +376,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       }
       // Add an attribute songs so long as they don't already exist in duplicates
       else if (
-        !playlistTracks.some((e) => e.identifier == sortedTrackSet[i].identifier)
+        !playlistTracks.some(
+          (e) => e.identifier == sortedTrackSet[i].identifier
+        )
       ) {
         playlistTracks.push({
           trackName: sortedTrackSet[i].data.trackName,
@@ -389,12 +393,12 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         });
       }
     }
-  } catch(err) {
+  } catch (err) {
     console.log("error on 393");
     res.json({
       message: "Adding tracks error",
-      error: err
-    })
+      error: err,
+    });
     return;
   }
 
@@ -446,13 +450,20 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // Set moods based on the request
   let moodParams;
-  
+
+  // instantiate spotifyApi object
+  let spotifyApi = new SpotifyWebApi({
+    clientId: client_id,
+    clientSecret: client_secret,
+    redirectUri: redirect_uri,
+  });
+
   // Error handling, request must be a valid mood
   try {
     moodParams = buildPlaylistMoodProfile(req.body.selectedMood);
-    
+
     if (moodParams == "type error" || moodParams == "undefined") {
-      throw new Error;
+      throw new Error();
     }
   } catch (e) {
     console.log("tried to generate mood playlist without selected mood");
@@ -495,9 +506,9 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     usersTopTracks = data.map((x) => x.topTracks);
     usersTopArtists = data.map((x) => x.topArtists);
   } catch (err) {
-    res.json({ 
-      message: "error on finding users", 
-      error: err 
+    res.json({
+      message: "error on finding users",
+      error: err,
     });
   }
   // set tracks into one array and removes duplicates
@@ -510,7 +521,9 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
   for (var i = 0; i < masterTopTracks.length; i++) {
     masterTopTracks[i]["delta"] =
-      Math.abs(masterTopTracks[i].danceability - moodParams.target_danceability) +
+      Math.abs(
+        masterTopTracks[i].danceability - moodParams.target_danceability
+      ) +
       Math.abs(masterTopTracks[i].energy - moodParams.target_energy) +
       Math.abs(masterTopTracks[i].valence - moodParams.target_valence);
   }
@@ -536,7 +549,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
         artistName: x.artistName,
       });
       // add to seed tracks so long as we don't already have 5
-      if (seedTracks.length < 5){
+      if (seedTracks.length < 5) {
         seedTracks.push(x.trackID);
       }
     } else {
@@ -545,11 +558,13 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   }
 
   // if no song currently made it use the closest 3 as seed tracks in case
-  if (seedTracks.length == 0){
-    seedTracks = sortedTrackSet.map((x) => x.trackID).slice(0, 5)
-  } else if (seedTracks.length  <= 2) {
+  if (seedTracks.length == 0) {
+    seedTracks = sortedTrackSet.map((x) => x.trackID).slice(0, 5);
+  } else if (seedTracks.length <= 2) {
     // concatenate more songs if seedtracks are 2 or less
-    seedTracks = seedTracks.concat(sortedTrackSet.map((x) => x.trackID).slice(0, 3));
+    seedTracks = seedTracks.concat(
+      sortedTrackSet.map((x) => x.trackID).slice(0, 3)
+    );
   }
   console.log("seed tracks used for moods: ", seedTracks.length);
 
@@ -601,7 +616,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     console.log("error with spotify access token");
     res.json({
       message: "error with spotify access token",
-      error: err
+      error: err,
     });
   }
 
@@ -638,6 +653,13 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
  * @param {*} res
  */
 exports.createSpotifyPlaylist = async (req, res) => {
+  // instantiate spotifyApi object
+  let spotifyApi = new SpotifyWebApi({
+    clientId: client_id,
+    clientSecret: client_secret,
+    redirectUri: redirect_uri,
+  });
+
   // Connect to spotify API using the owners refresh access token
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
