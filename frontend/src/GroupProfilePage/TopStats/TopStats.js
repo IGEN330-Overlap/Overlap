@@ -186,35 +186,37 @@ export const GroupTopStats = ({groupUsers}) => {
                         <h1 className="text"><strong>Top Artists</strong></h1>
                         <div className="under-bar"></div>
                     </div>
-                    <div className="top-artist-list">
-                        {groupUniqueArtists.slice(0,3).map((artist, i) => (
-                            <div className="top-artist-container" onClick={()=>openArtist(artist.linkURL)} key={i}>
-                                <div className="artist-index"><strong>#{[i+1]}</strong></div>
-                                <div className="artist-name"><strong>{artist.artistName}</strong></div>
+                    <div className="top-artist-display">
+                        <div className="top-artist-list">
+                            {groupUniqueArtists.slice(0,3).map((artist, i) => (
+                                <div className="top-artist-container" onClick={()=>openArtist(artist.linkURL)} key={i}>
+                                    <div className="artist-index"><strong>#{[i+1]}</strong></div>
+                                    <div className="artist-name"><strong>{artist.artistName}</strong></div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="top-artist-podiums">
+                            <div className="artist-podium">
+                                <img className="artist-icon" 
+                                    src={groupUniqueArtists[1].imageURL} 
+                                    alt={groupUniqueArtists[1].artistName}
+                                />
+                                <div className="podium-2"><strong>#2</strong></div>
                             </div>
-                        ))}
-                    </div>
-                    <div className="top-artist-podiums">
-                        <div className="artist-podium">
-                            <img className="artist-icon" 
-                                src={groupUniqueArtists[1].imageURL} 
-                                alt={groupUniqueArtists[1].artistName}
-                            />
-                            <div className="podium-2"><strong>#2</strong></div>
-                        </div>
-                        <div className="artist-podium">
-                            <img className="artist-icon" 
-                                src={groupUniqueArtists[0].imageURL} 
-                                alt={groupUniqueArtists[0].artistName}
-                            />
-                            <div className="podium-1"><strong>#1</strong></div>
-                        </div>
-                        <div className="artist-podium">
-                            <img className="artist-icon" 
-                                src={groupUniqueArtists[2].imageURL} 
-                                alt={groupUniqueArtists[2].artistName}
-                            />
-                            <div className="podium-3"><strong>#3</strong></div>
+                            <div className="artist-podium">
+                                <img className="artist-icon" 
+                                    src={groupUniqueArtists[0].imageURL} 
+                                    alt={groupUniqueArtists[0].artistName}
+                                />
+                                <div className="podium-1"><strong>#1</strong></div>
+                            </div>
+                            <div className="artist-podium">
+                                <img className="artist-icon" 
+                                    src={groupUniqueArtists[2].imageURL} 
+                                    alt={groupUniqueArtists[2].artistName}
+                                />
+                                <div className="podium-3"><strong>#3</strong></div>
+                            </div>
                         </div>
                     </div>
                 </div>
