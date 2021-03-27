@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './GroupProfilePage.css';
 import { useSelector } from 'react-redux';
+import { Link} from "react-router-dom";
 
 import MemberDisplay from './MemberDisplay/MemberDisplay';
 import GroupName from './GroupName/GroupName';
@@ -123,7 +124,7 @@ const GroupProfilePage = (props) => {
         <div className = "wrong-group">
             Oops! It looks like you're not part of this group :(
             <div>
-                <a href="/authorized" className = "return-button">Take me back to my groups!</a>
+                <Link to="/authorized" className = "return-button">Take me back to my groups!</Link>
             </div>
         </div>
     </div>
