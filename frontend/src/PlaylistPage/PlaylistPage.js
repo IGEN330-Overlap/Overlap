@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './PlaylistPage.css';
 
-import { Link} from "react-router-dom";
-
 import { PlaylistTracks } from './PlaylistTracks/PlaylistTracks';
 import PlaylistTitle from './PlaylistTitle/PlaylistTitle';
 import Navbar1 from "../Navbar/Navbar";

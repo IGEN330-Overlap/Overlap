@@ -69,11 +69,12 @@ const GroupProfilePage = (props) => {
   function toCompare(value) {
     selectMember(value);
   }
-    useEffect (() => {
-        return history.listen((location) => {
-            selectMember("");
-        })
-    }, [history])
+    
+  useEffect (() => {
+    return history.listen((location) => {
+        selectMember("");
+    })
+  }, [history])
 
   if (groupList.length === 0 || isLoading) {
     return <ScreenOverlay text="Collecting your group's information..." />;
@@ -142,6 +143,7 @@ const GroupProfilePage = (props) => {
               <MusicalProfile groupUsers={groupUsers} />
           </div> */}
       </div>
+    </div>
     );
   } else if (!isLoading && !checkMember) {
     return (
