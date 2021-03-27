@@ -49,7 +49,7 @@ function App() {
   const [faultyLogin, setFaultyLogin] = useState(false);
 
   //useState hook for page loading
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   //Update refresh token on App render
   //if refresh token exists in localstorage, dispatch update
