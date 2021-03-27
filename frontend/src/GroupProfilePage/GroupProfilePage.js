@@ -33,7 +33,7 @@ const GroupProfilePage = (props) => {
   const [playlists, setPlaylists] = useState([]);
 
   const [checkMember, setCheckMember] = useState(false);
-  const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsloading] = useState(false);
 
   //   React.useEffect(() => {
   //     //start loading
@@ -57,10 +57,10 @@ const GroupProfilePage = (props) => {
   const [groupUsers, setUsers] = useState("");
 
   useEffect(() => {
-    //start loading
-    setIsloading(true);
-
     if (groupCode !== null) {
+      //start loading
+      setIsloading(true);
+
       axios
         .get(
           process.env.REACT_APP_BACKEND_URL + "/groups/" + groupCode + "/users"
@@ -77,12 +77,16 @@ const GroupProfilePage = (props) => {
             }
             return groupName;
           });
-        })
-        .catch((err) => console.log(err));
-    }
 
-    //end loading
-    setIsloading(false);
+          //end loading
+          setIsloading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          //end loading
+          setIsloading(false);
+        });
+    }
   }, [groupCode, groupList, groupName]);
 
   // select member to compare
@@ -93,7 +97,7 @@ const GroupProfilePage = (props) => {
 
   if (groupList.length === 0 || isLoading) {
     return <ScreenOverlay text="Collecting your group's information..." />;
-  } else if (checkMember && groupUsers) {
+  } else if (checkMember && groupUsers && !isLoading) {
     return (
       <div className="group-landing-root">
         <div className="group-info-root">
