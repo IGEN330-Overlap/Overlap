@@ -11,7 +11,7 @@ const LandingPage = (props) => {
     //URL for login
     //REACT_APP_BACKEND_URL exists on production, and login url will correctly route to the backend.
     //On heroku deployment, the login url would exist directly on the root url.
-    const login_url = process.env.REACT_APP_BACKEND_URL ? (process.env.REACT_APP_BACKEND_URL + "/login") : "/login"
+    const login_url = process.env.REACT_APP_BACKEND_URL + "/login"
 
     return (
         <div className="landing-root d-flex flex-column justify-content-center align-items-center">

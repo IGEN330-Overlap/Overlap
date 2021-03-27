@@ -74,7 +74,7 @@ function App() {
     setIsLoading(true);
 
     axios
-      .post("/users/login", {
+      .post(process.env.REACT_APP_BACKEND_URL + "/users/login", {
         refreshToken: refreshToken,
       })
       .then((data) => {
@@ -106,7 +106,12 @@ function App() {
     if (userObject != null) {
       if (userObject.userID !== "") {
         axios
-          .get("/users/" + userObject.userID + "/groups")
+          .get(
+            process.env.REACT_APP_BACKEND_URL +
+              "/users/" +
+              userObject.userID +
+              "/groups"
+          )
           .then((data) => {
             dispatch(updateGroupList(data.data));
           })

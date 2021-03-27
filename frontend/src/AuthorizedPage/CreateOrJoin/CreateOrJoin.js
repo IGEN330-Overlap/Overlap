@@ -34,7 +34,7 @@ const CreateOrJoin = (props) => {
         else {
             console.log(input_name);
             axios
-            .post("/groups/create", {
+            .post(process.env.REACT_APP_BACKEND_URL + "/groups/create", {
                 name: input_name,
                 spotifyID: spotifyID.userID,
             })
@@ -42,7 +42,7 @@ const CreateOrJoin = (props) => {
                 console.log(data.data.return)
                 setGroupCode(data.data.return.groupCode);
                 axios
-                .get("/users/" + spotifyID.userID + "/groups")
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
                 .then((data) => {
                     dispatch(updateGroupList(data.data))
                     console.log(data.data);
@@ -64,7 +64,7 @@ const CreateOrJoin = (props) => {
         else {
             console.log(input_code)
             axios
-            .post("/groups/join", {
+            .post(process.env.REACT_APP_BACKEND_URL + "/groups/join", {
                 groupCode: input_code,
                 spotifyID: spotifyID.userID,
             })
@@ -72,7 +72,7 @@ const CreateOrJoin = (props) => {
                 console.log(data.data);
                 setGroupCode(data.data.groupCode);
                 axios
-                .get("/users/" + spotifyID.userID + "/groups")
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
                 .then((data) => {
                     dispatch(updateGroupList(data.data));
                     console.log(data.data);
