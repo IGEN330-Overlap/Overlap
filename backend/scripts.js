@@ -134,6 +134,34 @@ function extractUsersTopArtists (data) {
     return topArtists;
 }
 
+
+/**
+ * 
+ * @returns [day, month, year]
+ */
+function calculateDate() {
+    let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",        
+    ];
+    let d = new Date();
+    let day = d.getDate().toString();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear().toString();
+
+    return [day, month, year];
+}
+
 /**
  * Returns the corresponding mood profile, 
  * Expected parameters passed are, "happy", "sad", "chill", "party"
@@ -226,6 +254,9 @@ module.exports.extractUsersTopTracks = extractUsersTopTracks;
 
 // export getTopTracks data extraction method
 module.exports.extractUsersTopArtists = extractUsersTopArtists;
+
+// export get date method
+module.exports.calculateDate = calculateDate;
 
 // export mood profile
 module.exports.buildPlaylistMoodProfile = buildPlaylistMoodProfile;
