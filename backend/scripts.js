@@ -108,11 +108,9 @@ function extractUsersTopTracks (data) {
  */
 function extractUsersTopArtistsAndGenres (data) {
     
-    if (typeof(data) === "undefined") {
+    if (typeof data === "undefined") {
         return "";
     }
-
-    console.log(data.length)
 
     let topArtists = [];
     let topGenres = [];
@@ -132,8 +130,8 @@ function extractUsersTopArtistsAndGenres (data) {
                 linkURL: x.external_urls.spotify,
             });
     
-            if (x.genres.length != 0) {
-                // Add genres if there are any to add
+            if (x.genres.length != 0 && x.genres[0] != "undefined") {
+                // Add genres if there are any to add and is valid
                 topGenres.push(x.genres);
             } else {
                 //helps keep track of artists w/o genres
@@ -141,8 +139,6 @@ function extractUsersTopArtistsAndGenres (data) {
             }
         }        
     }
-    
-    console.log(topArtists.length, topGenres.length)
 
     return [topArtists, topGenres];
 }

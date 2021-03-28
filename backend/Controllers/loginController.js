@@ -285,7 +285,7 @@ exports.loginUser = async (req, res) => {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
-      //get user's top 50 artists short term
+      //get user's top 50 artists long term
       try {
         let data = await spotifyApi.getMyTopArtists({
           limit: 50,
@@ -294,7 +294,6 @@ exports.loginUser = async (req, res) => {
 
         let tmp = extractUsersTopArtistsAndGenres(data.body.items);
 
-        // iterate over top short term artists completely
         for (var i = 0; i < tmp[0].length; i++) {
           // if the artistID doesn't exist from previous terms then add
           if (!topArtists.some((x) => x.artistID === tmp[0][i].artistID)) {
@@ -316,7 +315,8 @@ exports.loginUser = async (req, res) => {
       // Extract KVPs into result object
       let result = [...map.entries()];
       topGenres = []; // reset top genres so we can re populate
-      for (x of result){
+      
+      for (x of result) {
         // Only add valid/existing genres
         if (x[0] == "undefined" || x[0] == null) {
           continue;
@@ -329,6 +329,10 @@ exports.loginUser = async (req, res) => {
           });
         }
       }
+
+      // Resort based on counts (highest at front), could be optimized into for loop todo
+      topGenres = topGenres.sort((a, b) => {return b.count - a.count});
+
       // Remove all duplicates
       topTracks = topTracks.filter(
         (v, i, a) => a.findIndex((t) => t.trackID === v.trackID) === i
