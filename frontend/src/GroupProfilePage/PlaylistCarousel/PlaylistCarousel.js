@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import "./PlaylistCarousel.css";
 
@@ -82,7 +82,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     }
     checkDuplicate = false
     index = ''
-    console.log(playlistUsers)
+    //console.log(playlistUsers)
   }
   
   // select all users or remove all users if everyone is already selected
@@ -104,7 +104,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         return playlistUsers
       })
     }
-    console.log(playlistUsers)
+    //console.log(playlistUsers)
   }
 
   // generate playlist
@@ -117,27 +117,58 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
           document.getElementById("generate-playlist-button").style.cursor = "not-allowed" 
         }
         else if (input_playlistName !== "") {
-          axios
-          .post(process.env.REACT_APP_BACKEND_URL + "/groups/generatePlaylist", {
-              groupCode: groupCode,
-              userIDs: playlistUsers,
-              refreshToken: refreshToken,
-              playlistName: input_playlistName,
-          })
-          .then((data) => {
-              console.log(data);
-              axios
-              .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
-              .then((data) => {
-                dispatch(updateGroupList(data.data));
-              })
-              .catch((err) => {
+
+          console.log(playlistType)
+
+          if(playlistType === "Top Tracks") {
+            axios
+            .post(process.env.REACT_APP_BACKEND_URL + "/groups/generatePlaylist", {
+                groupCode: groupCode,
+                userIDs: playlistUsers,
+                refreshToken: refreshToken,
+                playlistName: input_playlistName,
+            })
+            .then((data) => {
+                console.log(data);
+                axios
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+                .then((data) => {
+                  dispatch(updateGroupList(data.data));
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
+            })
+            .catch((err) => {
                 console.log(err);
-              })
-          })
-          .catch((err) => {
-              console.log(err);
-          });
+            });
+          }
+          else {
+            axios
+            .post(process.env.REACT_APP_BACKEND_URL + "/groups/generateMoodsPlaylist", {
+                groupCode: groupCode,
+                userIDs: playlistUsers,
+                refreshToken: refreshToken,
+                playlistName: input_playlistName,
+                selectedMood: playlistType,
+            })
+            .then((data) => {
+                console.log(data);
+                axios
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+                .then((data) => {
+                  dispatch(updateGroupList(data.data));
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+          }
+
+          // close playlist generate modal
           hideAddPlaylistModal()
         }
     }
@@ -177,6 +208,9 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     });
     carouselArray.push(carouselElement);
   }
+
+  const [playlistType, setPlaylistType] = useState('');
+  console.log(playlistType)
 
   return (
     <div className="playlist-container">
@@ -238,7 +272,19 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                 </div>
             </div>
             <div className="playlist-moods">
-              section for moods/top tracks toggle
+              {/* <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label> */}
+
+              {/* temporary mood stuff */}
+              <h4>Select the type of playlist you want to generate:</h4>
+              <div className="playlist-options" onClick={()=>setPlaylistType("Top Tracks")}>Top Tracks</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("happy")}>Happy</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("sad")}>Sad</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("chill")}>Chill</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("party")}>Party</div>
+
             </div>
             <div className="name-the-playlist">
               <h4>Give your playlist a name!</h4>
