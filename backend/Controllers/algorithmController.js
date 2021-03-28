@@ -198,7 +198,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     for (i = 0; j < duplicateBasedSongs.length; i++) {
       // trackIDs match then add the corresponding data
 
-      if (duplicateBasedSongs[j] == groupUniqueSet[i].identifier) {
+      if (duplicateBasedSongs[j] !== groupUniqueSet[i].identifier) {
         playlistTracks.push({
           trackName: groupUniqueSet[i].data.trackName,
           trackID: groupUniqueSet[i].data.trackID,
@@ -213,7 +213,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         // iterate to next track and reset the master to retraverse from left
         j++;
         i = 0;
-      } else if (i >= groupUniqueSet.length) {
+      } else if (i > groupUniqueSet.length - 1) {
         break; // WE HAVE AN ERROR
       }
     }
