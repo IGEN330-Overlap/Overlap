@@ -134,6 +134,34 @@ function extractUsersTopArtists (data) {
     return topArtists;
 }
 
+
+/**
+ * Gets the current date and returns the [day, month, year]
+ * @returns [day, month, year]
+ */
+function calculateDate() {
+    let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",        
+    ];
+    let d = new Date();
+    let day = d.getDate().toString();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear().toString();
+
+    return [day, month, year];
+}
+
 /**
  * Returns the corresponding mood profile, 
  * Expected parameters passed are, "happy", "sad", "chill", "party"
@@ -155,8 +183,8 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "happy",
                 "pop",
-                "summer"
-            ]
+                "summer",
+            ],
         };
     } else if (selection === "chill") {
         return {
@@ -170,9 +198,9 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "chill",
                 "ambient",
-                "summer"
-            ]
-        }        
+                "summer",
+            ],
+        };        
 
     } else if (selection === "sad") {
         return {
@@ -189,9 +217,9 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "sad",
                 "rainy-day",
-                "sleep"
-            ]
-        }
+                "sleep",
+            ],
+        };
     } else if (selection === "party") {
         return {
             "min_energy": 0.65,
@@ -207,11 +235,11 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "party",
                 "pop",
-                "dance"
-            ]
-        } 
+                "dance",
+            ],
+        }; 
     } else {
-        return "undefined"
+        return "undefined";
     }
 }
 
@@ -226,6 +254,9 @@ module.exports.extractUsersTopTracks = extractUsersTopTracks;
 
 // export getTopTracks data extraction method
 module.exports.extractUsersTopArtists = extractUsersTopArtists;
+
+// export get date method
+module.exports.calculateDate = calculateDate;
 
 // export mood profile
 module.exports.buildPlaylistMoodProfile = buildPlaylistMoodProfile;

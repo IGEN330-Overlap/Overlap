@@ -3,7 +3,6 @@ require("dotenv").config();
 
 let User = require("../Models/user.model");
 let Group = require("../Models/group.model");
-let Scripts = require("../scripts.js");
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -11,8 +10,11 @@ const backend_url = process.env.BACKEND_URL;
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
+const { calculateMusicalProfile } = require("../scripts.js");
+const { calculateDate } = require("../scripts.js");
 // Moods profiles tuned to suit the corresponding vibes
 const { buildPlaylistMoodProfile } = require("../scripts.js");
+
 
 /**
  * POST generate group top playlists
@@ -150,9 +152,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
   // Using track sounds to add the rest of the songs
   // To implement (BETTER WAYS possibly)
-  let groupsMusicalProfile = Scripts.calculateMusicalProfile(
-    usersMusicalProfile
-  );
+  let groupsMusicalProfile = calculateMusicalProfile(usersMusicalProfile);
   // console.log("groups musical profile", groupsMusicalProfile);
 
   // Remove all duplicates and add to the new array groupUniqueSet
@@ -414,10 +414,18 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     return item;
   });
 
+  let date = calculateDate();
+
   // Create playlist object which will be uploaded to the group, passed to MongoDB
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
+    createDate: {
+      day: date[0],
+      month: date[1],
+      year: date[2],
+    }
+
   };
 
   // Update playlist to the group
@@ -496,7 +504,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // console.log("Users", userIDs); //debugging
 
   let usersTopTracks = []; // arrays for storing user track information
-  let usersTopArtists = []; // arrays for storing user artist information
+  // let usersTopArtists = []; // arrays for storing user artist information
 
   // Collect user top "x" data from mongoDB
   try {
@@ -620,13 +628,18 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     });
   }
 
-  // Comment out this below part for parameter improvement to not go overkill on our groups
+  let date = calculateDate();
+
   // Create playlist object which will be uploaded to the group, passed to MongoDB
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
+    createDate: {
+      day: date[0],
+      month: date[1],
+      year: date[2],
+    },
   };
-
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne
   try {
