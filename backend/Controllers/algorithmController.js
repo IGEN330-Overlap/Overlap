@@ -242,7 +242,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     (k) => counts[k] == maxCountArtists
   );
 
-  console.log("max count tracks is: ", maxCountTracks); // debugging
+  // console.log("max count tracks is: ", maxCountTracks); // debugging
 
   // must have at least a single commonality to generate a viable seed based on the duplicates
   // otherwise use the best 3 matching songs to the group profile
