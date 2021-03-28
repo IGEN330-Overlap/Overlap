@@ -136,7 +136,7 @@ function extractUsersTopArtists (data) {
 
 
 /**
- * 
+ * Gets the current date and returns the [day, month, year]
  * @returns [day, month, year]
  */
 function calculateDate() {
@@ -183,8 +183,8 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "happy",
                 "pop",
-                "summer"
-            ]
+                "summer",
+            ],
         };
     } else if (selection === "chill") {
         return {
@@ -198,9 +198,9 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "chill",
                 "ambient",
-                "summer"
-            ]
-        }        
+                "summer",
+            ],
+        };        
 
     } else if (selection === "sad") {
         return {
@@ -217,9 +217,9 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "sad",
                 "rainy-day",
-                "sleep"
-            ]
-        }
+                "sleep",
+            ],
+        };
     } else if (selection === "party") {
         return {
             "min_energy": 0.65,
@@ -235,11 +235,11 @@ function buildPlaylistMoodProfile (selection) {
             "Seed_genres": [
                 "party",
                 "pop",
-                "dance"
-            ]
-        } 
+                "dance",
+            ],
+        }; 
     } else {
-        return "undefined"
+        return "undefined";
     }
 }
 
