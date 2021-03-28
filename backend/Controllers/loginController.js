@@ -2,7 +2,6 @@ const SpotifyWebApi = require("spotify-web-api-node");
 require("dotenv").config();
 
 let User = require("../Models/user.model");
-let Group = require("../Models/group.model");
 const { calculateMusicalProfile } = require("../scripts");
 const { extractUsersTopTracks } = require("../scripts.js");
 const { extractUsersTopArtistsAndGenres } = require("../scripts.js");
@@ -91,7 +90,6 @@ exports.loginUser = async (req, res) => {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
       }
-      // intiialize the top 3 forcefully
 
       var x = 2; // previuosly already added the first 2 from short-term
       var y = 1; // previously already added first song from med term
@@ -257,7 +255,6 @@ exports.loginUser = async (req, res) => {
         let tmp = extractUsersTopArtistsAndGenres(data.body.items);
         topArtists = tmp[0];
         topGenres = tmp[1];
-
       } catch (err) {
         console.log("error on 261");
         res.json({ message: "Unable to get user top artists.", error: err });
@@ -310,17 +307,20 @@ exports.loginUser = async (req, res) => {
       topGenres = topGenres.flat(); //put each item as a genre
 
       // Create a map of KVP for the top genres to pull out the counts
-      const map = topGenres.reduce((acc, e) => acc.set(e, (acc.get(e) || 0) + 1), new Map());
+      const map = topGenres.reduce(
+        (a, c) => a.set(c, (a.get(c) || 0) + 1),
+        new Map()
+      );
 
       // Extract KVPs into result object
       let result = [...map.entries()];
       topGenres = []; // reset top genres so we can re populate
-      
+
       for (x of result) {
         // Only add valid/existing genres
         if (x[0] == "undefined" || x[0] == null) {
           continue;
-        // genre must occur at least 3 times to be deemed "top"
+          // genre must occur at least 3 times to be deemed "top"
         } else if (x[1] >= 3) {
           // push genre and count of genre respectively
           topGenres.push({
@@ -331,7 +331,9 @@ exports.loginUser = async (req, res) => {
       }
 
       // Resort based on counts (highest at front), could be optimized into for loop todo
-      topGenres = topGenres.sort((a, b) => {return b.count - a.count});
+      topGenres = topGenres.sort((a, b) => {
+        return b.count - a.count;
+      });
 
       // Remove all duplicates
       topTracks = topTracks.filter(
