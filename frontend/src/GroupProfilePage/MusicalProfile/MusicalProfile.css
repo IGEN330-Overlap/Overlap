@@ -35,17 +35,44 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 85vh;
+    min-height: 88vh;
+    height: fit-content;
     width: 100%;
 }
 
 .musical-attribute {
     margin-left: 4vw;
+    height: 150px;
 }
-
-.musical-profile-content .scale-bar {
-    width: 80%;
-    height: 7px;
+.musical-scale {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    align-items: center;
+}
+.musical-attribute .scale-bar {
+    position: relative;
+    width: 88%;
+    height: 6.5px;
+    background-color: var(--off-white-color);
+}
+.musical-attribute .scale-markers {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 88%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 2;
+}
+.musical-attribute .scale-point {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
     background-color: var(--off-white-color);
 }
 
@@ -53,8 +80,18 @@
 .musical-profile-root strong {
     color: var(--off-white-color);
     font-size: 25px;
+    margin-left: 6px;
 }
 
 .musical-profile-root p{
     color: var(--off-white-color);
+    margin-left: 6px;
+    font-weight: 400;
+}
+
+.scale-point h5 {
+    color: var(--off-white-color);
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 550;
 }

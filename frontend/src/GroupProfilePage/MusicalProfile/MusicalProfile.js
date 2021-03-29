@@ -1,5 +1,6 @@
 import React from 'react';
 import './MusicalProfile.css';
+import logo_small from './logo small.svg';
 
 export const MusicalProfile = ({groupUsers}) => {
     
@@ -10,14 +11,14 @@ export const MusicalProfile = ({groupUsers}) => {
     let energy = [];
     let popularity = [];
     groupUsers.map((user) => (
-        musicalProfiles.push({ name: user.name, musicalProfile: user.musicalProfile })
+        musicalProfiles.push({ name: user.name, icon: user.imageURL ? user.imageURL : logo_small, musicalProfile: user.musicalProfile })
     ))
 
     musicalProfiles.map((profile) => {
-        danceability.push({ name: profile.name, stat: profile.musicalProfile.danceability });
-        valence.push({ name: profile.name, stat: profile.musicalProfile.valence });
-        energy.push({ name: profile.name, stat: profile.musicalProfile.energy });
-        popularity.push({ name: profile.name, stat: profile.musicalProfile.trackPopularity });
+        danceability.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.danceability });
+        valence.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.valence });
+        energy.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.energy });
+        popularity.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.trackPopularity });
         return musicalProfiles
     })
 
@@ -38,19 +39,59 @@ export const MusicalProfile = ({groupUsers}) => {
                     <p>Danceability measures how easy it is to dance to your music.</p>
                     <div className="musical-scale">
                         <div className="scale-bar"></div>
+                        <div className="user-position">
+
+                        </div>
+                        <div className="scale-markers">
+                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>100%</h5></div>
+                        </div>
                     </div>
                 </div>
                 <div className="musical-attribute">
                     <strong>Valence</strong>
                     <p>A higher valence value means your music taste is generally more positive.</p>
+                    <div className="musical-scale">
+                        <div className="scale-bar"></div>
+                        <div className="scale-markers">
+                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>100%</h5></div>
+                        </div>
+                    </div>
                 </div>
                 <div className="musical-attribute">
                     <strong>Energy</strong>
                     <p>The energy attribute measures how energetic your music is.</p>
+                    <div className="musical-scale">
+                        <div className="scale-bar"></div>
+                        <div className="scale-markers">
+                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>100%</h5></div>
+                        </div>
+                    </div>
                 </div>
                 <div className="musical-attribute">
                     <strong>Track Popularity</strong>
                     <p>Your overall track popularity tells you how popular the songs you listen to are.</p>
+                    <div className="musical-scale">
+                        <div className="scale-bar"></div>
+                        <div className="scale-markers">
+                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"></div>
+                            <div className="scale-point"><h5>100%</h5></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
