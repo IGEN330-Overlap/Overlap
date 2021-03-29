@@ -15,6 +15,8 @@ const { calculateDate } = require("../scripts.js");
 // Moods profiles tuned to suit the corresponding vibes
 const { buildPlaylistMoodProfile } = require("../scripts.js");
 
+const playlistLogos = require("../playlistLogos.json");
+
 /**
  * POST generate group top playlists
  *
@@ -252,7 +254,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           target_energy: musicalProfile.energy / 100,
           target_valence: musicalProfile.valence / 100,
           min_popularity: 35,
-          seed_tracks: sortedTrackSeed, 
+          seed_tracks: sortedTrackSeed,
         });
 
         // add the songs ensuring that their type is correct and that there is populated data
@@ -650,6 +652,28 @@ exports.createSpotifyPlaylist = async (req, res) => {
   let formattedTrackIds = [];
   let playlistName;
 
+  //image data that will be used as the cover for the playlist
+  let base64URI = playlistLogos["top"]; //until playlist type prop implemented leave as logo
+
+  // select base64URI based on the playlist type
+  switch (req.body.playlistType) {
+    case "top":
+      base64URI = playlistLogos["top"];
+      break;
+    case "happy":
+      base64URI = playlistLogos["happy"];
+      break;
+    case "party":
+      base64URI = playlistLogos["party"];
+      break;
+    case "chill":
+      base64URI = playlistLogos["chill"];
+      break;
+    case "sad":
+      base64URI = playlistLogos["sad"];
+      break;
+  }
+
   // find the group and the corresponding playlistID (playlist object ID)
   try {
     let data = await Group.find(
@@ -674,29 +698,52 @@ exports.createSpotifyPlaylist = async (req, res) => {
 
     try {
       // create spotify plyalist using the given playlist name
-      // TODO adding descriptions???????
       let data = await spotifyApi.createPlaylist(playlistName, {
-        description: "jams",
+        description:
+          "Playlist generated through Overlap. To learn more see: https://project-overlap.herokuapp.com",
         public: true,
       });
+      // if not successful status code throw an error      
+      if (data.statusCode != 201){
+        throw new Error();
+      } 
       playlistID = data.body.id; // collect playlist id so we can add to it later
-      console.log("playlist creation status code: ", data.statusCode);
+      // console.log("playlist creation status code: ", data.statusCode);
     } catch (err) {
       res.json(err);
     }
 
     try {
-      // Add the tracks to the spotify playlist
-      let data = await spotifyApi.addTracksToPlaylist(
+      let data = await spotifyApi.uploadCustomPlaylistCoverImage(
         playlistID,
-        formattedTrackIds
+        base64URI
       );
+      // if not successful status code throw an error
+      if (data.statusCode !== 202) {
+        throw new Error();
+      }
+    } catch (err) {
+      console.log("error with upload image");
+      res.json({
+        message: "error with upload image",
+        error: err,
+      });
+    }
+
+    try {
+      // Add the tracks to the spotify playlist
+      let data = await spotifyApi.addTracksToPlaylist(playlistID, formattedTrackIds);
+      // if not successful status code throw an error
+      if (data.statusCode != 201){
+        throw new Error();
+      } 
       console.log("playlist song addition status code: ", data.statusCode);
 
       res.json({
         message: "Successfully added playlist and the tracks to spotify",
         playlistID: playlistID,
         playlist: formattedTrackIds,
+        playlistLinkURL: "https://open.spotify.com/playlist/" + playlistID,
       });
     } catch (err) {
       res.json(err);
