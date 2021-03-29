@@ -4,6 +4,7 @@
 .CreateOrJoinBox{
     padding-top: 2vw;
     padding-left: 5vw;
+    z-index: 2;
 }
 
 .openCollapse{
@@ -16,6 +17,16 @@
 .openCollapse:hover{
     color: var(--blue-color-1);
     cursor:pointer;
+}
+
+.openCollapse:hover .create_icon {
+    /* Shitty solution for making the icon also change color on hover */
+    filter: brightness(0) saturate(100%) invert(72%) sepia(76%) saturate(768%) hue-rotate(192deg) brightness(105%) contrast(99%);
+}
+
+.openCollapse:hover .join_icon {
+    /* Shitty solution for making the icon also change color on hover */
+    filter: brightness(0) saturate(100%) invert(72%) sepia(76%) saturate(768%) hue-rotate(192deg) brightness(105%) contrast(99%);
 }
 
 .collapseBody{

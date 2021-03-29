@@ -144,7 +144,7 @@ function App() {
             <Fragment>
               <AuthorizedPage />
               {/* If page loading, render loading overlay */}
-              {isLoading && <ScreenOverlay text="Retreiving Data" />}
+              {isLoading && <ScreenOverlay text="Retrieving Data" />}
             </Fragment>
           )}
           exact={true}
