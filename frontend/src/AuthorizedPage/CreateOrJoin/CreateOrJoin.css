@@ -4,6 +4,7 @@
 .CreateOrJoinBox{
     padding-top: 2vw;
     padding-left: 5vw;
+    z-index: 2;
 }
 
 .openCollapse{

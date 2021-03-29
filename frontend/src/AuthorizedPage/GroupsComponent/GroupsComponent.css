@@ -1,6 +1,10 @@
 /* CSS variables */
 @import url(../../variables.css);
 
+.YourGroupsBox {
+    z-index: 2;
+}
+
 .title{
     color: white;
     font-size: 3vw;
