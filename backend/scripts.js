@@ -168,7 +168,11 @@ function calculateDate() {
     let month = months[d.getMonth()];
     let year = d.getFullYear().toString();
 
-    return [day, month, year];
+    return {
+        day: day,
+        month: month,
+        year: year,
+    };
 }
 
 /**

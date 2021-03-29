@@ -198,7 +198,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     for (i = 0; j < duplicateBasedSongs.length; i++) {
       // trackIDs match then add the corresponding data
 
-      if (duplicateBasedSongs[j] == groupUniqueSet[i].identifier) {
+      if (duplicateBasedSongs[j] !== groupUniqueSet[i].identifier) {
         playlistTracks.push({
           trackName: groupUniqueSet[i].data.trackName,
           trackID: groupUniqueSet[i].data.trackID,
@@ -213,8 +213,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         // iterate to next track and reset the master to retraverse from left
         j++;
         i = 0;
-      } else if (i >= groupUniqueSet.length) {
-        break; // WE HAVE AN ERROR
+      } else if (i > groupUniqueSet.length - 1) {
+        console.log("index out of range on 216")
+        throw new Error(); // WE HAVE AN ERROR
       }
     }
   } catch (e) {
@@ -420,12 +421,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
-    createDate: {
-      day: date[0],
-      month: date[1],
-      year: date[2],
-    }
-
+    createDate: date,
   };
 
   // Update playlist to the group
@@ -634,11 +630,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
-    createDate: {
-      day: date[0],
-      month: date[1],
-      year: date[2],
-    },
+    createDate: date,
   };
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne
