@@ -54,6 +54,16 @@ const userSchema = new Schema(
         required: true
       },
     },
+    topGenres: [
+      {
+        genre: {
+          type: String,
+        },
+        count: {
+          type: Number,
+        },
+      },
+    ],
     topTracks: [
       {
         trackName: {

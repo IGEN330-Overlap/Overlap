@@ -2,15 +2,13 @@ const SpotifyWebApi = require("spotify-web-api-node");
 require("dotenv").config();
 
 let User = require("../Models/user.model");
-let Group = require("../Models/group.model");
 const { calculateMusicalProfile } = require("../scripts");
 const { extractUsersTopTracks } = require("../scripts.js");
-const { extractUsersTopArtists } = require("../scripts.js");
+const { extractUsersTopArtistsAndGenres } = require("../scripts.js");
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
-const frontend_url = process.env.FRONTEND_URL;
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
@@ -92,7 +90,6 @@ exports.loginUser = async (req, res) => {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
       }
-      // intiialize the top 3 forcefully
 
       var x = 2; // previuosly already added the first 2 from short-term
       var y = 1; // previously already added first song from med term
@@ -142,7 +139,6 @@ exports.loginUser = async (req, res) => {
           }
         }
       }
-      // console.log("duplicate count", dupCount);
 
       // splice and flip the duplicates added because they were added in reverse order
       let tmp = topTracks.splice(0, dupCount);
@@ -247,6 +243,7 @@ exports.loginUser = async (req, res) => {
 
       //instantiate top artists array
       let topArtists = [];
+      let topGenres = [];
 
       //get user's top 50 artists medium term
       try {
@@ -254,9 +251,12 @@ exports.loginUser = async (req, res) => {
           limit: 50,
           time_range: "medium_term",
         });
-
-        topArtists = extractUsersTopArtists(data.body.items);
+        // See function for greater detail on data extraction
+        let tmp = extractUsersTopArtistsAndGenres(data.body.items);
+        topArtists = tmp[0];
+        topGenres = tmp[1];
       } catch (err) {
+        console.log("error on 261");
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
@@ -267,38 +267,73 @@ exports.loginUser = async (req, res) => {
           time_range: "short_term",
         });
 
-        tmp = extractUsersTopArtists(data.body.items);
+        let tmp = extractUsersTopArtistsAndGenres(data.body.items);
 
-        // iterate over top short term tracks completely
-        for (var i = 0; i < tmp.length; i++) {
+        // iterate over top short term artists completely
+        for (var i = 0; i < tmp[0].length; i++) {
           // if the artistID doesn't exist from top medium term then add
-          if (!topArtists.some((x) => x.artistID === tmp[i].artistID)) {
-            topArtists.push(tmp[i]);
+          if (!topArtists.some((x) => x.artistID === tmp[0][i].artistID)) {
+            topArtists.push(tmp[0][i]);
+            topGenres.push(tmp[1][i]);
           }
         }
       } catch (err) {
+        console.log("error on 283");
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
-      //get user's top 50 artists short term
+      //get user's top 50 artists long term
       try {
         let data = await spotifyApi.getMyTopArtists({
           limit: 50,
           time_range: "long_term",
         });
-        tmp = extractUsersTopArtists(data.body.items);
 
-        // iterate over top short term tracks completely
-        for (var i = 0; i < tmp.length; i++) {
-          // if the artistID doesn't exist from top medium term then add
-          if (!topArtists.some((x) => x.artistID === tmp[i].artistID)) {
-            topArtists.push(tmp[i]);
+        let tmp = extractUsersTopArtistsAndGenres(data.body.items);
+
+        for (var i = 0; i < tmp[0].length; i++) {
+          // if the artistID doesn't exist from previous terms then add
+          if (!topArtists.some((x) => x.artistID === tmp[0][i].artistID)) {
+            topArtists.push(tmp[0][i]);
+            topGenres.push(tmp[1][i]);
           }
         }
       } catch (err) {
+        console.log("error on 304");
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
+
+      topGenres = topGenres.flat(); //put each item as a genre
+
+      // Create a map of KVP for the top genres to pull out the counts
+      const map = topGenres.reduce(
+        (a, c) => a.set(c, (a.get(c) || 0) + 1),
+        new Map()
+      );
+
+      // Extract KVPs into result object
+      let result = [...map.entries()];
+      topGenres = []; // reset top genres so we can re populate
+
+      for (x of result) {
+        // Only add valid/existing genres
+        if (x[0] == "undefined" || x[0] == null) {
+          continue;
+          // genre must occur at least 3 times to be deemed "top"
+        } else if (x[1] >= 3) {
+          // push genre and count of genre respectively
+          topGenres.push({
+            genre: x[0],
+            count: x[1],
+          });
+        }
+      }
+
+      // Resort based on counts (highest at front), could be optimized into for loop todo
+      topGenres = topGenres.sort((a, b) => {
+        return b.count - a.count;
+      });
 
       // Remove all duplicates
       topTracks = topTracks.filter(
@@ -333,6 +368,7 @@ exports.loginUser = async (req, res) => {
                 musicalProfile: musicalProfile,
                 topTracks: topTracks, // Add top 50 tracks with their attributes
                 topArtists: topArtists, // Add top 30 artists with their attributes
+                topGenres: topGenres,
               },
             }, //Update
             { upsert: true } //create User if does not already exist
@@ -350,6 +386,7 @@ exports.loginUser = async (req, res) => {
                   musicalProfile: musicalProfile,
                   topTracks: topTracks,
                   topArtists: topArtists,
+                  topGenres: topGenres,
                 },
               });
             })

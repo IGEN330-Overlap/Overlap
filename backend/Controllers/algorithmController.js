@@ -15,7 +15,6 @@ const { calculateDate } = require("../scripts.js");
 // Moods profiles tuned to suit the corresponding vibes
 const { buildPlaylistMoodProfile } = require("../scripts.js");
 
-
 /**
  * POST generate group top playlists
  *
@@ -53,7 +52,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   let numUsers = userIDs.length; // keep track of number of users
-  console.log("Users", userIDs); //debugging
+  // console.log("Users", userIDs); //debugging
 
   // Collect user top track data into top tracks array
   try {
@@ -92,7 +91,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     }
   }
 
-  console.log("masterset length", masterSetTracks.length); //debugging
+  // console.log("masterset length", masterSetTracks.length); //debugging
 
   /* Let's algorithm: This is making a 30 song playlist */
 
@@ -133,7 +132,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       (k) => counts[k] >= numOccurencesOfSongsToAdd
     );
 
-    duplicateBasedSongs = mostFrequentTracks.slice(0, 10);
+    duplicateBasedSongs = mostFrequentTracks.slice(0, 7);
 
     // If there are more than 7 users add if maxCount > (half the users rounded down)
   } else if (
@@ -148,7 +147,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       (k) => counts[k] >= numOccurencesOfSongsToAdd
     );
 
-    duplicateBasedSongs = mostFrequentTracks.slice(0, 10);
+    duplicateBasedSongs = mostFrequentTracks.slice(0, 7);
   }
   // Using track sounds to add the rest of the songs
   // To implement (BETTER WAYS possibly)
@@ -160,27 +159,19 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     (v, i, a) => a.findIndex((t) => t.identifier === v.identifier) === i
   );
 
-  // TO IMPLEMENT, parameters to adjust which attribute has largest impacts
-  let attributeAdjust = [1, 1, 1, 1];
-
   // calculate differences between each attribute and a song
   // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
   for (var i = 0; i < groupUniqueSet.length; i++) {
     groupUniqueSet[i]["deltaFromGroup"] =
-      attributeAdjust[0] *
-        Math.abs(
-          groupUniqueSet[i].data.trackPopularity -
-            groupsMusicalProfile.trackPopularity
-        ) +
-      attributeAdjust[1] *
-        Math.abs(
-          groupUniqueSet[i].data.danceability -
-            groupsMusicalProfile.danceability
-        ) +
-      attributeAdjust[2] *
-        Math.abs(groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
-      attributeAdjust[3] *
-        Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
+      Math.abs(
+        groupUniqueSet[i].data.trackPopularity -
+          groupsMusicalProfile.trackPopularity
+      ) +
+      Math.abs(
+        groupUniqueSet[i].data.danceability - groupsMusicalProfile.danceability
+      ) +
+      Math.abs(groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
+      Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
     //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
   }
 
@@ -197,8 +188,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       j = 0;
     for (i = 0; j < duplicateBasedSongs.length; i++) {
       // trackIDs match then add the corresponding data
-
-      if (duplicateBasedSongs[j] == groupUniqueSet[i].identifier) {
+      if (i == groupUniqueSet.length) {
+        break;
+      } else if (duplicateBasedSongs[j] === groupUniqueSet[i].identifier) {
         playlistTracks.push({
           trackName: groupUniqueSet[i].data.trackName,
           trackID: groupUniqueSet[i].data.trackID,
@@ -213,8 +205,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         // iterate to next track and reset the master to retraverse from left
         j++;
         i = 0;
-      } else if (i >= groupUniqueSet.length) {
-        break; // WE HAVE AN ERROR
       }
     }
   } catch (e) {
@@ -242,26 +232,19 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     (k) => counts[k] == maxCountArtists
   );
 
-  console.log("max count tracks is: ", maxCountTracks); // debugging
-
   // must have at least a single commonality to generate a viable seed based on the duplicates
   // otherwise use the best 3 matching songs to the group profile
-  if (maxCountArtists == 1 || maxCountTracks == 1) {
-    let sortedTrackSeed = []; // used to get seed for non duplicates
 
-    try {
-      for (var i = 0; i < 3; i++) {
-        sortedTrackSeed.push(sortedTrackSet[i].data.trackID);
-      }
-    } catch (err) {
-      console.log("Line 251");
-      res.json(err);
-    }
+  let sortedTrackSeed = []; // used to get seed for non duplicates
 
-    try {
-      let tokenData = await spotifyApi.refreshAccessToken();
-      spotifyApi.setAccessToken(tokenData.body.access_token);
+  sortedTrackSeed = sortedTrackSet.map((x) => x.data.trackID).slice(0, 3); //just take top 3
 
+  try {
+    let tokenData = await spotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(tokenData.body.access_token);
+
+    // if either is 1 then automatically use the tracks for seeds
+    if (maxCountArtists == 1 || maxCountTracks == 1) {
       try {
         // get spotify data based on the groups profile
         let data = await spotifyApi.getRecommendations({
@@ -269,12 +252,16 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           target_energy: musicalProfile.energy / 100,
           target_valence: musicalProfile.valence / 100,
           min_popularity: 35,
-          seed_tracks: sortedTrackSeed.slice(0, 5),
+          seed_tracks: sortedTrackSeed, 
         });
 
         // add the songs ensuring that their type is correct and that there is populated data
         for (x of data.body.tracks) {
-          if (x.type == "track" && x.album.images.length != 0) {
+          if (
+            x.type == "track" &&
+            x.album.images.length != 0 &&
+            x.artists.length != 0
+          ) {
             recommendations.push({
               trackName: x.name,
               trackID: x.id,
@@ -286,16 +273,10 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           }
         }
       } catch (err) {
+        console.log("error on 271");
         res.json(err);
       }
-    } catch (err) {
-      res.json(err);
-    }
-  } else if (maxCountArtists != 1 || maxCountTracks != 1) {
-    try {
-      let tokenData = await spotifyApi.refreshAccessToken();
-      spotifyApi.setAccessToken(tokenData.body.access_token);
-
+    } else if (maxCountArtists != 1 || maxCountTracks != 1) {
       try {
         // Get recommendations for the group
         let data;
@@ -322,7 +303,11 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
         // add the songs ensuring that their type is correct and that there is populated data
         for (x of data.body.tracks) {
-          if (x.type == "track" && x.album.images.length != 0) {
+          if (
+            x.type == "track" &&
+            x.album.images.length != 0 &&
+            x.artists.length != 0
+          ) {
             recommendations.push({
               trackName: x.name,
               trackID: x.id,
@@ -334,13 +319,12 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error occured on 337");
+        console.log("error occured on 322");
         res.json(err);
       }
-    } catch (err) {
-      console.log("error on 343");
-      res.json(err);
     }
+  } catch (err) {
+    res.json(err);
   }
 
   try {
@@ -394,7 +378,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log("error on 393");
+    console.log("error on 381");
     res.json({
       message: "Adding tracks error",
       error: err,
@@ -414,18 +398,11 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     return item;
   });
 
-  let date = calculateDate();
-
   // Create playlist object which will be uploaded to the group, passed to MongoDB
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
-    createDate: {
-      day: date[0],
-      month: date[1],
-      year: date[2],
-    }
-
+    createDate: calculateDate(),
   };
 
   // Update playlist to the group
@@ -578,8 +555,8 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
 
   spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
   try {
-    let data = await spotifyApi.refreshAccessToken();
-    spotifyApi.setAccessToken(data.body.access_token);
+    let tokenData = await spotifyApi.refreshAccessToken();
+    spotifyApi.setAccessToken(tokenData.body.access_token);
 
     try {
       // Get recommendations for the group
@@ -628,17 +605,11 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     });
   }
 
-  let date = calculateDate();
-
   // Create playlist object which will be uploaded to the group, passed to MongoDB
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
-    createDate: {
-      day: date[0],
-      month: date[1],
-      year: date[2],
-    },
+    createDate: calculateDate(),
   };
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne

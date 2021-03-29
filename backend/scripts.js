@@ -104,34 +104,43 @@ function extractUsersTopTracks (data) {
  * Used to extract data for our use. used in conjuction with GET getMyTopArtists
  * Should pass data.body.items from the above SpotifyAPI request
  * @param {array} data 
- * @returns 
+ * @returns [ array of artist objects, array of array of top genres for every artists] 
  */
-function extractUsersTopArtists (data) {
+function extractUsersTopArtistsAndGenres (data) {
     
-    if (typeof(data) === "undefined") {
+    if (typeof data === "undefined") {
         return "";
     }
 
     let topArtists = [];
+    let topGenres = [];
     // iterate over data and add relevant artist attributes
     for (x of data) {
 
         //if artist name is empty, continue
         if (x.name.length === 0 || x.name.length == null || x.images.length == 0) {
             continue;
-        }
-        
-        topArtists.push({
-            artistName: x.name,
-            artistID: x.id,
-            followerCount: x.followers.total,
-            artistPopularity: x.popularity,
-            imageURL: x.images[0].url,
-            linkURL: x.external_urls.spotify,
-        });
+        } else {
+            topArtists.push({
+                artistName: x.name,
+                artistID: x.id,
+                followerCount: x.followers.total,
+                artistPopularity: x.popularity,
+                imageURL: x.images[0].url,
+                linkURL: x.external_urls.spotify,
+            });
+    
+            if (x.genres.length != 0 && x.genres[0] != "undefined") {
+                // Add genres if there are any to add and is valid
+                topGenres.push(x.genres);
+            } else {
+                //helps keep track of artists w/o genres
+                console.log(x.name, "has no top genres"); 
+            }
+        }        
     }
 
-    return topArtists;
+    return [topArtists, topGenres];
 }
 
 
@@ -159,7 +168,11 @@ function calculateDate() {
     let month = months[d.getMonth()];
     let year = d.getFullYear().toString();
 
-    return [day, month, year];
+    return {
+        day: day,
+        month: month,
+        year: year,
+    };
 }
 
 /**
@@ -253,7 +266,7 @@ module.exports.calculateMusicalProfile = calculateMusicalProfile;
 module.exports.extractUsersTopTracks = extractUsersTopTracks;
 
 // export getTopTracks data extraction method
-module.exports.extractUsersTopArtists = extractUsersTopArtists;
+module.exports.extractUsersTopArtistsAndGenres = extractUsersTopArtistsAndGenres;
 
 // export get date method
 module.exports.calculateDate = calculateDate;
