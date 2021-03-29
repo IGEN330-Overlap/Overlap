@@ -15,7 +15,7 @@ const { calculateDate } = require("../scripts.js");
 // Moods profiles tuned to suit the corresponding vibes
 const { buildPlaylistMoodProfile } = require("../scripts.js");
 
-const playlistLogos = require("../playlistLogos.json");
+const playlistCoverImages = require("../playlistCoverImages.json");
 
 /**
  * POST generate group top playlists
@@ -653,24 +653,24 @@ exports.createSpotifyPlaylist = async (req, res) => {
   let playlistName;
 
   //image data that will be used as the cover for the playlist
-  let base64URI = playlistLogos["top"]; //until playlist type prop implemented leave as logo
+  let base64URI = playlistCoverImages["top"]; //until playlist type prop implemented leave as logo
 
   // select base64URI based on the playlist type
   switch (req.body.playlistType) {
     case "top":
-      base64URI = playlistLogos["top"];
+      base64URI = playlistCoverImages["top"];
       break;
     case "happy":
-      base64URI = playlistLogos["happy"];
+      base64URI = playlistCoverImages["happy"];
       break;
     case "party":
-      base64URI = playlistLogos["party"];
+      base64URI = playlistCoverImages["party"];
       break;
     case "chill":
-      base64URI = playlistLogos["chill"];
+      base64URI = playlistCoverImages["chill"];
       break;
     case "sad":
-      base64URI = playlistLogos["sad"];
+      base64URI = playlistCoverImages["sad"];
       break;
   }
 
