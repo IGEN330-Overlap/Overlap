@@ -18,6 +18,15 @@ const GroupsComponent = (props) => {
   const groupList = useSelector((state) => state.groupList);
   const spotifyID = useSelector((state) => state.userObject);
 
+  //order groupList from most recent to oldest
+  function sortGroupList (a,b) {
+    if (b.createdAt > a.createdAt) return 1;
+    if (a.createdAt > b.createdAt) return -1;
+
+    return 0
+  }
+  groupList.sort(sortGroupList)
+
   //functions for opening and closing "Show Group Code" Modal
   const [CodeisOpen, setCodeIsOpen] = React.useState(false);
   const showCodeModal = () => {
