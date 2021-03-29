@@ -51,7 +51,7 @@ export const PlaylistPage = (props) => {
     }, [playlistID, groupList, playlistTracks]);
 
     if (isLoading || groupList.length === 0){
-        return <ScreenOverlay text="Collecting your playlist tracks..." />;
+        return <ScreenOverlay text="Collecting your playlist tracks" />;
     } else if (checkMember && !isLoading) {
         return (
             <div className="playlist-landing-root">
