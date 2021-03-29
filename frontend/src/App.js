@@ -49,7 +49,7 @@ function App() {
   const [faultyLogin, setFaultyLogin] = useState(false);
 
   //useState hook for page loading
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   //Update refresh token on App render
   //if refresh token exists in localstorage, dispatch update
@@ -70,43 +70,49 @@ function App() {
 
   //User Effect hook for logging in the user with API upon refreshToken update
   useEffect(() => {
-    //Start loading
-    setIsLoading(true);
+    if (refreshToken) {
+      //Start loading
+      setIsLoading(true);
+      axios
+        .post(process.env.REACT_APP_BACKEND_URL + "/users/login", {
+          refreshToken: refreshToken,
+        })
+        .then((data) => {
+          //if login is unsuccessful, reset refresh token
+          if (data.data.error) {
+            dispatch(updateRefreshToken(""));
+            localStorage.clear();
+            setFaultyLogin(true);
+          }
+          //if login is sucessful, update user object
+          else {
+            dispatch(updateUser(data.data.return));
+            setFaultyLogin(false);
+          }
 
-    axios
-      .post("/users/login", {
-        refreshToken: refreshToken,
-      })
-      .then((data) => {
-        //if login is unsuccessful, reset refresh token
-        if (data.data.error) {
-          dispatch(updateRefreshToken(""));
-          localStorage.clear();
-          setFaultyLogin(true);
-        }
-        //if login is sucessful, update user object
-        else {
-          dispatch(updateUser(data.data.return));
-          setFaultyLogin(false);
-        }
+          //Stop loading
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          //Stop loading
+          setIsLoading(false);
 
-        //Stop loading
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        //Stop loading
-        setIsLoading(false);
-
-        console.log(err);
-      });
-  }, [refreshToken]);
+          console.log(err);
+        });
+    }
+  }, [refreshToken, dispatch]);
 
   //User Effect to get user group list when userObject is updated
   useEffect(() => {
     if (userObject != null) {
       if (userObject.userID !== "") {
         axios
-          .get("/users/" + userObject.userID + "/groups")
+          .get(
+            process.env.REACT_APP_BACKEND_URL +
+              "/users/" +
+              userObject.userID +
+              "/groups"
+          )
           .then((data) => {
             dispatch(updateGroupList(data.data));
           })
