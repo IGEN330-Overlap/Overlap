@@ -82,7 +82,7 @@ const GroupProfilePage = (props) => {
   }, [history])
 
   if (groupList.length === 0 || isLoading) {
-    return <ScreenOverlay text="Collecting your group's information..." />;
+    return <ScreenOverlay text="Collecting your group's information" />;
   } else if (checkMember && groupUsers && !isLoading) {
     return (
       <div className="group-landing-root">
