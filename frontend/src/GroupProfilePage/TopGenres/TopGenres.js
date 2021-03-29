@@ -36,23 +36,23 @@ export const TopGenres = ({groupUsers}) => {
             <div className="genre-bubbles">
                 <div className="top-genre-1">
                     <div className="bubble"></div>
-                    <h2><strong>{top_genres[0].genre}</strong></h2>
+                    <h2><strong>{top_genres[0] ? top_genres[0].genre : 'Unable to find genre'}</strong></h2>
                 </div>
                 <div className="top-genre-2">
                     <div className="bubble"></div>
-                    <h2><strong>{top_genres[1].genre}</strong></h2>
+                    <h2><strong>{top_genres[1] ? top_genres[1].genre : 'Unable to find genre'}</strong></h2>
                 </div>
                 <div className="top-genre-3">
                     <div className="bubble"></div>
-                    <h2><strong>{top_genres[2].genre}</strong></h2>
+                    <h2><strong>{top_genres[2] ? top_genres[2].genre : 'Unable to find genre'}</strong></h2>
                 </div>
                 <div className="top-genre-4">
                     <div className="bubble"></div>
-                    <h2><strong>{top_genres[3].genre}</strong></h2>
+                    <h2><strong>{top_genres[3] ? top_genres[3].genre : 'Unable to find genre'}</strong></h2>
                 </div>
                 <div className="top-genre-5">
                     <div className="bubble"></div>
-                    <h2><strong>{top_genres[4].genre}</strong></h2>
+                    <h2><strong>{top_genres[4] ? top_genres[4].genre : 'Unable to find genre'}</strong></h2>
                 </div>
             </div>
         </div>

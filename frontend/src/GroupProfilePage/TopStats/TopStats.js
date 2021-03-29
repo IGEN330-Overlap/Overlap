@@ -198,22 +198,22 @@ export const GroupTopStats = ({groupUsers}) => {
                         <div className="top-artist-podiums">
                             <div className="artist-podium">
                                 <img className="artist-icon" 
-                                    src={groupUniqueArtists[1].imageURL} 
-                                    alt={groupUniqueArtists[1].artistName}
+                                    src={groupUniqueArtists[1] ? groupUniqueArtists[1].imageURL : 'Unable to find artist'} 
+                                    alt={groupUniqueArtists[1] ? groupUniqueArtists[1].artistName : 'Unable to find artist'}
                                 />
                                 <div className="podium-2"><strong>#2</strong></div>
                             </div>
                             <div className="artist-podium">
                                 <img className="artist-icon" 
-                                    src={groupUniqueArtists[0].imageURL} 
-                                    alt={groupUniqueArtists[0].artistName}
+                                    src={groupUniqueArtists[0] ? groupUniqueArtists[0].imageURL : 'Unable to find artist'} 
+                                    alt={groupUniqueArtists[0] ? groupUniqueArtists[0].artistName : 'Unable to find artist'}
                                 />
                                 <div className="podium-1"><strong>#1</strong></div>
                             </div>
                             <div className="artist-podium">
                                 <img className="artist-icon" 
-                                    src={groupUniqueArtists[2].imageURL} 
-                                    alt={groupUniqueArtists[2].artistName}
+                                    src={groupUniqueArtists[2] ? groupUniqueArtists[2].imageURL : 'Unable to find artist'} 
+                                    alt={groupUniqueArtists[2] ? groupUniqueArtists[2].artistName : 'Unable to find artist'}
                                 />
                                 <div className="podium-3"><strong>#3</strong></div>
                             </div>
