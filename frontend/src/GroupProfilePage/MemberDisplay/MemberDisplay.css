@@ -129,6 +129,8 @@
     border-radius: 50rem;
     transition: opacity 0.45s;
     background-color: var(--primary-color-6);
+    /* background-color: rgba(162,162,254,0.75); */
+    /* ^ --blue-color-2 at 75% opacity ^ */
 }
 .user-name {
     font-size: clamp(12px, 1.75vw, 17px);

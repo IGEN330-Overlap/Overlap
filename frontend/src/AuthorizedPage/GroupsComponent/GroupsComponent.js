@@ -56,7 +56,7 @@ const GroupsComponent = (props) => {
     setSearch(e.target.value);
   };
   const dynamicSearch = () => {
-    return groupList.filter((x) => x.groupName.includes(searchText));
+    return groupList.filter((x) => x.groupName.toLowerCase().includes(searchText.toLowerCase()));
   };
 
   //custom toggle as three dots

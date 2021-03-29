@@ -194,6 +194,13 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     return playlistInfo
   })
 
+  // trying to get the current out and total slides
+  // let totalSlides = playlistInfo.length % 4;
+  // $('#myCarousel').bind('slid', function() {
+  //   currentIndex = $('div.active').index() + 1;
+  //  $('.num').html(''+currentIndex+'/'+totalItems+'');
+  // });
+
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
   for (let i = 0; i < playlistInfo.length; i += 4) {
