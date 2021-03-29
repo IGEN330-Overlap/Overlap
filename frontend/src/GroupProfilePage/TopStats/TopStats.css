@@ -20,7 +20,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 92vh;
+    min-height: 92vh;
+    height: fit-content;
 }
 
 .top-stats-heading .text {
@@ -137,19 +138,19 @@
     flex-wrap: wrap;
 }
 .top-artists-root .top-artist-container {
-    height: 40px;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     width: fit-content;
     align-items: center;
-    padding: 5px;
-    padding-top: 25px;
+    margin-left: 6px;
 }
 .top-artists-root .top-artist-container:hover {
     cursor: pointer;
 }
 .top-artists-root .top-artist-list {
     width: 250px;
+    padding-top: 25px;
 }
 .top-artist-container strong {
     font-size: 25px;

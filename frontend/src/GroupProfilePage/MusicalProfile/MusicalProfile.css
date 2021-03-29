@@ -1,11 +1,12 @@
 @import url(../../variables.css);
 
 .musical-profile-root {
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     width: auto;
-    background-color: var(--blue-color-main);
+    background-color: #8FCED9;
     display: flex;
-    flex-direction: column;
+    align-items: center;
 }
 
 .musical-profile-heading {
@@ -15,10 +16,10 @@
     height: 80px;
 }
 
-.musical-profile-heading .text {
+.musical-profile-heading .text strong{
     color: var(--off-white-color);
     margin-left: 6px;
-    font-size: 4vw;
+    /* font-size: 4vw; */
     font-size: clamp(25px, 4vw, 40px);
 }
 
@@ -28,4 +29,32 @@
     height: 3px;
     margin-bottom: 0px;
     background-color: var(--off-white-color);
+}
+
+.musical-profile-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 85vh;
+    width: 100%;
+}
+
+.musical-attribute {
+    margin-left: 4vw;
+}
+
+.musical-profile-content .scale-bar {
+    width: 80%;
+    height: 7px;
+    background-color: var(--off-white-color);
+}
+
+/* text settings */
+.musical-profile-root strong {
+    color: var(--off-white-color);
+    font-size: 25px;
+}
+
+.musical-profile-root p{
+    color: var(--off-white-color);
 }
