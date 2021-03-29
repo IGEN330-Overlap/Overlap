@@ -195,28 +195,31 @@ export const GroupTopStats = ({groupUsers}) => {
                                 </div>
                             ))}
                         </div>
-                        <div className="top-artist-podiums">
-                            <div className="artist-podium">
-                                <img className="artist-icon" 
-                                    src={groupUniqueArtists[1].imageURL} 
-                                    alt={groupUniqueArtists[1].artistName}
-                                />
-                                <div className="podium-2"><strong>#2</strong></div>
+                        <div className="podium-display">
+                            <div className="top-artist-podiums">
+                                <div className="artist-podium">
+                                    <img className="artist-icon" 
+                                        src={groupUniqueArtists[1].imageURL} 
+                                        alt={groupUniqueArtists[1].artistName}
+                                    />
+                                    <div className="podium-2"><strong>#2</strong></div>
+                                </div>
+                                <div className="artist-podium">
+                                    <img className="artist-icon" 
+                                        src={groupUniqueArtists[0].imageURL} 
+                                        alt={groupUniqueArtists[0].artistName}
+                                    />
+                                    <div className="podium-1"><strong>#1</strong></div>
+                                </div>
+                                <div className="artist-podium">
+                                    <img className="artist-icon" 
+                                        src={groupUniqueArtists[2].imageURL} 
+                                        alt={groupUniqueArtists[2].artistName}
+                                    />
+                                    <div className="podium-3"><strong>#3</strong></div>
+                                </div>
                             </div>
-                            <div className="artist-podium">
-                                <img className="artist-icon" 
-                                    src={groupUniqueArtists[0].imageURL} 
-                                    alt={groupUniqueArtists[0].artistName}
-                                />
-                                <div className="podium-1"><strong>#1</strong></div>
-                            </div>
-                            <div className="artist-podium">
-                                <img className="artist-icon" 
-                                    src={groupUniqueArtists[2].imageURL} 
-                                    alt={groupUniqueArtists[2].artistName}
-                                />
-                                <div className="podium-3"><strong>#3</strong></div>
-                            </div>
+                            <div className="podium-stand"></div>
                         </div>
                     </div>
                 </div>

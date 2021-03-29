@@ -161,9 +161,12 @@
 .top-artist-container .artist-name {
     color: var(--off-white-color);
 }
+.podium-display {
+    margin-right: 50px;
+    z-index: 3;
+}
 .top-artist-podiums {
     width: 275px;
-    margin-right: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -206,6 +209,11 @@
     font-size: 40px;
     color: var(--blue-color-main)
 }
+.podium-stand {
+    width: 100%;
+    height: 10px;
+    background-color: var(--primary-color-main);
+}
 
 /* for bigger screen sizes */
 @media (min-width: 1450px) {
@@ -243,5 +251,14 @@
         display: flex;
         flex-direction: column;
         flex-wrap: none;
+    }
+}
+
+@media(max-width: 640px) {
+    .top-artist-display {
+        flex-direction: column;
+    }
+    .podium-display {
+        margin-left: 40vw;
     }
 }
