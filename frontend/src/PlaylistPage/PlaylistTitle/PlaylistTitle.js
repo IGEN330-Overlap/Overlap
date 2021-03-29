@@ -25,7 +25,7 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
         });
     }
 
-    console.log(createdDate);
+    //console.log(createdDate);
     
     let createdDay;
     let createdMonth;
