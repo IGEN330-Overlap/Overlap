@@ -6,7 +6,7 @@ import dog from './puppy-icon.jpg';
 
 const axios = require("axios");
 
-const PlaylistTitle = ({playlistName, playlistID, groupCode}) => {
+const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
 
     var refreshToken = useSelector((state) => state.refreshToken)
 
@@ -25,6 +25,18 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode}) => {
         });
     }
 
+    console.log(createdDate);
+    
+    let createdDay;
+    let createdMonth;
+    let createdYear;
+
+    if (createdDate !== undefined) {
+        createdDay = createdDate.day;
+        createdMonth = createdDate.month;
+        createdYear = createdDate.year;
+    }
+
     return (
         <div className="playlist-info-root">
             <div className="playlist-page-cover-container">
@@ -34,7 +46,7 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode}) => {
                 <div className="title-container">
                     <h2 className="white"> {playlistName} </h2>
                 </div>
-                {/* <h4 className="created-date"><strong>Created On: {createdDate.substr(0, 10)}</strong></h4> */}
+                {createdDate !== undefined ? <h4 className="created-date"><strong>Created On: {createdMonth + " " + createdDay + ", " + createdYear}</strong></h4> : ''}
                 <div className="btn btn-sm playlist-button" onClick={addToSpotify}>
                     Save Playlist to Spotify
                 </div>

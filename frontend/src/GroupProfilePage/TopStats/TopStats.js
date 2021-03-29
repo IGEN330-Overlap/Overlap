@@ -144,7 +144,7 @@ export const GroupTopStats = ({groupUsers}) => {
         artistOccurences -= 1;
     }
 
-    console.log(groupFrequentArtists)
+    // console.log(groupFrequentArtists)
     
     var groupTopArtists = []
     groupFrequentArtists.map((artists) => {

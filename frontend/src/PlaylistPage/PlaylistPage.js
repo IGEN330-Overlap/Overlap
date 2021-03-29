@@ -20,7 +20,7 @@ export const PlaylistPage = (props) => {
     const [playlistName, setPlaylistName] = useState("");
     const [playlistTracks, setPlaylistTracks] = useState([]);
     const [groupCode, setGroupCode] = useState("");
-    //const [createdDate, setCreatedDate] = useState("");
+    const [createdDate, setCreatedDate] = useState("");
 
     const [checkMember, setCheckMember] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,7 @@ export const PlaylistPage = (props) => {
                         setPlaylistName(playlist.playlistName);
                         setPlaylistTracks(playlist.tracks);
                         setGroupCode(group.groupCode);
-                        //setCreatedDate(playlist.createdAt);
+                        setCreatedDate(playlist.createDate);
                     }
                     return playlistTracks;
                 })
@@ -74,7 +74,7 @@ export const PlaylistPage = (props) => {
                 <div className="playlist-page-content">
                     <div className="playlist-components">
                         <div className="playlist-page-name">
-                            <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode} />
+                            <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode} createdDate={createdDate}/>
                         </div>
                         <div className="playlist-page-tracks-container">
                             <PlaylistTracks playlistTracks={playlistTracks} />

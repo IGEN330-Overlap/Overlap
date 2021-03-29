@@ -11,8 +11,14 @@ import playlistcover2 from "./playlist-cover2.jpg";
 import playlistcover3 from "./playlist-cover3.jpeg";
 import addButton from "./add.svg";
 import closeButton from "./close-x.svg";
+import happy from "./happy.svg";
+import sad from "./sad.svg";
+import chill from "./chill.svg";
+import party from "./party.svg";
+
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
+import Collapse from 'react-bootstrap/Collapse';
 
 const axios = require('axios')
 
@@ -104,8 +110,14 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         return playlistUsers
       })
     }
-    //console.log(playlistUsers)
+    console.log(playlistUsers)
   }
+
+  const [playlistType, setPlaylistType] = useState("");
+  //console.log(playlistType)
+
+  // mood collapse
+  const [openMoodSelection, setMoodSelectionOpen] = useState(false)
 
   // generate playlist
   // need to add alerts to tell users if no one is selected or if there is no playlist title
@@ -116,10 +128,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
           console.log('No playlist name entered!')
           document.getElementById("generate-playlist-button").style.cursor = "not-allowed" 
         }
-        else if (input_playlistName !== "") {
-
-          console.log(playlistType)
-
+        else if (input_playlistName !== "" && playlistType !== "") {
           if(playlistType === "Top Tracks") {
             axios
             .post(process.env.REACT_APP_BACKEND_URL + "/groups/generatePlaylist", {
@@ -143,7 +152,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                 console.log(err);
             });
           }
-          else {
+          else if (playlistType !== "Top Tracks") {
             axios
             .post(process.env.REACT_APP_BACKEND_URL + "/groups/generateMoodsPlaylist", {
                 groupCode: groupCode,
@@ -209,8 +218,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     carouselArray.push(carouselElement);
   }
 
-  const [playlistType, setPlaylistType] = useState('');
-  console.log(playlistType)
 
   return (
     <div className="playlist-container">
@@ -271,20 +278,45 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                   ))}
                 </div>
             </div>
-            <div className="playlist-moods">
-              {/* <label className="switch">
-                <input type="checkbox" />
-                <span className="slider round"></span>
-              </label> */}
-
+            <div className="playlist-generation-options">
               {/* temporary mood stuff */}
               <h4>Select the type of playlist you want to generate:</h4>
-              <div className="playlist-options" onClick={()=>setPlaylistType("Top Tracks")}>Top Tracks</div>
-              <div className="playlist-options" onClick={()=>setPlaylistType("happy")}>Happy</div>
-              <div className="playlist-options" onClick={()=>setPlaylistType("sad")}>Sad</div>
-              <div className="playlist-options" onClick={()=>setPlaylistType("chill")}>Chill</div>
-              <div className="playlist-options" onClick={()=>setPlaylistType("party")}>Party</div>
-
+              <div className="option-container">
+                <div className="playlist-options" onClick={()=>setPlaylistType("Top Tracks")}>
+                  <strong>Group Top Tracks</strong>
+                </div>
+                <div className="vertical-line"></div>
+                <div className="mood-options">
+                  <div 
+                    className="playlist-options" 
+                    onClick={()=>setMoodSelectionOpen(!openMoodSelection)}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={openMoodSelection}
+                  >
+                      <strong>Moods Based</strong>
+                  </div>
+                  <Collapse in={openMoodSelection}>
+                    <div id="example-collapse-text" className="moods-collapse">
+                      <div className="playlist-options" onClick={()=>setPlaylistType("happy")}>
+                        <img src={happy} alt="happy" className="playlist-mood-emoji"/>
+                        Happy
+                      </div>
+                      <div className="playlist-options" onClick={()=>setPlaylistType("sad")}>
+                        <img src={sad} alt="sad" className="playlist-mood-emoji"/>
+                        Sad
+                      </div>
+                      <div className="playlist-options" onClick={()=>setPlaylistType("chill")}>
+                        <img src={chill} alt="chill" className="playlist-mood-emoji"/>
+                        Chill
+                      </div>
+                      <div className="playlist-options" onClick={()=>setPlaylistType("party")}>
+                        <img src={party} alt="party" className="playlist-mood-emoji"/>
+                        Party
+                      </div>
+                    </div>
+                  </Collapse>
+                </div>
+              </div>
             </div>
             <div className="name-the-playlist">
               <h4>Give your playlist a name!</h4>
