@@ -40,7 +40,14 @@ export const MusicalProfile = ({groupUsers}) => {
                     <div className="musical-scale">
                         <div className="scale-bar"></div>
                         <div className="user-position">
-
+                            {danceability.map((user,i) => ( 
+                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                    <img className="user-icon" src={user.icon} alt={user.name}/>
+                                    <div className="user-name">
+                                        {user.name}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                         <div className="scale-markers">
                             <div className="scale-point"><h5>0%</h5></div>
@@ -56,6 +63,19 @@ export const MusicalProfile = ({groupUsers}) => {
                     <p>A higher valence value means your music taste is generally more positive.</p>
                     <div className="musical-scale">
                         <div className="scale-bar"></div>
+                        <div className="user-position">
+                            {valence.map((user,i) => ( 
+                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                    <img className="user-icon" src={user.icon} alt={user.name}/>
+                                    <div className="user-name">
+                                        {user.name}
+                                    </div>
+                                    {/* <div className="user-stat">
+                                        {user.stat}
+                                    </div> */}
+                                </div>
+                            ))}
+                        </div>
                         <div className="scale-markers">
                             <div className="scale-point"><h5>0%</h5></div>
                             <div className="scale-point"></div>
@@ -70,6 +90,16 @@ export const MusicalProfile = ({groupUsers}) => {
                     <p>The energy attribute measures how energetic your music is.</p>
                     <div className="musical-scale">
                         <div className="scale-bar"></div>
+                        <div className="user-position">
+                            {energy.map((user,i) => ( 
+                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                    <img className="user-icon" src={user.icon} alt={user.name}/>
+                                    <div className="user-name">
+                                        {user.name}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                         <div className="scale-markers">
                             <div className="scale-point"><h5>0%</h5></div>
                             <div className="scale-point"></div>
@@ -84,6 +114,16 @@ export const MusicalProfile = ({groupUsers}) => {
                     <p>Your overall track popularity tells you how popular the songs you listen to are.</p>
                     <div className="musical-scale">
                         <div className="scale-bar"></div>
+                        <div className="user-position">
+                            {popularity.map((user,i) => ( 
+                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                    <img className="user-icon" src={user.icon} alt={user.name}/>
+                                    <div className="user-name">
+                                        {user.name}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                         <div className="scale-markers">
                             <div className="scale-point"><h5>0%</h5></div>
                             <div className="scale-point"></div>
