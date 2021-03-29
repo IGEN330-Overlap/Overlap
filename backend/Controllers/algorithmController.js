@@ -653,7 +653,7 @@ exports.createSpotifyPlaylist = async (req, res) => {
   let playlistName;
 
   //image data that will be used as the cover for the playlist
-  let base64URI = playlistCoverImages["top"]; //until playlist type prop implemented leave as logo
+  let base64URI = ""; //until playlist type prop implemented leave as logo
 
   // select base64URI based on the playlist type
   switch (req.body.playlistType) {
@@ -713,22 +713,24 @@ exports.createSpotifyPlaylist = async (req, res) => {
       res.json(err);
     }
 
-    try {
-      let data = await spotifyApi.uploadCustomPlaylistCoverImage(
-        playlistID,
-        base64URI
-      );
-      // if not successful status code throw an error
-      if (data.statusCode !== 202) {
-        throw new Error();
+    if (base64URI != "") {
+      try {
+        let data = await spotifyApi.uploadCustomPlaylistCoverImage(
+          playlistID,
+          base64URI
+        );
+        // if not successful status code throw an error
+        if (data.statusCode !== 202) {
+          throw new Error();
+        }
+      } catch (err) {
+        console.log("error with upload image");
+        res.json({
+          message: "error with upload image",
+          error: err,
+        });
       }
-    } catch (err) {
-      console.log("error with upload image");
-      res.json({
-        message: "error with upload image",
-        error: err,
-      });
-    }
+    }    
 
     try {
       // Add the tracks to the spotify playlist
