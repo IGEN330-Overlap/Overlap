@@ -5,6 +5,9 @@ import { updateGroupList } from '../../Redux/Actions.js';
 
 import Collapse from 'react-bootstrap/Collapse';
 
+import add_member from '../../GroupProfilePage/MemberDisplay/add-member.svg';
+import plus_sign from '../../GroupProfilePage/PlaylistCarousel/add.svg';
+
 const axios = require("axios");
 
 var input_name = '';
@@ -84,10 +87,24 @@ const CreateOrJoin = (props) => {
     //Redirect to new group page when group_code changes
     useEffect(() => {
         if(group_code !== '') {
-            console.log(group_code)
+            //console.log(group_code)
             window.location.href = "/authorized/group/" + group_code
         }
     }, [group_code])
+
+    //If key press for new group input is "Enter", run create group function
+    const handleNewGroupKeyPress = (e) => {
+        if(e.key === "Enter") {
+            createNewGroup();
+        }
+    }
+
+    //If key press for join group input is "Enter", run join group function
+    const handleJoinGroupKeyPress = (e) => {
+        if(e.key === "Enter") {
+            joinGroup();
+        }
+    }
 
     return (
         //Flexbox for creating or joining new group
@@ -97,12 +114,11 @@ const CreateOrJoin = (props) => {
                 aria-controls="example-collapse-text"
                 aria-expanded={openCreate}
             >
-            <h5 className="openCollapse">+   Create a new group</h5>
-            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING */}
+            <h5 className="openCollapse"><img className="create_icon" src={plus_sign} alt="plus sign"/>Create a new group</h5>
             </div>
             <Collapse in={openCreate}>
                 <div id="example-collapse-text" className="collapseBody">
-                    <input type="text" className="input" placeholder="Enter Group Name" size="15" id="newGroupName" maxLength="25"/>
+                    <input type="text" className="input" placeholder="Enter Group Name" size="15" id="newGroupName" maxLength="25" onKeyPress={handleNewGroupKeyPress}/>
                     <div className="continue-arrow" onClick={createNewGroup}>
                         <svg 
                             height="429.92093pt" 
@@ -123,12 +139,11 @@ const CreateOrJoin = (props) => {
                 aria-controls="example-collapse-text"
                 aria-expanded={openJoin}
             >
-            <h5 className="openCollapse">+   Join a group</h5>
-            {/* INPUT AND CONTINUE DON'T DO ANYTHING/LINK TO ANYTHING */}
+            <h5 className="openCollapse"><img className="join_icon"src={add_member} alt="join group icon"/>Join a group</h5>
             </div>
             <Collapse in={openJoin}>
                 <div id="example-collapse-text" className="collapseBody">
-                    <input type="text" className="input" placeholder="Enter Group Code" size="15" id="joinGroupCode"/>
+                    <input type="text" className="input" placeholder="Enter Group Code" size="15" id="joinGroupCode" onKeyPress={handleJoinGroupKeyPress}/>
                     <div className="continue-arrow" onClick={joinGroup}>
                         <svg 
                             height="429.92093pt" 

@@ -1,6 +1,10 @@
 /* CSS variables */
 @import url(../../variables.css);
 
+.YourGroupsBox {
+    z-index: 2;
+}
+
 .title{
     color: white;
     font-size: 3vw;
@@ -64,9 +68,18 @@ input:focus{
     padding: 8px;
 }
 
+.no-groups-text {
+    width: 9em;
+    font-size: 2vw;
+    margin-right: 0.5em;
+    color: white;
+    outline-color: transparent;
+    align-self: center;
+}
+
 .groupButton{
     display: flex;
-    width: 8em;
+    width: 9em;
     font-size: 2vw;
     margin-right: 0.5em;
     background-color: transparent;
@@ -96,6 +109,7 @@ input:focus{
 
 .dots:hover{
     fill: var(--blue-color-3);
+    cursor: pointer;
 }
 
 .modalcss .modal-dialog .modal-content{

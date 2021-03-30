@@ -104,34 +104,156 @@ function extractUsersTopTracks (data) {
  * Used to extract data for our use. used in conjuction with GET getMyTopArtists
  * Should pass data.body.items from the above SpotifyAPI request
  * @param {array} data 
- * @returns 
+ * @returns [ array of artist objects, array of array of top genres for every artists] 
  */
-function extractUsersTopArtists (data) {
+function extractUsersTopArtistsAndGenres (data) {
     
-    if (typeof(data) === "undefined") {
+    if (typeof data === "undefined") {
         return "";
     }
 
     let topArtists = [];
+    let topGenres = [];
     // iterate over data and add relevant artist attributes
     for (x of data) {
 
         //if artist name is empty, continue
         if (x.name.length === 0 || x.name.length == null || x.images.length == 0) {
             continue;
-        }
-        
-        topArtists.push({
-            artistName: x.name,
-            artistID: x.id,
-            followerCount: x.followers.total,
-            artistPopularity: x.popularity,
-            imageURL: x.images[0].url,
-            linkURL: x.external_urls.spotify,
-        });
+        } else {
+            topArtists.push({
+                artistName: x.name,
+                artistID: x.id,
+                followerCount: x.followers.total,
+                artistPopularity: x.popularity,
+                imageURL: x.images[0].url,
+                linkURL: x.external_urls.spotify,
+            });
+    
+            if (x.genres.length != 0 && x.genres[0] != "undefined") {
+                // Add genres if there are any to add and is valid
+                topGenres.push(x.genres);
+            } else {
+                //helps keep track of artists w/o genres
+                console.log(x.name, "has no top genres"); 
+            }
+        }        
     }
 
-    return topArtists;
+    return [topArtists, topGenres];
+}
+
+
+/**
+ * Gets the current date and returns the [day, month, year]
+ * @returns [day, month, year]
+ */
+function calculateDate() {
+    let months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",        
+    ];
+    let d = new Date();
+    let day = d.getDate().toString();
+    let month = months[d.getMonth()];
+    let year = d.getFullYear().toString();
+
+    return {
+        day: day,
+        month: month,
+        year: year,
+    };
+}
+
+/**
+ * Returns the corresponding mood profile, 
+ * Expected parameters passed are, "happy", "sad", "chill", "party"
+ * @param {String} selection, mood selection
+ * @returns 
+ */
+function buildPlaylistMoodProfile (selection) {
+    if (selection === "happy") {
+        return {
+            "min_energy": 0.50,
+            "target_energy": 0.7,
+            "min_danceability": 0.20,
+            "target_danceability": 0.40,
+            "max_danceability": 0.70,
+            "min_valence": 0.60,
+            "target_valence": 0.85,
+            "min_popularity": 50,
+            "limit": 30,
+            "Seed_genres": [
+                "happy",
+                "pop",
+                "summer",
+            ],
+        };
+    } else if (selection === "chill") {
+        return {
+            "target_energy": 0.5,
+            "max_energy": 0.75,
+            "target_valence": 0.5,
+            "target_danceability": 0.35,
+            "max_danceability": 0.70, 
+            "min_popularity": 50,
+            "limit": 30,
+            "Seed_genres": [
+                "chill",
+                "ambient",
+                "summer",
+            ],
+        };        
+
+    } else if (selection === "sad") {
+        return {
+            "target_energy": 0.20,
+            "max_energy": 0.50,
+            "target_danceability": 0.20,
+            "max_danceability": 0.5,
+            "target_valence": 0.10,
+            "max_valence": 0.7,
+            "target_acousticness": 0.70,
+            "min_popularity": 25,
+            "max_tempo": 140,
+            "limit": 30,
+            "Seed_genres": [
+                "sad",
+                "rainy-day",
+                "sleep",
+            ],
+        };
+    } else if (selection === "party") {
+        return {
+            "min_energy": 0.65,
+            "target_energy": 0.80,
+            "min_danceability": 0.70,
+            "target_danceability": 0.85,
+            "min_valence": 0.60,
+            "target_valence": 0.75,
+            "min_popularity": 50,
+            "target_popularity": 75,
+            "min_tempo": 120,
+            "limit": 30,
+            "Seed_genres": [
+                "party",
+                "pop",
+                "dance",
+            ],
+        }; 
+    } else {
+        return "undefined";
+    }
 }
 
 //export generateGroupCode() as a module for use in Controller.js
@@ -144,4 +266,10 @@ module.exports.calculateMusicalProfile = calculateMusicalProfile;
 module.exports.extractUsersTopTracks = extractUsersTopTracks;
 
 // export getTopTracks data extraction method
-module.exports.extractUsersTopArtists = extractUsersTopArtists;
+module.exports.extractUsersTopArtistsAndGenres = extractUsersTopArtistsAndGenres;
+
+// export get date method
+module.exports.calculateDate = calculateDate;
+
+// export mood profile
+module.exports.buildPlaylistMoodProfile = buildPlaylistMoodProfile;

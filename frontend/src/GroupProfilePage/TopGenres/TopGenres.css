@@ -50,7 +50,7 @@
 }
 
 .top-genre-1 {
-    position: absolute;
+    position: relative;
 }
 .top-genre-1 .bubble {
     height: min(40vw, 50vh);
@@ -65,8 +65,8 @@
 
 .top-genre-2 {
     position: relative;
-    top: clamp(5px, 2vw, 100px);
-    left: clamp(380px, 50vw, 650px);
+    /* top: clamp(5px, 2vw, 100px);
+    left: clamp(380px, 50vw, 650px); */
 }
 .top-genre-2 .bubble {
     height: min(30vw, 40vh);
@@ -81,8 +81,8 @@
 
 .top-genre-3 {
     position: relative;
-    top: clamp(160px, 17.5vw, 230px);
-    left: clamp(80px, 12vw, 200px);
+    /* top: clamp(160px, 17.5vw, 230px);
+    left: clamp(80px, 12vw, 200px); */
 }
 .top-genre-3 .bubble {
     height: min(20vw, 30vh);
@@ -97,8 +97,8 @@
 
 .top-genre-4 {
     position: relative;
-    top: clamp(125px, 10vw, 300px);
-    right: clamp(290px, 39vw, 450px);
+    /* top: clamp(125px, 10vw, 300px);
+    right: clamp(290px, 39vw, 450px); */
 }
 .top-genre-4 .bubble {
     height: min(12.5vw, 22.5vh);
@@ -113,8 +113,8 @@
 
 .top-genre-5 {
     position: relative;
-    bottom: clamp(140px, 19vw, 200px);
-    right: clamp(350px, 43vw, 600px);
+    /* bottom: clamp(140px, 19vw, 200px);
+    right: clamp(350px, 43vw, 600px); */
 }
 .top-genre-5 .bubble {
     height: min(10vw, 20vh);
