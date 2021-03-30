@@ -68,6 +68,9 @@ const groupSchema = new Schema(
             required: true,
           },
         },
+        playlistType: {
+          type: String,
+        },
       },
     ],
   },

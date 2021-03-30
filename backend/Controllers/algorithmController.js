@@ -405,6 +405,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
     createDate: calculateDate(),
+    playlistType: "top",
   };
 
   // Update playlist to the group
@@ -612,6 +613,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
     createDate: calculateDate(),
+    playlistType: req.body.selectedMood,
   };
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne
@@ -653,7 +655,7 @@ exports.createSpotifyPlaylist = async (req, res) => {
   let playlistName;
 
   //image data that will be used as the cover for the playlist
-  let base64URI = ""; //until playlist type prop implemented leave as logo
+  let base64URI = playlistCoverImages["top"]; //until playlist type prop implemented leave as logo
 
   // select base64URI based on the playlist type
   switch (req.body.playlistType) {
@@ -713,30 +715,29 @@ exports.createSpotifyPlaylist = async (req, res) => {
       res.json(err);
     }
 
-    if (base64URI != "") {
-      try {
-        let data = await spotifyApi.uploadCustomPlaylistCoverImage(
-          playlistID,
-          base64URI
-        );
-        // if not successful status code throw an error
-        if (data.statusCode !== 202) {
-          throw new Error();
-        }
-      } catch (err) {
-        console.log("error with upload image");
-        res.json({
-          message: "error with upload image",
-          error: err,
-        });
+    // Add image cover to the spotify playlist
+    try {
+      let data = await spotifyApi.uploadCustomPlaylistCoverImage(
+        playlistID,
+        base64URI
+      );
+      // if not successful status code throw an error
+      if (data.statusCode !== 202) {
+        throw new Error();
       }
-    }    
+    } catch (err) {
+      console.log("error with upload image");
+      res.json({
+        message: "error with upload image",
+        error: err,
+      });
+    }
 
     try {
       // Add the tracks to the spotify playlist
       let data = await spotifyApi.addTracksToPlaylist(playlistID, formattedTrackIds);
       // if not successful status code throw an error
-      if (data.statusCode != 201){
+      if (data.statusCode != 201) {
         throw new Error();
       } 
       console.log("playlist song addition status code: ", data.statusCode);
