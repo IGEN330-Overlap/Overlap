@@ -149,7 +149,7 @@ const GroupProfilePage = (props) => {
           </div>
           {/* <div className="musical-profile-display">
               <MusicalProfile groupUsers={groupUsers} />
-          </div>
+          </div> */}
       </div>
     </div>
     );
