@@ -137,15 +137,20 @@
 }
 .playlistModal h4 {
     margin-top: 12px;
+    margin-left: 6px;
+    margin-bottom: 10px;
     font-size: 18px;
     color: var(--primary-color-main);
     font-weight: 520;
+}
+.playlistModal .generate-step {
+    color: var(--blue-color-main);
 }
 .playlist-add-modal .modal-dialog .modal-content{
     height: fit-content;
     padding-top: 10px;
     padding-bottom: 10px;
-    text-align: center;
+    /* text-align: center; */
     background-color: var(--off-white-color);
     width: 500px;
 }
@@ -192,8 +197,7 @@
     height: 30px;
     color: var(--off-white-color);
     margin: 4px;
-    margin-top: 10px;
-    margin-bottom: 17px;
+    margin-bottom: 15px;
     border-radius: 20px;
 }
 .select-all-users:hover {
@@ -205,13 +209,14 @@
 }
 .name-the-playlist {
     display: flex;
-    flex-direction: column;
-    margin-top: 20px;
+    /* margin-top: 20px; */
+}
+.name-playlist {
+    display: flex;
     justify-content: center;
-    align-items: center;
 }
 .name-input {
-    width: 300px;
+    width: 350px;
     height: 30px;
     background-color: transparent;
     border-color: transparent;
@@ -219,6 +224,7 @@
     font-size: 20px;
     font-weight: 550;
     text-align: center;
+    align-items: center;
 }
 .name-input::placeholder{
     color: var(--primary-color-main);
@@ -252,12 +258,29 @@
     color: var(--neutral-color-7);
 }
 .option-container {
-    width: 95%;
+    width: 100%;
     margin: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
+}
+.toptracks-option {
+    text-align: center;
+    width: 47%;
+    padding: 5px;
+}
+.option-container p {
+    font-size: 14px;
+    margin-bottom: 2px;;
+}
+.mood-options {
+    width: 47%;
+    padding: 5px;
+    text-align: center;
+}
+.collapse-content {
+    height: 130px;
 }
 .vertical-line {
     background-color: var(--primary-color-main);

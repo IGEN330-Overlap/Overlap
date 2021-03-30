@@ -48,9 +48,11 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
   const showAddPlaylistModal = () => {
     setAddPlaylistIsOpen(true);
+    setPlaylistType('')
   };
   const hideAddPlaylistModal = () => {
     setAddPlaylistIsOpen(false);
+    setPlaylistType('')
   };
 
   var playlistUsers = []
@@ -113,11 +115,27 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     console.log(playlistUsers)
   }
 
-  const [playlistType, setPlaylistType] = useState("");
-  //console.log(playlistType)
-
   // mood collapse
   const [openMoodSelection, setMoodSelectionOpen] = useState(false)
+  const [openTopTrackSelection, setTopTrackSelectionOpen] = useState(false)
+
+  const [playlistType, setPlaylistType] = useState("");
+  const selectPlaylistType = (type) => {
+    if((type === "Top Tracks") && !openTopTrackSelection) {
+      document.getElementById("toptracks-select").style.backgroundColor = "var(--neutral-color-2)";
+      document.getElementById("moods-select").style.backgroundColor = "var(--off-white-color)";
+    }
+    else if(type !== "Top Tracks") {
+      document.getElementById("moods-select").style.backgroundColor = "var(--neutral-color-2)";
+      document.getElementById("toptracks-select").style.backgroundColor = "var(--off-white-color)";
+    }
+    else {
+      document.getElementById("toptracks-select").style.backgroundColor = "var(--off-white-color)";
+      document.getElementById("moods-select").style.backgroundColor = "var(--off-white-color)";
+    }
+    setPlaylistType(type);
+  }
+  console.log(playlistType)
 
   // generate playlist
   // need to add alerts to tell users if no one is selected or if there is no playlist title
@@ -152,7 +170,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                 console.log(err);
             });
           }
-          else if (playlistType !== "Top Tracks") {
+          else if (playlistType !== "Top Tracks" && playlistType !== "Moods") {
             axios
             .post(process.env.REACT_APP_BACKEND_URL + "/groups/generateMoodsPlaylist", {
                 groupCode: groupCode,
@@ -218,7 +236,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     carouselArray.push(carouselElement);
   }
 
-
   return (
     <div className="playlist-container">
       <div>
@@ -261,7 +278,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         </Modal.Header>
         <Modal.Body>
           <div className="playlistModal">
-            <h4>Who do you want to contribute to this playlist?</h4>
+            <h4><span className="generate-step">STEP 1: </span>Choose people to contribute to this playlist</h4>
             <div className="select-playlist-users">
                 <div className="select-all-users" id="select-bubble" onClick={() => selectAll()}>
                   <strong>Select All</strong>
@@ -280,36 +297,55 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
             </div>
             <div className="playlist-generation-options">
               {/* temporary mood stuff */}
-              <h4>Select the type of playlist you want to generate:</h4>
+              <h4><span className="generate-step">STEP 2: </span>Select the type of playlist you want to make</h4>
               <div className="option-container">
-                <div className="playlist-options" onClick={()=>setPlaylistType("Top Tracks")}>
-                  <strong>Group Top Tracks</strong>
+                <div className="toptracks-option" id="toptracks-select">
+                  <div 
+                      className="playlist-options" 
+                      onClick={()=>{
+                        setTopTrackSelectionOpen(!openTopTrackSelection); 
+                        setMoodSelectionOpen(false);
+                        selectPlaylistType("Top Tracks")}}
+                      aria-controls="example-collapse-text"
+                      aria-expanded={openTopTrackSelection}
+                    >
+                      <strong>Top Tracks</strong>
+                  </div>
+                  <Collapse in={openTopTrackSelection}>
+                    <div id="example-collapse-text" className="collapse-content">
+                      <p>This playlist is generated based on the top tracks of each user. It prioritizes songs that appear in multiple people's top tracks.</p>
+                    </div>
+                  </Collapse>                 
                 </div>
                 <div className="vertical-line"></div>
-                <div className="mood-options">
+                <div className="mood-options" id="moods-select">
                   <div 
                     className="playlist-options" 
-                    onClick={()=>setMoodSelectionOpen(!openMoodSelection)}
+                    onClick={()=>{
+                      setMoodSelectionOpen(!openMoodSelection); 
+                      setTopTrackSelectionOpen(false); 
+                      selectPlaylistType("Moods")}}
                     aria-controls="example-collapse-text"
                     aria-expanded={openMoodSelection}
                   >
                       <strong>Moods Based</strong>
                   </div>
                   <Collapse in={openMoodSelection}>
-                    <div id="example-collapse-text" className="moods-collapse">
-                      <div className="playlist-options" onClick={()=>setPlaylistType("happy")}>
+                    <div id="example-collapse-text" className="collapse-content">
+                    <p>What mood do you want?</p>
+                      <div className="playlist-options" onClick={()=>selectPlaylistType("happy")}>
                         <img src={happy} alt="happy" className="playlist-mood-emoji"/>
                         Happy
                       </div>
-                      <div className="playlist-options" onClick={()=>setPlaylistType("sad")}>
+                      <div className="playlist-options" onClick={()=>selectPlaylistType("sad")}>
                         <img src={sad} alt="sad" className="playlist-mood-emoji"/>
                         Sad
                       </div>
-                      <div className="playlist-options" onClick={()=>setPlaylistType("chill")}>
+                      <div className="playlist-options" onClick={()=>selectPlaylistType("chill")}>
                         <img src={chill} alt="chill" className="playlist-mood-emoji"/>
                         Chill
                       </div>
-                      <div className="playlist-options" onClick={()=>setPlaylistType("party")}>
+                      <div className="playlist-options" onClick={()=>selectPlaylistType("party")}>
                         <img src={party} alt="party" className="playlist-mood-emoji"/>
                         Party
                       </div>
@@ -319,8 +355,10 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               </div>
             </div>
             <div className="name-the-playlist">
-              <h4>Give your playlist a name!</h4>
+              <h4><span className="generate-step">STEP 3: </span>Give your playlist a name!</h4>
               {/*create alert to tell user playlist title is too long */}
+            </div>
+            <div className="name-playlist">
               <input type="text" className="name-input" placeholder="Enter Playlist Name" maxlength="25" id="newPlaylistName"/>
             </div>
             <div className="generate-playlist">
