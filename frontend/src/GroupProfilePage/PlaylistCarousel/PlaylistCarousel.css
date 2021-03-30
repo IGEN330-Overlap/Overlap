@@ -269,6 +269,7 @@
     text-align: center;
     width: 47%;
     padding: 5px;
+    border-radius: 30px;
 }
 .option-container p {
     font-size: 14px;
@@ -278,6 +279,7 @@
     width: 47%;
     padding: 5px;
     text-align: center;
+    border-radius: 30px;
 }
 .collapse-content {
     height: 130px;

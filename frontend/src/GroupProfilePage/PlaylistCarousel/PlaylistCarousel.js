@@ -90,7 +90,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     }
     checkDuplicate = false
     index = ''
-    //console.log(playlistUsers)
+    console.log(playlistUsers)
   }
   
   // select all users or remove all users if everyone is already selected
