@@ -57,6 +57,12 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   var checkDuplicate = false
   var index
 
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const handleSelect = (selectedCarouselIndex, e) => {
+    setCarouselIndex(selectedCarouselIndex);
+  };
+
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
     if (playlistUsers.length === 0) {
@@ -193,13 +199,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     playlistInfo.reverse()
     return playlistInfo
   })
-
-  // trying to get the current out and total slides
-  // let totalSlides = playlistInfo.length % 4;
-  // $('#myCarousel').bind('slid', function() {
-  //   currentIndex = $('div.active').index() + 1;
-  //  $('.num').html(''+currentIndex+'/'+totalItems+'');
-  // });
 
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
