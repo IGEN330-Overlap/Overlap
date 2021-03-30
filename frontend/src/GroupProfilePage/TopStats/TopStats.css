@@ -82,6 +82,7 @@
     font-size: 15px;
     max-height: 68px;
     overflow-y: auto;
+    scrollbar-width: thin;
 }
 .top-tracks-root .track-artist {
     color: var(--blue-color-1);

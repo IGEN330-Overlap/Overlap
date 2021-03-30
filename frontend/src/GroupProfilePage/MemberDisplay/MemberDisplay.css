@@ -108,11 +108,10 @@
 }
 
 /*custom scroll bar for firefox*/
-/* .display-members {
-    scrollbar-width: 7px;
+.display-members {
+    scrollbar-width: thin;
     scrollbar-color: var(--blue-color-3) black;
-    
-} */
+}
 
 .icon-container {
     margin-top: 15px;
