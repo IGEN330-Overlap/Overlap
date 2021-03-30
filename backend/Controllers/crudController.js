@@ -277,26 +277,48 @@ exports.getUserGroups = async (req, res) => {
  * @param {} req {groupCode: String, newGroupName: String}
  * @param {} res
  */
-exports.changeGroupName = async (req, res) => {
-  await Group.updateOne(
+ exports.changeGroupName = async (req, res) => {
+  
+  if(req.body.newGroupName === ""){
+    //checks if newGroupName is blank
+    res.json({
+      message:"invalid group name"
+    })
+    return;
+  }
+
+  try{
+    //checking if the group code entered is valid.
+    let data = await Group.findOne({ groupCode: req.body.groupCode });
+
+    if (data == null){
+      throw new Error();
+    }
+  } catch(err) {
+    res.json({
+      message: "Unable to find group",
+      error: err,
+    });
+    return;
+  }
+
+    try{
+    await Group.updateOne(
 
       //filter
       {groupCode: req.body.groupCode},
 
       //updates group name
-      {groupName: req.body.newGroupName})
+      {$set: {groupName: req.body.newGroupName}});
 
-      .then((data) => {
-        res.json({
-          message: "Sucessfully changed group name",
-          groupCode: req.body.groupCode,
-        });
-      })
-     .catch((err) => {
+    res.json({
+      message: "Successfully changed group name"
+    });
+    } catch(err) {
       res.json({
         message: "Unable to change group name",
         error: err,
       });
-    });
-
-};
+      return;
+    }
+}
