@@ -19,6 +19,7 @@
     height: auto;
     color: white;
     display: flex;
+    box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.644);
 } 
 
 .navbar-stuff {
@@ -30,6 +31,7 @@
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
+
 }
 
 .navbar-stuff .btn {
@@ -44,3 +46,6 @@
     background: var(--blue-color-5);
 }
 
+.justify-content-end {
+    padding-right: 2vw;
+}
