@@ -96,8 +96,8 @@
 }
 
 .user-position .user-icon {
-    height: 45px;
-    width: 45px;
+    height: 50px;
+    width: 50px;
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;

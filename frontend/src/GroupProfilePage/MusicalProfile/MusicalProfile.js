@@ -22,11 +22,6 @@ export const MusicalProfile = ({groupUsers}) => {
         return musicalProfiles
     })
 
-    console.log(danceability)
-    console.log(valence)
-    console.log(energy)
-    console.log(popularity)
-
     return (
         <div className="musical-profile-root">
             <div className="musical-profile-content">
