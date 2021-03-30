@@ -4,7 +4,6 @@
 .member-container {
     width: 45vw;
     margin-right: 5vw;
-    margin-bottom: 3vh;
     background-color: transparent;
 }
 
@@ -12,9 +11,10 @@
 .member-container .d-flex {
     background-color: var(--primary-color-main);
     margin-bottom: 3px;
+    width: 55vw;
     align-items: center;
     position: relative;
-    z-index: 10;
+    z-index: 7;
 }
 .add-member {
     margin-left: 15px;
@@ -62,7 +62,7 @@
     font-size: clamp(13px, 1.25vw, 18px);
     animation-name: comparemessage;
     animation-duration: 3s;
-    z-index: 5;
+    z-index: 8;
 }
 
 @keyframes comparemessage {
@@ -74,7 +74,7 @@
 /*icons */
 .display-members {
     display: flex;
-    width: 45vw;
+    width: 43vw;
     flex-wrap: wrap;
     max-height: 32.5vh;
     justify-content: flex-start;
@@ -121,6 +121,9 @@
     object-position: 50%;
     border-radius: 50rem;
     transition: opacity 0.45s;
+    background-color: var(--primary-color-6);
+    /* background-color: rgba(162,162,254,0.75); */
+    /* ^ --blue-color-2 at 75% opacity ^ */
 }
 .user-name {
     font-size: clamp(12px, 1.75vw, 17px);
@@ -155,5 +158,8 @@
     }
     .member-comparison-flex .individual-comparisons {
         margin-top: 20px;
+    }
+    .member-container .d-flex {
+        width: 90vw;
     }
 }

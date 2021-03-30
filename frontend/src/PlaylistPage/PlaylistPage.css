@@ -3,12 +3,12 @@
 .playlist-landing-root {
     width: auto;
     height: 100vh;
-    background-color: #9D5C63;
+    background-color: var(--primary-color-main);
 }
 
 .playlist-page-content {
     display: flex;
-    height: 90vh;
+    /* height: 90vh; */
     width: auto;
     align-items: center;
     justify-content: center;
@@ -16,9 +16,11 @@
 
 .playlist-page-name {
     margin-left: 4vw;
+    margin-bottom: 2vh;
 }
 
 .playlist-components {
+    padding-top: 5vh;
     width: 100vw;
     display: flex;
     flex-direction: row;
@@ -29,10 +31,76 @@
 
 .playlist-page-tracks-container {
     margin-left: 2vw;
-    background: rgba(190, 154, 154, 0.25);
+    background: rgba(155, 154, 190, 0.301);
     border-radius: 15px;
     width: 425px;
     height: max(55vh, 475px);
+}
+
+.landing-root-error {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.landing-root-base {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrong-playlist {
+    font-size: 2vw;
+    color: var(--off-white-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+}
+.wrong-playlist .return-button {
+    margin-top: 20px;
+    display: flex;
+    padding-right: 15px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: var(--blue-color-main);
+    font-size: clamp(12px, 1.75vw, 25px);
+    color: var(--off-white-color);
+    align-items: center;
+}
+.return-button:hover {
+    text-decoration: none;
+    background-color: var(--blue-color-5);
+    cursor: pointer;
+}
+
+.error-return-arrow {
+    width: 28px;
+    height: 28px;
+    margin-right: 3px;
+}
+
+.pp_backArrow{
+    fill: white;
+    margin-left:2vw;
+    color: white;
+    text-align: center;
+}
+
+.pp_backArrow:hover{
+    cursor: pointer;
+    color: var(--blue-color-1);
+    text-decoration: none;
+}
+
+.pp_backArrow_svg{
+    height:2vw;
+    width:2vw;
+    padding-right: 2px;
 }
 
 @media (max-width: 820px) {
@@ -47,5 +115,19 @@
     .playlist-page-name {
         width: 425px;
         margin-left: 0px;
+        margin-bottom: 0px;
+    }
+    .loading-message {
+        font-size: 3.5vw;
+    }
+    .wrong-group {
+        font-size: 3.5vw;
+    }
+    .return-button {
+        font-size: 3vw;
+    }
+    .pp_backArrow_svg{
+        height:35px;
+        width:35px;
     }
 }

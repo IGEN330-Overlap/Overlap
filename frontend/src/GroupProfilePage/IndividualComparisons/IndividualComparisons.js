@@ -1,17 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import './IndividualComparisons.css';
+import { useSelector } from "react-redux";
 
 export const MyInsights = (props) => {
-       
-    const getTopArtists = useSelector((state) => state.userObject.topArtists).slice(0,3);
+    
+    const userObject = useSelector(state => state.userObject)
+
+    const getTopArtists = userObject ? userObject.topArtists.slice(0,3) : []
     const myTopArtists = []
     getTopArtists.map((artist,i) => {
         myTopArtists[i]=({artist: artist.artistName, icon: artist.imageURL})
         return myTopArtists
     })
 
-    const getTopTracks = useSelector((state) => state.userObject.topTracks).slice(0,3);
+    const getTopTracks = userObject ? userObject.topTracks.slice(0,3) : []
     const myTopTracks = []
     getTopTracks.map((track,i) => {
         myTopTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
@@ -29,7 +31,7 @@ export const MyInsights = (props) => {
                 <h2><strong>Top Artists</strong></h2>
                 <div className="artist-display">
                     {myTopArtists.map((artist,i) => (
-                        <div className="artist-container">
+                        <div className="artist-container" key={i}>
                             <img className="artist-icon" src={artist.icon} alt={artist.artist}></img>
                             <div className="artist-name">
                                 <h5><strong>{[i+1]} / </strong></h5>
@@ -44,7 +46,7 @@ export const MyInsights = (props) => {
                 <h2><strong>Top Tracks</strong></h2>
                 <div className="track-display">
                     {myTopTracks.map((track,i) => (
-                        <div className="track-container">
+                        <div className="track-container" key={i}>
                             <h3><strong>{[i+1]}</strong></h3>
                             <img className="track-icon" src={track.icon} alt={track.track}/>
                             <div className="track-info">    
@@ -64,28 +66,30 @@ export const MyInsights = (props) => {
     )
 }
 
-export const Comparisons = ({member_id, toCompare}) => {
+export const Comparisons = ({groupUsers, member_id, toCompare}) => {
     
+    const userObject = useSelector(state => state.userObject)
+
     // user top artists and tracks
-    const getTopArtists = useSelector((state) => state.userObject.topArtists)
+    const getTopArtists = userObject ? userObject.topArtists : []
     const myTopArtists = []
     getTopArtists.map((artist,i) => {
         myTopArtists[i]=({artist: artist.artistName, icon: artist.imageURL})
         return myTopArtists
     })
 
-    const getTopTracks = useSelector((state) => state.userObject.topTracks)
+    const getTopTracks = userObject ? userObject.topTracks : []
     const myTopTracks = []
     getTopTracks.map((track,i) => {
-        myTopTracks[i]=({track:track.trackName, artist: track.artistName, icon: track.imageURL})
+        myTopTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
         return myTopTracks
     })
+
 
     // compare top artists and tracks
     var compare_name = ''
     var compare_info = ''
-    const getGroupUsers = useSelector((state) => state.currentGroup.groupUsers)
-    getGroupUsers.map((user) => {
+    groupUsers.map((user) => {
         if (user.userID === member_id){
             compare_name = user.name
             compare_info = user
@@ -95,16 +99,18 @@ export const Comparisons = ({member_id, toCompare}) => {
 
     var userCompareArtists = []
     var userCompareTracks = []
-
-    compare_info.topArtists.map((artist,i) => {
-        userCompareArtists[i] = ({artist: artist.artistName, icon: artist.imageURL})
-        return userCompareArtists
-    })
     
-    compare_info.topTracks.map((track,i) => {
-        userCompareTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
-        return userCompareTracks
-    })
+    if(compare_info.length !== 0){
+        compare_info.topArtists.map((artist,i) => {
+            userCompareArtists[i] = ({artist: artist.artistName, icon: artist.imageURL})
+            return userCompareArtists
+        })
+        
+        compare_info.topTracks.map((track,i) => {
+            userCompareTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
+            return userCompareTracks
+        })
+    }
 
     // find up to three common artists
     const compareArtists = []
@@ -123,8 +129,8 @@ export const Comparisons = ({member_id, toCompare}) => {
     compareArtists.sort(function(a,b){
         return a.rank - b.rank
     })
-    console.log(compareArtists)
 
+    // find up to three common tracks
     myTopTracks.map((myTrack, i) => {
         userCompareTracks.map((compTrack, j) => {
             if((myTrack.track === compTrack.track) && (myTrack.artist === compTrack.artist)){
@@ -142,7 +148,7 @@ export const Comparisons = ({member_id, toCompare}) => {
     return(
         <div className="comparisons">
             <div className="return-to-insights">
-                <h4><strong onClick={() => toCompare()}> Return to Personal Insights</strong></h4>
+                <h4><strong onClick={() => toCompare('')}> Return to Personal Insights</strong></h4>
             </div>
             <div className="heading">
                 <h1><strong>You & {compare_name}</strong></h1>
@@ -157,7 +163,7 @@ export const Comparisons = ({member_id, toCompare}) => {
                 ?
                 <div className="artist-display">
                     {compareArtists.slice(0,3).map((artist,i) => (
-                        <div className="artist-container">
+                        <div className="artist-container" key={i}>
                             <img className="artist-icon" src={artist.icon} alt={artist.artist}></img>
                             <div className="artist-name">
                                 <h5><strong>{[i+1]} / </strong></h5>
@@ -181,7 +187,7 @@ export const Comparisons = ({member_id, toCompare}) => {
                 ?                                                                      
                 <div className="track-display">
                     {compareTracks.slice(0,3).map((track,i) => (
-                        <div className="track-container">
+                        <div className="track-container" key={i}>
                             <h3><strong>{[i+1]}</strong></h3>
                             <img className="track-icon" src={track.icon} alt={track.track}/>
                             <div className="track-info">

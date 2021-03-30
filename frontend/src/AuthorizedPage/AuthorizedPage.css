@@ -6,13 +6,23 @@
     justify-content: center;
     align-items: center;
     width: auto;
-    height: 100vh;
     background-color: var(--primary-color-main);
+}
+
+.groups_iceberg{
+    position: absolute;
+    bottom: 1vh;
+    right: 1vh;
 }
 
 @media (max-width: 720px){
     .AuthorizedPage{
         flex-direction: column;
         align-items: center;
+    }
+    .groups_iceberg{
+        bottom: -1vh;
+        right: -7vh;
+        height: 225px;
     }
 }

@@ -1,48 +1,30 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupUsers } from '../../Redux/Actions.js';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 import './MemberDisplay.css';
 import { Popover, OverlayTrigger } from 'react-bootstrap';
 
 import add_member from './add-member.svg';
+import logo_small from './logo small.svg';
 
-const axios = require("axios");
-
-const MemberDisplay = ({name, toCompare}) => {
-
-  const dispatch = useDispatch();
+const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
 
   const userObject = useSelector(state => state.userObject)
 
-  const groupCode = useSelector(state => state.currentGroup.groupCode)
-
-  // use effect to get user info for each user in the group
-  useEffect(() => {
-    axios
-    // using an existing group for now, need to replace with group code later
-    .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
-    .then((data) => {
-      console.log(data.data)
-      var group_users = data.data
-      dispatch(updateGroupUsers(group_users))
-    })
-    .catch((err) => console.log(err))
-  }, [userObject])
-
   // primary user
-  const primary_user = useSelector(state => state.userObject.name)
-  const primary_icon = useSelector(state => state.userObject.imageURL)
+  const primary_user = userObject ? userObject.name : ''
+  let primary_icon = userObject ? userObject.imageURL : ''
+
+  primary_icon = primary_icon ? primary_icon : logo_small;
 
   // group members
-  const groupUsers = useSelector(state => state.currentGroup.groupUsers)
   const members = []
-  const icon_src = []
+  let icon_src = []
   const member_id = []
   groupUsers.map((member,i) => {
     if (member.name !== primary_user) {
       members[i] = member.name
-      icon_src[i] = member.imageURL
+      icon_src[i] = member.imageURL ? member.imageURL : logo_small;
       member_id[i] = member.userID
     }
     return members
@@ -90,13 +72,13 @@ const MemberDisplay = ({name, toCompare}) => {
 
         <div className="display-members">
             <div className="icon-container">
-                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
-                <div className="user-name" onClick={() => toCompare()}>
+                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare('')}></img>
+                <div className="user-name" onClick={() => toCompare('')}>
                   <strong>{primary_user}</strong>
                 </div>
             </div>
             {members.map((member,i) => (
-                <div className="icon-container">
+                <div className="icon-container" key={i}>
                     <img className="user-icon" src={icon_src[i]} alt={member} onClick={() => toCompare(member_id[i])}></img>
                     <div className="user-name" onClick={() => toCompare(member_id[i])}>
                             <strong>{member}</strong>

@@ -1,19 +1,23 @@
 import "./AuthorizedPage.css";
 import GroupsComponent from "./GroupsComponent/GroupsComponent";
 import CreateOrJoin from "./CreateOrJoin/CreateOrJoin";
-import { useSelector } from "react-redux";
+import Navbar1 from "../Navbar/Navbar";
+import iceberg from './iceberg.svg';
 
 //takes accessToken string and loggedIn boolean as props
 const AuthorizedPage = (props) => {
-  //Select refreshToken state from Redux store
-  const refreshToken = useSelector((state) => state.refreshToken);
-
   return (
-    <div className="AuthorizedPage">
-      {/* && operator allows conditional rendering of the component */}
-
-      <>{refreshToken.length !== 0 && <GroupsComponent />}</>
-      <>{refreshToken.length !== 0 && <CreateOrJoin />}</>
+    <div className="landing-root">
+      <div className="navbar">
+        <Navbar1 />
+      </div>
+      <div className="AuthorizedPage">
+        <GroupsComponent />
+        <CreateOrJoin />
+        <div className="groups_iceberg">
+          <img src={iceberg} alt="decorative iceberg"/>
+        </div>
+      </div>
     </div>
   );
 };

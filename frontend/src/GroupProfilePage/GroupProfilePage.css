@@ -1,78 +1,159 @@
 @import url(../variables.css);
 
-.landing-root {
+.group-landing-root {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     background-color: var(--primary-color-main);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
+    overflow: auto;
+    scroll-snap-type: y mandatory;
 }
-.landing-root .navbar {
+.group-info-root {
+    background-color: var(--primary-color-main);
+    min-height: 100vh;
+    height: fit-content;
+    scroll-snap-align: center;
+}
+.group-landing-root .navbar {
     position: relative;
     z-index: 6;
     animation-name: navbaropacity;
     animation-duration: 3s;
 }
-.landing-root .main-column-box {
-    height: clamp(100px, 9vh, 150px);
+.group-landing-root .main-column-box {
+    height: clamp(110px, 9vh, 150px);
     width: 50vw;
     background-color: var(--primary-color-main);
     position: absolute;
     z-index: 2;
 }
 
-.group-profile-page-components {
+.landing-root-error {
     width: 100vw;
-    height: 90vh;
+    height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing-root-base {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: var(--primary-color-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrong-group {
+    font-size: 2vw;
+    color: var(--off-white-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    position: absolute;
+    animation-name: wrong-group;
+    animation-duration: 0.1s;
+}
+.wrong-group .return-button {
+    margin-top: 20px;
+    display: flex;
+    padding-right: 15px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: var(--blue-color-main);
+    font-size: clamp(12px, 1.75vw, 25px);
+    color: var(--off-white-color);
+    align-items: center;
+}
+.return-button:hover {
+    text-decoration: none;
+    background-color: var(--blue-color-5);
+    cursor: pointer;
+}
+
+.error-return-arrow {
+    width: 28px;
+    height: 28px;
+    margin-right: 3px;
+}
+
+.group-profile-page-components {
+    width: 100vw;
+    min-height: 92vh;
+    height: fit-content;
 }
 
 .component-box {
-    height: 8vh;
-    width: 90vw;
-    z-index: 3;
+    position: relative;
+    height: min(8vh, 50px);
+    width: 95vw;
+    z-index: 5;
     background-color: var(--primary-color-main);
 }
 
 .group-name {
-    margin-top: 10px;
+    position: absolute;
     margin-left: 4vw;
     height: clamp(55px, 9vw, 90px);
     z-index: 3;
 }
-.landing-root .d-flex {
+.group-landing-root .info-flex {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
+    height: fit-content;
+    width: 100vw;
     position: relative;
     z-index: 1;
 }
 .member-display {
+    position: relative;
     width: 45vw;
     max-height: 48vh;
     margin-left: 4vw;
-    margin-bottom: 10px;
+    margin-bottom: 2vh;
+    margin-top: clamp(80px, 10vh, 100px);
 }
 .playlist-carousel{
+    position: relative;
+    margin-top: clamp(40px, 4vh, 50px);
     margin-left: 4vw;
+    margin-bottom: 16vh;
+    width: 45vw;
+    animation-name: playlistanimation;
+    animation-duration: 3.5s;
+    animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
 
 .individual-comparisons {
-    margin-top: 70px;
-    margin-left: 8vw;
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 55vw;
+    margin-bottom: 2vh;
+    z-index: 8;
     animation-name: insightanimation;
     animation-duration: 2.75s;
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
 
-.main-column{
-    display: flex;
-    flex-direction: column;
+.profile_iceberg{
+    position: absolute;
+    bottom: 2vh;
+    right: 1vh;
+    opacity: 25%;
+}
+
+.top-genres-display{
+    scroll-snap-align: center;
+}
+
+.musical-profile-display{
+    scroll-snap-align: center;
 }
 
 @keyframes navbaropacity {
@@ -84,6 +165,21 @@
     }
     to {
         background-color: transparent;
+    }
+}
+
+@keyframes playlistanimation {
+    from {
+        opacity: 0;
+        transform: translateY(500px);
+    }
+    75% {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
     }
 }
 
@@ -102,31 +198,56 @@
     }
 }
 
+@keyframes wrong-group {
+    from {
+        opacity: 0;
+    }
+    75% {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 780px) {
     .individual-comparisons {
+        position: relative;
         margin-left: 4vw;
         margin-top: 10px;
     }
     .member-display {
+        position: relative;
+        margin-top: 0px;
+        margin-bottom: 0px;
         width: 90vw;
     }
     .playlist-carousel {
-        margin-bottom: 15px;
+        position: relative;
+        margin-top: 2vh;
+        margin-bottom: 3vh;
     }
     .group-name {
+        position: relative;
         width: 100vw;
     }
     .group-profile-page-components {
         align-items: start;
         justify-content: start;
     }
-    .landing-root .main-column-box {
-        height: 100px;
-        width: 90vw;
+    .group-landing-root .main-column-box {
+        height: 85px;
+        width: 95vw;
         z-index: 2;
     }
-    .component-box {
+    .group-profile-page-components .component-box {
         height: 0px;
+    }
+    .wrong-group {
+        font-size: 3.5vw;
+    }
+    .return-button {
+        font-size: 3vw;
     }
 }
 @media (max-height: 1200px) {
