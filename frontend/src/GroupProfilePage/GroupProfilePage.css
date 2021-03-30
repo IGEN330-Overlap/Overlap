@@ -9,11 +9,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
+    overflow: auto;
+    scroll-snap-type: y mandatory;
 }
 .group-info-root {
     background-color: var(--primary-color-main);
     min-height: 100vh;
     height: fit-content;
+    scroll-snap-align: center;
 }
 .group-landing-root .navbar {
     position: relative;
@@ -46,14 +49,6 @@
     justify-content: center;
     align-items: center;
 }
-
-.loading-message {
-    font-size: 2vw;
-    color: var(--off-white-color);
-    opacity: 0;
-    /*animation-name: loading-message;
-    animation-duration: 3s; */
-}
 .wrong-group {
     font-size: 2vw;
     color: var(--off-white-color);
@@ -64,19 +59,32 @@
     animation-name: wrong-group;
     animation-duration: 0.1s;
 }
-.return-button {
-    font-size: 1.5vw;
-    color: var(--blue-color-1);
+.wrong-group .return-button {
+    margin-top: 20px;
+    display: flex;
+    padding-right: 15px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: var(--blue-color-main);
+    font-size: clamp(12px, 1.75vw, 25px);
+    color: var(--off-white-color);
+    align-items: center;
 }
 .return-button:hover {
     text-decoration: none;
-    color: var(--blue-color-main);
+    background-color: var(--blue-color-5);
     cursor: pointer;
+}
+
+.error-return-arrow {
+    width: 28px;
+    height: 28px;
+    margin-right: 3px;
 }
 
 .group-profile-page-components {
     width: 100vw;
-    min-height: 90vh;
+    min-height: 92vh;
     height: fit-content;
 }
 
@@ -140,6 +148,14 @@
     opacity: 25%;
 }
 
+.top-genres-display{
+    scroll-snap-align: center;
+}
+
+.musical-profile-display{
+    scroll-snap-align: center;
+}
+
 @keyframes navbaropacity {
     from {
         background-color: var(--primary-color-main);
@@ -179,18 +195,6 @@
     to {
         opacity: 1;
         transform: translateX(0px);
-    }
-}
-
-@keyframes loading-message {
-    from {
-        opacity: 1;
-    }
-    75% {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
     }
 }
 
@@ -238,9 +242,6 @@
     }
     .group-profile-page-components .component-box {
         height: 0px;
-    }
-    .loading-message {
-        font-size: 3.5vw;
     }
     .wrong-group {
         font-size: 3.5vw;

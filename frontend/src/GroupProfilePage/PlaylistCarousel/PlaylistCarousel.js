@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import "./PlaylistCarousel.css";
 
@@ -10,6 +10,7 @@ import playlistcover1 from "./playlist-cover1.jpg";
 import playlistcover2 from "./playlist-cover2.jpg";
 import playlistcover3 from "./playlist-cover3.jpeg";
 import addButton from "./add.svg";
+import closeButton from "./close-x.svg";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 
@@ -50,6 +51,12 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   var checkDuplicate = false
   var index
 
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const handleSelect = (selectedCarouselIndex, e) => {
+    setCarouselIndex(selectedCarouselIndex);
+  };
+
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
     if (playlistUsers.length === 0) {
@@ -81,7 +88,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     }
     checkDuplicate = false
     index = ''
-    console.log(playlistUsers)
+    //console.log(playlistUsers)
   }
   
   // select all users or remove all users if everyone is already selected
@@ -103,7 +110,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         return playlistUsers
       })
     }
-    console.log(playlistUsers)
+    //console.log(playlistUsers)
   }
 
   // generate playlist
@@ -113,29 +120,62 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       var input_playlistName = document.getElementById("newPlaylistName").value
         if (input_playlistName === "") {
           console.log('No playlist name entered!')
+          document.getElementById("generate-playlist-button").style.cursor = "not-allowed" 
         }
         else if (input_playlistName !== "") {
-          axios
-          .post(process.env.REACT_APP_BACKEND_URL + "/groups/generatePlaylist", {
-              groupCode: groupCode,
-              userIDs: playlistUsers,
-              refreshToken: refreshToken,
-              playlistName: input_playlistName,
-          })
-          .then((data) => {
-              console.log(data);
-              axios
-              .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
-              .then((data) => {
-                dispatch(updateGroupList(data.data));
-              })
-              .catch((err) => {
+
+          console.log(playlistType)
+
+          if(playlistType === "Top Tracks") {
+            axios
+            .post(process.env.REACT_APP_BACKEND_URL + "/groups/generatePlaylist", {
+                groupCode: groupCode,
+                userIDs: playlistUsers,
+                refreshToken: refreshToken,
+                playlistName: input_playlistName,
+            })
+            .then((data) => {
+                console.log(data);
+                axios
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+                .then((data) => {
+                  dispatch(updateGroupList(data.data));
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
+            })
+            .catch((err) => {
                 console.log(err);
-              })
-          })
-          .catch((err) => {
-              console.log(err);
-          });
+            });
+          }
+          else {
+            axios
+            .post(process.env.REACT_APP_BACKEND_URL + "/groups/generateMoodsPlaylist", {
+                groupCode: groupCode,
+                userIDs: playlistUsers,
+                refreshToken: refreshToken,
+                playlistName: input_playlistName,
+                selectedMood: playlistType,
+            })
+            .then((data) => {
+                console.log(data);
+                axios
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+                .then((data) => {
+                  dispatch(updateGroupList(data.data));
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+          }
+
+          // close playlist generate modal
+          hideAddPlaylistModal()
         }
     }
     else {
@@ -150,13 +190,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     playlistInfo.reverse()
     return playlistInfo
   })
-
-  // trying to get the current out and total slides
-  // let totalSlides = playlistInfo.length % 4;
-  // $('#myCarousel').bind('slid', function() {
-  //   currentIndex = $('div.active').index() + 1;
-  //  $('.num').html(''+currentIndex+'/'+totalItems+'');
-  // });
 
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
@@ -182,6 +215,9 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     carouselArray.push(carouselElement);
   }
 
+  const [playlistType, setPlaylistType] = useState('');
+  console.log(playlistType)
+
   return (
     <div className="playlist-container">
       <div>
@@ -199,7 +235,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
             <strong>Add Playlist</strong>
           </div>
         </div>
-        <Carousel interval={null} indicators={false} defaultActiveIndex={0}>
+        <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="playlist-carousel-carousel">
           {carouselArray.map((element, i) => (
             <Carousel.Item key={i}>
               <div className="display-playlists">{element}</div>
@@ -214,8 +250,16 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         centered
         className="playlist-add-modal"
       >
+        <Modal.Header>
+          <Modal.Title>
+            <div className="generate-playlist-title">
+              <h2 id="generate-playlist-button"><strong>Generate a Playlist!</strong></h2>
+              <img src={closeButton} alt="close" className="cancel-generate" onClick={hideAddPlaylistModal}/>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <div className="playlistModal">
-            <h2><strong>Generate a Playlist!</strong></h2>
             <h4>Who do you want to contribute to this playlist?</h4>
             <div className="select-playlist-users">
                 <div className="select-all-users" id="select-bubble" onClick={() => selectAll()}>
@@ -234,17 +278,32 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                 </div>
             </div>
             <div className="playlist-moods">
-              section for moods/top tracks toggle
+              {/* <label className="switch">
+                <input type="checkbox" />
+                <span className="slider round"></span>
+              </label> */}
+
+              {/* temporary mood stuff */}
+              <h4>Select the type of playlist you want to generate:</h4>
+              <div className="playlist-options" onClick={()=>setPlaylistType("Top Tracks")}>Top Tracks</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("happy")}>Happy</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("sad")}>Sad</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("chill")}>Chill</div>
+              <div className="playlist-options" onClick={()=>setPlaylistType("party")}>Party</div>
+
             </div>
             <div className="name-the-playlist">
               <h4>Give your playlist a name!</h4>
               {/*create alert to tell user playlist title is too long */}
               <input type="text" className="name-input" placeholder="Enter Playlist Name" maxlength="25" id="newPlaylistName"/>
             </div>
-            <button onClick={() => {hideAddPlaylistModal(); generatePlaylist()}} centered className="generate-button">
-              <strong>Generate Playlist</strong>
-            </button>
+            <div className="generate-playlist">
+              <button onClick={() => generatePlaylist()} centered className="generate-button">
+                <strong>Generate Playlist</strong>
+              </button>
+            </div>
           </div>
+        </Modal.Body>
       </Modal>
     </div>
   );

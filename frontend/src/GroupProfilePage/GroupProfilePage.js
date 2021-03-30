@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
-import "./GroupProfilePage.css";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import './GroupProfilePage.css';
 
 import MemberDisplay from "./MemberDisplay/MemberDisplay";
 import GroupName from "./GroupName/GroupName";
 import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
-import ScreenOverlay from "../ScreenOverlay/ScreenOverlay";
-import {
-  MyInsights,
-  Comparisons,
-} from "./IndividualComparisons/IndividualComparisons";
-// import { TopGenres } from './TopGenres/TopGenres';
-// import { MusicalProfile } from './MusicalProfile/MusicalProfile';
-import iceberg from "../AuthorizedPage/iceberg.svg";
+import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
+import { TopGenres } from './TopGenres/TopGenres';
+import { GroupTopStats } from './TopStats/TopStats';
+//import { MusicalProfile } from './MusicalProfile/MusicalProfile';
+import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
+import iceberg from '../AuthorizedPage/iceberg.svg';
 
 const axios = require("axios");
 
@@ -26,65 +24,47 @@ const GroupProfilePage = (props) => {
   const url = new URL(window.location.href);
   const groupCode = url.pathname.replace("/authorized/group/", "");
 
+  const history = useHistory();
+
   // get group name
   const groupList = useSelector((state) => state.groupList);
 
+  const [groupUsers, setUsers] = useState("");
   const [groupName, setGroupName] = useState("");
   const [playlists, setPlaylists] = useState([]);
+  const [createdDate, setCreatedDate] = useState("");
 
   const [checkMember, setCheckMember] = useState(false);
-  const [isLoading, setIsloading] = useState(false);
-
-  //   React.useEffect(() => {
-  //     //start loading
-  //     setIsloading(true);
-
-  //     groupList.map((group) => {
-  //       if (group.groupCode === groupCode) {
-  //         setCheckMember(true);
-  //         setGroupName(group.groupName);
-  //         setPlaylists(group.playlists);
-  //       }
-  //       return groupName;
-  //     });
-
-  //     //end loading
-  //     setIsloading(false);
-  //   },
-  //   [groupCode, groupList, groupName]);
-
-  // get group users and assign to groupUsers variable
-  const [groupUsers, setUsers] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (groupCode !== null) {
       //start loading
-      setIsloading(true);
+      setIsLoading(true);
 
       axios
-        .get(
-          process.env.REACT_APP_BACKEND_URL + "/groups/" + groupCode + "/users"
-        )
+        .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
         .then((data) => {
-          setUsers(data.data);
+            setUsers(data.data)
 
-          //check if user belongs to group
-          groupList.map((group) => {
-            if (group.groupCode === groupCode) {
-              setCheckMember(true);
-              setGroupName(group.groupName);
-              setPlaylists(group.playlists);
-            }
-            return groupName;
-          });
+        //check if user belongs to group
+        groupList.map((group) => {
+        if (group.groupCode === groupCode) {
+            setCheckMember(true);
+            setGroupName(group.groupName);
+            setPlaylists(group.playlists);
+            setCreatedDate(group.createdAt);
+        }
+        return groupName;
+        });
 
-          //end loading
-          setIsloading(false);
+        //end loading
+        setIsLoading(false);
         })
         .catch((err) => {
-          console.log(err);
-          //end loading
-          setIsloading(false);
+            console.log(err);
+            //end loading
+            setIsLoading(false);
         });
     }
   }, [groupCode, groupList, groupName]);
@@ -94,9 +74,15 @@ const GroupProfilePage = (props) => {
   function toCompare(value) {
     selectMember(value);
   }
+    
+  useEffect (() => {
+    return history.listen((location) => {
+        selectMember("");
+    })
+  }, [history])
 
   if (groupList.length === 0 || isLoading) {
-    return <ScreenOverlay text="Collecting your group's information..." />;
+    return <ScreenOverlay text="Collecting your group's information" />;
   } else if (checkMember && groupUsers && !isLoading) {
     return (
       <div className="group-landing-root">
@@ -109,7 +95,7 @@ const GroupProfilePage = (props) => {
             <div className="info-flex">
               <div className="main-column-box"></div>
               <div className="group-name">
-                <GroupName groupName={groupName} />
+                <GroupName groupName={groupName} createdDate={createdDate} />
               </div>
               <div className="member-display">
                 {/* render members display when group users variable is populated */}
@@ -141,20 +127,31 @@ const GroupProfilePage = (props) => {
                 />
               </div>
             </div>
-          </div>
+                
+            {/* <div className="top-genres-display">
+                <TopGenres groupUsers={groupUsers} />
+            </div>
+            <div className="musical-profile-display">
+                <MusicalProfile groupUsers={groupUsers} />
+            </div> */}
+           
         </div>
 
         <div className="profile_iceberg">
           <img src={iceberg} alt="decorative iceberg" />
         </div>
 
-        {/* <div className="top-genres-display">
+          <div className="top-genres-display">
               <TopGenres groupUsers={groupUsers} />
           </div>
-          <div className="musical-profile-display">
+          <div className="top-stats-display">
+              <GroupTopStats groupUsers={groupUsers}/>
+          </div>
+          {/* <div className="musical-profile-display">
               <MusicalProfile groupUsers={groupUsers} />
-          </div> */}
+          </div>
       </div>
+    </div>
     );
   } else if (!isLoading && !checkMember) {
     return (
@@ -162,8 +159,17 @@ const GroupProfilePage = (props) => {
         <div className="wrong-group">
           Oops! It looks like you're not part of this group!
           <div>
-            <Link to="/authorized" className="return-button">
-              Take me back to my groups!
+            <Link to={"/authorized"} className="return-button">
+                <svg
+                    className="error-return-arrow"
+                    xmlns="http://www.w3.org/2000/svg"  
+                    viewBox="0 0 24 24" >
+                    <path d="M0 0h24v24H0z" 
+                    fill="none"/>
+                    <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"
+                    fill="var(--off-white-color)"/>
+                </svg>
+                <strong>My Groups</strong>
             </Link>
           </div>
         </div>

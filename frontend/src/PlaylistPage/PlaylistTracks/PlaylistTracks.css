@@ -27,6 +27,9 @@
     color: var(--off-white-color);
     font-size: 20px;
 }
+.playlist-tracks-container .track-container:hover {
+    cursor: pointer;
+}
 .playlist-tracks-container .track-icon {
     width: 45px;
     height: 45px;

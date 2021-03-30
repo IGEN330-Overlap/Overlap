@@ -34,6 +34,7 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode}) => {
                 <div className="title-container">
                     <h2 className="white"> {playlistName} </h2>
                 </div>
+                {/* <h4 className="created-date"><strong>Created On: {createdDate.substr(0, 10)}</strong></h4> */}
                 <div className="btn btn-sm playlist-button" onClick={addToSpotify}>
                     Save Playlist to Spotify
                 </div>

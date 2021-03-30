@@ -1,6 +1,10 @@
 /* CSS variables */
 @import url(../../variables.css);
 
+.YourGroupsBox {
+    z-index: 2;
+}
+
 .title{
     color: white;
     font-size: 3vw;
@@ -62,6 +66,15 @@ input:focus{
     direction: ltr;
     justify-content: space-between;
     padding: 8px;
+}
+
+.no-groups-text {
+    width: 9em;
+    font-size: 2vw;
+    margin-right: 0.5em;
+    color: white;
+    outline-color: transparent;
+    align-self: center;
 }
 
 .groupButton{

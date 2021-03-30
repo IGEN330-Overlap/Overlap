@@ -74,7 +74,7 @@
 /*icons */
 .display-members {
     display: flex;
-    width: 45vw;
+    width: 43vw;
     flex-wrap: wrap;
     max-height: 32.5vh;
     justify-content: flex-start;

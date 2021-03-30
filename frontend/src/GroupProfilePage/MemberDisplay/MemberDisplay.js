@@ -72,8 +72,8 @@ const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
 
         <div className="display-members">
             <div className="icon-container">
-                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare()}></img>
-                <div className="user-name" onClick={() => toCompare()}>
+                <img className="user-icon" src={primary_icon} alt={primary_user} onClick={() => toCompare('')}></img>
+                <div className="user-name" onClick={() => toCompare('')}>
                   <strong>{primary_user}</strong>
                 </div>
             </div>

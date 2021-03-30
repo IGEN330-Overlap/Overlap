@@ -99,16 +99,18 @@ export const Comparisons = ({groupUsers, member_id, toCompare}) => {
 
     var userCompareArtists = []
     var userCompareTracks = []
-
-    compare_info.topArtists.map((artist,i) => {
-        userCompareArtists[i] = ({artist: artist.artistName, icon: artist.imageURL})
-        return userCompareArtists
-    })
     
-    compare_info.topTracks.map((track,i) => {
-        userCompareTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
-        return userCompareTracks
-    })
+    if(compare_info.length !== 0){
+        compare_info.topArtists.map((artist,i) => {
+            userCompareArtists[i] = ({artist: artist.artistName, icon: artist.imageURL})
+            return userCompareArtists
+        })
+        
+        compare_info.topTracks.map((track,i) => {
+            userCompareTracks[i] = ({track: track.trackName, artist: track.artistName, icon: track.imageURL})
+            return userCompareTracks
+        })
+    }
 
     // find up to three common artists
     const compareArtists = []
@@ -128,6 +130,7 @@ export const Comparisons = ({groupUsers, member_id, toCompare}) => {
         return a.rank - b.rank
     })
 
+    // find up to three common tracks
     myTopTracks.map((myTrack, i) => {
         userCompareTracks.map((compTrack, j) => {
             if((myTrack.track === compTrack.track) && (myTrack.artist === compTrack.artist)){
@@ -145,7 +148,7 @@ export const Comparisons = ({groupUsers, member_id, toCompare}) => {
     return(
         <div className="comparisons">
             <div className="return-to-insights">
-                <h4><strong onClick={() => toCompare()}> Return to Personal Insights</strong></h4>
+                <h4><strong onClick={() => toCompare('')}> Return to Personal Insights</strong></h4>
             </div>
             <div className="heading">
                 <h1><strong>You & {compare_name}</strong></h1>
