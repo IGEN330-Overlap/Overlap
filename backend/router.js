@@ -30,6 +30,9 @@ router.post("/groups/join", crudController.joinGroup);
 //define post request for leaving a group
 router.post("/groups/leave", crudController.leaveGroup);
 
+//define post request for changing group name
+router.post("/groups/changeGroupName", crudController.changeGroupName);
+
 //define post request for creating spotify playlist
 router.post("/groups/addToSpotify", algorithmController.createSpotifyPlaylist);
 

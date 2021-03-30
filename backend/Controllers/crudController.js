@@ -269,3 +269,34 @@ exports.getUserGroups = async (req, res) => {
     return;
   }
 };
+
+/**
+ * Middleware for changing group name
+ * POST method
+ *
+ * @param {} req {groupCode: String, newGroupName: String}
+ * @param {} res
+ */
+exports.changeGroupName = async (req, res) => {
+  await Group.updateOne(
+
+      //filter
+      {groupCode: req.body.groupCode},
+
+      //updates group name
+      {groupName: req.body.newGroupName})
+
+      .then((data) => {
+        res.json({
+          message: "Sucessfully changed group name",
+          groupCode: req.body.groupCode,
+        });
+      })
+     .catch((err) => {
+      res.json({
+        message: "Unable to change group name",
+        error: err,
+      });
+    });
+
+};
