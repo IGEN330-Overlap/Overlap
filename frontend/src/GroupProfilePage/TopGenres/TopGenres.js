@@ -5,11 +5,13 @@ export const TopGenres = ({groupUsers}) => {
     
     //collect group top genres
     let allGenres = [];
-    groupUsers.map((user) => (
-        user.topGenres.map((genre) => (
-            allGenres.push(genre)
+    if (groupUsers) {
+        groupUsers.map((user) => (
+            user.topGenres.map((genre) => (
+                allGenres.push(genre)
+            ))
         ))
-    ))
+    }
     
     //sort genres
     let uniqueGenres = [];
