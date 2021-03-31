@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import { useSelector } from 'react-redux';
 import './PlaylistTitle.css';
 
@@ -49,6 +49,13 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
                 {createdDate !== undefined ? <h4 className="created-date"><strong>Created On: {createdMonth + " " + createdDay + ", " + createdYear}</strong></h4> : ''}
                 <div className="btn btn-sm playlist-button" onClick={addToSpotify}>
                     Save Playlist to Spotify
+                </div>
+                <div className="playlist-contributors">
+                    {/* {playlistUsers.map((group, i) => (
+                    <div key={i}>
+                        {playlistUsers.groupName}
+                    </div>
+                    ))} */}
                 </div>
             </div>
         </div>

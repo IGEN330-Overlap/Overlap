@@ -8,9 +8,7 @@ import iceberg from './iceberg.svg';
 const AuthorizedPage = (props) => {
   return (
     <div className="landing-root">
-      <div className="navbar">
         <Navbar1 />
-      </div>
       <div className="AuthorizedPage">
         <GroupsComponent />
         <CreateOrJoin />
