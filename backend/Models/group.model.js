@@ -54,6 +54,12 @@ const groupSchema = new Schema(
             },
           },
         ],
+        contributors: [
+          {
+            type: String,
+            required: true,
+          },
+        ],
         createDate: {
           day: {
             type: String,

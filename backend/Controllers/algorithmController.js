@@ -55,7 +55,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
   let numUsers = userIDs.length; // keep track of number of users
   // console.log("Users", userIDs); //debugging
-
+  
+  let contributorsUsernames = [];
   // Collect user top track data into top tracks array
   try {
     let data = await User.find({ userID: { $in: userIDs } });
@@ -64,6 +65,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     usersTopTracks = data.map((x) => x.topTracks);
     usersMusicalProfile = data.map((x) => x.musicalProfile);
     usersTopArtists = data.map((x) => x.topArtists);
+    contributorsUsernames = data.map((x) => x.name);
+
   } catch (err) {
     res.json({ message: "error on finding users", error: err });
   }
@@ -404,6 +407,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
+    contributors: contributorsUsernames,
     createDate: calculateDate(),
     playlistType: "top",
   };
@@ -485,6 +489,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
 
   let usersTopTracks = []; // arrays for storing user track information
   // let usersTopArtists = []; // arrays for storing user artist information
+  let contributorsUsernames;
 
   // Collect user top "x" data from mongoDB
   try {
@@ -492,7 +497,8 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
 
     // Add each persons dataset to our master array for the corresponding thing
     usersTopTracks = data.map((x) => x.topTracks);
-    usersTopArtists = data.map((x) => x.topArtists);
+    // usersTopArtists = data.map((x) => x.topArtists);
+    contributorsUsernames = data.map((x) => x.name);
   } catch (err) {
     res.json({
       message: "error on finding users",
@@ -612,6 +618,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
+    contributors: contributorsUsernames,
     createDate: calculateDate(),
     playlistType: req.body.selectedMood,
   };
