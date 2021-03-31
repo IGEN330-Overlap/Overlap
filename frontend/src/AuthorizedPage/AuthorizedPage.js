@@ -14,9 +14,6 @@ const AuthorizedPage = (props) => {
       <div className="AuthorizedPage">
         <GroupsComponent />
         <CreateOrJoin />
-        <div className="groups_iceberg">
-          <img src={iceberg} alt="decorative iceberg"/>
-        </div>
       </div>
     </div>
   );
