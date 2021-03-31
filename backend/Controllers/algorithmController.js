@@ -15,6 +15,8 @@ const { calculateDate } = require("../scripts.js");
 // Moods profiles tuned to suit the corresponding vibes
 const { buildPlaylistMoodProfile } = require("../scripts.js");
 
+const playlistCoverImages = require("../playlistCoverImages.json");
+
 /**
  * POST generate group top playlists
  *
@@ -52,16 +54,22 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   let numUsers = userIDs.length; // keep track of number of users
-  // console.log("Users", userIDs); //debugging
-
+  let contributorsUsernames = [];// array to store usernames of playlist contributors
+  
   // Collect user top track data into top tracks array
   try {
     let data = await User.find({ userID: { $in: userIDs } });
 
     // Add each persons dataset to our master array for the corresponding thing
-    usersTopTracks = data.map((x) => x.topTracks);
-    usersMusicalProfile = data.map((x) => x.musicalProfile);
-    usersTopArtists = data.map((x) => x.topArtists);
+    for (x of data) {
+      usersTopTracks.push(x.topTracks);
+      usersMusicalProfile.push(x.musicalProfile);
+      usersTopArtists.push(x.topArtists);
+      contributorsUsernames.push({
+        name: x.name,
+        userImageURL: x.imageURL,
+      });
+    }
   } catch (err) {
     res.json({ message: "error on finding users", error: err });
   }
@@ -252,7 +260,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           target_energy: musicalProfile.energy / 100,
           target_valence: musicalProfile.valence / 100,
           min_popularity: 35,
-          seed_tracks: sortedTrackSeed, 
+          seed_tracks: sortedTrackSeed,
         });
 
         // add the songs ensuring that their type is correct and that there is populated data
@@ -402,7 +410,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
+    contributors: contributorsUsernames,
     createDate: calculateDate(),
+    playlistType: "top",
   };
 
   // Update playlist to the group
@@ -481,15 +491,22 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // console.log("Users", userIDs); //debugging
 
   let usersTopTracks = []; // arrays for storing user track information
-  // let usersTopArtists = []; // arrays for storing user artist information
+  // let usersTopArtists = []; // UNUSED RIGHT NOW
+  let contributorsUsernames = []; // array to store usernames of playlist contributors
 
   // Collect user top "x" data from mongoDB
   try {
     let data = await User.find({ userID: { $in: userIDs } });
 
     // Add each persons dataset to our master array for the corresponding thing
-    usersTopTracks = data.map((x) => x.topTracks);
-    usersTopArtists = data.map((x) => x.topArtists);
+    for (x of data) {
+      usersTopTracks.push(x.topTracks);
+      // usersTopArtists.push(x.topArtists);
+      contributorsUsernames.push({
+        name: x.name,
+        userImageURL: x.imageURL,
+      });
+    }
   } catch (err) {
     res.json({
       message: "error on finding users",
@@ -609,7 +626,9 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   playlist = {
     playlistName: req.body.playlistName,
     tracks: playlistTracks,
+    contributors: contributorsUsernames,
     createDate: calculateDate(),
+    playlistType: req.body.selectedMood,
   };
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne
@@ -650,6 +669,28 @@ exports.createSpotifyPlaylist = async (req, res) => {
   let formattedTrackIds = [];
   let playlistName;
 
+  //image data that will be used as the cover for the playlist
+  let base64URI = playlistCoverImages["top"]; //until playlist type prop implemented leave as logo
+
+  // select base64URI based on the playlist type
+  switch (req.body.playlistType) {
+    case "top":
+      base64URI = playlistCoverImages["top"];
+      break;
+    case "happy":
+      base64URI = playlistCoverImages["happy"];
+      break;
+    case "party":
+      base64URI = playlistCoverImages["party"];
+      break;
+    case "chill":
+      base64URI = playlistCoverImages["chill"];
+      break;
+    case "sad":
+      base64URI = playlistCoverImages["sad"];
+      break;
+  }
+
   // find the group and the corresponding playlistID (playlist object ID)
   try {
     let data = await Group.find(
@@ -674,15 +715,37 @@ exports.createSpotifyPlaylist = async (req, res) => {
 
     try {
       // create spotify plyalist using the given playlist name
-      // TODO adding descriptions???????
       let data = await spotifyApi.createPlaylist(playlistName, {
-        description: "jams",
+        description:
+          "Playlist generated through Overlap. To learn more see: https://project-overlap.herokuapp.com",
         public: true,
       });
+      // if not successful status code throw an error
+      if (data.statusCode != 201) {
+        throw new Error();
+      }
       playlistID = data.body.id; // collect playlist id so we can add to it later
-      console.log("playlist creation status code: ", data.statusCode);
+      // console.log("playlist creation status code: ", data.statusCode);
     } catch (err) {
       res.json(err);
+    }
+
+    // Add image cover to the spotify playlist
+    try {
+      let data = await spotifyApi.uploadCustomPlaylistCoverImage(
+        playlistID,
+        base64URI
+      );
+      // if not successful status code throw an error
+      if (data.statusCode !== 202) {
+        throw new Error();
+      }
+    } catch (err) {
+      console.log("error with upload image");
+      res.json({
+        message: "error with upload image",
+        error: err,
+      });
     }
 
     try {
@@ -691,12 +754,17 @@ exports.createSpotifyPlaylist = async (req, res) => {
         playlistID,
         formattedTrackIds
       );
+      // if not successful status code throw an error
+      if (data.statusCode != 201) {
+        throw new Error();
+      }
       console.log("playlist song addition status code: ", data.statusCode);
 
       res.json({
         message: "Successfully added playlist and the tracks to spotify",
         playlistID: playlistID,
         playlist: formattedTrackIds,
+        playlistLinkURL: "https://open.spotify.com/playlist/" + playlistID,
       });
     } catch (err) {
       res.json(err);

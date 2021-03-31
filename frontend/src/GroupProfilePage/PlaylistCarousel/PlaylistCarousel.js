@@ -62,12 +62,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   const [playlistUsers, setPlaylistUsers] = useState([]);
   var checkDuplicate = false;
 
-  const [carouselIndex, setCarouselIndex] = useState(0);
-
-  const handleSelect = (selectedCarouselIndex, e) => {
-    setCarouselIndex(selectedCarouselIndex);
-  };
-
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
     if (playlistUsers.length === 0) {
@@ -260,7 +254,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
             <strong>Add Playlist</strong>
           </div>
         </div>
-        <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="playlist-carousel-carousel">
+        <Carousel interval={null} indicators={true} defaultActiveIndex={0} className="playlist-carousel-carousel">
           {carouselArray.map((element, i) => (
             <Carousel.Item key={i}>
               <div className="display-playlists">{element}</div>
