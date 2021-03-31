@@ -270,31 +270,83 @@ exports.getUserGroups = async (req, res) => {
   }
 };
 
+/* Middleware for deleting embedded playlist object from group object
+* POST method that groups use to delete playlists
+*
+* @param {} req {groupCode: String, playlistID: String}
+* @param {} res
+*/
+exports.deletePlaylist = async (req, res) => {
+ Group.updateOne(
+   //Filter the group
+   {groupCode: req.body.groupCode}, 
+   // remove embedded playlist object from the playlist ARRAY
+   {$pull: {playlists: {_id: {$eq: req.body.playlistID} } } }
+ ) 
+ .then(() => {
+   res.json({
+     message: "Successfully deleted playlist:",
+     groupCode: req.body.groupCode,
+   });
+ })
+ //error with the removal of playlist object from group object
+ .catch((err) => {
+   res.json({
+     message: "Unable to delete playlist from group",
+     error: err,
+   });
+ });
+};
+
 /**
- * Middleware for deleting embedded playlist object from group object
- * POST method that groups use to delete playlists
+ * Middleware for changing group name
+ * POST method
  *
- * @param {} req {groupCode: String, playlistID: String}
+ * @param {} req {groupCode: String, newGroupName: String}
  * @param {} res
  */
-exports.deletePlaylist = async (req, res) => {
-  Group.updateOne(
-    //Filter the group
-    {groupCode: req.body.groupCode}, 
-    // remove embedded playlist object from the playlist ARRAY
-    {$pull: {playlists: {_id: {$eq: req.body.playlistID} } } }
-  ) 
-  .then(() => {
+ exports.changeGroupName = async (req, res) => {
+  
+  if(req.body.newGroupName === ""){
+    //checks if newGroupName is blank
     res.json({
-      message: "Successfully deleted playlist:",
-      groupCode: req.body.groupCode,
-    });
-  })
-  //error with the removal of playlist object from group object
-  .catch((err) => {
+      message:"invalid group name"
+    })
+    return;
+  }
+
+  try{
+    //checking if the group code entered is valid.
+    let data = await Group.findOne({ groupCode: req.body.groupCode });
+
+    if (data == null){
+      throw new Error();
+    }
+  } catch(err) {
     res.json({
-      message: "Unable to delete playlist from group",
+      message: "Unable to find group",
       error: err,
     });
-  });
-};
+    return;
+  }
+   
+    try{
+    await Group.updateOne(
+
+      //filter
+      {groupCode: req.body.groupCode},
+
+      //updates group name
+      {$set: {groupName: req.body.newGroupName}});
+
+    res.json({
+      message: "Successfully changed group name"
+    });
+    } catch(err) {
+      res.json({
+        message: "Unable to change group name",
+        error: err,
+      });
+      return;
+    }
+}
