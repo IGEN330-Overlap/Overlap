@@ -50,6 +50,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   var playlistUsers = []
   var checkDuplicate = false
   var index
+  var control
 
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
@@ -229,7 +230,8 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
             <strong>Add Playlist</strong>
           </div>
         </div>
-        <Carousel interval={null} indicators={true} defaultActiveIndex={0} className="playlist-carousel-carousel">
+        {playlistInfo.length < 5 ? control=false : control=true}
+        <Carousel interval={null} indicators={control} controls={control} defaultActiveIndex={0} className="playlist-carousel-carousel">
           {carouselArray.map((element, i) => (
             <Carousel.Item key={i}>
               <div className="display-playlists">{element}</div>
