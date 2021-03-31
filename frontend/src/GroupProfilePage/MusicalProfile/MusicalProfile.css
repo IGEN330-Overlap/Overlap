@@ -102,12 +102,13 @@
     object-position: 50%;
     border-radius: 50rem;
     background-color: var(--primary-color-6);
+    z-index: 2;
 }
 .user-position .user-name {
-    margin-top: 30px;
+    margin-top: 40px;
     opacity: 0;
     color: var(--off-white-color);
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 550;
     text-align: center;
     z-index: 4;

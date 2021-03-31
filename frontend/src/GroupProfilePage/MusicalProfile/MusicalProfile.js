@@ -14,13 +14,42 @@ export const MusicalProfile = ({groupUsers}) => {
         musicalProfiles.push({ name: user.name, icon: user.imageURL ? user.imageURL : logo_small, musicalProfile: user.musicalProfile })
     ))
 
+    //find min, max, and avg values
+    let danceability_data = [];
+    let valence_data = [];
+    let energy_data = [];
+    let popularity_data = [];
+
+    musicalProfiles.map((profile) => {
+        danceability_data.push(profile.musicalProfile.danceability);
+        valence_data.push(profile.musicalProfile.valence);
+        energy_data.push(profile.musicalProfile.energy);
+        popularity_data.push(profile.musicalProfile.trackPopularity);
+        return musicalProfiles;
+    })
+
+    let min_danceability = Math.round(Math.min(...danceability_data) - 7.5);
+    let max_danceability = Math.round(Math.max(...danceability_data) + 7.5);
+
+    let min_valence = Math.round(Math.min(...valence_data) - 7.5);
+    let max_valence = Math.round(Math.max(...valence_data) + 7.5);
+
+    let min_energy = Math.round(Math.min(...energy_data) - 7.5);
+    let max_energy = Math.round(Math.max(...energy_data) + 7.5);
+
+    let min_popularity = Math.round(Math.min(...popularity_data) - 7.5);
+    let max_popularity = Math.round(Math.max(...popularity_data) + 7.5);
+
     musicalProfiles.map((profile) => {
         danceability.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.danceability });
         valence.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.valence });
         energy.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.energy });
         popularity.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.trackPopularity });
+
         return musicalProfiles
     })
+
+    console.log(popularity)
 
     return (
         <div className="musical-profile-root">
@@ -36,7 +65,7 @@ export const MusicalProfile = ({groupUsers}) => {
                         <div className="scale-bar"></div>
                         <div className="user-position">
                             {danceability.map((user,i) => ( 
-                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                <div className="user-info" style={{left: (100*(user.stat-min_danceability)/(max_danceability-min_danceability)) + "%"}} key={i}>
                                     <img className="user-icon" src={user.icon} alt={user.name}/>
                                     <div className="user-name">
                                         {user.name}
@@ -45,11 +74,11 @@ export const MusicalProfile = ({groupUsers}) => {
                             ))}
                         </div>
                         <div className="scale-markers">
-                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"><h5>{min_danceability}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"><h5>{(min_danceability + max_danceability)/2}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>100%</h5></div>
+                            <div className="scale-point"><h5>{max_danceability}%</h5></div>
                         </div>
                     </div>
                 </div>
@@ -60,7 +89,7 @@ export const MusicalProfile = ({groupUsers}) => {
                         <div className="scale-bar"></div>
                         <div className="user-position">
                             {valence.map((user,i) => ( 
-                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                <div className="user-info" style={{left: (100*(user.stat-min_valence)/(max_valence-min_valence)) + "%"}} key={i}>
                                     <img className="user-icon" src={user.icon} alt={user.name}/>
                                     <div className="user-name">
                                         {user.name}
@@ -72,11 +101,11 @@ export const MusicalProfile = ({groupUsers}) => {
                             ))}
                         </div>
                         <div className="scale-markers">
-                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"><h5>{min_valence}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"><h5>{(min_valence + max_valence)/2}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>100%</h5></div>
+                            <div className="scale-point"><h5>{max_valence}%</h5></div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +116,7 @@ export const MusicalProfile = ({groupUsers}) => {
                         <div className="scale-bar"></div>
                         <div className="user-position">
                             {energy.map((user,i) => ( 
-                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                <div className="user-info" style={{left: (100*(user.stat-min_energy)/(max_energy-min_energy)) + "%"}} key={i}>
                                     <img className="user-icon" src={user.icon} alt={user.name}/>
                                     <div className="user-name">
                                         {user.name}
@@ -96,11 +125,11 @@ export const MusicalProfile = ({groupUsers}) => {
                             ))}
                         </div>
                         <div className="scale-markers">
-                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"><h5>{min_energy}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"><h5>{(min_energy + max_energy)/2}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>100%</h5></div>
+                            <div className="scale-point"><h5>{max_energy}%</h5></div>
                         </div>
                     </div>
                 </div>
@@ -111,7 +140,7 @@ export const MusicalProfile = ({groupUsers}) => {
                         <div className="scale-bar"></div>
                         <div className="user-position">
                             {popularity.map((user,i) => ( 
-                                <div className="user-info" style={{left: user.stat + "%"}} key={i}>
+                                <div className="user-info" style={{left: (100*(user.stat-min_popularity)/(max_popularity-min_popularity)) + "%"}} key={i}>
                                     <img className="user-icon" src={user.icon} alt={user.name}/>
                                     <div className="user-name">
                                         {user.name}
@@ -120,11 +149,11 @@ export const MusicalProfile = ({groupUsers}) => {
                             ))}
                         </div>
                         <div className="scale-markers">
-                            <div className="scale-point"><h5>0%</h5></div>
+                            <div className="scale-point"><h5>{min_popularity}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>50%</h5></div>
+                            <div className="scale-point"><h5>{(min_popularity + max_popularity)/2}%</h5></div>
                             <div className="scale-point"></div>
-                            <div className="scale-point"><h5>100%</h5></div>
+                            <div className="scale-point"><h5>{max_popularity}%</h5></div>
                         </div>
                     </div>
                 </div>
