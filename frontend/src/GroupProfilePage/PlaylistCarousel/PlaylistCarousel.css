@@ -156,12 +156,12 @@
 }
 .playlistModal .generate-step {
     color: var(--blue-color-main);
+    font-weight: 600;
 }
 .playlist-add-modal .modal-dialog .modal-content{
     height: fit-content;
     padding-top: 10px;
     padding-bottom: 10px;
-    /* text-align: center; */
     background-color: var(--off-white-color);
     width: 500px;
 }
@@ -266,38 +266,49 @@
 
 /* top tracks and moods */
 .playlist-generation-options .playlist-options {
-    color: var(--neutral-color-7);
+    color: var(--blue-color-6);
     text-align: center;
+    font-size: 20px;
 }
 .playlist-options:hover {
     cursor: pointer;
 }
 .option-container {
-    width: 100%;
+    width: 96%;
     margin: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
+.option-container p {
+    font-size: 15px;
+    margin-bottom: 2px;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+}
 .toptracks-option {
     text-align: center;
     width: 47%;
     padding: 5px;
-    border-radius: 20px;
-}
-.option-container p {
-    font-size: 14px;
-    margin-bottom: 2px;
-    text-align: center;
+    border-radius: 10px;
 }
 .mood-options {
     width: 47%;
     padding: 5px;
-    border-radius: 30px;
+    border-radius: 10px;
 }
-.collapse-content {
-    min-height: 130px;
+.collapse-top-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 155px;
+    padding-top: 20px;
+}
+.collapse-mood-content {
+    display: flex;
+    flex-direction: column;
+    min-height: 155px;
 }
 .vertical-line {
     background-color: var(--primary-color-main);
@@ -316,14 +327,19 @@
     align-items: center;
 }
 .playlist-mood h5 {
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 550;
     width: fit-content;
     margin-left: 5px;
     margin-bottom: 0px;
     vertical-align: middle;
 }
-.playlist-mood:hover {
+.playlist-mood:hover h5{
     cursor: pointer;
+    color: var(--blue-color-main);
+}
+.playlist-mood:hover .playlist-mood-color{
+    fill: var(--blue-color-main);
 }
 
 @media (max-width: 780px) {
