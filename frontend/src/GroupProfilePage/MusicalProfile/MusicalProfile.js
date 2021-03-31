@@ -28,17 +28,17 @@ export const MusicalProfile = ({groupUsers}) => {
         return musicalProfiles;
     })
 
-    let min_danceability = Math.round(Math.min(...danceability_data) - 7.5);
-    let max_danceability = Math.round(Math.max(...danceability_data) + 7.5);
+    let min_danceability = Math.round(Math.min(...danceability_data) - 5);
+    let max_danceability = Math.round(Math.max(...danceability_data) + 5);
 
-    let min_valence = Math.round(Math.min(...valence_data) - 7.5);
-    let max_valence = Math.round(Math.max(...valence_data) + 7.5);
+    let min_valence = Math.round(Math.min(...valence_data) - 5);
+    let max_valence = Math.round(Math.max(...valence_data) + 5);
 
-    let min_energy = Math.round(Math.min(...energy_data) - 7.5);
-    let max_energy = Math.round(Math.max(...energy_data) + 7.5);
+    let min_energy = Math.round(Math.min(...energy_data) - 5);
+    let max_energy = Math.round(Math.max(...energy_data) + 5);
 
-    let min_popularity = Math.round(Math.min(...popularity_data) - 7.5);
-    let max_popularity = Math.round(Math.max(...popularity_data) + 7.5);
+    let min_popularity = Math.round(Math.min(...popularity_data) - 5);
+    let max_popularity = Math.round(Math.max(...popularity_data) + 5);
 
     musicalProfiles.map((profile) => {
         danceability.push({ name: profile.name, icon: profile.icon, stat: profile.musicalProfile.danceability });
@@ -49,7 +49,7 @@ export const MusicalProfile = ({groupUsers}) => {
         return musicalProfiles
     })
 
-    console.log(popularity)
+    console.log(danceability)
 
     return (
         <div className="musical-profile-root">

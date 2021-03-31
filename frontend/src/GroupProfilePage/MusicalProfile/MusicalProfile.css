@@ -4,7 +4,8 @@
     min-height: 100vh;
     height: fit-content;
     width: auto;
-    background-color: #8FCED9;
+    /* background-color: #8FCED9; */
+    background-color: #4faebf;
     display: flex;
     align-items: center;
 }
