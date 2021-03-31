@@ -33,8 +33,8 @@ const Navbar1 = (props) => {
   groupList.sort(sortGroupList)
 
   return (
-    <div className="navbar-stuff sticky-top">
-      <Navbar bg="transparent" variant="dark" expand="sm">
+    <div className="navbar-stuff">
+      <Navbar bg="var(--primary-color-main)" variant="dark" expand="sm">
         <Navbar.Brand as={Link} to="/authorized/">
           <img width="75" height="30" src={logo} alt="logo" />
         </Navbar.Brand>
