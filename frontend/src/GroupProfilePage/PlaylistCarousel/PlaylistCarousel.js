@@ -48,71 +48,69 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
   const showAddPlaylistModal = () => {
     setAddPlaylistIsOpen(true);
-    setPlaylistType('')
+    setPlaylistType('');
+    setPlaylistUsers([]);
   };
   const hideAddPlaylistModal = () => {
     setAddPlaylistIsOpen(false);
-    setPlaylistType('')
+    setPlaylistType('');
+    setMoodSelectionOpen(false);
+    setTopTrackSelectionOpen(false);
+    setPlaylistUsers([]);
   };
 
-  var playlistUsers = []
-  var checkDuplicate = false
-  var index
+  const [playlistUsers, setPlaylistUsers] = useState([]);
+  var checkDuplicate = false;
 
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
     if (playlistUsers.length === 0) {
-      playlistUsers.push(userID)
-      document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--blue-color-main)"
+      setPlaylistUsers([...playlistUsers, userID]);
+      document.getElementById("select-bubble-" + position).style.backgroundColor = "var(--blue-color-main)";
     }  
     else if (playlistUsers.length !== 0) {
       playlistUsers.map((user, i) => {
         if(user === userID) {
-          checkDuplicate = true
-          index = i
+          setPlaylistUsers(playlistUsers.filter(user => user !== userID));
+          document.getElementById("select-bubble-" + position).style.backgroundColor = "var(--primary-color-1)";
+          if(playlistUsers.length !== groupUsers.length) {
+            document.getElementById("select-bubble").style.backgroundColor = "var(--primary-color-1)";
+          }
+          checkDuplicate = true;
         }
-        return checkDuplicate
+        return playlistUsers;
       })
-      if(checkDuplicate === true){
-        playlistUsers.splice(index, 1)
-        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--primary-color-1)"
-        if(playlistUsers.length !== groupUsers.length) {
-          document.getElementById("select-bubble").style.backgroundColor = "var(--primary-color-1)"
-        }
-      }
-      else if(checkDuplicate === false){
-        playlistUsers.push(userID)
-        document.getElementById("select-bubble-"+position).style.backgroundColor = "var(--blue-color-main)"
+      if(checkDuplicate === false){
+        setPlaylistUsers([...playlistUsers, userID]);
+        document.getElementById("select-bubble-" + position).style.backgroundColor = "var(--blue-color-main)";
         if(playlistUsers.length === groupUsers.length) {
-          document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-main)"
+          document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-main)";
         }
       }
     }
-    checkDuplicate = false
-    index = ''
-    console.log(playlistUsers)
+    checkDuplicate = false;
   }
   
   // select all users or remove all users if everyone is already selected
   const selectAll = () => {
     if(playlistUsers.length === groupUsers.length){
-      playlistUsers=[]
+      setPlaylistUsers([])
       groupUsers.map((user, i) => {
-        document.getElementById("select-bubble").style.backgroundColor = "var(--primary-color-1)"
-        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--primary-color-1)"
-        return playlistUsers
+        document.getElementById("select-bubble").style.backgroundColor = "var(--primary-color-1)";
+        document.getElementById("select-bubble-" + i).style.backgroundColor = "var(--primary-color-1)";
+        return playlistUsers;
       })
     }
     else {
-      playlistUsers = []
+      var allUsers = [];
       groupUsers.map((user, i) => {
-        playlistUsers.push(user.userID)
-        document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-main)"
-        document.getElementById("select-bubble-"+i).style.backgroundColor = "var(--blue-color-main)"
-        return playlistUsers
+        allUsers.push(user.userID)
+        document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-main)";
+        document.getElementById("select-bubble-" + i).style.backgroundColor = "var(--blue-color-main)";
+        return playlistUsers;
       })
+      setPlaylistUsers(allUsers);
     }
-    console.log(playlistUsers)
   }
 
   // mood collapse
@@ -121,7 +119,11 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
   const [playlistType, setPlaylistType] = useState("");
   const selectPlaylistType = (type) => {
-    if((type === "Top Tracks") && !openTopTrackSelection) {
+    if(type === "" && openMoodSelection) {
+      document.getElementById("toptracks-select").style.backgroundColor = "var(--off-white-color)";
+      document.getElementById("moods-select").style.backgroundColor = "var(--off-white-color)";
+    }
+    else if((type === "Top Tracks") && !openTopTrackSelection) {
       document.getElementById("toptracks-select").style.backgroundColor = "var(--neutral-color-2)";
       document.getElementById("moods-select").style.backgroundColor = "var(--off-white-color)";
     }
@@ -135,7 +137,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     }
     setPlaylistType(type);
   }
-  console.log(playlistType)
 
   // generate playlist
   // need to add alerts to tell users if no one is selected or if there is no playlist title
@@ -265,7 +266,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       <Modal
         show={AddPlaylistisOpen}
         onHide={hideAddPlaylistModal}
-        centered
+        centered="true"
         className="playlist-add-modal"
       >
         <Modal.Header>
@@ -324,7 +325,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                     onClick={()=>{
                       setMoodSelectionOpen(!openMoodSelection); 
                       setTopTrackSelectionOpen(false); 
-                      selectPlaylistType("Moods")}}
+                      selectPlaylistType("")}}
                     aria-controls="example-collapse-text"
                     aria-expanded={openMoodSelection}
                   >
@@ -332,22 +333,24 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                   </div>
                   <Collapse in={openMoodSelection}>
                     <div id="example-collapse-text" className="collapse-content">
-                    <p>What mood do you want?</p>
-                      <div className="playlist-options" onClick={()=>selectPlaylistType("happy")}>
-                        <img src={happy} alt="happy" className="playlist-mood-emoji"/>
-                        Happy
-                      </div>
-                      <div className="playlist-options" onClick={()=>selectPlaylistType("sad")}>
-                        <img src={sad} alt="sad" className="playlist-mood-emoji"/>
-                        Sad
-                      </div>
-                      <div className="playlist-options" onClick={()=>selectPlaylistType("chill")}>
-                        <img src={chill} alt="chill" className="playlist-mood-emoji"/>
-                        Chill
-                      </div>
-                      <div className="playlist-options" onClick={()=>selectPlaylistType("party")}>
-                        <img src={party} alt="party" className="playlist-mood-emoji"/>
-                        Party
+                      <p>What mood do you want?</p>
+                      <div className="mood-playlist-options">
+                        <div className="playlist-mood" onClick={()=>selectPlaylistType("happy")}>
+                          <img src={happy} alt="happy" className="playlist-mood-emoji"/>
+                          <h5>Happy</h5>
+                        </div>
+                        <div className="playlist-mood" onClick={()=>selectPlaylistType("sad")}>
+                          <img src={sad} alt="sad" className="playlist-mood-emoji"/>
+                          <h5>Sad</h5>
+                        </div>
+                        <div className="playlist-mood" onClick={()=>selectPlaylistType("chill")}>
+                          <img src={chill} alt="chill" className="playlist-mood-emoji"/>
+                          <h5>Chill</h5>
+                        </div>
+                        <div className="playlist-mood" onClick={()=>selectPlaylistType("party")}>
+                          <img src={party} alt="party" className="playlist-mood-emoji"/>
+                          <h5>Party</h5>
+                        </div>
                       </div>
                     </div>
                   </Collapse>
@@ -359,10 +362,10 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               {/*create alert to tell user playlist title is too long */}
             </div>
             <div className="name-playlist">
-              <input type="text" className="name-input" placeholder="Enter Playlist Name" maxlength="25" id="newPlaylistName"/>
+              <input type="text" className="name-input" placeholder="Enter Playlist Name" maxLength="25" id="newPlaylistName"/>
             </div>
             <div className="generate-playlist">
-              <button onClick={() => generatePlaylist()} centered className="generate-button">
+              <button onClick={() => generatePlaylist()} centered="true" className="generate-button">
                 <strong>Generate Playlist</strong>
               </button>
             </div>

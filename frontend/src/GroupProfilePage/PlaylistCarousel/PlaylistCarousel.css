@@ -237,7 +237,7 @@
     justify-content: center;
 }
 .generate-button {
-    margin-top: 20px;
+    margin-top: 7.5px;
     border-radius: 20px;
     background-color: var(--blue-color-main);
     /* background-color: #1DB954; */
@@ -250,12 +250,16 @@
     width: 200px;
     height: 42px;
     font-size: 20px;
-    filter: drop-shadow(0 2mm 2mm var(--primary-color-main));
+    filter: drop-shadow(0 1mm 1mm var(--primary-color-main));
 }
 
 /* top tracks and moods */
 .playlist-generation-options .playlist-options {
     color: var(--neutral-color-7);
+    text-align: center;
+}
+.playlist-options:hover {
+    cursor: pointer;
 }
 .option-container {
     width: 100%;
@@ -269,26 +273,45 @@
     text-align: center;
     width: 47%;
     padding: 5px;
-    border-radius: 30px;
+    border-radius: 20px;
 }
 .option-container p {
     font-size: 14px;
-    margin-bottom: 2px;;
+    margin-bottom: 2px;
+    text-align: center;
 }
 .mood-options {
     width: 47%;
     padding: 5px;
-    text-align: center;
     border-radius: 30px;
 }
 .collapse-content {
-    height: 130px;
+    min-height: 130px;
 }
 .vertical-line {
     background-color: var(--primary-color-main);
     width: 2px;
 }
-.playlist-options:hover {
+.mood-playlist-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.playlist-mood {
+    display: flex;
+    flex-direction: row;
+    width: 80px;
+    padding: 2px;
+    align-items: center;
+}
+.playlist-mood h5 {
+    font-size: 15px;
+    width: fit-content;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    vertical-align: middle;
+}
+.playlist-mood:hover {
     cursor: pointer;
 }
 
