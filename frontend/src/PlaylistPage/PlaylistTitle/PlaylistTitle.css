@@ -39,6 +39,10 @@
     margin-bottom: min(2.25vw, 2.25rem);
 }
 
+.playlist-page-cover {
+    border-radius: 15px;
+}
+
 .playlist-info-save {
     display: flex;
     flex-direction: column;

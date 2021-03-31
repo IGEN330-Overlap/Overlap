@@ -55,9 +55,7 @@ export const PlaylistPage = (props) => {
     } else if (checkMember && !isLoading) {
         return (
             <div className="playlist-landing-root">
-                <div className="navbar">
                     <Navbar1 />
-                </div>
                 <div className="backToProfile">
                     <Link to={"/authorized/group/" + groupCode} className="pp_backArrow">
                         <svg

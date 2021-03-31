@@ -54,6 +54,17 @@ const groupSchema = new Schema(
             },
           },
         ],
+        contributors: [
+          {
+            name: {
+              type: String,
+              required: true,
+            },
+            userImageURL: {
+              type: String,
+            },
+          },
+        ],
         createDate: {
           day: {
             type: String,
@@ -67,6 +78,9 @@ const groupSchema = new Schema(
             type: String,
             required: true,
           },
+        },
+        playlistType: {
+          type: String,
         },
       },
     ],

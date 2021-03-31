@@ -5,6 +5,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { updateRefreshToken } from "../Redux/Actions";
+// import GroupIcon from "./group.svg";
 
 const Navbar1 = (props) => {
   //useDispatch hook for redux
@@ -33,14 +34,14 @@ const Navbar1 = (props) => {
 
   return (
     <div className="navbar-stuff">
-      <Navbar bg="transparent" variant="dark" expand="sm">
+      <Navbar bg="var(--primary-color-main)" variant="dark" expand="sm">
         <Navbar.Brand as={Link} to="/authorized/">
           <img width="75" height="30" src={logo} alt="logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <NavDropdown title="My Groups" id="basic-nav-dropdown">
+            <NavDropdown title='My Groups' id="basic-nav-dropdown">
               {groupList.map((group, i) => (
                 <div key={i}>
                   <NavDropdown.Item as={Link} to={"/authorized/group/"+group.groupCode}>
