@@ -9,7 +9,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
-    overflow: auto;
 }
 .group-info-root {
     background-color: var(--primary-color-main);
@@ -82,7 +81,7 @@
 
 .group-profile-page-components {
     width: 100vw;
-    min-height: 92vh;
+    min-height: 95vh;
     height: fit-content;
 }
 
@@ -115,7 +114,7 @@
     max-height: 48vh;
     margin-left: 4vw;
     margin-bottom: 2vh;
-    margin-top: clamp(80px, 10vh, 100px);
+    margin-top: clamp(90px, 10vh, 100px);
 }
 .playlist-carousel{
     position: relative;
@@ -130,7 +129,7 @@
 
 .individual-comparisons {
     position: absolute;
-    margin-top: 55px;
+    margin-top: 60px;
     margin-left: 55vw;
     margin-bottom: 2vh;
     z-index: 8;
@@ -240,6 +239,6 @@
 }
 @media (max-height: 720px) {
     .component-box {
-        height: 0px;
+        height: 5px;
     }
 }
