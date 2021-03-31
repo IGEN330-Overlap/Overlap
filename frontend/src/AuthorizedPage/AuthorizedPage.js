@@ -2,7 +2,6 @@ import "./AuthorizedPage.css";
 import GroupsComponent from "./GroupsComponent/GroupsComponent";
 import CreateOrJoin from "./CreateOrJoin/CreateOrJoin";
 import Navbar1 from "../Navbar/Navbar";
-import iceberg from './iceberg.svg';
 
 //takes accessToken string and loggedIn boolean as props
 const AuthorizedPage = (props) => {
