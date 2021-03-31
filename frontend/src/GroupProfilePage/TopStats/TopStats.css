@@ -149,7 +149,8 @@
     cursor: pointer;
 }
 .top-artists-root .top-artist-list {
-    width: 250px;
+    min-width: 250px;
+    width: fit-content;
 }
 .top-artist-container strong {
     font-size: 25px;
