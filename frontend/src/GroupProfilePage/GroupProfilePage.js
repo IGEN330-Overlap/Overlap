@@ -134,11 +134,6 @@ const GroupProfilePage = (props) => {
             </div> */}
            
         </div>
-
-        <div className="profile_iceberg">
-          <img src={iceberg} alt="decorative iceberg" />
-        </div>
-
           <div className="top-genres-display">
               <TopGenres groupUsers={groupUsers} />
           </div>

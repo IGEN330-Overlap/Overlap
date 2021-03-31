@@ -10,13 +10,11 @@
     justify-content: flex-start;
     align-content: flex-start;
     overflow: auto;
-    scroll-snap-type: y mandatory;
 }
 .group-info-root {
     background-color: var(--primary-color-main);
     min-height: 100vh;
     height: fit-content;
-    scroll-snap-align: center;
 }
 .group-landing-root .navbar {
     position: relative;
@@ -139,21 +137,6 @@
     animation-name: insightanimation;
     animation-duration: 2.75s;
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
-}
-
-.profile_iceberg{
-    position: absolute;
-    bottom: 2vh;
-    right: 1vh;
-    opacity: 25%;
-}
-
-.top-genres-display{
-    scroll-snap-align: center;
-}
-
-.musical-profile-display{
-    scroll-snap-align: center;
 }
 
 @keyframes navbaropacity {
