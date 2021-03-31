@@ -2,20 +2,34 @@ import "./Navbar.css";
 import logo from "../overlap-logo.svg";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { updateRefreshToken } from "../Redux/Actions";
-
-const groupnames = ["Group 1", "Group 2", "Group 3", "Group 4"];
 
 const Navbar1 = (props) => {
   //useDispatch hook for redux
   const dispatch = useDispatch();
 
+  //useHistory for redirect
+  const history = useHistory();
+
   const handleLogout = () => {
-      dispatch(updateRefreshToken(""));
-      localStorage.clear();
+    dispatch(updateRefreshToken(""));
+    localStorage.clear();
+    history.push("/");
   };
+
+  //get group list from redux states
+  const groupList = useSelector((state) => state.groupList);
+
+  //order groupList from most recent to oldest
+  function sortGroupList (a,b) {
+    if (b.createdAt > a.createdAt) return 1;
+    if (a.createdAt > b.createdAt) return -1;
+
+    return 0
+  }
+  groupList.sort(sortGroupList)
 
   return (
     <div className="navbar-stuff">
@@ -27,19 +41,15 @@ const Navbar1 = (props) => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="My Groups" id="basic-nav-dropdown">
-              {groupnames.map((group, i) => (
+              {groupList.map((group, i) => (
                 <div key={i}>
-                  <NavDropdown.Item as={Link} to="/authorized/group/groupcode">
-                    {group}
+                  <NavDropdown.Item as={Link} to={"/authorized/group/"+group.groupCode}>
+                    {group.groupName}
                   </NavDropdown.Item>
                 </div>
               ))}
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/authorized/">
-                New Group
-              </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={Link} to="/authorized/about" bg="white">
+            <Nav.Link as={Link} to="/about" bg="white">
               About Us
             </Nav.Link>
           </Nav>

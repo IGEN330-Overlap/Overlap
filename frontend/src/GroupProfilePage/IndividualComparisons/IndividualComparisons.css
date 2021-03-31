@@ -36,7 +36,7 @@
     color: var(--off-white-color);
     margin-left: 6px;
     margin-top: clamp(10px, 1vw, 17px);
-    font-size: clamp(13px, 1.25vw, 18px);
+    font-size: clamp(17px, 2vw, 20px);
     width: fit-content;
 }
 .comparisons .return-to-insights {
@@ -151,7 +151,7 @@
     margin-left: 15px;
     display: flex;
     flex-direction: column;
-    width: 29vw;
+    width: 28vw;
     transition: 0.3s;
 }
 .top-tracks .track-info .track-title {
@@ -225,11 +225,11 @@
         width: 80vw;
     }
     .top-tracks .track-info {
-        width: 90vw;
+        width: 70vw;
     }
     .top-tracks .track-container:hover .track-info {
         font-size: 21.5px;
-        width: 90vw;
+        width: 80vw;
     }
     .top-tracks .track-artist {
         width: 90vw;

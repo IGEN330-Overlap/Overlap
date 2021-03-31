@@ -329,7 +329,7 @@ exports.deletePlaylist = async (req, res) => {
     });
     return;
   }
-
+   
     try{
     await Group.updateOne(
 

@@ -1,0 +1,15 @@
+{
+  "name": "overlap",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "cd backend && npm install && node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"npm run start\" \"npm run client\"",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
+  },
+  "engines": {
+    "node": "15.9.0",
+    "npm": "7.5.3"
+}
+}

@@ -1,11 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  updateGroupCode,
-  updateGroupName,
-  updateGroupPlaylists,
-  updateGroupList,
-} from "../../Redux/Actions.js";
+import { updateGroupList } from "../../Redux/Actions.js";
 import Modal from "react-bootstrap/Modal";
 import Dropdown from "react-bootstrap/Dropdown";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -21,8 +16,16 @@ const GroupsComponent = (props) => {
 
   //variables for using states
   const groupList = useSelector((state) => state.groupList);
-  const selectedGroup = useSelector((state) => state.currentGroup);
   const spotifyID = useSelector((state) => state.userObject);
+
+  //order groupList from most recent to oldest
+  function sortGroupList (a,b) {
+    if (b.createdAt > a.createdAt) return 1;
+    if (a.createdAt > b.createdAt) return -1;
+
+    return 0
+  }
+  groupList.sort(sortGroupList)
 
   //functions for opening and closing "Show Group Code" Modal
   const [CodeisOpen, setCodeIsOpen] = React.useState(false);
@@ -40,6 +43,20 @@ const GroupsComponent = (props) => {
   };
   const hideLeaveModal = () => {
     setLeaveIsOpen(false);
+  };
+
+  //set group code state
+  const [groupCodeState, setCode] = useState("");
+  //set group name state
+  const [groupNameState, setName] = useState("");
+
+  //search bar state
+  const [searchText, setSearch] = useState("");
+  const editSearch = (e) => {
+    setSearch(e.target.value);
+  };
+  const dynamicSearch = () => {
+    return groupList.filter((x) => x.groupName.toLowerCase().includes(searchText.toLowerCase()));
   };
 
   //custom toggle as three dots
@@ -86,27 +103,16 @@ const GroupsComponent = (props) => {
     }
   }
 
-  const setCurrentGroup = (group) => {
-    dispatch(updateGroupName(group.groupName));
-    dispatch(updateGroupCode(group.groupCode));
-    dispatch(updateGroupPlaylists(group.playlists));
-  };
-
   function leaveGroup() {
     axios
       .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
-        groupCode: selectedGroup.groupCode,
+        groupCode: groupCodeState,
         spotifyID: spotifyID.userID,
       })
       .then((data) => {
         console.log(data.data.return);
         axios
-          .get(
-            process.env.REACT_APP_BACKEND_URL +
-              "/users/" +
-              spotifyID.userID +
-              "/groups"
-          )
+          .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
           .then((data) => {
             dispatch(updateGroupList(data.data));
             console.log(data.data);
@@ -122,32 +128,32 @@ const GroupsComponent = (props) => {
       <h1 className="title">
         <strong>Groups</strong>
       </h1>
-      <div class="mr-auto">
+      <div className="mr-auto">
         <img src={line} className="underline" alt="underline" />
       </div>
 
-      {/*search bar -- INPUT DOES NOT DO ANYTHING*/}
+      {/* search bar */}
       <div className="search-bar">
         <input
           type="text"
+          name="search-bar"
+          value={searchText.value}
+          onChange={editSearch}
           class="input-search"
-          placeholder="search"
+          placeholder="Search"
           size="15"
         />
       </div>
 
       <div className="group-list">
-        {groupList.map((group, i) => (
+        {dynamicSearch().length === 0 && <div className="no-groups-text" dir="ltr">Sorry, we can't find any groups for you.</div>}
+        {dynamicSearch().map((group, i) => (
           /* Group as a dropdown menu button */
-          <div
-            className="group-item d-flex"
-            onClick={() => setCurrentGroup(group)}
-          >
+          <div key={i} className="group-item d-flex">
             <Dropdown as={ButtonGroup}>
               <Link
-                to="/authorized/group/groupid"
+                to={"/authorized/group/" + group.groupCode}
                 className="groupButton"
-                onClick={() => setCurrentGroup(group)}
               >
                 {group.groupName}
               </Link>
@@ -155,11 +161,27 @@ const GroupsComponent = (props) => {
               <Dropdown.Toggle as={CustomToggle} />
               <Dropdown.Menu className="menu">
                 <Dropdown.Item>
-                  <div onClick={showCodeModal}>Show Group Code</div>
+                  <div
+                    onClick={() => {
+                      showCodeModal();
+                      setCode(group.groupCode);
+                      setName(group.groupName);
+                    }}
+                  >
+                    Show Group Code
+                  </div>
                 </Dropdown.Item>
                 <Dropdown.Divider></Dropdown.Divider>
                 <Dropdown.Item>
-                  <div onClick={showLeaveModal}>Leave Group</div>
+                  <div
+                    onClick={() => {
+                      showLeaveModal();
+                      setCode(group.groupCode);
+                      setName(group.groupName);
+                    }}
+                  >
+                    Leave Group
+                  </div>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
@@ -177,11 +199,11 @@ const GroupsComponent = (props) => {
         >
           <Modal.Body className="in-modal modal-body">
             <h5 className="modal-text modal-head">
-              <strong>{selectedGroup.groupName} Code</strong>
+              <strong>{groupNameState} Code</strong>
             </h5>
             <div id="myCode">
               <h4 className="modal-text" type="text">
-                <strong>{selectedGroup.groupCode}</strong>
+                <strong>{groupCodeState}</strong>
               </h4>
             </div>
             <div className="copy-groupCode">
@@ -221,7 +243,7 @@ const GroupsComponent = (props) => {
               <strong>Are you sure you want to leave?</strong>
             </h5>
             <h4 className="modal-text">
-              <strong>{selectedGroup.groupName}</strong>
+              <strong>{groupNameState}</strong>
             </h4>
             <p>
               <button

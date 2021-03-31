@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+//React, redux, and react-router imports
+import React, { useEffect, useState, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateRefreshToken,
@@ -7,11 +8,13 @@ import {
 } from "./Redux/Actions.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 
+//Component Imports
 import LandingPage from "./LandingPage/LandingPage";
 import AuthorizedPage from "./AuthorizedPage/AuthorizedPage";
 import AboutUs from "./AboutUs/AboutUs";
 import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
 import { PlaylistPage } from "./PlaylistPage/PlaylistPage";
+import ScreenOverlay from "./ScreenOverlay/ScreenOverlay";
 import "./App.css";
 
 const axios = require("axios");
@@ -45,13 +48,18 @@ function App() {
   //useState hook for faulty login attempts
   const [faultyLogin, setFaultyLogin] = useState(false);
 
+  //useState hook for page loading
+  const [isLoading, setIsLoading] = useState(true);
+
   //Update refresh token on App render
   //if refresh token exists in localstorage, dispatch update
   //else if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
-  if (localStorage.getItem("refreshToken") !== undefined && localStorage.getItem("refreshToken") !== null) {
+  if (
+    localStorage.getItem("refreshToken") !== undefined &&
+    localStorage.getItem("refreshToken") !== null
+  ) {
     dispatch(updateRefreshToken(localStorage.getItem("refreshToken")));
-  }
-  else if (
+  } else if (
     params.refresh_token !== "" &&
     params.refresh_token !== undefined &&
     params.refresh_token !== null
@@ -62,27 +70,37 @@ function App() {
 
   //User Effect hook for logging in the user with API upon refreshToken update
   useEffect(() => {
-    axios
-      .post(process.env.REACT_APP_BACKEND_URL + "/users/login", {
-        refreshToken: refreshToken,
-      })
-      .then((data) => {
-        //if login is unsuccessful, reset refresh token
-        if (data.data.error) {
-          dispatch(updateRefreshToken(""));
-          localStorage.clear();
-          setFaultyLogin(true);
-        }
-        //if login is sucessful, update user object
-        else {
-          dispatch(updateUser(data.data.return));
-          setFaultyLogin(false);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [refreshToken]);
+    if (refreshToken) {
+      //Start loading
+      setIsLoading(true);
+      axios
+        .post(process.env.REACT_APP_BACKEND_URL + "/users/login", {
+          refreshToken: refreshToken,
+        })
+        .then((data) => {
+          //if login is unsuccessful, reset refresh token
+          if (data.data.error) {
+            dispatch(updateRefreshToken(""));
+            localStorage.clear();
+            setFaultyLogin(true);
+          }
+          //if login is sucessful, update user object
+          else {
+            dispatch(updateUser(data.data.return));
+            setFaultyLogin(false);
+          }
+
+          //Stop loading
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          //Stop loading
+          setIsLoading(false);
+
+          console.log(err);
+        });
+    }
+  }, [refreshToken, dispatch]);
 
   //User Effect to get user group list when userObject is updated
   useEffect(() => {
@@ -107,19 +125,31 @@ function App() {
   return (
     <div className="App">
       {/* Redirect if not logged in with spotify */}
-      {(refreshToken == null || refreshToken.length === 0 || refreshToken === "" || faultyLogin) && (
-        <Redirect to="/" />
-      )}
+      {(refreshToken == null ||
+        refreshToken.length === 0 ||
+        refreshToken === "" ||
+        faultyLogin) &&
+        isLoading === false && <Redirect to="/" />}
       <Switch>
         {/* Route for root */}
-        <Route path="/" render={() => <LandingPage faultyLogin={faultyLogin}/>} exact={true} />
+        <Route
+          path="/"
+          render={() => <LandingPage faultyLogin={faultyLogin} />}
+          exact={true}
+        />
         {/* Router for authorized reroute from backend authorization */}
         <Route
           path="/authorized"
-          render={() => <AuthorizedPage />}
+          render={() => (
+            <Fragment>
+              <AuthorizedPage />
+              {/* If page loading, render loading overlay */}
+              {isLoading && <ScreenOverlay text="Retrieving Data" />}
+            </Fragment>
+          )}
           exact={true}
         />
-        <Route path="/authorized/about" render={() => <AboutUs />} />
+        <Route path="/about" render={() => <AboutUs />} />
         <Route path="/authorized/group" render={() => <GroupProfilePage />} />
         <Route path="/authorized/playlist" render={() => <PlaylistPage />} />
       </Switch>
