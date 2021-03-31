@@ -87,9 +87,7 @@ const GroupProfilePage = (props) => {
     return (
       <div className="group-landing-root">
         <div className="group-info-root">
-          <div className="navbar">
             <Navbar1 />
-          </div>
           <div className="group-profile-page-components">
             <div className="component-box"></div>
             <div className="info-flex">
@@ -128,11 +126,6 @@ const GroupProfilePage = (props) => {
               </div>
             </div>
         </div>
-
-        <div className="profile_iceberg">
-          <img src={iceberg} alt="decorative iceberg" />
-        </div>
-
           <div className="top-genres-display">
               <TopGenres groupUsers={groupUsers} />
           </div>

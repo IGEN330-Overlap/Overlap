@@ -113,7 +113,7 @@
 .playlist-carousel-carousel .carousel-control-prev{
     position: absolute;
     top: -30%;
-    left: 200%;
+    left: 150%;
     width: 2rem;
     height: 2rem;
     margin-left: max(5%, 45px);
@@ -130,10 +130,11 @@
 }
 
 .carousel .carousel-indicators {
+    position: absolute;
     top: -27%;
-    left: 275%;
+    left: 200%;
     z-index: 1;
-    width: min(5vw, 75px);
+    width: max(5vw, 180px);
     height: 1vw;
 }
 
@@ -303,9 +304,9 @@
     }
     .carousel .carousel-indicators{
         height: 20px;
-        width: 60px;
+        width: 125px;
         top: -30px;
-        left: 125%;
+        left: 100%;
     }
 }
 

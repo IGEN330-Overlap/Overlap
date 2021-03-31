@@ -103,6 +103,10 @@
     padding-right: 2px;
 }
 
+.backToProfile {
+    margin-top: 3vh;
+}
+
 @media (max-width: 820px) {
     .playlist-components {
         align-items: flex-start;
