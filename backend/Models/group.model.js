@@ -56,8 +56,13 @@ const groupSchema = new Schema(
         ],
         contributors: [
           {
-            type: String,
-            required: true,
+            name: {
+              type: String,
+              required: true,
+            },
+            userImageURL: {
+              type: String,
+            },
           },
         ],
         createDate: {

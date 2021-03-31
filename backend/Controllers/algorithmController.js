@@ -54,19 +54,22 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   let numUsers = userIDs.length; // keep track of number of users
-  // console.log("Users", userIDs); //debugging
+  let contributorsUsernames = [];// array to store usernames of playlist contributors
   
-  let contributorsUsernames = [];
   // Collect user top track data into top tracks array
   try {
     let data = await User.find({ userID: { $in: userIDs } });
 
     // Add each persons dataset to our master array for the corresponding thing
-    usersTopTracks = data.map((x) => x.topTracks);
-    usersMusicalProfile = data.map((x) => x.musicalProfile);
-    usersTopArtists = data.map((x) => x.topArtists);
-    contributorsUsernames = data.map((x) => x.name);
-
+    for (x of data) {
+      usersTopTracks.push(x.topTracks);
+      usersMusicalProfile.push(x.musicalProfile);
+      usersTopArtists.push(x.topArtists);
+      contributorsUsernames.push({
+        name: x.name,
+        userImageURL: x.imageURL,
+      });
+    }
   } catch (err) {
     res.json({ message: "error on finding users", error: err });
   }
@@ -488,17 +491,22 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // console.log("Users", userIDs); //debugging
 
   let usersTopTracks = []; // arrays for storing user track information
-  // let usersTopArtists = []; // arrays for storing user artist information
-  let contributorsUsernames;
+  // let usersTopArtists = []; // UNUSED RIGHT NOW
+  let contributorsUsernames = []; // array to store usernames of playlist contributors
 
   // Collect user top "x" data from mongoDB
   try {
     let data = await User.find({ userID: { $in: userIDs } });
 
     // Add each persons dataset to our master array for the corresponding thing
-    usersTopTracks = data.map((x) => x.topTracks);
-    // usersTopArtists = data.map((x) => x.topArtists);
-    contributorsUsernames = data.map((x) => x.name);
+    for (x of data) {
+      usersTopTracks.push(x.topTracks);
+      // usersTopArtists.push(x.topArtists);
+      contributorsUsernames.push({
+        name: x.name,
+        userImageURL: x.imageURL,
+      });
+    }
   } catch (err) {
     res.json({
       message: "error on finding users",
@@ -712,10 +720,10 @@ exports.createSpotifyPlaylist = async (req, res) => {
           "Playlist generated through Overlap. To learn more see: https://project-overlap.herokuapp.com",
         public: true,
       });
-      // if not successful status code throw an error      
-      if (data.statusCode != 201){
+      // if not successful status code throw an error
+      if (data.statusCode != 201) {
         throw new Error();
-      } 
+      }
       playlistID = data.body.id; // collect playlist id so we can add to it later
       // console.log("playlist creation status code: ", data.statusCode);
     } catch (err) {
@@ -742,11 +750,14 @@ exports.createSpotifyPlaylist = async (req, res) => {
 
     try {
       // Add the tracks to the spotify playlist
-      let data = await spotifyApi.addTracksToPlaylist(playlistID, formattedTrackIds);
+      let data = await spotifyApi.addTracksToPlaylist(
+        playlistID,
+        formattedTrackIds
+      );
       // if not successful status code throw an error
       if (data.statusCode != 201) {
         throw new Error();
-      } 
+      }
       console.log("playlist song addition status code: ", data.statusCode);
 
       res.json({
