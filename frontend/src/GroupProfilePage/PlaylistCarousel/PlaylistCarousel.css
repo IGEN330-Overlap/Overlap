@@ -113,10 +113,11 @@
 .playlist-carousel-carousel .carousel-control-prev{
     position: absolute;
     top: -30%;
-    left: 275%;
+    left: 200%;
     width: 2rem;
     height: 2rem;
     margin-left: max(5%, 45px);
+    z-index: 2;
 }
 
 .playlist-carousel-carousel .carousel-control-next{
@@ -125,6 +126,15 @@
     right: -300%;
     width: 2rem;
     height: 2rem;
+    z-index: 2;
+}
+
+.carousel .carousel-indicators {
+    top: -27%;
+    left: 275%;
+    z-index: 1;
+    width: min(5vw, 75px);
+    height: 1vw;
 }
 
 /* modal css */
@@ -333,11 +343,17 @@
     }
     .carousel .carousel-control-prev{
         top: -35px;
-        left: 135%;
+        left: 50%;
     }
     .carousel .carousel-control-next{
         top: -35px;
         right: -150%;
+    }
+    .carousel .carousel-indicators{
+        height: 20px;
+        width: 60px;
+        top: -30px;
+        left: 125%;
     }
 }
 

@@ -8,7 +8,7 @@ import GroupName from "./GroupName/GroupName";
 import Navbar1 from "../Navbar/Navbar";
 import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
-//import { TopGenres } from './TopGenres/TopGenres';
+import { TopGenres } from './TopGenres/TopGenres';
 import { GroupTopStats } from './TopStats/TopStats';
 //import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
@@ -82,7 +82,7 @@ const GroupProfilePage = (props) => {
   }, [history])
 
   if (groupList.length === 0 || isLoading) {
-    return <ScreenOverlay text="Collecting your group's information..." />;
+    return <ScreenOverlay text="Collecting your group's information" />;
   } else if (checkMember && groupUsers && !isLoading) {
     return (
       <div className="group-landing-root">
@@ -141,9 +141,9 @@ const GroupProfilePage = (props) => {
           <img src={iceberg} alt="decorative iceberg" />
         </div>
 
-          {/* <div className="top-genres-display">
+          <div className="top-genres-display">
               <TopGenres groupUsers={groupUsers} />
-          </div> */}
+          </div>
           <div className="top-stats-display">
               <GroupTopStats groupUsers={groupUsers}/>
           </div>

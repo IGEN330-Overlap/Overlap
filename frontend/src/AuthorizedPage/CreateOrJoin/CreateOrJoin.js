@@ -92,6 +92,20 @@ const CreateOrJoin = (props) => {
         }
     }, [group_code])
 
+    //If key press for new group input is "Enter", run create group function
+    const handleNewGroupKeyPress = (e) => {
+        if(e.key === "Enter") {
+            createNewGroup();
+        }
+    }
+
+    //If key press for join group input is "Enter", run join group function
+    const handleJoinGroupKeyPress = (e) => {
+        if(e.key === "Enter") {
+            joinGroup();
+        }
+    }
+
     return (
         //Flexbox for creating or joining new group
         <div className="CreateOrJoinBox d-flex flex-column align-left">
@@ -104,7 +118,7 @@ const CreateOrJoin = (props) => {
             </div>
             <Collapse in={openCreate}>
                 <div id="example-collapse-text" className="collapseBody">
-                    <input type="text" className="input" placeholder="Enter Group Name" size="15" id="newGroupName" maxLength="25"/>
+                    <input type="text" className="input" placeholder="Enter Group Name" size="15" id="newGroupName" maxLength="25" onKeyPress={handleNewGroupKeyPress}/>
                     <div className="continue-arrow" onClick={createNewGroup}>
                         <svg 
                             height="429.92093pt" 
@@ -129,7 +143,7 @@ const CreateOrJoin = (props) => {
             </div>
             <Collapse in={openJoin}>
                 <div id="example-collapse-text" className="collapseBody">
-                    <input type="text" className="input" placeholder="Enter Group Code" size="15" id="joinGroupCode"/>
+                    <input type="text" className="input" placeholder="Enter Group Code" size="15" id="joinGroupCode" onKeyPress={handleJoinGroupKeyPress}/>
                     <div className="continue-arrow" onClick={joinGroup}>
                         <svg 
                             height="429.92093pt" 

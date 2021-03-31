@@ -1,8 +1,8 @@
 # Overlap Project 
-<img src="public\images\overlap-logo.png" width="30%">
+[<img src="public\images\overlap-logo.png" width="25%">](https://project-overlap.herokuapp.com)
 
 # About the project
-Overlap is a web application designed and created by six Integrated Engineering Students at UBC. One thing the COVID pandemic has showed us is the lack of socialibilty in music. Where you could previously go to parties or concerts and discover new music, the pandemic has limited the opportunities to expand your own horizons. Seeing this gap we decided to build an application that helps you connect with your friends to help build stronger relationships and keep connections that can fade in the online environment. 
+Overlap is a web application designed and created by six Integrated Engineering Students at UBC. One thing the COVID pandemic has showed us is the lack of socialibilty in music. Where you could previously go to parties or concerts and discover new music, the pandemic has limited the opportunities to expand your own horizons. Seeing this gap we decided to build an application that helps you connect with your friends to help build stronger relationships and keep connections that can fade in the online environment. Check out our app [here](https://project-overlap.herokuapp.com).
 
 The application integrates Spotify to collect a user's listening habits and lets you:
  - Create and join music sharing groups with friends.

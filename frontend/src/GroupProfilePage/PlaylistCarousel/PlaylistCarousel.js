@@ -62,6 +62,12 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   const [playlistUsers, setPlaylistUsers] = useState([]);
   var checkDuplicate = false;
 
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  const handleSelect = (selectedCarouselIndex, e) => {
+    setCarouselIndex(selectedCarouselIndex);
+  };
+
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
     if (playlistUsers.length === 0) {

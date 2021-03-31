@@ -56,7 +56,7 @@ const GroupsComponent = (props) => {
     setSearch(e.target.value);
   };
   const dynamicSearch = () => {
-    return groupList.filter((x) => x.groupName.includes(searchText));
+    return groupList.filter((x) => x.groupName.toLowerCase().includes(searchText.toLowerCase()));
   };
 
   //custom toggle as three dots
@@ -146,6 +146,7 @@ const GroupsComponent = (props) => {
       </div>
 
       <div className="group-list">
+        {dynamicSearch().length === 0 && <div className="no-groups-text" dir="ltr">Sorry, we can't find any groups for you.</div>}
         {dynamicSearch().map((group, i) => (
           /* Group as a dropdown menu button */
           <div key={i} className="group-item d-flex">
