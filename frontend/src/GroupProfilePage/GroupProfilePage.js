@@ -10,7 +10,7 @@ import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 import { TopGenres } from './TopGenres/TopGenres';
 import { GroupTopStats } from './TopStats/TopStats';
-//import { MusicalProfile } from './MusicalProfile/MusicalProfile';
+import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
 import iceberg from '../AuthorizedPage/iceberg.svg';
 
@@ -125,14 +125,6 @@ const GroupProfilePage = (props) => {
                 />
               </div>
             </div>
-                
-            {/* <div className="top-genres-display">
-                <TopGenres groupUsers={groupUsers} />
-            </div>
-            <div className="musical-profile-display">
-                <MusicalProfile groupUsers={groupUsers} />
-            </div> */}
-           
         </div>
           <div className="top-genres-display">
               <TopGenres groupUsers={groupUsers} />
@@ -140,9 +132,9 @@ const GroupProfilePage = (props) => {
           <div className="top-stats-display">
               <GroupTopStats groupUsers={groupUsers}/>
           </div>
-          {/* <div className="musical-profile-display">
+          <div className="musical-profile-display">
               <MusicalProfile groupUsers={groupUsers} />
-          </div> */}
+          </div>
       </div>
     </div>
     );
