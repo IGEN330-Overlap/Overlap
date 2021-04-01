@@ -62,6 +62,12 @@ input:focus{
     border-radius: 10px;
 }
 
+/* custom scrollbar for firefox */
+.group-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color-2) var(--primary-color-6);
+}
+
 .group-item{
     direction: ltr;
     justify-content: space-between;

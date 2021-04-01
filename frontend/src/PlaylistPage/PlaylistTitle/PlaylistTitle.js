@@ -11,13 +11,12 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
     const [SavedisOpen, setSavedIsOpen] = useState(false);
     const showSavedModal = () => {
          setSavedIsOpen(true);
-     };
-     const hideSavedModal = () => {
+    };
+    const hideSavedModal = () => {
          setSavedIsOpen(false);
-     };
+    };
 
-     const openPlaylist = () => { window.open("https://open.spotify.com/")}
-    
+    const openPlaylist = () => { window.open("https://open.spotify.com/")}
 
     var refreshToken = useSelector((state) => state.refreshToken)
 
@@ -36,6 +35,18 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
         });
     }
 
+    //console.log(createdDate);
+    
+    let createdDay;
+    let createdMonth;
+    let createdYear;
+
+    if (createdDate !== undefined) {
+        createdDay = createdDate.day;
+        createdMonth = createdDate.month;
+        createdYear = createdDate.year;
+    }
+
     return (
         <div className="playlist-info-root">
             <div className="playlist-page-cover-container">
@@ -45,7 +56,8 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
                 <div className="title-container">
                     <h2 className="white"> {playlistName} </h2>
                 </div>
-                {/* <h4 className="created-date-playlist"><strong>Created On: {createdDate.substr(0, 10)}</strong></h4> */}
+
+                {createdDate !== undefined ? <h4 className="created-date"><strong>Created On: {createdMonth + " " + createdDay + ", " + createdYear}</strong></h4> : ''}
                 <div className="btn btn-sm playlist-button" 
                     onClick={() => {
                         addToSpotify();
