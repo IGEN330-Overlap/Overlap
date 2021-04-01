@@ -95,7 +95,7 @@ export const GroupTopStats = ({groupUsers}) => {
 
     // Add 4 elements at a time to carousel array
     let carouselTracks = [];
-    for (let i = 0; (i < groupUniqueSongs.length) && (i < 36); i += num_tracks) {
+    for (let i = 0; (i < groupUniqueSongs.length) && (i < 18); i += num_tracks) {
         let threeTracks = groupUniqueSongs.slice(i, i + num_tracks);
 
         let carouselElement = threeTracks.map((track, j) => {
@@ -195,28 +195,31 @@ export const GroupTopStats = ({groupUsers}) => {
                                 </div>
                             ))}
                         </div>
-                        <div className="top-artist-podiums">
-                            <div className="artist-podium">
-                                <img className="artist-icon" 
-                                    src={groupUniqueArtists[1] ? groupUniqueArtists[1].imageURL : 'Unable to find artist'} 
-                                    alt={groupUniqueArtists[1] ? groupUniqueArtists[1].artistName : 'Unable to find artist'}
-                                />
-                                <div className="podium-2"><strong>#2</strong></div>
+                        <div className="podium-display">
+                            <div className="top-artist-podiums">
+                                <div className="artist-podium">
+                                    <img className="artist-icon" 
+                                        src={groupUniqueArtists[1] ? groupUniqueArtists[1].imageURL : 'Unable to find artist'} 
+                                        alt={groupUniqueArtists[1] ? groupUniqueArtists[1].artistName : 'Unable to find artist'}
+                                    />
+                                    <div className="podium-2"><strong>#2</strong></div>
+                                </div>
+                                <div className="artist-podium">
+                                    <img className="artist-icon" 
+                                        src={groupUniqueArtists[0] ? groupUniqueArtists[0].imageURL : 'Unable to find artist'} 
+                                        alt={groupUniqueArtists[0] ? groupUniqueArtists[0].artistName : 'Unable to find artist'}
+                                    />
+                                    <div className="podium-1"><strong>#1</strong></div>
+                                </div>
+                                <div className="artist-podium">
+                                    <img className="artist-icon" 
+                                        src={groupUniqueArtists[2] ? groupUniqueArtists[2].imageURL : 'Unable to find artist'} 
+                                        alt={groupUniqueArtists[2] ? groupUniqueArtists[2].artistName : 'Unable to find artist'}
+                                    />
+                                    <div className="podium-3"><strong>#3</strong></div>
+                                </div>
                             </div>
-                            <div className="artist-podium">
-                                <img className="artist-icon" 
-                                    src={groupUniqueArtists[0] ? groupUniqueArtists[0].imageURL : 'Unable to find artist'} 
-                                    alt={groupUniqueArtists[0] ? groupUniqueArtists[0].artistName : 'Unable to find artist'}
-                                />
-                                <div className="podium-1"><strong>#1</strong></div>
-                            </div>
-                            <div className="artist-podium">
-                                <img className="artist-icon" 
-                                    src={groupUniqueArtists[2] ? groupUniqueArtists[2].imageURL : 'Unable to find artist'} 
-                                    alt={groupUniqueArtists[2] ? groupUniqueArtists[2].artistName : 'Unable to find artist'}
-                                />
-                                <div className="podium-3"><strong>#3</strong></div>
-                            </div>
+                            <div className="podium-stand"></div>
                         </div>
                     </div>
                 </div>
