@@ -9,7 +9,7 @@ const ScreenOverlay = (props) => {
   useEffect(() => {
     setTimeout(() => {
       setRenderBack(true);
-    }, 3000);
+    }, 4000);
   }, []);
 
   return (
