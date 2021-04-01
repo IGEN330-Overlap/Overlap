@@ -144,6 +144,14 @@
     cursor: pointer;
 }
 
+/* copy alert */
+.copy-alert { 
+    height: 50px;
+}
+.copy-alert p {
+    margin: 0px;
+}
+
 /*adjust for different screen sizes */
 @media (max-width: 780px) {
     .member-container {

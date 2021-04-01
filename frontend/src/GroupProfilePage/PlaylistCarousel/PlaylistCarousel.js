@@ -200,6 +200,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     if (playlistUsers.length > 1) {
       var input_playlistName = document.getElementById("newPlaylistName").value
         if (input_playlistName === "") {
+          
           console.log('No playlist name entered!')
           document.getElementById("generate-playlist-button").style.cursor = "not-allowed" 
         }
