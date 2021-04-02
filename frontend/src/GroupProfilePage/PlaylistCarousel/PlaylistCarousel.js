@@ -132,6 +132,11 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       document.getElementById("moods-select").style.backgroundColor = "var(--off-white-color)";
       document.getElementById("moods-select").style.filter = "none";
     }
+    else if((type === "Top Tracks") && openTopTrackSelection) {
+      type = "";
+      document.getElementById("toptracks-select").style.backgroundColor = "var(--off-white-color)";
+      document.getElementById("toptracks-select").style.filter = "none";
+    }
     else if((type === "Top Tracks") && !openTopTrackSelection) {
       document.getElementById("toptracks-select").style.backgroundColor = "var(--neutral-color-2)";
       document.getElementById("toptracks-select").style.filter = "drop-shadow(1mm 1mm 1mm var(--primary-color-main))";
@@ -242,7 +247,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                 console.log(err);
             });
           }
-          else if (playlistType !== "Top Tracks" && playlistType !== "Moods") {
+          else if (playlistType !== "Top Tracks") {
             axios
             .post(process.env.REACT_APP_BACKEND_URL + "/groups/generateMoodsPlaylist", {
                 groupCode: groupCode,
@@ -278,12 +283,19 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   }
 
   // get playlist info
-  var playlistInfo = []
+  let playlistInfo = []
   playlists.map((playlist,i) => {
-    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id})
-    playlistInfo.reverse()
-    return playlistInfo
+    let createdDate;
+    // if(playlist.createDate !== undefined) {
+    //   let created = new Date (playlist.createDate.day +' '+ playlist.createDate.month +' '+ playlist.createDate.year);
+    //   createdDate = created.toISOString()
+    // }
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id,  created: createdDate});
+    playlistInfo.reverse();
+    return playlistInfo   
   })
+
+  
 
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
