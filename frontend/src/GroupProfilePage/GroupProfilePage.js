@@ -36,11 +36,14 @@ const GroupProfilePage = (props) => {
 
   const [checkMember, setCheckMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const setLoading = (state) => {
+    setIsLoading(state)
+  }
 
   useEffect(() => {
     if (groupCode !== null) {
       //start loading
-      setIsLoading(true);
+      setLoading(true);
 
       axios
         .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
@@ -59,12 +62,12 @@ const GroupProfilePage = (props) => {
         });
 
         //end loading
-        setIsLoading(false);
+        setLoading(false);
         })
         .catch((err) => {
             console.log(err);
             //end loading
-            setIsLoading(false);
+            setLoading(false);
         });
     }
   }, [groupCode, groupList, groupName]);
@@ -93,7 +96,11 @@ const GroupProfilePage = (props) => {
             <div className="info-flex">
               <div className="main-column-box"></div>
               <div className="group-name">
-                <GroupName groupCode={groupCode} groupName={groupName} createdDate={createdDate} />
+                <GroupName 
+                  groupCode={groupCode} 
+                  groupName={groupName} 
+                  createdDate={createdDate} 
+                  setLoading={setLoading}/>
               </div>
               <div className="member-display">
                 {/* render members display when group users variable is populated */}
@@ -122,6 +129,7 @@ const GroupProfilePage = (props) => {
                   groupCode={groupCode}
                   groupUsers={groupUsers}
                   refreshToken={refreshToken}
+                  setLoading={setLoading}
                 />
               </div>
             </div>

@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './GroupName.css';
+
+import { updateGroupList } from "../../Redux/Actions.js";
+
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
 
@@ -8,7 +12,11 @@ import closeButton from "../PlaylistCarousel/close-x.svg";
 const axios = require("axios");
 
 // display group name on group profile page
-const GroupName = ({groupCode, groupName, createdDate}) => {
+const GroupName = ({groupCode, groupName, createdDate, setLoading}) => {
+
+    const userObject = useSelector((state) => state.userObject)
+    const dispatch = useDispatch();
+
     //convert ISO date to long date
     let createdDay = createdDate.substr(8,2)
     let createdMonth;
@@ -54,8 +62,6 @@ const GroupName = ({groupCode, groupName, createdDate}) => {
         default:
             console.log("Oops! Can't find date.")
     }
-    
-    const [newName, setNewName] = useState('');
 
     const [showEdit, setShowEdit] = useState(false)
     const showEditModal = () => {
@@ -84,12 +90,20 @@ const GroupName = ({groupCode, groupName, createdDate}) => {
                 groupCode: groupCode,
             })
             .then((data) => {
-                setNewName(input_name);
                 console.log(data.data);
+                axios
+                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+                .then((data) => {
+                  dispatch(updateGroupList(data.data));
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
             })
             .catch((err) => console.log(err));
 
             hideEditModal();
+            setLoading(true);
         }
     }
 
@@ -99,7 +113,7 @@ const GroupName = ({groupCode, groupName, createdDate}) => {
     return(
     <div className="group-name-container">
         <div className="group-name-edit">
-        <h1 className="text"><strong>{newName !== ''? newName: groupName}</strong></h1>
+        <h1 className="text"><strong>{groupName}</strong></h1>
             <svg className="edit-icon" onClick={showEditModal} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 528.899 528.899">
                 <path className="edit-icon-colour" d="M328.883,89.125l107.59,107.589l-272.34,272.34L56.604,361.465L328.883,89.125z M518.113,63.177l-47.981-47.981
                 c-18.543-18.543-48.653-18.543-67.259,0l-45.961,45.961l107.59,107.59l53.611-53.611
