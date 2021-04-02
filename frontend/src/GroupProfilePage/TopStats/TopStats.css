@@ -257,13 +257,46 @@
         flex-direction: column;
         flex-wrap: none;
     }
-}
-
-@media(max-width: 640px) {
+    .top-tracks-carousel .carousel-control-prev {
+        left: 0%;
+    }
+    .top-tracks-carousel .carousel-control-next {
+        right: 0%;
+    }
     .top-artist-display {
         flex-direction: column;
     }
     .podium-display {
-        margin-left: 40vw;
+        margin-top: 20px;
+        margin-left: 20%;
+    }
+}
+
+@media(max-width: 400px) {
+    .top-tracks-root .track-container {
+        width: 90vw;
+        height: clamp(100px, 5vw, 120px);
+    }
+    .top-tracks-carousel .carousel-inner {
+        width: 75vw;
+    }
+    .top-tracks-carousel .group-tracks {
+        width: 75vw;
+    }
+    .top-tracks-carousel .carousel-control-prev {
+        left: 0%;
+    }
+    .top-tracks-carousel .carousel-control-next {
+        right: 0%;
+    }
+    .top-tracks-root .track-info {
+        width: 42vw;
+    }
+    .top-tracks-root .track-artist {
+        width: 42vw;
+        font-size: clamp(12px, 0.6vw, 16px)
+    }
+    .podium-display {
+        margin-left: 8%;
     }
 }

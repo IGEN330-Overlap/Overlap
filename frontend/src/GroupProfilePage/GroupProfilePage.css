@@ -253,7 +253,7 @@
         justify-content: start;
     }
     .group-landing-root .main-column-box {
-        height: 85px;
+        height: 100px;
         width: 95vw;
         z-index: 2;
     }
