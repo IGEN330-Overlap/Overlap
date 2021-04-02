@@ -41,7 +41,7 @@ const GroupProfilePage = (props) => {
   const [checkMember, setCheckMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const setLoading = (state) => {
-    setIsLoading(state)
+    setIsLoading(state);
   }
 
   useEffect(() => {
@@ -175,6 +175,7 @@ const GroupProfilePage = (props) => {
             </div>
           </div>
       </div>
+
       <div className="top-genres-display">
           <TopGenres groupUsers={groupUsers} />
       </div>
@@ -220,7 +221,6 @@ const GroupProfilePage = (props) => {
             </p>
           </Modal.Body>
         </Modal>
-
     </div>
     );
   } else if (!isLoading && !checkMember) {

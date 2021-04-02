@@ -35,12 +35,12 @@ const cover_src = [
   playlistcover1,
 ];
 
-const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
+const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLoading}) => {
 
   const userObject = useSelector((state) => state.userObject)
   
   const dispatch = useDispatch();
-
+  
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
   const showAddPlaylistModal = () => {
@@ -210,7 +210,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   }
 
   // generate playlist
-  // need to add alerts to tell users if no one is selected or if there is no playlist title
   const generatePlaylist = () => {
     if (playlistUsers.length > 1) {
       var input_playlistName = document.getElementById("newPlaylistName").value
@@ -274,6 +273,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
           // close playlist generate modal
           hideAddPlaylistModal()
+          setLoading(true);
         }
     }
     else {
@@ -285,12 +285,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   // get playlist info
   let playlistInfo = []
   playlists.map((playlist,i) => {
-    let createdDate;
-    // if(playlist.createDate !== undefined) {
-    //   let created = new Date (playlist.createDate.day +' '+ playlist.createDate.month +' '+ playlist.createDate.year);
-    //   createdDate = created.toISOString()
-    // }
-    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id,  created: createdDate});
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id});
     playlistInfo.reverse();
     return playlistInfo   
   })
