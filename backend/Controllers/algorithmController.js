@@ -627,6 +627,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne
   try {
+    if (playlistTracks.length < 25 || playlist == undefined) {
+      console.log("Uncaught error in the playlist generation");
+      throw new Error();
+    }
     await Group.updateOne(
       { groupCode: req.body.groupCode },
       { $addToSet: { playlists: playlist } }
@@ -638,7 +642,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     return;
   } catch (err) {
     console.log("Unable to add mood playlist to the group", err);
-    res.json({
+    res.status(400).json({
       message: "Unable to add mood playlist to the group",
       error: err,
     });
@@ -689,7 +693,7 @@ exports.createSpotifyPlaylist = async (req, res) => {
   }
 
   //image data that will be used as the cover for the playlist
-  let base64URI = playlistCoverImages["top"]; //until playlist type prop implemented leave as logo
+  let base64URI = playlistCoverImages["top"];
   // select base64URI based on the playlist type (otherwise keep "top" image)
   switch (playlistType) {
     case "top":
