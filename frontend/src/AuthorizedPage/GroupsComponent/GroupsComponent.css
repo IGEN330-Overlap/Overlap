@@ -156,6 +156,28 @@ input:focus{
     fill: white;
 }
 
+/* copy alert */
+.copy-button .copy-alert {
+    display: flex;
+    height: 35px;
+    justify-content: center;
+}
+.copy-button .copy-alert .alert{
+    display: flex;
+    height: 40px;
+    width: fit-content;
+    align-items: center;
+    margin-bottom: 0px;
+}
+.copy-button .copy-alert p {
+    margin: 0px;
+    font-size: 13px;
+    text-align: center;
+}
+.timeout {
+    display: none;
+}
+
 @media (max-width: 720px){
     .title{
         font-size: 30px;

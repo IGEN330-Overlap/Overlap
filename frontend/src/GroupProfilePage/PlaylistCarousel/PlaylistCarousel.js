@@ -4,7 +4,7 @@ import "./PlaylistCarousel.css";
 
 import { updateGroupList } from "../../Redux/Actions.js";
 
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import playlistcover1 from "./playlist-cover1.jpg";
 import playlistcover2 from "./playlist-cover2.jpg";
@@ -15,6 +15,7 @@ import closeButton from "./close-x.svg";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import Collapse from 'react-bootstrap/Collapse';
+import Alert from 'react-bootstrap/Alert';
 
 const axios = require('axios')
 
@@ -34,12 +35,12 @@ const cover_src = [
   playlistcover1,
 ];
 
-const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
+const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLoading}) => {
 
   const userObject = useSelector((state) => state.userObject)
   
   const dispatch = useDispatch();
-
+  
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
   const showAddPlaylistModal = () => {
@@ -57,7 +58,16 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
   const [playlistUsers, setPlaylistUsers] = useState([]);
   var checkDuplicate = false;
-  var control
+  var control;
+
+  //alert for not enough people
+  const [showNoUsersAlert, setShowNoUsersAlert] = useState(false);
+
+  //alert for no playlist type selected
+  const [showNoTypeAlert, setShowNoTypeAlert] = useState(false);
+
+  //alert for no playlist name
+  const [showPlaylistNameAlert, setShowPlaylistNameAlert] = useState(false);
 
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
@@ -70,7 +80,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         if(user === userID) {
           setPlaylistUsers(playlistUsers.filter(user => user !== userID));
           document.getElementById("select-bubble-" + position).style.backgroundColor = "var(--primary-color-1)";
-          if(playlistUsers.length !== groupUsers.length) {
+          if(playlistUsers.length === groupUsers.length) {
             document.getElementById("select-bubble").style.backgroundColor = "var(--primary-color-1)";
           }
           checkDuplicate = true;
@@ -80,7 +90,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       if(checkDuplicate === false){
         setPlaylistUsers([...playlistUsers, userID]);
         document.getElementById("select-bubble-" + position).style.backgroundColor = "var(--blue-color-main)";
-        if(playlistUsers.length === groupUsers.length) {
+        if(playlistUsers.length === (groupUsers.length-1)) {
           document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-main)";
         }
       }
@@ -121,6 +131,11 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       document.getElementById("toptracks-select").style.filter = "none";
       document.getElementById("moods-select").style.backgroundColor = "var(--off-white-color)";
       document.getElementById("moods-select").style.filter = "none";
+    }
+    else if((type === "Top Tracks") && openTopTrackSelection) {
+      type = "";
+      document.getElementById("toptracks-select").style.backgroundColor = "var(--off-white-color)";
+      document.getElementById("toptracks-select").style.filter = "none";
     }
     else if((type === "Top Tracks") && !openTopTrackSelection) {
       document.getElementById("toptracks-select").style.backgroundColor = "var(--neutral-color-2)";
@@ -195,13 +210,17 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   }
 
   // generate playlist
-  // need to add alerts to tell users if no one is selected or if there is no playlist title
   const generatePlaylist = () => {
     if (playlistUsers.length > 1) {
       var input_playlistName = document.getElementById("newPlaylistName").value
         if (input_playlistName === "") {
-          console.log('No playlist name entered!')
+          setShowPlaylistNameAlert(true);
+          console.log('No playlist name entered!');
           document.getElementById("generate-playlist-button").style.cursor = "not-allowed" 
+        }
+        else if (playlistType === "" || playlistType ==="Moods") {
+          setShowNoTypeAlert(true);
+          console.log("No mood selected");
         }
         else if (input_playlistName !== "" && playlistType !== "") {
           if(playlistType === "Top Tracks") {
@@ -227,7 +246,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
                 console.log(err);
             });
           }
-          else if (playlistType !== "Top Tracks" && playlistType !== "Moods") {
+          else if (playlistType !== "Top Tracks") {
             axios
             .post(process.env.REACT_APP_BACKEND_URL + "/groups/generateMoodsPlaylist", {
                 groupCode: groupCode,
@@ -254,20 +273,24 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
           // close playlist generate modal
           hideAddPlaylistModal()
+          setLoading(true);
         }
     }
     else {
-      console.log("Please select at least one more person!")
+      setShowNoUsersAlert(true);
+      console.log("Please select at least one more person!");
     }
   }
 
   // get playlist info
-  var playlistInfo = []
+  let playlistInfo = []
   playlists.map((playlist,i) => {
-    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id})
-    playlistInfo.reverse()
-    return playlistInfo
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id});
+    playlistInfo.reverse();
+    return playlistInfo   
   })
+
+  
 
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
@@ -441,6 +464,24 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               <button onClick={() => generatePlaylist()} centered="true" className="generate-button">
                 <strong>Generate Playlist</strong>
               </button>
+              {showNoUsersAlert ? 
+              <div className="playlist-error">
+                  <AlertPlaylistGenerate type="warning" message="Not enough users selected!"/>
+              </div>
+              : null}
+              {showNoUsersAlert ? <div className="timeout"> {window.setTimeout(function(){setShowNoUsersAlert(false)}, 1500)} </div> : null}
+              {showNoTypeAlert ? 
+              <div className="playlist-error">
+                  <AlertPlaylistGenerate type="warning" message="No playlist type selected!"/>
+              </div>
+              : null}
+              {showNoTypeAlert ? <div className="timeout"> {window.setTimeout(function(){setShowNoTypeAlert(false)}, 1500)} </div> : null}
+              {showPlaylistNameAlert ? 
+              <div className="playlist-error">
+                  <AlertPlaylistGenerate type="warning" message="No playlist name entered!"/>
+              </div>
+              : null}
+              {showPlaylistNameAlert ? <div className="timeout"> {window.setTimeout(function(){setShowPlaylistNameAlert(false)}, 1500)} </div> : null}
             </div>
           </div>
         </Modal.Body>
@@ -448,5 +489,15 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     </div>
   );
 };
+
+function AlertPlaylistGenerate (props) {
+  return(
+    <div className="error-alert">
+      <Alert variant={props.type}>
+        <p>{props.message}</p>
+      </Alert>
+    </div>
+  )
+}
 
 export default PlaylistCarousel;

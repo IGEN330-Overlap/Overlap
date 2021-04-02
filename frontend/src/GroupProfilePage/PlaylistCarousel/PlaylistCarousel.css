@@ -251,7 +251,6 @@
     margin-top: 7.5px;
     border-radius: 20px;
     background-color: var(--blue-color-main);
-    /* background-color: #1DB954; */
 }
 .generate-button strong {
     color: var(--off-white-color);
@@ -342,6 +341,15 @@
     fill: var(--blue-color-main);
 }
 
+.playlist-error .error-alert {
+    position: absolute;
+    margin-left: 20px;
+}
+.playlist-error .error-alert .alert {
+    height: 50px;
+    width: 250px;
+}
+
 @media (max-width: 780px) {
     .playlist-container{
         width: 90vw;
@@ -371,6 +379,9 @@
         width: 125px;
         top: -30px;
         left: 100%;
+    }
+    .playlist-add-modal .modal-dialog .modal-content{
+        max-width: 100%;
     }
 }
 
