@@ -255,6 +255,9 @@
 .generate-button strong {
     color: var(--off-white-color);
 }
+.generate-button:focus {
+    outline: none;
+}
 .playlistModal button {
     border-color: transparent;
     width: 200px;
