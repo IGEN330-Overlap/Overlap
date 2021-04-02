@@ -20,7 +20,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 92vh;
+    min-height: 94vh;
+    height: fit-content;
 }
 
 .top-stats-heading .text {
@@ -81,6 +82,7 @@
     font-size: 15px;
     max-height: 68px;
     overflow-y: auto;
+    scrollbar-width: thin;
 }
 .top-tracks-root .track-artist {
     color: var(--blue-color-1);
@@ -114,6 +116,7 @@
 .top-artists-root {
     height: 375px;
     width: 90vw;
+    margin-top: 10px;
     margin-left: 4vw;
     display: flex;
     flex-direction: column;
@@ -137,19 +140,20 @@
     flex-wrap: wrap;
 }
 .top-artists-root .top-artist-container {
-    height: 40px;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     width: fit-content;
     align-items: center;
-    padding: 5px;
-    padding-top: 25px;
+    margin-left: 6px;
 }
 .top-artists-root .top-artist-container:hover {
     cursor: pointer;
 }
 .top-artists-root .top-artist-list {
-    width: 250px;
+    min-width: 250px;
+    width: fit-content;
+    padding-top: 25px;
 }
 .top-artist-container strong {
     font-size: 25px;
@@ -160,10 +164,14 @@
 }
 .top-artist-container .artist-name {
     color: var(--off-white-color);
+    width: fit-content;
+}
+.podium-display {
+    margin-right: 25%;
+    z-index: 3;
 }
 .top-artist-podiums {
     width: 275px;
-    margin-right: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -206,6 +214,11 @@
     font-size: 40px;
     color: var(--blue-color-main)
 }
+.podium-stand {
+    width: 100%;
+    height: 10px;
+    background-color: var(--primary-color-main);
+}
 
 /* for bigger screen sizes */
 @media (min-width: 1450px) {
@@ -243,5 +256,14 @@
         display: flex;
         flex-direction: column;
         flex-wrap: none;
+    }
+}
+
+@media(max-width: 640px) {
+    .top-artist-display {
+        flex-direction: column;
+    }
+    .podium-display {
+        margin-left: 40vw;
     }
 }

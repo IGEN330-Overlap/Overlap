@@ -107,6 +107,12 @@
     border-radius: 10px;
 }
 
+/*custom scroll bar for firefox*/
+.display-members {
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue-color-3) black;
+}
+
 .icon-container {
     margin-top: 15px;
     margin-left: 6.5px;

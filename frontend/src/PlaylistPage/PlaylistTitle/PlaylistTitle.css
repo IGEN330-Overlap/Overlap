@@ -61,6 +61,13 @@
     font-weight: 550;
 }
 
+.playlist-info-root .created-date {
+    margin-left: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--neutral-color-3);
+}
+
 @media (max-width: 820px) {
     .playlist-info-root {
         flex-direction: row;
