@@ -4,7 +4,7 @@ import "./PlaylistCarousel.css";
 
 import { updateGroupList } from "../../Redux/Actions.js";
 
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import playlistcover1 from "./playlist-cover1.jpg";
 import playlistcover2 from "./playlist-cover2.jpg";
