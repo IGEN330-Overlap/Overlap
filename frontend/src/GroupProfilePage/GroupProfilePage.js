@@ -199,7 +199,7 @@ const GroupProfilePage = (props) => {
                   leaveGroup();
                 }}
               >
-                Yes, I'm sure
+                Yes, I'm sure.
               </button>
             </p>
             <p>
@@ -207,7 +207,7 @@ const GroupProfilePage = (props) => {
                 onClick={hideLeaveModal}
                 className="btn-in-modal leave-buttons"
               >
-                Nope, take me back!
+                No, I want to stay!
               </button>
             </p>
           </Modal.Body>
