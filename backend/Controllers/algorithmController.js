@@ -54,8 +54,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   let numUsers = userIDs.length; // keep track of number of users
-  let contributorsUsernames = [];// array to store usernames of playlist contributors
-  
+  let contributorsUsernames = []; // array to store usernames of playlist contributors
+
   // Collect user top track data into top tracks array
   try {
     let data = await User.find({ userID: { $in: userIDs } });
@@ -75,8 +75,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     res.json({ message: "error on finding users", error: err });
   }
 
-  console.log("top track profiles collected:", usersTopTracks.length); //debugging
-
   let masterSetTracks = []; //stores all top tracks as an item
   let masterSetArtists = []; //Array to store every artist from total group
   let findDuplicatesArr = []; //stores all track IDs as an item
@@ -91,7 +89,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   // put all artists into one array and collect the ids
-  masterSetArtists = usersTopArtists.flat().map( (x) => x.artistID);
+  masterSetArtists = usersTopArtists.flat().map((x) => x.artistID);
 
   /* Let's algorithm: This is making a 30 song playlist */
 
@@ -440,7 +438,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
  * @param {*} res
  */
 exports.generateGroupsMoodsPlaylist = async (req, res) => {
-
   // instantiate spotifyApi object
   let spotifyApi = new SpotifyWebApi({
     clientId: client_id,
@@ -463,7 +460,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "no selected mood",
       error: e,
     });
-    return
+    return;
   }
 
   // get the userIDs
@@ -511,7 +508,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // set tracks into one array and removes duplicates
   let masterTopTracks = usersTopTracks.flat();
   masterTopTracks = masterTopTracks.filter(
-    (v, i, a) => a.findIndex((t) => t.trackID === v.trackID) === i
+    (v, i, a) =>
+      a.findIndex(
+        (t) => t.trackName + t.artistName === v.trackName + v.artistName
+      ) === i
   );
 
   // calculate differences between each attribute and a song
@@ -575,9 +575,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       let recommendationsBody = moodParams;
 
       recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5); // force to 5 to prevent any possible error
-
       let data = await spotifyApi.getRecommendations(recommendationsBody);
-
       // add the songs ensuring that their type is correct and that there is populated data
       for (x of data.body.tracks) {
         // continuosly add songs until we've hit our playlist length (30 songs)
@@ -603,7 +601,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       }
     } catch (err) {
       console.log("error in get recommendations mood playlist");
-      res.json({
+      res.status(400).json({
         message: "error in get recommendations mood playlist",
         error: err,
       });
@@ -611,7 +609,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     }
   } catch (err) {
     console.log("error with spotify access token");
-    res.json({
+    res.status(400).json({
       message: "error with spotify access token",
       error: err,
     });
@@ -775,8 +773,8 @@ exports.createSpotifyPlaylist = async (req, res) => {
     } catch (err) {
       console.log("error in adding tracks to playlist");
       console.log(formattedTrackIds, err);
-      res.json({
-        message:"error in adding tracks to playlist",
+      res.status(400).json({
+        message: "error in adding tracks to playlist",
         error: err,
       });
       return;
