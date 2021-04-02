@@ -12,7 +12,29 @@
   z-index: 99; 
   color: var(--off-white-color);
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.overlay-row {
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.overlay-text {
+  font-size: calc(20px + 1.5vw);
+}
+
+.back-link {
+  color: var(--blue-color-2);
+  font-size: calc(12px + 0.5vw);
+}
+
+.back-link:hover {
+  color: var(--blue-color-5);
 }
