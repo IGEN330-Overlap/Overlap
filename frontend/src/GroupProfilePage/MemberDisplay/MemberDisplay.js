@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { render } from 'react-dom';
 import { useSelector } from 'react-redux';
 
 import './MemberDisplay.css';

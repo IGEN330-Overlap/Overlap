@@ -81,6 +81,18 @@ input::placeholder{
     fill: var(--blue-color-3);
 }    
 
+.join-error .error-alert {
+    position: absolute;
+    margin-left: 20px;
+}
+.create-error .error-alert {
+    margin-left: 20px;
+}
+.error-alert .alert {
+    height: 50px;
+    width: 235px;
+}
+
 @media (max-width: 720px){
     .CreateOrJoinBox{
         width: 230px;
@@ -112,5 +124,8 @@ input::placeholder{
         width: 15px;
         margin-right: 10px;
         margin-left: 5px;
+    }
+    .error-alert {
+        margin-left: 0px;
     }
 }
