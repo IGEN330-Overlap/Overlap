@@ -10,9 +10,9 @@ const backend_url = process.env.BACKEND_URL;
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
+// SCRIPTS imports
 const { calculateMusicalProfile } = require("../scripts.js");
 const { calculateDate } = require("../scripts.js");
-// Moods profiles tuned to suit the corresponding vibes
 const { buildPlaylistMoodProfile } = require("../scripts.js");
 
 const playlistCoverImages = require("../playlistCoverImages.json");
@@ -71,6 +71,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       });
     }
   } catch (err) {
+    console.log("error on finding users", err);
     res.json({ message: "error on finding users", error: err });
   }
 
@@ -80,26 +81,17 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   let masterSetArtists = []; //Array to store every artist from total group
   let findDuplicatesArr = []; //stores all track IDs as an item
 
-  // put all the songs into one array, the master set
-  for (x of usersTopTracks) {
-    for (data of x) {
-      masterSetTracks.push({
-        data,
-        identifier: data.trackName + " " + data.artistName,
-      });
-      findDuplicatesArr.push(data.trackName + " " + data.artistName);
-    }
+  // put all the songs into one array, the master set and find duplicates
+  for (data of usersTopTracks.flat()) {
+    masterSetTracks.push({
+      data,
+      identifier: data.trackName + " " + data.artistName,
+    });
+    findDuplicatesArr.push(data.trackName + " " + data.artistName);
   }
 
-  // switch to Arr.flat() since its cleaner code if we get the chance
-  // Put all the artists into one array (master set)
-  for (x of usersTopArtists) {
-    for (data of x) {
-      masterSetArtists.push(data.artistID);
-    }
-  }
-
-  // console.log("masterset length", masterSetTracks.length); //debugging
+  // put all artists into one array and collect the ids
+  masterSetArtists = usersTopArtists.flat().map( (x) => x.artistID);
 
   /* Let's algorithm: This is making a 30 song playlist */
 
@@ -157,10 +149,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
     duplicateBasedSongs = mostFrequentTracks.slice(0, 7);
   }
+
   // Using track sounds to add the rest of the songs
-  // To implement (BETTER WAYS possibly)
   let groupsMusicalProfile = calculateMusicalProfile(usersMusicalProfile);
-  // console.log("groups musical profile", groupsMusicalProfile);
 
   // Remove all duplicates and add to the new array groupUniqueSet
   let groupUniqueSet = masterSetTracks.filter(
@@ -180,11 +171,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       ) +
       Math.abs(groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
       Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
-    //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
   }
 
-  // Sort the unique set by the deltaFromGroup to (lowest to highest)
-  // Lowest is the best
+  // Sort the unique set by the deltaFromGroup to (lowest to highest), lowest is the best
   let sortedTrackSet = groupUniqueSet.sort((a, b) => {
     return parseFloat(a.deltaFromGroup) - parseFloat(b.deltaFromGroup);
   });
@@ -221,6 +210,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       message: "duplicates adding error",
       error: e,
     });
+    return;
   }
 
   // purely trackIDs of duplicate songs for the recommendation seed
@@ -240,11 +230,10 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     (k) => counts[k] == maxCountArtists
   );
 
-  // must have at least a single commonality to generate a viable seed based on the duplicates
-  // otherwise use the best 3 matching songs to the group profile
-
   let sortedTrackSeed = []; // used to get seed for non duplicates
 
+  // must have at least a single commonality to generate a viable seed based on the duplicates
+  // otherwise use the best 3 matching songs to the group profile
   sortedTrackSeed = sortedTrackSet.map((x) => x.data.trackID).slice(0, 3); //just take top 3
 
   try {
@@ -260,6 +249,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           target_energy: musicalProfile.energy / 100,
           target_valence: musicalProfile.valence / 100,
           min_popularity: 35,
+          limit: 30,
           seed_tracks: sortedTrackSeed,
         });
 
@@ -281,8 +271,12 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error on 271");
-        res.json(err);
+        console.log("error in get recomendations", err);
+        res.json({
+          message: "error in get recoemmendations",
+          error: err,
+        });
+        return;
       }
     } else if (maxCountArtists != 1 || maxCountTracks != 1) {
       try {
@@ -296,7 +290,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             target_danceability: musicalProfile.danceability / 100,
             target_energy: musicalProfile.energy / 100,
             target_valence: musicalProfile.valence / 100,
-            min_popularity: 50,
+            min_popularity: 40,
+            limit: 30,
             seed_artists: mostFrequentArtists.slice(0, 5),
           });
         } else {
@@ -304,7 +299,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             target_danceability: musicalProfile.danceability / 100,
             target_energy: musicalProfile.energy / 100,
             target_valence: musicalProfile.valence / 100,
-            min_popularity: 50,
+            min_popularity: 40,
+            limit: 30,
             seed_tracks: mostFrequentTracks.slice(0, 5),
           });
         }
@@ -327,18 +323,26 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error occured on 322");
-        res.json(err);
+        console.log("error in get recomendations", err);
+        res.json({
+          message: "error in get recoemmendations",
+          error: err,
+        });
+        return;
       }
     }
   } catch (err) {
-    res.json(err);
+    console.log("error with the refresh token");
+    res.json({
+      message: "error with the refresh token",
+      error: err,
+    });
+    return;
   }
 
   try {
-    // Add all the recommendation songs from spotify until the playlist has 20 songs
-    // To implement verify that we're adding a song that is not already in the playlist
-    for (var i = 0; playlistTracks.length < 23; i++) {
+    // Add all the recommendation songs from spotify until the playlist has 25 songs
+    for (var i = 0; playlistTracks.length < 25; i++) {
       // We have added all the reccomendations so break from loop
       if (i == recommendations.length) {
         break;
@@ -361,7 +365,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     }
 
     // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
-    // To implement verify that we're adding a song that is not already in the playlist
     for (var i = 0; playlistTracks.length < 30; i++) {
       if (i == sortedTrackSet.length) {
         break; // if we have already added all the sorted tracks then break
@@ -386,20 +389,15 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log("error on 381");
+    console.log("Adding recommendations or ends error");
     res.json({
-      message: "Adding tracks error",
+      message: "Adding recommendations or ends error",
       error: err,
     });
     return;
   }
-
-  //debugging
-  console.log("duplicate based songs added: ", duplicateBasedSongs.length);
-
   /* End of algorithm */
 
-  // Concatenate the duplicates and attribute based songs into one playlist
   // Remove identifier property
   playlistTracks.map((item) => {
     delete item.identifier;
@@ -415,8 +413,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     playlistType: "top",
   };
 
-  // Update playlist to the group
-  // Note: no error is thrown when the groupCode is incorrect / dne
+  // Update playlist to the group, Note: no error is thrown when the groupCode is incorrect / dne
   try {
     await Group.updateOne(
       { groupCode: req.body.groupCode },
@@ -763,7 +760,7 @@ exports.createSpotifyPlaylist = async (req, res) => {
       res.json({
         message: "Successfully added playlist and the tracks to spotify",
         playlistID: playlistID,
-        playlist: formattedTrackIds,
+        // playlist: formattedTrackIds,
         playlistLinkURL: "https://open.spotify.com/playlist/" + playlistID,
       });
     } catch (err) {
