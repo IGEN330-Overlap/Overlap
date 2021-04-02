@@ -171,6 +171,7 @@ const GroupProfilePage = (props) => {
             </div>
           </div>
       </div>
+
       <div className="top-genres-display">
           <TopGenres groupUsers={groupUsers} />
       </div>
@@ -216,7 +217,6 @@ const GroupProfilePage = (props) => {
             </p>
           </Modal.Body>
         </Modal>
-
     </div>
     );
   } else if (!isLoading && !checkMember) {
