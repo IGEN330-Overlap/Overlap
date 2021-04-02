@@ -440,8 +440,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
  * @param {*} res
  */
 exports.generateGroupsMoodsPlaylist = async (req, res) => {
-  // Set moods based on the request
-  let moodParams;
 
   // instantiate spotifyApi object
   let spotifyApi = new SpotifyWebApi({
@@ -449,6 +447,8 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     clientSecret: client_secret,
     redirectUri: redirect_uri,
   });
+
+  let moodParams; // holds parameters to be sent to the get recommendations
 
   // Error handling, request must be a valid mood
   try {
@@ -463,6 +463,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "no selected mood",
       error: e,
     });
+    return
   }
 
   // get the userIDs
@@ -483,12 +484,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "Cannot create a group with zero other users",
       error: e,
     });
+    return;
   }
 
-  // console.log("Users", userIDs); //debugging
-
   let usersTopTracks = []; // arrays for storing user track information
-  // let usersTopArtists = []; // UNUSED RIGHT NOW
   let contributorsUsernames = []; // array to store usernames of playlist contributors
 
   // Collect user top "x" data from mongoDB
@@ -498,7 +497,6 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     // Add each persons dataset to our master array for the corresponding thing
     for (x of data) {
       usersTopTracks.push(x.topTracks);
-      // usersTopArtists.push(x.topArtists);
       contributorsUsernames.push({
         name: x.name,
         userImageURL: x.imageURL,
@@ -527,8 +525,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       Math.abs(masterTopTracks[i].valence - moodParams.target_valence);
   }
 
-  // Sort the unique set by the deltaFromGroup to (lowest to highest)
-  // Lowest is the best
+  // Sort the unique set by the deltaFromGroup to (lowest to highest), Lowest is the best
   let sortedTrackSet = masterTopTracks.sort((a, b) => {
     return parseFloat(a.delta) - parseFloat(b.delta);
   });
@@ -567,7 +564,6 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       sortedTrackSet.map((x) => x.trackID).slice(0, 3)
     );
   }
-  console.log("seed tracks used for moods: ", seedTracks.length);
 
   spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
   try {
@@ -579,7 +575,6 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       let recommendationsBody = moodParams;
 
       recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5); // force to 5 to prevent any possible error
-      // console.log(recommendationsBody); // debugging
 
       let data = await spotifyApi.getRecommendations(recommendationsBody);
 
@@ -612,6 +607,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
         message: "error in get recommendations mood playlist",
         error: err,
       });
+      return;
     }
   } catch (err) {
     console.log("error with spotify access token");
@@ -619,6 +615,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "error with spotify access token",
       error: err,
     });
+    return;
   }
 
   // Create playlist object which will be uploaded to the group, passed to MongoDB
@@ -640,7 +637,9 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "added " + req.body.selectedMood + " playlist to the group",
       playlist: playlist,
     });
+    return;
   } catch (err) {
+    console.log("Unable to add mood playlist to the group", err);
     res.json({
       message: "Unable to add mood playlist to the group",
       error: err,
@@ -666,13 +665,35 @@ exports.createSpotifyPlaylist = async (req, res) => {
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
   let formattedTrackIds = [];
-  let playlistName;
+  let playlistName = ""; // string for playlist name
+  let playlistType = ""; // string for playlistType to determine image used
+
+  // find the group and the corresponding playlistID (playlist object ID)
+  try {
+    let data = await Group.find(
+      { groupCode: req.body.groupCode },
+      { playlists: { $elemMatch: { _id: req.body.playlistID } } }
+    );
+
+    playlistName = data[0].playlists[0].playlistName;
+    playlistType = data[0].playlists[0].playlistType;
+
+    // Add the spotify track ids in the necessary format for adding to playlist
+    for (x of data[0].playlists[0].tracks) {
+      formattedTrackIds.push("spotify:track:" + x.trackID);
+    }
+  } catch (err) {
+    console.log("error on getting playlist");
+    res.json({
+      message: "error on getting playlist",
+      error: err,
+    });
+  }
 
   //image data that will be used as the cover for the playlist
   let base64URI = playlistCoverImages["top"]; //until playlist type prop implemented leave as logo
-
-  // select base64URI based on the playlist type
-  switch (req.body.playlistType) {
+  // select base64URI based on the playlist type (otherwise keep "top" image)
+  switch (playlistType) {
     case "top":
       base64URI = playlistCoverImages["top"];
       break;
@@ -688,23 +709,6 @@ exports.createSpotifyPlaylist = async (req, res) => {
     case "sad":
       base64URI = playlistCoverImages["sad"];
       break;
-  }
-
-  // find the group and the corresponding playlistID (playlist object ID)
-  try {
-    let data = await Group.find(
-      { groupCode: req.body.groupCode },
-      { playlists: { $elemMatch: { _id: req.body.playlistID } } }
-    );
-
-    playlistName = data[0].playlists[0].playlistName; // Set playlist Name
-
-    // Add the spotify track ids in the necessary format for adding to playlist
-    for (x of data[0].playlists[0].tracks) {
-      formattedTrackIds.push("spotify:track:" + x.trackID);
-    }
-  } catch (err) {
-    res.json(err);
   }
 
   let playlistID; // variable to store playlist ID (spotify based)
@@ -724,9 +728,13 @@ exports.createSpotifyPlaylist = async (req, res) => {
         throw new Error();
       }
       playlistID = data.body.id; // collect playlist id so we can add to it later
-      // console.log("playlist creation status code: ", data.statusCode);
     } catch (err) {
-      res.json(err);
+      console.log("error on playlist creation");
+      res.json({
+        message: "error on playlist creation",
+        error: err,
+      });
+      return;
     }
 
     // Add image cover to the spotify playlist
@@ -745,6 +753,7 @@ exports.createSpotifyPlaylist = async (req, res) => {
         message: "error with upload image",
         error: err,
       });
+      return;
     }
 
     try {
@@ -757,20 +766,23 @@ exports.createSpotifyPlaylist = async (req, res) => {
       if (data.statusCode != 201) {
         throw new Error();
       }
-      console.log("playlist song addition status code: ", data.statusCode);
 
       res.json({
         message: "Successfully added playlist and the tracks to spotify",
         playlistID: playlistID,
-        // playlist: formattedTrackIds,
         playlistLinkURL: "https://open.spotify.com/playlist/" + playlistID,
       });
     } catch (err) {
-      res.json(err);
+      console.log("error in adding tracks to playlist");
+      console.log(formattedTrackIds, err);
+      res.json({
+        message:"error in adding tracks to playlist",
+        error: err,
+      });
+      return;
     }
-    //TO IMPLEMENT adding an image cover to the playlist????
   } catch (err) {
-    // console.log(err)
+    console.log("token error in save to spotify", err);
     res.json(err);
   }
 };
