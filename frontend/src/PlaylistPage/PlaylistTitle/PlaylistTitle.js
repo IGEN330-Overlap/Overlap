@@ -17,12 +17,14 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
          setSavedIsOpen(false);
     };
 
+    const [playlistURL, setPlaylistURL] = useState('');
+
     //show save error when there is an error with playlist
     const [showSaveAlert, setShowSaveAlert] = useState(false);
 
-    const openPlaylist = (playlist_url) => {
-      if (playlist_url) {
-        window.open("playlist_url")
+    const openPlaylist = ()=> {
+      if (playlistURL !== undefined) {
+        window.open(playlistURL)
       }
       else window.open("https://open.spotify.com/")
     }
@@ -37,7 +39,8 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
             groupCode: groupCode,
         })
         .then((data) => {
-            console.log(data)
+            setPlaylistURL(data.data.playlistLinkURL);
+            console.log(data);
         })
         .catch((err) => {
             setShowSaveAlert(true);
