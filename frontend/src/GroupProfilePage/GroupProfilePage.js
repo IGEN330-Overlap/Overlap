@@ -93,7 +93,7 @@ const GroupProfilePage = (props) => {
             <div className="info-flex">
               <div className="main-column-box"></div>
               <div className="group-name">
-                <GroupName groupName={groupName} createdDate={createdDate} />
+                <GroupName groupCode={groupCode} groupName={groupName} createdDate={createdDate} />
               </div>
               <div className="member-display">
                 {/* render members display when group users variable is populated */}

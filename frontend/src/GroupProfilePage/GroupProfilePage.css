@@ -211,6 +211,7 @@
     .group-name {
         position: relative;
         width: 100vw;
+        height: fit-content;
     }
     .group-profile-page-components {
         align-items: start;
@@ -222,7 +223,7 @@
         z-index: 2;
     }
     .group-profile-page-components .component-box {
-        height: 0px;
+        height: 10px;
     }
     .wrong-group {
         font-size: 3.5vw;

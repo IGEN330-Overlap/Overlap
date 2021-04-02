@@ -3,13 +3,20 @@
 .group-name-container {
     width: auto;
     height: 80px;
+    display: flex;
+    flex-direction: column;
 }
-
-.group-name-container .text {
+.group-name-container .group-name-edit .text {
     color: var(--off-white-color);
     margin-left: 6px;
     font-size: clamp(25px, 4vw, 40px);
     margin-bottom: 5px;
+}
+.group-name-container .group-name-edit {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .group-name-container .created-date {
     margin-left: 6px;
@@ -17,10 +24,27 @@
     margin-bottom: 10px;
     color: var(--neutral-color-3);
 }
-.under-bar{
+.under-bar {
     margin-left: 10px;
     width: 75px;
     height: 3px;
     margin-bottom: 0px;
     background-color: var(--off-white-color);
+}
+.edit-icon {
+    height: 20px;
+    width: 20px;
+    margin-left: 20px;
+    fill: var(--off-white-color);
+}
+.edit-icon:hover{
+    /* fill: var(--blue-color-1); */
+    opacity: 0.7;
+    cursor: pointer;
+}
+@media (max-width: 780px) {
+    .edit-icon {
+        height: 15px;
+        width: 15px;
+    }
 }
