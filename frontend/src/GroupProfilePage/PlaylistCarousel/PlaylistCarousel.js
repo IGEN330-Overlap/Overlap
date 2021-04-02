@@ -70,7 +70,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         if(user === userID) {
           setPlaylistUsers(playlistUsers.filter(user => user !== userID));
           document.getElementById("select-bubble-" + position).style.backgroundColor = "var(--primary-color-1)";
-          if(playlistUsers.length !== groupUsers.length) {
+          if(playlistUsers.length === groupUsers.length) {
             document.getElementById("select-bubble").style.backgroundColor = "var(--primary-color-1)";
           }
           checkDuplicate = true;
@@ -80,7 +80,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
       if(checkDuplicate === false){
         setPlaylistUsers([...playlistUsers, userID]);
         document.getElementById("select-bubble-" + position).style.backgroundColor = "var(--blue-color-main)";
-        if(playlistUsers.length === groupUsers.length) {
+        if(playlistUsers.length === (groupUsers.length-1)) {
           document.getElementById("select-bubble").style.backgroundColor = "var(--blue-color-main)";
         }
       }
