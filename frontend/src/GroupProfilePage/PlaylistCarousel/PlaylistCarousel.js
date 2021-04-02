@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import "./PlaylistCarousel.css";
 
 import { updateGroupList } from "../../Redux/Actions.js";
+import ScreenOverlay from '../../ScreenOverlay/ScreenOverlay';
 
 import { Link } from "react-router-dom";
 
@@ -40,6 +41,12 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   const userObject = useSelector((state) => state.userObject)
   
   const dispatch = useDispatch();
+
+  const [isGenerating, setIsGenerating] = useState(false)
+  
+  useEffect(() => {
+    setIsGenerating(false);
+  }, [playlists])
 
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
@@ -210,7 +217,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   }
 
   // generate playlist
-  // need to add alerts to tell users if no one is selected or if there is no playlist title
   const generatePlaylist = () => {
     if (playlistUsers.length > 1) {
       var input_playlistName = document.getElementById("newPlaylistName").value
@@ -274,6 +280,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
           // close playlist generate modal
           hideAddPlaylistModal()
+          setIsGenerating(true);
         }
     }
     else {
@@ -285,12 +292,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
   // get playlist info
   let playlistInfo = []
   playlists.map((playlist,i) => {
-    let createdDate;
-    // if(playlist.createDate !== undefined) {
-    //   let created = new Date (playlist.createDate.day +' '+ playlist.createDate.month +' '+ playlist.createDate.year);
-    //   createdDate = created.toISOString()
-    // }
-    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id,  created: createdDate});
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id});
     playlistInfo.reverse();
     return playlistInfo   
   })
@@ -323,6 +325,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
   return (
     <div className="playlist-container">
+      {isGenerating ? <ScreenOverlay text="Generating your playlist" /> : null}
       <div>
         <h1 className="text">
           <strong>Playlists</strong>

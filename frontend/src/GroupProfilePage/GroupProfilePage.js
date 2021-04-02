@@ -12,7 +12,6 @@ import { TopGenres } from './TopGenres/TopGenres';
 import { GroupTopStats } from './TopStats/TopStats';
 import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
-import iceberg from '../AuthorizedPage/iceberg.svg';
 
 const axios = require("axios");
 
