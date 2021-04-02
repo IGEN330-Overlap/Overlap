@@ -163,6 +163,9 @@
     width: 29vw;
     transition: 0.3s;
 }
+.no-common-message h3 {
+    width: 100%;
+}
 
 /* animations */
 .top-artists .artist-container:hover .artist-icon {
@@ -235,6 +238,6 @@
         width: 90vw;
     }
     .comparisons .return-to-insights {
-        width: 80vw
+        width: 93vw
     }
 }
