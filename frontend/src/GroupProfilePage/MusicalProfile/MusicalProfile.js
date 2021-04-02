@@ -49,8 +49,6 @@ export const MusicalProfile = ({groupUsers}) => {
         return musicalProfiles
     })
 
-    console.log(danceability)
-
     return (
         <div className="musical-profile-root">
             <div className="musical-profile-content">

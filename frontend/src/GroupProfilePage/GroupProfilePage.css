@@ -81,7 +81,6 @@
 
 .group-profile-page-components {
     width: 100vw;
-    min-height: 93vh;
     height: fit-content;
 }
 
@@ -94,10 +93,38 @@
 }
 
 .group-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     position: absolute;
     margin-left: 4vw;
     height: clamp(55px, 9vw, 90px);
+    width: 85%;
     z-index: 3;
+}
+.leave-group {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+    height: 50px;
+}
+.leave-group h2 {
+    color: var(--off-white-color);
+    font-size: 20px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+.leave-group .exit-icon {
+    height: 50px;
+    width: 25px;
+    fill: var(--off-white-color);
+}
+.leave-group .exit-icon:hover {
+    cursor: pointer;
+}
+.leave-group .exit-icon:hover .exit-icon-part{
+    fill: var(--blue-color-1);
 }
 .group-landing-root .info-flex {
     display: flex;
@@ -211,7 +238,14 @@
     }
     .group-name {
         position: relative;
-        width: 100vw;
+        width: 85%;
+    }
+    .leave-group {
+        height: 35px;
+    }
+    .leave-group .exit-icon {
+        height: 25px;
+        width: 20px;
     }
     .group-profile-page-components {
         align-items: start;

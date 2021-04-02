@@ -150,6 +150,24 @@
     cursor: pointer;
 }
 
+/* copy alert */
+.d-flex .copy-alert {
+    height: 35px;
+    margin-left: 20px;
+}
+.d-flex .copy-alert .alert{
+    position: absolute; 
+    display: flex;
+    height: 40px;
+    align-items: center;
+    margin-bottom: 0px;
+}
+.d-flex .copy-alert p {
+    margin: 0px;
+    font-size: 13px;
+    text-align: center;
+}
+
 /*adjust for different screen sizes */
 @media (max-width: 780px) {
     .member-container {

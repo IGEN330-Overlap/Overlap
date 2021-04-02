@@ -545,7 +545,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     if (x.delta <= 0.15) {
       playlistTracks.push({
         trackName: x.trackName,
-        trackID: x.id,
+        trackID: x.trackID,
         imageURL: x.imageURL,
         linkURL: x.linkURL,
         artistName: x.artistName,
