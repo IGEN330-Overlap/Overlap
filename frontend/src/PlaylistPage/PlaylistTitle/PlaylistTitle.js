@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './PlaylistTitle.css';
 import Modal from "react-bootstrap/Modal";
+import Alert from "react-bootstrap/Alert";
 import dog from './puppy-icon.jpg';
 
 const axios = require("axios");
@@ -16,7 +17,15 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
          setSavedIsOpen(false);
     };
 
-    const openPlaylist = () => { window.open("https://open.spotify.com/")}
+    //show save error when there is an error with playlist
+    const [showSaveAlert, setShowSaveAlert] = useState(false);
+
+    const openPlaylist = (playlist_url) => {
+      if (playlist_url) {
+        window.open("playlist_url")
+      }
+      else window.open("https://open.spotify.com/")
+    }
 
     var refreshToken = useSelector((state) => state.refreshToken)
 
@@ -31,6 +40,7 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
             console.log(data)
         })
         .catch((err) => {
+            setShowSaveAlert(true);
             console.log(err);
         });
     }
@@ -65,6 +75,12 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
                     }}>
                     Save Playlist to Spotify
                 </div>
+                {showSaveAlert ? 
+                  <div className="save-error">
+                    <AlertSave type="danger" message="Unable to save playlist!"/>
+                  </div>
+                : null }
+                {showSaveAlert ? <div className="timeout"> {window.setTimeout(function(){setShowSaveAlert(false)}, 1750)} </div> : null}
             </div>
         <>
         <Modal
@@ -98,6 +114,17 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
         </>   
         </div>
     );
+}
+
+//playlist save error alert
+function AlertSave (props) {
+  return(
+    <div className="error-alert">
+      <Alert variant={props.type}>
+        <p>{props.message}</p>
+      </Alert>
+    </div>
+  )
 }
 
 export default PlaylistTitle

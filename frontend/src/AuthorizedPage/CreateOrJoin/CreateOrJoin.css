@@ -92,6 +92,10 @@ input::placeholder{
     height: 50px;
     width: 235px;
 }
+.join-error .error-alert .alert {
+    height: 50px;
+    width: 235px;
+}
 
 @media (max-width: 720px){
     .CreateOrJoinBox{
