@@ -542,7 +542,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     if (x.delta <= 0.15) {
       playlistTracks.push({
         trackName: x.trackName,
-        trackID: x.id,
+        trackID: x.trackID,
         imageURL: x.imageURL,
         linkURL: x.linkURL,
         artistName: x.artistName,
@@ -550,6 +550,8 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       // add to seed tracks so long as we don't already have 5
       if (seedTracks.length < 5) {
         seedTracks.push(x.trackID);
+      } else {
+        break; // already have 5 tracks meeting criteria
       }
     } else {
       break; // break from loop if the delta doesn't meet requirements
