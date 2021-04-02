@@ -93,8 +93,8 @@ const CreateOrJoin = (props) => {
                 .catch((err) => console.log(err));
             })
             .catch((err) => {
-                console.log(err);
                 setShowInvalidAlert(true);
+                console.log(err);
             });         
         }
         document.getElementById("joinGroupCode").value = ''

@@ -88,7 +88,7 @@ input::placeholder{
 .create-error .error-alert {
     margin-left: 20px;
 }
-.error-alert .alert {
+.create-error .error-alert .alert {
     height: 50px;
     width: 235px;
 }

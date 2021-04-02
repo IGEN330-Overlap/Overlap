@@ -15,6 +15,7 @@ import closeButton from "./close-x.svg";
 import Modal from "react-bootstrap/Modal";
 import Carousel from "react-bootstrap/Carousel";
 import Collapse from 'react-bootstrap/Collapse';
+import Alert from 'react-bootstrap/Alert';
 
 const axios = require('axios')
 
@@ -57,7 +58,16 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
   const [playlistUsers, setPlaylistUsers] = useState([]);
   var checkDuplicate = false;
-  var control
+  var control;
+
+  //alert for not enough people
+  const [showNoUsersAlert, setShowNoUsersAlert] = useState(false);
+
+  //alert for no playlist type selected
+  const [showNoTypeAlert, setShowNoTypeAlert] = useState(false);
+
+  //alert for no playlist name
+  const [showPlaylistNameAlert, setShowPlaylistNameAlert] = useState(false);
 
   // select users and check if user is already selected
   const selectUser = (userID, position) => {
@@ -200,9 +210,13 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     if (playlistUsers.length > 1) {
       var input_playlistName = document.getElementById("newPlaylistName").value
         if (input_playlistName === "") {
-          
-          console.log('No playlist name entered!')
+          setShowPlaylistNameAlert(true);
+          console.log('No playlist name entered!');
           document.getElementById("generate-playlist-button").style.cursor = "not-allowed" 
+        }
+        else if (playlistType === "" || playlistType ==="Moods") {
+          setShowNoTypeAlert(true);
+          console.log("No mood selected");
         }
         else if (input_playlistName !== "" && playlistType !== "") {
           if(playlistType === "Top Tracks") {
@@ -258,7 +272,8 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
         }
     }
     else {
-      console.log("Please select at least one more person!")
+      setShowNoUsersAlert(true);
+      console.log("Please select at least one more person!");
     }
   }
 
@@ -442,6 +457,24 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
               <button onClick={() => generatePlaylist()} centered="true" className="generate-button">
                 <strong>Generate Playlist</strong>
               </button>
+              {showNoUsersAlert ? 
+              <div className="playlist-error">
+                  <AlertPlaylistGenerate type="warning" message="Not enough users selected!"/>
+              </div>
+              : null}
+              {showNoUsersAlert ? <div className="timeout"> {window.setTimeout(function(){setShowNoUsersAlert(false)}, 1500)} </div> : null}
+              {showNoTypeAlert ? 
+              <div className="playlist-error">
+                  <AlertPlaylistGenerate type="warning" message="No playlist type selected!"/>
+              </div>
+              : null}
+              {showNoTypeAlert ? <div className="timeout"> {window.setTimeout(function(){setShowNoTypeAlert(false)}, 1500)} </div> : null}
+              {showPlaylistNameAlert ? 
+              <div className="playlist-error">
+                  <AlertPlaylistGenerate type="warning" message="No playlist name entered!"/>
+              </div>
+              : null}
+              {showPlaylistNameAlert ? <div className="timeout"> {window.setTimeout(function(){setShowPlaylistNameAlert(false)}, 1500)} </div> : null}
             </div>
           </div>
         </Modal.Body>
@@ -449,5 +482,15 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
     </div>
   );
 };
+
+function AlertPlaylistGenerate (props) {
+  return(
+    <div className="error-alert">
+      <Alert variant={props.type}>
+        <p>{props.message}</p>
+      </Alert>
+    </div>
+  )
+}
 
 export default PlaylistCarousel;
