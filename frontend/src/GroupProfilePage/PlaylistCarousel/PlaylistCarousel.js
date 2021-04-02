@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import "./PlaylistCarousel.css";
 
 import { updateGroupList } from "../../Redux/Actions.js";
-import ScreenOverlay from '../../ScreenOverlay/ScreenOverlay';
 
 import { Link } from "react-router-dom";
 
@@ -36,18 +35,12 @@ const cover_src = [
   playlistcover1,
 ];
 
-const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
+const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLoading}) => {
 
   const userObject = useSelector((state) => state.userObject)
   
   const dispatch = useDispatch();
-
-  const [isGenerating, setIsGenerating] = useState(false)
   
-  useEffect(() => {
-    setIsGenerating(false);
-  }, [playlists])
-
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
   const showAddPlaylistModal = () => {
@@ -280,7 +273,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
           // close playlist generate modal
           hideAddPlaylistModal()
-          setIsGenerating(true);
+          setLoading(true);
         }
     }
     else {
@@ -325,7 +318,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken}) => {
 
   return (
     <div className="playlist-container">
-      {isGenerating ? <ScreenOverlay text="Generating your playlist" /> : null}
       <div>
         <h1 className="text">
           <strong>Playlists</strong>
