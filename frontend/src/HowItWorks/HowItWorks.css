@@ -1,0 +1,7 @@
+@import url(../variables.css);
+
+.hiw-root {
+    min-height: 100vh;
+    height: fit-content;
+    background-color: var(--primary-color-main);
+}
