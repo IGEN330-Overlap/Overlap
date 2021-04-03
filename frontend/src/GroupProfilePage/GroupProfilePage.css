@@ -238,7 +238,8 @@
     }
     .group-name {
         position: relative;
-        width: 85%;
+        width: 90vw;
+        height: fit-content;
     }
     .leave-group {
         height: 35px;
@@ -252,12 +253,12 @@
         justify-content: start;
     }
     .group-landing-root .main-column-box {
-        height: 85px;
+        height: 100px;
         width: 95vw;
         z-index: 2;
     }
     .group-profile-page-components .component-box {
-        height: 0px;
+        height: 10px;
     }
     .wrong-group {
         font-size: 3.5vw;

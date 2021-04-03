@@ -73,7 +73,7 @@ const MemberDisplay = ({groupUsers, groupCode, toCompare}) => {
             {showCopyAlert ? <div className="timeout"> {window.setTimeout(function(){setShowCopyAlert(false)}, 1500)} </div> : null}
         </div>
 
-        <h1 className="compare-message"><strong>Click on a friend to see the overlap in your listening habits!</strong></h1>
+        <h1 className="compare-message"><strong>Click on a friend to see the overlap in your top tracks and artists!</strong></h1>
 
         {/*user icon display */}
 
