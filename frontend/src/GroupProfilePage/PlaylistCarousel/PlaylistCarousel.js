@@ -365,7 +365,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
           <strong>Playlists</strong>
           {playlistInfo.length > 0 ?
           <div className="playlist-edit">
-              {isDelete ? <h5 onClick={()=>setIsDelete(false)}><strong>Cancel Edit</strong></h5> : <h5 onClick={()=>setIsDelete(true)}><strong>Edit</strong></h5>}
+              {isDelete ? <h5 onClick={()=>setIsDelete(false)}><strong>Cancel</strong></h5> : <h5 onClick={()=>setIsDelete(true)}><strong>Edit</strong></h5>}
           </div>
           : null
           }

@@ -431,6 +431,15 @@
     .playlist-add-modal .modal-dialog .modal-content{
         max-width: 100%;
     }
+
+    .delete-playlist-bubble {
+        height: clamp(95px, 12vw, 130px);
+        width: clamp(70px, 8vw, 110px);
+    }
+    .delete-playlist-x {
+        height: 18px;
+        width: 18px;
+    }
 }
 
 
