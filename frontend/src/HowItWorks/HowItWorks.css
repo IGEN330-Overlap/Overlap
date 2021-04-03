@@ -1,7 +1,57 @@
 @import url(../variables.css);
 
 .hiw-root {
+    background-color: var(--primary-color-main);
     min-height: 100vh;
     height: fit-content;
+}
+.hiw-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 2vh;
+}
+.hiw-content {
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+.hiw-insights {
     background-color: var(--primary-color-main);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-playlistgeneration {
+    background-color: var(--neutral-color-7);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-genres {
+    background-color: var(--blue-color-1);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-topstats {
+    background-color: var(--blue-color-main);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-musicstats {
+    background-color: #79cced;
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-root .under-bar {
+    margin-left: 5px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+    background-color: var(--off-white-color);
+}
+/* text styles */
+.hiw-info h1 {
+    color: var(--off-white-color);
+    font-size: clamp(25px, 4vw, 40px);
 }

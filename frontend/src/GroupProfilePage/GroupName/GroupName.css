@@ -25,7 +25,7 @@
     margin-bottom: 10px;
     color: var(--neutral-color-3);
 }
-.under-bar {
+.group-name-container .under-bar {
     margin-left: 10px;
     width: 75px;
     height: 3px;

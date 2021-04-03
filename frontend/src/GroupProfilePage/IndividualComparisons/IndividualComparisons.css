@@ -19,13 +19,18 @@
     margin-bottom: 5px;
     width: fit-content;
 }
-.under-bar{
+.my-insights .under-bar{
     margin-left: 10px;
     width: 75px;
     height: 3px;
     background-color: var(--off-white-color);
 }
-
+.comparisons .under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    background-color: var(--off-white-color);
+}
 .comparisons h1 {
     color: var(--off-white-color);
     margin-left: 6px;

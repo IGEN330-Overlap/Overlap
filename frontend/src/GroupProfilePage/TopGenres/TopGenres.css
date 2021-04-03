@@ -29,7 +29,7 @@
     height: 3px;
     margin-bottom: 0px;
     /* background-color: var(--primary-color-main); */
-    background-color: white;
+    background-color: var(--off-white-color);
 }
 
 .genre-bars {
