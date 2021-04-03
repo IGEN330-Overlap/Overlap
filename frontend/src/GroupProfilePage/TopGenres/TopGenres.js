@@ -37,7 +37,7 @@ export const TopGenres = ({groupUsers}) => {
             totalCounts = totalCounts + genre.count
     })
 
-    top_genres[0].count/totalCounts < 0.5 ? filler = 50 : filler = 0
+    top_genres[0].count/totalCounts < 0.5 ? filler = 40 : filler = 0
 
     return (
         <div className="top-genres-root">

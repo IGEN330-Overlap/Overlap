@@ -57,13 +57,13 @@
 
 .genre_bar{
     display: flex;
-    height: 18vh;
+    height: 12vh;
     justify-content: flex-end;
     align-items: center;
 }
 
 .genre_name{
-    margin-right: 1%;
+    margin-right: 2%;
     color: white;
 }
 
@@ -101,10 +101,11 @@
 }
 
 .five .genre_bar{
-    background-color: rgba(244, 194, 12,0.75);
+    /* background-color: rgba(244, 194, 12,0.75); */
+    background-color: rgba(100, 190, 239, 0.75);
 }
 .five strong {
-    font-size: clamp(10px, 2.5vw, 30px);
+    font-size: clamp(10px, 2.75vw, 35px);
 }
 
 @media (max-width:780px) {
