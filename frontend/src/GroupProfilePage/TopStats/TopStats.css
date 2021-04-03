@@ -23,6 +23,13 @@
     min-height: 94vh;
     height: fit-content;
 }
+.top-stats-content .under-bar {
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+    background-color: var(--off-white-color);
+}
 
 .top-stats-heading .text {
     color: var(--off-white-color);

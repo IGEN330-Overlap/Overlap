@@ -1,5 +1,6 @@
 @import url(../variables.css);
 
+/* general styling */
 .hiw-root {
     background-color: var(--primary-color-main);
     min-height: 100vh;
@@ -18,11 +19,67 @@
     margin-top: 1vw;
     margin-bottom: 1vw;
 }
+.hiw-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.hiw-root .under-bar {
+    margin-left: 5px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+    background-color: var(--off-white-color);
+}
+.hiw-info .text-box {
+    width: 60%;
+}
+.hiw-info .graphics {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+}
+
+/* content specific styling */
 .hiw-insights {
     background-color: var(--primary-color-main);
     min-height: 200px;
     height: fit-content;
 }
+.hiw-insights .graphics .user-bubble {
+    position: relative;
+    background-color: var(--blue-color-1);
+    opacity: 0.7;
+    height: 18vw;
+    width: 18vw;
+    border-radius: 50%;
+    text-align: center;
+}
+.hiw-insights .graphics .friend-bubble {
+    position: relative;
+    background-color: #79cced;
+    opacity: 0.7;
+    height: 18vw;
+    width: 18vw;
+    border-radius: 50%;
+    text-align: center;
+    transform: translate(-25%);
+}
+.hiw-insights .graphics .user-bubble h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-70%, -50%);
+    font-weight: 550;
+}
+.hiw-insights .graphics .friend-bubble h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, -50%);
+    font-weight: 550;
+}
+
 .hiw-playlistgeneration {
     background-color: var(--neutral-color-7);
     min-height: 200px;
@@ -43,15 +100,15 @@
     min-height: 200px;
     height: fit-content;
 }
-.hiw-root .under-bar {
-    margin-left: 5px;
-    width: 75px;
-    height: 3px;
-    margin-bottom: 0px;
-    background-color: var(--off-white-color);
-}
+
 /* text styles */
 .hiw-info h1 {
     color: var(--off-white-color);
     font-size: clamp(25px, 4vw, 40px);
+    margin-top: 0.5rem;
+}
+.hiw-info h2 {
+    color: var(--off-white-color);
+    font-size: clamp(17px, 2.5vw, 25px);
+    margin-top: 0.5rem;
 }

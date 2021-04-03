@@ -16,9 +16,9 @@ const LandingPage = (props) => {
     return (
         <div className="landing-root d-flex flex-column justify-content-center align-items-center">
             <div className="landing-redirect">
-                <Link to="/about" className="landing-access"><strong>About Us</strong></Link>
-                <div className="vertical-line"></div>
                 <Link to="/how-it-works" className="landing-access"><strong>How It Works</strong></Link>
+                <div className="vertical-line"></div>
+                <Link to="/about" className="landing-access"><strong>About Us</strong></Link>
             </div>
             <div className="logo-container">
                 <img src={logo} alt="logo" />

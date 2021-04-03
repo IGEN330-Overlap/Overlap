@@ -79,12 +79,11 @@ const Navbar1 = (props) => {
                 ))}
               </NavDropdown>
             )}
-
-            <Nav.Link as={Link} to="/about" bg="white">
-              About Us
-            </Nav.Link>
             <Nav.Link as={Link} to="/how-it-works" bg="white">
               How It Works
+            </Nav.Link>
+            <Nav.Link as={Link} to="/about" bg="white">
+              About Us
             </Nav.Link>
           </Nav>
           <Nav className="justify-content-end">

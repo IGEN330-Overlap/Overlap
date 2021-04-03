@@ -102,8 +102,10 @@
     z-index: 2;
 }
 .user-position .user-name {
-    margin-top: 40px;
+    margin-top: 45px;
     opacity: 0;
+    width: 100px;
+    height: fit-content;
     color: var(--off-white-color);
     font-size: 13px;
     font-weight: 550;
