@@ -282,6 +282,47 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
     }
   }
 
+  // delete playlist functionality
+  const [isDelete, setIsDelete] = useState(false);
+  const [deletePlaylistName, setDeletePlaylistName] = useState('');
+  const [deletePlaylistID, setDeletePlaylistID] = useState('');
+
+  // delete playlist modal
+  const [showDelete, setShowDelete] = useState(false)
+  const showDeleteModal = (playlistName, playlistID) => {
+    setDeletePlaylistName(playlistName);
+    setDeletePlaylistID(playlistID);
+    setShowDelete(true);
+  }
+  const hideDeleteModal = () => {
+    setDeletePlaylistName('');
+    setDeletePlaylistID('');
+    setShowDelete(false);
+  }
+
+  const deletePlaylist = () => {
+    axios
+    .post(process.env.REACT_APP_BACKEND_URL + "/groups/deletePlaylist", {
+        groupCode: groupCode,
+        playlistID: deletePlaylistID,
+    })
+    .then((data) => {
+        console.log(data.data);
+        axios
+        .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+        .then((data) => {
+          dispatch(updateGroupList(data.data));
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    })
+    .catch((err) => console.log(err));
+
+    hideDeleteModal();
+    setLoading(true);
+  }
+
   // get playlist info
   let playlistInfo = []
   playlists.map((playlist,i) => {
@@ -289,8 +330,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
     playlistInfo.reverse();
     return playlistInfo   
   })
-
-  
 
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
@@ -300,6 +339,9 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
     let carouselElement = fourPlaylists.map((playlist, i) => {
       return (
         <div className="playlistcover-container" key={i}>
+          {isDelete ? <div className="delete-playlist-bubble">
+            <img className="delete-playlist-x" src={closeButton} alt="delete" onClick={()=>showDeleteModal(playlist.name, playlist.id)}/>
+          </div> : null }
           <Link to={"/authorized/playlist/" + playlist.id} className="playlist-links">
             <img
               className="playlistcover"
@@ -321,6 +363,12 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
       <div>
         <h1 className="text">
           <strong>Playlists</strong>
+          {playlistInfo.length > 0 ?
+          <div className="playlist-edit">
+              {isDelete ? <h5 onClick={()=>setIsDelete(false)}><strong>Cancel Edit</strong></h5> : <h5 onClick={()=>setIsDelete(true)}><strong>Edit</strong></h5>}
+          </div>
+          : null
+          }
         </h1>
       </div>
       <div className="covers">
@@ -342,6 +390,40 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
           ))}
         </Carousel>
       </div>
+
+      <Modal
+          className="modalcss edit-name-modal"
+          show={showDelete}
+          onHide={hideDeleteModal}
+          centered
+        >
+          <Modal.Body className="in-modal">
+            <h5 className="modal-text modal-head">
+              <strong>Are you sure you want to delete this playlist for the whole group?</strong>
+            </h5>
+            <h4 className="modal-text">
+              <strong>{deletePlaylistName}</strong>
+            </h4>
+            <p>
+              <button
+                className="btn-in-modal leave-buttons"
+                onClick={() => {
+                  deletePlaylist()
+                }}
+              >
+                Yes, I'm sure.
+              </button>
+            </p>
+            <p>
+              <button
+                onClick={hideDeleteModal}
+                className="btn-in-modal leave-buttons"
+              >
+                No, I'll keep it.
+              </button>
+            </p>
+          </Modal.Body>
+        </Modal>
 
       <Modal
         show={AddPlaylistisOpen}

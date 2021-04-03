@@ -10,6 +10,9 @@
 }
 
 .playlist-container .text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     font-size: clamp(20px, 3vw, 30px);
     color: var(--off-white-color);
 }
@@ -351,6 +354,48 @@
 .playlist-error .error-alert .alert {
     height: 50px;
     width: 250px;
+}
+
+/* delete playlist */
+.playlist-edit {
+    background-color: var(--neutral-color-7);
+    padding: 3px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 20px;
+    min-width: 50px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+    color: var(--off-white-color);
+}
+.playlist-edit h5 {
+    font-size: 13px;
+    margin-bottom: 0px;
+    color: var(--off-white-color);
+}
+.playlist-edit:hover{
+    background-color: var(--primary-color-1);
+    cursor: pointer;
+}
+.delete-playlist-bubble {
+    position: absolute;
+    display: flex;
+    height: clamp(95px, 12vw, 130px);
+    width: clamp(75px, 8vw, 110px);
+    justify-content: flex-end;
+}
+.delete-playlist-x {
+    height: 22px;
+    width: 22px;
+    background-color: var(--neutral-color-3);
+    padding: 5px;
+    border-radius: 50%;
+}
+.delete-playlist-x:hover {
+    background-color: var(--neutral-color-5);
+    cursor: pointer;
 }
 
 @media (max-width: 780px) {
