@@ -17,12 +17,13 @@
     margin-left: 4vw;
     margin-right: 4vw;
     margin-top: 1vw;
-    margin-bottom: 1vw;
+    margin-bottom: 1.5vw;
 }
 .hiw-flex {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
 }
 .hiw-root .under-bar {
     margin-left: 5px;
@@ -32,7 +33,7 @@
     background-color: var(--off-white-color);
 }
 .hiw-info .text-box {
-    width: 60%;
+    width: 55%;
 }
 .hiw-info .graphics {
     display: flex;
@@ -54,6 +55,7 @@
     width: 18vw;
     border-radius: 50%;
     text-align: center;
+    transform: translate(12.5%);
 }
 .hiw-insights .graphics .friend-bubble {
     position: relative;
@@ -63,7 +65,7 @@
     width: 18vw;
     border-radius: 50%;
     text-align: center;
-    transform: translate(-25%);
+    transform: translate(-12.5%);
 }
 .hiw-insights .graphics .user-bubble h3 {
     position: absolute;
@@ -77,6 +79,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-30%, -50%);
+    font-weight: 550;
+}
+.hiw-insights span {
+    color: var(--blue-color-1);
     font-weight: 550;
 }
 
@@ -110,5 +116,32 @@
 .hiw-info h2 {
     color: var(--off-white-color);
     font-size: clamp(17px, 2.5vw, 25px);
-    margin-top: 0.5rem;
+    margin-top: 0.7rem;
+}
+.hiw-info p {
+    color: var(--off-white-color);
+}
+
+@media(max-width: 780px) {
+    .hiw-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .hiw-info .text-box {
+        width: 100%;
+    }
+    .hiw-info .graphics {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+
+    .hiw-insights .graphics .user-bubble {
+        height: 170px;
+        width: 170px;
+    }
+    .hiw-insights .graphics .friend-bubble {
+        height: 170px;
+        width: 170px;
+    }
 }

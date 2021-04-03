@@ -15,14 +15,27 @@ const HowItWorks = (props) => {
                         <div className="hiw-flex">
                             <div className="text-box">
                                 <h2><strong>My Insights</strong></h2>
+                                <p>
+                                    Your insights show you your top three most listened to tracks and artists. 
+                                    We take data from your <span>short-term</span>, <span>medium-term</span>, and <span>long-term</span> listening. 
+                                    In order to make the information dynamic and relevant to you, we prioritize your short-term and medium-term songs and artists.
+                                    You may notice that, if you log in two weeks from now, your top tracks and artists have changed.
+                                </p>
                                 <h2><strong>Comparisons</strong></h2>
+                                <p>
+                                    When you click on a friend, you compare <span>your top tracks and artists</span> with <span>their top tracks and artists</span>.
+                                    The songs and artists that you see here are the <span>overlap</span> in each of your most listened to music.
+                                    We wanted to give you a little bit of insight into what each of your friends listen to and how they compare to your listening habits.
+                                    If it tells you you don't have any in common, that doesn't mean you don't listen to any of the same music!
+                                    It just means that, currently, there is no overlap in your <span>top</span> tracks or artists.
+                                </p>
                             </div>
                             <div className="graphics">
                                 <div className="user-bubble">
-                                    <h3>Your Music</h3>
+                                    <h3>Your Top Music</h3>
                                 </div>
                                 <div className="friend-bubble">
-                                    <h3>Their Music</h3>
+                                    <h3>Their Top Music</h3>
                                 </div>
                             </div>
                         </div>
