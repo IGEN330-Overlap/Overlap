@@ -325,11 +325,10 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
 
   // get playlist info
   let playlistInfo = []
-  playlists.map((playlist,i) => {
-    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id});
-    playlistInfo.reverse();
-    return playlistInfo   
-  })
+  playlists.map((playlist,i) => (
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id})
+  ))
+  playlistInfo.reverse()
 
   // Add 4 elements at a time to carousel array
   let carouselArray = [];
