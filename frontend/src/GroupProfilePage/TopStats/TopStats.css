@@ -290,13 +290,24 @@
         right: 0%;
     }
     .top-tracks-root .track-info {
-        width: 42vw;
+        width: 40vw;
+    }
+    .top-tracks-root .track-info .track-title {
+        font-size: 14px;
+        max-height: 60px;
     }
     .top-tracks-root .track-artist {
-        width: 42vw;
-        font-size: clamp(12px, 0.6vw, 16px)
+        width: 40vw;
     }
     .podium-display {
         margin-left: 8%;
+    }
+}
+@media(max-width: 350px) {
+    .top-tracks-root .track-info {
+        width: 35vw;
+    }
+    .top-tracks-root .track-artist {
+        width: 35vw;
     }
 }
