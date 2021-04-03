@@ -18,7 +18,6 @@
 
 .playlist-info-root .btn-sm {
     padding: 0.2rem 0.95rem;
-    font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
 }
@@ -29,6 +28,7 @@
     transition: color 0.35s
 }
 .playlist-info-root .btn:hover {
+    margin-left: 6px;
     background: var(--blue-color-5);
     color: white;
 }
@@ -51,8 +51,9 @@
 }
 
 .title-container {
+    margin-left: 6px;
     font-size: 5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .playlist-info-root .white {
@@ -109,4 +110,26 @@
         font-size: 12px;
         margin: 0px;
     }
+}
+@media (max-width: 400px) {
+    .playlist-page-cover {
+        width: 90px;
+        height: 90px;
+    }
+    .playlist-info-save .created-date {
+        font-size: 12px;
+    }
+    .playlist-info-root .white {
+        font-size: 20px;
+    }
+    .playlist-info-root .btn {
+        font-size: 12px;
+    }
+    .playlist-info-root .playlist-button {
+        background: var(--blue-color-main); 
+        color: white;
+        height: 26px;
+        align-items: center;
+    }
+
 }

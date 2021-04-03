@@ -17,13 +17,6 @@
     height: 80px;
 }
 
-.musical-profile-heading .text strong{
-    color: var(--off-white-color);
-    margin-left: 6px;
-    /* font-size: 4vw; */
-    font-size: clamp(25px, 4vw, 40px);
-}
-
 .musical-profile-heading .under-bar{
     margin-left: 10px;
     width: 75px;
@@ -43,7 +36,9 @@
 
 .musical-attribute {
     margin-left: 4vw;
-    height: 150px;
+    min-height: 150px;
+    height: fit-content;
+    margin-bottom: 15px;
 }
 .musical-scale {
     position: relative;
@@ -51,6 +46,7 @@
     display: flex;
     justify-content: center;
     margin-top: 40px;
+    margin-bottom: 40px;
     align-items: center;
 }
 .musical-attribute .scale-bar {
@@ -135,14 +131,22 @@
 /* text settings */
 .musical-profile-root strong {
     color: var(--off-white-color);
-    font-size: 25px;
+    font-size: clamp(17px, 2.5vw, 25px);
     margin-left: 6px;
+}
+
+.musical-profile-heading .text strong{
+    color: var(--off-white-color);
+    margin-left: 6px;
+    /* font-size: 4vw; */
+    font-size: clamp(25px, 4vw, 40px);
 }
 
 .musical-profile-root p{
     color: var(--off-white-color);
     margin-left: 6px;
     font-weight: 400;
+    font-size: clamp(13px, 1.5vw, 20px);
 }
 
 .scale-point h5 {
@@ -150,4 +154,13 @@
     margin-top: 20px;
     font-size: 15px;
     font-weight: 550;
+}
+
+@media (max-height: 800px) {
+    .musical-profile-heading {
+        padding-top: 1vh;
+    }
+    .musical-profile-content {
+        min-height: 95vh;
+    }
 }

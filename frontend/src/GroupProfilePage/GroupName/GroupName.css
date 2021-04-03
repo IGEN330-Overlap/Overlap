@@ -2,14 +2,22 @@
 
 .group-name-container {
     width: auto;
-    height: 80px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
 }
-
-.group-name-container .text {
+.group-name-container .group-name-edit .text {
     color: var(--off-white-color);
     margin-left: 6px;
     font-size: clamp(25px, 4vw, 40px);
     margin-bottom: 5px;
+    width: fit-content;
+}
+.group-name-container .group-name-edit {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 .group-name-container .created-date {
     margin-left: 6px;
@@ -17,10 +25,80 @@
     margin-bottom: 10px;
     color: var(--neutral-color-3);
 }
-.under-bar{
+.under-bar {
     margin-left: 10px;
     width: 75px;
     height: 3px;
     margin-bottom: 0px;
     background-color: var(--off-white-color);
+}
+.edit-icon {
+    height: 20px;
+    width: 20px;
+    margin-left: 20px;
+    fill: var(--off-white-color);
+}
+.edit-icon:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+.edit-name-modal strong {
+    font-size: 20px;
+}
+.rename {
+    display: flex;
+    justify-content: center;
+}
+.input-rename {
+    width: 80%;
+    height: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--primary-color-main);
+    font-size: 20px;
+    font-weight: 550;
+    text-align: center;
+    align-items: center;
+}
+.input-rename::placeholder{
+    color: var(--primary-color-main);
+    font-weight: 450;
+    text-align: center;
+}
+.edit-name-buttons { 
+    margin-top: 20px;
+    width: 50%
+}
+.edit-name-error .error-alert {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 20px;
+}
+.edit-name-error .error-alert .alert {
+    width: 200px;
+    height: 40px;
+    align-items: center;
+}
+.edit-name-error .error-alert p {
+    margin: 0px;
+    font-size: 13px;
+    text-align: center;
+}
+.modal-body .cancel-rename {
+    position: absolute;
+    right: 3%;
+    top: 1%;
+    height: 15px;
+    width: 15px;
+}
+.modal-body .cancel-rename:hover{
+    cursor: pointer;
+}
+
+@media (max-width: 780px) {
+    .edit-icon {
+        height: 15px;
+        width: 15px;
+        margin-left: 12px;
+    }
 }

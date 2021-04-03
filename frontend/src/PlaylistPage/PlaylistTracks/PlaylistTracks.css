@@ -93,3 +93,21 @@
         width: 270px;
     }
 }
+@media (max-width: 400px) {
+    .playlist-tracks-container {
+        width: 380px;
+        height: 90%;
+    }
+    .playlist-tracks-container .track-container {
+        width: 90%;
+    }
+    .playlist-tracks-container .track-info {
+        width: 100%;
+    }
+    .playlist-tracks-container .track-info h3 {
+        width: 100%;
+    }
+    .playlist-tracks-container .track-artist {
+        width: 100%;
+    }
+}
