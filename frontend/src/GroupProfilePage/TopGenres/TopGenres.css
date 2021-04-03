@@ -12,11 +12,12 @@
     margin-left: 4vw;
     padding-top: 2vh;
     width: auto;
-    height: 80px;
+    height: 10vh;
 }
 
 .top-genres-heading .text {
-    color: var(--primary-color-main);
+    /* color: var(--primary-color-main); */
+    color: white;
     margin-left: 6px;
     font-size: 4vw;
     font-size: clamp(25px, 4vw, 40px);
@@ -27,121 +28,112 @@
     width: 75px;
     height: 3px;
     margin-bottom: 0px;
-    background-color: var(--primary-color-main);
+    /* background-color: var(--primary-color-main); */
+    background-color: white;
 }
 
-.genre-bubbles {
-    height: 70vh;
+.genre-bars {
+    height: 90vh;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    overflow-y: hidden;
+}
+
+.genre_bar_div {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    animation-name: genreBars;
+    animation-duration: 5s;
+    animation-timing-function: cubic-bezier(0, 0.45, 0.88, 1.09);
+}
+
+@keyframes genreBars {
+    from {transform: translatex(-50em)}
+    to {transform: translatex(0em);}
+}
+
+.genre_bar{
+    display: flex;
+    height: 12vh;
+    justify-content: flex-end;
     align-items: center;
 }
 
-.genre-bubbles strong {
-    position: absolute;
-    width: 20vw;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -60%);
-    color: var(--off-white-color);
-    z-index: 5;
+.genre_name{
+    margin-right: 2%;
+    color: white;
 }
 
-.top-genre-1 {
-    position: relative;
+.genre_percentage{
+    margin-left: 1%;
+    color: white;
 }
-.top-genre-1 .bubble {
-    height: min(40vw, 50vh);
-    width: min(40vw, 50vh);
-    border-radius: 50rem;
-    background-color: var(--blue-color-main);
-    opacity: 0.5;
+
+.one .genre_bar{
+    background-color: rgba(123,123,253,0.75);
 }
-.top-genre-1 strong {
+.one strong {
     font-size: 5vw;
 }
 
-.top-genre-2 {
-    position: relative;
-    /* top: clamp(5px, 2vw, 100px);
-    left: clamp(380px, 50vw, 650px); */
+.two .genre_bar{
+    background-color: rgba(255, 179, 71,0.75);
 }
-.top-genre-2 .bubble {
-    height: min(30vw, 40vh);
-    width: min(30vw, 40vh);
-    border-radius: 50rem;
-    background-color: #FFB347;
-    opacity: 0.5;
-}
-.top-genre-2 strong {
-    font-size: clamp(10px, 4vw, 50px);
+.two strong {
+    font-size: clamp(10px, 4vw, 60px);
 }
 
-.top-genre-3 {
-    position: relative;
-    /* top: clamp(160px, 17.5vw, 230px);
-    left: clamp(80px, 12vw, 200px); */
+.three .genre_bar{
+    background-color: rgba(157, 92, 99,0.75);
 }
-.top-genre-3 .bubble {
-    height: min(20vw, 30vh);
-    width: min(20vw, 30vh);
-    border-radius: 50rem;
-    background-color: #9D5C63;
-    opacity: 0.5;
-}
-.top-genre-3 strong {
-    font-size: clamp(10px, 3.75vw, 40px);
+.three strong {
+    font-size: clamp(10px, 3.75vw, 50px);
 }
 
-.top-genre-4 {
-    position: relative;
-    /* top: clamp(125px, 10vw, 300px);
-    right: clamp(290px, 39vw, 450px); */
+.four .genre_bar{
+    background-color: rgba(119, 221, 119,0.75);
 }
-.top-genre-4 .bubble {
-    height: min(12.5vw, 22.5vh);
-    width: min(12.5vw, 22.5vh);
-    border-radius: 50rem;
-    background-color: #77DD77;
-    opacity: 0.5;
-}
-.top-genre-4 strong {
-    font-size: clamp(10px, 3vw, 30px);
+.four strong {
+    font-size: clamp(10px, 3vw, 40px);
 }
 
-.top-genre-5 {
-    position: relative;
-    /* bottom: clamp(140px, 19vw, 200px);
-    right: clamp(350px, 43vw, 600px); */
+.five .genre_bar{
+    /* background-color: rgba(244, 194, 12,0.75); */
+    background-color: rgba(100, 190, 239, 0.75);
 }
-.top-genre-5 .bubble {
-    height: min(10vw, 20vh);
-    width: min(10vw, 20vh);
-    border-radius: 50rem;
-    background-color: #F4C20C;
-    opacity: 0.38;
-}
-.top-genre-5 strong {
-    font-size: clamp(10px, 2.5vw, 25px);
+.five strong {
+    font-size: clamp(10px, 2.75vw, 35px);
 }
 
-/* @media (max-width:780px) {
-    .top-genre-2 {
-        top: clamp(80px, 50vw, 200px);
-        left: clamp(120px, 50vw, 300px);
+@media (max-width:780px) {
+    .genre-bars{
+        justify-content: space-around;
     }
-    .top-genre-3 {
-        top: clamp(15px, 50vw, 40px);
-        left: clamp(70px, 50vw, 155px);
+    .genre_bar{
+        height: 70px;
     }
-    .top-genre-4 {
-        top: clamp(-80px, -60vw, -70px);
-        right: clamp(30px, 50vw, 50px);
+    .genre_name{
+        margin-right: 10px;
     }
-    .top-genre-5 {
-        bottom: clamp(40px, 50vw, 80px);
-        right: clamp(170px, 50vw, 400px);
+    .genre_percentage{
+        margin-left: 10px;
     }
-} */
+    .one strong{
+        font-size: 25px;
+    }
+    .two strong{
+        font-size: 25px;
+    }
+    .three strong{
+        font-size: 25px;
+    }
+    .four strong{
+        font-size: 25px;
+    }
+    .five strong{
+        font-size: 25px;
+    }
+}
