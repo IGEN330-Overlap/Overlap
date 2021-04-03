@@ -1,0 +1,35 @@
+@import url(../variables.css);
+
+.user-landing-root{
+    background-color: var(--blue-color-main);
+}
+
+.userProfile-title {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2vh;
+    width: auto;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+ .userProfile-title-text{
+    color: white;
+    font-size: clamp(25px, 6vw, 50px);
+}
+
+.userProfile-title .under-bar{
+    width: 15rem;
+    height: 3px;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    background-color: white;
+}
+
+@media (max-width:780px) {
+    .userProfile-title .under-bar{
+        width: 150px;
+    }
+}
