@@ -120,10 +120,13 @@
     width: 25px;
     fill: var(--off-white-color);
 }
-.leave-group .exit-icon:hover {
+.leave-group:hover {
     cursor: pointer;
 }
-.leave-group .exit-icon:hover .exit-icon-part{
+.leave-group:hover h2 {
+    color: var(--blue-color-1);
+}
+.leave-group:hover .exit-icon-part{
     fill: var(--blue-color-1);
 }
 .group-landing-root .info-flex {
