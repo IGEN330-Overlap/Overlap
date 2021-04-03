@@ -440,6 +440,21 @@
         height: 18px;
         width: 18px;
     }
+    .playlist-error .error-alert {
+        margin-left: -45%;
+        margin-top: 12%;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .playlistModal button {
+        font-size: 16px;
+    }
+    .playlist-error .error-alert {
+        transform: translateX(-15%);
+        margin-top: 15%;
+    }
 }
 
 

@@ -16,6 +16,7 @@
 }
 
 .navbar {
+    /* min-height: 5vh; */
     height: fit-content;
     color: white;
     display: flex;
@@ -24,7 +25,7 @@
 
 .navbar-stuff {
     width: 100vw;
-    min-height: 5vh;
+    /* min-height: 5vh; */
     height: fit-content;
 } 
 
@@ -33,7 +34,6 @@
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
-
 }
 
 .navbar-stuff .btn {

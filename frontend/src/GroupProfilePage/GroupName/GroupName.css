@@ -101,4 +101,8 @@
         width: 15px;
         margin-left: 12px;
     }
+    .edit-name-error .error-alert {
+        transform: translateX(-100%);
+        margin-top: 15%;
+    }
 }

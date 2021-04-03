@@ -291,7 +291,7 @@
     }
 }
 
-@media(max-width: 400px) {
+@media(max-width: 450px) {
     .top-tracks-root .track-container {
         width: 90vw;
         height: clamp(100px, 5vw, 120px);
@@ -320,7 +320,7 @@
     }
     .podium-display {
         width: 340px;
-        margin-left: 0px;
+        margin-left: 5%;
     }
     .top-artist-podiums {
         width: 340px;
@@ -345,7 +345,7 @@
         width: 65px;
     }
 }
-@media(max-width: 350px) {
+@media(max-width: 380px) {
     .top-tracks-root .track-info {
         width: 35vw;
     }
@@ -354,7 +354,6 @@
     }  
     .podium-display {
         width: 290px;
-        margin-left: 0px;
     }
     .top-artist-podiums {
         width: 280px;
