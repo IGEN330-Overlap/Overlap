@@ -627,8 +627,9 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne
   try {
-    if (playlistTracks.length < 25 || playlist == undefined) {
+    if (playlistTracks.length < 20 || playlist == undefined) {
       console.log("Uncaught error in the playlist generation");
+      console.log("playlist tracks len", playlistTracks.length);
       throw new Error();
     }
     await Group.updateOne(

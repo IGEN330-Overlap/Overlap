@@ -238,7 +238,8 @@ function buildPlaylistMoodProfile (selection) {
             "target_valence": 0.75,
             "min_popularity": 50,
             "target_popularity": 75,
-            "min_tempo": 130,
+            "min_tempo": 120,
+            "target_tempo": 155,
             "limit": 30,
             "Seed_genres": [
                 "party",
