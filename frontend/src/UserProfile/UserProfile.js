@@ -153,7 +153,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
             </div>
             <div className="stats">
                 <div className="stats_title">Average Music Stats</div>
-                <div className="stats_sub_title">Click each for more info!</div>
+                <div className="stats_sub_title">Click each property for more info!</div>
                 <div className="columns">
                     <div className="column">
 
@@ -162,7 +162,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             aria-controls="example-collapse-text"
                             aria-expanded={openTrackPop}>
                             <div className="trackPopularity">Track Popularity: </div>
-                            <div className="percentage">{spotifyID.musicalProfile.trackPopularity.toFixed(2)}%</div>
+                            <div className="UP_percentage">{spotifyID.musicalProfile.trackPopularity.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openTrackPop}>
                             <div id="example-collapse-text" className="collapseBody">
@@ -170,30 +170,30 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <Carousel.Item>
                                         <div className="description">
                                             <div className="blurb">
-                                        Track Popularity is calculated by Spotify, we have taken the average popularity of your top 100 songs.
+                                                Track Popularity, like all of the other properties, is calculated by Spotify. We've taken the average popularity of your top 100 songs.
                                             </div>
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your MOST popular tracks are:</div>
+                                        <div className="collapseText">Your MOST popular top tracks are:</div>
                                             <div className="top3">
                                             {trackPop3.map((track,i) => (
-                                                <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                                 <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="trackArtist">{track.artistName}</div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your LEAST popular tracks are:</div>
+                                        <div className="collapseText">Your LEAST popular top tracks are:</div>
                                             <div className="top3">
                                             {trackPop3low.map((track,i) => (
-                                                <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                                 <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="trackArtist">{track.artistName}</div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                         </div>
@@ -209,7 +209,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             aria-controls="example-collapse-text"
                             aria-expanded={openDance}>
                             <div className="danceability">Danceability: </div>
-                            <div className="percentage">{spotifyID.musicalProfile.danceability.toFixed(2)}%</div>
+                            <div className="UP_percentage">{spotifyID.musicalProfile.danceability.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openDance}>
                             <div id="example-collapse-text" className="collapseBody">
@@ -217,7 +217,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <Carousel.Item>
                                         <div className="description">
                                             <div className="blurb">
-                                            A combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity.
+                                             Danceability includes elements like tempo, rhythm stability, beat strength, and overall regularity. How much does the track make people want to dance?
                                             </div>
                                         </div>
                                     </Carousel.Item>
@@ -225,10 +225,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="collapseText">Your top tracks with the HIGHEST danceability score are:</div>
                                             <div className="top3">
                                             {dance3.map((track,i) => (
-                                                <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                                 <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="trackArtist">{track.artistName}</div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                         </div>
@@ -237,10 +237,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="collapseText">Your top tracks with the LOWEST danceability score are:</div>
                                             <div className="top3">
                                             {dance3low.map((track,i) => (
-                                                <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                                 <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="trackArtist">{track.artistName}</div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                         </div>
@@ -254,7 +254,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             aria-controls="example-collapse-text"
                             aria-expanded={openEnergy}>
                             <div className="energy">Energy: </div>
-                            <div className="percentage">{spotifyID.musicalProfile.energy.toFixed(2)}%</div>
+                            <div className="UP_percentage">{spotifyID.musicalProfile.energy.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openEnergy}>
                             <div id="example-collapse-text" className="collapseBody">
@@ -262,7 +262,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <Carousel.Item>
                                         <div className="description">
                                             <div className="blurb">
-                                                Energy is a measure of intensity and activity.
+                                                Energy is a measure of intensity and activity. Spotify notes attributes like dynamic range, perceived loudness, timbre, onset rate, and general entropy.
                                             </div>
                                         </div>
                                     </Carousel.Item>
@@ -270,10 +270,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="collapseText">Your top tracks with the HIGHEST energy score are:</div>
                                         <div className="top3">
                                         {energy3.map((track,i) => (
-                                            <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                             <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="trackArtist">{track.artistName}</div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
@@ -282,10 +282,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="collapseText">Your top tracks with the LOWEST energy score are:</div>
                                         <div className="top3">
                                         {energy3low.map((track,i) => (
-                                            <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                             <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="trackArtist">{track.artistName}</div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
@@ -302,7 +302,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             aria-controls="example-collapse-text"
                             aria-expanded={openAcousticness}>
                             <div className="acousticness">Acousticness: </div>
-                            <div className="percentage">{spotifyID.musicalProfile.acousticness.toFixed(2)}%</div>
+                            <div className="UP_percentage">{spotifyID.musicalProfile.acousticness.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openAcousticness}>
                             <div id="example-collapse-text" className="collapseBody">
@@ -310,7 +310,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <Carousel.Item>
                                         <div className="description">
                                             <div className="blurb">
-                                             "A confidence measure from 0.0 to 1.0 of whether the track is acoustic." - Spotify
+                                             This metric is quite simple, how acoustic does your track feel? This is Spotify's best guess from 0 (not sure that's acoustic) to 1 (pretty sure that's acoustic).
                                             </div>
                                         </div>
                                     </Carousel.Item>
@@ -318,10 +318,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="collapseText">Your top tracks with the HIGHEST acousticness score are:</div>
                                         <div className="top3">
                                         {acoustic3.map((track,i) => (
-                                            <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                             <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="trackArtist">{track.artistName}</div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
@@ -330,10 +330,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="collapseText">Your top tracks with the LOWEST acousticness score are:</div>
                                         <div className="top3">
                                         {acoustic3low.map((track,i) => (
-                                            <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                             <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="trackArtist">{track.artistName}</div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
@@ -347,7 +347,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             aria-controls="example-collapse-text"
                             aria-expanded={openInstrumental}>
                             <div className="instrumentalness">Instrumentalness: </div>
-                            <div className="percentage">{spotifyID.musicalProfile.instrumentalness.toFixed(2)}%</div>
+                            <div className="UP_percentage">{spotifyID.musicalProfile.instrumentalness.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openInstrumental}>
                             <div id="example-collapse-text" className="collapseBody">
@@ -355,7 +355,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                 <Carousel.Item>
                                     <div className="description">
                                         <div className="blurb">
-                                        "Predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this context." - Spotify
+                                            Instrumentalness predicts whether a track contains no vocals. Although, "Ooh" and "aah" sounds are considered to be instrumental for this metric.
                                         </div>
                                     </div>
                                 </Carousel.Item>
@@ -363,10 +363,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <div className="collapseText">Your top tracks with the HIGHEST instrumentalness score are:</div>
                                     <div className="top3">
                                     {instrumental3.map((track,i) => (
-                                        <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                         <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="trackArtist">{track.artistName}</div>
+                                        <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
                                     </div>
@@ -375,10 +375,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <div className="collapseText">Your top tracks with the LOWEST instrumentalness score are:</div>
                                     <div className="top3">
                                     {instrumental3low.map((track,i) => (
-                                        <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                         <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="trackArtist">{track.artistName}</div>
+                                        <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
                                     </div>
@@ -392,7 +392,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             aria-controls="example-collapse-text"
                             aria-expanded={openValence}>
                             <div className="valence">Valence: </div>
-                            <div className="percentage">{spotifyID.musicalProfile.valence.toFixed(2)}%</div>
+                            <div className="UP_percentage">{spotifyID.musicalProfile.valence.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openValence}>
                             <div id="example-collapse-text" className="collapseBody">
@@ -408,10 +408,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <div className="collapseText">Your top tracks with the HIGHEST valence score are:</div>
                                     <div className="top3">
                                     {valence3.map((track,i) => (
-                                        <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                         <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="trackArtist">{track.artistName}</div>
+                                        <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
                                     </div>
@@ -420,10 +420,10 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     <div className="collapseText">Your top tracks with the LOWEST valence score are:</div>
                                     <div className="top3">
                                     {valence3low.map((track,i) => (
-                                        <div className="track-container" onClick={()=>openSong(track.linkURL)}>
+                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
                                         <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="trackArtist">{track.artistName}</div>
+                                        <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
                                     </div>

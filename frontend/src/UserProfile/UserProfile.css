@@ -96,12 +96,12 @@
     cursor: pointer;
 }
 
-.percentage{
+.UP_percentage{
     margin-left: 0.5rem;
     color: var(--blue-color-1);
 }
 
-.open:hover .percentage{
+.open:hover .UP_percentage{
     color: var(--blue-color-main);
 }
 
@@ -131,6 +131,7 @@
 .blurb{
     margin: 5%;
     text-align: center;
+    font-size: clamp(15px, 1.5vw, 20px);
 }
 
 .descriptor-carousel{
@@ -173,13 +174,13 @@
     align-items: start;
 }
 
-.track-container{
+.userProfile-track-container{
     width: 100%;
     font-size: clamp(15px, 1vw, 20px);
     text-align: center;
 }
 
-.track-container{
+.userProfile-track-container:hover{
     cursor: pointer;
 }
 
@@ -189,7 +190,7 @@
     border-radius: 10%;
 }
 
-.trackArtist{
+.UP_trackArtist{
     color: var(--blue-color-1);
 }
 
