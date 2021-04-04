@@ -209,6 +209,13 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
     setPlaylistType(type);
   }
 
+  //If key press for new group input is "Enter", run edit group name function
+  const handleGenerateKeyPress = (e) => {
+    if(e.key === "Enter") {
+        generatePlaylist();
+    }
+  }
+
   // generate playlist
   const generatePlaylist = () => {
     if (playlistUsers.length > 1) {
@@ -539,7 +546,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
               {/*create alert to tell user playlist title is too long */}
             </div>
             <div className="name-playlist">
-              <input type="text" className="name-input" placeholder="Enter Playlist Name" maxLength="25" id="newPlaylistName"/>
+              <input type="text" className="name-input" placeholder="Enter Playlist Name" maxLength="25" id="newPlaylistName" onKeyPress={handleGenerateKeyPress}/>
             </div>
             <div className="generate-playlist">
               <button onClick={() => generatePlaylist()} centered="true" className="generate-button">
