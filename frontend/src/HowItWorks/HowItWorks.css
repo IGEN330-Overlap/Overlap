@@ -66,7 +66,7 @@
     border-radius: 50%;
     text-align: center;
     transform: translate(12.5%);
-    transition: 0.12s;
+    transition: 0.2s;
 }
 .hiw-insights .graphics .friend-bubble {
     position: relative;
@@ -77,7 +77,7 @@
     border-radius: 50%;
     text-align: center;
     transform: translate(-12.5%);
-    transition: 0.12s;
+    transition: 0.2s;
 }
 .hiw-insights .graphics .user-bubble:hover {
     height: 19vw;
@@ -187,13 +187,77 @@
     color: var(--primary-color-main);
 }
 .hiw-genres p {
-    
+    color: var(--primary-color-main);
 }
 .hiw-genres .under-bar {
     background-color: var(--primary-color-main);
 }
 .hiw-genres span {
-
+    color: var(--blue-color-7);
+    font-weight: 550;
+}
+.hiw-genres .graphics {
+    justify-content: flex-start;
+}
+.hiw-genres .genre-display {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.hiw-genres .genre-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.hiw-genres .genre-bar h3 {
+    margin-left: 1vw;
+}
+.hiw-genres .genre-bar .bar-1 {
+    background-color: rgba(123,123,253,0.75);
+    width: 80%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-2 {
+    background-color: rgba(255, 179, 71,0.75);
+    width: 62%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-3 {
+    background-color: rgba(157, 92, 99,0.75);
+    width: 51%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-4 {
+    background-color: rgba(119, 221, 119,0.75);
+    width: 46%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-5 {
+    background-color: rgba(100, 190, 239, 0.75);
+    width: 43%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-1:hover {
+    width: 82%;
+}
+.hiw-genres .genre-bar .bar-2:hover {
+    width: 64%;
+}
+.hiw-genres .genre-bar .bar-3:hover {
+    width: 53%;
+}
+.hiw-genres .genre-bar .bar-4:hover {
+    width: 48%;
+}
+.hiw-genres .genre-bar .bar-5:hover {
+    width: 45%;
 }
 
 .hiw-topstats {
@@ -363,6 +427,37 @@
     .hiw-playlistgeneration .collapse-playlistgeneration {
         width: 250px;
         margin-left: calc(27px + 1vw);
+    }
+
+    .hiw-genres .genre-bar .bar-1 {
+        width: 80%;
+    }
+    .hiw-genres .genre-bar .bar-2 {
+        width: 62%;
+    }
+    .hiw-genres .genre-bar .bar-3 {
+        width: 51%;
+    }
+    .hiw-genres .genre-bar .bar-4 {
+        width: 46%;
+    }
+    .hiw-genres .genre-bar .bar-5 {
+        width: 43%;
+    }
+    .hiw-genres .genre-bar .bar-1:hover {
+        width: 82%;
+    }
+    .hiw-genres .genre-bar .bar-2:hover {
+        width: 64%;
+    }
+    .hiw-genres .genre-bar .bar-3:hover {
+        width: 53%;
+    }
+    .hiw-genres .genre-bar .bar-4:hover {
+        width: 48%;
+    }
+    .hiw-genres .genre-bar .bar-5:hover {
+        width: 45%;
     }
 
     .hiw-topstats .graphics {

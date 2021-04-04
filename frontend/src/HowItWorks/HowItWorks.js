@@ -160,10 +160,41 @@ const HowItWorks = (props) => {
                         <div className="under-bar"></div>
                         <div className="hiw-flex">
                             <div className="graphics">
-
+                                <div className="genre-display">
+                                    <div className="genre-bar">                                        
+                                        <div className="bar-1"></div>
+                                        <h3>25%</h3>
+                                    </div>
+                                    <div className="genre-bar">
+                                        <div className="bar-2"></div>
+                                        <h3>18%</h3>
+                                    </div>
+                                    <div className="genre-bar">                                        
+                                        <div className="bar-3"></div>
+                                        <h3>14%</h3>
+                                    </div>
+                                    <div className="genre-bar">                                        
+                                        <div className="bar-4"></div>
+                                        <h3>12%</h3>
+                                    </div>
+                                    <div className="genre-bar">                                        
+                                        <div className="bar-5"></div>
+                                        <h3>11%</h3>
+                                    </div>
+                                </div>
                             </div>
                             <div className="text-box">
-
+                                <p>
+                                    Every artist is assigned <span>five different genres</span>. 
+                                    In order to determine the top genres within the group, we first collect the individual genres from <span>each person's list of top artists</span>.
+                                    We also count how many times each genre appears for that user. 
+                                    The top genres are then added together to create a combined list of the genres within the group, as well as how many artists are associated with that genre.
+                                    <br></br><br></br>
+                                    The percentage that you see next to each bar is actually only out of the <span>top quarter of the full list of genres</span>. 
+                                    We chose to do this because, especially with larger groups, it is likely that only the top 25% of genres is relevant to the majority of people.
+                                    We get approximately 30 genres from each person and sometimes even the <span>fifth top genre</span> for one person represents <span>less than 5%</span> of their listening habits. 
+                                    So don't worry if the percentages seem low, comparatively, they're actually very high!
+                                </p>
                             </div>
                         </div>
                     </div>
