@@ -64,7 +64,7 @@ const HowItWorks = (props) => {
                     </div>
                 </div>
                 <div className="hiw-playlistgeneration">
-                <div className="hiw-content">
+                    <div className="hiw-content">
                         <h1><strong>Playlist Generation</strong></h1>
                         <div className="under-bar"></div>
                         <div className="hiw-flex">
@@ -251,7 +251,17 @@ const HowItWorks = (props) => {
 
                             </div>
                             <div className="text-box">
-
+                                <p>
+                                    Spotify assigns every track a set of specific attributes. 
+                                    These attributes include <span>danceability, energy, valence, acoustiness, instrumentalness</span> and <span>track popularity</span>, among others. 
+                                    We have created a musical profile for you by finding the <span>average</span> of each of these attributes <span>within your top tracks</span>.
+                                    Each of these values fall on a scale from 0 to 100, but we found that the distribution is often <span>skewed</span>. 
+                                    Take a look at the average Spotify distributions {width > 780 ? " on the left." : " above."} 
+                                    <br></br><br></br>
+                                    You'll notice that the music stats you see within your group have a much <span>smaller range</span>.  
+                                    Each display is <span>scaled</span> to more clearly show you the difference between the average listening habits of your group members.
+                                    Here you can compare how danceabilty, energetic, sad, happy, or popular your music taste is. 
+                                </p>
                             </div>     
                         </div>
                     </div>

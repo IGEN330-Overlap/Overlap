@@ -362,8 +362,15 @@
 .hiw-musicstats h2 {
     color: var(--off-white-color);
 }
+.hiw-musicstats p {
+    color: var(--off-white-color);
+}
 .hiw-musicstats .under-bar {
     background-color: var(--off-white-color);
+}
+.hiw-musicstats span {
+    color: var(--blue-color-6);
+    font-weight: 550;
 }
 
 
