@@ -180,73 +180,101 @@ function calculateDate() {
  */
 function buildPlaylistMoodProfile (selection) {
     if (selection === "happy") {
-        return {
-            "min_energy": 0.50,
-            "target_energy": 0.70,
-            "min_danceability": 0.20,
-            "target_danceability": 0.40,
-            "max_danceability": 0.75,
-            "min_valence": 0.60,
-            "target_valence": 0.85,
-            "min_popularity": 50,
-            "limit": 30,
-            "Seed_genres": [
-                "happy",
-                "pop",
-                "summer",
-            ],
-        };
+        return [
+            {
+                "min_energy": 0.50,
+                "target_energy": 0.70,
+                "min_danceability": 0.20,
+                "target_danceability": 0.40,
+                "max_danceability": 0.75,
+                "min_valence": 0.60,
+                "target_valence": 0.85,
+                "min_popularity": 50,
+                "limit": 30,
+                "Seed_genres": [
+                    "happy",
+                    "pop",
+                    "summer",
+                ],
+            },
+            {
+                "energy_wght": 1,
+                "danceability_wght": 1,
+                "valence_wght": 1,
+            },
+        ];
     } else if (selection === "chill") {
-        return {
-            "target_energy": 0.40,
-            "max_energy": 0.70,
-            "target_valence": 0.50,
-            "target_danceability": 0.25,
-            "max_danceability": 0.60, 
-            "min_popularity": 50,
-            "limit": 30,
-            "Seed_genres": [
-                "chill",
-                "summer",
-            ],
-        };        
+        return [
+            {
+                "target_energy": 0.40,
+                "max_energy": 0.70,
+                "target_valence": 0.50,
+                "target_danceability": 0.25,
+                "max_danceability": 0.60, 
+                "min_popularity": 50,
+                "limit": 30,
+                "Seed_genres": [
+                    "chill",
+                    "summer",
+                ],
+            },
+            {
+                "energy_wght": 1,
+                "danceability_wght": 1,
+                "valence_wght": 1,
+            },
+        ];        
 
     } else if (selection === "sad") {
-        return {
-            "target_energy": 0.20,
-            "max_energy": 0.50,
-            "target_danceability": 0.10,
-            "max_danceability": 0.5,
-            "target_valence": 0.15,
-            "max_valence": 0.50,
-            "target_acousticness": 0.70,
-            "min_popularity": 25,
-            "max_tempo": 160,
-            "limit": 30,
-            "Seed_genres": [
-                "sad",
-                "rainy-day",
-            ],
-        };
+        return [
+            {
+                "target_energy": 0.20,
+                "max_energy": 0.50,
+                "target_danceability": 0.10,
+                "max_danceability": 0.5,
+                "target_valence": 0.15,
+                "max_valence": 0.50,
+                "target_acousticness": 0.70,
+                "min_popularity": 25,
+                "max_tempo": 160,
+                "limit": 30,
+                "Seed_genres": [
+                    "sad",
+                    "rainy-day",
+                ],
+            },
+            {
+                "energy_wght": 0.30,
+                "danceability_wght": 0.20,
+                "valence_wght": 0.50,
+            },
+        ];
     } else if (selection === "party") {
-        return {
+        return [
+        {
             "min_energy": 0.70,
-            "target_energy": 0.80,
+            "target_energy": 0.85,
             "min_danceability": 0.70,
             "target_danceability": 0.85,
             "min_valence": 0.60,
-            "target_valence": 0.75,
+            "target_valence": 0.80,
             "min_popularity": 50,
             "target_popularity": 75,
             "min_tempo": 120,
-            "target_tempo": 155,
+            "target_tempo": 150,
             "limit": 30,
-            "Seed_genres": [
+            "seed_genres": [
                 "party",
                 "pop",
                 "dance",
             ],
-        }; 
+        },
+        {
+            "energy_wght": 0.45,
+            "danceability_wght": 0.45,
+            "valence_wght": 0.10,
+        },
+    ]; 
     } else {
         return "undefined";
     }

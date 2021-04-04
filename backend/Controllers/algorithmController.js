@@ -251,6 +251,11 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           seed_tracks: sortedTrackSeed,
         });
 
+        if (data.statusCode != 200){
+          console.log("top, unsuccessful getRecommendations request");
+          throw new Error(); // Request to spotifyAPI was not successful
+        }
+
         // add the songs ensuring that their type is correct and that there is populated data
         for (x of data.body.tracks) {
           if (
@@ -289,7 +294,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             target_energy: musicalProfile.energy / 100,
             target_valence: musicalProfile.valence / 100,
             min_popularity: 40,
-            limit: 30,
+            limit: 25,
             seed_artists: mostFrequentArtists.slice(0, 5),
           });
         } else {
@@ -298,11 +303,15 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             target_energy: musicalProfile.energy / 100,
             target_valence: musicalProfile.valence / 100,
             min_popularity: 40,
-            limit: 30,
+            limit: 25,
             seed_tracks: mostFrequentTracks.slice(0, 5),
           });
         }
 
+        if (data.statusCode != 200){
+          console.log("top, unsuccessful getRecommendations request");
+          throw new Error(); // Request to spotifyAPI was not successful
+        }
         // add the songs ensuring that their type is correct and that there is populated data
         for (x of data.body.tracks) {
           if (
@@ -341,7 +350,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   try {
     // Add all the recommendation songs from spotify until the playlist has 25 songs
     for (var i = 0; playlistTracks.length < 25; i++) {
-      // We have added all the reccomendations so break from loop
+      // We have added all the recomendations so break from loop
       if (i == recommendations.length) {
         break;
         // Add an attribute songs so long as they don't already exist in duplicates
@@ -446,10 +455,15 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   });
 
   let moodParams; // holds parameters to be sent to the get recommendations
+  let paramWeights;
 
   // Error handling, request must be a valid mood
   try {
-    moodParams = buildPlaylistMoodProfile(req.body.selectedMood);
+    let tmp = buildPlaylistMoodProfile(req.body.selectedMood);
+    moodParams = tmp[0];
+    paramWeights = tmp[1];
+    // console.log(moodParams);
+    // console.log(paramWeights)
 
     if (moodParams == "type error" || moodParams == "undefined") {
       throw new Error();
@@ -518,11 +532,12 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // add new prop "deltaFromGroup" which acts as an all in one ranking against the groups listening habits
   for (var i = 0; i < masterTopTracks.length; i++) {
     masterTopTracks[i]["delta"] =
-      Math.abs(
-        masterTopTracks[i].danceability - moodParams.target_danceability
-      ) +
-      Math.abs(masterTopTracks[i].energy - moodParams.target_energy) +
-      Math.abs(masterTopTracks[i].valence - moodParams.target_valence);
+      Math.abs(masterTopTracks[i].danceability - moodParams.target_danceability) *
+        paramWeights.danceability_wght +
+      Math.abs(masterTopTracks[i].energy - moodParams.target_energy) *
+        paramWeights.energy_wght +
+      Math.abs(masterTopTracks[i].valence - moodParams.target_valence) *
+        paramWeights.valence_wght;
   }
 
   // Sort the unique set by the deltaFromGroup to (lowest to highest), Lowest is the best
@@ -536,7 +551,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // Add seed tracks to the playlist so long as they meet the required delta
   for (x of sortedTrackSet) {
     // add to playlist if the song is precisely enough matching the target profile
-    if (x.delta <= 0.15) {
+    if (x.delta <= 0.075) {
       playlistTracks.push({
         trackName: x.trackName,
         trackID: x.trackID,
@@ -545,8 +560,9 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
         artistName: x.artistName,
       });
       // add to seed tracks so long as we don't already have 5
-      if (seedTracks.length < 5) {
+      if (seedTracks.length < 7) {
         seedTracks.push(x.trackID);
+        console.log(x.delta);
       } else {
         break; // already have 5 tracks meeting criteria
       }
@@ -575,7 +591,14 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       let recommendationsBody = moodParams;
 
       recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5); // force to 5 to prevent any possible error
+      console.log(recommendationsBody);
       let data = await spotifyApi.getRecommendations(recommendationsBody);
+
+      if (data.statusCode != 200){
+        console.log("top, unsuccessful getRecommendations request");
+        throw new Error(); // Request to spotifyAPI was not successful
+      }
+      
       // add the songs ensuring that their type is correct and that there is populated data
       for (x of data.body.tracks) {
         // continuosly add songs until we've hit our playlist length (30 songs)
@@ -598,6 +621,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
             artistName: x.artists[0].name,
           });
         }
+        console.log(x.name);
       }
     } catch (err) {
       console.log("error in get recommendations mood playlist");
