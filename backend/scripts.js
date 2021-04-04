@@ -261,9 +261,8 @@ function buildPlaylistMoodProfile (selection) {
             "min_popularity": 50,
             "target_popularity": 75,
             "min_tempo": 120,
-            "target_tempo": 150,
             "limit": 30,
-            "seed_genres": [
+            "Seed_genres": [
                 "party",
                 "pop",
                 "dance",

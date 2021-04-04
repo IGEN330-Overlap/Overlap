@@ -237,15 +237,14 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   try {
     let tokenData = await spotifyApi.refreshAccessToken();
     spotifyApi.setAccessToken(tokenData.body.access_token);
-
     // if either is 1 then automatically use the tracks for seeds
     if (maxCountArtists == 1 || maxCountTracks == 1) {
       try {
         // get spotify data based on the groups profile
         let data = await spotifyApi.getRecommendations({
-          target_danceability: musicalProfile.danceability / 100,
-          target_energy: musicalProfile.energy / 100,
-          target_valence: musicalProfile.valence / 100,
+          target_danceability: Math.round(musicalProfile.danceability) / 100,
+          target_energy: Math.round(musicalProfile.energy) / 100,
+          target_valence: Math.round(musicalProfile.valence) / 100,
           min_popularity: 35,
           limit: 30,
           seed_tracks: sortedTrackSeed,
@@ -290,26 +289,47 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
         // prioritize tracks seed as shown by the non inclusive conditional
         if (maxCountArtists > maxCountTracks) {
           data = await spotifyApi.getRecommendations({
-            target_danceability: musicalProfile.danceability / 100,
-            target_energy: musicalProfile.energy / 100,
-            target_valence: musicalProfile.valence / 100,
-            min_popularity: 40,
-            limit: 25,
+            target_danceability: Math.round(musicalProfile.danceability) / 100,
+            target_energy: Math.round(musicalProfile.energy) / 100,
+            target_valence: Math.round(musicalProfile.valence) / 100,
+            min_popularity: 35,
+            limit: 30,
             seed_artists: mostFrequentArtists.slice(0, 5),
           });
         } else {
           data = await spotifyApi.getRecommendations({
-            target_danceability: musicalProfile.danceability / 100,
-            target_energy: musicalProfile.energy / 100,
-            target_valence: musicalProfile.valence / 100,
-            min_popularity: 40,
-            limit: 25,
+            target_danceability: Math.round(musicalProfile.danceability) / 100,
+            target_energy: Math.round(musicalProfile.energy) / 100,
+            target_valence: Math.round(musicalProfile.valence) / 100,
+            min_popularity: 35,
+            limit: 30,
             seed_tracks: mostFrequentTracks.slice(0, 5),
           });
         }
 
-        if (data.statusCode != 200){
+        if (data.statusCode != 200) {
           console.log("top, unsuccessful getRecommendations request");
+          let badReq;
+          if (maxCountArtists > maxCountTracks){
+            badReq = {
+              target_danceability: Math.round(musicalProfile.danceability) / 100,
+              target_energy: Math.round(musicalProfile.energy) / 100,
+              target_valence: Math.round(musicalProfile.valence) / 100,
+              min_popularity: 35,
+              limit: 30,
+              seed_artists: mostFrequentArtists.slice(0, 5),
+            };
+          } else {
+            badReq = {
+              target_danceability: Math.round(musicalProfile.danceability) / 100,
+              target_energy: Math.round(musicalProfile.energy) / 100,
+              target_valence: Math.round(musicalProfile.valence) / 100,
+              min_popularity: 35,
+              limit: 30,
+              seed_tracks: mostFrequentTracks.slice(0, 5),
+            };
+          }
+          console.log(badReq); // log the request that lead to an error
           throw new Error(); // Request to spotifyAPI was not successful
         }
         // add the songs ensuring that their type is correct and that there is populated data
@@ -426,13 +446,15 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       { groupCode: req.body.groupCode },
       { $addToSet: { playlists: playlist } }
     );
-
+    // log in console we added a playlist :)
+    console.log("Added new playlist:", req.body.playlistName + " to " + req.body.groupCode);
     res.json({
       message: "added groups top playlist to the group",
       playlist: playlist,
     });
     return;
   } catch (err) {
+    console.log("error adding playlist to: ". req.body.groupCode); // log error
     res.json({
       message: "Unable to add playlist to the group",
       error: err,
@@ -562,7 +584,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       // add to seed tracks so long as we don't already have 5
       if (seedTracks.length < 7) {
         seedTracks.push(x.trackID);
-        console.log(x.delta);
+        // console.log(x.delta);
       } else {
         break; // already have 5 tracks meeting criteria
       }
@@ -621,10 +643,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
             artistName: x.artists[0].name,
           });
         }
-        console.log(x.name);
       }
     } catch (err) {
-      console.log("error in get recommendations mood playlist");
+      console.log("error in get recommendations mood playlist", err);
+      console.log(recommendationsBody)
       res.status(400).json({
         message: "error in get recommendations mood playlist",
         error: err,
