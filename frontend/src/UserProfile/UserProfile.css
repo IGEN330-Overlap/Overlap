@@ -1,7 +1,7 @@
 @import url(../variables.css);
 
 .user-landing-root{
-    background-color: var(--blue-color-main);
+    background-color: var(--primary-color-main);
 }
 
 .userProfile-title {
@@ -28,8 +28,199 @@
     background-color: white;
 }
 
+.quickStats{
+    display: flex;
+    width: 100vw;
+    min-height: 60vh;
+    height: fit-content;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2vh;
+}
+
+.icon{
+    width: fit-content;
+    margin-left: 10vw;
+}
+
+.quickStats .user_icon{
+    height: clamp(150px, 15vw, 500px);
+    width: clamp(150px, 15vw, 500px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 50rem;
+    transition: opacity 0.45s;
+    background-color: var(--primary-color-6);
+}
+
+.stats{
+    height: fit-content;
+    width: 60vw;
+    margin-left: 5vw;
+}
+
+.stats_title{
+    color: white;
+    width: 100%;
+    height: fit-content;
+    font-weight: bolder;
+    font-size: clamp(20px, 3vw, 35px);
+    margin-bottom: 1.5vw;
+}
+
+.columns{
+    width: 100%;
+    display: flex;
+    font-size: clamp(20px, 2vw, 30px);
+}
+
+.column{
+    width: 50%;
+    margin-right: 2vw;
+}
+
+.open{
+    display: flex;
+    color: white;
+}
+
+.open:hover{
+    color: var(--blue-color-main);
+    cursor: pointer;
+}
+
+.percentage{
+    margin-left: 0.5rem;
+    color: var(--blue-color-1);
+}
+
+.open:hover .percentage{
+    color: var(--blue-color-main);
+}
+
+.collapseBody{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2px;
+    font-size: clamp(15px, 1.5vw, 25px);
+    background-color: rgba(169,169,169, 0.25);
+    border-radius: 2.5%;
+    color: white;
+}
+
+.collapseText{
+    text-align: left;
+    padding: 10px;
+}
+
+.description{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+    width: 100%;
+}
+
+.blurb{
+    margin: 5%;
+    text-align: center;
+}
+
+.descriptor-carousel{
+    display: flex;
+    height: fit-content;
+    min-height: 25vh;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.descriptor-carousel .carousel-inner{
+    width: 80%;
+    height: 100%;
+}
+
+.descriptor-carousel .active{
+    width: 100%;
+    height: 100%;
+}
+
+.descriptor-carousel .carousel-control-prev{
+    height: 100%;
+    width: 5%;
+    left: 5%;
+    top: 0%;
+}
+
+.descriptor-carousel .carousel-control-next{
+    height: 100%;
+    width: 5%;
+    right: 5%;
+    top: 0%;
+}
+
+.top3{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: start;
+}
+
+.track-container{
+    width: 100%;
+    font-size: clamp(15px, 1vw, 20px);
+    text-align: center;
+}
+
+.track-container{
+    cursor: pointer;
+}
+
+.collapseImage{
+    height: 6vw;
+    width: 6vw;
+    border-radius: 10%;
+}
+
+.trackArtist{
+    color: var(--blue-color-1);
+}
+
 @media (max-width:780px) {
     .userProfile-title .under-bar{
         width: 150px;
+    }
+    .quickStats{
+        flex-direction: column;
+    }
+    .stats{
+        width: 80vw;
+    }
+    .columns{
+        flex-direction: column;
+    }
+    .column{
+        width: 100%;
+    }
+    .icon{
+        margin-left: 0px;
+        margin-bottom: 45px;
+    }
+    .stats_title{
+        margin-bottom: 10px;
+    }
+    .collapseImage{
+        height: 50px;
+        width: 50px;
+    }
+    .descriptor-carousel{
+        min-height: 20vh;
+    }
+    .collapseBody{
+        width: 95%;
+        margin: 0px;
+    }
+    .description{
+        height: 20vh;
     }
 }
