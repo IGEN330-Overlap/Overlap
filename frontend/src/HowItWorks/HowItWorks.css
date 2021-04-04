@@ -39,6 +39,7 @@
     display: flex;
     width: 40%;
     justify-content: center;
+    align-items: center;
 }
 
 /* content specific styling */
@@ -65,6 +66,7 @@
     border-radius: 50%;
     text-align: center;
     transform: translate(12.5%);
+    transition: 0.12s;
 }
 .hiw-insights .graphics .friend-bubble {
     position: relative;
@@ -75,6 +77,15 @@
     border-radius: 50%;
     text-align: center;
     transform: translate(-12.5%);
+    transition: 0.12s;
+}
+.hiw-insights .graphics .user-bubble:hover {
+    height: 19vw;
+    width: 19vw;
+}
+.hiw-insights .graphics .friend-bubble:hover {
+    height: 19vw;
+    width: 19vw;
 }
 .hiw-insights .graphics .user-bubble h3 {
     position: absolute;
@@ -203,7 +214,7 @@
     background-color: var(--off-white-color);
 }
 .hiw-topstats span {
-    color: var(--primary-color-7);
+    color: var(--neutral-color-1);
     font-weight: 550;
 }
 .hiw-topstats .podium-display {
@@ -323,6 +334,14 @@
     .hiw-insights .graphics .friend-bubble {
         height: 170px;
         width: 170px;
+    }
+    .hiw-insights .graphics .user-bubble:hover {
+        height: 180px;
+        width: 180px;
+    }
+    .hiw-insights .graphics .friend-bubble:hover {
+        height: 180px;
+        width: 180px;
     }
 
     .hiw-playlistgeneration .mood-emoji {
