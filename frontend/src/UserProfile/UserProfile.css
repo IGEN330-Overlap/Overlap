@@ -65,6 +65,13 @@
     height: fit-content;
     font-weight: bolder;
     font-size: clamp(20px, 3vw, 35px);
+}
+
+.stats_sub_title{
+    color: var(--blue-color-1);
+    width: 100%;
+    height: fit-content;
+    font-size: clamp(20px, 1vw, 30px);
     margin-bottom: 1.5vw;
 }
 

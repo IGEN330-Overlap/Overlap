@@ -40,6 +40,7 @@ export const TopGenres = ({groupUsers}) => {
     uniqueGenres.map((genre) => {
         if (genre.count > (uniqueGenres[Math.round(uniqueGenres.length/4)].count))
             totalCounts = totalCounts + genre.count
+        return totalCounts;
     })
 
     top_genres[0] ? (top_genres[0].count/totalCounts < 0.5 ? filler = 40 : filler = 0) : filler = 0;

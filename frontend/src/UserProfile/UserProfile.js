@@ -11,22 +11,21 @@ import { GroupTopStats } from '../GroupProfilePage/TopStats/TopStats';
 import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
 import logo_small from '../GroupProfilePage/MemberDisplay/logo small.svg';
 
-const axios = require("axios");
 
 const UserProfile = (props) => {
   const spotifyID = useSelector((state) => state.userObject);
   const userArray = [spotifyID];
 
   // get screen width to determine how many items in the carousel
-  const [width, getWidth] = useState(window.innerWidth)
+//   const [width, getWidth] = useState(window.innerWidth)
 
-  useEffect(() => {
-      const handleResize = () => {
-          getWidth(window.innerWidth)
-      }
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-  }, [])
+//   useEffect(() => {
+//       const handleResize = () => {
+//           getWidth(window.innerWidth)
+//       }
+//       window.addEventListener('resize', handleResize);
+//       return () => window.removeEventListener('resize', handleResize);
+//   }, [])
 
   //open song with spotify
   const openSong = (song_url) => {
@@ -45,6 +44,7 @@ const UserProfile = (props) => {
             if (track.trackName !== trackPop[i+1].trackName && track.artistName !== trackPop[i+1].artistName)
                 trackPopUnique.push(track);
         }
+        return trackPopUnique;
     })
     const trackPop3 = trackPopUnique.slice(0,3);
   const trackPop3low = trackPopUnique.slice(trackPopUnique.length-3,trackPopUnique.length);
@@ -61,6 +61,7 @@ const UserProfile = (props) => {
             if (track.trackName !== dance[i+1].trackName && track.artistName !== dance[i+1].artistName)
                 danceUnique.push(track);
         }
+        return danceUnique;
     })
     const dance3 = danceUnique.slice(0,3);
   const dance3low = danceUnique.slice(danceUnique.length-3,danceUnique.length);
@@ -77,6 +78,7 @@ const UserProfile = (props) => {
           if (track.trackName !== energy[i+1].trackName && track.artistName !== energy[i+1].artistName)
               energyUnique.push(track);
       }
+      return energyUnique;
   })
   const energy3 = energyUnique.slice(0,3);
 const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length);
@@ -93,6 +95,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
             if (track.trackName !== acoustic[i+1].trackName && track.artistName !== acoustic[i+1].artistName)
                 acousticUnique.push(track);
         }
+        return acousticUnique;
     })
     const acoustic3 = acousticUnique.slice(0,3);
   const acoustic3low = acousticUnique.slice(acousticUnique.length-3,acousticUnique.length);
@@ -109,6 +112,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
             if (track.trackName !== instrumental[i+1].trackName && track.artistName !== instrumental[i+1].artistName)
                 instrumentalUnique.push(track);
         }
+        return instrumentalUnique;
     })
     const instrumental3 = instrumentalUnique.slice(0,3);
   const instrumental3low = instrumentalUnique.slice(instrumentalUnique.length-3, instrumentalUnique.length);
@@ -125,6 +129,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
             if (track.trackName !== valence[i+1].trackName && track.artistName !== valence[i+1].artistName)
                 valenceUnique.push(track);
         }
+        return valenceUnique;
     })
     const valence3 = valenceUnique.slice(0,3);
   const valence3low = valenceUnique.slice(valenceUnique.length-3, valenceUnique.length);
@@ -148,6 +153,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
             </div>
             <div className="stats">
                 <div className="stats_title">Average Music Stats</div>
+                <div className="stats_sub_title">Click each for more info!</div>
                 <div className="columns">
                     <div className="column">
 
