@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './HowItWorks.css';
 
 import Navbar1 from "../Navbar/Navbar";
+import small_logo from "../GroupProfilePage/MemberDisplay/logo small.svg";
 
 import Collapse from "react-bootstrap/Collapse";
 
@@ -47,7 +48,7 @@ const HowItWorks = (props) => {
                                     Your insights show you your top three most listened to tracks and artists. 
                                     We take data from your <span>short-term</span>, <span>medium-term</span>, and <span>long-term</span> listening. 
                                     In order to make the information dynamic and relevant to you, we prioritize your short-term and medium-term songs and artists.
-                                    You may notice that, if you log in two weeks from now, your top tracks and artists have changed.
+                                    Every time you log in, we can collect new data from you. So you may notice that, if you log in a few weeks from now, your top tracks and artists have changed.
                                 </p>
                                 <h2><strong>Comparisons</strong></h2>
                                 <p>
@@ -83,7 +84,7 @@ const HowItWorks = (props) => {
                                     Next, we find <span>common songs</span> within the top tracks of the selected group of people and use those as seed tracks for the playlist.
                                     Based on these characteristics and tracks, we can create a tailored mood-based playlist just for you.
                                     <br></br><br></br>
-                                    <span>Click into each of the moods {width > 780 ? "on the right" : "below"} to see a sneak peak of the characteristics we chose :)</span>
+                                    <span>Click into each of the moods {width > 780 ? "on the right" : "below"} to see a sneak peak of some of the characteristics we chose :)</span>
                                 </p>
                             </div>
                             <div className="graphics">
@@ -158,10 +159,10 @@ const HowItWorks = (props) => {
                         <h1><strong>Genres</strong></h1>
                         <div className="under-bar"></div>
                         <div className="hiw-flex">
-                            <div className="text-box">
+                            <div className="graphics">
 
                             </div>
-                            <div className="graphics">
+                            <div className="text-box">
 
                             </div>
                         </div>
@@ -174,10 +175,38 @@ const HowItWorks = (props) => {
                         <div className="hiw-flex">
                             <div className="text-box">
                                 <h2><strong>Top Tracks</strong></h2>
-                                <h2><strong>Top Artists</strong></h2>  
+                                <p>
+                                    The top tracks displayed are the <span>combined top tracks</span> of everyone in your group. 
+                                    We combine everyone's top tracks information, then count <span>how many times each song appears</span> in the list. 
+                                    Starting with the songs that are in the most people's top tracks, we populate the top tracks display. 
+                                    Within the list of songs that appear the same number of times, there is no particular order to which they are shown.
+                                </p>
+                                <h2><strong>Top Artists</strong></h2>
+                                <p>
+                                    The top artists work the same way as the top tracks.
+                                    We combine the top artists of each of the people in your group, then count the <span>number of people that listen to each artist</span>. 
+                                    Again, there is no particular order within the group of artists that appear the same amount of times. 
+                                    If half or more of a group has very similar music taste, it is likely that their top artists will dominate the podium.
+                                </p>  
                             </div>
                             <div className="graphics">
-
+                                <div className="podium-display">
+                                    <div className="top-artist-podiums">
+                                        <div className="artist-podium">
+                                            <img className="icon" src={small_logo} alt="logo"/>
+                                            <div className="podium-2"><strong>#2</strong></div>
+                                        </div>
+                                        <div className="artist-podium">
+                                            <img className="icon" src={small_logo} alt="logo"/>
+                                            <div className="podium-1"><strong>#1</strong></div>
+                                        </div>
+                                        <div className="artist-podium">
+                                            <img className="icon" src={small_logo} alt="logo"/>
+                                            <div className="podium-3"><strong>#3</strong></div>
+                                        </div>
+                                    </div>
+                                    <div className="podium-stand"></div>
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -187,12 +216,12 @@ const HowItWorks = (props) => {
                         <h1><strong>Music Stats</strong></h1>
                         <div className="under-bar"></div>
                         <div className="hiw-flex">
-                            <div className="text-box">
-
-                            </div>
                             <div className="graphics">
 
                             </div>
+                            <div className="text-box">
+
+                            </div>     
                         </div>
                     </div>
                 </div>
