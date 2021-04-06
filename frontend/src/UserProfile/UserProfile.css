@@ -105,7 +105,7 @@
     color: var(--blue-color-main);
 }
 
-.collapseBody{
+.UP_collapseBody{
     display: flex;
     flex-direction: column;
     margin-top: 2px;
@@ -171,7 +171,7 @@
     display: flex;
     width: 100%;
     justify-content: space-around;
-    align-items: start;
+    align-items: flex-start;
 }
 
 .userProfile-track-container{

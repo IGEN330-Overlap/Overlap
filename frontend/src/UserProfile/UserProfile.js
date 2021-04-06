@@ -165,7 +165,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             <div className="UP_percentage">{spotifyID.musicalProfile.trackPopularity.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openTrackPop}>
-                            <div id="example-collapse-text" className="collapseBody">
+                            <div id="example-collapse-text" className="UP_collapseBody">
                                 <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="descriptor-carousel">
                                     <Carousel.Item>
                                         <div className="description">
@@ -212,7 +212,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             <div className="UP_percentage">{spotifyID.musicalProfile.danceability.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openDance}>
-                            <div id="example-collapse-text" className="collapseBody">
+                            <div id="example-collapse-text" className="UP_collapseBody">
                                 <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="descriptor-carousel">
                                     <Carousel.Item>
                                         <div className="description">
@@ -257,7 +257,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             <div className="UP_percentage">{spotifyID.musicalProfile.energy.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openEnergy}>
-                            <div id="example-collapse-text" className="collapseBody">
+                            <div id="example-collapse-text" className="UP_collapseBody">
                                 <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="descriptor-carousel">
                                     <Carousel.Item>
                                         <div className="description">
@@ -305,7 +305,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             <div className="UP_percentage">{spotifyID.musicalProfile.acousticness.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openAcousticness}>
-                            <div id="example-collapse-text" className="collapseBody">
+                            <div id="example-collapse-text" className="UP_collapseBody">
                                 <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="descriptor-carousel">
                                     <Carousel.Item>
                                         <div className="description">
@@ -350,7 +350,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             <div className="UP_percentage">{spotifyID.musicalProfile.instrumentalness.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openInstrumental}>
-                            <div id="example-collapse-text" className="collapseBody">
+                            <div id="example-collapse-text" className="UP_collapseBody">
                             <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="descriptor-carousel">
                                 <Carousel.Item>
                                     <div className="description">
@@ -395,7 +395,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                             <div className="UP_percentage">{spotifyID.musicalProfile.valence.toFixed(2)}%</div>
                         </div>
                         <Collapse in={openValence}>
-                            <div id="example-collapse-text" className="collapseBody">
+                            <div id="example-collapse-text" className="UP_collapseBody">
                             <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="descriptor-carousel">
                                 <Carousel.Item>
                                     <div className="description">

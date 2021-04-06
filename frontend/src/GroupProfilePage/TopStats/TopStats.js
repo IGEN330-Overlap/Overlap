@@ -95,7 +95,7 @@ export const GroupTopStats = ({groupUsers}) => {
 
     // Add 4 elements at a time to carousel array
     let carouselTracks = [];
-    for (let i = 0; (i < groupUniqueSongs.length) && (i < (groupUsers.length === 1 ? 36 : 18)); i += num_tracks) {
+    for (let i = 0; (i < groupUniqueSongs.length) && (i <  18); i += num_tracks) {
         let threeTracks = groupUniqueSongs.slice(i, i + num_tracks);
 
         let carouselElement = threeTracks.map((track, j) => {
