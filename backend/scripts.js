@@ -178,108 +178,92 @@ function calculateDate() {
  * @param {String} selection, mood selection
  * @returns 
  */
-function buildPlaylistMoodProfile (selection) {
-    switch (selection){
-        case "happy":
-            return [
-                {
-                    "min_energy": 0.50,
-                    "target_energy": 0.70,
-                    "min_danceability": 0.20,
-                    "target_danceability": 0.40,
-                    "max_danceability": 0.75,
-                    "min_valence": 0.60,
-                    "target_valence": 0.85,
-                    "min_popularity": 50,
-                    "limit": 30,
-                    "Seed_genres": [
-                        "happy",
-                        "summer",
-                        "pop",
-                    ],
-                },
-                {
-                    "energy_wght": 0.30,
-                    "danceability_wght": 0.20,
-                    "valence_wght": 0.50,
-                },
-            ];
-        case "chill":
-            return [
-                {
-                    "target_energy": 0.40,
-                    "max_energy": 0.70,
-                    "target_valence": 0.50,
-                    "target_danceability": 0.25,
-                    "max_danceability": 0.60, 
-                    "min_popularity": 50,
-                    "limit": 30,
-                    "Seed_genres": [
-                        "chill",
-                        "summer",
-                        "guitar",
-                    ],
-                },
-                {
-                    "energy_wght": 0.45,
-                    "danceability_wght": 0.45,
-                    "valence_wght": 0.1,
-                },
-            ];
-        case "sad":
-            return [
-                {
-                    "target_energy": 0.20,
-                    "max_energy": 0.50,
-                    "target_danceability": 0.10,
-                    "max_danceability": 0.5,
-                    "target_valence": 0.15,
-                    "max_valence": 0.50,
-                    "target_acousticness": 0.70,
-                    "min_popularity": 25,
-                    "max_tempo": 160,
-                    "limit": 30,
-                    "Seed_genres": [
-                        "sad",
-                        "rainy-day",
-                    ],
-                },
-                {
-                    "energy_wght": 0.30,
-                    "danceability_wght": 0.20,
-                    "valence_wght": 0.50,
-                },
-            ];
-        case "party":
-            return [
-                {
-                    "min_energy": 0.70,
-                    "target_energy": 0.85,
-                    "min_danceability": 0.70,
-                    "target_danceability": 0.85,
-                    "min_valence": 0.60,
-                    "target_valence": 0.80,
-                    "min_popularity": 50,
-                    "target_popularity": 75,
-                    "min_tempo": 120,
-                    "target_tempo": 150,
-                    "limit": 30,
-                    "Seed_genres": [
-                        "party",
-                        "dance",
-                        "hip-hop",
-                        "edm",
-                        "rock-n-roll",
-                    ],
-                },
-                {
-                    "energy_wght": 0.45,
-                    "danceability_wght": 0.45,
-                    "valence_wght": 0.10,
-                },
-            ]; 
-    }
-    return "undefined";
+function buildPlaylistMoodProfile(selection) {
+  switch (selection) {
+    case "happy":
+      return [
+        {
+          min_energy: 0.5,
+          target_energy: 0.7,
+          min_danceability: 0.2,
+          target_danceability: 0.4,
+          max_danceability: 0.75,
+          min_valence: 0.6,
+          target_valence: 0.85,
+          min_popularity: 50,
+          limit: 30,
+          Seed_genres: ["happy", "summer", "pop"],
+        },
+        {
+          energy_wght: 0.3,
+          danceability_wght: 0.2,
+          valence_wght: 0.5,
+        },
+      ];
+    case "chill":
+      return [
+        {
+          target_energy: 0.4,
+          max_energy: 0.7,
+          target_valence: 0.5,
+          target_danceability: 0.25,
+          max_danceability: 0.6,
+          min_popularity: 50,
+          limit: 30,
+          Seed_genres: ["chill", "summer", "guitar"],
+        },
+        {
+          energy_wght: 0.45,
+          danceability_wght: 0.45,
+          valence_wght: 0.1,
+        },
+      ];
+    case "sad":
+      return [
+        {
+          target_energy: 0.2,
+          max_energy: 0.5,
+          target_danceability: 0.1,
+          max_danceability: 0.5,
+          target_valence: 0.15,
+          max_valence: 0.5,
+          target_acousticness: 0.7,
+          min_popularity: 25,
+          max_tempo: 160,
+          limit: 30,
+          Seed_genres: ["sad", "rainy-day"],
+        },
+        {
+          energy_wght: 0.3,
+          danceability_wght: 0.2,
+          valence_wght: 0.5,
+        },
+      ];
+    case "party":
+      return [
+        {
+          min_energy: 0.7,
+          target_energy: 0.85,
+          min_danceability: 0.7,
+          target_danceability: 0.85,
+          min_valence: 0.6,
+          target_valence: 0.8,
+          min_popularity: 50,
+          target_popularity: 75,
+          min_tempo: 120,
+          target_tempo: 150,
+          limit: 30,
+          Seed_genres: ["party", "dance", "hip-hop", "edm", "rock-n-roll"],
+        },
+        {
+          energy_wght: 0.45,
+          danceability_wght: 0.45,
+          valence_wght: 0.1,
+        },
+      ];
+  }
+
+  return "undefined";
 }
 
 //export generateGroupCode() as a module for use in Controller.js
