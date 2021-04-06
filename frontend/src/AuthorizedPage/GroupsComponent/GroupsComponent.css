@@ -8,7 +8,24 @@
 .title{
     color: white;
     font-size: 3vw;
+    margin-right: 24px;
+}
+
+.title-flex {
     padding-top: 15vh;
+}
+
+.refresh-icon {
+    width: calc(18px + 1.2vw);
+    height: calc(18px + 1.2vw);
+    fill: white;
+    transition: transform .3s ease-out;
+}
+
+.refresh-icon:hover {
+    fill: var(--blue-color-2);
+    cursor: pointer;
+    transform: rotate(180deg);
 }
 
 .search-bar{
@@ -181,6 +198,9 @@ input:focus{
 @media (max-width: 720px){
     .title{
         font-size: 30px;
+        margin-right: 12px;
+    }
+    .title-flex {
         padding-top: 12vh;
     }
     .search-bar{

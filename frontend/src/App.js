@@ -51,6 +51,9 @@ function App() {
   //useState hook for page loading
   const [isLoading, setIsLoading] = useState(true);
 
+  //useState hook for page refresh trigger
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
   //Update refresh token on App render
   //if refresh token exists in localstorage, dispatch update
   //else if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
@@ -100,7 +103,7 @@ function App() {
           console.log(err);
         });
     }
-  }, [refreshToken, dispatch]);
+  }, [refreshToken, dispatch, refreshTrigger]);
 
   //User Effect to get user group list when userObject is updated
   useEffect(() => {
@@ -120,6 +123,11 @@ function App() {
       }
     }
   }, [userObject]);
+
+  //Function to update the refreshTrigger and trigger login refresh
+  const loginRefresh = () => {
+    setRefreshTrigger(refreshTrigger + 1);
+  }
 
   //Start return statement
   return (
@@ -142,7 +150,7 @@ function App() {
           path="/authorized"
           render={() => (
             <Fragment>
-              <AuthorizedPage />
+              <AuthorizedPage refreshPage = {loginRefresh} />
               {/* If page loading, render loading overlay */}
               {isLoading && <ScreenOverlay text="Retrieving Data" />}
             </Fragment>
