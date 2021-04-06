@@ -56,7 +56,13 @@ export const PlaylistPage = (props) => {
         return <ScreenOverlay text="Collecting your playlist tracks" />;
     } else if (checkMember && !isLoading) {
         return (
-            <div className="playlist-landing-root">
+            <div className="playlist-landing-root" 
+                style={playlistType === "top" ? {backgroundColor: "var(--primary-color-main)"} :
+                        playlistType === "happy" ? {backgroundColor: "#c4e0fa"} :
+                        playlistType === "sad" ? {backgroundColor: "#d3cce2"} :
+                        playlistType === "chill" ? {backgroundColor: "#cdb49b"} :
+                        playlistType === "party" ? {backgroundColor: "#ffe7ab"} :
+                        {backgroundColor: "var(--primary-color-main)"}}>
                     <Navbar1 />
                 <div className="backToProfile">
                     <Link to={"/authorized/group/" + groupCode} className="pp_backArrow">
@@ -71,7 +77,7 @@ export const PlaylistPage = (props) => {
                         Back to Group Profile
                     </Link>
                 </div>
-                <div className="playlist-page-content">
+                <div className="playlist-page-content" id="background-color">
                     <div className="playlist-components">
                         <div className="playlist-page-name">
                             <PlaylistTitle 
@@ -113,3 +119,5 @@ export const PlaylistPage = (props) => {
         return <div className="landing-root-base"></div>;
     }
 };
+
+
