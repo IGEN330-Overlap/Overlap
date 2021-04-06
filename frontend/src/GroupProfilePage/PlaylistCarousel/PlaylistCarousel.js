@@ -11,6 +11,7 @@ import sad_cover from "./Sad.jpg";
 import chill_cover from "./Chill.jpg";
 import party_cover from "./Party.jpg";
 import topTracks_cover from "./TopTracks.png";
+import default_cover from "./default.png";
 import addButton from "./add.svg";
 import closeButton from "./close-x.svg";
 
@@ -334,7 +335,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
                   (playlist.type === "happy" ? happy_cover : 
                   (playlist.type === "chill" ? chill_cover :
                   (playlist.type === "sad" ? sad_cover :
-                  (playlist.type === "party" ? party_cover : null))))}
+                  (playlist.type === "party" ? party_cover : default_cover))))}
               alt={playlist.name}
             ></img>
             <div className="playlist-name">

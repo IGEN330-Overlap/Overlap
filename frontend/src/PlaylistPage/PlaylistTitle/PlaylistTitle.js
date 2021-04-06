@@ -3,11 +3,17 @@ import { useSelector } from 'react-redux';
 import './PlaylistTitle.css';
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
-import dog from './puppy-icon.jpg';
+
+import happy_cover from "../../GroupProfilePage/PlaylistCarousel/Happy.jpg";
+import sad_cover from "../../GroupProfilePage/PlaylistCarousel/Sad.jpg";
+import chill_cover from "../../GroupProfilePage/PlaylistCarousel/Chill.jpg";
+import party_cover from "../../GroupProfilePage/PlaylistCarousel/Party.jpg";
+import topTracks_cover from "../../GroupProfilePage/PlaylistCarousel/TopTracks.png";
+import default_cover from "../../GroupProfilePage/PlaylistCarousel/default.png";
 
 const axios = require("axios");
 
-const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
+const PlaylistTitle = ({playlistName, playlistID, playlistType, groupCode, createdDate}) => {
 
     const [SavedisOpen, setSavedIsOpen] = useState(false);
     const showSavedModal = () => {
@@ -28,6 +34,14 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
       }
       else window.open("https://open.spotify.com/")
     }
+
+    let cover = '';
+    if (playlistType === "top") cover = topTracks_cover;
+    else if (playlistType === "happy") cover = happy_cover;
+    else if (playlistType === "sad") cover = sad_cover;
+    else if (playlistType === "chill") cover = chill_cover;
+    else if (playlistType === "party") cover = party_cover;
+    else cover = default_cover;
 
     var refreshToken = useSelector((state) => state.refreshToken)
 
@@ -63,7 +77,7 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
     return (
         <div className="playlist-info-root">
             <div className="playlist-page-cover-container">
-                <img className="playlist-page-cover" src={dog} alt={playlistName} />
+                <img className="playlist-page-cover" src={cover} alt={playlistName} />
             </div>
             <div className="playlist-info-save">
                 <div className="title-container">
