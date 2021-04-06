@@ -1,6 +1,7 @@
 import React from 'react'
 import './IndividualComparisons.css';
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const MyInsights = (props) => {
     
@@ -62,6 +63,7 @@ export const MyInsights = (props) => {
                     }
                 </div>
             </div>
+            <Link to={"/authorized/user/" + userObject.userID} className="moreMessageLink"><div className="moreMessage">Click here to see more!</div></Link>
         </div>
     )
 }
