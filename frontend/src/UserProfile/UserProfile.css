@@ -68,7 +68,7 @@
 }
 
 .stats_sub_title{
-    color: var(--blue-color-1);
+    color: var(--blue-color-3);
     width: 100%;
     height: fit-content;
     font-size: clamp(20px, 1vw, 30px);
