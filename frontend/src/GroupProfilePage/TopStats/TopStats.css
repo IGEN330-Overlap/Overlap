@@ -19,8 +19,9 @@
 .top-stats-content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 92vh;
+    justify-content: space-evenly;
+    min-height: 94vh;
+    height: fit-content;
 }
 
 .top-stats-heading .text {
@@ -81,6 +82,7 @@
     font-size: 15px;
     max-height: 68px;
     overflow-y: auto;
+    scrollbar-width: thin;
 }
 .top-tracks-root .track-artist {
     color: var(--blue-color-1);
@@ -112,8 +114,9 @@
 
 /* top artists */
 .top-artists-root {
-    height: 375px;
+    height: 50%;
     width: 90vw;
+    margin-top: 10px;
     margin-left: 4vw;
     display: flex;
     flex-direction: column;
@@ -129,7 +132,7 @@
     font-size: 4vw;
     font-size: clamp(25px, 4vw, 40px);
 }
-.top-artists-root .top-artist-display {
+.top-artists-root {
     width: 90vw;
     display: flex;
     justify-content: space-between;
@@ -137,19 +140,20 @@
     flex-wrap: wrap;
 }
 .top-artists-root .top-artist-container {
-    height: 40px;
+    height: fit-content;
     display: flex;
     flex-direction: row;
     width: fit-content;
     align-items: center;
-    padding: 5px;
-    padding-top: 25px;
+    margin-left: 6px;
 }
 .top-artists-root .top-artist-container:hover {
     cursor: pointer;
 }
 .top-artists-root .top-artist-list {
-    width: 250px;
+    min-width: 250px;
+    width: fit-content;
+    padding-top: 25px;
 }
 .top-artist-container strong {
     font-size: 25px;
@@ -160,17 +164,26 @@
 }
 .top-artist-container .artist-name {
     color: var(--off-white-color);
+    width: fit-content;
+}
+.podium-display {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    margin-right: 20%;
+    z-index: 3;
+    width: 380px;
+    align-items: center;
 }
 .top-artist-podiums {
-    width: 275px;
-    margin-right: 50px;
+    width: 370px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 .top-artist-podiums .artist-icon{
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     object-fit: cover;
     object-position: 50%;
     border-radius: 10px;
@@ -183,28 +196,47 @@
 }
 .artist-podium .podium-3 {
     margin-top: 15px;
-    height: 70px;
-    width: 80px;
+    height: 100px;
+    width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
 }
 .artist-podium .podium-1 {
     margin-top: 15px;
-    height: 150px;
-    width: 80px;
+    height: 170px;
+    width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
 }
 .artist-podium .podium-2 {
     margin-top: 15px;
-    height: 110px;
-    width: 80px;
+    height: 135px;
+    width: 70px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+}
+.artist-podium .podium-5 {
+    margin-top: 15px;
+    height: 60px;
+    width: 70px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+}
+.artist-podium .podium-4 {
+    margin-top: 15px;
+    height: 80px;
+    width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
 }
 .artist-podium strong {
     font-size: 40px;
     color: var(--blue-color-main)
+}
+.podium-stand {
+    width: 100%;
+    height: 7px;
+    background-color: var(--primary-color-main);
 }
 
 /* for bigger screen sizes */
@@ -243,5 +275,107 @@
         display: flex;
         flex-direction: column;
         flex-wrap: none;
+    }
+    .top-tracks-carousel .carousel-control-prev {
+        left: 0%;
+    }
+    .top-tracks-carousel .carousel-control-next {
+        right: 0%;
+    }
+    .top-artist-root {
+        flex-direction: column;
+    }
+    .podium-display {
+        margin-top: 20px;
+        margin-left: 20%;
+    }
+}
+
+@media(max-width: 400px) {
+    .top-tracks-root .track-container {
+        width: 90vw;
+        height: clamp(100px, 5vw, 120px);
+    }
+    .top-tracks-carousel .carousel-inner {
+        width: 75vw;
+    }
+    .top-tracks-carousel .group-tracks {
+        width: 75vw;
+    }
+    .top-tracks-carousel .carousel-control-prev {
+        left: 0%;
+    }
+    .top-tracks-carousel .carousel-control-next {
+        right: 0%;
+    }
+    .top-tracks-root .track-info {
+        width: 40vw;
+    }
+    .top-tracks-root .track-info .track-title {
+        font-size: 14px;
+        max-height: 60px;
+    }
+    .top-tracks-root .track-artist {
+        width: 40vw;
+    }
+    .podium-display {
+        width: 340px;
+        margin-left: 0px;
+    }
+    .top-artist-podiums {
+        width: 340px;
+    }
+    .top-artist-podiums .artist-icon{
+        height: 63px;
+        width: 63px;
+    }
+    .artist-podium .podium-1 {
+        width: 65px;
+    }
+    .artist-podium .podium-2 {
+        width: 65px;
+    }
+    .artist-podium .podium-3 {
+        width: 65px;
+    }
+    .artist-podium .podium-4 {
+        width: 65px;
+    }
+    .artist-podium .podium-5 {
+        width: 65px;
+    }
+}
+@media(max-width: 350px) {
+    .top-tracks-root .track-info {
+        width: 35vw;
+    }
+    .top-tracks-root .track-artist {
+        width: 35vw;
+    }  
+    .podium-display {
+        width: 290px;
+        margin-left: 0px;
+    }
+    .top-artist-podiums {
+        width: 280px;
+    }
+    .top-artist-podiums .artist-icon{
+        height: 55px;
+        width: 55px;
+    }
+    .artist-podium .podium-1 {
+        width: 56px;
+    }
+    .artist-podium .podium-2 {
+        width: 56px;
+    }
+    .artist-podium .podium-3 {
+        width: 56px;
+    }
+    .artist-podium .podium-4 {
+        width: 56px;
+    }
+    .artist-podium .podium-5 {
+        width: 56px;
     }
 }

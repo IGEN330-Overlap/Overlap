@@ -18,7 +18,6 @@
 
 .playlist-info-root .btn-sm {
     padding: 0.2rem 0.95rem;
-    font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
 }
@@ -29,6 +28,7 @@
     transition: color 0.35s
 }
 .playlist-info-root .btn:hover {
+    margin-left: 6px;
     background: var(--blue-color-5);
     color: white;
 }
@@ -51,14 +51,29 @@
 }
 
 .title-container {
+    margin-left: 6px;
     font-size: 5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .playlist-info-root .white {
     color: white;
     font-size: clamp(25px, 4.25vw, 50px);
     font-weight: 550;
+}
+
+.playlist-info-root .created-date {
+    margin-left: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--neutral-color-3);
+}
+.save-error .error-alert {
+    margin-top: 10px;
+}
+.save-error .error-alert .alert {
+    height: 50px;
+    width: 235px;
 }
 
 @media (max-width: 820px) {
@@ -83,4 +98,38 @@
         align-items: flex-start;
         margin-left: 3vw;
     }
+    .save-error .error-alert .alert {
+        position: absolute; 
+        display: flex;
+        height: 30px;
+        align-items: center;
+        margin-bottom: 0px;
+        width: 185px;
+    }
+    .save-error .error-alert .alert p {
+        font-size: 12px;
+        margin: 0px;
+    }
+}
+@media (max-width: 400px) {
+    .playlist-page-cover {
+        width: 90px;
+        height: 90px;
+    }
+    .playlist-info-save .created-date {
+        font-size: 12px;
+    }
+    .playlist-info-root .white {
+        font-size: 20px;
+    }
+    .playlist-info-root .btn {
+        font-size: 12px;
+    }
+    .playlist-info-root .playlist-button {
+        background: var(--blue-color-main); 
+        color: white;
+        height: 26px;
+        align-items: center;
+    }
+
 }

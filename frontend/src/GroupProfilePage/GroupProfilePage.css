@@ -9,7 +9,6 @@
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
-    overflow: auto;
 }
 .group-info-root {
     background-color: var(--primary-color-main);
@@ -82,7 +81,6 @@
 
 .group-profile-page-components {
     width: 100vw;
-    min-height: 92vh;
     height: fit-content;
 }
 
@@ -95,10 +93,41 @@
 }
 
 .group-name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     position: absolute;
     margin-left: 4vw;
     height: clamp(55px, 9vw, 90px);
+    width: 85%;
     z-index: 3;
+}
+.leave-group {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    align-items: center;
+    height: 50px;
+}
+.leave-group h2 {
+    color: var(--off-white-color);
+    font-size: 20px;
+    margin-bottom: 0px;
+    margin-right: 10px;
+}
+.leave-group .exit-icon {
+    height: 50px;
+    width: 25px;
+    fill: var(--off-white-color);
+}
+.leave-group:hover {
+    cursor: pointer;
+}
+.leave-group:hover h2 {
+    color: var(--blue-color-1);
+}
+.leave-group:hover .exit-icon-part{
+    fill: var(--blue-color-1);
 }
 .group-landing-root .info-flex {
     display: flex;
@@ -115,7 +144,7 @@
     max-height: 48vh;
     margin-left: 4vw;
     margin-bottom: 2vh;
-    margin-top: clamp(80px, 10vh, 100px);
+    margin-top: clamp(90px, 10vh, 100px);
 }
 .playlist-carousel{
     position: relative;
@@ -130,7 +159,7 @@
 
 .individual-comparisons {
     position: absolute;
-    margin-top: 55px;
+    margin-top: 60px;
     margin-left: 55vw;
     margin-bottom: 2vh;
     z-index: 8;
@@ -212,19 +241,27 @@
     }
     .group-name {
         position: relative;
-        width: 100vw;
+        width: 90vw;
+        height: fit-content;
+    }
+    .leave-group {
+        height: 35px;
+    }
+    .leave-group .exit-icon {
+        height: 25px;
+        width: 20px;
     }
     .group-profile-page-components {
         align-items: start;
         justify-content: start;
     }
     .group-landing-root .main-column-box {
-        height: 85px;
+        height: 100px;
         width: 95vw;
         z-index: 2;
     }
     .group-profile-page-components .component-box {
-        height: 0px;
+        height: 10px;
     }
     .wrong-group {
         font-size: 3.5vw;
@@ -240,6 +277,6 @@
 }
 @media (max-height: 720px) {
     .component-box {
-        height: 0px;
+        height: 5px;
     }
 }

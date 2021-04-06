@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateGroupList } from '../Redux/Actions.js';
+import Modal from 'react-bootstrap/Modal';
 import './GroupProfilePage.css';
 
 import MemberDisplay from "./MemberDisplay/MemberDisplay";
@@ -10,19 +12,21 @@ import PlaylistCarousel from "./PlaylistCarousel/PlaylistCarousel";
 import { MyInsights, Comparisons } from './IndividualComparisons/IndividualComparisons';
 import { TopGenres } from './TopGenres/TopGenres';
 import { GroupTopStats } from './TopStats/TopStats';
-//import { MusicalProfile } from './MusicalProfile/MusicalProfile';
+import { MusicalProfile } from './MusicalProfile/MusicalProfile';
 import ScreenOverlay from '../ScreenOverlay/ScreenOverlay';
-import iceberg from '../AuthorizedPage/iceberg.svg';
 
 const axios = require("axios");
 
 const GroupProfilePage = (props) => {
+  const dispatch = useDispatch();
+
   // get refresh token
   const refreshToken = useSelector((state) => state.refreshToken);
 
   // get group code from url
   const url = new URL(window.location.href);
   const groupCode = url.pathname.replace("/authorized/group/", "");
+  const spotifyID = useSelector((state) => state.userObject);
 
   const history = useHistory();
 
@@ -36,11 +40,14 @@ const GroupProfilePage = (props) => {
 
   const [checkMember, setCheckMember] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const setLoading = (state) => {
+    setIsLoading(state);
+  }
 
   useEffect(() => {
     if (groupCode !== null) {
       //start loading
-      setIsLoading(true);
+      setLoading(true);
 
       axios
         .get(process.env.REACT_APP_BACKEND_URL + "/groups/"+ groupCode + "/users")
@@ -59,15 +66,55 @@ const GroupProfilePage = (props) => {
         });
 
         //end loading
-        setIsLoading(false);
+        setLoading(false);
         })
         .catch((err) => {
             console.log(err);
             //end loading
-            setIsLoading(false);
+            setLoading(false);
         });
     }
   }, [groupCode, groupList, groupName]);
+
+  // get screen width to determine how many items in the carousel
+  const [width, getWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+      const handleResize = () => {
+          getWidth(window.innerWidth)
+      }
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+  }, [])
+
+  //functions for opening and closing "Leave Group" Modal
+  const [LeaveisOpen, setLeaveIsOpen] = React.useState(false);
+  const showLeaveModal = () => {
+    setLeaveIsOpen(true);
+  };
+  const hideLeaveModal = () => {
+    setLeaveIsOpen(false);
+  };
+
+  function leaveGroup() {
+    axios
+      .post(process.env.REACT_APP_BACKEND_URL + "/groups/leave", {
+        groupCode: groupCode,
+        spotifyID: spotifyID.userID,
+      })
+      .then((data) => {
+        console.log(data.data.return);
+        axios
+          .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
+          .then((data) => {
+            dispatch(updateGroupList(data.data));
+            console.log(data.data);
+          })
+          .catch((err) => console.log(err));
+      })
+      .catch((err) => console.log(err));
+    history.push("/authorized/")
+  }
 
   // select member to compare
   const [member_id, selectMember] = useState("");
@@ -93,7 +140,18 @@ const GroupProfilePage = (props) => {
             <div className="info-flex">
               <div className="main-column-box"></div>
               <div className="group-name">
-                <GroupName groupName={groupName} createdDate={createdDate} />
+                <GroupName 
+                  groupCode={groupCode} 
+                  groupName={groupName} 
+                  createdDate={createdDate} 
+                  setLoading={setLoading}/>
+                <div className="leave-group" onClick={showLeaveModal}>
+                  {width > 720 ? <h2>Leave Group</h2> : null }
+                  <svg className="exit-icon" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg" id="fi_3580175">
+                      <path className="exit-icon-part" d="m480.971 239.029-90.51-90.509a24 24 0 0 0 -33.942 0 24 24 0 0 0 0 33.941l49.54 49.539h-262.059a24 24 0 0 0 -24 24 24 24 0 0 0 24 24h262.059l-49.54 49.539a24 24 0 0 0 33.942 33.941l90.51-90.51a24 24 0 0 0 0-33.941z"></path>
+                      <path className="exit-icon-part" d="m304 392a24 24 0 0 0 -24 24v24h-208v-368h208v24a24 24 0 0 0 48 0v-32a40 40 0 0 0 -40-40h-224a40 40 0 0 0 -40 40v384a40 40 0 0 0 40 40h224a40 40 0 0 0 40-40v-32a24 24 0 0 0 -24-24z"></path>
+                  </svg>
+                </div>
               </div>
               <div className="member-display">
                 {/* render members display when group users variable is populated */}
@@ -122,28 +180,58 @@ const GroupProfilePage = (props) => {
                   groupCode={groupCode}
                   groupUsers={groupUsers}
                   refreshToken={refreshToken}
+                  setLoading={setLoading}
                 />
               </div>
             </div>
-                
-            {/* <div className="top-genres-display">
-                <TopGenres groupUsers={groupUsers} />
-            </div>
-            <div className="musical-profile-display">
-                <MusicalProfile groupUsers={groupUsers} />
-            </div> */}
-           
-        </div>
-          <div className="top-genres-display">
-              <TopGenres groupUsers={groupUsers} />
           </div>
-          <div className="top-stats-display">
-              <GroupTopStats groupUsers={groupUsers}/>
-          </div>
-          {/* <div className="musical-profile-display">
-              <MusicalProfile groupUsers={groupUsers} />
-          </div> */}
       </div>
+
+      <div className="top-genres-display">
+          <TopGenres groupUsers={groupUsers} />
+      </div>
+      <div className="top-stats-display">
+          <GroupTopStats groupUsers={groupUsers}/>
+      </div>
+      <div className="musical-profile-display">
+          <MusicalProfile groupUsers={groupUsers} />
+      </div>
+
+      {/* Leave group modal */}
+      <Modal
+          className="modalcss"
+          show={LeaveisOpen}
+          onHide={hideLeaveModal}
+          centered
+        >
+          <Modal.Body className="in-modal">
+            <h5 className="modal-text modal-head">
+              <strong>Are you sure you want to leave?</strong>
+            </h5>
+            <h4 className="modal-text">
+              <strong>{groupName}</strong>
+            </h4>
+            <p>
+              <button
+                className="btn-in-modal leave-buttons"
+                onClick={() => {
+                  hideLeaveModal();
+                  leaveGroup();
+                }}
+              >
+                Yes, I'm sure.
+              </button>
+            </p>
+            <p>
+              <button
+                onClick={hideLeaveModal}
+                className="btn-in-modal leave-buttons"
+              >
+                No, I want to stay!
+              </button>
+            </p>
+          </Modal.Body>
+        </Modal>
     </div>
     );
   } else if (!isLoading && !checkMember) {

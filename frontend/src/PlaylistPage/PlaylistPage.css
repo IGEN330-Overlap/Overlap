@@ -2,7 +2,8 @@
 
 .playlist-landing-root {
     width: auto;
-    height: 100vh;
+    min-height: 100vh;
+    height: fit-content;
     background-color: var(--primary-color-main);
 }
 
@@ -109,7 +110,9 @@
 
 @media (max-width: 820px) {
     .playlist-components {
-        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     .playlist-page-tracks-container {
         background-color: transparent;

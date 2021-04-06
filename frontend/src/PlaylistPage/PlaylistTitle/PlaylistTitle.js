@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './PlaylistTitle.css';
 import Modal from "react-bootstrap/Modal";
+import Alert from "react-bootstrap/Alert";
 import dog from './puppy-icon.jpg';
 
 const axios = require("axios");
@@ -11,13 +12,22 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
     const [SavedisOpen, setSavedIsOpen] = useState(false);
     const showSavedModal = () => {
          setSavedIsOpen(true);
-     };
-     const hideSavedModal = () => {
+    };
+    const hideSavedModal = () => {
          setSavedIsOpen(false);
-     };
+    };
 
-     const openPlaylist = () => { window.open("https://open.spotify.com/")}
-    
+    const [playlistURL, setPlaylistURL] = useState('');
+
+    //show save error when there is an error with playlist
+    const [showSaveAlert, setShowSaveAlert] = useState(false);
+
+    const openPlaylist = ()=> {
+      if (playlistURL !== undefined) {
+        window.open(playlistURL)
+      }
+      else window.open("https://open.spotify.com/")
+    }
 
     var refreshToken = useSelector((state) => state.refreshToken)
 
@@ -29,11 +39,25 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
             groupCode: groupCode,
         })
         .then((data) => {
-            console.log(data)
+            setPlaylistURL(data.data.playlistLinkURL);
+            console.log(data);
         })
         .catch((err) => {
+            setShowSaveAlert(true);
             console.log(err);
         });
+    }
+
+    //console.log(createdDate);
+    
+    let createdDay;
+    let createdMonth;
+    let createdYear;
+
+    if (createdDate !== undefined) {
+        createdDay = createdDate.day;
+        createdMonth = createdDate.month;
+        createdYear = createdDate.year;
     }
 
     return (
@@ -45,7 +69,8 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
                 <div className="title-container">
                     <h2 className="white"> {playlistName} </h2>
                 </div>
-                {/* <h4 className="created-date-playlist"><strong>Created On: {createdDate.substr(0, 10)}</strong></h4> */}
+
+                {createdDate !== undefined ? <h4 className="created-date"><strong>Created On: {createdMonth + " " + createdDay + ", " + createdYear}</strong></h4> : ''}
                 <div className="btn btn-sm playlist-button" 
                     onClick={() => {
                         addToSpotify();
@@ -53,6 +78,12 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
                     }}>
                     Save Playlist to Spotify
                 </div>
+                {showSaveAlert ? 
+                  <div className="save-error">
+                    <AlertSave type="danger" message="Unable to save playlist!"/>
+                  </div>
+                : null }
+                {showSaveAlert ? <div className="timeout"> {window.setTimeout(function(){setShowSaveAlert(false)}, 1750)} </div> : null}
             </div>
         <>
         <Modal
@@ -86,6 +117,17 @@ const PlaylistTitle = ({playlistName, playlistID, groupCode, createdDate}) => {
         </>   
         </div>
     );
+}
+
+//playlist save error alert
+function AlertSave (props) {
+  return(
+    <div className="error-alert">
+      <Alert variant={props.type}>
+        <p>{props.message}</p>
+      </Alert>
+    </div>
+  )
 }
 
 export default PlaylistTitle

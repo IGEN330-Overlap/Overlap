@@ -10,9 +10,9 @@ const backend_url = process.env.BACKEND_URL;
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
 
+// SCRIPTS imports
 const { calculateMusicalProfile } = require("../scripts.js");
 const { calculateDate } = require("../scripts.js");
-// Moods profiles tuned to suit the corresponding vibes
 const { buildPlaylistMoodProfile } = require("../scripts.js");
 
 const playlistCoverImages = require("../playlistCoverImages.json");
@@ -54,8 +54,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   }
 
   let numUsers = userIDs.length; // keep track of number of users
-  let contributorsUsernames = [];// array to store usernames of playlist contributors
-  
+  let contributorsUsernames = []; // array to store usernames of playlist contributors
+
   // Collect user top track data into top tracks array
   try {
     let data = await User.find({ userID: { $in: userIDs } });
@@ -71,35 +71,25 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       });
     }
   } catch (err) {
+    console.log("error on finding users", err);
     res.json({ message: "error on finding users", error: err });
   }
-
-  console.log("top track profiles collected:", usersTopTracks.length); //debugging
 
   let masterSetTracks = []; //stores all top tracks as an item
   let masterSetArtists = []; //Array to store every artist from total group
   let findDuplicatesArr = []; //stores all track IDs as an item
 
-  // put all the songs into one array, the master set
-  for (x of usersTopTracks) {
-    for (data of x) {
-      masterSetTracks.push({
-        data,
-        identifier: data.trackName + " " + data.artistName,
-      });
-      findDuplicatesArr.push(data.trackName + " " + data.artistName);
-    }
+  // put all the songs into one array, the master set and find duplicates
+  for (data of usersTopTracks.flat()) {
+    masterSetTracks.push({
+      data,
+      identifier: data.trackName + " " + data.artistName,
+    });
+    findDuplicatesArr.push(data.trackName + " " + data.artistName);
   }
 
-  // switch to Arr.flat() since its cleaner code if we get the chance
-  // Put all the artists into one array (master set)
-  for (x of usersTopArtists) {
-    for (data of x) {
-      masterSetArtists.push(data.artistID);
-    }
-  }
-
-  // console.log("masterset length", masterSetTracks.length); //debugging
+  // put all artists into one array and collect the ids
+  masterSetArtists = usersTopArtists.flat().map((x) => x.artistID);
 
   /* Let's algorithm: This is making a 30 song playlist */
 
@@ -157,10 +147,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
 
     duplicateBasedSongs = mostFrequentTracks.slice(0, 7);
   }
+
   // Using track sounds to add the rest of the songs
-  // To implement (BETTER WAYS possibly)
   let groupsMusicalProfile = calculateMusicalProfile(usersMusicalProfile);
-  // console.log("groups musical profile", groupsMusicalProfile);
 
   // Remove all duplicates and add to the new array groupUniqueSet
   let groupUniqueSet = masterSetTracks.filter(
@@ -180,11 +169,9 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       ) +
       Math.abs(groupUniqueSet[i].data.energy - groupsMusicalProfile.energy) +
       Math.abs(groupUniqueSet[i].data.valence - groupsMusicalProfile.valence);
-    //   Math.abs(x."SOME ATTRIBUTE" - groupsMusicalProfile."SOME ATTRIBUTE") ...
   }
 
-  // Sort the unique set by the deltaFromGroup to (lowest to highest)
-  // Lowest is the best
+  // Sort the unique set by the deltaFromGroup to (lowest to highest), lowest is the best
   let sortedTrackSet = groupUniqueSet.sort((a, b) => {
     return parseFloat(a.deltaFromGroup) - parseFloat(b.deltaFromGroup);
   });
@@ -221,6 +208,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       message: "duplicates adding error",
       error: e,
     });
+    return;
   }
 
   // purely trackIDs of duplicate songs for the recommendation seed
@@ -240,11 +228,10 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     (k) => counts[k] == maxCountArtists
   );
 
-  // must have at least a single commonality to generate a viable seed based on the duplicates
-  // otherwise use the best 3 matching songs to the group profile
-
   let sortedTrackSeed = []; // used to get seed for non duplicates
 
+  // must have at least a single commonality to generate a viable seed based on the duplicates
+  // otherwise use the best 3 matching songs to the group profile
   sortedTrackSeed = sortedTrackSet.map((x) => x.data.trackID).slice(0, 3); //just take top 3
 
   try {
@@ -260,6 +247,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           target_energy: musicalProfile.energy / 100,
           target_valence: musicalProfile.valence / 100,
           min_popularity: 35,
+          limit: 30,
           seed_tracks: sortedTrackSeed,
         });
 
@@ -281,8 +269,12 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error on 271");
-        res.json(err);
+        console.log("error in get recomendations", err);
+        res.json({
+          message: "error in get recoemmendations",
+          error: err,
+        });
+        return;
       }
     } else if (maxCountArtists != 1 || maxCountTracks != 1) {
       try {
@@ -296,7 +288,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             target_danceability: musicalProfile.danceability / 100,
             target_energy: musicalProfile.energy / 100,
             target_valence: musicalProfile.valence / 100,
-            min_popularity: 50,
+            min_popularity: 40,
+            limit: 30,
             seed_artists: mostFrequentArtists.slice(0, 5),
           });
         } else {
@@ -304,7 +297,8 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
             target_danceability: musicalProfile.danceability / 100,
             target_energy: musicalProfile.energy / 100,
             target_valence: musicalProfile.valence / 100,
-            min_popularity: 50,
+            min_popularity: 40,
+            limit: 30,
             seed_tracks: mostFrequentTracks.slice(0, 5),
           });
         }
@@ -327,18 +321,26 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error occured on 322");
-        res.json(err);
+        console.log("error in get recomendations", err);
+        res.json({
+          message: "error in get recoemmendations",
+          error: err,
+        });
+        return;
       }
     }
   } catch (err) {
-    res.json(err);
+    console.log("error with the refresh token");
+    res.json({
+      message: "error with the refresh token",
+      error: err,
+    });
+    return;
   }
 
   try {
-    // Add all the recommendation songs from spotify until the playlist has 20 songs
-    // To implement verify that we're adding a song that is not already in the playlist
-    for (var i = 0; playlistTracks.length < 23; i++) {
+    // Add all the recommendation songs from spotify until the playlist has 25 songs
+    for (var i = 0; playlistTracks.length < 25; i++) {
       // We have added all the reccomendations so break from loop
       if (i == recommendations.length) {
         break;
@@ -361,7 +363,6 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     }
 
     // Add all the attribute based songs adding from lowest to highest until we satisfy our playlist size
-    // To implement verify that we're adding a song that is not already in the playlist
     for (var i = 0; playlistTracks.length < 30; i++) {
       if (i == sortedTrackSet.length) {
         break; // if we have already added all the sorted tracks then break
@@ -386,20 +387,15 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log("error on 381");
+    console.log("Adding recommendations or ends error");
     res.json({
-      message: "Adding tracks error",
+      message: "Adding recommendations or ends error",
       error: err,
     });
     return;
   }
-
-  //debugging
-  console.log("duplicate based songs added: ", duplicateBasedSongs.length);
-
   /* End of algorithm */
 
-  // Concatenate the duplicates and attribute based songs into one playlist
   // Remove identifier property
   playlistTracks.map((item) => {
     delete item.identifier;
@@ -415,8 +411,7 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
     playlistType: "top",
   };
 
-  // Update playlist to the group
-  // Note: no error is thrown when the groupCode is incorrect / dne
+  // Update playlist to the group, Note: no error is thrown when the groupCode is incorrect / dne
   try {
     await Group.updateOne(
       { groupCode: req.body.groupCode },
@@ -443,15 +438,14 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
  * @param {*} res
  */
 exports.generateGroupsMoodsPlaylist = async (req, res) => {
-  // Set moods based on the request
-  let moodParams;
-
   // instantiate spotifyApi object
   let spotifyApi = new SpotifyWebApi({
     clientId: client_id,
     clientSecret: client_secret,
     redirectUri: redirect_uri,
   });
+
+  let moodParams; // holds parameters to be sent to the get recommendations
 
   // Error handling, request must be a valid mood
   try {
@@ -466,6 +460,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "no selected mood",
       error: e,
     });
+    return;
   }
 
   // get the userIDs
@@ -486,12 +481,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "Cannot create a group with zero other users",
       error: e,
     });
+    return;
   }
 
-  // console.log("Users", userIDs); //debugging
-
   let usersTopTracks = []; // arrays for storing user track information
-  // let usersTopArtists = []; // UNUSED RIGHT NOW
   let contributorsUsernames = []; // array to store usernames of playlist contributors
 
   // Collect user top "x" data from mongoDB
@@ -501,7 +494,6 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     // Add each persons dataset to our master array for the corresponding thing
     for (x of data) {
       usersTopTracks.push(x.topTracks);
-      // usersTopArtists.push(x.topArtists);
       contributorsUsernames.push({
         name: x.name,
         userImageURL: x.imageURL,
@@ -516,7 +508,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // set tracks into one array and removes duplicates
   let masterTopTracks = usersTopTracks.flat();
   masterTopTracks = masterTopTracks.filter(
-    (v, i, a) => a.findIndex((t) => t.trackID === v.trackID) === i
+    (v, i, a) =>
+      a.findIndex(
+        (t) => t.trackName + t.artistName === v.trackName + v.artistName
+      ) === i
   );
 
   // calculate differences between each attribute and a song
@@ -530,8 +525,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       Math.abs(masterTopTracks[i].valence - moodParams.target_valence);
   }
 
-  // Sort the unique set by the deltaFromGroup to (lowest to highest)
-  // Lowest is the best
+  // Sort the unique set by the deltaFromGroup to (lowest to highest), Lowest is the best
   let sortedTrackSet = masterTopTracks.sort((a, b) => {
     return parseFloat(a.delta) - parseFloat(b.delta);
   });
@@ -545,7 +539,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
     if (x.delta <= 0.15) {
       playlistTracks.push({
         trackName: x.trackName,
-        trackID: x.id,
+        trackID: x.trackID,
         imageURL: x.imageURL,
         linkURL: x.linkURL,
         artistName: x.artistName,
@@ -553,6 +547,8 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       // add to seed tracks so long as we don't already have 5
       if (seedTracks.length < 5) {
         seedTracks.push(x.trackID);
+      } else {
+        break; // already have 5 tracks meeting criteria
       }
     } else {
       break; // break from loop if the delta doesn't meet requirements
@@ -568,7 +564,6 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       sortedTrackSet.map((x) => x.trackID).slice(0, 3)
     );
   }
-  console.log("seed tracks used for moods: ", seedTracks.length);
 
   spotifyApi.setRefreshToken(req.body.refreshToken); // set refresh token
   try {
@@ -580,10 +575,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       let recommendationsBody = moodParams;
 
       recommendationsBody["seed_tracks"] = seedTracks.slice(0, 5); // force to 5 to prevent any possible error
-      // console.log(recommendationsBody); // debugging
-
       let data = await spotifyApi.getRecommendations(recommendationsBody);
-
       // add the songs ensuring that their type is correct and that there is populated data
       for (x of data.body.tracks) {
         // continuosly add songs until we've hit our playlist length (30 songs)
@@ -609,17 +601,19 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       }
     } catch (err) {
       console.log("error in get recommendations mood playlist");
-      res.json({
+      res.status(400).json({
         message: "error in get recommendations mood playlist",
         error: err,
       });
+      return;
     }
   } catch (err) {
     console.log("error with spotify access token");
-    res.json({
+    res.status(400).json({
       message: "error with spotify access token",
       error: err,
     });
+    return;
   }
 
   // Create playlist object which will be uploaded to the group, passed to MongoDB
@@ -633,6 +627,11 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // Update playlist to the group
   // Note: no error is thrown when the groupCode is incorrect / dne
   try {
+    if (playlistTracks.length < 20 || playlist == undefined) {
+      console.log("Uncaught error in the playlist generation");
+      console.log("playlist tracks len", playlistTracks.length);
+      throw new Error();
+    }
     await Group.updateOne(
       { groupCode: req.body.groupCode },
       { $addToSet: { playlists: playlist } }
@@ -641,8 +640,10 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
       message: "added " + req.body.selectedMood + " playlist to the group",
       playlist: playlist,
     });
+    return;
   } catch (err) {
-    res.json({
+    console.log("Unable to add mood playlist to the group", err);
+    res.status(400).json({
       message: "Unable to add mood playlist to the group",
       error: err,
     });
@@ -667,13 +668,35 @@ exports.createSpotifyPlaylist = async (req, res) => {
   spotifyApi.setRefreshToken(req.body.refreshToken);
 
   let formattedTrackIds = [];
-  let playlistName;
+  let playlistName = ""; // string for playlist name
+  let playlistType = ""; // string for playlistType to determine image used
+
+  // find the group and the corresponding playlistID (playlist object ID)
+  try {
+    let data = await Group.find(
+      { groupCode: req.body.groupCode },
+      { playlists: { $elemMatch: { _id: req.body.playlistID } } }
+    );
+
+    playlistName = data[0].playlists[0].playlistName;
+    playlistType = data[0].playlists[0].playlistType;
+
+    // Add the spotify track ids in the necessary format for adding to playlist
+    for (x of data[0].playlists[0].tracks) {
+      formattedTrackIds.push("spotify:track:" + x.trackID);
+    }
+  } catch (err) {
+    console.log("error on getting playlist");
+    res.json({
+      message: "error on getting playlist",
+      error: err,
+    });
+  }
 
   //image data that will be used as the cover for the playlist
-  let base64URI = playlistCoverImages["top"]; //until playlist type prop implemented leave as logo
-
-  // select base64URI based on the playlist type
-  switch (req.body.playlistType) {
+  let base64URI = playlistCoverImages["top"];
+  // select base64URI based on the playlist type (otherwise keep "top" image)
+  switch (playlistType) {
     case "top":
       base64URI = playlistCoverImages["top"];
       break;
@@ -689,23 +712,6 @@ exports.createSpotifyPlaylist = async (req, res) => {
     case "sad":
       base64URI = playlistCoverImages["sad"];
       break;
-  }
-
-  // find the group and the corresponding playlistID (playlist object ID)
-  try {
-    let data = await Group.find(
-      { groupCode: req.body.groupCode },
-      { playlists: { $elemMatch: { _id: req.body.playlistID } } }
-    );
-
-    playlistName = data[0].playlists[0].playlistName; // Set playlist Name
-
-    // Add the spotify track ids in the necessary format for adding to playlist
-    for (x of data[0].playlists[0].tracks) {
-      formattedTrackIds.push("spotify:track:" + x.trackID);
-    }
-  } catch (err) {
-    res.json(err);
   }
 
   let playlistID; // variable to store playlist ID (spotify based)
@@ -725,9 +731,13 @@ exports.createSpotifyPlaylist = async (req, res) => {
         throw new Error();
       }
       playlistID = data.body.id; // collect playlist id so we can add to it later
-      // console.log("playlist creation status code: ", data.statusCode);
     } catch (err) {
-      res.json(err);
+      console.log("error on playlist creation");
+      res.json({
+        message: "error on playlist creation",
+        error: err,
+      });
+      return;
     }
 
     // Add image cover to the spotify playlist
@@ -746,6 +756,7 @@ exports.createSpotifyPlaylist = async (req, res) => {
         message: "error with upload image",
         error: err,
       });
+      return;
     }
 
     try {
@@ -758,20 +769,23 @@ exports.createSpotifyPlaylist = async (req, res) => {
       if (data.statusCode != 201) {
         throw new Error();
       }
-      console.log("playlist song addition status code: ", data.statusCode);
 
       res.json({
         message: "Successfully added playlist and the tracks to spotify",
         playlistID: playlistID,
-        playlist: formattedTrackIds,
         playlistLinkURL: "https://open.spotify.com/playlist/" + playlistID,
       });
     } catch (err) {
-      res.json(err);
+      console.log("error in adding tracks to playlist");
+      console.log(formattedTrackIds, err);
+      res.status(400).json({
+        message: "error in adding tracks to playlist",
+        error: err,
+      });
+      return;
     }
-    //TO IMPLEMENT adding an image cover to the playlist????
   } catch (err) {
-    // console.log(err)
+    console.log("token error in save to spotify", err);
     res.json(err);
   }
 };

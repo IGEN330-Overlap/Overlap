@@ -62,6 +62,12 @@ input:focus{
     border-radius: 10px;
 }
 
+/* custom scrollbar for firefox */
+.group-list {
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color-2) var(--primary-color-6);
+}
+
 .group-item{
     direction: ltr;
     justify-content: space-between;
@@ -148,6 +154,28 @@ input:focus{
 }
 .copy-groupCode .copy-button:hover .clipboard {
     fill: white;
+}
+
+/* copy alert */
+.copy-button .copy-alert {
+    display: flex;
+    height: 35px;
+    justify-content: center;
+}
+.copy-button .copy-alert .alert{
+    display: flex;
+    height: 40px;
+    width: fit-content;
+    align-items: center;
+    margin-bottom: 0px;
+}
+.copy-button .copy-alert p {
+    margin: 0px;
+    font-size: 13px;
+    text-align: center;
+}
+.timeout {
+    display: none;
 }
 
 @media (max-width: 720px){
