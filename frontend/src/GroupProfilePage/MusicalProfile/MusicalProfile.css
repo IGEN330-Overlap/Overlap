@@ -95,6 +95,7 @@
 .user-position .user-icon {
     height: 50px;
     width: 50px;
+    opacity: 0.8;
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;
@@ -109,9 +110,17 @@
     font-weight: 550;
     text-align: center;
     z-index: 4;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 .user-info:hover {
     cursor: pointer;
+    z-index: 5;
+}
+.user-info:hover .user-icon {
+    opacity: 1;
 }
 .user-info:hover .user-name {
     opacity: 1;

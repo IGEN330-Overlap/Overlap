@@ -104,7 +104,7 @@
 .top-tracks-carousel .carousel-item {
     width: 100vw;
 }
-.top-tracks-carousel .group-tracks {
+/* .top-tracks-carousel .group-tracks {
     width: 80vw;
     display: flex;
     flex-direction: column;
@@ -112,14 +112,14 @@
     justify-content: space-between;
     align-items: center;
     height: 330px;
-}
-/* .top-tracks-carousel .group-tracks {
+} */
+.top-tracks-carousel .group-tracks {
     width: 80vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-evenly;
-} */
+}
 
 /* top artists */
 .top-artists-root {
