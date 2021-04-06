@@ -191,7 +191,7 @@ const HowItWorks = (props) => {
                                     The top genres are then added together to create a combined list of the genres within the group, as well as how many artists are associated with that genre.
                                     <br></br><br></br>
                                     The percentage that you see next to each bar is actually only out of the <span>top quarter of the full list of genres</span>. 
-                                    We chose to do this because, especially with larger groups, it is likely that only the top 25% of genres is relevant to the majority of people.
+                                    We chose to do this because, especially with larger groups, it is likely that only the top 25% of genres are relevant to the majority of people.
                                     We get approximately 30 genres from each person and sometimes even the <span>fifth top genre</span> for one person represents <span>less than 5%</span> of their listening habits. 
                                     So don't worry if the percentages seem low, comparatively, they're actually very high!
                                 </p>
@@ -260,7 +260,7 @@ const HowItWorks = (props) => {
                                     <br></br><br></br>
                                     You'll notice that the music stats you see within your group have a much <span>smaller range</span>.  
                                     Each display is <span>scaled</span> to more clearly show you the difference between the average listening habits of your group members.
-                                    Here you can compare how danceabilty, energetic, sad, happy, or popular your music taste is. 
+                                    Here you can compare how danceable, energetic, sad, happy, or popular your music taste is. 
                                 </p>
                             </div>     
                         </div>
