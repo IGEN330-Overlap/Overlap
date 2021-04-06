@@ -71,7 +71,7 @@
     color: var(--blue-color-3);
     width: 100%;
     height: fit-content;
-    font-size: clamp(20px, 1vw, 30px);
+    font-size: clamp(18px, 1vw, 30px);
     margin-bottom: 1.5vw;
 }
 
