@@ -114,12 +114,10 @@ const GroupsComponent = (props) => {
         spotifyID: spotifyID.userID,
       })
       .then((data) => {
-        console.log(data.data.return);
         axios
           .get(process.env.REACT_APP_BACKEND_URL + "/users/" + spotifyID.userID + "/groups")
           .then((data) => {
             dispatch(updateGroupList(data.data));
-            console.log(data.data);
           })
           .catch((err) => console.log(err));
       })

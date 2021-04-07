@@ -256,7 +256,7 @@ exports.loginUser = async (req, res) => {
         topArtists = tmp[0];
         topGenres = tmp[1];
       } catch (err) {
-        console.log("error on 261");
+        console.log("medium artists error");
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
@@ -278,7 +278,6 @@ exports.loginUser = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error on 283");
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
@@ -299,7 +298,6 @@ exports.loginUser = async (req, res) => {
           }
         }
       } catch (err) {
-        console.log("error on 304");
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
