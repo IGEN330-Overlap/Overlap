@@ -176,10 +176,12 @@
 .top-artist-container .artist-index {
     padding-right: 10px;
     color: var(--neutral-color-2);
+    transition: 0.2s;
 }
 .top-artist-container .artist-name {
     color: var(--off-white-color);
     width: fit-content;
+    transition: 0.2s;
 }
 .podium-display {
     display: flex;
