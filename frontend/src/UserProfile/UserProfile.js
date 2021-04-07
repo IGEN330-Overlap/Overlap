@@ -148,7 +148,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
             <div className="under-bar"></div>
         </div>
         <div className="quickStats">
-            <div className="icon">
+            <div className="UP_icon">
                 <img className="user_icon" src={icon_src} alt={user}></img>
             </div>
             <div className="stats">
