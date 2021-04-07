@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './PlaylistPage.css';
+import logo_small from '../GroupProfilePage/MemberDisplay/logo small.svg';
 
 import { PlaylistTracks } from './PlaylistTracks/PlaylistTracks';
 import PlaylistTitle from './PlaylistTitle/PlaylistTitle';
@@ -20,8 +21,9 @@ export const PlaylistPage = (props) => {
     const [playlistName, setPlaylistName] = useState("");
     const [playlistTracks, setPlaylistTracks] = useState([]);
     const [groupCode, setGroupCode] = useState("");
+    const [contributors, setPlaylistContributors] = useState([]);
     const [createdDate, setCreatedDate] = useState("");
-
+    
     const [checkMember, setCheckMember] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -39,6 +41,7 @@ export const PlaylistPage = (props) => {
                         setPlaylistTracks(playlist.tracks);
                         setGroupCode(group.groupCode);
                         setCreatedDate(playlist.createDate);
+                        setPlaylistContributors(playlist.contributors);
                     }
                     return playlistTracks;
                 })
@@ -48,10 +51,16 @@ export const PlaylistPage = (props) => {
             //end loading
             setIsLoading(false);
         }
-    }, [playlistID, groupList, playlistTracks]);
+    }, [playlistID, groupList, playlistTracks, contributors]);
+
+    var contributorsInfo = []
+    contributors.map((contributor, i) => {
+        contributorsInfo[i] = ({name: contributor.name, icon: contributor.userImageURL ? contributor.userImageURL : logo_small  })
+        return contributorsInfo
+    })
 
     if (isLoading || groupList.length === 0){
-        return <ScreenOverlay text="Collecting your playlist tracks" />;
+        return <ScreenOverlay text="Collecting your playlist tracks..." />;
     } else if (checkMember && !isLoading) {
         return (
             <div className="playlist-landing-root">
@@ -72,7 +81,16 @@ export const PlaylistPage = (props) => {
                 <div className="playlist-page-content">
                     <div className="playlist-components">
                         <div className="playlist-page-name">
-                            <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode} createdDate={createdDate}/>
+                            <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode} />
+                            <div className= "contributor-component">
+                            {contributorsInfo.map((contributor,i) => (
+                                <div className="contributor-container" key={i}>
+                                <img className="contributor-icon" src={contributor.icon} alt={contributor}></img>
+                                {/* <div className="contributor-name"> {contributor.name} </div> */}
+                                </div>
+                            ))} 
+                            
+                        </div>
                         </div>
                         <div className="playlist-page-tracks-container">
                             <PlaylistTracks playlistTracks={playlistTracks} />

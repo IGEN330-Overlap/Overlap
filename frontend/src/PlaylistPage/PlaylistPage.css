@@ -79,6 +79,27 @@
     cursor: pointer;
 }
 
+.contributor-component {
+    display: flex;
+    flex-direction: row;
+    padding-top: 3vh;
+}
+
+.contributor-container {
+   position: relative;
+}
+
+.contributor-icon {
+    height: clamp(40px, 7.5vw, 70px);
+    width: clamp(40px, 7.5vw, 70px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 50rem;
+    transition: opacity 0.45s;
+    padding: 2px;
+    
+}
+
 .error-return-arrow {
     width: 28px;
     height: 28px;
