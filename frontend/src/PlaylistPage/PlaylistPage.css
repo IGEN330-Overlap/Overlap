@@ -32,7 +32,7 @@
 
 .playlist-page-tracks-container {
     margin-left: 2vw;
-    background: rgba(155, 154, 190, 0.301);
+    background: rgba(154, 154, 154, 0.25);
     border-radius: 15px;
     width: 425px;
     height: max(55vh, 475px);

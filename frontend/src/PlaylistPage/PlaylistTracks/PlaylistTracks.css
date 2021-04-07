@@ -10,7 +10,7 @@
 
 .playlist-tracks-container .track-number h3 {
     font-size: 15px;
-    color: var(--off-white-color);
+    color: var(--primary-color-3);
     line-height: 45px;
     height: 45px;
     width: 32.5px;
@@ -24,7 +24,7 @@
     margin: 8px;
     padding-right: 10px;
     width: 390px;
-    color: var(--off-white-color);
+    color: var(--primary-color-6);
     font-size: 20px;
 }
 .playlist-tracks-container .track-container:hover {
@@ -52,7 +52,7 @@
     width: 280px;
 }
 .playlist-tracks-container .track-artist {
-    color: var(--neutral-color-3);
+    color: var(--primary-color-3);
     font-size: 11px;
     width: 280px;
     transition: 0.3s;
