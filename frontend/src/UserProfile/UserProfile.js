@@ -180,7 +180,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             {trackPop3.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                                 <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
@@ -192,7 +192,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             {trackPop3low.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                                 <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
@@ -227,7 +227,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             {dance3.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                                 <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
@@ -239,7 +239,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             {dance3low.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                                 <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                                 <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
@@ -272,7 +272,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         {energy3.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                             <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
@@ -284,7 +284,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         {energy3low.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                             <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
@@ -320,7 +320,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         {acoustic3.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                             <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
@@ -332,7 +332,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         {acoustic3low.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                             <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                             <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
@@ -365,7 +365,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     {instrumental3.map((track,i) => (
                                         <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
+                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                         <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
@@ -377,7 +377,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     {instrumental3low.map((track,i) => (
                                         <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
+                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                         <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
@@ -410,7 +410,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     {valence3.map((track,i) => (
                                         <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
+                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                         <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
@@ -422,7 +422,7 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     {valence3low.map((track,i) => (
                                         <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
                                         <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
+                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
                                         <div className="UP_trackArtist">{track.artistName}</div>
                                         </div>
                                     ))}
