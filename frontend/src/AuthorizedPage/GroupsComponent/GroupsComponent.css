@@ -155,10 +155,16 @@ input:focus{
     border-radius: 0.75rem;
     border-color: transparent;
     width: 15em;
+    filter: drop-shadow(0px 1px 1px var(--primary-color-3));
+    transition: 0.2s;
 }
 
 .btn-in-modal:focus{
     outline: none;
+}
+
+.btn-in-modal:hover {
+    color: var(--blue-color-1);
 }
 
 .copy-groupCode {
@@ -168,9 +174,14 @@ input:focus{
 .copy-groupCode .copy-button .clipboard{
     height: 22.5px;
     margin-left: 0px;
+    transition: 0.2s;
 }
 .copy-groupCode .copy-button:hover .clipboard {
-    fill: white;
+    fill: var(--blue-color-main);
+}
+
+.copy-groupCode .copy-button:hover {
+    cursor: pointer;
 }
 
 /* copy alert */

@@ -82,8 +82,14 @@
 }
 .edit-name-buttons { 
     margin-top: 20px;
-    width: 50%
+    width: 50%;
+    transition: 0.2s;
 }
+
+.edit-name-buttons:hover {
+    color: var(--blue-color-1);
+}
+
 .edit-name-error .error-alert {
     position: absolute;
     margin-top: 15px;
@@ -108,6 +114,10 @@
 }
 .modal-body .cancel-rename:hover{
     cursor: pointer;
+}
+
+.modalcss .modal-dialog .modal-content {
+    background-color: var(--off-white-color);
 }
 
 @media (max-width: 780px) {

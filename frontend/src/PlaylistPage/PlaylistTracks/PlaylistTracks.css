@@ -26,10 +26,17 @@
     width: 390px;
     color: var(--off-white-color);
     font-size: 20px;
+    transition: 0.2s;
 }
 .playlist-tracks-container .track-container:hover {
     cursor: pointer;
+    color: var(--blue-color-1);
 }
+
+.playlist-tracks-container .track-container:hover .track-artist {
+    color: var(--blue-color-1);
+}
+
 .playlist-tracks-container .track-icon {
     width: 45px;
     height: 45px;
