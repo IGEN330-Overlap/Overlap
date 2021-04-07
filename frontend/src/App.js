@@ -15,6 +15,7 @@ import AboutUs from "./AboutUs/AboutUs";
 import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
 import { PlaylistPage } from "./PlaylistPage/PlaylistPage";
 import ScreenOverlay from "./ScreenOverlay/ScreenOverlay";
+import UserProfile from "./UserProfile/UserProfile";
 import "./App.css";
 
 const axios = require("axios");
@@ -152,6 +153,7 @@ function App() {
         <Route path="/about" render={() => <AboutUs />} />
         <Route path="/authorized/group" render={() => <GroupProfilePage />} />
         <Route path="/authorized/playlist" render={() => <PlaylistPage />} />
+        <Route path="/authorized/user" render={() => <UserProfile />} />
       </Switch>
     </div>
   );
