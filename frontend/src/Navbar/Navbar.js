@@ -79,6 +79,13 @@ const Navbar1 = (props) => {
                 ))}
               </NavDropdown>
             )}
+            
+            {isLoggedIn && (
+              <Nav.Link as={Link} to={"/authorized/user/" + userObject.userID} bg="white">
+                My Music Profile
+              </Nav.Link>
+            )}
+
             <Nav.Link as={Link} to="/how-it-works" bg="white">
               How It Works
             </Nav.Link>

@@ -31,6 +31,22 @@
     height: 3px;
     background-color: var(--off-white-color);
 }
+
+.moreMessage{
+    color: var(--blue-color-1);
+    font-size: clamp(15px, 1.5vw, 20px);
+    margin-top: 2vh;
+}
+
+.moreMessage:hover{
+    cursor: pointer;
+    color: white;
+}
+
+.moreMessageLink:hover{
+    text-decoration: none;
+}
+
 .comparisons h1 {
     color: var(--off-white-color);
     margin-left: 6px;
