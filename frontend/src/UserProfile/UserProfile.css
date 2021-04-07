@@ -124,7 +124,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 100%;
     width: 100%;
 }
 
@@ -136,21 +136,30 @@
 
 .descriptor-carousel{
     display: flex;
-    height: fit-content;
-    min-height: 25vh;
+    height: 35vh;
+    /* min-height: 25vh; */
     width: 100%;
     align-items: center;
     justify-content: center;
 }
 
-.descriptor-carousel .carousel-inner{
-    width: 80%;
+.descriptorCarouselItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     height: 100%;
 }
 
-.descriptor-carousel .active{
-    width: 100%;
+.descriptor-carousel .carousel-item{
     height: 100%;
+}
+
+.descriptor-carousel .carousel-inner{
+    width: 80%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .descriptor-carousel .carousel-control-prev{
@@ -192,6 +201,8 @@
 
 .UP_trackArtist{
     color: var(--blue-color-1);
+    max-height: max(5vh, 45px);
+    overflow-y: hidden;
 }
 
 .UP_trackName{
