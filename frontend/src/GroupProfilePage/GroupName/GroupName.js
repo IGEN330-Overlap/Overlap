@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './GroupName.css';
-
+import {ReactComponent as RefreshIcon} from "./refresh.svg"
 import { updateGroupList } from "../../Redux/Actions.js";
 
 import Modal from "react-bootstrap/Modal";
@@ -12,7 +12,7 @@ import closeButton from "../PlaylistCarousel/close-x.svg";
 const axios = require("axios");
 
 // display group name on group profile page
-const GroupName = ({groupCode, groupName, createdDate, setLoading}) => {
+const GroupName = ({groupCode, groupName, createdDate, setLoading, refreshPage}) => {
 
     const userObject = useSelector((state) => state.userObject)
     const dispatch = useDispatch();
@@ -120,6 +120,7 @@ const GroupName = ({groupCode, groupName, createdDate, setLoading}) => {
               C532.495,100.753,532.495,77.559,518.113,63.177z M0.3,512.69c-1.958,8.812,5.998,16.708,14.811,14.565l119.891-29.069
               L27.473,390.597L0.3,512.69z"/>
           </svg>
+          <RefreshIcon className="refresh-icon" onClick={refreshPage}/>
         </h1>
             
         </div>
