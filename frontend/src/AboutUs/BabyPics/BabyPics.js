@@ -25,7 +25,7 @@ const Babies = (props) => {
             <div className= 'container-baby'>
                 <img className='icon-baby' src={Josi} alt= 'Josi'></img>
                 <div className="baby-name">
-                                    <b>Josi</b></div></div>
+                                    <b>Josie</b></div></div>
             <div className= 'container-baby'>
                 <img className='icon-baby' src={Brendan} alt= 'Brendan'></img>
                 <div className="baby-name">
