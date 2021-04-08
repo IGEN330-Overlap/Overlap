@@ -59,11 +59,21 @@
 }
 
 .playlist-info-root .white {
-    color: var(--primary-color-7);
+    color: var(--off-white-color);
     font-size: clamp(25px, 4.25vw, 50px);
     font-weight: 550;
 }
-
+.playlist-info-root .dark {
+    color: var(--primary-color-6);
+    font-size: clamp(25px, 4.25vw, 50px);
+    font-weight: 550;
+}
+.playlist-info-root .created-date-dark {
+    margin-left: 6px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--neutral-color-5);
+}
 .playlist-info-root .created-date {
     margin-left: 6px;
     font-size: 14px;

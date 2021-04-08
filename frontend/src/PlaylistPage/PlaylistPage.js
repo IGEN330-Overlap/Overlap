@@ -65,7 +65,7 @@ export const PlaylistPage = (props) => {
                         {backgroundColor: "var(--primary-color-main)"}}>
                     <Navbar1 />
                 <div className="backToProfile">
-                    <Link to={"/authorized/group/" + groupCode} className="pp_backArrow">
+                    <Link to={"/authorized/group/" + groupCode} className={playlistType === "top" ? "pp_backArrow-dark" : "pp_backArrow"}>
                         <svg
                             className="pp_backArrow_svg"
                             xmlns="http://www.w3.org/2000/svg"  
@@ -88,7 +88,9 @@ export const PlaylistPage = (props) => {
                                 createdDate={createdDate}/>
                         </div>
                         <div className="playlist-page-tracks-container">
-                            <PlaylistTracks playlistTracks={playlistTracks} />
+                            <PlaylistTracks 
+                                playlistTracks={playlistTracks} 
+                                playlistType={playlistType}/>
                         </div>
                     </div>
                 </div>
