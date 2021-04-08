@@ -86,7 +86,6 @@ export const PlaylistPage = (props) => {
                             {contributorsInfo.map((contributor,i) => (
                                 <div className="contributor-container" key={i}>
                                 <img className="contributor-icon" src={contributor.icon} alt={contributor}></img>
-                                {/* <div className="contributor-name"> {contributor.name} </div> */}
                                 </div>
                             ))} 
                             

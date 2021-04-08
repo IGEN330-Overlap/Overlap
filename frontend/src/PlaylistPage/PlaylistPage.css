@@ -87,6 +87,7 @@
 
 .contributor-container {
    position: relative;
+   align-items: center;
 }
 
 .contributor-icon {
