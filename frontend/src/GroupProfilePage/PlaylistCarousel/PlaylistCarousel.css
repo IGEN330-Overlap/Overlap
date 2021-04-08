@@ -132,7 +132,7 @@
     z-index: 2;
 }
 
-.carousel .carousel-indicators {
+.playlist-carousel-carousel .carousel-indicators {
     position: absolute;
     top: -27%;
     left: 200%;
@@ -420,18 +420,18 @@
     .display-playlists{
         justify-content: flex-start;
     }
-    .carousel .carousel-inner{
+    .playlist-carousel-carousel .carousel-inner{
         width: 75vw;
     }
-    .carousel .carousel-control-prev{
+    .playlist-carousel-carousel .carousel-control-prev{
         top: -35px;
         left: 50%;
     }
-    .carousel .carousel-control-next{
+    .playlist-carousel-carousel .carousel-control-next{
         top: -35px;
         right: -150%;
     }
-    .carousel .carousel-indicators{
+    .playlist-carousel-carousel .carousel-indicators{
         height: 20px;
         width: 125px;
         top: -30px;
@@ -453,7 +453,6 @@
         margin-left: -45%;
         margin-top: 12%;
     }
-    
 }
 
 @media (max-width: 480px) {

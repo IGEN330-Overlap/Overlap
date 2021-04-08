@@ -117,6 +117,15 @@
 .top-tracks-carousel .carousel-item {
     width: 100vw;
 }
+/* .top-tracks-carousel .group-tracks {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    height: 330px;
+} */
 .top-tracks-carousel .group-tracks {
     width: 80vw;
     display: flex;
@@ -200,10 +209,12 @@
     align-items: center;
 }
 .top-artists-root .top-artist-podiums {
+    height: 275px;
     width: 370px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: flex-end;
 }
 .top-artists-root .top-artist-podiums .artist-icon{
     height: 70px;
@@ -219,39 +230,59 @@
     align-items: center;
 }
 .top-artists-root .artist-podium .podium-3 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 100px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .top-artists-root .artist-podium .podium-1 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 170px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .top-artists-root .artist-podium .podium-2 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 135px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .top-artists-root .artist-podium .podium-5 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 60px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .top-artists-root .artist-podium .podium-4 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 80px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
+}
+.artist-podium .podium-3:hover {
+    height: 110px;
+}
+.artist-podium .podium-1:hover {
+    height: 180px;
+}
+.artist-podium .podium-2:hover {
+    height: 145px;
+}
+.artist-podium .podium-5:hover {
+    height: 70px;
+}
+.artist-podium .podium-4:hover {
+    height: 90px;
 }
 .top-artists-root .artist-podium strong {
     font-size: 40px;
