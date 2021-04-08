@@ -9,7 +9,7 @@ const AuthorizedPage = (props) => {
     <div className="landing-root">
         <Navbar1 />
       <div className="AuthorizedPage">
-        <GroupsComponent groupLoading={props.groupLoading}/>
+        <GroupsComponent groupLoading={props.groupLoading} refreshPage={props.refreshPage}/>
         <CreateOrJoin />
       </div>
     </div>

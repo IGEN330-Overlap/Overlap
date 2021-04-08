@@ -44,6 +44,12 @@ const GroupProfilePage = (props) => {
     setIsLoading(state);
   }
 
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const refreshPage = () => {
+    setRefreshTrigger(refreshTrigger + 1);
+  }
+
   useEffect(() => {
     if (groupCode !== null) {
       //start loading
@@ -74,7 +80,7 @@ const GroupProfilePage = (props) => {
             setLoading(false);
         });
     }
-  }, [groupCode, groupList, groupName]);
+  }, [groupCode, groupList, groupName, refreshTrigger]);
 
   // get screen width to determine how many items in the carousel
   const [width, getWidth] = useState(window.innerWidth)
@@ -144,7 +150,9 @@ const GroupProfilePage = (props) => {
                   groupCode={groupCode} 
                   groupName={groupName} 
                   createdDate={createdDate} 
-                  setLoading={setLoading}/>
+                  setLoading={setLoading}
+                  refreshPage={refreshPage}
+                  />
                 <div className="leave-group" onClick={showLeaveModal}>
                   {width > 720 ? <h2>Leave Group</h2> : null }
                   <svg className="exit-icon" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg" id="fi_3580175">

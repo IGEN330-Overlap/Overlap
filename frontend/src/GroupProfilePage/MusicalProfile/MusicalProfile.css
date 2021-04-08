@@ -100,7 +100,15 @@
     border-radius: 50rem;
     background-color: var(--primary-color-6);
     z-index: 2;
+    opacity: 0.7;
 }
+
+.user-info:hover .user-icon {
+    opacity: 1;
+    cursor: default;
+    filter: drop-shadow(0px 2px 2px var(--primary-color-2));
+}
+
 .user-position .user-name {
     margin-top: 40px;
     opacity: 0;
@@ -111,7 +119,8 @@
     z-index: 4;
 }
 .user-info:hover {
-    cursor: pointer;
+    cursor: default;
+    z-index: 99;
 }
 .user-info:hover .user-name {
     opacity: 1;
@@ -163,4 +172,18 @@
     .musical-profile-content {
         min-height: 95vh;
     }
+}
+
+.up-arrow {
+    fill: white;
+    width: calc(16px + 1.5vw);
+    align-self: center;
+    z-index: 4;
+    transition: 0.2s;
+}
+
+.up-arrow:hover {
+    fill: var(--blue-color-1);
+    cursor: pointer;
+    filter: drop-shadow(-1px 0px 1px var(--blue-color-2));
 }
