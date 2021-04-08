@@ -53,6 +53,9 @@ function App() {
   //useState hook for page loading
   const [isLoading, setIsLoading] = useState(true);
 
+  //useState hook for group list loading
+  const [groupLoading, setGroupLoading] = useState(false);
+
   //useState hook for page refresh trigger
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
@@ -111,6 +114,7 @@ function App() {
   useEffect(() => {
     if (userObject != null) {
       if (userObject.userID !== "") {
+        setGroupLoading(true);
         axios
           .get(
             process.env.REACT_APP_BACKEND_URL +
@@ -120,8 +124,10 @@ function App() {
           )
           .then((data) => {
             dispatch(updateGroupList(data.data));
+            setGroupLoading(false);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {console.log(err);
+            setGroupLoading(false);});
       }
     }
   }, [userObject]);
@@ -152,7 +158,7 @@ function App() {
           path="/authorized"
           render={() => (
             <Fragment>
-              <AuthorizedPage refreshPage = {loginRefresh} />
+              <AuthorizedPage groupLoading={groupLoading} refreshPage={loginRefresh}/>
               {/* If page loading, render loading overlay */}
               {isLoading && <ScreenOverlay text="Retrieving Data" />}
             </Fragment>
