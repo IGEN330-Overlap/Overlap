@@ -52,6 +52,9 @@ function App() {
   //useState hook for page loading
   const [isLoading, setIsLoading] = useState(true);
 
+  //useState hook for group list loading
+  const [groupLoading, setGroupLoading] = useState(false);
+
   //Update refresh token on App render
   //if refresh token exists in localstorage, dispatch update
   //else if refresh token is provided in callback URL, set the localstorage to contain refresh token, and dispatch update for redux store
@@ -107,6 +110,7 @@ function App() {
   useEffect(() => {
     if (userObject != null) {
       if (userObject.userID !== "") {
+        setGroupLoading(true);
         axios
           .get(
             process.env.REACT_APP_BACKEND_URL +
@@ -116,8 +120,10 @@ function App() {
           )
           .then((data) => {
             dispatch(updateGroupList(data.data));
+            setGroupLoading(false);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {console.log(err);
+            setGroupLoading(false);});
       }
     }
   }, [userObject]);
@@ -143,7 +149,7 @@ function App() {
           path="/authorized"
           render={() => (
             <Fragment>
-              <AuthorizedPage />
+              <AuthorizedPage groupLoading={groupLoading}/>
               {/* If page loading, render loading overlay */}
               {isLoading && <ScreenOverlay text="Retrieving Data" />}
             </Fragment>

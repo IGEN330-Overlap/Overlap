@@ -178,6 +178,11 @@ input:focus{
     display: none;
 }
 
+.loading-spinner {
+    color: var(--off-white-color);
+    align-self: center;
+}
+
 @media (max-width: 720px){
     .title{
         font-size: 30px;
