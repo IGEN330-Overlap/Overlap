@@ -91,6 +91,9 @@ export const MusicalProfile = ({groupUsers}) => {
                                         <img className="user-icon" src={user.icon} alt={user.name}/>
                                         <div className="user-name">
                                             {user.name}
+                                            <div className="user-stat">
+                                                {user.stat.toFixed(2) + "%"}
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
@@ -115,10 +118,10 @@ export const MusicalProfile = ({groupUsers}) => {
                                         <img className="user-icon" src={user.icon} alt={user.name}/>
                                         <div className="user-name">
                                             {user.name}
-                                        </div>
-                                        {/* <div className="user-stat">
-                                            {user.stat}
-                                        </div> */}
+                                            <div className="user-stat">
+                                                {user.stat.toFixed(2) + "%"}
+                                            </div>
+                                        </div>                                     
                                     </div>
                                 ))}
                             </div>
@@ -142,7 +145,10 @@ export const MusicalProfile = ({groupUsers}) => {
                                         <img className="user-icon" src={user.icon} alt={user.name}/>
                                         <div className="user-name">
                                             {user.name}
-                                        </div>
+                                            <div className="user-stat">
+                                                {user.stat.toFixed(2) + "%"}
+                                            </div>
+                                        </div>                                        
                                     </div>
                                 ))}
                             </div>
@@ -166,6 +172,9 @@ export const MusicalProfile = ({groupUsers}) => {
                                         <img className="user-icon" src={user.icon} alt={user.name}/>
                                         <div className="user-name">
                                             {user.name}
+                                            <div className="user-stat">
+                                                {user.stat.toFixed(2) + "%"}
+                                            </div>
                                         </div>
                                     </div>
                                 ))}

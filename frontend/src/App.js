@@ -14,6 +14,7 @@ import AuthorizedPage from "./AuthorizedPage/AuthorizedPage";
 import AboutUs from "./AboutUs/AboutUs";
 import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
 import { PlaylistPage } from "./PlaylistPage/PlaylistPage";
+import HowItWorks from "./HowItWorks/HowItWorks";
 import ScreenOverlay from "./ScreenOverlay/ScreenOverlay";
 import UserProfile from "./UserProfile/UserProfile";
 import "./App.css";
@@ -165,6 +166,7 @@ function App() {
           exact={true}
         />
         <Route path="/about" render={() => <AboutUs />} />
+        <Route path="/how-it-works" render={() => <HowItWorks />} />
         <Route path="/authorized/group" render={() => <GroupProfilePage />} />
         <Route path="/authorized/playlist" render={() => <PlaylistPage />} />
         <Route path="/authorized/user" render={() => <UserProfile />} />

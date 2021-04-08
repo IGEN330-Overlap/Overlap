@@ -38,3 +38,9 @@
 .back-link:hover {
   color: var(--blue-color-5);
 }
+
+@media (max-width: 480px) {
+  .overlay-row {
+    margin-left: 5vw;
+  }
+}

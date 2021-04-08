@@ -23,6 +23,13 @@
     min-height: 94vh;
     height: fit-content;
 }
+.top-stats-content .under-bar {
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+    background-color: var(--off-white-color);
+}
 
 .top-stats-heading .text {
     color: var(--off-white-color);
@@ -192,7 +199,7 @@
     width: fit-content;
     transition: 0.2s;
 }
-.podium-display {
+.top-artists-root .podium-display {
     display: flex;
     flex-direction: column;
     margin-top: 4%;
@@ -201,7 +208,7 @@
     width: 380px;
     align-items: center;
 }
-.top-artist-podiums {
+.top-artists-root .top-artist-podiums {
     height: 275px;
     width: 370px;
     display: flex;
@@ -209,20 +216,20 @@
     justify-content: space-evenly;
     align-items: flex-end;
 }
-.top-artist-podiums .artist-icon{
+.top-artists-root .top-artist-podiums .artist-icon{
     height: 70px;
     width: 70px;
     object-fit: cover;
     object-position: 50%;
     border-radius: 10px;
 }
-.artist-podium {
+.top-artists-root .artist-podium {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
 }
-.artist-podium .podium-3 {
+.top-artists-root .artist-podium .podium-3 {
     margin-top: 12px;
     height: 100px;
     width: 70px;
@@ -230,7 +237,7 @@
     text-align: center;
     transition: 0.2s;
 }
-.artist-podium .podium-1 {
+.top-artists-root .artist-podium .podium-1 {
     margin-top: 12px;
     height: 170px;
     width: 70px;
@@ -238,7 +245,7 @@
     text-align: center;
     transition: 0.2s;
 }
-.artist-podium .podium-2 {
+.top-artists-root .artist-podium .podium-2 {
     margin-top: 12px;
     height: 135px;
     width: 70px;
@@ -246,7 +253,7 @@
     text-align: center;
     transition: 0.2s;
 }
-.artist-podium .podium-5 {
+.top-artists-root .artist-podium .podium-5 {
     margin-top: 12px;
     height: 60px;
     width: 70px;
@@ -254,7 +261,7 @@
     text-align: center;
     transition: 0.2s;
 }
-.artist-podium .podium-4 {
+.top-artists-root .artist-podium .podium-4 {
     margin-top: 12px;
     height: 80px;
     width: 70px;
@@ -277,11 +284,11 @@
 .artist-podium .podium-4:hover {
     height: 90px;
 }
-.artist-podium strong {
+.top-artists-root .artist-podium strong {
     font-size: 40px;
     color: var(--blue-color-main)
 }
-.podium-stand {
+.top-artists-root .podium-stand {
     width: 100%;
     height: 7px;
     background-color: var(--primary-color-main);
@@ -333,7 +340,7 @@
     .top-artist-root {
         flex-direction: column;
     }
-    .podium-display {
+    .top-artists-root .podium-display {
         margin-top: 20px;
         margin-left: 20%;
     }
@@ -366,30 +373,30 @@
     .top-tracks-root .track-artist {
         width: 40vw;
     }
-    .podium-display {
+    .top-artists-root .podium-display {
         width: 340px;
         margin-left: 5%;
     }
-    .top-artist-podiums {
+    .top-artists-root .top-artist-podiums {
         width: 340px;
     }
-    .top-artist-podiums .artist-icon{
+    .top-artists-root .top-artist-podiums .artist-icon{
         height: 63px;
         width: 63px;
     }
-    .artist-podium .podium-1 {
+    .top-artists-root .artist-podium .podium-1 {
         width: 65px;
     }
-    .artist-podium .podium-2 {
+    .top-artists-root .artist-podium .podium-2 {
         width: 65px;
     }
-    .artist-podium .podium-3 {
+    .top-artists-root .artist-podium .podium-3 {
         width: 65px;
     }
-    .artist-podium .podium-4 {
+    .top-artists-root .artist-podium .podium-4 {
         width: 65px;
     }
-    .artist-podium .podium-5 {
+    .top-artists-root .artist-podium .podium-5 {
         width: 65px;
     }
 }
@@ -400,29 +407,29 @@
     .top-tracks-root .track-artist {
         width: 35vw;
     }  
-    .podium-display {
+    .top-artists-root .podium-display {
         width: 290px;
     }
-    .top-artist-podiums {
+    .top-artists-root .top-artist-podiums {
         width: 280px;
     }
-    .top-artist-podiums .artist-icon{
+    .top-artists-root .top-artist-podiums .artist-icon{
         height: 55px;
         width: 55px;
     }
-    .artist-podium .podium-1 {
+    .top-artists-root .artist-podium .podium-1 {
         width: 56px;
     }
-    .artist-podium .podium-2 {
+    .top-artists-root .artist-podium .podium-2 {
         width: 56px;
     }
-    .artist-podium .podium-3 {
+    .top-artists-root .artist-podium .podium-3 {
         width: 56px;
     }
-    .artist-podium .podium-4 {
+    .top-artists-root .artist-podium .podium-4 {
         width: 56px;
     }
-    .artist-podium .podium-5 {
+    .top-artists-root .artist-podium .podium-5 {
         width: 56px;
     }
 }
