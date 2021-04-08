@@ -93,7 +93,7 @@ input:focus{
 
 .no-groups-text {
     width: 9em;
-    font-size: 2vw;
+    font-size: calc(12px + 1vw);
     margin-right: 0.5em;
     color: white;
     outline-color: transparent;
@@ -209,6 +209,8 @@ input:focus{
 .loading-spinner {
     color: var(--off-white-color);
     align-self: center;
+    min-height: 40px;
+    min-width: 40px;
 }
 
 @media (max-width: 720px){
