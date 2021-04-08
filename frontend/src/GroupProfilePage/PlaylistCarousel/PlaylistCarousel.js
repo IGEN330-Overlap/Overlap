@@ -6,9 +6,12 @@ import { updateGroupList } from "../../Redux/Actions.js";
 
 import { Link } from "react-router-dom";
 
-import playlistcover1 from "./playlist-cover1.jpg";
-import playlistcover2 from "./playlist-cover2.jpg";
-import playlistcover3 from "./playlist-cover3.jpeg";
+import happy_cover from "./Happy.jpg";
+import sad_cover from "./Sad.jpg";
+import chill_cover from "./Chill.jpg";
+import party_cover from "./Party.jpg";
+import topTracks_cover from "./TopTracks.png";
+import default_cover from "./default.png";
 import addButton from "./add.svg";
 import closeButton from "./close-x.svg";
 
@@ -18,22 +21,6 @@ import Collapse from 'react-bootstrap/Collapse';
 import Alert from 'react-bootstrap/Alert';
 
 const axios = require('axios')
-
-const cover_src = [
-  playlistcover1,
-  playlistcover2,
-  playlistcover3,
-  playlistcover1,
-  playlistcover2,
-  playlistcover3,
-  playlistcover1,
-  playlistcover2,
-  playlistcover3,
-  playlistcover1,
-  playlistcover2,
-  playlistcover3,
-  playlistcover1,
-];
 
 const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLoading}) => {
 
@@ -326,7 +313,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
   // get playlist info
   let playlistInfo = []
   playlists.map((playlist,i) => (
-    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id})
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id, type: playlist.playlistType})
   ))
   playlistInfo.reverse()
 
@@ -344,7 +331,11 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
           <Link to={"/authorized/playlist/" + playlist.id} className="playlist-links">
             <img
               className="playlistcover"
-              src={cover_src[i]}
+              src={playlist.type === "top" ? topTracks_cover : 
+                  (playlist.type === "happy" ? happy_cover : 
+                  (playlist.type === "chill" ? chill_cover :
+                  (playlist.type === "sad" ? sad_cover :
+                  (playlist.type === "party" ? party_cover : default_cover))))}
               alt={playlist.name}
             ></img>
             <div className="playlist-name">

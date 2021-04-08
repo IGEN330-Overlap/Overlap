@@ -5,23 +5,33 @@
     color:white;
     margin-right: 20px;
 }
-
 .nav-link{
-    color: white;
+    color: var(--off-white-color);
 }
-
 .nav-link:hover{
     text-decoration: none;
     color: var(--blue-color-main);
 }
-
+.navbar-stuff h2 {
+    font-size: 1rem;
+    margin-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 .navbar {
+    /* min-height: 5vh; */
     height: fit-content;
     color: white;
     display: flex;
     box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.644);
 } 
-
+.navbar-stuff .navbar-dark .navbar-nav .nav-link {
+    color: var(--neutral-color-3);
+}
+.navbar-stuff .navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--off-white-color);
+}
 .navbar-stuff {
     width: 100vw;
     /* min-height: 5vh; */
@@ -33,7 +43,6 @@
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 1.05rem;
-
 }
 
 .navbar-stuff .btn {
@@ -54,4 +63,40 @@
 
 .navbar-brand {
     margin-left: 18px;
+}
+
+/* properties with dark coloured text coloured background */
+.navbar-stuff-dark {
+    width: 100vw;
+    /* min-height: 5vh; */
+    height: fit-content;
+} 
+.navbar-stuff-dark h2 {
+    font-size: 1rem;
+    margin-bottom: 0px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.navbar-stuff-dark .btn-sm {
+    padding: 0.40rem 0.95rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 1.05rem;
+}
+.navbar-stuff-dark .btn {
+    font-weight: 800;
+    font-size: 1rem;
+    transition: color 0.35s;
+    background: var(--blue-color-main);
+    border-color: var(--blue-color-main);
+}
+.navbar-stuff-dark .btn:hover {
+    background: var(--blue-color-5);
+}
+.navbar-stuff-dark .navbar-dark .navbar-nav .nav-link {
+    color: var(--primary-color-3);
+}
+.navbar-stuff-dark .navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--primary-color-7);
 }

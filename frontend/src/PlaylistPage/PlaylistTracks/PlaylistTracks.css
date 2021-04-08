@@ -10,7 +10,15 @@
 
 .playlist-tracks-container .track-number h3 {
     font-size: 15px;
-    color: var(--off-white-color);
+    color: var(--primary-color-3);
+    line-height: 45px;
+    height: 45px;
+    width: 32.5px;
+    margin: 0px;
+}
+.playlist-tracks-container .track-number-dark h3 {
+    font-size: 15px;
+    color: var(--neutral-color-3);
     line-height: 45px;
     height: 45px;
     width: 32.5px;
@@ -24,17 +32,37 @@
     margin: 8px;
     padding-right: 10px;
     width: 390px;
-    color: var(--off-white-color);
+    color: var(--primary-color-6);
     font-size: 20px;
-    transition: 0.2s;
+    /* transition: 0.1s; */
 }
 .playlist-tracks-container .track-container:hover {
     cursor: pointer;
-    color: var(--blue-color-1);
+    color: var(--blue-color-main);
+}
+.playlist-tracks-container .track-container:hover .track-artist {
+    color: var(--blue-color-main);
+    transition: 0.2s;
 }
 
-.playlist-tracks-container .track-container:hover .track-artist {
+.playlist-tracks-container .track-container-dark {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 8px;
+    padding-right: 10px;
+    width: 390px;
+    color: var(--off-white-color);
+    font-size: 20px;
+    /* transition: 0.1s; */
+}
+.playlist-tracks-container .track-container-dark:hover {
+    cursor: pointer;
     color: var(--blue-color-1);
+}
+.playlist-tracks-container .track-container-dark:hover .track-artist-dark {
+    color: var(--blue-color-1);
+    transition: 0.2s;
 }
 
 .playlist-tracks-container .track-icon {
@@ -59,10 +87,16 @@
     width: 280px;
 }
 .playlist-tracks-container .track-artist {
-    color: var(--neutral-color-3);
+    color: var(--primary-color-3);
     font-size: 11px;
     width: 280px;
-    transition: 0.3s;
+    /* transition: 0.2s; */
+}
+.playlist-tracks-container .track-artist-dark {
+    color: var(--neutral-color-5);
+    font-size: 11px;
+    width: 280px;
+    /* transition: 0.3s; */
 }
 
 /* customize scroll */

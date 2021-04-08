@@ -34,7 +34,7 @@
 }
 
 .group-name-container .group-name-edit .refresh-icon:hover {
-    fill: var(--blue-color-2);
+    fill: var(--blue-color-1);
     cursor: pointer;
     transform: rotate(180deg);
 }
@@ -54,7 +54,7 @@
     margin-right: 20px;
 }
 .edit-icon:hover{
-    opacity: 0.7;
+    fill: var(--blue-color-1);
     cursor: pointer;
 }
 .edit-name-modal strong {
@@ -125,5 +125,9 @@
         height: 15px;
         width: 15px;
         margin-left: 12px;
+    }
+    .edit-name-error .error-alert {
+        transform: translateX(-100%);
+        margin-top: 15%;
     }
 }

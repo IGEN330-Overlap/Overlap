@@ -205,6 +205,10 @@
     max-height: max(5vh, 45px);
     overflow-y: hidden;
 }
+.UP_trackName{
+    max-height: max(5vh, 45px);
+    overflow-y: hidden;
+}
 
 .UP_trackName{
     max-height: max(5vh, 45px);
