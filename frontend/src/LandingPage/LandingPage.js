@@ -1,7 +1,7 @@
 import './LandingPage.css';
 import logo from './overlap large.svg';
 import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 //Home page component
 //Takes loggedIn boolean as a prop
@@ -15,8 +15,10 @@ const LandingPage = (props) => {
 
     return (
         <div className="landing-root d-flex flex-column justify-content-center align-items-center">
-            <div className="landing-about">
-                <a className="about-us-access" href="/about"><strong>About Us</strong></a>
+            <div className="landing-redirect">
+                <Link to="/how-it-works" className="landing-access"><strong>How It Works</strong></Link>
+                <div className="vertical-line"></div>
+                <Link to="/about" className="landing-access"><strong>About Us</strong></Link>
             </div>
             <div className="logo-container">
                 <img src={logo} alt="logo" />

@@ -1,5 +1,6 @@
 import "./Navbar.css";
 import logo from "../overlap-logo.svg";
+import logo_dark from "../overlap-logo-dark.svg"
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
@@ -7,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateRefreshToken } from "../Redux/Actions";
 // import GroupIcon from "./group.svg";
 
-const Navbar1 = (props) => {
+const Navbar1 = ({playlistType}) => {
   //useDispatch hook for redux
   const dispatch = useDispatch();
 
@@ -50,11 +51,11 @@ const Navbar1 = (props) => {
   groupList.sort(sortGroupList);
 
   return (
-    <div className="navbar-stuff">
+    <div className={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad" || playlistType === "party") ? "navbar-stuff-dark" : "navbar-stuff"}>
       <Navbar bg="var(--primary-color-main)" variant="dark" expand="sm">
         {isLoggedIn && (
           <Navbar.Brand as={Link} to="/authorized/">
-            <img width="75" height="30" src={logo} alt="logo" />
+            <img width="75" height="30" src={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad" || playlistType === "party") ? logo_dark : logo} alt="logo" />
           </Navbar.Brand>
         )}
         {!isLoggedIn && (
@@ -81,11 +82,14 @@ const Navbar1 = (props) => {
             )}
             
             {isLoggedIn && (
-              <Nav.Link as={Link} to={"/authorized/user/" + userObject.userID} bg="white">
+              <Nav.Link as={Link} to={"/authorized/user/" + userObject.userID} bg="white" className="navbar-link">
                 My Music Profile
               </Nav.Link>
             )}
 
+            <Nav.Link as={Link} to="/how-it-works" bg="white">
+              How It Works
+            </Nav.Link>
             <Nav.Link as={Link} to="/about" bg="white">
               About Us
             </Nav.Link>

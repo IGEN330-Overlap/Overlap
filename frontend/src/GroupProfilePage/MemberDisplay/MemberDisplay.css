@@ -20,12 +20,12 @@
     margin-left: 15px;
     margin-top: 5px;
     height: 30px;
-    transition: opacity 0.45s;
+    transition: 0.45s;
 }
 
 /*add member button and popover */
-.add-member:hover {
-    opacity: 0.7;
+.add-member:hover .add-member-icon {
+    fill: var(--blue-color-1);
     cursor: pointer;
 }
 
@@ -120,7 +120,7 @@
     position: relative;
     text-align: center;
 }
-.user-icon {
+.icon-container .user-icon {
     height: clamp(65px, 7.5vw, 100px);
     width: clamp(65px, 7.5vw, 100px);
     object-fit: cover;
@@ -131,7 +131,7 @@
     /* background-color: rgba(162,162,254,0.75); */
     /* ^ --blue-color-2 at 75% opacity ^ */
 }
-.user-name {
+.icon-container .user-name {
     font-size: clamp(12px, 1.75vw, 17px);
     color: transparent;
     position: absolute;

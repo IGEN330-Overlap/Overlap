@@ -14,6 +14,7 @@ import AuthorizedPage from "./AuthorizedPage/AuthorizedPage";
 import AboutUs from "./AboutUs/AboutUs";
 import GroupProfilePage from "./GroupProfilePage/GroupProfilePage";
 import { PlaylistPage } from "./PlaylistPage/PlaylistPage";
+import HowItWorks from "./HowItWorks/HowItWorks";
 import ScreenOverlay from "./ScreenOverlay/ScreenOverlay";
 import UserProfile from "./UserProfile/UserProfile";
 import "./App.css";
@@ -51,6 +52,9 @@ function App() {
 
   //useState hook for page loading
   const [isLoading, setIsLoading] = useState(true);
+
+  //useState hook for group list loading
+  const [groupLoading, setGroupLoading] = useState(false);
 
   //useState hook for page refresh trigger
   const [refreshTrigger, setRefreshTrigger] = useState(0);
@@ -110,6 +114,7 @@ function App() {
   useEffect(() => {
     if (userObject != null) {
       if (userObject.userID !== "") {
+        setGroupLoading(true);
         axios
           .get(
             process.env.REACT_APP_BACKEND_URL +
@@ -119,8 +124,10 @@ function App() {
           )
           .then((data) => {
             dispatch(updateGroupList(data.data));
+            setGroupLoading(false);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {console.log(err);
+            setGroupLoading(false);});
       }
     }
   }, [userObject]);
@@ -151,7 +158,7 @@ function App() {
           path="/authorized"
           render={() => (
             <Fragment>
-              <AuthorizedPage refreshPage = {loginRefresh} />
+              <AuthorizedPage groupLoading={groupLoading} refreshPage={loginRefresh}/>
               {/* If page loading, render loading overlay */}
               {isLoading && <ScreenOverlay text="Retrieving Data" />}
             </Fragment>
@@ -159,6 +166,7 @@ function App() {
           exact={true}
         />
         <Route path="/about" render={() => <AboutUs />} />
+        <Route path="/how-it-works" render={() => <HowItWorks />} />
         <Route path="/authorized/group" render={() => <GroupProfilePage />} />
         <Route path="/authorized/playlist" render={() => <PlaylistPage />} />
         <Route path="/authorized/user" render={() => <UserProfile />} />

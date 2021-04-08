@@ -1,0 +1,501 @@
+@import url(../variables.css);
+
+/* general styling */
+.hiw-root {
+    background-color: var(--primary-color-main);
+    min-height: 100vh;
+    height: fit-content;
+}
+.hiw-info {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 1vh;
+}
+.hiw-content {
+    margin-left: 4vw;
+    margin-right: 4vw;
+    margin-top: 1.5vw;
+    margin-bottom: 1.5vw;
+}
+.hiw-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.25rem;
+}
+.hiw-root .under-bar {
+    margin-left: 5px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+}
+.hiw-info .text-box {
+    width: 53%;
+}
+.hiw-info .graphics {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    align-items: center;
+}
+
+/* content specific styling */
+.hiw-insights {
+    background-color: var(--primary-color-main);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-insights h1 {
+    color: var(--off-white-color);
+}
+.hiw-insights h2 {
+    color: var(--off-white-color);
+}
+.hiw-insights .under-bar {
+    background-color: var(--off-white-color);
+}
+.hiw-insights .graphics .user-bubble {
+    position: relative;
+    background-color: var(--blue-color-1);
+    opacity: 0.7;
+    height: 18vw;
+    width: 18vw;
+    border-radius: 50%;
+    text-align: center;
+    transform: translate(12.5%);
+    transition: 0.2s;
+}
+.hiw-insights .graphics .friend-bubble {
+    position: relative;
+    background-color: #79cced;
+    opacity: 0.7;
+    height: 18vw;
+    width: 18vw;
+    border-radius: 50%;
+    text-align: center;
+    transform: translate(-12.5%);
+    transition: 0.2s;
+}
+.hiw-insights .graphics .user-bubble:hover {
+    height: 19vw;
+    width: 19vw;
+}
+.hiw-insights .graphics .friend-bubble:hover {
+    height: 19vw;
+    width: 19vw;
+}
+.hiw-insights .graphics .user-bubble h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-70%, -50%);
+    font-weight: 550;
+}
+.hiw-insights .graphics .friend-bubble h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, -50%);
+    font-weight: 550;
+}
+.hiw-insights p {
+    color: var(--off-white-color);
+}
+.hiw-insights span {
+    color: var(--blue-color-1);
+    font-weight: 550;
+}
+
+.hiw-playlistgeneration {
+    background-color: var(--neutral-color-main);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-playlistgeneration h1 {
+    color: var(--primary-color-main);
+}
+.hiw-playlistgeneration h2 {
+    color: var(--primary-color-main);
+}
+.hiw-playlistgeneration p {
+    color: var(--primary-color-main);
+}
+.hiw-playlistgeneration .under-bar {
+    background-color: var(--primary-color-main);
+}
+.hiw-playlistgeneration span {
+    color: var(--blue-color-7);
+    font-weight: 550;
+}
+.hiw-playlistgeneration .mood-icons {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-left: 20%;
+}
+.hiw-playlistgeneration .mood {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.hiw-playlistgeneration .mood-emoji {
+    height: 3vw;
+    width: 3vw;
+    margin-right: 1vw;
+}
+.hiw-playlistgeneration .mood:hover {
+    cursor: pointer;
+}
+.hiw-playlistgeneration .mood:hover h3 {
+    color: var(--blue-color-6);
+}
+.hiw-playlistgeneration .mood:hover .mood-color {
+    fill: var(--blue-color-6);
+}
+.hiw-playlistgeneration .mood h3 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: 550;
+}
+.hiw-playlistgeneration .collapse-playlistgeneration {
+    margin-left: 4vw;
+    width: 93%;
+    height: fit-content;
+}
+.hiw-playlistgeneration .collapse-playlistgeneration h5 {
+    font-size: 1.1rem;
+}
+.hiw-playlistgeneration .collapse-playlistgeneration span {
+    color: var(--blue-color-5);
+}
+
+.hiw-genres {
+    background-color: var(--blue-color-1);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-genres h1 {
+    color: var(--primary-color-main);
+}
+.hiw-genres h2 {
+    color: var(--primary-color-main);
+}
+.hiw-genres p {
+    color: var(--primary-color-main);
+}
+.hiw-genres .under-bar {
+    background-color: var(--primary-color-main);
+}
+.hiw-genres span {
+    color: var(--blue-color-7);
+    font-weight: 550;
+}
+.hiw-genres .graphics {
+    justify-content: flex-start;
+}
+.hiw-genres .genre-display {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.hiw-genres .genre-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.hiw-genres .genre-bar h3 {
+    margin-left: 1vw;
+}
+.hiw-genres .genre-bar .bar-1 {
+    background-color: rgba(123,123,253,0.75);
+    width: 80%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-2 {
+    background-color: rgba(255, 179, 71,0.75);
+    width: 62%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-3 {
+    background-color: rgba(157, 92, 99,0.75);
+    width: 51%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-4 {
+    background-color: rgba(119, 221, 119,0.75);
+    width: 46%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-5 {
+    background-color: rgba(100, 190, 239, 0.75);
+    width: 43%;
+    height: 50px;
+    transition: 0.5s;
+}
+.hiw-genres .genre-bar .bar-1:hover {
+    width: 82%;
+}
+.hiw-genres .genre-bar .bar-2:hover {
+    width: 64%;
+}
+.hiw-genres .genre-bar .bar-3:hover {
+    width: 53%;
+}
+.hiw-genres .genre-bar .bar-4:hover {
+    width: 48%;
+}
+.hiw-genres .genre-bar .bar-5:hover {
+    width: 45%;
+}
+
+.hiw-topstats {
+    background-color: var(--blue-color-main);
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-topstats h1 {
+    color: var(--off-white-color);
+}
+.hiw-topstats h2 {
+    color: var(--off-white-color);
+}
+.hiw-topstats p {
+    color: var(--off-white-color)
+}
+.hiw-topstats .under-bar {
+    background-color: var(--off-white-color);
+}
+.hiw-topstats span {
+    color: var(--primary-color-7);
+    font-weight: 550;
+}
+.hiw-topstats .podium-display {
+    display: flex;
+    flex-direction: column;
+    margin-top: 4%;
+    margin-right: 20%;
+    z-index: 3;
+    width: 270px;
+    height: 280px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.hiw-topstats .top-artist-podiums {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.hiw-topstats .top-artist-podiums .icon{
+    height: 75px;
+    width: 75px;
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 10px;
+}
+.hiw-topstats .artist-podium {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.hiw-topstats .artist-podium .podium-3 {
+    height: 70px;
+    width: 70px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+    transition: 0.5s;
+}
+.hiw-topstats .artist-podium .podium-1 {
+    height: 170px;
+    width: 70px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+    transition: 0.5s;
+}
+.hiw-topstats .artist-podium .podium-2 {
+    height: 120px;
+    width: 70px;
+    background-color: var(--blue-color-1);
+    text-align: center;
+    transition: 0.5s;
+}
+.hiw-topstats .artist-podium .podium-3:hover {
+    height: 90px;
+}
+.hiw-topstats .artist-podium .podium-1:hover {
+    height: 190px;
+}
+.hiw-topstats .artist-podium .podium-2:hover {
+    height: 140px;
+}
+.hiw-topstats .artist-podium strong {
+    font-size: 40px;
+    color: var(--blue-color-main)
+}
+.hiw-topstats .podium-stand {
+    width: 100%;
+    height: 7px;
+    background-color: var(--primary-color-main);
+}
+
+.hiw-musicstats {
+    background-color: #79cced;
+    min-height: 200px;
+    height: fit-content;
+}
+.hiw-musicstats h1 {
+    color: var(--off-white-color);
+}
+.hiw-musicstats h2 {
+    color: var(--off-white-color);
+}
+.hiw-musicstats h3 {
+    color: var(--off-white-color);
+    font-size: 17px;
+    font-weight: 550;
+    padding: 8px;
+}
+.hiw-musicstats .graph-type:hover {
+    cursor: pointer;
+    color: var(--blue-color-4);
+}
+.hiw-musicstats p {
+    color: var(--off-white-color);
+}
+.hiw-musicstats .under-bar {
+    background-color: var(--off-white-color);
+}
+.hiw-musicstats span {
+    color: var(--blue-color-6);
+    font-weight: 550;
+}
+.hiw-musicstats .graphics {
+    flex-direction: column;
+    height: 100%;
+}
+.hiw-musicstats .graph-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.hiw-musicstats .hiw-graph {
+    height: auto;
+    margin-left: 20px;
+    width: 95%;
+}
+
+/* text styles */
+.hiw-info h1 {
+    font-size: clamp(25px, 4vw, 40px);
+    margin-top: 0.5rem;
+}
+.hiw-info h2 {
+    font-size: clamp(17px, 2.5vw, 25px);
+    margin-top: 0.7rem;
+}
+
+@media(max-width: 780px) {
+    .hiw-flex {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .hiw-info .text-box {
+        width: 100%;
+    }
+    .hiw-info .graphics {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+
+    .hiw-insights .graphics .user-bubble {
+        height: 170px;
+        width: 170px;
+    }
+    .hiw-insights .graphics .friend-bubble {
+        height: 170px;
+        width: 170px;
+    }
+    .hiw-insights .graphics .user-bubble:hover {
+        height: 180px;
+        width: 180px;
+    }
+    .hiw-insights .graphics .friend-bubble:hover {
+        height: 180px;
+        width: 180px;
+    }
+
+    .hiw-playlistgeneration .mood-emoji {
+        height: 27px;
+        width: 27px;
+    }
+    .hiw-playlistgeneration .mood-icons {
+        flex-direction: column;
+        width: 80%;
+        margin-left: 10%;
+    }
+    .hiw-playlistgeneration .mood {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .hiw-playlistgeneration .mood h3 {
+        padding-top: 0px;
+    }
+    .hiw-playlistgeneration .collapse-playlistgeneration {
+        width: 250px;
+        margin-left: calc(27px + 1vw);
+    }
+
+    .hiw-genres .genre-bar .bar-1 {
+        width: 80%;
+    }
+    .hiw-genres .genre-bar .bar-2 {
+        width: 62%;
+    }
+    .hiw-genres .genre-bar .bar-3 {
+        width: 51%;
+    }
+    .hiw-genres .genre-bar .bar-4 {
+        width: 46%;
+    }
+    .hiw-genres .genre-bar .bar-5 {
+        width: 43%;
+    }
+    .hiw-genres .genre-bar .bar-1:hover {
+        width: 82%;
+    }
+    .hiw-genres .genre-bar .bar-2:hover {
+        width: 64%;
+    }
+    .hiw-genres .genre-bar .bar-3:hover {
+        width: 53%;
+    }
+    .hiw-genres .genre-bar .bar-4:hover {
+        width: 48%;
+    }
+    .hiw-genres .genre-bar .bar-5:hover {
+        width: 45%;
+    }
+
+    .hiw-topstats .graphics {
+        display: flex;
+        justify-content: center;
+    }
+    .hiw-topstats .podium-display {
+        margin-right: 0px;
+    }
+}

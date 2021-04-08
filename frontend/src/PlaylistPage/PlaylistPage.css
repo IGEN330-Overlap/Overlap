@@ -32,7 +32,7 @@
 
 .playlist-page-tracks-container {
     margin-left: 2vw;
-    background: rgba(155, 154, 190, 0.301);
+    background: rgba(154, 154, 154, 0.25);
     border-radius: 15px;
     width: 425px;
     height: max(55vh, 475px);
@@ -86,14 +86,28 @@
 }
 
 .pp_backArrow{
-    fill: white;
+    fill: var(--primary-color-main);
     margin-left:2vw;
-    color: white;
+    color: var(--primary-color-main);
     text-align: center;
 }
 
 .pp_backArrow:hover{
     cursor: pointer;
+    fill: var(--blue-color-6);
+    color: var(--blue-color-6);
+    text-decoration: none;
+}
+.pp_backArrow-dark {
+    fill: var(--off-white-color);
+    margin-left:2vw;
+    color: var(--off-white-color);
+    text-align: center;
+}
+
+.pp_backArrow-dark:hover{
+    cursor: pointer;
+    fill: var(--blue-color-1);
     color: var(--blue-color-1);
     text-decoration: none;
 }
