@@ -62,7 +62,13 @@
 }
 .top-tracks-root .track-container:hover {
     cursor: pointer;
+    color: var(--blue-color-3);
 }
+
+.top-tracks-root .track-container:hover .track-artist {
+    color: var(--blue-color-3);
+}
+
 .top-tracks-root .track-icon {
     margin-left: 15px;
     width: 50px;
@@ -150,6 +156,15 @@
 .top-artists-root .top-artist-container:hover {
     cursor: pointer;
 }
+
+.top-artists-root .top-artist-container:hover .artist-name {
+    color: var(--blue-color-1);
+}
+
+.top-artists-root .top-artist-container:hover .artist-index {
+    color: var(--blue-color-1);
+}
+
 .top-artists-root .top-artist-list {
     min-width: 250px;
     width: fit-content;
@@ -161,10 +176,12 @@
 .top-artist-container .artist-index {
     padding-right: 10px;
     color: var(--neutral-color-2);
+    transition: 0.2s;
 }
 .top-artist-container .artist-name {
     color: var(--off-white-color);
     width: fit-content;
+    transition: 0.2s;
 }
 .podium-display {
     display: flex;
