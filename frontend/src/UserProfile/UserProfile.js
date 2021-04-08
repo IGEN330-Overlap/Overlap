@@ -175,27 +175,31 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your MOST popular top tracks are:</div>
-                                            <div className="top3">
-                                            {trackPop3.map((track,i) => (
-                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
-                                                </div>
-                                            ))}
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your MOST popular top tracks are:</div>
+                                                <div className="top3">
+                                                {trackPop3.map((track,i) => (
+                                                    <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your LEAST popular top tracks are:</div>
-                                            <div className="top3">
-                                            {trackPop3low.map((track,i) => (
-                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
-                                                </div>
-                                            ))}
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your LEAST popular top tracks are:</div>
+                                                <div className="top3">
+                                                {trackPop3low.map((track,i) => (
+                                                    <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </Carousel.Item>
                                 </Carousel>
@@ -222,27 +226,31 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your top tracks with the HIGHEST danceability score are:</div>
-                                            <div className="top3">
-                                            {dance3.map((track,i) => (
-                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
-                                                </div>
-                                            ))}
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your top tracks with the HIGHEST danceability:</div>
+                                                <div className="top3">
+                                                {dance3.map((track,i) => (
+                                                    <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your top tracks with the LOWEST danceability score are:</div>
-                                            <div className="top3">
-                                            {dance3low.map((track,i) => (
-                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
-                                                </div>
-                                            ))}
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your top tracks with the LOWEST danceability:</div>
+                                                <div className="top3">
+                                                {dance3low.map((track,i) => (
+                                                    <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
                                     </Carousel.Item>
                                 </Carousel>
@@ -267,27 +275,31 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your top tracks with the HIGHEST energy score are:</div>
-                                        <div className="top3">
-                                        {energy3.map((track,i) => (
-                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your top tracks with the HIGHEST energy:</div>
+                                            <div className="top3">
+                                            {energy3.map((track,i) => (
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                </div>
+                                            ))}
                                             </div>
-                                        ))}
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your top tracks with the LOWEST energy score are:</div>
-                                        <div className="top3">
-                                        {energy3low.map((track,i) => (
-                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your top tracks with the LOWEST energy:</div>
+                                            <div className="top3">
+                                            {energy3low.map((track,i) => (
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                </div>
+                                            ))}
                                             </div>
-                                        ))}
                                         </div>
                                     </Carousel.Item>
                                 </Carousel>
@@ -315,27 +327,31 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your top tracks with the HIGHEST acousticness score are:</div>
-                                        <div className="top3">
-                                        {acoustic3.map((track,i) => (
-                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your top tracks with the HIGHEST acousticness:</div>
+                                            <div className="top3">
+                                            {acoustic3.map((track,i) => (
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                </div>
+                                            ))}
                                             </div>
-                                        ))}
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
-                                        <div className="collapseText">Your top tracks with the LOWEST acousticness score are:</div>
-                                        <div className="top3">
-                                        {acoustic3low.map((track,i) => (
-                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                        <div className="descriptorCarouselItem">
+                                            <div className="collapseText">Your top tracks with the LOWEST acousticness:</div>
+                                            <div className="top3">
+                                            {acoustic3low.map((track,i) => (
+                                                <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                </div>
+                                            ))}
                                             </div>
-                                        ))}
                                         </div>
                                     </Carousel.Item>
                                 </Carousel>
@@ -360,27 +376,31 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     </div>
                                 </Carousel.Item>
                                 <Carousel.Item>
-                                    <div className="collapseText">Your top tracks with the HIGHEST instrumentalness score are:</div>
-                                    <div className="top3">
-                                    {instrumental3.map((track,i) => (
-                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="UP_trackArtist">{track.artistName}</div>
+                                    <div className="descriptorCarouselItem">
+                                        <div className="collapseText">Your top tracks with the HIGHEST instrumentalness:</div>
+                                        <div className="top3">
+                                        {instrumental3.map((track,i) => (
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                            </div>
+                                        ))}
                                         </div>
-                                    ))}
-                                    </div>
+                                    </div>    
                                 </Carousel.Item>
                                 <Carousel.Item>
-                                    <div className="collapseText">Your top tracks with the LOWEST instrumentalness score are:</div>
-                                    <div className="top3">
-                                    {instrumental3low.map((track,i) => (
-                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="UP_trackArtist">{track.artistName}</div>
+                                    <div className="descriptorCarouselItem">
+                                        <div className="collapseText">Your top tracks with the LOWEST instrumentalness:</div>
+                                        <div className="top3">
+                                        {instrumental3low.map((track,i) => (
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                            </div>
+                                        ))}
                                         </div>
-                                    ))}
                                     </div>
                                 </Carousel.Item>
                             </Carousel>
@@ -405,27 +425,31 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                     </div>
                                 </Carousel.Item>
                                 <Carousel.Item>
-                                    <div className="collapseText">Your top tracks with the HIGHEST valence score are:</div>
-                                    <div className="top3">
-                                    {valence3.map((track,i) => (
-                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="UP_trackArtist">{track.artistName}</div>
+                                    <div className="descriptorCarouselItem">
+                                        <div className="collapseText">Your top tracks with the HIGHEST valence score are:</div>
+                                        <div className="top3">
+                                        {valence3.map((track,i) => (
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                            </div>
+                                        ))}
                                         </div>
-                                    ))}
                                     </div>
                                 </Carousel.Item>
                                 <Carousel.Item>
-                                    <div className="collapseText">Your top tracks with the LOWEST valence score are:</div>
-                                    <div className="top3">
-                                    {valence3low.map((track,i) => (
-                                        <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                        <div className="trackName"><strong>{track.trackName}</strong></div>
-                                        <div className="UP_trackArtist">{track.artistName}</div>
+                                    <div className="descriptorCarouselItem">
+                                        <div className="collapseText">Your top tracks with the LOWEST valence score are:</div>
+                                        <div className="top3">
+                                        {valence3low.map((track,i) => (
+                                            <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
+                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                            </div>
+                                        ))}
                                         </div>
-                                    ))}
                                     </div>
                                 </Carousel.Item>
                             </Carousel>

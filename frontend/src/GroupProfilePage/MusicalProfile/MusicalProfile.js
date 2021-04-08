@@ -1,6 +1,7 @@
 import React from 'react';
 import './MusicalProfile.css';
 import logo_small from './logo small.svg';
+import {ReactComponent as UpArrow} from "./up-arrow.svg"
 
 export const MusicalProfile = ({groupUsers}) => {
     
@@ -48,6 +49,14 @@ export const MusicalProfile = ({groupUsers}) => {
 
         return musicalProfiles
     })
+
+    const scrollTop = () =>{
+        document.querySelector("body").scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+          });
+    };
 
     return (
         <div className="musical-profile-root">
@@ -164,6 +173,7 @@ export const MusicalProfile = ({groupUsers}) => {
                         </div>
                     </div>
                 </div>
+            <UpArrow className="up-arrow" onClick={scrollTop}/>
             </div>
         </div>
     )

@@ -145,6 +145,7 @@
 .generate-playlist-title {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .playlistModal h2 {
     color: var(--primary-color-main);
@@ -171,8 +172,8 @@
 .playlist-add-modal .cancel-generate {
     position: absolute;
     right: 5%;
-    height: 15px;
-    width: 15px;
+    height: 18px;
+    width: 18px;
 }
 .playlist-add-modal .cancel-generate:hover{
     cursor: pointer;
@@ -197,9 +198,11 @@
     color: var(--off-white-color);
     margin: 4px;
     border-radius: 20px;
+    filter: drop-shadow(0px 1px 1px var(--primary-color-3));
 }
 .select-a-user:hover {
     cursor: pointer;
+    color: var(--blue-color-1);
 }
 .select-a-user strong {
     vertical-align: middle;
@@ -213,9 +216,11 @@
     margin: 4px;
     margin-bottom: 15px;
     border-radius: 20px;
+    filter: drop-shadow(0px 1px 1px var(--primary-color-3));
 }
 .select-all-users:hover {
     cursor: pointer;
+    color: var(--blue-color-1);
 }
 .select-all-users strong {
     vertical-align: middle;
@@ -266,7 +271,7 @@
     width: 200px;
     height: 42px;
     font-size: 20px;
-    filter: drop-shadow(0 1mm 1mm var(--primary-color-main));
+    filter: drop-shadow(0 2px 2px var(--primary-color-main));
 }
 
 /* top tracks and moods */
@@ -396,6 +401,10 @@
 .delete-playlist-x:hover {
     background-color: var(--neutral-color-5);
     cursor: pointer;
+}
+
+.modal-content .modal-header {
+    padding: 0.5rem 1rem;
 }
 
 @media (max-width: 780px) {

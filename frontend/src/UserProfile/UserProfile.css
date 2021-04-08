@@ -117,14 +117,15 @@
 
 .collapseText{
     text-align: left;
-    padding: 10px;
+    padding: 9px;
+    padding-top: 5px;
 }
 
 .description{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 25vh;
+    height: 100%;
     width: 100%;
 }
 
@@ -136,21 +137,30 @@
 
 .descriptor-carousel{
     display: flex;
-    height: fit-content;
-    min-height: 25vh;
+    height: 33.2vh;
+    /* min-height: 25vh; */
     width: 100%;
     align-items: center;
     justify-content: center;
 }
 
-.descriptor-carousel .carousel-inner{
-    width: 80%;
+.descriptorCarouselItem{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     height: 100%;
 }
 
-.descriptor-carousel .active{
-    width: 100%;
+.descriptor-carousel .carousel-item{
     height: 100%;
+}
+
+.descriptor-carousel .carousel-inner{
+    width: 80%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .descriptor-carousel .carousel-control-prev{
@@ -192,6 +202,13 @@
 
 .UP_trackArtist{
     color: var(--blue-color-1);
+    max-height: max(5vh, 45px);
+    overflow-y: hidden;
+}
+
+.UP_trackName{
+    max-height: max(5vh, 45px);
+    overflow-y: hidden;
 }
 
 @media (max-width:780px) {
@@ -212,7 +229,8 @@
     }
     .UP_icon{
         margin-left: 0px;
-        margin-bottom: 45px;
+        margin-bottom: 35px;
+        margin-top: 35px;
     }
     .stats_title{
         margin-bottom: 10px;
@@ -222,13 +240,10 @@
         width: 50px;
     }
     .descriptor-carousel{
-        min-height: 20vh;
+        height: 27vh;
     }
     .collapseBody{
         width: 95%;
         margin: 0px;
-    }
-    .description{
-        height: 20vh;
     }
 }

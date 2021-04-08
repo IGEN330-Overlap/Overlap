@@ -138,14 +138,14 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
       document.getElementById("toptracks-select").style.filter = "none";
     }
     else if((type === "Top Tracks") && !openTopTrackSelection) {
-      document.getElementById("toptracks-select").style.backgroundColor = "var(--neutral-color-2)";
-      document.getElementById("toptracks-select").style.filter = "drop-shadow(1mm 1mm 1mm var(--primary-color-main))";
+      document.getElementById("toptracks-select").style.backgroundColor = "var(--neutral-color-1)";
+      document.getElementById("toptracks-select").style.filter = "drop-shadow(1px 1px 2px var(--primary-color-2))";
       document.getElementById("moods-select").style.backgroundColor = "var(--off-white-color)";
       document.getElementById("moods-select").style.filter = "none";
     }
     else if(type !== "Top Tracks") {
-      document.getElementById("moods-select").style.backgroundColor = "var(--neutral-color-2)";
-      document.getElementById("moods-select").style.filter = "drop-shadow(1mm 1mm 1mm var(--primary-color-main))";
+      document.getElementById("moods-select").style.backgroundColor = "var(--neutral-color-1)";
+      document.getElementById("moods-select").style.filter = "drop-shadow(1px 1px 2px var(--primary-color-2))";
       document.getElementById("toptracks-select").style.backgroundColor = "var(--off-white-color)";
       document.getElementById("toptracks-select").style.filter = "none";
 
