@@ -51,3 +51,7 @@
 .justify-content-end {
     padding-right: 2vw;
 }
+
+.navbar-brand {
+    margin-left: 18px;
+}
