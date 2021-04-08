@@ -38,7 +38,7 @@
     margin-bottom: 2vh;
 }
 
-.icon{
+.UP_icon{
     width: fit-content;
     margin-left: 10vw;
 }
@@ -138,6 +138,7 @@
 .descriptor-carousel{
     display: flex;
     height: 33.2vh;
+    /* min-height: 25vh; */
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -209,6 +210,11 @@
     overflow-y: hidden;
 }
 
+.UP_trackName{
+    max-height: max(5vh, 45px);
+    overflow-y: hidden;
+}
+
 @media (max-width:780px) {
     .userProfile-title .under-bar{
         width: 150px;
@@ -225,10 +231,10 @@
     .column{
         width: 100%;
     }
-    .icon{
+    .UP_icon{
         margin-left: 0px;
-        margin-top: 35px;
         margin-bottom: 35px;
+        margin-top: 35px;
     }
     .stats_title{
         margin-bottom: 10px;
