@@ -63,7 +63,7 @@ export const PlaylistPage = (props) => {
                         playlistType === "chill" ? {backgroundColor: "#cdb49b"} :
                         playlistType === "party" ? {backgroundImage: "linear-gradient(to bottom right, #ffe177, #ebd68c)"} :
                         {backgroundColor: "var(--primary-color-main)"}}>
-                    <Navbar1 />
+                    <Navbar1 playlistType={playlistType}/>
                 <div className="backToProfile">
                     <Link to={"/authorized/group/" + groupCode} className={playlistType === "top" ? "pp_backArrow-dark" : "pp_backArrow"}>
                         <svg
