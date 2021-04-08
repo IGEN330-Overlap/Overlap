@@ -2,7 +2,7 @@
 
 .text-blurb {
     margin-right: 4vw;
-    height: 350px;
+    height: fit-content;
 }
 
 .display-babies {
@@ -15,6 +15,8 @@
 .about {
     margin-left: 4vw;
     margin-top: 2vw;
+    display: flex;
+    flex-direction: column;
 }
 
 .about-root {
