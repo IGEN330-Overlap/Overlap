@@ -20,12 +20,12 @@
     margin-left: 15px;
     margin-top: 5px;
     height: 30px;
-    transition: opacity 0.45s;
+    transition: 0.45s;
 }
 
 /*add member button and popover */
-.add-member:hover {
-    opacity: 0.7;
+.add-member:hover .add-member-icon {
+    fill: var(--blue-color-1);
     cursor: pointer;
 }
 
