@@ -156,7 +156,6 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                 <div className="stats_sub_title">Click each property for more info!</div>
                 <div className="columns">
                     <div className="column">
-
                         <div className="open"
                             onClick={() => {setTrackPopOpen(!openTrackPop); setDanceOpen(false); setEnergyOpen(false); setAcousticnessOpen(false); setInstrumentalOpen(false); setValenceOpen(false)}}
                             aria-controls="example-collapse-text"
@@ -180,9 +179,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                                 <div className="top3">
                                                 {trackPop3.map((track,i) => (
                                                     <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                        <div className="UP_trackArtist">{track.artistName}</div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -194,9 +193,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                                 <div className="top3">
                                                 {trackPop3low.map((track,i) => (
                                                     <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                        <div className="UP_trackArtist">{track.artistName}</div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -231,9 +230,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                                 <div className="top3">
                                                 {dance3.map((track,i) => (
                                                     <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                        <div className="UP_trackArtist">{track.artistName}</div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -245,9 +244,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                                 <div className="top3">
                                                 {dance3low.map((track,i) => (
                                                     <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                    <div className="UP_trackArtist">{track.artistName}</div>
+                                                        <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                        <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                        <div className="UP_trackArtist">{track.artistName}</div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -280,9 +279,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             <div className="top3">
                                             {energy3.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                             </div>
@@ -294,9 +293,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             <div className="top3">
                                             {energy3low.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                             </div>
@@ -332,13 +331,12 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             <div className="top3">
                                             {acoustic3.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                             </div>
-                                        </div>
                                         </div>
                                     </Carousel.Item>
                                     <Carousel.Item>
@@ -347,9 +345,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                             <div className="top3">
                                             {acoustic3low.map((track,i) => (
                                                 <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                                <div className="UP_trackArtist">{track.artistName}</div>
+                                                    <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                    <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                    <div className="UP_trackArtist">{track.artistName}</div>
                                                 </div>
                                             ))}
                                             </div>
@@ -382,9 +380,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="top3">
                                         {instrumental3.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
@@ -396,9 +394,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="top3">
                                         {instrumental3low.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
@@ -431,9 +429,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="top3">
                                         {valence3.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
@@ -445,9 +443,9 @@ const energy3low = energyUnique.slice(energyUnique.length-3,energyUnique.length)
                                         <div className="top3">
                                         {valence3low.map((track,i) => (
                                             <div className="userProfile-track-container" onClick={()=>openSong(track.linkURL)}>
-                                            <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
-                                            <div className="UP_trackName"><strong>{track.trackName}</strong></div>
-                                            <div className="UP_trackArtist">{track.artistName}</div>
+                                                <img src={track.imageURL} alt={track.trackName} className="collapseImage"></img>
+                                                <div className="UP_trackName"><strong>{track.trackName}</strong></div>
+                                                <div className="UP_trackArtist">{track.artistName}</div>
                                             </div>
                                         ))}
                                         </div>
