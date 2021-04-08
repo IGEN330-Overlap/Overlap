@@ -202,10 +202,12 @@
     align-items: center;
 }
 .top-artist-podiums {
+    height: 275px;
     width: 370px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    align-items: flex-end;
 }
 .top-artist-podiums .artist-icon{
     height: 70px;
@@ -221,39 +223,59 @@
     align-items: center;
 }
 .artist-podium .podium-3 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 100px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .artist-podium .podium-1 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 170px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .artist-podium .podium-2 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 135px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .artist-podium .podium-5 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 60px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
 }
 .artist-podium .podium-4 {
-    margin-top: 15px;
+    margin-top: 12px;
     height: 80px;
     width: 70px;
     background-color: var(--blue-color-1);
     text-align: center;
+    transition: 0.2s;
+}
+.artist-podium .podium-3:hover {
+    height: 110px;
+}
+.artist-podium .podium-1:hover {
+    height: 180px;
+}
+.artist-podium .podium-2:hover {
+    height: 145px;
+}
+.artist-podium .podium-5:hover {
+    height: 70px;
+}
+.artist-podium .podium-4:hover {
+    height: 90px;
 }
 .artist-podium strong {
     font-size: 40px;
