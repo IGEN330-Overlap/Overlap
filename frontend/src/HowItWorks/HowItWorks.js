@@ -7,6 +7,9 @@ import small_logo from "../GroupProfilePage/MemberDisplay/logo small.svg";
 import Collapse from "react-bootstrap/Collapse";
 
 import danceability_graph from "./danceability.png";
+import valence_graph from "./valence.png";
+import energy_graph from "./energy.png";
+import popularity_graph from "./popularity.png"
 
 const HowItWorks = (props) => {
 
@@ -31,6 +34,9 @@ const HowItWorks = (props) => {
 
     const selectGraph = (type) => {
         setGraphType(type);
+    }
+
+    useEffect(() => {
         if (graphType === "danceability") {
             document.getElementById("graph-danceability").style.color = "var(--blue-color-6)";
             document.getElementById("graph-valence").style.color = "var(--off-white-color)";
@@ -61,8 +67,7 @@ const HowItWorks = (props) => {
             document.getElementById("graph-energy").style.color = "var(--off-white-color)";
             document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
         }
-    }
-    
+    }, [graphType])
 
     return (
         <div className="hiw-root">
@@ -287,7 +292,12 @@ const HowItWorks = (props) => {
                         <div className="under-bar"></div>
                         <div className="hiw-flex">
                             <div className="graphics">
-                                <img className="hiw-graph"src={danceability_graph} alt="danceability"></img>
+                                <img className="hiw-graph" 
+                                    src={graphType === "danceability" ? danceability_graph :
+                                            graphType === "valence" ? valence_graph :
+                                            graphType === "energy" ? energy_graph :
+                                            graphType === "popularity" ? popularity_graph :
+                                            danceability_graph} alt={graphType}></img>
                                 <div className="graph-select">
                                     <h3 className="graph-type" id="graph-danceability" onClick={()=>selectGraph("danceability")}>Danceability</h3>
                                     <h3 className="graph-type" id="graph-valence" onClick={()=>selectGraph("valence")}>Valence</h3>

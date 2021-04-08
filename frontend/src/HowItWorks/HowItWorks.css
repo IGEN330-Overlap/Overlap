@@ -370,7 +370,7 @@
 }
 .hiw-musicstats .graph-type:hover {
     cursor: pointer;
-    color: var(--blue-color-5);
+    color: var(--blue-color-4);
 }
 .hiw-musicstats p {
     color: var(--off-white-color);
@@ -394,6 +394,7 @@
 }
 .hiw-musicstats .hiw-graph {
     height: auto;
+    margin-left: 20px;
     width: 95%;
 }
 
