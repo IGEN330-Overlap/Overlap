@@ -176,7 +176,7 @@ export const GroupTopStats = ({groupUsers}) => {
                     <Carousel interval={null} indicators={false} defaultActiveIndex={0} className="top-tracks-carousel">
                         {carouselTracks.map((element, i) => (
                             <Carousel.Item key={i}>
-                            <div className="group-tracks">{element}</div>
+                                <div className="group-tracks">{element}</div>
                             </Carousel.Item>
                         ))}
                     </Carousel>

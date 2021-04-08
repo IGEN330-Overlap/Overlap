@@ -20,6 +20,7 @@ export const PlaylistPage = (props) => {
 
     const [playlistName, setPlaylistName] = useState("");
     const [playlistTracks, setPlaylistTracks] = useState([]);
+    const [playlistType, setPlaylistType] = useState('');
     const [groupCode, setGroupCode] = useState("");
     const [contributors, setPlaylistContributors] = useState([]);
     const [createdDate, setCreatedDate] = useState("");
@@ -42,6 +43,7 @@ export const PlaylistPage = (props) => {
                         setGroupCode(group.groupCode);
                         setCreatedDate(playlist.createDate);
                         setPlaylistContributors(playlist.contributors);
+                        setPlaylistType(playlist.playlistType);
                     }
                     return playlistTracks;
                 })
@@ -63,10 +65,16 @@ export const PlaylistPage = (props) => {
         return <ScreenOverlay text="Collecting your playlist tracks..." />;
     } else if (checkMember && !isLoading) {
         return (
-            <div className="playlist-landing-root">
-                    <Navbar1 />
+            <div className="playlist-landing-root" 
+                style={playlistType === "top" ? {backgroundColor: "var(--primary-color-main)"} :
+                        playlistType === "happy" ? {backgroundColor: "#c4e0fa"} :
+                        playlistType === "sad" ? {backgroundColor: "#d3cce2"} :
+                        playlistType === "chill" ? {backgroundColor: "#cdb49b"} :
+                        playlistType === "party" ? {backgroundImage: "linear-gradient(to bottom right, #ffe177, #ebd68c)"} :
+                        {backgroundColor: "var(--primary-color-main)"}}>
+                    <Navbar1 playlistType={playlistType}/>
                 <div className="backToProfile">
-                    <Link to={"/authorized/group/" + groupCode} className="pp_backArrow">
+                    <Link to={"/authorized/group/" + groupCode} className={playlistType === "top" ? "pp_backArrow-dark" : "pp_backArrow"}>
                         <svg
                             className="pp_backArrow_svg"
                             xmlns="http://www.w3.org/2000/svg"  
@@ -78,7 +86,7 @@ export const PlaylistPage = (props) => {
                         Back to Group Profile
                     </Link>
                 </div>
-                <div className="playlist-page-content">
+                <div className="playlist-page-content" id="background-color">
                     <div className="playlist-components">
                         <div className="playlist-page-name">
                             <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode} />
@@ -91,10 +99,18 @@ export const PlaylistPage = (props) => {
                                 </div>
                                 </div>
                             ))} 
+                            <PlaylistTitle 
+                                playlistName={playlistName} 
+                                playlistID={playlistID} 
+                                playlistType = {playlistType}
+                                groupCode={groupCode} 
+                                createdDate={createdDate}/>
                         </div>
                         </div>
                         <div className="playlist-page-tracks-container">
-                            <PlaylistTracks playlistTracks={playlistTracks} />
+                            <PlaylistTracks 
+                                playlistTracks={playlistTracks} 
+                                playlistType={playlistType}/>
                         </div>
                     </div>
                 </div>
@@ -125,3 +141,5 @@ export const PlaylistPage = (props) => {
         return <div className="landing-root-base"></div>;
     }
 };
+
+

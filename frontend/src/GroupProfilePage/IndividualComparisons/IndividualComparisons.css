@@ -19,7 +19,13 @@
     margin-bottom: 5px;
     width: fit-content;
 }
-.under-bar{
+.my-insights .under-bar{
+    margin-left: 10px;
+    width: 75px;
+    height: 3px;
+    background-color: var(--off-white-color);
+}
+.comparisons .under-bar{
     margin-left: 10px;
     width: 75px;
     height: 3px;
@@ -100,8 +106,8 @@
 
 .top-artists .artist-icon {
     margin-top: 3px;
-    height: clamp(86px,10vw,110px);
-    width: clamp(86px,10vw,110px);
+    height: clamp(83px,10vw,110px);
+    width: clamp(83px,10vw,110px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 10px;
@@ -229,7 +235,7 @@
         width: 92px;
     }
     .top-artists .artist-name {
-        width: 86.4px;
+        width: 85px;
     }
     .top-artists .artist-name h5{
         width: 11px;
