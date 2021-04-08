@@ -4,7 +4,6 @@
     min-height: 100vh;
     height: fit-content;
     width: auto;
-    /* background-color: #8FCED9; */
     background-color: #79cced;
     display: flex;
     align-items: center;
@@ -133,17 +132,6 @@
 .user-info:hover .user-name {
     opacity: 1;
 }
-/* .user-position .user-stat {
-    margin-top: 30px;
-    opacity: 0;
-    color: var(--off-white-color);
-    font-size: 15px;
-    font-weight: 550;
-    text-align: center;
-}
-.user-info:hover .user-stat {
-    opacity: 1;
-} */
 
 /* text settings */
 .musical-profile-root strong {
@@ -318,17 +306,6 @@
     .user-info:hover .user-name {
         opacity: 1;
     }
-    /* .user-position .user-stat {
-        margin-top: 30px;
-        opacity: 0;
-        color: var(--off-white-color);
-        font-size: 15px;
-        font-weight: 550;
-        text-align: center;
-    }
-    .user-info:hover .user-stat {
-        opacity: 1;
-    } */
     
     /* text settings */
     .musical-profile-root strong {
