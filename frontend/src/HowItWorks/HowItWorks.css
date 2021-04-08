@@ -362,6 +362,16 @@
 .hiw-musicstats h2 {
     color: var(--off-white-color);
 }
+.hiw-musicstats h3 {
+    color: var(--off-white-color);
+    font-size: 17px;
+    font-weight: 550;
+    padding: 8px;
+}
+.hiw-musicstats .graph-type:hover {
+    cursor: pointer;
+    color: var(--blue-color-5);
+}
 .hiw-musicstats p {
     color: var(--off-white-color);
 }
@@ -372,7 +382,20 @@
     color: var(--blue-color-6);
     font-weight: 550;
 }
-
+.hiw-musicstats .graphics {
+    flex-direction: column;
+    height: 100%;
+}
+.hiw-musicstats .graph-select {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+.hiw-musicstats .hiw-graph {
+    height: auto;
+    width: 95%;
+}
 
 /* text styles */
 .hiw-info h1 {

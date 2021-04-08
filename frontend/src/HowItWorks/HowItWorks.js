@@ -6,6 +6,8 @@ import small_logo from "../GroupProfilePage/MemberDisplay/logo small.svg";
 
 import Collapse from "react-bootstrap/Collapse";
 
+import danceability_graph from "./danceability.png";
+
 const HowItWorks = (props) => {
 
     // get screen width to determine how many items in the carousel
@@ -24,6 +26,43 @@ const HowItWorks = (props) => {
     const [openSad, setSadOpen] = useState(false);
     const [openChill, setChillOpen] = useState(false);
     const [openParty, setPartyOpen] = useState(false);
+
+    const [graphType, setGraphType] = useState("danceability");
+
+    const selectGraph = (type) => {
+        setGraphType(type);
+        if (graphType === "danceability") {
+            document.getElementById("graph-danceability").style.color = "var(--blue-color-6)";
+            document.getElementById("graph-valence").style.color = "var(--off-white-color)";
+            document.getElementById("graph-energy").style.color = "var(--off-white-color)";
+            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+        }
+        else if (graphType === "valence") {
+            document.getElementById("graph-valence").style.color = "var(--blue-color-6)";
+            document.getElementById("graph-danceability").style.color = "var(--off-white-color)";
+            document.getElementById("graph-energy").style.color = "var(--off-white-color)";
+            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+        }
+        else if (graphType === "energy") {
+            document.getElementById("graph-energy").style.color = "var(--blue-color-6)";
+            document.getElementById("graph-valence").style.color = "var(--off-white-color)";
+            document.getElementById("graph-danceability").style.color = "var(--off-white-color)";
+            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+        }
+        else if (graphType === "popularity") {
+            document.getElementById("graph-popularity").style.color = "var(--blue-color-6)";
+            document.getElementById("graph-valence").style.color = "var(--off-white-color)";
+            document.getElementById("graph-energy").style.color = "var(--off-white-color)";
+            document.getElementById("graph-danceability").style.color = "var(--off-white-color)";
+        }
+        else {
+            document.getElementById("graph-danceability").style.color = "var(--blue-color-6)";
+            document.getElementById("graph-valence").style.color = "var(--off-white-color)";
+            document.getElementById("graph-energy").style.color = "var(--off-white-color)";
+            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+        }
+    }
+    
 
     return (
         <div className="hiw-root">
@@ -248,7 +287,17 @@ const HowItWorks = (props) => {
                         <div className="under-bar"></div>
                         <div className="hiw-flex">
                             <div className="graphics">
-
+                                <img className="hiw-graph"src={danceability_graph} alt="danceability"></img>
+                                <div className="graph-select">
+                                    <h3 className="graph-type" id="graph-danceability" onClick={()=>selectGraph("danceability")}>Danceability</h3>
+                                    <h3 className="graph-type" id="graph-valence" onClick={()=>selectGraph("valence")}>Valence</h3>
+                                    <h3 className="graph-type" id="graph-energy" onClick={()=>selectGraph("energy")}>Energy</h3>
+                                    <h3 className="graph-type" id="graph-popularity" onClick={()=>selectGraph("popularity")}>Popularity</h3>
+                                    {/* <h3>Acoustiness</h3>
+                                    <h3>Instrumentalness</h3>
+                                    <h3>Liveness</h3>
+                                    <h3>Speechiness</h3> */}
+                                </div>
                             </div>
                             <div className="text-box">
                                 <p>
