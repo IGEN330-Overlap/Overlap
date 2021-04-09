@@ -18,3 +18,20 @@
     margin-top: 30px;
     height: fit-content;
 }
+
+.github-logo {
+    width: clamp(14px, 3vw, 20px);
+    height: clamp(14px, 3vw, 20px);
+    margin-left: 8px;
+}
+
+.github-link {
+    width: fit-content;
+    fill: var(--off-white-color);
+    margin-top: 4px;
+}
+
+.about-name-container .github-link:hover {
+    fill: var(--blue-color-1);
+    color: var(--blue-color-1);
+}
