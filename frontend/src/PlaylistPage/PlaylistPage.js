@@ -89,22 +89,24 @@ export const PlaylistPage = (props) => {
                 <div className="playlist-page-content" id="background-color">
                     <div className="playlist-components">
                         <div className="playlist-page-name">
-                            <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode} />
-                            <div className= "contributor-component">
-                            {contributorsInfo.map((contributor,i) => (
-                                <div className="contributor-container" key={i}>
-                                <img className="contributor-icon" src={contributor.icon} alt={contributor}></img>
-                                <div className="contributor-name">
-                                    <strong>{contributor.name}</strong>
-                                </div>
-                                </div>
-                            ))} 
+                            {/* <PlaylistTitle playlistName={playlistName} playlistID={playlistID} groupCode={groupCode} /> */}
+                            <div className= "component">
                             <PlaylistTitle 
                                 playlistName={playlistName} 
                                 playlistID={playlistID} 
                                 playlistType = {playlistType}
                                 groupCode={groupCode} 
                                 createdDate={createdDate}/>
+                                <div className = "contributor-component">
+                                {contributorsInfo.map((contributor,i) => (
+                                <div className="contributor-container" key={i}>
+                                <img className="contributor-icon" src={contributor.icon} alt={contributor}></img>
+                                <div className="contributor-name">
+                                    <strong>{contributor.name}</strong>
+                                </div>
+                                </div>
+                            ))}
+                            </div>
                         </div>
                         </div>
                         <div className="playlist-page-tracks-container">

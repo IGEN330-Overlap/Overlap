@@ -114,7 +114,7 @@
 }
 
 .contributor-container:hover .contributor-icon {
-    opacity: 0.4;
+    opacity: 0.8;
     cursor: pointer;
 }
 
