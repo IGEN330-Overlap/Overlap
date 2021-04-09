@@ -30,6 +30,10 @@ const groupSchema = new Schema(
           type: String,
           required: true,
         },
+        playlistCode: {
+          type: String,
+          required: true,
+        },
         tracks: [
           {
             trackName: {
