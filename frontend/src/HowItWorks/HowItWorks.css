@@ -57,6 +57,9 @@
 .hiw-insights .under-bar {
     background-color: var(--off-white-color);
 }
+.hiw-insights .graphics{
+    height: 19vw;
+}
 .hiw-insights .graphics .user-bubble {
     position: relative;
     background-color: var(--blue-color-1);
@@ -421,7 +424,9 @@
         margin-bottom: 1.5rem;
         width: 100%;
     }
-
+    .hiw-insights .graphics{
+        height: 180px;
+    }
     .hiw-insights .graphics .user-bubble {
         height: 170px;
         width: 170px;
