@@ -39,7 +39,7 @@
     transform: rotate(180deg);
 }
 
-.under-bar {
+.group-name-container .under-bar {
     margin-left: 10px;
     width: 75px;
     height: 3px;

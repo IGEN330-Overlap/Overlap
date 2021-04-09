@@ -87,6 +87,9 @@ const Navbar1 = ({playlistType}) => {
               </Nav.Link>
             )}
 
+            <Nav.Link as={Link} to="/how-it-works" bg="white">
+              How It Works
+            </Nav.Link>
             <Nav.Link as={Link} to="/about" bg="white">
               About Us
             </Nav.Link>

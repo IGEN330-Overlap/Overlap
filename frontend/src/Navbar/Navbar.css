@@ -100,3 +100,9 @@
 .navbar-stuff-dark .navbar-dark .navbar-nav .nav-link:hover {
     color: var(--primary-color-7);
 }
+
+@media (max-width: 575px) {
+    .navbar-brand{
+        margin-left: 0px;
+    }
+}
