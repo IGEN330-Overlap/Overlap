@@ -81,10 +81,10 @@ const PlaylistTitle = ({playlistName, playlistID, playlistType, groupCode, creat
             </div>
             <div className="playlist-info-save">
                 <div className="title-container">
-                    <h2 className={playlistType === "top" ? "white" : "dark"}> {playlistName} </h2>
+                    <h2 className={playlistType === "top" || playlistType === "party" ? "white" : "dark"}> {playlistName} </h2>
                 </div>
 
-                {createdDate !== undefined ? <h4 className={playlistType === "top" ? "created-date-dark" : "created-date"}><strong>Created On: {createdMonth + " " + createdDay + ", " + createdYear}</strong></h4> : ''}
+                {createdDate !== undefined ? <h4 className={playlistType === "top" || playlistType === "party" ? "created-date-dark" : "created-date"}><strong>Created On: {createdMonth + " " + createdDay + ", " + createdYear}</strong></h4> : ''}
                 <div className="btn btn-sm playlist-button" 
                     onClick={() => {
                         addToSpotify();

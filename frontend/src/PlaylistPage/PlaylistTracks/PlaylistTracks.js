@@ -20,14 +20,14 @@ export const PlaylistTracks = ({playlistTracks, playlistType}) => {
             <div className="playlist-page-tracks">
                 <div className="track-display">
                     {trackInfo.map((track,i) => (
-                        <div key={i} className={playlistType === "top" ? "track-container-dark" : "track-container"} onClick={()=>openSong(track.url)}>
-                            <div className={playlistType === "top" ? "track-number-dark" : "track-number"}>
+                        <div key={i} className={playlistType === "top" || playlistType === "party" ? "track-container-dark" : "track-container"} onClick={()=>openSong(track.url)}>
+                            <div className={playlistType === "top" || playlistType === "party" ? "track-number-dark" : "track-number"}>
                                 <h3><strong>{[i+1]}</strong></h3>
                             </div>
                             <img className="track-icon" src={track.icon} alt={track.track}/>
                             <div className="track-info">    
                                 <h3><strong>{track.track}</strong></h3>
-                                <div className={playlistType === "top" ? "track-artist-dark" : "track-artist"}>
+                                <div className={playlistType === "top" || playlistType === "party" ? "track-artist-dark" : "track-artist"}>
                                     <strong>{track.artist}</strong>
                                 </div>
                             </div>
