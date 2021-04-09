@@ -82,12 +82,14 @@ const GroupProfilePage = (props) => {
     }
   }, [groupCode, groupList, groupName, refreshTrigger]);
 
-  // get screen width to determine how many items in the carousel
+  // get screen width and height
   const [width, getWidth] = useState(window.innerWidth)
+  const [height, getHeight] = useState(window.innerHeight)
 
   useEffect(() => {
       const handleResize = () => {
           getWidth(window.innerWidth)
+          getHeight(window.innerHeight)
       }
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
@@ -190,8 +192,22 @@ const GroupProfilePage = (props) => {
                   refreshToken={refreshToken}
                   setLoading={setLoading}
                 />
-              </div>
+              </div>              
             </div>
+            {width > 600 ? 
+              <div className="gp-scroll">
+                {height > 720 ? "Scroll for more!" : null}
+                <svg
+                  className="gp-downArrow"
+                  xmlns="http://www.w3.org/2000/svg"  
+                  viewBox="0 0 24 24" >
+                  <path d="M0 0h24v24H0z" 
+                  fill="none"/>
+                  <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
+                </svg>
+              </div>
+              : null
+            }
           </div>
       </div>
 

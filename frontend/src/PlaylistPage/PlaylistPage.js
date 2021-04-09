@@ -61,7 +61,7 @@ export const PlaylistPage = (props) => {
                         playlistType === "happy" ? {backgroundColor: "#c4e0fa"} :
                         playlistType === "sad" ? {backgroundColor: "#d3cce2"} :
                         playlistType === "chill" ? {backgroundColor: "#cdb49b"} :
-                        playlistType === "party" ? {backgroundImage: "linear-gradient(to bottom right, #ffe177, #ebd68c)"} :
+                        playlistType === "party" ? {backgroundColor: "#1e3f66"} :
                         {backgroundColor: "var(--primary-color-main)"}}>
                     <Navbar1 playlistType={playlistType}/>
                 <div className="backToProfile">

@@ -9,7 +9,8 @@ import Collapse from "react-bootstrap/Collapse";
 import danceability_graph from "./danceability.png";
 import valence_graph from "./valence.png";
 import energy_graph from "./energy.png";
-import popularity_graph from "./popularity.png"
+// import popularity_graph from "./popularity.png";
+import acousticness_graph from "./acoustiness.png";
 
 const HowItWorks = (props) => {
 
@@ -41,22 +42,22 @@ const HowItWorks = (props) => {
             document.getElementById("graph-danceability").style.color = "var(--blue-color-6)";
             document.getElementById("graph-valence").style.color = "var(--off-white-color)";
             document.getElementById("graph-energy").style.color = "var(--off-white-color)";
-            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+            document.getElementById("graph-acousticness").style.color = "var(--off-white-color)";
         }
         else if (graphType === "valence") {
             document.getElementById("graph-valence").style.color = "var(--blue-color-6)";
             document.getElementById("graph-danceability").style.color = "var(--off-white-color)";
             document.getElementById("graph-energy").style.color = "var(--off-white-color)";
-            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+            document.getElementById("graph-acousticness").style.color = "var(--off-white-color)";
         }
         else if (graphType === "energy") {
             document.getElementById("graph-energy").style.color = "var(--blue-color-6)";
             document.getElementById("graph-valence").style.color = "var(--off-white-color)";
             document.getElementById("graph-danceability").style.color = "var(--off-white-color)";
-            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+            document.getElementById("graph-acousticness").style.color = "var(--off-white-color)";
         }
-        else if (graphType === "popularity") {
-            document.getElementById("graph-popularity").style.color = "var(--blue-color-6)";
+        else if (graphType === "acousticness") {
+            document.getElementById("graph-acousticness").style.color = "var(--blue-color-6)";
             document.getElementById("graph-valence").style.color = "var(--off-white-color)";
             document.getElementById("graph-energy").style.color = "var(--off-white-color)";
             document.getElementById("graph-danceability").style.color = "var(--off-white-color)";
@@ -65,7 +66,7 @@ const HowItWorks = (props) => {
             document.getElementById("graph-danceability").style.color = "var(--blue-color-6)";
             document.getElementById("graph-valence").style.color = "var(--off-white-color)";
             document.getElementById("graph-energy").style.color = "var(--off-white-color)";
-            document.getElementById("graph-popularity").style.color = "var(--off-white-color)";
+            document.getElementById("graph-acousticness").style.color = "var(--off-white-color)";
         }
     }, [graphType])
 
@@ -296,13 +297,13 @@ const HowItWorks = (props) => {
                                     src={graphType === "danceability" ? danceability_graph :
                                             graphType === "valence" ? valence_graph :
                                             graphType === "energy" ? energy_graph :
-                                            graphType === "popularity" ? popularity_graph :
+                                            graphType === "acousticness" ? acousticness_graph :
                                             danceability_graph} alt={graphType}></img>
                                 <div className="graph-select">
                                     <h3 className="graph-type" id="graph-danceability" onClick={()=>selectGraph("danceability")}>Danceability</h3>
                                     <h3 className="graph-type" id="graph-valence" onClick={()=>selectGraph("valence")}>Valence</h3>
                                     <h3 className="graph-type" id="graph-energy" onClick={()=>selectGraph("energy")}>Energy</h3>
-                                    <h3 className="graph-type" id="graph-popularity" onClick={()=>selectGraph("popularity")}>Popularity</h3>
+                                    <h3 className="graph-type" id="graph-acousticness" onClick={()=>selectGraph("acousticness")}>Acousticness</h3>
                                     {/* <h3>Acoustiness</h3>
                                     <h3>Instrumentalness</h3>
                                     <h3>Liveness</h3>
