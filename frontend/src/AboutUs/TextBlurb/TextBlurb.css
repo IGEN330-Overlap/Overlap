@@ -15,8 +15,13 @@
 }
 
 .sub-text{
-    margin-top: 30px;
+    margin-top: 18px;
     height: fit-content;
+    margin-bottom: 0px;
+}
+
+.text-continued {
+    margin-top: 0px;
 }
 
 .github-logo {
@@ -25,13 +30,24 @@
     margin-left: 8px;
 }
 
-.github-link {
+.about-name-container .github-link {
     width: fit-content;
-    fill: var(--off-white-color);
+    fill: var(--blue-color-1);
+    color: var(--blue-color-1);
     margin-top: 4px;
+    display: inline;
 }
 
 .about-name-container .github-link:hover {
-    fill: var(--blue-color-1);
+    fill: var(--blue-color-3);
+    color: var(--blue-color-3);
+}
+
+.emailLink{
     color: var(--blue-color-1);
+    display: inline;
+}
+
+.emailLink:hover {
+    color: var(--blue-color-3)
 }

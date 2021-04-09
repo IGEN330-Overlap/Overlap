@@ -79,6 +79,54 @@
     cursor: pointer;
 }
 
+.contributor-component {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 3vh;
+    padding-left: 1vh;
+}
+
+.contributor-container {
+   position: relative;
+   align-items: center;
+   width: auto;
+}
+
+.contributor-icon {
+    height: clamp(40px, 7.5vw, 60px);
+    width: clamp(40px, 7.5vw, 60px);
+    object-fit: cover;
+    object-position: 50%;
+    border-radius: 50rem;
+    transition: opacity 0.45s;
+    padding: 2px;
+    
+}
+
+.contributor-name {
+    font-size: clamp(7px, 1.75vw, 11px);
+    color:transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.45s;
+}
+
+.contributor-container:hover .contributor-icon {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.contributor-container:hover .contributor-name {
+    color: var(--off-white-color);
+    cursor: pointer;
+}
+
+
+
 .error-return-arrow {
     width: 28px;
     height: 28px;
