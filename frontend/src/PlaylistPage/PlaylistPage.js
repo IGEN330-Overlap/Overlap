@@ -82,11 +82,11 @@ export const PlaylistPage = (props) => {
                         playlistType === "happy" ? {backgroundColor: "#c4e0fa"} :
                         playlistType === "sad" ? {backgroundColor: "#d3cce2"} :
                         playlistType === "chill" ? {backgroundColor: "#cdb49b"} :
-                        playlistType === "party" ? {backgroundColor: "#1e3f66"} :
+                        playlistType === "party" ? {backgroundColor: "#A35151"} :
                         {backgroundColor: "var(--primary-color-main)"}}>
                     <Navbar1 playlistType={playlistType}/>
                 <div className="backToProfile">
-                    <Link to={"/authorized/group/" + groupCode} className={playlistType === "top" ? "pp_backArrow-dark" : "pp_backArrow"}>
+                    <Link to={"/authorized/group/" + groupCode} className={playlistType === "top" || playlistType === "party" ? "pp_backArrow-dark" : "pp_backArrow"}>
                         <svg
                             className="pp_backArrow_svg"
                             xmlns="http://www.w3.org/2000/svg"  

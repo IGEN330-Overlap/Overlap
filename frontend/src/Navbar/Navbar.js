@@ -51,11 +51,11 @@ const Navbar1 = ({playlistType}) => {
   groupList.sort(sortGroupList);
 
   return (
-    <div className={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad" || playlistType === "party") ? "navbar-stuff-dark" : "navbar-stuff"}>
+    <div className={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad") ? "navbar-stuff-dark" : "navbar-stuff"}>
       <Navbar bg="var(--primary-color-main)" variant="dark" expand="md">
         {isLoggedIn && (
           <Navbar.Brand as={Link} to="/authorized/">
-            <img width="75" height="30" src={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad" || playlistType === "party") ? logo_dark : logo} alt="logo" />
+            <img width="75" height="30" src={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad") ? logo_dark : logo} alt="logo" />
           </Navbar.Brand>
         )}
         {!isLoggedIn && (
