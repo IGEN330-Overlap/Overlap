@@ -3,10 +3,11 @@
 
 .nav-item {
     color:white;
-    margin-right: 20px;
+    margin-right: 4px;
 }
 .nav-link{
     color: var(--off-white-color);
+    margin-right: 8px;
 }
 .nav-link:hover{
     text-decoration: none;

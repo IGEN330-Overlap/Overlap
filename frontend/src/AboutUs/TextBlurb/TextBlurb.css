@@ -1,7 +1,7 @@
 @import url(../../variables.css);
 
 .about-name-container {
-    /* height: clamp(25px, 4vw, 40px) */
+    height: fit-content;
 }
 
 .about-name-container .big-text {
@@ -11,14 +11,43 @@
 
 .about-name-container .sub-text {
     color: var(--off-white-color);
-    font-size: clamp(5px, 4vw, 20px);
+    font-size: clamp(14px, 3vw, 20px);
 }
 
 .sub-text{
-    margin-top: 30px;
+    margin-top: 18px;
+    height: fit-content;
+    margin-bottom: 0px;
+}
+
+.text-continued {
+    margin-top: 0px;
+}
+
+.github-logo {
+    width: clamp(14px, 3vw, 20px);
+    height: clamp(14px, 3vw, 20px);
+    margin-left: 8px;
+}
+
+.about-name-container .github-link {
+    width: fit-content;
+    fill: var(--blue-color-1);
+    color: var(--blue-color-1);
+    margin-top: 4px;
+    display: inline;
+}
+
+.about-name-container .github-link:hover {
+    fill: var(--blue-color-3);
+    color: var(--blue-color-3);
 }
 
 .emailLink{
     color: var(--blue-color-1);
-    /* text-decoration: underline; */
+    display: inline;
+}
+
+.emailLink:hover {
+    color: var(--blue-color-3)
 }

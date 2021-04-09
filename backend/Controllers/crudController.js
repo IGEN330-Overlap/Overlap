@@ -7,16 +7,10 @@ let Group = require("../Models/group.model");
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
 const backend_url = process.env.BACKEND_URL;
-const scripts = require("../scripts.js");
+
+const { generateCode } = require("../scripts.js"); // import generateCode function
 
 const redirect_uri = backend_url + "callback"; // Your redirect uri
-
-// instantiate spotifyApi object
-var spotifyApi = new SpotifyWebApi({
-  clientId: client_id,
-  clientSecret: client_secret,
-  redirectUri: redirect_uri,
-});
 
 /**
  * GET method to collect a users information
@@ -54,7 +48,8 @@ exports.getUser = async (req, res) => {
  * @param {} res
  */
 exports.createGroup = async (req, res) => {
-  generatedGroupCode = scripts.generateGroupCode();
+  generatedGroupCode = generateCode(7); // Creates code length 7 for the group
+
   //create a new instance of the group model named newGroup
   const newGroup = new Group({
     //format for storing data for the group model
