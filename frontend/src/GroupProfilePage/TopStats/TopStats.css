@@ -223,6 +223,11 @@
     object-position: 50%;
     border-radius: 10px;
 }
+
+.top-artists-root .top-artist-podiums .artist-podium:hover{
+    cursor: pointer;
+}
+
 .top-artists-root .artist-podium {
     display: flex;
     flex-direction: column;
@@ -269,19 +274,19 @@
     text-align: center;
     transition: 0.2s;
 }
-.artist-podium .podium-3:hover {
+#third-place:hover > .podium-3 {
     height: 110px;
 }
-.artist-podium .podium-1:hover {
+#first-place:hover > .podium-1{
     height: 180px;
 }
-.artist-podium .podium-2:hover {
+#second-place:hover > .podium-2{
     height: 145px;
 }
-.artist-podium .podium-5:hover {
+#fifth-place:hover > .podium-5{
     height: 70px;
 }
-.artist-podium .podium-4:hover {
+#fourth-place:hover > .podium-4{
     height: 90px;
 }
 .top-artists-root .artist-podium strong {

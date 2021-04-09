@@ -2,14 +2,14 @@
 
 .text-blurb {
     margin-right: 4vw;
-    height: 350px;
 }
 
 .display-babies {
+    display: flex;
     margin-right: 2vw;
-    padding-top: 20px;
-    min-height: 100vh;
+    margin-top: 20px;
     height: fit-content;
+    justify-content: center;
 }
 
 .about {

@@ -90,16 +90,16 @@ const HowItWorks = (props) => {
                                 <h2><strong>My Insights</strong></h2>
                                 <p>
                                     Your insights show you your top three most listened to tracks and artists. 
-                                    We take data from your <span>short-term</span>, <span>medium-term</span>, and <span>long-term</span> listening. 
+                                    We take data from your <span>short-term</span>, <span>medium-term</span>, and <span>long-term</span> listening habits. 
                                     In order to make the information dynamic and relevant to you, we prioritize your short-term and medium-term songs and artists.
-                                    Every time you log in, we can collect new data from you. So you may notice that, if you log in a few weeks from now, your top tracks and artists have changed.
+                                    Every time you log in, we can collect new data from you. So you may notice that, if you log in a few weeks from now, your top tracks and artists may have changed.
                                 </p>
                                 <h2><strong>Comparisons</strong></h2>
                                 <p>
                                     When you click on a friend, you compare <span>your top tracks and artists</span> with <span>their top tracks and artists</span>.
-                                    The songs and artists that you see here are the <span>overlap</span> in each of your most listened to music.
-                                    We wanted to give you a little bit of insight into what each of your friends listen to and how they compare to your listening habits.
-                                    If it tells you you don't have any in common, that doesn't mean you don't listen to any of the same music!
+                                    The songs and artists that you see here are the <span>overlap</span> between your top ~125 tracks and top ~80 artists with theirs.
+                                    We wanted to give you a little bit of insight into what each of your friends listens to and how they compare to your listening habits.
+                                    If it tells you that you don't have any in common, that doesn't mean you don't listen to any of the same music!
                                     It just means that, currently, there is no overlap in your <span>top</span> tracks or artists.
                                 </p>
                             </div>
@@ -232,7 +232,7 @@ const HowItWorks = (props) => {
                                     Every artist is assigned <span>five different genres</span>. 
                                     In order to determine the top genres within the group, we first collect the individual genres from <span>each person's list of top artists</span>.
                                     We also count how many times each genre appears for that user. 
-                                    The top genres are then added together to create a combined list of the genres within the group, as well as how many artists are associated with that genre.
+                                    The top genres are then added together to create a combined list of genres within the group, as well as how many artists are associated with that genre.
                                     <br></br><br></br>
                                     The percentage that you see next to each bar is actually only out of the <span>top quarter of the full list of genres</span>. 
                                     We chose to do this because, especially with larger groups, it is likely that only the top 25% of genres are relevant to the majority of people.
@@ -252,16 +252,16 @@ const HowItWorks = (props) => {
                                 <h2><strong>Top Tracks</strong></h2>
                                 <p>
                                     The top tracks displayed are the <span>combined top tracks</span> of everyone in your group. 
-                                    We combine everyone's top tracks information, then count <span>how many times each song appears</span> in the list. 
-                                    Starting with the songs that are in the most people's top tracks, we populate the top tracks display. 
+                                    We combine everyone's top track information, then count <span>how many times each song appears</span>. 
+                                    We populate the Top Tracks display starting with the songs that appear the most frequently across the individual top tracks. 
                                     Within the list of songs that appear the same number of times, there is no particular order to which they are shown.
                                 </p>
                                 <h2><strong>Top Artists</strong></h2>
                                 <p>
                                     The top artists work the same way as the top tracks.
-                                    We combine the top artists of each of the people in your group, then count the <span>number of people that listen to each artist</span>. 
-                                    Again, there is no particular order within the group of artists that appear the same amount of times. 
-                                    If half or more of a group has very similar music taste, it is likely that their top artists will dominate the podium.
+                                    We combine the top artists of all of the people in your group, then count the <span>number of people that listen to each artist</span>. 
+                                    Again, there is no particular order to the artists that have the same number of listeners. 
+                                    If half or more of your group has very similar music taste, it is likely that their top artists will dominate the podium.
                                 </p>  
                             </div>
                             <div className="graphics">
@@ -315,11 +315,11 @@ const HowItWorks = (props) => {
                                     These attributes include <span>danceability, energy, valence, acoustiness, instrumentalness</span> and <span>track popularity</span>, among others. 
                                     We have created a musical profile for you by finding the <span>average</span> of each of these attributes <span>within your top tracks</span>.
                                     Each of these values fall on a scale from 0 to 100, but we found that the distribution is often <span>skewed</span>. 
-                                    Take a look at the average Spotify distributions {width > 780 ? " on the left." : " above."} 
+                                    This can be seen in the average Spotify distributions shown {width > 780 ? " on the left." : " above."} 
                                     <br></br><br></br>
                                     You'll notice that the music stats you see within your group have a much <span>smaller range</span>.  
                                     Each display is <span>scaled</span> to more clearly show you the difference between the average listening habits of your group members.
-                                    Here you can compare how danceable, energetic, sad, happy, or popular your music taste is. 
+                                    Here you can compare how danceable, energetic, sad, happy, or popular your music taste is relative to that of your friends. 
                                 </p>
                             </div>     
                         </div>

@@ -198,28 +198,28 @@ export const GroupTopStats = ({groupUsers}) => {
                     </div>
                     <div className="podium-display">
                         <div className="top-artist-podiums">
-                            <div className="artist-podium">
+                            <div className="artist-podium" id="fourth-place" onClick={()=> groupUniqueArtists[3] ? openArtist(groupUniqueArtists[3].linkURL) : ''}>
                                 <img className="artist-icon" 
                                     src={groupUniqueArtists[3] ? groupUniqueArtists[3].imageURL : 'Unable to find artist'} 
                                     alt={groupUniqueArtists[3] ? groupUniqueArtists[3].artistName : 'Unable to find artist'}
                                 />
                                 <div className="podium-4"><strong>#4</strong></div>
                             </div>
-                            <div className="artist-podium">
+                            <div className="artist-podium" id="second-place" onClick={()=> groupUniqueArtists[1] ? openArtist(groupUniqueArtists[1].linkURL) : ''}>
                                 <img className="artist-icon" 
                                     src={groupUniqueArtists[1] ? groupUniqueArtists[1].imageURL : 'Unable to find artist'} 
                                     alt={groupUniqueArtists[1] ? groupUniqueArtists[1].artistName : 'Unable to find artist'}
                                 />
                                 <div className="podium-2"><strong>#2</strong></div>
                             </div>
-                            <div className="artist-podium">
+                            <div className="artist-podium" id="first-place" onClick={()=> groupUniqueArtists[0] ? openArtist(groupUniqueArtists[0].linkURL) : ''}>
                                 <img className="artist-icon" 
                                     src={groupUniqueArtists[0] ? groupUniqueArtists[0].imageURL : 'Unable to find artist'} 
                                     alt={groupUniqueArtists[0] ? groupUniqueArtists[0].artistName : 'Unable to find artist'}
                                 />
                                 <div className="podium-1"><strong>#1</strong></div>
                             </div>
-                            <div className="artist-podium">
+                            <div className="artist-podium" id="third-place" onClick={()=> groupUniqueArtists[2] ? openArtist(groupUniqueArtists[2].linkURL) : ''}>
                                 <img className="artist-icon" 
                                     src={groupUniqueArtists[2] ? groupUniqueArtists[2].imageURL : 'Unable to find artist'} 
                                     alt={groupUniqueArtists[2] ? groupUniqueArtists[2].artistName : 'Unable to find artist'}
@@ -227,7 +227,7 @@ export const GroupTopStats = ({groupUsers}) => {
                                 <div className="podium-3"><strong>#3</strong></div>
                             </div>
                             
-                            <div className="artist-podium">
+                            <div className="artist-podium" id="fifth-place" onClick={()=> groupUniqueArtists[4] ? openArtist(groupUniqueArtists[4].linkURL) : ''}>
                                 <img className="artist-icon" 
                                     src={groupUniqueArtists[4] ? groupUniqueArtists[4].imageURL : 'Unable to find artist'} 
                                     alt={groupUniqueArtists[4] ? groupUniqueArtists[4].artistName : 'Unable to find artist'}
