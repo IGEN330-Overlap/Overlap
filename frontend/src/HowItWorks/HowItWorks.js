@@ -97,7 +97,7 @@ const HowItWorks = (props) => {
                                 <h2><strong>Comparisons</strong></h2>
                                 <p>
                                     When you click on a friend, you compare <span>your top tracks and artists</span> with <span>their top tracks and artists</span>.
-                                    The songs and artists that you see here are the <span>overlap</span> between your top ~125 tracks and top ~75 artists with theirs.
+                                    The songs and artists that you see here are the <span>overlap</span> between your top ~125 tracks and top ~80 artists with theirs.
                                     We wanted to give you a little bit of insight into what each of your friends listens to and how they compare to your listening habits.
                                     If it tells you that you don't have any in common, that doesn't mean you don't listen to any of the same music!
                                     It just means that, currently, there is no overlap in your <span>top</span> tracks or artists.
