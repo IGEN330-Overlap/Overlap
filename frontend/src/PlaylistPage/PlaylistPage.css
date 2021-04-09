@@ -128,7 +128,6 @@
     cursor: pointer;
 }
 
-
 .error-return-arrow {
     width: 28px;
     height: 28px;
@@ -200,5 +199,9 @@
     .pp_backArrow_svg{
         height:35px;
         width:35px;
+    }
+    .contributor-component{
+        justify-content: flex-start;
+        margin-left: 10px;
     }
 }
