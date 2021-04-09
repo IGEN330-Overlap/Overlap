@@ -4,9 +4,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: auto;
+    width: 100%;
     max-height: 40vh;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     align-content: flex-start;
     height: fit-content;
 }
@@ -14,15 +14,16 @@
 .container-baby {
     width: auto;
     margin-top: 2vh;
-    margin-right: 4vw;
+    margin-right: 1.5vw;
+    margin-left: 1.5vw;
     margin-bottom: 2vh; 
     position: relative;
     text-align: center;
 }
 
 .icon-baby {
-    height: clamp(100px, 25vw, 175px);
-    width: clamp(100px, 25vw, 175px);
+    height: clamp(100px, 12vw, 175px);
+    width: clamp(100px, 12vw, 175px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;
