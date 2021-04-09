@@ -49,7 +49,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
   var checkDuplicate = false;
   var control;
 
-  const [playlistCode, setPlaylistCode] = useState('');
+  // const [playlistCode, setPlaylistCode] = useState('');
 
   //alert for not enough people
   const [showNoUsersAlert, setShowNoUsersAlert] = useState(false);
@@ -231,16 +231,16 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
             })
             .then((data) => {
                 console.log(data);
-                setPlaylistCode(data.data.playlist.playlistCode);
+                // setPlaylistCode(data.data.playlist.playlistCode);
                 // console.log(playlistCode)
-                axios
-                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
-                .then((data) => {
-                  dispatch(updateGroupList(data.data));
-                })
-                .catch((err) => {
-                  console.log(err);
-                })
+                // axios
+                // .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+                // .then((data) => {
+                //   dispatch(updateGroupList(data.data));
+                // })
+                // .catch((err) => {
+                //   console.log(err);
+                // })
                 history.push("/authorized/playlist/"+data.data.playlist.playlistCode);
             })
             .catch((err) => {
@@ -258,14 +258,14 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
             })
             .then((data) => {
                 console.log(data);
-                axios
-                .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
-                .then((data) => {
-                  dispatch(updateGroupList(data.data));
-                })
-                .catch((err) => {
-                  console.log(err);
-                })
+                // axios
+                // .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
+                // .then((data) => {
+                //   dispatch(updateGroupList(data.data));
+                // })
+                // .catch((err) => {
+                //   console.log(err);
+                // })
                 history.push("/authorized/playlist/"+data.data.playlist.playlistCode);
             })
             .catch((err) => {
@@ -275,7 +275,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
 
           // close playlist generate modal
           hideAddPlaylistModal()
-          setLoading(true);
+          // setLoading(true);
         }
     }
     else {
