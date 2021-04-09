@@ -11,6 +11,7 @@
     align-content: flex-start;
 }
 .group-info-root {
+    position: relative;
     background-color: var(--primary-color-main);
     min-height: 100vh;
     height: fit-content;
@@ -138,6 +139,29 @@
     position: relative;
     z-index: 1;
 }
+.group-info-root .gp-scroll {
+    position: absolute;
+    display: flex;
+    width: 10vw;
+    min-width: fit-content;
+    flex-direction: column;
+    align-items: center;
+    color: var(--neutral-color-5);
+    font-size: clamp(15px, 1.25vw, 20px);
+    font-weight: 550;
+    right: 7%;
+    bottom: 5%;
+}
+.group-info-root .gp-downArrow {
+    height: clamp(34px, 2vw, 50px);
+    width:  clamp(34px, 2vw, 50px);
+    fill: var(--neutral-color-5);
+}
+.group-info-root .gp-scroll:hover {
+    animation: bounce 1.5s infinite;
+    animation-timing-function: ease-in-out;
+}
+
 .member-display {
     position: relative;
     width: 45vw;
@@ -150,7 +174,7 @@
     position: relative;
     margin-top: clamp(40px, 4vh, 50px);
     margin-left: 4vw;
-    margin-bottom: 16vh;
+    /* margin-bottom: 16vh; */
     width: 45vw;
     animation-name: playlistanimation;
     animation-duration: 3.5s;
@@ -167,7 +191,15 @@
     animation-duration: 2.75s;
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
-
+@keyframes bounce {
+    0%,  
+    100% {
+        transform: translateY(0);
+    } 
+    50% {
+        transform: translateY(-10px);
+    }
+}
 @keyframes navbaropacity {
     from {
         background-color: var(--primary-color-main);
@@ -278,5 +310,8 @@
 @media (max-height: 720px) {
     .component-box {
         height: 5px;
+    }
+    .playlist-carousel {
+        margin-bottom: 24vh;
     }
 }
