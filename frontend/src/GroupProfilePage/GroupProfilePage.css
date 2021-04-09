@@ -156,10 +156,10 @@
     height: clamp(34px, 2vw, 50px);
     width:  clamp(34px, 2vw, 50px);
     fill: var(--neutral-color-5);
-    transform: rotate(-90deg);
 }
-.group-info-root .gp-downArrow {
-    cursor: default;
+.group-info-root .gp-scroll:hover {
+    animation: bounce 1.5s infinite;
+    animation-timing-function: ease-in-out;
 }
 
 .member-display {
@@ -191,7 +191,15 @@
     animation-duration: 2.75s;
     animation-timing-function: cubic-bezier(0, 0.46, 0.74, 1.13);
 }
-
+@keyframes bounce {
+    0%,  
+    100% {
+        transform: translateY(0);
+    } 
+    50% {
+        transform: translateY(-10px);
+    }
+}
 @keyframes navbaropacity {
     from {
         background-color: var(--primary-color-main);
