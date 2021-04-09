@@ -68,7 +68,8 @@ const Navbar1 = ({playlistType}) => {
           <Nav className="mr-auto">
             {isLoggedIn && (
               <NavDropdown title="My Groups" id="basic-nav-dropdown">
-                {groupList.map((group, i) => (
+                {groupList.length !== 0 ? 
+                  groupList.map((group, i) => (
                   <div key={i}>
                     <NavDropdown.Item
                       as={Link}
@@ -77,7 +78,12 @@ const Navbar1 = ({playlistType}) => {
                       {group.groupName}
                     </NavDropdown.Item>
                   </div>
-                ))}
+                ))
+                : <NavDropdown.Item 
+                    as={Link}
+                    to={"/authorized/"}>
+                      Create/Join a Group
+                  </NavDropdown.Item>}
               </NavDropdown>
             )}
             
