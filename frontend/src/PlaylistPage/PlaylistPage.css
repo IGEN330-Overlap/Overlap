@@ -85,6 +85,7 @@
     align-items: center;
     flex-wrap: wrap;
     padding-top: 3vh;
+    padding-left: 1vh;
 }
 
 .contributor-container {
@@ -94,8 +95,8 @@
 }
 
 .contributor-icon {
-    height: clamp(40px, 7.5vw, 70px);
-    width: clamp(40px, 7.5vw, 70px);
+    height: clamp(40px, 7.5vw, 60px);
+    width: clamp(40px, 7.5vw, 60px);
     object-fit: cover;
     object-position: 50%;
     border-radius: 50rem;
