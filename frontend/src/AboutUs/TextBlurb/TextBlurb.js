@@ -14,6 +14,8 @@ const Blurb = (props) => {
         our quarantine project with your friends and would love to hear any feedback you have!
         </p> 
         <p className='sub-text'>If you have any question, comments, or concerns, please reach out!</p>
+        <p className='sub-text'>You can send us an email at: </p>
+        <p className='sub-text'>Or click on any of our baby photos to be taken to our linkedin profiles and send us a message!</p>
     </div>
     )
 }
