@@ -84,8 +84,10 @@
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
-    padding-top: 3vh;
-    padding-left: 1vh;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+    justify-content: center;
+    width: 100%;
 }
 
 .contributor-container {
@@ -101,8 +103,8 @@
     object-position: 50%;
     border-radius: 50rem;
     transition: opacity 0.45s;
-    padding: 2px;
-    
+    margin: 2px;
+    background-color: var(--primary-color-main);
 }
 
 .contributor-name {
@@ -113,10 +115,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     transition: color 0.45s;
+    text-align: center;
 }
 
 .contributor-container:hover .contributor-icon {
-    opacity: 0.8;
+    opacity: 0.6;
     cursor: pointer;
 }
 
@@ -124,7 +127,6 @@
     color: var(--off-white-color);
     cursor: pointer;
 }
-
 
 
 .error-return-arrow {
