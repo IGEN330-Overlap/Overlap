@@ -43,17 +43,9 @@ var stateKey = "spotify_auth_state";
 
 var app = express();
 
-const cors_options =
-  process.env.DEPLOYMENT === "true"
-    ? {
-        origin: process.env.FRONTEND_URL,
-        optionsSuccessStatus: 200,
-      }
-    : true;
-
 app
   .use(express.static(path.join(__dirname, "/../frontend/build")))
-  .use(cors(cors_options))
+  .use(cors())
   .use(cookieParser());
 
 app.get("/login", function (req, res) {
