@@ -191,7 +191,7 @@ exports.loginUser = async (req, res) => {
             topTracks[i]["valence"] = x.valence;
             topTracks[i]["duration_ms"] = x.duration_ms;
           } else {
-            delete topTracks[i];
+            topTracks.splice(i, 1);
             continue; // skip to next, ids were not the same
           }
           i++; // iterate for the next item to add in our topTracks array
@@ -332,6 +332,8 @@ exports.loginUser = async (req, res) => {
       topGenres = topGenres.sort((a, b) => {
         return b.count - a.count;
       });
+      
+      console.log(topTracks);
 
       // Remove all duplicates
       topTracks = topTracks.filter(
