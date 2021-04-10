@@ -231,8 +231,6 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
             })
             .then((data) => {
                 console.log(data);
-                // setPlaylistCode(data.data.playlist.playlistCode);
-                // console.log(playlistCode)
                 axios
                 .get(process.env.REACT_APP_BACKEND_URL + "/users/" + userObject.userID + "/groups")
                 .then((data) => {

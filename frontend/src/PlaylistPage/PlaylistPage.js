@@ -14,7 +14,6 @@ export const PlaylistPage = (props) => {
     // get playlist code from url
     const url = new URL(window.location.href);
     const playlist_code = url.pathname.replace("/authorized/playlist/","")
-    console.log(playlist_code)
    
     // get information from playlist ID
     const groupList = useSelector((state) => state.groupList)
