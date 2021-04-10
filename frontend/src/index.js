@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore } from "redux";
 import reducer from "./Redux/Reducer.js";
 import { Provider } from "react-redux";
+import { devToolsEnhancer } from "redux-devtools-extension/developmentOnly";
 
 //***CSS
 //Bootstrap
@@ -16,7 +17,7 @@ import "./index.css";
 //Redux create store
 const store = createStore(
   reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  devToolsEnhancer()
 );
 
 //Note that BrowerRouter wrapper is necessary to use react router components in App.js

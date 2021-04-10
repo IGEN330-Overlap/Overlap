@@ -1,16 +1,26 @@
 import "./ScreenOverlay.css";
 import { Spinner } from "react-bootstrap";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ScreenOverlay = (props) => {
-  const [renderBack, setRenderBack] = React.useState(false);
+  const [renderBack, setRenderBack] = useState(false);
+
+  const [didMount, setDidMount] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setRenderBack(true);
-    }, 6000);
+    setDidMount(true);
+    return () => setDidMount(false);
   }, []);
+
+  //check if component mounted before setting timeout and state
+  useEffect(() => {
+    if (didMount === true) {
+      setTimeout(() => {
+        setRenderBack(true);
+      }, 6000);
+    }
+  }, [didMount]);
 
   return (
     <div className="overlay">
