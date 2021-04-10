@@ -153,8 +153,9 @@
     bottom: 5%;
 }
 .group-info-root .gp-downArrow {
-    height: clamp(34px, 2vw, 50px);
-    width:  clamp(34px, 2vw, 50px);
+    height: clamp(25px, 1.5vw, 40px);
+    width:  clamp(25px, 1.5vw, 40px);
+    margin-top: 10px;
     fill: var(--neutral-color-5);
 }
 .group-info-root .gp-scroll:hover {
