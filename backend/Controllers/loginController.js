@@ -336,7 +336,7 @@ exports.loginUser = async (req, res) => {
         return b.count - a.count;
       });
       
-      console.log(topTracks);
+      //console.log(topTracks);
 
       // Remove all duplicates
       topTracks = topTracks.filter(
