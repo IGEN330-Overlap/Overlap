@@ -17,7 +17,7 @@ const request = require("request"); // "Request" library
 const cors = require("cors");
 const querystring = require("querystring");
 const cookieParser = require("cookie-parser");
-const path = require('path');
+const path = require("path");
 
 const client_id = process.env.CLIENT_ID; // Your client id
 const client_secret = process.env.CLIENT_SECRET; // Your secret
@@ -43,9 +43,17 @@ var stateKey = "spotify_auth_state";
 
 var app = express();
 
+const cors_options =
+  process.env.DEPLOYMENT === "true"
+    ? {
+        origin: process.env.FRONTEND_URL,
+        optionsSuccessStatus: 200,
+      }
+    : true;
+
 app
   .use(express.static(path.join(__dirname, "/../frontend/build")))
-  .use(cors())
+  .use(cors(cors_options))
   .use(cookieParser());
 
 app.get("/login", function (req, res) {
