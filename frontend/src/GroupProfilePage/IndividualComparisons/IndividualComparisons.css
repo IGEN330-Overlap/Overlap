@@ -36,6 +36,12 @@
     color: var(--blue-color-1);
     font-size: clamp(15px, 1.5vw, 20px);
     margin-top: 2vh;
+    width: fit-content;
+}
+
+.moreMessageLink {
+    width: fit-content;
+    display: inline-block;
 }
 
 .moreMessage:hover{
