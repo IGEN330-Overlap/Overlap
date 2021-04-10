@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateGroupList } from '../Redux/Actions.js';
 import Modal from 'react-bootstrap/Modal';
+import { ReactComponent as DownArrow} from './down-arrow.svg';
 import './GroupProfilePage.css';
 
 import MemberDisplay from "./MemberDisplay/MemberDisplay";
@@ -197,15 +198,7 @@ const GroupProfilePage = (props) => {
             {width > 600 ? 
               <div className="gp-scroll">
                 {height > 720 ? "Scroll for more!" : null}
-                <svg
-                  className="gp-downArrow"
-                  xmlns="http://www.w3.org/2000/svg"  
-                  viewBox="0 0 24 24" 
-                  transform="rotate(-90)">
-                  <path d="M0 0h24v24H0z" 
-                  fill="none"/>
-                  <path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/>
-                </svg>
+                  <DownArrow className="gp-downArrow" />
               </div>
               : null
             }
