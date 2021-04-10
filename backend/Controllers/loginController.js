@@ -191,6 +191,9 @@ exports.loginUser = async (req, res) => {
             topTracks[i]["valence"] = x.valence;
             topTracks[i]["duration_ms"] = x.duration_ms;
           } else {
+            console.log("ID DOESNT MATCH HERE:");
+            console.log(topTracks[i]);
+            console.log(x.id);
             topTracks.splice(i, 1);
             continue; // skip to next, ids were not the same
           }
