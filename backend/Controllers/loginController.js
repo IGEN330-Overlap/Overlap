@@ -338,6 +338,11 @@ exports.loginUser = async (req, res) => {
       
       //console.log(topTracks);
 
+      //Remove null or undefined elements
+      topTracks = topTracks.filter(
+        track => track != undefined
+      );
+
       // Remove all duplicates
       topTracks = topTracks.filter(
         (v, i, a) => a.findIndex((t) => t.trackID === v.trackID) === i
