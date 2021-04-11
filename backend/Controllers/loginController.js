@@ -51,10 +51,29 @@ exports.loginUser = async (req, res) => {
           time_range: "short_term",
         });
 
+        spotifyApi.getMyTopTracks({
+          limit: 50,
+          time_range: "short_term",
+        })
+        .then((data) => {
+          console.log("Promise attempt data: ");
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log("Promise attempt ERROR: ");
+          console.log(err);
+        });
+
+        console.log("request from spotify (short term): ");
+        console.log(data.body.items);
+
         if( data.statusCode != 200) {
           console.log("top tracks for short term exit code not 200: ", data.statusCode);
           throw new Error();
         }
+
+        console.log("raw data from spotify (short term): ");
+        console.log(data.body.items);
 
         short_term = extractUsersTopTracks(data.body.items);
 
@@ -73,10 +92,16 @@ exports.loginUser = async (req, res) => {
           time_range: "medium_term",
         });
 
+        console.log("request from spotify (med term): ");
+        console.log(data.body.items);
+
         if( data.statusCode != 200) {
           console.log("top tracks for medium term exit code not 200: ", data.statusCode);
           throw new Error();
         }
+
+        console.log("raw data from spotify (med term): ");
+        console.log(data.body.items);
 
         med_term = extractUsersTopTracks(data.body.items);
         if (med_term == "") {
@@ -95,10 +120,16 @@ exports.loginUser = async (req, res) => {
           time_range: "long_term",
         });
 
+        console.log("request from spotify (long term): ");
+        console.log(data.body.items);
+
         if( data.statusCode != 200) {
           console.log("top tracks for long term exit code not 200: ", data.statusCode);
           throw new Error();
         }
+
+        console.log("raw data from spotify (long term): ");
+        console.log(data.body.items);
 
         long_term = extractUsersTopTracks(data.body.items);
         if (long_term == "") {
@@ -327,6 +358,19 @@ exports.loginUser = async (req, res) => {
         let data = await spotifyApi.getMyTopArtists({
           limit: 50,
           time_range: "short_term",
+        });
+
+        spotifyApi.getMyTopArtists({
+          limit: 50,
+          time_range: "short_term",
+        })
+        .then((data) => {
+          console.log("ARTIST Promise attempt data: ");
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log("ARTIST Promise attempt ERROR: ");
+          console.log(err);
         });
 
         let tmp = extractUsersTopArtistsAndGenres(data.body.items);
