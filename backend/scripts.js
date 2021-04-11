@@ -59,7 +59,7 @@ function calculateMusicalProfile (data) {
  */
 function extractUsersTopTracks (data) {
     // returns empty string if improper data sent
-    if (typeof data === "undefined"){
+    if (typeof data === "undefined" || data == undefined){
         return ""; // return empty string if data is undefined 
     }
 
@@ -93,6 +93,9 @@ function extractUsersTopTracks (data) {
         } else {
             track.artistName = "";
         }
+
+        console.log("Scripts.js line 100:");
+        console.log(track);
 
         topTrackIDs.push(x.id);
         topTracks.push(track);

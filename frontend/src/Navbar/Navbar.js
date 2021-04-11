@@ -1,14 +1,14 @@
 import "./Navbar.css";
 import logo from "../overlap-logo.svg";
-import logo_dark from "../overlap-logo-dark.svg"
+import logo_dark from "../overlap-logo-dark.svg";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateRefreshToken } from "../Redux/Actions";
+import { updateRefreshToken, updateUser } from "../Redux/Actions";
 // import GroupIcon from "./group.svg";
 
-const Navbar1 = ({playlistType}) => {
+const Navbar1 = ({ playlistType }) => {
   //useDispatch hook for redux
   const dispatch = useDispatch();
 
@@ -17,6 +17,26 @@ const Navbar1 = ({playlistType}) => {
 
   const handleLogout = () => {
     dispatch(updateRefreshToken(""));
+    dispatch(
+      updateUser({
+        email: "",
+        imageURL: "",
+        musicalProfile: {
+          acousticness: 0,
+          danceability: 0,
+          energy: 0,
+          instrumentalness: 0,
+          speechiness: 0,
+          trackPopularity: 0,
+          valence: 0,
+        },
+        name: "",
+        refreshToken: "",
+        topArtists: [],
+        topTracks: [],
+        userID: "",
+      })
+    );
     localStorage.clear();
     history.push("/");
   };
@@ -51,11 +71,30 @@ const Navbar1 = ({playlistType}) => {
   groupList.sort(sortGroupList);
 
   return (
-    <div className={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad") ? "navbar-stuff-dark" : "navbar-stuff"}>
+    <div
+      className={
+        playlistType === "happy" ||
+        playlistType === "chill" ||
+        playlistType === "sad"
+          ? "navbar-stuff-dark"
+          : "navbar-stuff"
+      }
+    >
       <Navbar bg="var(--primary-color-main)" variant="dark" expand="md">
         {isLoggedIn && (
           <Navbar.Brand as={Link} to="/authorized/">
-            <img width="75" height="30" src={(playlistType === "happy" || playlistType === "chill" || playlistType === "sad") ? logo_dark : logo} alt="logo" />
+            <img
+              width="75"
+              height="30"
+              src={
+                playlistType === "happy" ||
+                playlistType === "chill" ||
+                playlistType === "sad"
+                  ? logo_dark
+                  : logo
+              }
+              alt="logo"
+            />
           </Navbar.Brand>
         )}
         {!isLoggedIn && (
@@ -68,27 +107,32 @@ const Navbar1 = ({playlistType}) => {
           <Nav className="mr-auto">
             {isLoggedIn && (
               <NavDropdown title="My Groups" id="basic-nav-dropdown">
-                {groupList.length !== 0 ? 
+                {groupList.length !== 0 ? (
                   groupList.map((group, i) => (
-                  <div key={i}>
-                    <NavDropdown.Item
-                      as={Link}
-                      to={"/authorized/group/" + group.groupCode}
-                    >
-                      {group.groupName}
-                    </NavDropdown.Item>
-                  </div>
-                ))
-                : <NavDropdown.Item 
-                    as={Link}
-                    to={"/authorized/"}>
-                      Create/Join a Group
-                  </NavDropdown.Item>}
+                    <div key={i}>
+                      <NavDropdown.Item
+                        as={Link}
+                        to={"/authorized/group/" + group.groupCode}
+                      >
+                        {group.groupName}
+                      </NavDropdown.Item>
+                    </div>
+                  ))
+                ) : (
+                  <NavDropdown.Item as={Link} to={"/authorized/"}>
+                    Create/Join a Group
+                  </NavDropdown.Item>
+                )}
               </NavDropdown>
             )}
-            
+
             {isLoggedIn && (
-              <Nav.Link as={Link} to={"/authorized/user/" + userObject.userID} bg="white" className="navbar-link">
+              <Nav.Link
+                as={Link}
+                to={"/authorized/user/" + userObject.userID}
+                bg="white"
+                className="navbar-link"
+              >
                 My Music Profile
               </Nav.Link>
             )}
