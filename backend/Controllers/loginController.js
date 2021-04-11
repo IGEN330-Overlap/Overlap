@@ -51,29 +51,10 @@ exports.loginUser = async (req, res) => {
           time_range: "short_term",
         });
 
-        spotifyApi.getMyTopTracks({
-          limit: 50,
-          time_range: "short_term",
-        })
-        .then((data) => {
-          console.log("Promise attempt data: ");
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log("Promise attempt ERROR: ");
-          console.log(err);
-        });
-
-        console.log("request from spotify (short term): ");
-        console.log(data.body.items);
-
         if( data.statusCode != 200) {
           console.log("top tracks for short term exit code not 200: ", data.statusCode);
           throw new Error();
         }
-
-        console.log("raw data from spotify (short term): ");
-        console.log(data.body.items);
 
         short_term = extractUsersTopTracks(data.body.items);
 
@@ -92,16 +73,10 @@ exports.loginUser = async (req, res) => {
           time_range: "medium_term",
         });
 
-        console.log("request from spotify (med term): ");
-        console.log(data.body.items);
-
         if( data.statusCode != 200) {
           console.log("top tracks for medium term exit code not 200: ", data.statusCode);
           throw new Error();
         }
-
-        console.log("raw data from spotify (med term): ");
-        console.log(data.body.items);
 
         med_term = extractUsersTopTracks(data.body.items);
         if (med_term == "") {
@@ -120,16 +95,10 @@ exports.loginUser = async (req, res) => {
           time_range: "long_term",
         });
 
-        console.log("request from spotify (long term): ");
-        console.log(data.body.items);
-
         if( data.statusCode != 200) {
           console.log("top tracks for long term exit code not 200: ", data.statusCode);
           throw new Error();
         }
-
-        console.log("raw data from spotify (long term): ");
-        console.log(data.body.items);
 
         long_term = extractUsersTopTracks(data.body.items);
         if (long_term == "") {
@@ -139,15 +108,6 @@ exports.loginUser = async (req, res) => {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
       }
-
-      console.log("Short term line 112: ")
-      console.log(short_term[0]);
-
-      console.log("Medium term line 115: ")
-      console.log(med_term[0]);
-
-      console.log("Long term line 118: ")
-      console.log(long_term[0]);
 
       var x = 2; // previuosly already added the first 2 from short-term
       var y = 1; // previously already added first song from med term
@@ -198,11 +158,11 @@ exports.loginUser = async (req, res) => {
         }
       }
 
-      console.log("top tracks line 170: ");
-      console.log(topTracks);
-
-      console.log("top track IDs line 170: ");
-      console.log(topTrackIDs);
+      if(topTracks == null || topTracks.length == 0) {
+        console.log(topTracks);
+        res.status(500).json("Sorry, we can't get you Spotify music data.");
+        return
+      }
 
       // splice and flip the duplicates added because they were added in reverse order
       let tmp = topTracks.splice(0, dupCount);
@@ -232,12 +192,6 @@ exports.loginUser = async (req, res) => {
         }
       }
 
-      console.log("top tracks line 204: ");
-      console.log(topTracks);
-
-      console.log("top track IDs line 207: ");
-      console.log(topTrackIDs);
-
       //get the corresponding top track features to up to 100 songs
       try {
         //Spotify api call
@@ -265,9 +219,6 @@ exports.loginUser = async (req, res) => {
             topTracks[i]["instrumentalness"] = x.instrumentalness;
             topTracks[i]["valence"] = x.valence;
             topTracks[i]["duration_ms"] = x.duration_ms;
-
-            console.log("Line 233 top track: ");
-            console.log(topTracks[i]);
 
           } else {
             console.log("ID DOESNT MATCH HERE:");
@@ -314,9 +265,6 @@ exports.loginUser = async (req, res) => {
               topTracks[i]["instrumentalness"] = x.instrumentalness;
               topTracks[i]["valence"] = x.valence;
               topTracks[i]["duration_ms"] = x.duration_ms;
-
-              console.log("Line 277 top track (2nd audio features): ");
-              console.log(topTracks[i]);
             } else {
               console.log("ID DOESNT MATCH HERE:");
               console.log(topTracks[i]);
@@ -358,19 +306,6 @@ exports.loginUser = async (req, res) => {
         let data = await spotifyApi.getMyTopArtists({
           limit: 50,
           time_range: "short_term",
-        });
-
-        spotifyApi.getMyTopArtists({
-          limit: 50,
-          time_range: "short_term",
-        })
-        .then((data) => {
-          console.log("ARTIST Promise attempt data: ");
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log("ARTIST Promise attempt ERROR: ");
-          console.log(err);
         });
 
         let tmp = extractUsersTopArtistsAndGenres(data.body.items);
@@ -438,9 +373,6 @@ exports.loginUser = async (req, res) => {
       topGenres = topGenres.sort((a, b) => {
         return b.count - a.count;
       });
-      
-      console.log("Final top tracks before we filter out undefined: ");
-      console.log(topTracks);
 
       //Remove null or undefined elements
       topTracks = topTracks.filter(
