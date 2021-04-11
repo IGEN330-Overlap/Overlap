@@ -158,7 +158,7 @@ exports.loginUser = async (req, res) => {
         }
       }
 
-      if(topTracks == null || topTracks.length == 0) {
+      if (topTracks == null || topTracks.length == 0) {
         console.log(topTracks);
         res.status(500).json("Sorry, we can't get you Spotify music data.");
         return
@@ -342,6 +342,13 @@ exports.loginUser = async (req, res) => {
         res.json({ message: "Unable to get user top artists.", error: err });
         return;
       }
+
+      if (topArtists == null || topArtists.length == 0) {
+        console.log(topArtists);
+        res.status(500).json("Sorry, we can't get your Spotify artist data.");
+        return;
+      }
+
 
       topGenres = topGenres.flat(); //put each item as a genre
 
