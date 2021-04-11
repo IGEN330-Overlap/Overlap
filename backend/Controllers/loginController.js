@@ -113,7 +113,7 @@ exports.loginUser = async (req, res) => {
       console.log(short_term[0]);
 
       console.log("Medium term line 115: ")
-      console.log(medium_term[0]);
+      console.log(med_term[0]);
 
       console.log("Long term line 118: ")
       console.log(long_term[0]);
