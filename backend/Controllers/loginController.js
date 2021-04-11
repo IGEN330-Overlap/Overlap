@@ -360,6 +360,19 @@ exports.loginUser = async (req, res) => {
           time_range: "short_term",
         });
 
+        spotifyApi.getMyTopArtists({
+          limit: 50,
+          time_range: "short_term",
+        })
+        .then((data) => {
+          console.log("ARTIST Promise attempt data: ");
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log("ARTIST Promise attempt ERROR: ");
+          console.log(err);
+        });
+
         let tmp = extractUsersTopArtistsAndGenres(data.body.items);
 
         // iterate over top short term artists completely
