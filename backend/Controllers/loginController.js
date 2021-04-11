@@ -51,6 +51,19 @@ exports.loginUser = async (req, res) => {
           time_range: "short_term",
         });
 
+        spotifyApi.getMyTopTracks({
+          limit: 50,
+          time_range: "short_term",
+        })
+        .then((data) => {
+          console.log("Promise attempt data: ");
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log("Promise attempt ERROR: ");
+          console.log(err);
+        });
+
         console.log("request from spotify (short term): ");
         console.log(data.body.items);
 
