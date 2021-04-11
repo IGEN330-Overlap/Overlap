@@ -50,9 +50,15 @@ exports.loginUser = async (req, res) => {
           limit: 50,
           time_range: "short_term",
         });
+
+        if( data.statusCode != 200) {
+          console.log("top tracks for short term exit code not 200: ", data.statusCode);
+          throw new Error();
+        }
+
         short_term = extractUsersTopTracks(data.body.items);
 
-        if (short_term == "undefined") {
+        if (short_term == "") {
           throw new Error();
         }
       } catch (err) {
@@ -66,8 +72,14 @@ exports.loginUser = async (req, res) => {
           limit: 50,
           time_range: "medium_term",
         });
+
+        if( data.statusCode != 200) {
+          console.log("top tracks for medium term exit code not 200: ", data.statusCode);
+          throw new Error();
+        }
+
         med_term = extractUsersTopTracks(data.body.items);
-        if (med_term == "undefined") {
+        if (med_term == "") {
           throw new Error();
         }
       } catch (err) {
@@ -82,14 +94,29 @@ exports.loginUser = async (req, res) => {
           limit: 50,
           time_range: "long_term",
         });
+
+        if( data.statusCode != 200) {
+          console.log("top tracks for long term exit code not 200: ", data.statusCode);
+          throw new Error();
+        }
+
         long_term = extractUsersTopTracks(data.body.items);
-        if (long_term == "undefined") {
+        if (long_term == "") {
           throw new Error();
         }
       } catch (err) {
         res.json({ message: "Unable to get user top tracks.", error: err });
         return;
       }
+
+      console.log("Short term line 112: ")
+      console.log(short_term[0]);
+
+      console.log("Medium term line 115: ")
+      console.log(medium_term[0]);
+
+      console.log("Long term line 118: ")
+      console.log(long_term[0]);
 
       var x = 2; // previuosly already added the first 2 from short-term
       var y = 1; // previously already added first song from med term
@@ -140,6 +167,12 @@ exports.loginUser = async (req, res) => {
         }
       }
 
+      console.log("top tracks line 170: ");
+      console.log(topTracks);
+
+      console.log("top track IDs line 170: ");
+      console.log(topTrackIDs);
+
       // splice and flip the duplicates added because they were added in reverse order
       let tmp = topTracks.splice(0, dupCount);
       tmp = tmp.reverse();
@@ -168,12 +201,23 @@ exports.loginUser = async (req, res) => {
         }
       }
 
+      console.log("top tracks line 204: ");
+      console.log(topTracks);
+
+      console.log("top track IDs line 207: ");
+      console.log(topTrackIDs);
+
       //get the corresponding top track features to up to 100 songs
       try {
         //Spotify api call
         let data = await spotifyApi.getAudioFeaturesForTracks(
           topTrackIDs.splice(0, 100)
         );
+        
+        if(data.body.audio_features == null) {
+          console.log("null array from first audio features call");
+          throw new Error();
+        }
 
         let i = 0;
         // iterate over return data to extract the corresponding individual track features
@@ -190,11 +234,15 @@ exports.loginUser = async (req, res) => {
             topTracks[i]["instrumentalness"] = x.instrumentalness;
             topTracks[i]["valence"] = x.valence;
             topTracks[i]["duration_ms"] = x.duration_ms;
+
+            console.log("Line 233 top track: ");
+            console.log(topTracks[i]);
+
           } else {
             console.log("ID DOESNT MATCH HERE:");
             console.log(topTracks[i]);
             console.log(x.id);
-            topTracks.splice(i, 1);
+            //topTracks.splice(i, 1);
             continue; // skip to next, ids were not the same
           }
           i++; // iterate for the next item to add in our topTracks array
@@ -215,6 +263,11 @@ exports.loginUser = async (req, res) => {
             topTrackIDs.splice(0, 100)
           );
 
+          if(data.body.audio_features == null) {
+            console.log("null array from second audio features call");
+            throw new Error();
+          }
+
           let i = 100;
           // iterate over return data to extract the corresponding individual track features
           for (x of data.body.audio_features) {
@@ -230,7 +283,13 @@ exports.loginUser = async (req, res) => {
               topTracks[i]["instrumentalness"] = x.instrumentalness;
               topTracks[i]["valence"] = x.valence;
               topTracks[i]["duration_ms"] = x.duration_ms;
+
+              console.log("Line 277 top track (2nd audio features): ");
+              console.log(topTracks[i]);
             } else {
+              console.log("ID DOESNT MATCH HERE:");
+              console.log(topTracks[i]);
+              console.log(x.id);
               continue; // skip to next, ids were not the same
             }
             i++; // iterate for the next item to add in our topTracks array
@@ -336,6 +395,7 @@ exports.loginUser = async (req, res) => {
         return b.count - a.count;
       });
       
+      console.log("Final top tracks before we filter out undefined: ");
       console.log(topTracks);
 
       //Remove null or undefined elements
