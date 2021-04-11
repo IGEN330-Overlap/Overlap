@@ -56,6 +56,9 @@ exports.loginUser = async (req, res) => {
           throw new Error();
         }
 
+        console.log("raw data from spotify (short term): ");
+        console.log(data.body.items);
+
         short_term = extractUsersTopTracks(data.body.items);
 
         if (short_term == "") {
@@ -78,6 +81,9 @@ exports.loginUser = async (req, res) => {
           throw new Error();
         }
 
+        console.log("raw data from spotify (med term): ");
+        console.log(data.body.items);
+
         med_term = extractUsersTopTracks(data.body.items);
         if (med_term == "") {
           throw new Error();
@@ -99,6 +105,9 @@ exports.loginUser = async (req, res) => {
           console.log("top tracks for long term exit code not 200: ", data.statusCode);
           throw new Error();
         }
+
+        console.log("raw data from spotify (long term): ");
+        console.log(data.body.items);
 
         long_term = extractUsersTopTracks(data.body.items);
         if (long_term == "") {
