@@ -51,6 +51,9 @@ exports.loginUser = async (req, res) => {
           time_range: "short_term",
         });
 
+        console.log("request from spotify (short term): ");
+        console.log(data.body.items);
+
         if( data.statusCode != 200) {
           console.log("top tracks for short term exit code not 200: ", data.statusCode);
           throw new Error();
@@ -76,6 +79,9 @@ exports.loginUser = async (req, res) => {
           time_range: "medium_term",
         });
 
+        console.log("request from spotify (med term): ");
+        console.log(data.body.items);
+
         if( data.statusCode != 200) {
           console.log("top tracks for medium term exit code not 200: ", data.statusCode);
           throw new Error();
@@ -100,6 +106,9 @@ exports.loginUser = async (req, res) => {
           limit: 50,
           time_range: "long_term",
         });
+
+        console.log("request from spotify (long term): ");
+        console.log(data.body.items);
 
         if( data.statusCode != 200) {
           console.log("top tracks for long term exit code not 200: ", data.statusCode);
