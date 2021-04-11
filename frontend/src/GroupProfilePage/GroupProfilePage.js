@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateGroupList } from '../Redux/Actions.js';
 import Modal from 'react-bootstrap/Modal';
+import { ReactComponent as DownArrow} from './down-arrow.svg';
 import './GroupProfilePage.css';
 
 import MemberDisplay from "./MemberDisplay/MemberDisplay";
@@ -82,12 +83,14 @@ const GroupProfilePage = (props) => {
     }
   }, [groupCode, groupList, groupName, refreshTrigger]);
 
-  // get screen width to determine how many items in the carousel
+  // get screen width and height
   const [width, getWidth] = useState(window.innerWidth)
+  const [height, getHeight] = useState(window.innerHeight)
 
   useEffect(() => {
       const handleResize = () => {
           getWidth(window.innerWidth)
+          getHeight(window.innerHeight)
       }
       window.addEventListener('resize', handleResize);
       return () => window.removeEventListener('resize', handleResize);
@@ -190,8 +193,15 @@ const GroupProfilePage = (props) => {
                   refreshToken={refreshToken}
                   setLoading={setLoading}
                 />
-              </div>
+              </div>              
             </div>
+            {width > 600 ? 
+              <div className="gp-scroll">
+                {height > 720 ? "Scroll for more!" : null}
+                  <DownArrow className="gp-downArrow" />
+              </div>
+              : null
+            }
           </div>
       </div>
 

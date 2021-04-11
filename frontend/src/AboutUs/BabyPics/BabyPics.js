@@ -1,10 +1,10 @@
-import './BabyPics.css';
-import Brendan from './Brendan.png';
-import Kevin from './Kevin.jpg';
-import Beatrice from './Beatrice.jpg';
-import Josi from './Josi.jpg';
-import Danica from './Danica.jpg';
-import RealRemy from './RealRemy.jpg';
+import "./BabyPics.css";
+import Brendan from "./Brendan.png";
+import Kevin from "./Kevin.jpg";
+import Beatrice from "./Beatrice.jpg";
+import Josi from "./Josi.jpg";
+import Danica from "./Danica.jpg";
+import RealRemy from "./RealRemy.jpg";
 
 const Babies = (props) => {
     return(
@@ -47,7 +47,7 @@ const Babies = (props) => {
                 </div>
             </div>
         </div>
-    )
-}
+  );
+};
 
 export default Babies;

@@ -1,12 +1,12 @@
 //function to generate random group code for /group/create post request
-function generateGroupCode(){
+function generateCode(complexity){
 
-    //set password length/complexity
-    let complexity = 7//document.getElementById("slider").value;
+    //set password length/complexity to 7 unless specified as larger
+    //for groups we set complexity to 7 and for playlists we choose 9
+    complexity = (complexity > 7) ? complexity : 7;
 
     //possible password values
     let values = "ABCDEFGHIJKLMNOPQRSTUVWZYZ1234567890";
-
     let password = "";
 
     //create for loop to choose password characters
@@ -59,7 +59,7 @@ function calculateMusicalProfile (data) {
  */
 function extractUsersTopTracks (data) {
     // returns empty string if improper data sent
-    if (typeof data === "undefined"){
+    if (typeof data === "undefined" || data == undefined){
         return ""; // return empty string if data is undefined 
     }
 
@@ -93,6 +93,9 @@ function extractUsersTopTracks (data) {
         } else {
             track.artistName = "";
         }
+
+        console.log("Scripts.js line 100:");
+        console.log(track);
 
         topTrackIDs.push(x.id);
         topTracks.push(track);
@@ -253,7 +256,7 @@ function buildPlaylistMoodProfile (selection) {
 }
 
 //export generateGroupCode() as a module for use in Controller.js
-module.exports.generateGroupCode = generateGroupCode;
+module.exports.generateCode = generateCode;
 
 //export music profile calculation method
 module.exports.calculateMusicalProfile = calculateMusicalProfile;

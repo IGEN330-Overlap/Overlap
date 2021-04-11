@@ -14,6 +14,7 @@ const redirect_uri = backend_url + "callback"; // Your redirect uri
 const { calculateMusicalProfile } = require("../scripts.js");
 const { calculateDate } = require("../scripts.js");
 const { buildPlaylistMoodProfile } = require("../scripts.js");
+const { generateCode } = require("../scripts.js");
 
 const playlistCoverImages = require("../playlistCoverImages.json");
 
@@ -405,9 +406,10 @@ exports.generateGroupsTopPlaylist = async (req, res) => {
   // Create playlist object which will be uploaded to the group, passed to MongoDB
   playlist = {
     playlistName: req.body.playlistName,
+    playlistCode: generateCode(12), //generate length 12 code for the playlist
     tracks: playlistTracks,
     contributors: contributorsUsernames,
-    createDate: calculateDate(),
+    createDate: calculateDate(), //calculate loocal server date
     playlistType: "top",
   };
 
@@ -619,6 +621,7 @@ exports.generateGroupsMoodsPlaylist = async (req, res) => {
   // Create playlist object which will be uploaded to the group, passed to MongoDB
   playlist = {
     playlistName: req.body.playlistName,
+    playlistCode: generateCode(12), //generate length 9 code for the playlist
     tracks: playlistTracks,
     contributors: contributorsUsernames,
     createDate: calculateDate(),

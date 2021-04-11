@@ -34,6 +34,9 @@
 }
 .hiw-info .text-box {
     width: 53%;
+    background-color: rgba(250,250,250,0.2);
+    padding: 15px;
+    border-radius: 30px;
 }
 .hiw-info .graphics {
     display: flex;
@@ -360,13 +363,13 @@
     height: fit-content;
 }
 .hiw-musicstats h1 {
-    color: var(--off-white-color);
+    color: var(--primary-color-main);
 }
 .hiw-musicstats h2 {
-    color: var(--off-white-color);
+    color: var(--primary-color-main);
 }
 .hiw-musicstats h3 {
-    color: var(--off-white-color);
+    color: var(--primary-color-main);
     font-size: 17px;
     font-weight: 550;
     padding: 8px;
@@ -376,10 +379,10 @@
     color: var(--blue-color-4);
 }
 .hiw-musicstats p {
-    color: var(--off-white-color);
+    color: var(--primary-color-main);
 }
 .hiw-musicstats .under-bar {
-    background-color: var(--off-white-color);
+    background-color: var(--primary-color-main);
 }
 .hiw-musicstats span {
     color: var(--blue-color-6);

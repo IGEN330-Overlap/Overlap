@@ -13,30 +13,32 @@ export const PlaylistPage = (props) => {
 
     // get playlist code from url
     const url = new URL(window.location.href);
-    const playlistID = url.pathname.replace("/authorized/playlist/","")
-
+    const playlist_code = url.pathname.replace("/authorized/playlist/","")
+   
     // get information from playlist ID
     const groupList = useSelector((state) => state.groupList)
 
     const [playlistName, setPlaylistName] = useState("");
     const [playlistTracks, setPlaylistTracks] = useState([]);
     const [playlistType, setPlaylistType] = useState('');
+    // const [playlistCode, setPlaylistCode] = useState('');
+    const [playlistID, setPlaylistID] = useState('');
     const [groupCode, setGroupCode] = useState("");
     const [contributors, setPlaylistContributors] = useState([]);
-    const [createdDate, setCreatedDate] = useState("");
+    const [createdDate, setCreatedDate] = useState(""); 
     
-    const [checkMember, setCheckMember] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [checkMember, setCheckMember] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if(playlistID !== null) {
+        if(playlist_code !== null) {
             //start loading
             setIsLoading(true);
             
             //check if user can access playlist
             groupList.map((group) => {
                 group.playlists.map((playlist, i) => {
-                    if (playlist._id === playlistID) {
+                    if (playlist.playlistCode === playlist_code) {
                         setCheckMember(true);
                         setPlaylistName(playlist.playlistName);
                         setPlaylistTracks(playlist.tracks);
@@ -44,16 +46,26 @@ export const PlaylistPage = (props) => {
                         setCreatedDate(playlist.createDate);
                         setPlaylistContributors(playlist.contributors);
                         setPlaylistType(playlist.playlistType);
+                        setPlaylistID(playlist._id)
+                    }
+                    else if (playlist._id === playlist_code) {
+                        setCheckMember(true);
+                        setPlaylistName(playlist.playlistName);
+                        setPlaylistTracks(playlist.tracks);
+                        setGroupCode(group.groupCode);
+                        setCreatedDate(playlist.createDate);
+                        setPlaylistContributors(playlist.contributors);
+                        setPlaylistType(playlist.playlistType);
+                        setPlaylistID(playlist._id)
                     }
                     return playlistTracks;
                 })
                 return groupList;
             })
-
             //end loading
             setIsLoading(false);
         }
-    }, [playlistID, groupList, playlistTracks, contributors]);
+    }, [playlist_code, groupList, playlistTracks, contributors]);
 
     var contributorsInfo = []
     contributors.map((contributor, i) => {
@@ -61,8 +73,8 @@ export const PlaylistPage = (props) => {
         return contributorsInfo
     })
 
-    if (isLoading || groupList.length === 0){
-        return <ScreenOverlay text="Collecting your playlist tracks..." />;
+    if (isLoading || groupList.length === 0 || checkMember === ""){
+        return <ScreenOverlay text="Collecting your playlist tracks" />;
     } else if (checkMember && !isLoading) {
         return (
             <div className="playlist-landing-root" 
@@ -70,11 +82,11 @@ export const PlaylistPage = (props) => {
                         playlistType === "happy" ? {backgroundColor: "#c4e0fa"} :
                         playlistType === "sad" ? {backgroundColor: "#d3cce2"} :
                         playlistType === "chill" ? {backgroundColor: "#cdb49b"} :
-                        playlistType === "party" ? {backgroundImage: "linear-gradient(to bottom right, #ffe177, #ebd68c)"} :
+                        playlistType === "party" ? {backgroundColor: "#A35151"} :
                         {backgroundColor: "var(--primary-color-main)"}}>
                     <Navbar1 playlistType={playlistType}/>
                 <div className="backToProfile">
-                    <Link to={"/authorized/group/" + groupCode} className={playlistType === "top" ? "pp_backArrow-dark" : "pp_backArrow"}>
+                    <Link to={"/authorized/group/" + groupCode} className={playlistType === "top" || playlistType === "party" ? "pp_backArrow-dark" : "pp_backArrow"}>
                         <svg
                             className="pp_backArrow_svg"
                             xmlns="http://www.w3.org/2000/svg"  

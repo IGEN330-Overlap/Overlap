@@ -4,7 +4,7 @@ import "./PlaylistCarousel.css";
 
 import { updateGroupList } from "../../Redux/Actions.js";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import happy_cover from "./Happy.jpg";
 import sad_cover from "./Sad.jpg";
@@ -27,6 +27,8 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
   const userObject = useSelector((state) => state.userObject)
   
   const dispatch = useDispatch();
+
+  const history = useHistory();
   
   // functions for opening and closing "Add Playlist" Modal
   const [AddPlaylistisOpen, setAddPlaylistIsOpen] = React.useState(false);
@@ -46,6 +48,8 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
   const [playlistUsers, setPlaylistUsers] = useState([]);
   var checkDuplicate = false;
   var control;
+
+  // const [playlistCode, setPlaylistCode] = useState('');
 
   //alert for not enough people
   const [showNoUsersAlert, setShowNoUsersAlert] = useState(false);
@@ -235,6 +239,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
                 .catch((err) => {
                   console.log(err);
                 })
+                history.push("/authorized/playlist/"+data.data.playlist.playlistCode);
             })
             .catch((err) => {
                 console.log(err);
@@ -259,6 +264,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
                 .catch((err) => {
                   console.log(err);
                 })
+                history.push("/authorized/playlist/"+data.data.playlist.playlistCode);
             })
             .catch((err) => {
                 console.log(err);
@@ -275,6 +281,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
       console.log("Please select at least one more person!");
     }
   }
+
 
   // delete playlist functionality
   const [isDelete, setIsDelete] = useState(false);
@@ -320,7 +327,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
   // get playlist info
   let playlistInfo = []
   playlists.map((playlist,i) => (
-    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id, type: playlist.playlistType})
+    playlistInfo[i] = ({name: playlist.playlistName, tracks: playlist.tracks, id: playlist._id, type: playlist.playlistType, code: playlist.playlistCode})
   ))
   playlistInfo.reverse()
 
@@ -335,7 +342,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
           {isDelete ? <div className="delete-playlist-bubble">
             <img className="delete-playlist-x" src={closeButton} alt="delete" onClick={()=>showDeleteModal(playlist.name, playlist.id)}/>
           </div> : null }
-          <Link to={"/authorized/playlist/" + playlist.id} className="playlist-links">
+          <Link to={playlist.code !== undefined ? "/authorized/playlist/" + playlist.code : "/authorized/playlist/" + playlist.id} className="playlist-links">
             <img
               className="playlistcover"
               src={playlist.type === "top" ? topTracks_cover : 

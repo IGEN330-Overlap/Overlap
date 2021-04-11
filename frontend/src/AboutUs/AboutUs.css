@@ -2,6 +2,7 @@
 
 .text-blurb {
     margin-right: 4vw;
+    height: fit-content;
 }
 
 .display-babies {
@@ -12,9 +13,19 @@
     justify-content: center;
 }
 
+.under-bar {
+    margin-left: 5px;
+    width: 75px;
+    height: 3px;
+    margin-bottom: 0px;
+    background-color: var(--off-white-color);
+}
+
 .about {
     margin-left: 4vw;
     margin-top: 2vw;
+    display: flex;
+    flex-direction: column;
 }
 
 .about-root {
