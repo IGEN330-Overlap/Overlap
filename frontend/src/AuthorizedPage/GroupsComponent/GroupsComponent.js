@@ -91,25 +91,31 @@ const GroupsComponent = (props) => {
   //show copy to clipboard alert
   const [showCopyAlert, setShowCopyAlert] = useState(false);
 
-  function copyCode() {
-    var copyText = document.getElementById("myCode");
-    var currentRange;
-    if (document.getSelection().rangeCount > 0) {
-      currentRange = document.getSelection().getRangeAt(0);
-      window.getSelection().removeRange(currentRange);
-    } else {
-      currentRange = false;
-    }
-    var CopyRange = document.createRange();
-    CopyRange.selectNode(copyText);
-    window.getSelection().addRange(CopyRange);
-    document.execCommand("copy");
+  // function copyCode() {
+  //   var copyText = document.getElementById("myCode");
+  //   var currentRange;
+  //   if (document.getSelection().rangeCount > 0) {
+  //     currentRange = document.getSelection().getRangeAt(0);
+  //     window.getSelection().removeRange(currentRange);
+  //   } else {
+  //     currentRange = false;
+  //   }
+  //   var CopyRange = document.createRange();
+  //   CopyRange.selectNode(copyText);
+  //   window.getSelection().addRange(CopyRange);
+  //   document.execCommand("copy");
 
-    window.getSelection().removeRange(CopyRange);
-    if (currentRange) {
-      window.getSelection().addRange(currentRange);
-    }
-  }
+  //   window.getSelection().removeRange(CopyRange);
+  //   if (currentRange) {
+  //     window.getSelection().addRange(currentRange);
+  //   }
+  // }
+
+  function copyCode(){
+    let copy = document.getElementById("myCode");
+    let copyText = copy.textContent;
+    navigator.clipboard.writeText(copyText);
+}
 
   function leaveGroup() {
     axios
