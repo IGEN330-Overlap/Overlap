@@ -12,7 +12,7 @@ import chill_cover from "./Chill.jpg";
 import party_cover from "./Party.jpg";
 import topTracks_cover from "./TopTracks.png";
 import default_cover from "./default.png";
-import addButton from "./add.svg";
+import {ReactComponent as AddSVG} from "./add.svg";
 import closeButton from "./close-x.svg";
 
 import Modal from "react-bootstrap/Modal";
@@ -379,7 +379,7 @@ const PlaylistCarousel = ({playlists, groupUsers, groupCode, refreshToken, setLo
         <div onClick={showAddPlaylistModal} className="addPlaylist-container">
           {/*link to add playlist*/}
           <div className="addButton">
-            <img src={addButton} className="plus-symbol" alt="Add Playlist Button"/>
+            <AddSVG className="plus-symbol" alt="Add Playlist Button"/>
           </div>
           <div className="playlist-name">
             <strong>Add Playlist</strong>
