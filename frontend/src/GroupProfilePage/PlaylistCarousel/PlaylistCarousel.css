@@ -32,9 +32,9 @@
 }
 
 .plus-symbol{
-    height: 2vw;
-    width: 2vw;
-    color: white;
+    height: calc(15px + 1.5vw);
+    width: calc(15px + 1.5vw);
+    fill: white;
 }
 
 .addButton{
@@ -44,8 +44,9 @@
     justify-content: center;
     align-items: center;
     border-radius: 15%;
-    background-color: #494a4e;
+    background-color: var(--blue-color-3);
     cursor: pointer;
+    box-shadow: 0px 2px 4px 1px var(--primary-color-6);
 }
 
 .display-playlists{
@@ -87,7 +88,15 @@
 }
 
 .addPlaylist-container:hover .playlist-name {
-    color: var(--blue-color-1)
+    color: var(--blue-color-1);
+}
+
+.addPlaylist-container:hover .plus-symbol {
+    fill: var(--blue-color-1);
+}
+
+.addPlaylist-container:hover .addButton {
+    background-color: var(--blue-color-main);
 }
 
 /*customize scroll bar */
