@@ -2,21 +2,26 @@
 @import url(../../variables.css);
 
 .CreateOrJoinBox{
-    padding-top: 2vw;
-    padding-left: 5vw;
+    margin-top: 2vw;
+    margin-left: 5vw;
+    padding: 10px;
+    padding-left: 20px;
     z-index: 2;
+    /* background-color: rgba(218, 223, 232, 0.075); */
+    /* border-radius: 25px; */
 }
 
 .openCollapse{
-    color: white;
+    color: var(--off-white-color);
     font-size: 2vw;
+    font-weight: 550;
     width: 12em;
     margin-top: 0.5vw;
 }
 
 .openCollapse:hover{
     color: var(--blue-color-1);
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .openCollapse:hover .create_icon {
@@ -47,7 +52,7 @@
 }
 
 input::placeholder{
-    color: var(--neutral-color-5);
+    color: var(--neutral-color-main);
     background: 
       linear-gradient(var(--neutral-color-7), var(--neutral-color-7)) center bottom 0/95% 1px no-repeat;
 }
@@ -66,7 +71,7 @@ input::placeholder{
 }
 
 .arrow{
-    width: 1.5vw;
+    width: 1.75vw;
     height: 1.5vw;
     cursor: pointer;
     margin-bottom: 0.5vw;
@@ -78,7 +83,10 @@ input::placeholder{
 }
 
 .continue-arrow:hover{
-    fill: var(--blue-color-3);
+    fill: var(--blue-color-2);
+}
+.modal-content span {
+    color: var(--blue-color-main);
 }    
 
 .join-error .error-alert {
