@@ -1,5 +1,6 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import ScreenOverlay from '../../ScreenOverlay/ScreenOverlay';
 import './PlaylistTitle.css';
 import Modal from "react-bootstrap/Modal";
 import Alert from "react-bootstrap/Alert";
@@ -18,22 +19,34 @@ const PlaylistTitle = ({playlistName, playlistID, playlistType, groupCode, creat
     const [SavedisOpen, setSavedIsOpen] = useState(false);
     const showSavedModal = () => {
          setSavedIsOpen(true);
+         setRedirectSpotify(false);
     };
     const hideSavedModal = () => {
          setSavedIsOpen(false);
     };
 
     const [playlistURL, setPlaylistURL] = useState('');
+    const [redirectSpotify, setRedirectSpotify] = useState(false);
+    const [loadingRedirect, setLoadingRedirect] = useState(false);
 
     //show save error when there is an error with playlist
     const [showSaveAlert, setShowSaveAlert] = useState(false);
 
-    const openPlaylist = ()=> {
-      if (playlistURL !== undefined) {
-        window.open(playlistURL)
+    // const openPlaylist = ()=> {
+    //   if (playlistURL !== undefined && playlistURL !== '') {
+    //     window.open(playlistURL)
+    //   }
+    //   else window.open("https://open.spotify.com/")
+    // }
+
+    useEffect (() => {
+      if (redirectSpotify && playlistURL !== '') {
+        if (playlistURL !== undefined) {
+          window.open(playlistURL);
+        } 
+        else window.open("https://open.spotify.com/");
       }
-      else window.open("https://open.spotify.com/")
-    }
+    },[playlistURL, redirectSpotify] )
 
     let cover = '';
     if (playlistType === "top") cover = topTracks_cover;
@@ -55,10 +68,12 @@ const PlaylistTitle = ({playlistName, playlistID, playlistType, groupCode, creat
         .then((data) => {
             setPlaylistURL(data.data.playlistLinkURL);
             console.log(data);
+            setLoadingRedirect(false);
         })
         .catch((err) => {
             setShowSaveAlert(true);
             console.log(err);
+            setLoadingRedirect(false);
         });
     }
 
@@ -113,7 +128,7 @@ const PlaylistTitle = ({playlistName, playlistID, playlistType, groupCode, creat
             <p>
               <button
                 className="btn-in-modal leave-buttons"
-                onClick= { ()=> {openPlaylist(); hideSavedModal()}}
+                onClick= { ()=> {setRedirectSpotify(true); hideSavedModal(); setLoadingRedirect(true)}}
               >
                 Open Spotify Webplayer
               </button>
@@ -123,11 +138,12 @@ const PlaylistTitle = ({playlistName, playlistID, playlistType, groupCode, creat
                 onClick={hideSavedModal}
                 className="btn-in-modal leave-buttons"
               >
-                Back to overlap
+                Back to Overlap
               </button>
             </p>
           </Modal.Body>
         </Modal>
+        {loadingRedirect ? <ScreenOverlay text="Taking you to Spotify" /> : null}
         </>   
         </div>
     );
