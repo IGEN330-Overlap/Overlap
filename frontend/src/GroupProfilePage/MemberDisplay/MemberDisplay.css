@@ -80,6 +80,7 @@
     justify-content: flex-start;
     align-content: flex-start;
     overflow-y: auto;
+    overflow-x: hidden;
     position: relative;
     z-index: 1;
     animation-name: displaymember;
