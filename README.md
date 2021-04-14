@@ -36,16 +36,9 @@ REACT_APP_FRONTEND_URL=http://localhost:3000
 <br/>
 
 # Using the Application
-To use the application you need to complete the steps above. Once you have completed steps 5 and 6 open your browser and open http://localhost:3000 which should lead you to the login page. After clicking login you are redirected to the spotify login and authorization process looking like this:
-![image](https://user-images.githubusercontent.com/51245035/109400671-f796dc80-7917-11eb-9f46-1189a9baf4ea.png)
-This then brings you to our Overlap Home page. Here you can navigate between groups, create groups, or join groups with codes given to you by your friends. When creating a group it requires you to set a name. Once the group is created you can distribute the group code to your friends so that they are able to join. While unfinished this is currently what the page looks like.
-![image](https://user-images.githubusercontent.com/51245035/109400726-417fc280-7918-11eb-8dd2-f30f3f4f4382.png)
-Entering a group page you are greeted with the members of the group, our rapid comparison tool, and a log of the playlists that have been previously created.
-![image](https://user-images.githubusercontent.com/51245035/109400777-a0ddd280-7918-11eb-90e4-d43afe4a03ce.png)
-Finally there is our playlist page which displays a top playlist for the group at a certain point in time.
-![image](https://user-images.githubusercontent.com/51245035/109400793-b94ded00-7918-11eb-9e19-56790b6617d2.png)
+Check out our application [here](https://project-overlap.herokuapp.com) and specifically the "how it works" page if you want to learn more about it.
 
-# Documentation: MOVED TO THE [WIKI](https://github.com/IGEN330-Overlap/Overlap/wiki)
+# Documentation: check the [WIKI](https://github.com/IGEN330-Overlap/Overlap/wiki)
 If you want to help contribute or read into our documentation you can look at your repository wiki which has the relevant and important information to our application.
 The wiki contains relevant API references and information on our database. 
 A sample of what our documentation looks like is below for hthte users login endpoint.
